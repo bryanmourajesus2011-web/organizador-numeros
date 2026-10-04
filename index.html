@@ -7,6 +7,7 @@
 <title>🍀 BOT DO BM3 🍀</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -16,259 +17,512 @@ body {
   padding: 20px;
   font-family: Arial, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(135deg, #008C45, #FFFFFF, #CD212A);
+
+  background:
+    linear-gradient(
+      135deg,
+      #008C45,
+      #FFFFFF,
+      #CD212A
+    );
 }
+
+/* =========================
+   CARREGAMENTO INICIAL
+========================= */
 
 #carregando {
   position: fixed;
   inset: 0;
   z-index: 9999;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #008C45, #FFFFFF, #CD212A);
+
+  background:
+    linear-gradient(
+      135deg,
+      #008C45,
+      #FFFFFF,
+      #CD212A
+    );
 }
 
 .carregando-box {
   width: 90%;
   max-width: 350px;
+
   padding: 30px;
+
   text-align: center;
+
   background: white;
+
   border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,.2);
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.2);
 }
 
 .spinner {
   width: 45px;
   height: 45px;
+
   margin: 15px auto;
+
   border: 5px solid #ddd;
   border-top: 5px solid #008C45;
   border-right: 5px solid #CD212A;
+
   border-radius: 50%;
-  animation: girar 1s linear infinite;
+
+  animation:
+    girar 1s linear infinite;
 }
 
 @keyframes girar {
+
   to {
     transform: rotate(360deg);
   }
+
 }
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container {
   max-width: 700px;
   margin: auto;
 }
 
+/* =========================
+   TOPO
+========================= */
+
 .topo {
+
   padding: 25px 15px;
+
   margin-bottom: 20px;
+
   text-align: center;
+
   border-radius: 18px;
-  background: linear-gradient(90deg, #008C45, #FFFFFF, #CD212A);
-  box-shadow: 0 5px 15px rgba(0,0,0,.15);
+
+  background:
+    linear-gradient(
+      90deg,
+      #008C45,
+      #FFFFFF,
+      #CD212A
+    );
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,.15);
 }
 
 .bandeira {
+
   width: 100%;
   height: 6px;
+
   border-radius: 10px;
-  background: linear-gradient(
-    90deg,
-    #008C45 33%,
-    #FFFFFF 33%,
-    #FFFFFF 66%,
-    #CD212A 66%
-  );
+
+  background:
+    linear-gradient(
+      90deg,
+      #008C45 33%,
+      #FFFFFF 33%,
+      #FFFFFF 66%,
+      #CD212A 66%
+    );
 }
 
 .topo h1 {
+
   margin: 12px 0 5px;
+
 }
 
 .topo p {
+
   margin: 0;
+
   font-weight: bold;
+
 }
+
+/* =========================
+   TELAS
+========================= */
 
 .inicio,
 .menu,
 .tela {
+
   background: white;
+
   border-radius: 18px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.15);
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,.15);
 }
 
 .inicio {
+
   padding: 25px;
+
   text-align: center;
 }
 
 .menu {
+
   display: none;
+
   padding: 15px;
 }
 
 .tela {
+
   display: none;
+
   padding: 20px;
 }
 
+/* =========================
+   BOTÕES
+========================= */
+
 button {
+
   border: none;
+
   border-radius: 10px;
+
   cursor: pointer;
+
   font-weight: bold;
 }
 
 .inicio button,
 .menu button {
+
   width: 100%;
+
   padding: 14px;
+
   margin-bottom: 10px;
+
   color: white;
+
   font-size: 16px;
-  background: linear-gradient(90deg, #008C45, #CD212A);
+
+  background:
+    linear-gradient(
+      90deg,
+      #008C45,
+      #CD212A
+    );
 }
 
 input,
 textarea,
 select {
+
   width: 100%;
+
   padding: 12px;
+
   margin: 8px 0 12px;
+
   border: 1px solid #ccc;
+
   border-radius: 8px;
+
   font-size: 16px;
+
   background: white;
 }
 
 .acao {
+
   width: 100%;
+
   padding: 13px;
+
   margin-top: 10px;
+
   color: white;
+
   font-size: 16px;
+
   background: #008C45;
 }
 
 .voltar {
+
   background: #555;
 }
 
-
-/* RESUMO */
+/* =========================
+   RESUMO
+========================= */
 
 .resumo {
+
   margin-top: 20px;
+
   padding: 15px;
+
   border-radius: 15px;
+
   background: #f5f5f5;
 }
 
 .resumo h3 {
+
   margin-top: 0;
+
   text-align: center;
 }
 
 .resumo-grid {
+
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 10px;
 }
 
 .resumo-card {
+
   padding: 15px 10px;
+
   text-align: center;
+
   background: white;
+
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.10);
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.10);
 }
 
 .resumo-card strong {
+
   display: block;
+
   font-size: 25px;
+
   margin-bottom: 5px;
 }
 
 .resumo-card span {
+
   font-size: 13px;
+
   font-weight: bold;
 }
 
-
-/* CONTATO */
+/* =========================
+   CONTATO
+========================= */
 
 .contato {
+
   padding: 15px;
+
   margin-top: 12px;
+
   border: 1px solid #ddd;
+
   border-radius: 12px;
 }
 
 .status-box {
+
   padding: 15px;
+
   margin-top: 15px;
+
   border-radius: 12px;
+
   background: #f5f5f5;
 }
 
 .status-atual {
+
   margin-bottom: 12px;
+
   font-size: 18px;
+
   font-weight: bold;
 }
 
 .status-label {
+
   display: block;
+
   margin-bottom: 6px;
+
   font-weight: bold;
 }
 
 .status-select {
+
   margin: 0;
+
   border: 2px solid #555;
+
   font-weight: bold;
 }
 
+/* =========================
+   WHATSAPP
+========================= */
+
 .whatsapp {
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 10px;
+
   background: #25D366;
 }
 
 .whatsapp svg {
+
   width: 24px;
+
   height: 24px;
+
   flex-shrink: 0;
 }
 
 .excluir {
+
   background: #CD212A;
 }
 
+/* =========================
+   GRUPOS
+========================= */
+
 .grupo-item {
+
   padding: 12px;
+
   margin-bottom: 8px;
+
   border-radius: 10px;
+
   background: #f2f2f2;
+
   font-weight: bold;
 }
 
 .sem-contatos {
+
   text-align: center;
+
   padding: 20px;
+
   color: #666;
 }
+
+/* =========================
+   CONFIGURAÇÕES
+========================= */
+
+.config-item {
+
+  padding: 15px;
+
+  margin-bottom: 12px;
+
+  border-radius: 12px;
+
+  background: #f5f5f5;
+
+  border: 1px solid #ddd;
+}
+
+.config-item strong {
+
+  display: block;
+
+  font-size: 17px;
+
+  margin-bottom: 6px;
+}
+
+.config-item p {
+
+  margin: 5px 0;
+
+  color: #555;
+
+  font-size: 14px;
+}
+
+/* =========================
+   CONFIGURAÇÃO ABERTA
+========================= */
+
+.config-subtela {
+
+  display: none;
+
+  padding: 20px;
+
+  margin-top: 15px;
+
+  border-radius: 15px;
+
+  background: #f5f5f5;
+
+  border: 1px solid #ddd;
+}
+
+.config-subtela h3 {
+
+  margin-top: 0;
+
+  text-align: center;
+}
+
+/* =========================
+   BOTÃO CONFIGURAÇÃO
+========================= */
+
+.botao-config {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- CARREGAMENTO -->
+<!-- =========================
+     CARREGAMENTO
+========================= -->
+
 <div id="carregando">
 
   <div class="carregando-box">
@@ -277,7 +531,9 @@ select {
 
     <div class="spinner"></div>
 
-    <strong>⏳ Carregando...</strong>
+    <strong>
+      ⏳ Carregando...
+    </strong>
 
   </div>
 
@@ -286,74 +542,102 @@ select {
 
 <div class="container">
 
-  <!-- TOPO -->
+<!-- =========================
+     TOPO
+========================= -->
 
-  <div class="topo">
+<div class="topo">
 
-    <div class="bandeira"></div>
+  <div class="bandeira"></div>
 
-    <h1>🍀 BOT DO BM3 🍀</h1>
+  <h1>
+    🍀 BOT DO BM3 🍀
+  </h1>
 
-    <p>Organizador de contatos</p>
+  <p>
+    Organizador de contatos
+  </p>
 
-  </div>
-
-
-  <!-- INÍCIO -->
-
-  <div class="inicio" id="inicio">
-
-    <h2>🏠 Início</h2>
-
-    <p>Bem-vindo ao BOT DO BM3</p>
-
-    <button id="botaoMenu">
-      ☰ Abrir Menu
-    </button>
+</div>
 
 
-    <!-- RESUMO -->
+<!-- =========================
+     INÍCIO
+========================= -->
 
-    <div class="resumo">
+<div class="inicio" id="inicio">
 
-      <h3>📊 Resumo</h3>
+  <h2>
+    🏠 Início
+  </h2>
 
-      <div class="resumo-grid">
+  <p>
+    Bem-vindo ao BOT DO BM3
+  </p>
 
-        <div class="resumo-card">
-
-          <strong id="totalContatos">0</strong>
-
-          <span>👥 Contatos</span>
-
-        </div>
-
-
-        <div class="resumo-card">
-
-          <strong id="totalOn">0</strong>
-
-          <span>🟢 ZAP ON</span>
-
-        </div>
+  <button id="botaoMenu">
+    ☰ Abrir Menu
+  </button>
 
 
-        <div class="resumo-card">
+  <!-- RESUMO -->
 
-          <strong id="totalAnalise">0</strong>
+  <div class="resumo">
 
-          <span>🟡 Em análise</span>
+    <h3>
+      📊 Resumo
+    </h3>
 
-        </div>
+    <div class="resumo-grid">
+
+      <div class="resumo-card">
+
+        <strong id="totalContatos">
+          0
+        </strong>
+
+        <span>
+          👥 Contatos
+        </span>
+
+      </div>
 
 
-        <div class="resumo-card">
+      <div class="resumo-card">
 
-          <strong id="totalCaiu">0</strong>
+        <strong id="totalOn">
+          0
+        </strong>
 
-          <span>🔴 ZAP CAIU</span>
+        <span>
+          🟢 ZAP ON
+        </span>
 
-        </div>
+      </div>
+
+
+      <div class="resumo-card">
+
+        <strong id="totalAnalise">
+          0
+        </strong>
+
+        <span>
+          🟡 Em análise
+        </span>
+
+      </div>
+
+
+      <div class="resumo-card">
+
+        <strong id="totalCaiu">
+          0
+        </strong>
+
+        <span>
+          🔴 ZAP CAIU
+        </span>
 
       </div>
 
@@ -361,235 +645,411 @@ select {
 
   </div>
 
-
-  <!-- MENU -->
-
-  <div class="menu" id="menu">
-
-    <button data-tela="adicionar">
-      ➕ Adicionar contato
-    </button>
-
-    <button data-tela="pesquisar">
-      🔎 Pesquisar contatos
-    </button>
-
-    <button data-tela="contatos">
-      📋 Meus contatos
-    </button>
-
-    <button data-tela="grupos">
-      🏷️ Grupos / Etiquetas
-    </button>
-
-    <button data-tela="configuracoes">
-      ⚙️ Configurações
-    </button>
-
-    <button id="botaoInicio">
-      🏠 Voltar ao início
-    </button>
-
-  </div>
-
-
-  <!-- ADICIONAR -->
-
-  <div class="tela" id="adicionar">
-
-    <h2>➕ Adicionar contato</h2>
-
-    <input
-      id="nome"
-      placeholder="Nome"
-    >
-
-    <input
-      id="numero"
-      placeholder="Número do WhatsApp"
-      inputmode="tel"
-    >
-
-    <input
-      id="grupo"
-      placeholder="Grupo / Etiqueta"
-    >
-
-    <textarea
-      id="observacao"
-      placeholder="Observação"
-    ></textarea>
-
-    <button
-      class="acao"
-      id="salvarContato"
-    >
-      💾 Salvar contato
-    </button>
-
-    <button
-      class="acao voltar"
-      data-voltar
-    >
-      ↩️ Voltar ao menu
-    </button>
-
-  </div>
-
-
-  <!-- PESQUISAR -->
-
-  <div class="tela" id="pesquisar">
-
-    <h2>🔎 Pesquisar contatos</h2>
-
-    <input
-      id="pesquisa"
-      placeholder="Digite nome, número ou grupo..."
-    >
-
-    <div id="resultadoPesquisa"></div>
-
-    <button
-      class="acao voltar"
-      data-voltar
-    >
-      ↩️ Voltar ao menu
-    </button>
-
-  </div>
-
-
-  <!-- CONTATOS -->
-
-  <div class="tela" id="contatos">
-
-    <h2>📋 Meus contatos</h2>
-
-    <div id="lista"></div>
-
-    <button
-      class="acao voltar"
-      data-voltar
-    >
-      ↩️ Voltar ao menu
-    </button>
-
-  </div>
-
-
-  <!-- GRUPOS -->
-
-  <div class="tela" id="grupos">
-
-    <h2>🏷️ Grupos / Etiquetas</h2>
-
-    <div id="listaGrupos"></div>
-
-    <button
-      class="acao voltar"
-      data-voltar
-    >
-      ↩️ Voltar ao menu
-    </button>
-
-  </div>
-
-
-  <!-- CONFIGURAÇÕES -->
-
-  <div class="tela" id="configuracoes">
-  <h2>⚙️ Configurações</h2>
-
-  <div class="config-item">
-    <strong>🎨 Personalização</strong>
-    <p>Configurações de aparência do BOT.</p>
-    <button class="acao">🎨 Personalizar</button>
-  </div>
-
-  <div class="config-item">
-    <strong>🔔 Notificações</strong>
-    <p>Gerencie os avisos do BOT.</p>
-    <button class="acao">🔔 Notificações</button>
-  </div>
-
-  <div class="config-item">
-    <strong>📊 Resumo</strong>
-    <p>Configurações do resumo da página inicial.</p>
-    <button class="acao">📊 Configurar resumo</button>
-  </div>
-
-  <div class="config-item">
-    <strong>💾 Backup</strong>
-    <p>Faça uma cópia dos seus contatos.</p>
-    <button class="acao">💾 Fazer backup</button>
-  </div>
-
-  <div class="config-item">
-    <strong>📥 Importar contatos</strong>
-    <p>Restaure contatos através de um backup.</p>
-    <button class="acao">📥 Importar contatos</button>
-  </div>
-
-  <div class="config-item">
-    <strong>🕐 Atualizações</strong>
-    <p>Informações sobre as atualizações dos contatos.</p>
-    <button class="acao">🕐 Atualizações</button>
-  </div>
-
-  <div class="config-item">
-    <strong>ℹ️ Sobre o BOT</strong>
-    <p>🍀 BOT DO BM3 🍀</p>
-    <p>Organizador de contatos.</p>
-    <button class="acao">ℹ️ Ver informações</button>
-  </div>
-
-  <button class="acao voltar" data-voltar>
-    ↩️ Voltar ao menu
-  </button>
 </div>
 
-    <h2>⚙️ Configurações</h2>
+
+<!-- =========================
+     MENU
+========================= -->
+
+<div class="menu" id="menu">
+
+  <button data-tela="adicionar">
+    ➕ Adicionar contato
+  </button>
+
+  <button data-tela="pesquisar">
+    🔎 Pesquisar contatos
+  </button>
+
+  <button data-tela="contatos">
+    📋 Meus contatos
+  </button>
+
+  <button data-tela="grupos">
+    🏷️ Grupos / Etiquetas
+  </button>
+
+
+  <!-- CONFIGURAÇÕES SOMENTE NO MENU -->
+
+  <button
+    class="botao-config"
+    data-tela="configuracoes"
+  >
+    ⚙️ Configurações
+  </button>
+
+
+  <button id="botaoInicio">
+    🏠 Voltar ao início
+  </button>
+
+</div>
+
+
+<!-- =========================
+     ADICIONAR
+========================= -->
+
+<div class="tela" id="adicionar">
+
+  <h2>
+    ➕ Adicionar contato
+  </h2>
+
+  <input
+    id="nome"
+    placeholder="Nome"
+  >
+
+  <input
+    id="numero"
+    placeholder="Número do WhatsApp"
+    inputmode="tel"
+  >
+
+  <input
+    id="grupo"
+    placeholder="Grupo / Etiqueta"
+  >
+
+  <textarea
+    id="observacao"
+    placeholder="Observação"
+  ></textarea>
+
+  <button
+    class="acao"
+    id="salvarContato"
+  >
+    💾 Salvar contato
+  </button>
+
+  <button
+    class="acao voltar"
+    data-voltar
+  >
+    ↩️ Voltar ao menu
+  </button>
+
+</div>
+
+
+<!-- =========================
+     PESQUISAR
+========================= -->
+
+<div class="tela" id="pesquisar">
+
+  <h2>
+    🔎 Pesquisar contatos
+  </h2>
+
+  <input
+    id="pesquisa"
+    placeholder="Digite nome, número ou grupo..."
+  >
+
+  <div id="resultadoPesquisa"></div>
+
+  <button
+    class="acao voltar"
+    data-voltar
+  >
+    ↩️ Voltar ao menu
+  </button>
+
+</div>
+
+
+<!-- =========================
+     CONTATOS
+========================= -->
+
+<div class="tela" id="contatos">
+
+  <h2>
+    📋 Meus contatos
+  </h2>
+
+  <div id="lista"></div>
+
+  <button
+    class="acao voltar"
+    data-voltar
+  >
+    ↩️ Voltar ao menu
+  </button>
+
+</div>
+
+
+<!-- =========================
+     GRUPOS
+========================= -->
+
+<div class="tela" id="grupos">
+
+  <h2>
+    🏷️ Grupos / Etiquetas
+  </h2>
+
+  <div id="listaGrupos"></div>
+
+  <button
+    class="acao voltar"
+    data-voltar
+  >
+    ↩️ Voltar ao menu
+  </button>
+
+</div>
+
+
+<!-- =========================
+     CONFIGURAÇÕES
+========================= -->
+
+<div class="tela" id="configuracoes">
+
+  <h2>
+    ⚙️ Configurações
+  </h2>
+
+
+  <!-- PERSONALIZAÇÃO -->
+
+  <div class="config-item">
+
+    <strong>
+      🎨 Personalização
+    </strong>
 
     <p>
-      <strong>🍀 BOT DO BM3 🍀</strong>
-    </p>
-
-    <p>
-      Organizador de contatos
+      Configurações de aparência do BOT.
     </p>
 
     <button
       class="acao"
-      id="limparContatos"
+      data-config="personalizacao"
     >
-      🗑️ Apagar todos os contatos
-    </button>
-
-    <button
-      class="acao voltar"
-      data-voltar
-    >
-      ↩️ Voltar ao menu
+      🎨 Personalizar
     </button>
 
   </div>
+
+
+  <!-- NOTIFICAÇÕES -->
+
+  <div class="config-item">
+
+    <strong>
+      🔔 Notificações
+    </strong>
+
+    <p>
+      Gerencie os avisos do BOT.
+    </p>
+
+    <button
+      class="acao"
+      data-config="notificacoes"
+    >
+      🔔 Notificações
+    </button>
+
+  </div>
+
+
+  <!-- RESUMO -->
+
+  <div class="config-item">
+
+    <strong>
+      📊 Resumo
+    </strong>
+
+    <p>
+      Configurações do resumo da página inicial.
+    </p>
+
+    <button
+      class="acao"
+      data-config="resumo"
+    >
+      📊 Configurar resumo
+    </button>
+
+  </div>
+
+
+  <!-- BACKUP -->
+
+  <div class="config-item">
+
+    <strong>
+      💾 Backup
+    </strong>
+
+    <p>
+      Faça uma cópia dos seus contatos.
+    </p>
+
+    <button
+      class="acao"
+      data-config="backup"
+    >
+      💾 Fazer backup
+    </button>
+
+  </div>
+
+
+  <!-- IMPORTAR -->
+
+  <div class="config-item">
+
+    <strong>
+      📥 Importar contatos
+    </strong>
+
+    <p>
+      Restaure contatos através de um backup.
+    </p>
+
+    <button
+      class="acao"
+      data-config="importar"
+    >
+      📥 Importar contatos
+    </button>
+
+  </div>
+
+
+  <!-- ATUALIZAÇÕES -->
+
+  <div class="config-item">
+
+    <strong>
+      🕐 Atualizações
+    </strong>
+
+    <p>
+      Informações sobre atualizações dos contatos.
+    </p>
+
+    <button
+      class="acao"
+      data-config="atualizacoes"
+    >
+      🕐 Atualizações
+    </button>
+
+  </div>
+
+
+  <!-- SOBRE -->
+
+  <div class="config-item">
+
+    <strong>
+      ℹ️ Sobre o BOT
+    </strong>
+
+    <p>
+      🍀 BOT DO BM3 🍀
+    </p>
+
+    <p>
+      Organizador de contatos.
+    </p>
+
+    <button
+      class="acao"
+      data-config="sobre"
+    >
+      ℹ️ Ver informações
+    </button>
+
+  </div>
+
+
+  <!-- CONFIGURAÇÃO -->
+
+  <div class="config-item">
+
+    <strong>
+      ⚙️ Configuração
+    </strong>
+
+    <p>
+      Área geral de configuração do BOT.
+    </p>
+
+    <button
+      class="acao"
+      data-config="configuracaoGeral"
+    >
+      ⚙️ Abrir configuração
+    </button>
+
+  </div>
+
+
+  <button
+    class="acao voltar"
+    data-voltar
+  >
+    ↩️ Voltar ao menu
+  </button>
+
+</div>
+
+
+<!-- =========================
+     SUBTELA DE CONFIGURAÇÃO
+========================= -->
+
+<div
+  class="config-subtela"
+  id="configSubtela"
+>
+
+  <h3 id="tituloConfig">
+    ⚙️ Configuração
+  </h3>
+
+  <div id="conteudoConfig"></div>
+
+  <button
+    class="acao voltar"
+    id="fecharConfig"
+  >
+    ↩️ Voltar
+  </button>
+
+</div>
+
 
 </div>
 
 
 <script>
 
+/* =========================
+   CONTATOS
+========================= */
+
 let contatos = [];
-
-
-/* CARREGAR CONTATOS */
 
 try {
 
-  contatos = JSON.parse(
-    localStorage.getItem("contatos") || "[]"
-  );
+  contatos =
+    JSON.parse(
+      localStorage.getItem("contatos") || "[]"
+    );
 
 } catch (erro) {
 
@@ -598,52 +1058,83 @@ try {
 }
 
 
-/* RESUMO */
+/* =========================
+   RESUMO
+========================= */
 
 function atualizarResumo() {
 
-  document.getElementById("totalContatos").textContent =
+  document.getElementById(
+    "totalContatos"
+  ).textContent =
     contatos.length;
 
 
-  document.getElementById("totalOn").textContent =
-    contatos.filter(function(contato) {
+  document.getElementById(
+    "totalOn"
+  ).textContent =
 
-      return contato.status === "✅ ZAP ON";
+    contatos.filter(
+      function(contato) {
 
-    }).length;
+        return contato.status ===
+          "✅ ZAP ON";
 
-
-  document.getElementById("totalAnalise").textContent =
-    contatos.filter(function(contato) {
-
-      return contato.status === "⚠️ ZAP EM ANÁLISE";
-
-    }).length;
+      }
+    ).length;
 
 
-  document.getElementById("totalCaiu").textContent =
-    contatos.filter(function(contato) {
+  document.getElementById(
+    "totalAnalise"
+  ).textContent =
 
-      return contato.status === "❌ ZAP CAIU";
+    contatos.filter(
+      function(contato) {
 
-    }).length;
+        return contato.status ===
+          "⚠️ ZAP EM ANÁLISE";
+
+      }
+    ).length;
+
+
+  document.getElementById(
+    "totalCaiu"
+  ).textContent =
+
+    contatos.filter(
+      function(contato) {
+
+        return contato.status ===
+          "❌ ZAP CAIU";
+
+      }
+    ).length;
 
 }
 
 
-/* CARREGAMENTO INICIAL */
+/* =========================
+   CARREGAMENTO INICIAL
+========================= */
 
-setTimeout(function() {
+setTimeout(
+  function() {
 
-  document.getElementById("carregando").style.display = "none";
+    document.getElementById(
+      "carregando"
+    ).style.display = "none";
 
-  atualizarResumo();
+    atualizarResumo();
 
-}, 2000);
+  },
+  2000
+);
 
 
-/* SALVAR */
+/* =========================
+   SALVAR
+========================= */
 
 function salvar() {
 
@@ -657,48 +1148,75 @@ function salvar() {
 }
 
 
-/* ESCONDER TUDO */
+/* =========================
+   ESCONDER TUDO
+========================= */
 
 function esconderTudo() {
 
-  document.getElementById("inicio").style.display = "none";
+  document.getElementById(
+    "inicio"
+  ).style.display = "none";
 
-  document.getElementById("menu").style.display = "none";
 
-  document.querySelectorAll(".tela").forEach(function(tela) {
+  document.getElementById(
+    "menu"
+  ).style.display = "none";
 
-    tela.style.display = "none";
 
-  });
+  document.getElementById(
+    "configSubtela"
+  ).style.display = "none";
+
+
+  document
+    .querySelectorAll(".tela")
+    .forEach(
+      function(tela) {
+
+        tela.style.display = "none";
+
+      }
+    );
 
 }
 
 
-/* INÍCIO */
+/* =========================
+   INÍCIO
+========================= */
 
 function mostrarInicio() {
 
   esconderTudo();
 
-  document.getElementById("inicio").style.display = "block";
+  document.getElementById(
+    "inicio"
+  ).style.display = "block";
 
   atualizarResumo();
 
 }
 
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
 function mostrarMenu() {
 
   esconderTudo();
 
-  document.getElementById("menu").style.display = "block";
+  document.getElementById(
+    "menu"
+  ).style.display = "block";
 
 }
 
 
-/* BOTÃO MENU */
+/* =========================
+   BOTÃO MENU
+========================= */
 
 document
   .getElementById("botaoMenu")
@@ -708,7 +1226,9 @@ document
   );
 
 
-/* BOTÃO INÍCIO */
+/* =========================
+   BOTÃO INÍCIO
+========================= */
 
 document
   .getElementById("botaoInicio")
@@ -718,69 +1238,85 @@ document
   );
 
 
-/* ABRIR TELAS */
+/* =========================
+   ABRIR TELAS
+========================= */
 
 document
   .querySelectorAll("[data-tela]")
-  .forEach(function(botao) {
+  .forEach(
+    function(botao) {
 
-    botao.addEventListener(
-      "click",
-      function() {
+      botao.addEventListener(
+        "click",
+        function() {
 
-        const tela =
-          botao.dataset.tela;
-
-
-        esconderTudo();
+          const tela =
+            botao.dataset.tela;
 
 
-        document
-          .getElementById(tela)
-          .style.display = "block";
+          esconderTudo();
 
 
-        if (tela === "contatos") {
+          document.getElementById(
+            tela
+          ).style.display = "block";
 
-          mostrarContatos();
+
+          if (
+            tela === "contatos"
+          ) {
+
+            mostrarContatos();
+
+          }
+
+
+          if (
+            tela === "pesquisar"
+          ) {
+
+            mostrarContatos();
+
+          }
+
+
+          if (
+            tela === "grupos"
+          ) {
+
+            mostrarGrupos();
+
+          }
 
         }
+      );
+
+    }
+  );
 
 
-        if (tela === "pesquisar") {
-
-          mostrarContatos();
-
-        }
-
-
-        if (tela === "grupos") {
-
-          mostrarGrupos();
-
-        }
-
-      }
-    );
-
-  });
-
-
-/* VOLTAR */
+/* =========================
+   VOLTAR
+========================= */
 
 document
   .querySelectorAll("[data-voltar]")
-  .forEach(function(botao) {
+  .forEach(
+    function(botao) {
 
-    botao.addEventListener(
-      "click",
-      mostrarMenu
-    );
+      botao.addEventListener(
+        "click",
+        mostrarMenu
+      );
 
-  });
+    }
+  );
 
 
-/* SALVAR CONTATO */
+/* =========================
+   ADICIONAR CONTATO
+========================= */
 
 document
   .getElementById("salvarContato")
@@ -789,8 +1325,6 @@ document
     adicionarContato
   );
 
-
-/* ADICIONAR */
 
 function adicionarContato() {
 
@@ -843,10 +1377,12 @@ function adicionarContato() {
 
     observacao: observacao,
 
-    status: "⚠️ ZAP EM ANÁLISE",
+    status:
+      "⚠️ ZAP EM ANÁLISE",
 
     ultimaAtualizacao:
-      new Date().toLocaleString("pt-BR")
+      new Date()
+        .toLocaleString("pt-BR")
 
   });
 
@@ -854,13 +1390,24 @@ function adicionarContato() {
   salvar();
 
 
-  document.getElementById("nome").value = "";
+  document.getElementById(
+    "nome"
+  ).value = "";
 
-  document.getElementById("numero").value = "";
 
-  document.getElementById("grupo").value = "";
+  document.getElementById(
+    "numero"
+  ).value = "";
 
-  document.getElementById("observacao").value = "";
+
+  document.getElementById(
+    "grupo"
+  ).value = "";
+
+
+  document.getElementById(
+    "observacao"
+  ).value = "";
 
 
   alert(
@@ -870,18 +1417,25 @@ function adicionarContato() {
 
   esconderTudo();
 
-  document.getElementById("contatos").style.display = "block";
+
+  document.getElementById(
+    "contatos"
+  ).style.display = "block";
+
 
   mostrarContatos();
 
 }
 
 
-/* MOSTRAR CONTATOS */
+/* =========================
+   MOSTRAR CONTATOS
+========================= */
 
 function mostrarContatos() {
 
   const pesquisa =
+
     (
       document
         .getElementById("pesquisa")
@@ -893,171 +1447,186 @@ function mostrarContatos() {
   let html = "";
 
 
-  contatos.forEach(function(contato, index) {
+  contatos.forEach(
+    function(contato, index) {
 
-    const texto = (
+      const texto =
 
-      contato.nome +
-      " " +
-      contato.numero +
-      " " +
-      contato.grupo
-
-    ).toLowerCase();
-
-
-    if (!texto.includes(pesquisa)) {
-
-      return;
-
-    }
+        (
+          contato.nome +
+          " " +
+          contato.numero +
+          " " +
+          contato.grupo
+        )
+        .toLowerCase();
 
 
-    const status =
-      contato.status ||
-      "⚠️ ZAP EM ANÁLISE";
+      if (
+        !texto.includes(pesquisa)
+      ) {
+
+        return;
+
+      }
 
 
-    const data =
-      contato.ultimaAtualizacao ||
-      "Não registrada";
+      const status =
+
+        contato.status ||
+        "⚠️ ZAP EM ANÁLISE";
 
 
-    html += `
+      const data =
 
-      <div class="contato">
-
-        <strong>
-          👤 ${contato.nome}
-        </strong>
-
-        <br><br>
-
-        📱 Número:
-        ${contato.numero}
-
-        <br><br>
-
-        🏷️ Grupo:
-        ${contato.grupo || "Sem grupo"}
-
-        <br><br>
-
-        📝 Observação:
-        ${contato.observacao || "Sem observação"}
+        contato.ultimaAtualizacao ||
+        "Não registrada";
 
 
-        <div class="status-box">
+      html += `
 
-          <div class="status-atual">
+        <div class="contato">
 
-            Status atual:
-            ${status}
+          <strong>
+            👤 ${contato.nome}
+          </strong>
+
+          <br><br>
+
+          📱 Número:
+          ${contato.numero}
+
+          <br><br>
+
+          🏷️ Grupo:
+          ${contato.grupo || "Sem grupo"}
+
+          <br><br>
+
+          📝 Observação:
+          ${contato.observacao || "Sem observação"}
+
+
+          <div class="status-box">
+
+            <div class="status-atual">
+
+              Status atual:
+              ${status}
+
+            </div>
+
+
+            <label
+              class="status-label"
+              for="status-${index}"
+            >
+
+              🔽 Alterar status
+
+            </label>
+
+
+            <select
+              class="status-select"
+              id="status-${index}"
+              data-status-index="${index}"
+            >
+
+              <option value="">
+                Escolher novo status
+              </option>
+
+              <option value="⚠️ ZAP EM ANÁLISE">
+                ⚠️ ZAP EM ANÁLISE
+              </option>
+
+              <option value="✅ ZAP ON">
+                ✅ ZAP ON
+              </option>
+
+              <option value="❌ ZAP CAIU">
+                ❌ ZAP CAIU
+              </option>
+
+            </select>
+
+
+            <br>
+
+            📅 Última atualização:
+            ${data}
 
           </div>
 
 
-          <label
-            class="status-label"
-            for="status-${index}"
+          <button
+            class="acao whatsapp"
+            data-whatsapp="${contato.numero}"
           >
 
-            🔽 Alterar status
+            <svg
+              viewBox="0 0 32 32"
+              xmlns="http://www.w3.org/2000/svg"
+            >
 
-          </label>
+              <circle
+                cx="16"
+                cy="16"
+                r="15"
+                fill="white"
+              />
+
+              <path
+                fill="#25D366"
+                d="M22.2 17.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.7-1.4-3.8-3.1-.3-.5.3-.5.8-1.7.1-.2.1-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.1 3.1 1.2 3.3c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.3-.6-.5z"
+              />
+
+            </svg>
+
+            Abrir WhatsApp
+
+          </button>
 
 
-          <select
-            class="status-select"
-            id="status-${index}"
-            data-status-index="${index}"
+          <button
+            class="acao excluir"
+            data-excluir="${index}"
           >
 
-            <option value="">
-              Escolher novo status
-            </option>
+            🗑️ Excluir
 
-            <option value="⚠️ ZAP EM ANÁLISE">
-              ⚠️ ZAP EM ANÁLISE
-            </option>
-
-            <option value="✅ ZAP ON">
-              ✅ ZAP ON
-            </option>
-
-            <option value="❌ ZAP CAIU">
-              ❌ ZAP CAIU
-            </option>
-
-          </select>
-
-
-          <br>
-
-          📅 Última atualização:
-          ${data}
+          </button>
 
         </div>
 
+      `;
 
-        <button
-          class="acao whatsapp"
-          data-whatsapp="${contato.numero}"
-        >
-
-          <svg
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-
-            <circle
-              cx="16"
-              cy="16"
-              r="15"
-              fill="white"
-            />
-
-            <path
-              fill="#25D366"
-              d="M22.2 17.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.7-1.4-3.8-3.1-.3-.5.3-.5.8-1.7.1-.2.1-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.1 3.1 1.2 3.3c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.3-.6-.5z"
-            />
-
-          </svg>
-
-          Abrir WhatsApp
-
-        </button>
-
-
-        <button
-          class="acao excluir"
-          data-excluir="${index}"
-        >
-
-          🗑️ Excluir
-
-        </button>
-
-      </div>
-
-    `;
-
-  });
+    }
+  );
 
 
   const resultado =
+
     html ||
-    '<div class="sem-contatos">Nenhum contato encontrado.</div>';
+
+    `
+      <div class="sem-contatos">
+        Nenhum contato encontrado.
+      </div>
+    `;
 
 
-  document
-    .getElementById("lista")
-    .innerHTML = resultado;
+  document.getElementById(
+    "lista"
+  ).innerHTML =
+    resultado;
 
 
-  document
-    .getElementById("resultadoPesquisa")
-    .innerHTML = resultado;
+  document.getElementById(
+    "resultadoPesquisa"
+  ).innerHTML =
+    resultado;
 
 
   ativarBotoesContatos();
@@ -1065,7 +1634,9 @@ function mostrarContatos() {
 }
 
 
-/* ATIVAR BOTÕES */
+/* =========================
+   BOTÕES DOS CONTATOS
+========================= */
 
 function ativarBotoesContatos() {
 
@@ -1073,129 +1644,151 @@ function ativarBotoesContatos() {
   /* STATUS */
 
   document
-    .querySelectorAll("[data-status-index]")
-    .forEach(function(select) {
+    .querySelectorAll(
+      "[data-status-index]"
+    )
+    .forEach(
+      function(select) {
 
-      select.addEventListener(
-        "change",
-        function() {
+        select.addEventListener(
+          "change",
+          function() {
 
-          const index =
-            Number(
-              select.dataset.statusIndex
-            );
-
-
-          const novoStatus =
-            select.value;
+            const index =
+              Number(
+                select.dataset.statusIndex
+              );
 
 
-          if (!novoStatus) {
+            const novoStatus =
+              select.value;
 
-            return;
+
+            if (!novoStatus) {
+
+              return;
+
+            }
+
+
+            contatos[index].status =
+              novoStatus;
+
+
+            contatos[index]
+              .ultimaAtualizacao =
+
+              new Date()
+                .toLocaleString("pt-BR");
+
+
+            salvar();
+
+
+            mostrarContatos();
 
           }
+        );
 
-
-          contatos[index].status =
-            novoStatus;
-
-
-          contatos[index].ultimaAtualizacao =
-            new Date().toLocaleString("pt-BR");
-
-
-          salvar();
-
-
-          mostrarContatos();
-
-        }
-      );
-
-    });
+      }
+    );
 
 
   /* EXCLUIR */
 
   document
-    .querySelectorAll("[data-excluir]")
-    .forEach(function(botao) {
+    .querySelectorAll(
+      "[data-excluir]"
+    )
+    .forEach(
+      function(botao) {
 
-      botao.addEventListener(
-        "click",
-        function() {
+        botao.addEventListener(
+          "click",
+          function() {
 
-          const index =
-            Number(
-              botao.dataset.excluir
-            );
+            const index =
+              Number(
+                botao.dataset.excluir
+              );
 
 
-          if (
-            confirm(
-              "Deseja excluir este contato?"
-            )
-          ) {
+            if (
+              confirm(
+                "Deseja excluir este contato?"
+              )
+            ) {
 
-            contatos.splice(index, 1);
+              contatos.splice(
+                index,
+                1
+              );
 
-            salvar();
 
-            mostrarContatos();
+              salvar();
 
-            mostrarGrupos();
+
+              mostrarContatos();
+
+
+              mostrarGrupos();
+
+            }
 
           }
+        );
 
-        }
-      );
-
-    });
+      }
+    );
 
 
   /* WHATSAPP */
 
   document
-    .querySelectorAll("[data-whatsapp]")
-    .forEach(function(botao) {
+    .querySelectorAll(
+      "[data-whatsapp]"
+    )
+    .forEach(
+      function(botao) {
 
-      botao.addEventListener(
-        "click",
-        function() {
+        botao.addEventListener(
+          "click",
+          function() {
 
-          const numero =
-            botao
-              .dataset
-              .whatsapp
-              .replace(/\D/g, "");
+            const numero =
+
+              botao.dataset.whatsapp
+                .replace(/\D/g, "");
 
 
-          if (!numero) {
+            if (!numero) {
 
-            alert(
-              "Número de WhatsApp inválido."
+              alert(
+                "Número de WhatsApp inválido."
+              );
+
+              return;
+
+            }
+
+
+            window.open(
+              "https://wa.me/" + numero,
+              "_blank"
             );
 
-            return;
-
           }
+        );
 
-
-          window.open(
-            "https://wa.me/" + numero,
-            "_blank"
-          );
-
-        }
-      );
-
-    });
+      }
+    );
 
 }
 
 
-/* PESQUISA */
+/* =========================
+   PESQUISA
+========================= */
 
 document
   .getElementById("pesquisa")
@@ -1205,7 +1798,9 @@ document
   );
 
 
-/* GRUPOS */
+/* =========================
+   GRUPOS
+========================= */
 
 function mostrarGrupos() {
 
@@ -1218,87 +1813,582 @@ function mostrarGrupos() {
   const grupos = {};
 
 
-  contatos.forEach(function(contato) {
+  contatos.forEach(
+    function(contato) {
 
-    const grupo =
-      contato.grupo ||
-      "Sem grupo";
+      const grupo =
+        contato.grupo ||
+        "Sem grupo";
 
 
-    if (!grupos[grupo]) {
+      if (!grupos[grupo]) {
 
-      grupos[grupo] = 0;
+        grupos[grupo] = 0;
+
+      }
+
+
+      grupos[grupo]++;
 
     }
-
-
-    grupos[grupo]++;
-
-  });
+  );
 
 
   let html = "";
 
 
   Object.keys(grupos)
-    .forEach(function(grupo) {
+    .forEach(
+      function(grupo) {
 
-      html += `
+        html += `
 
-        <div class="grupo-item">
+          <div class="grupo-item">
 
-          🏷️ ${grupo}
-          —
-          ${grupos[grupo]}
-          contato(s)
+            🏷️ ${grupo}
 
-        </div>
+            —
 
-      `;
+            ${grupos[grupo]}
+            contato(s)
 
-    });
+          </div>
+
+        `;
+
+      }
+    );
 
 
   lista.innerHTML =
+
     html ||
-    '<div class="sem-contatos">Nenhum grupo cadastrado.</div>';
+
+    `
+      <div class="sem-contatos">
+        Nenhum grupo cadastrado.
+      </div>
+    `;
 
 }
 
 
-/* APAGAR TODOS */
+/* =========================
+   CONFIGURAÇÕES
+========================= */
 
 document
-  .getElementById("limparContatos")
-  .addEventListener(
-    "click",
-    function() {
+  .querySelectorAll("[data-config]")
+  .forEach(
+    function(botao) {
 
-      if (
-        confirm(
-          "Tem certeza que deseja apagar TODOS os contatos?"
-        )
-      ) {
+      botao.addEventListener(
+        "click",
+        function() {
 
-        contatos = [];
+          const tipo =
+            botao.dataset.config;
 
-        salvar();
 
-        mostrarContatos();
+          abrirConfiguracao(tipo);
 
-        mostrarGrupos();
-
-        alert(
-          "🗑️ Todos os contatos foram apagados."
-        );
-
-      }
+        }
+      );
 
     }
   );
 
 
-/* ATUALIZAR RESUMO AO ABRIR */
+function abrirConfiguracao(tipo) {
+
+  const subtela =
+    document.getElementById(
+      "configSubtela"
+    );
+
+
+  const titulo =
+    document.getElementById(
+      "tituloConfig"
+    );
+
+
+  const conteudo =
+    document.getElementById(
+      "conteudoConfig"
+    );
+
+
+  subtela.style.display =
+    "block";
+
+
+  if (
+    tipo === "personalizacao"
+  ) {
+
+    titulo.textContent =
+      "🎨 Personalização";
+
+
+    conteudo.innerHTML = `
+
+      <p>
+        Escolha a aparência do BOT.
+      </p>
+
+      <label>
+        Tema:
+      </label>
+
+      <select>
+
+        <option>
+          🇮🇹 Itália
+        </option>
+
+        <option>
+          🌑 Escuro
+        </option>
+
+        <option>
+          ☀️ Claro
+        </option>
+
+      </select>
+
+      <button
+        class="acao"
+        onclick="alert('🎨 Personalização selecionada!')"
+      >
+        💾 Salvar
+      </button>
+
+    `;
+
+  }
+
+
+  if (
+    tipo === "notificacoes"
+  ) {
+
+    titulo.textContent =
+      "🔔 Notificações";
+
+
+    conteudo.innerHTML = `
+
+      <p>
+        Configure os avisos do BOT.
+      </p>
+
+      <label>
+        Notificações:
+      </label>
+
+      <select>
+
+        <option>
+          🔔 Ativadas
+        </option>
+
+        <option>
+          🔕 Desativadas
+        </option>
+
+      </select>
+
+      <button
+        class="acao"
+        onclick="alert('🔔 Configuração salva!')"
+      >
+        💾 Salvar
+      </button>
+
+    `;
+
+  }
+
+
+  if (
+    tipo === "resumo"
+  ) {
+
+    titulo.textContent =
+      "📊 Resumo";
+
+
+    conteudo.innerHTML = `
+
+      <p>
+        O resumo mostra os dados dos seus contatos.
+      </p>
+
+      <div class="resumo-card">
+
+        👥 Contatos:
+        <strong>
+          ${contatos.length}
+        </strong>
+
+      </div>
+
+      <br>
+
+      <div class="resumo-card">
+
+        🟢 ZAP ON:
+        <strong>
+          ${
+            contatos.filter(
+              function(c) {
+                return c.status === "✅ ZAP ON";
+              }
+            ).length
+          }
+        </strong>
+
+      </div>
+
+      <br>
+
+      <div class="resumo-card">
+
+        🟡 Em análise:
+        <strong>
+          ${
+            contatos.filter(
+              function(c) {
+                return c.status === "⚠️ ZAP EM ANÁLISE";
+              }
+            ).length
+          }
+        </strong>
+
+      </div>
+
+      <br>
+
+      <div class="resumo-card">
+
+        🔴 ZAP CAIU:
+        <strong>
+          ${
+            contatos.filter(
+              function(c) {
+                return c.status === "❌ ZAP CAIU";
+              }
+            ).length
+          }
+        </strong>
+
+      </div>
+
+    `;
+
+  }
+
+
+  if (
+    tipo === "backup"
+  ) {
+
+    titulo.textContent =
+      "💾 Backup";
+
+
+    conteudo.innerHTML = `
+
+      <p>
+        Faça uma cópia dos seus contatos.
+      </p>
+
+      <button
+        class="acao"
+        onclick="fazerBackup()"
+      >
+        💾 Baixar backup
+      </button>
+
+    `;
+
+  }
+
+
+  if (
+    tipo === "importar"
+  ) {
+
+    titulo.textContent =
+      "📥 Importar contatos";
+
+
+    conteudo.innerHTML = `
+
+      <p>
+        Selecione um arquivo de backup.
+      </p>
+
+      <input
+        type="file"
+        id="arquivoBackup"
+        accept=".json"
+      >
+
+      <button
+        class="acao"
+        onclick="importarBackup()"
+      >
+        📥 Importar backup
+      </button>
+
+    `;
+
+  }
+
+
+  if (
+    tipo === "atualizacoes"
+  ) {
+
+    titulo.textContent =
+      "🕐 Atualizações";
+
+
+    conteudo.innerHTML = `
+
+      <p>
+        Os status dos contatos são atualizados automaticamente.
+      </p>
+
+      <p>
+        📅 A data e o horário são registrados
+        sempre que o status é alterado.
+      </p>
+
+    `;
+
+  }
+
+
+  if (
+    tipo === "sobre"
+  ) {
+
+    titulo.textContent =
+      "ℹ️ Sobre o BOT";
+
+
+    conteudo.innerHTML = `
+
+      <h3>
+        🍀 BOT DO BM3 🍀
+      </h3>
+
+      <p>
+        Organizador de contatos.
+      </p>
+
+      <p>
+        📱 Controle seus contatos,
+        grupos e status de WhatsApp.
+      </p>
+
+    `;
+
+  }
+
+
+  if (
+    tipo === "configuracaoGeral"
+  ) {
+
+    titulo.textContent =
+      "⚙️ Configuração";
+
+
+    conteudo.innerHTML = `
+
+      <p>
+        ⚙️ Área geral de configuração do BOT.
+      </p>
+
+      <p>
+        Aqui ficarão as configurações
+        gerais do sistema.
+      </p>
+
+      <button
+        class="acao"
+        onclick="alert('⚙️ Configuração geral aberta!')"
+      >
+        ⚙️ Configurar
+      </button>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================
+   FECHAR CONFIGURAÇÃO
+========================= */
+
+document
+  .getElementById("fecharConfig")
+  .addEventListener(
+    "click",
+    function() {
+
+      document.getElementById(
+        "configSubtela"
+      ).style.display = "none";
+
+    }
+  );
+
+
+/* =========================
+   BACKUP
+========================= */
+
+function fazerBackup() {
+
+  const dados =
+    JSON.stringify(
+      contatos,
+      null,
+      2
+    );
+
+
+  const arquivo =
+    new Blob(
+      [dados],
+      {
+        type: "application/json"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      arquivo
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  link.href = url;
+
+  link.download =
+    "backup-bot-do-bm3.json";
+
+
+  link.click();
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+}
+
+
+/* =========================
+   IMPORTAR BACKUP
+========================= */
+
+function importarBackup() {
+
+  const arquivo =
+    document.getElementById(
+      "arquivoBackup"
+    );
+
+
+  if (
+    !arquivo.files.length
+  ) {
+
+    alert(
+      "Selecione um arquivo de backup."
+    );
+
+    return;
+
+  }
+
+
+  const leitor =
+    new FileReader();
+
+
+  leitor.onload =
+    function(evento) {
+
+      try {
+
+        const dados =
+          JSON.parse(
+            evento.target.result
+          );
+
+
+        if (
+          !Array.isArray(dados)
+        ) {
+
+          throw new Error();
+
+        }
+
+
+        contatos = dados;
+
+
+        salvar();
+
+
+        mostrarContatos();
+
+
+        mostrarGrupos();
+
+
+        alert(
+          "✅ Backup importado com sucesso!"
+        );
+
+
+      } catch (erro) {
+
+        alert(
+          "❌ Arquivo de backup inválido."
+        );
+
+      }
+
+    };
+
+
+  leitor.readAsText(
+    arquivo.files[0]
+  );
+
+}
+
+
+/* =========================
+   INICIAR
+========================= */
 
 atualizarResumo();
 
