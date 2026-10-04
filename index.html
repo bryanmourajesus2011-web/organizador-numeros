@@ -4,624 +4,604 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🍀 BOT DO BM3 🍀</title>
+<title>🍀BOT DO BM3🍀</title>
 
 <style>
 
-* {
-    box-sizing: border-box;
+:root{
+    --verde:#009c3b;
+    --verde2:#00c853;
+    --vermelho:#ce2b37;
+    --branco:#ffffff;
+    --preto:#080808;
+    --painel:#ffffff;
+    --texto:#111111;
+    --borda:#dddddd;
+    --cinza:#666666;
 }
 
-:root {
-    --fundo: linear-gradient(
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(
         135deg,
-        #008C45 0%,
+        #009c3b 0%,
         #ffffff 50%,
-        #CD212A 100%
+        #ce2b37 100%
     );
+    color:var(--texto);
+}
 
-    --painel: #ffffff;
-    --card: #f5f5f5;
-    --texto: #111111;
-    --subtexto: #555555;
-    --borda: #dddddd;
-    --campo: #ffffff;
+button,
+input,
+select{
+    font-family:inherit;
+}
 
-    --botao: linear-gradient(
+button{
+    cursor:pointer;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+#telaLogin{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    border-radius:22px;
+    padding:30px 24px;
+    box-shadow:0 15px 45px rgba(0,0,0,.25);
+    text-align:center;
+}
+
+.login-logo{
+    font-size:48px;
+    margin-bottom:8px;
+}
+
+.login-box h1{
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.login-box p{
+    color:#666;
+    margin-bottom:25px;
+}
+
+.login-box input{
+    width:100%;
+    padding:15px;
+    margin-bottom:12px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    font-size:16px;
+}
+
+.login-box input:focus{
+    border-color:var(--verde);
+}
+
+.btn-login{
+    width:100%;
+    border:0;
+    padding:15px;
+    border-radius:12px;
+    background:var(--verde);
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.erro-login{
+    color:#d00000;
+    font-size:14px;
+    margin-top:12px;
+    min-height:20px;
+}
+
+/* =========================
+   SISTEMA
+========================= */
+
+#sistema{
+    display:none;
+    min-height:100vh;
+}
+
+.topo{
+    position:relative;
+    padding:25px 20px 20px;
+    text-align:center;
+    background:rgba(255,255,255,.96);
+    border-bottom:4px solid var(--verde);
+}
+
+.bandeira{
+    width:75px;
+    height:45px;
+    margin:0 auto 10px;
+    background:linear-gradient(
         90deg,
-        #008C45,
-        #CD212A
+        #009c3b 0 33%,
+        #fff 33% 66%,
+        #ce2b37 66% 100%
     );
+    border-radius:8px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
-body.tema-escuro {
-
-    --fundo: linear-gradient(
-        135deg,
-        #000000 0%,
-        #061b10 50%,
-        #250606 100%
-    );
-
-    --painel: #080808;
-    --card: #111111;
-    --texto: #eeeeee;
-    --subtexto: #bdbdbd;
-    --borda: #244c35;
-    --campo: #151515;
-
-    --botao: linear-gradient(
-        90deg,
-        #075c31,
-        #700c13
-    );
+.topo h1{
+    color:#111;
+    font-size:25px;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background: var(--fundo);
-    color: var(--texto);
+.topo p{
+    color:#666;
+    margin-top:5px;
 }
 
-#carregando {
+/* =========================
+   CONTA
+========================= */
 
-    position: fixed;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            #000000,
-            #061b10,
-            #250606
-        );
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    color: white;
-
-    z-index: 9999;
+.conta-topo{
+    position:absolute;
+    top:15px;
+    right:15px;
 }
 
-.spinner {
-
-    width: 55px;
-    height: 55px;
-
-    border: 5px solid #333;
-
-    border-top:
-        5px solid #00c853;
-
-    border-right:
-        5px solid #d50000;
-
-    border-radius: 50%;
-
-    animation:
-        girar 1s linear infinite;
-
-    margin-bottom: 20px;
+.btn-conta{
+    border:1px solid #ddd;
+    background:white;
+    border-radius:12px;
+    padding:9px 12px;
+    font-weight:bold;
+    color:#222;
 }
 
-@keyframes girar {
-
-    to {
-        transform: rotate(360deg);
-    }
+.btn-conta:hover{
+    border-color:var(--verde);
 }
 
-/* LOGIN */
-
-#telaLogin {
-
-    min-height: 100vh;
-
-    display: none;
-
-    justify-content: center;
-    align-items: center;
-
-    padding: 20px;
+.conta-box{
+    display:none;
+    position:absolute;
+    right:0;
+    top:48px;
+    width:230px;
+    background:white;
+    border-radius:16px;
+    padding:16px;
+    box-shadow:0 10px 35px rgba(0,0,0,.25);
+    text-align:left;
+    z-index:1000;
 }
 
-.login-box {
-
-    width: 100%;
-    max-width: 430px;
-
-    background: var(--painel);
-
-    border:
-        1px solid var(--borda);
-
-    border-radius: 22px;
-
-    padding: 30px 25px;
-
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,0.35);
-
-    text-align: center;
+.conta-box.aberta{
+    display:block;
 }
 
-.login-logo {
-
-    font-size: 60px;
+.conta-nome{
+    font-size:17px;
+    font-weight:bold;
+    margin-bottom:5px;
 }
 
-.login-box h1 {
-    margin: 5px 0;
+.conta-login{
+    font-size:13px;
+    color:#666;
+    margin-bottom:10px;
 }
 
-.login-box p {
-    color: var(--subtexto);
+.conta-admin{
+    display:inline-block;
+    background:#fff3cd;
+    color:#856404;
+    padding:5px 9px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:12px;
 }
 
-.login-box label {
-
-    display: block;
-
-    text-align: left;
-
-    margin-top: 15px;
-    margin-bottom: 6px;
-
-    font-weight: bold;
+.conta-usuario{
+    display:inline-block;
+    background:#e9ecef;
+    color:#333;
+    padding:5px 9px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:12px;
 }
 
-.login-box input {
-
-    width: 100%;
-
-    padding: 14px;
-
-    border-radius: 10px;
-
-    border:
-        1px solid var(--borda);
-
-    background: var(--campo);
-
-    color: var(--texto);
-
-    font-size: 15px;
+.btn-sair{
+    width:100%;
+    border:0;
+    padding:10px;
+    border-radius:10px;
+    background:#111;
+    color:white;
+    font-weight:bold;
 }
 
-.login-box button {
-
-    width: 100%;
-
-    padding: 14px;
-
-    margin-top: 15px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    background: var(--botao);
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-}
-
-.login-erro {
-
-    display: none;
-
-    margin-top: 12px;
-
-    padding: 10px;
-
-    border-radius: 8px;
-
-    background: #4b0b0b;
-
-    color: #ff7777;
-}
-
-.login-sucesso {
-
-    display: none;
-
-    margin-top: 12px;
-
-    padding: 10px;
-
-    border-radius: 8px;
-
-    background: #073b21;
-
-    color: #55e89b;
-}
-
-/* SISTEMA */
-
-#sistema {
-    display: none;
-}
+/* =========================
+   PÁGINAS
+========================= */
 
 .inicio,
 .menu,
-.tela {
-
-    background-color: var(--painel);
-
-    min-height: 100vh;
-
-    padding: 20px;
+.tela{
+    width:100%;
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+    background:var(--painel);
+    min-height:calc(100vh - 130px);
 }
 
-.inicio,
+.inicio{
+    display:block;
+}
+
 .menu,
-.tela {
-
-    max-width: 700px;
-    margin: auto;
+.tela{
+    display:none;
 }
 
-.topo {
-
-    padding: 25px 10px;
-
-    border-radius: 18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #008C45,
-            #ffffff,
-            #CD212A
-        );
-
-    color: #111;
-
-    text-align: center;
-
-    margin-bottom: 20px;
+.titulo-tela{
+    text-align:center;
+    margin-bottom:20px;
 }
 
-/* RESUMO */
-
-.resumo {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 12px;
-
-    margin: 20px 0;
+.titulo-tela h2{
+    margin-bottom:5px;
 }
 
-.resumo-card {
-
-    background: var(--card);
-
-    border:
-        1px solid var(--borda);
-
-    border-radius: 14px;
-
-    padding: 18px;
-
-    text-align: center;
-
-    font-weight: bold;
+.titulo-tela p{
+    color:#666;
 }
 
-.resumo-numero {
+/* =========================
+   BOTÕES MENU
+========================= */
 
-    display: block;
-
-    font-size: 25px;
-
-    margin-top: 8px;
+.menu-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-/* BOTÕES */
-
-.btn {
-
-    width: 100%;
-
-    padding: 15px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    margin: 7px 0;
-
-    background: var(--botao);
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
+.menu-btn{
+    padding:18px 10px;
+    border:1px solid var(--borda);
+    border-radius:15px;
+    background:#fff;
+    font-size:15px;
+    font-weight:bold;
 }
 
-.btn-secundario {
-
-    background: var(--card);
-
-    color: var(--texto);
-
-    border:
-        1px solid var(--borda);
+.menu-btn:hover{
+    border-color:var(--verde);
+    transform:translateY(-1px);
 }
 
-/* MENU */
-
-.menu {
-    display: none;
+.menu-admin{
+    border:2px solid #d4af37;
+    background:#fffaf0;
 }
 
-.menu h2 {
-    text-align: center;
+.btn-voltar{
+    width:100%;
+    margin-top:18px;
+    padding:13px;
+    border:0;
+    border-radius:12px;
+    background:#111;
+    color:#fff;
+    font-weight:bold;
 }
 
-.menu-item {
+/* =========================
+   RESUMO
+========================= */
 
-    width: 100%;
-
-    padding: 16px;
-
-    margin: 8px 0;
-
-    border-radius: 12px;
-
-    border:
-        1px solid var(--borda);
-
-    background: var(--card);
-
-    color: var(--texto);
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    text-align: left;
+.resumo{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:20px 0;
 }
 
-/* TELAS */
-
-.tela {
-    display: none;
+.resumo-card{
+    padding:16px;
+    border-radius:15px;
+    background:#f7f7f7;
+    border:1px solid #ddd;
+    text-align:center;
 }
 
-.tela h2 {
-    text-align: center;
+.resumo-card strong{
+    display:block;
+    font-size:25px;
+    margin-bottom:5px;
 }
 
-.campo {
-
-    width: 100%;
-
-    padding: 14px;
-
-    margin-bottom: 12px;
-
-    border-radius: 10px;
-
-    border:
-        1px solid var(--borda);
-
-    background: var(--campo);
-
-    color: var(--texto);
-
-    font-size: 15px;
+.resumo-card span{
+    font-size:13px;
+    color:#666;
 }
 
-/* CONTATOS */
+/* =========================
+   FORMULÁRIOS
+========================= */
 
-.contato {
-
-    background: var(--card);
-
-    border:
-        1px solid var(--borda);
-
-    border-radius: 15px;
-
-    padding: 17px;
-
-    margin-bottom: 12px;
+.form-box{
+    background:#f7f7f7;
+    padding:18px;
+    border-radius:16px;
+    margin-bottom:20px;
 }
 
-.status-select {
-
-    width: 100%;
-
-    padding: 11px;
-
-    border-radius: 9px;
-
-    border:
-        1px solid var(--borda);
-
-    background: var(--campo);
-
-    color: var(--texto);
+.form-box input,
+.form-box select{
+    width:100%;
+    padding:13px;
+    margin-bottom:10px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    background:white;
 }
 
-.whatsapp {
-
-    width: 100%;
-
-    padding: 12px;
-
-    margin-top: 10px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background: #25D366;
-
-    color: white;
-
-    font-weight: bold;
+.btn-principal{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:11px;
+    background:var(--verde);
+    color:#fff;
+    font-weight:bold;
 }
 
-.excluir {
+/* =========================
+   CONTATOS
+========================= */
 
-    width: 100%;
-
-    padding: 11px;
-
-    margin-top: 8px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background: #a80000;
-
-    color: white;
-
-    font-weight: bold;
+.contato{
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:15px;
+    margin-bottom:12px;
+    background:white;
 }
 
-/* CARDS ADMIN */
-
-.admin-card {
-
-    background: var(--card);
-
-    border:
-        1px solid var(--borda);
-
-    border-radius: 15px;
-
-    padding: 18px;
-
-    margin-bottom: 12px;
+.contato h3{
+    margin-bottom:5px;
 }
 
-.admin-card strong {
-    font-size: 17px;
+.contato p{
+    color:#666;
+    font-size:14px;
+    margin-bottom:5px;
 }
 
-.admin-status {
-
-    display: inline-block;
-
-    padding: 6px 10px;
-
-    border-radius: 20px;
-
-    margin-top: 8px;
-
-    font-size: 13px;
-
-    font-weight: bold;
+.status-select{
+    width:100%;
+    margin:10px 0;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:9px;
 }
 
-.admin-acoes {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 8px;
-
-    margin-top: 12px;
+.acoes{
+    display:flex;
+    gap:8px;
 }
 
-.admin-acoes button {
-
-    padding: 10px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    color: white;
-
-    font-weight: bold;
+.btn-whatsapp{
+    flex:1;
+    border:0;
+    padding:11px;
+    border-radius:10px;
+    background:#25D366;
+    color:white;
+    font-weight:bold;
 }
 
-.btn-bloquear {
-    background: #8f6800;
+.btn-excluir{
+    padding:11px 14px;
+    border:0;
+    border-radius:10px;
+    background:#ce2b37;
+    color:white;
+    font-weight:bold;
 }
 
-.btn-desbloquear {
-    background: #075c31;
+/* =========================
+   USUÁRIOS
+========================= */
+
+.usuario-card{
+    border:1px solid #ddd;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:12px;
+    background:#fff;
 }
 
-.btn-excluir {
-    background: #8f1018;
+.usuario-header{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:8px;
 }
 
-/* CONFIG */
-
-.config-card {
-
-    background: var(--card);
-
-    border:
-        1px solid var(--borda);
-
-    padding: 16px;
-
-    border-radius: 12px;
-
-    margin-bottom: 10px;
+.usuario-header strong{
+    font-size:16px;
 }
 
-.config-card button {
-
-    width: 100%;
-
-    padding: 13px;
-
-    margin-top: 8px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background: var(--botao);
-
-    color: white;
-
-    font-weight: bold;
+.badge{
+    padding:5px 8px;
+    border-radius:7px;
+    font-size:11px;
+    font-weight:bold;
 }
 
-@media (max-width: 500px) {
+.badge-ativo{
+    background:#d4edda;
+    color:#155724;
+}
 
-    .resumo {
-        grid-template-columns:
-            1fr 1fr;
+.badge-bloqueado{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+.usuario-info{
+    color:#666;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.usuario-acoes{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.usuario-acoes button{
+    flex:1;
+    border:0;
+    padding:10px;
+    border-radius:9px;
+    font-weight:bold;
+}
+
+.btn-bloquear{
+    background:#ffc107;
+}
+
+.btn-apagar{
+    background:#ce2b37;
+    color:white;
+}
+
+/* =========================
+   CONFIGURAÇÕES
+========================= */
+
+.config-item{
+    padding:17px;
+    border:1px solid #ddd;
+    border-radius:14px;
+    margin-bottom:10px;
+    background:white;
+    font-weight:bold;
+}
+
+.config-item small{
+    display:block;
+    color:#666;
+    font-weight:normal;
+    margin-top:5px;
+}
+
+/* =========================
+   DARK
+========================= */
+
+body.dark{
+    --painel:#111;
+    --texto:#eee;
+    --borda:#333;
+    --cinza:#aaa;
+    background:#050505;
+    color:#eee;
+}
+
+body.dark .topo,
+body.dark .login-box,
+body.dark .menu-btn,
+body.dark .contato,
+body.dark .usuario-card,
+body.dark .config-item,
+body.dark .conta-box{
+    background:#151515;
+    color:#eee;
+}
+
+body.dark .topo h1,
+body.dark .btn-conta{
+    color:#eee;
+}
+
+body.dark .inicio,
+body.dark .menu,
+body.dark .tela{
+    background:#111;
+}
+
+body.dark input,
+body.dark select{
+    background:#191919;
+    color:#eee;
+    border-color:#444;
+}
+
+body.dark .form-box,
+body.dark .resumo-card{
+    background:#181818;
+    border-color:#333;
+}
+
+body.dark .login-box p,
+body.dark .titulo-tela p,
+body.dark .conta-login,
+body.dark .contato p,
+body.dark .usuario-info{
+    color:#aaa;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:500px){
+
+    .menu-grid{
+        grid-template-columns:1fr;
     }
 
-    .admin-acoes {
-        grid-template-columns:
-            1fr;
+    .conta-topo{
+        position:absolute;
     }
+
+    .topo{
+        padding-top:75px;
+    }
+
+    .resumo{
+        grid-template-columns:1fr 1fr;
+    }
+
 }
 
 </style>
@@ -629,204 +609,125 @@ body {
 
 <body>
 
-<!-- CARREGAMENTO -->
+<!-- =========================
+     LOGIN
+========================= -->
 
-<div id="carregando">
-
-    <div class="spinner"></div>
-
-    <h2>🍀 BOT DO BM3 🍀</h2>
-
-    <p>Carregando sistema...</p>
-
-</div>
-
-
-<!-- LOGIN -->
-
-<div id="telaLogin">
+<section id="telaLogin">
 
     <div class="login-box">
 
-        <div class="login-logo">
-            🍀
-        </div>
+        <div class="login-logo">🍀</div>
 
-        <h1>
-            BOT DO BM3
-        </h1>
+        <h1>BOT DO BM3</h1>
 
-        <p>
-            Sistema de organização de contatos
-        </p>
+        <p>Faça login para entrar no sistema</p>
 
-
-        <!-- CRIAR ADMIN -->
-
-        <div id="criarAdmin">
-
-            <h2>
-                👑 Criar Administrador
-            </h2>
-
-            <p>
-                Esse será o acesso principal.
-            </p>
-
-            <label>
-                Nome do administrador
-            </label>
-
-            <input
-                id="adminNome"
-                placeholder="Seu nome"
-            >
-
-            <label>
-                Usuário
-            </label>
-
-            <input
-                id="adminUsuario"
-                placeholder="Crie seu usuário"
-            >
-
-            <label>
-                Senha
-            </label>
-
-            <input
-                id="adminSenha"
-                type="password"
-                placeholder="Crie sua senha"
-            >
-
-            <label>
-                Confirmar senha
-            </label>
-
-            <input
-                id="adminSenhaConfirmacao"
-                type="password"
-                placeholder="Confirme sua senha"
-            >
-
-            <button id="criarContaAdmin">
-                👑 Criar conta de administrador
-            </button>
-
-            <div
-                id="erroCriacao"
-                class="login-erro"
-            ></div>
-
-            <div
-                id="sucessoCriacao"
-                class="login-sucesso"
-            ></div>
-
-        </div>
-
-
-        <!-- LOGIN -->
-
-        <div
-            id="fazerLogin"
-            style="display:none;"
+        <input
+            type="text"
+            id="loginUsuario"
+            placeholder="Usuário"
+            autocomplete="username"
         >
 
-            <h2>
-                🔐 Login
-            </h2>
+        <input
+            type="password"
+            id="loginSenha"
+            placeholder="Senha"
+            autocomplete="current-password"
+        >
 
-            <label>
-                Usuário
-            </label>
+        <button
+            class="btn-login"
+            onclick="fazerLogin()"
+        >
+            🔐 Entrar
+        </button>
 
-            <input
-                id="loginUsuario"
-                placeholder="Digite seu usuário"
-            >
-
-            <label>
-                Senha
-            </label>
-
-            <input
-                id="loginSenha"
-                type="password"
-                placeholder="Digite sua senha"
-            >
-
-            <button id="entrarBot">
-                🔓 Entrar no BOT
-            </button>
-
-            <button
-                id="esqueciUsuario"
-                style="
-                    background:
-                    linear-gradient(
-                        90deg,
-                        #444,
-                        #222
-                    );
-                "
-            >
-                👤 Esqueci meu usuário
-            </button>
-
-            <div
-                id="usuarioRecuperado"
-                class="login-sucesso"
-            ></div>
-
-            <div
-                id="erroLogin"
-                class="login-erro"
-            ></div>
-
-            <button
-                id="apagarAdministrador"
-                style="
-                    background:
-                    linear-gradient(
-                        90deg,
-                        #8f1018,
-                        #5c080d
-                    );
-                "
-            >
-                🗑️ Apagar administrador
-            </button>
-
-        </div>
+        <div
+            class="erro-login"
+            id="erroLogin"
+        ></div>
 
     </div>
 
-</div>
+</section>
 
 
-<!-- SISTEMA -->
+<!-- =========================
+     SISTEMA
+========================= -->
 
-<div id="sistema">
+<section id="sistema">
+
+    <header class="topo">
+
+        <div class="bandeira"></div>
+
+        <h1>🍀BOT DO BM3🍀</h1>
+
+        <p>Organizador de contatos</p>
 
 
-    <!-- INÍCIO -->
+        <!-- CONTA NO CANTO SUPERIOR DIREITO -->
 
-    <div
-        id="inicio"
+        <div class="conta-topo">
+
+            <button
+                class="btn-conta"
+                onclick="abrirConta()"
+            >
+                👤 Sua conta
+            </button>
+
+            <div
+                class="conta-box"
+                id="contaBox"
+            >
+
+                <div
+                    class="conta-nome"
+                    id="contaNome"
+                ></div>
+
+                <div
+                    class="conta-login"
+                    id="contaLogin"
+                ></div>
+
+                <div
+                    id="contaTipo"
+                ></div>
+
+                <button
+                    class="btn-sair"
+                    onclick="sairDaConta()"
+                >
+                    🚪 Sair da conta
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         INÍCIO
+    ========================= -->
+
+    <main
         class="inicio"
+        id="inicio"
     >
 
-        <div class="topo">
+        <div class="titulo-tela">
 
-            <h1>
-                🍀 BOT DO BM3 🍀
-            </h1>
+            <h2>🏠 Início</h2>
 
             <p>
-                Organizador de contatos
+                Bem-vindo ao BOT DO BM3
             </p>
 
         </div>
@@ -835,484 +736,487 @@ body {
         <div class="resumo">
 
             <div class="resumo-card">
-                👥 Total
-                <span
-                    id="totalContatos"
-                    class="resumo-numero"
-                >
-                    0
-                </span>
+                <strong id="totalContatos">0</strong>
+                <span>👥 Total</span>
             </div>
 
             <div class="resumo-card">
-                🟢 ZAP ON
-                <span
-                    id="totalOn"
-                    class="resumo-numero"
-                >
-                    0
-                </span>
+                <strong id="totalOn">0</strong>
+                <span>🟢 ZAP ON</span>
             </div>
 
             <div class="resumo-card">
-                🟡 Em análise
-                <span
-                    id="totalAnalise"
-                    class="resumo-numero"
-                >
-                    0
-                </span>
+                <strong id="totalAnalise">0</strong>
+                <span>🟡 Em análise</span>
             </div>
 
             <div class="resumo-card">
-                🔴 ZAP CAIU
-                <span
-                    id="totalCaiu"
-                    class="resumo-numero"
-                >
-                    0
-                </span>
+                <strong id="totalCaiu">0</strong>
+                <span>🔴 ZAP CAIU</span>
             </div>
 
         </div>
 
 
         <button
-            id="abrirMenu"
-            class="btn"
+            class="menu-btn"
+            style="width:100%; margin-bottom:10px;"
+            onclick="abrirMenu()"
         >
             ☰ Abrir Menu
         </button>
 
 
         <button
-            id="abrirConfiguracoes"
-            class="btn btn-secundario"
+            class="menu-btn"
+            style="width:100%;"
+            onclick="abrirTela('configuracoes')"
         >
             ⚙️ Configurações
         </button>
 
-
-        <button
-            id="sairConta"
-            class="btn"
-            style="
-                background:
-                linear-gradient(
-                    90deg,
-                    #700c13,
-                    #a80000
-                );
-            "
-        >
-            🚪 Sair da conta
-        </button>
-
-    </div>
+    </main>
 
 
-    <!-- MENU -->
+    <!-- =========================
+         MENU
+    ========================= -->
 
-    <div
-        id="menu"
+    <main
         class="menu"
+        id="menu"
     >
 
-        <h2>
-            ☰ Menu do BOT
-        </h2>
+        <div class="titulo-tela">
 
-        <button
-            class="menu-item"
-            id="menuInicio"
-        >
-            🏠 Início
-        </button>
+            <h2>☰ Menu</h2>
 
-        <button
-            class="menu-item"
-            id="menuAdicionar"
-        >
-            ➕ Adicionar contato
-        </button>
+            <p>Escolha uma opção</p>
 
-        <button
-            class="menu-item"
-            id="menuPesquisar"
-        >
-            🔎 Pesquisar contatos
-        </button>
-
-        <button
-            class="menu-item"
-            id="menuContatos"
-        >
-            👥 Contatos
-        </button>
-
-        <button
-            class="menu-item"
-            id="menuGrupos"
-        >
-            👥 Grupos
-        </button>
-
-        <button
-            class="menu-item"
-            id="menuConfiguracoes"
-        >
-            ⚙️ Configurações
-        </button>
-
-        <!-- ADMIN -->
-
-        <button
-            class="menu-item"
-            id="menuAdministracao"
-        >
-            👑 Administração
-        </button>
-
-        <button
-            class="menu-item"
-            id="menuVoltar"
-        >
-            ↩️ Voltar
-        </button>
-
-    </div>
+        </div>
 
 
-    <!-- ADICIONAR -->
+        <div class="menu-grid">
 
-    <div
-        id="telaAdicionar"
-        class="tela"
-    >
+            <button
+                class="menu-btn"
+                onclick="abrirTela('adicionar')"
+            >
+                ➕ Adicionar contato
+            </button>
 
-        <h2>
-            ➕ Adicionar contato
-        </h2>
+            <button
+                class="menu-btn"
+                onclick="abrirTela('buscar')"
+            >
+                🔎 Buscar contatos
+            </button>
 
-        <input
-            id="nome"
-            class="campo"
-            placeholder="Nome"
-        >
+            <button
+                class="menu-btn"
+                onclick="abrirTela('contatos')"
+            >
+                👥 Contatos
+            </button>
 
-        <input
-            id="numero"
-            class="campo"
-            placeholder="WhatsApp com DDD"
-        >
+            <button
+                class="menu-btn"
+                onclick="abrirTela('grupos')"
+            >
+                🏷️ Grupos
+            </button>
 
-        <input
-            id="grupo"
-            class="campo"
-            placeholder="Grupo / etiqueta"
-        >
-
-        <textarea
-            id="observacao"
-            class="campo"
-            placeholder="Observação"
-            rows="4"
-        ></textarea>
-
-        <button
-            id="adicionarContato"
-            class="btn"
-        >
-            💾 Salvar contato
-        </button>
-
-        <button
-            class="btn btn-secundario voltarMenu"
-        >
-            ↩️ Voltar
-        </button>
-
-    </div>
+            <button
+                class="menu-btn"
+                onclick="abrirTela('configuracoes')"
+            >
+                ⚙️ Configurações
+            </button>
 
 
-    <!-- PESQUISAR -->
+            <!-- SOMENTE ADMIN -->
 
-    <div
-        id="telaPesquisar"
-        class="tela"
-    >
-
-        <h2>
-            🔎 Pesquisar contatos
-        </h2>
-
-        <input
-            id="pesquisa"
-            class="campo"
-            placeholder="Digite nome, número ou grupo..."
-        >
-
-        <div id="resultadoPesquisa"></div>
-
-        <button
-            class="btn btn-secundario voltarMenu"
-        >
-            ↩️ Voltar
-        </button>
-
-    </div>
-
-
-    <!-- CONTATOS -->
-
-    <div
-        id="telaContatos"
-        class="tela"
-    >
-
-        <h2>
-            👥 Contatos
-        </h2>
-
-        <div id="listaContatos"></div>
-
-        <button
-            class="btn btn-secundario voltarMenu"
-        >
-            ↩️ Voltar
-        </button>
-
-    </div>
-
-
-    <!-- GRUPOS -->
-
-    <div
-        id="telaGrupos"
-        class="tela"
-    >
-
-        <h2>
-            👥 Grupos
-        </h2>
-
-        <div id="listaGrupos"></div>
-
-        <button
-            class="btn btn-secundario voltarMenu"
-        >
-            ↩️ Voltar
-        </button>
-
-    </div>
-
-
-    <!-- CONFIGURAÇÕES -->
-
-    <div
-        id="telaConfiguracoes"
-        class="tela"
-    >
-
-        <h2>
-            ⚙️ Configurações
-        </h2>
-
-        <div class="config-card">
-
-            <strong>
-                🎨 Personalização
-            </strong>
-
-            <button id="alternarTema">
-                🌙 Alterar tema
+            <button
+                class="menu-btn menu-admin"
+                id="btnAdministracao"
+                onclick="abrirTela('administracao')"
+                style="display:none;"
+            >
+                👑 Administração
             </button>
 
         </div>
 
-        <div class="config-card">
 
-            <strong>
-                💾 Backup
-            </strong>
+        <button
+            class="btn-voltar"
+            onclick="voltarInicio()"
+        >
+            🏠 Voltar para Início
+        </button>
 
-            <button id="exportarBackup">
-                💾 Exportar contatos
-            </button>
+    </main>
+
+
+    <!-- =========================
+         ADICIONAR
+    ========================= -->
+
+    <section
+        class="tela"
+        id="tela-adicionar"
+    >
+
+        <div class="titulo-tela">
+
+            <h2>➕ Adicionar contato</h2>
 
         </div>
 
-        <div class="config-card">
-
-            <strong>
-                📥 Importar contatos
-            </strong>
-
-            <button id="importarBackup">
-                📥 Importar backup
-            </button>
+        <div class="form-box">
 
             <input
-                type="file"
-                id="arquivoBackup"
-                accept=".json"
-                style="display:none;"
+                id="nomeContato"
+                placeholder="Nome"
+            >
+
+            <input
+                id="numeroContato"
+                placeholder="WhatsApp com DDD"
+                inputmode="numeric"
+            >
+
+            <input
+                id="grupoContato"
+                placeholder="Grupo / etiqueta"
+            >
+
+            <input
+                id="obsContato"
+                placeholder="Observação"
+            >
+
+            <button
+                class="btn-principal"
+                onclick="adicionarContato()"
+            >
+                💾 Salvar contato
+            </button>
+
+        </div>
+
+        <button
+            class="btn-voltar"
+            onclick="voltarMenu()"
+        >
+            ← Voltar
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         BUSCAR
+    ========================= -->
+
+    <section
+        class="tela"
+        id="tela-buscar"
+    >
+
+        <div class="titulo-tela">
+
+            <h2>🔎 Buscar contatos</h2>
+
+        </div>
+
+        <div class="form-box">
+
+            <input
+                id="campoBusca"
+                placeholder="Digite nome, número ou grupo..."
+                oninput="buscarContatos()"
             >
 
         </div>
 
-        <div class="config-card">
+        <div id="resultadoBusca"></div>
 
-            <strong>
-                ⚙️ Configuração
-            </strong>
+        <button
+            class="btn-voltar"
+            onclick="voltarMenu()"
+        >
+            ← Voltar
+        </button>
 
-            <p>
-                Área de configuração do sistema.
-            </p>
+    </section>
+
+
+    <!-- =========================
+         CONTATOS
+    ========================= -->
+
+    <section
+        class="tela"
+        id="tela-contatos"
+    >
+
+        <div class="titulo-tela">
+
+            <h2>👥 Contatos</h2>
+
+        </div>
+
+        <div id="listaContatos"></div>
+
+        <button
+            class="btn-voltar"
+            onclick="voltarMenu()"
+        >
+            ← Voltar
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         GRUPOS
+    ========================= -->
+
+    <section
+        class="tela"
+        id="tela-grupos"
+    >
+
+        <div class="titulo-tela">
+
+            <h2>🏷️ Grupos</h2>
+
+            <p>Grupos usados nos contatos</p>
+
+        </div>
+
+        <div id="listaGrupos"></div>
+
+        <button
+            class="btn-voltar"
+            onclick="voltarMenu()"
+        >
+            ← Voltar
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         CONFIGURAÇÕES
+    ========================= -->
+
+    <section
+        class="tela"
+        id="tela-configuracoes"
+    >
+
+        <div class="titulo-tela">
+
+            <h2>⚙️ Configurações</h2>
+
+        </div>
+
+
+        <div
+            class="config-item"
+            onclick="alternarTema()"
+        >
+            🎨 Personalização
+
+            <small>
+                Alternar entre tema claro e escuro.
+            </small>
+        </div>
+
+
+        <div
+            class="config-item"
+            onclick="abrirTela('configuracao')"
+        >
+            ⚙️ Configuração
+
+            <small>
+                Opções gerais do sistema.
+            </small>
+        </div>
+
+
+        <div class="config-item">
+
+            💾 Backup
+
+            <small>
+                Sistema de backup será conectado ao banco de dados.
+            </small>
+
+        </div>
+
+
+        <div class="config-item">
+
+            ℹ️ Sobre o BOT
+
+            <small>
+                🍀 BOT DO BM3 — Organizador de contatos.
+            </small>
+
+        </div>
+
+
+        <button
+            class="btn-voltar"
+            onclick="voltarMenu()"
+        >
+            ← Voltar
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         CONFIGURAÇÃO
+    ========================= -->
+
+    <section
+        class="tela"
+        id="tela-configuracao"
+    >
+
+        <div class="titulo-tela">
+
+            <h2>⚙️ Configuração</h2>
+
+        </div>
+
+        <div class="config-item">
+
+            👤 Conta atual
+
+            <small id="configContaAtual"></small>
+
+        </div>
+
+        <div class="config-item">
+
+            🔐 Segurança
+
+            <small>
+                A autenticação permanente será conectada ao banco de dados.
+            </small>
 
         </div>
 
         <button
-            class="btn btn-secundario voltarMenu"
+            class="btn-voltar"
+            onclick="abrirTela('configuracoes')"
         >
-            ↩️ Voltar
+            ← Voltar
         </button>
 
-    </div>
+    </section>
 
 
-    <!-- ADMINISTRAÇÃO -->
+    <!-- =========================
+         ADMINISTRAÇÃO
+    ========================= -->
 
-    <div
-        id="telaAdministracao"
+    <section
         class="tela"
+        id="tela-administracao"
     >
 
-        <h2>
-            👑 Administração
-        </h2>
+        <div class="titulo-tela">
 
+            <h2>👑 Administração</h2>
 
-        <!-- RESUMO USUÁRIOS -->
+            <p>
+                Área exclusiva do administrador
+            </p>
+
+        </div>
+
 
         <div class="resumo">
 
             <div class="resumo-card">
-
-                👤 Usuários
-
-                <span
-                    id="totalUsuarios"
-                    class="resumo-numero"
-                >
-                    0
-                </span>
-
+                <strong id="adminTotalUsuarios">0</strong>
+                <span>👥 Usuários</span>
             </div>
 
             <div class="resumo-card">
-
-                🟢 Ativos
-
-                <span
-                    id="usuariosAtivos"
-                    class="resumo-numero"
-                >
-                    0
-                </span>
-
+                <strong id="adminAtivos">0</strong>
+                <span>🟢 Ativos</span>
             </div>
 
             <div class="resumo-card">
-
-                🔴 Bloqueados
-
-                <span
-                    id="usuariosBloqueados"
-                    class="resumo-numero"
-                >
-                    0
-                </span>
-
+                <strong id="adminBloqueados">0</strong>
+                <span>🔴 Bloqueados</span>
             </div>
 
             <div class="resumo-card">
-
-                🟢 Online
-
-                <span
-                    id="usuariosOnline"
-                    class="resumo-numero"
-                >
-                    0
-                </span>
-
+                <strong id="adminOnline">0</strong>
+                <span>🟢 Online</span>
             </div>
 
         </div>
 
 
-        <!-- CRIAR USUÁRIO -->
+        <div class="form-box">
 
-        <div class="admin-card">
-
-            <h3>
+            <h3 style="margin-bottom:12px;">
                 ➕ Criar usuário
             </h3>
 
             <input
                 id="novoUsuarioNome"
-                class="campo"
                 placeholder="Nome da pessoa"
             >
 
             <input
                 id="novoUsuarioLogin"
-                class="campo"
-                placeholder="Usuário"
+                placeholder="Nome de usuário"
             >
 
             <input
                 id="novoUsuarioSenha"
-                class="campo"
                 type="password"
                 placeholder="Senha"
             >
 
             <button
-                id="criarNovoUsuario"
-                class="btn"
+                class="btn-principal"
+                onclick="criarUsuario()"
             >
-                👤 Criar usuário
+                👤 Criar conta
             </button>
-
-            <div
-                id="resultadoCriacaoUsuario"
-                class="login-sucesso"
-            ></div>
 
         </div>
 
 
-        <!-- LISTA -->
-
-        <h3>
-            👥 Usuários cadastrados
+        <h3 style="margin:20px 0 12px;">
+            👥 Contas cadastradas
         </h3>
 
         <div id="listaUsuarios"></div>
 
 
         <button
-            class="btn btn-secundario voltarMenu"
+            class="btn-voltar"
+            onclick="voltarMenu()"
         >
-            ↩️ Voltar
+            ← Voltar
         </button>
 
-    </div>
+    </section>
 
-</div>
+</section>
 
 
 <script>
@@ -1321,20 +1225,11 @@ body {
    CHAVES
 ========================= */
 
-const CHAVE_ADMIN =
-    "botBM3Administrador";
-
-const CHAVE_SESSAO =
-    "botBM3Sessao";
-
-const CHAVE_CONTATOS =
-    "botBM3Contatos";
-
-const CHAVE_USUARIOS =
-    "botBM3Usuarios";
-
-const CHAVE_TEMA =
-    "temaBotBM3";
+const CHAVE_ADMIN = "botBM3Administrador";
+const CHAVE_SESSAO = "botBM3Sessao";
+const CHAVE_CONTATOS = "botBM3Contatos";
+const CHAVE_USUARIOS = "botBM3Usuarios";
+const CHAVE_TEMA = "temaBotBM3";
 
 
 /* =========================
@@ -1343,732 +1238,437 @@ const CHAVE_TEMA =
 
 let contatos =
     JSON.parse(
-        localStorage.getItem(
-            CHAVE_CONTATOS
-        )
+        localStorage.getItem(CHAVE_CONTATOS)
     ) || [];
-
 
 let usuarios =
     JSON.parse(
-        localStorage.getItem(
-            CHAVE_USUARIOS
-        )
+        localStorage.getItem(CHAVE_USUARIOS)
     ) || [];
 
 
 /* =========================
-   TEMA
+   CONTA ATUAL
 ========================= */
 
-if (
-    localStorage.getItem(
-        CHAVE_TEMA
-    ) === "escuro"
-) {
-
-    document.body.classList.add(
-        "tema-escuro"
-    );
-
-}
+let contaAtual = null;
 
 
 /* =========================
    LOGIN
 ========================= */
 
-function verificarAdministrador() {
+function fazerLogin(){
+
+    const usuario =
+        document
+        .getElementById("loginUsuario")
+        .value
+        .trim();
+
+    const senha =
+        document
+        .getElementById("loginSenha")
+        .value;
+
+    const erro =
+        document
+        .getElementById("erroLogin");
+
+    erro.textContent = "";
+
+
+    /*
+      ADMINISTRADOR
+
+      A senha NÃO fica escrita aqui.
+      Depois vamos conectar essa autenticação
+      ao banco permanente.
+    */
 
     const admin =
-        localStorage.getItem(
-            CHAVE_ADMIN
+        JSON.parse(
+            localStorage.getItem(CHAVE_ADMIN)
         );
 
-    document.getElementById(
-        "criarAdmin"
-    ).style.display =
-        admin ? "none" : "block";
 
-    document.getElementById(
-        "fazerLogin"
-    ).style.display =
-        admin ? "block" : "none";
-}
+    if(
+        admin &&
+        usuario === admin.usuario &&
+        senha === admin.senha
+    ){
 
+        contaAtual = {
+            nome:admin.nome,
+            usuario:admin.usuario,
+            tipo:"administrador"
+        };
 
-function entrarNoSistema() {
+        entrarSistema();
 
-    document.getElementById(
-        "telaLogin"
-    ).style.display =
-        "none";
-
-    document.getElementById(
-        "sistema"
-    ).style.display =
-        "block";
-
-    mostrarTela(
-        "inicio"
-    );
-
-    atualizarResumo();
-
-}
+        return;
+    }
 
 
-/* =========================
-   CRIAR ADMIN
-========================= */
+    /*
+      USUÁRIO COMUM
+    */
 
-document
-.getElementById(
-    "criarContaAdmin"
-)
-.addEventListener(
-    "click",
-    function() {
-
-        const nome =
-            document.getElementById(
-                "adminNome"
-            ).value.trim();
-
-        const usuario =
-            document.getElementById(
-                "adminUsuario"
-            ).value.trim();
-
-        const senha =
-            document.getElementById(
-                "adminSenha"
-            ).value;
-
-        const confirmacao =
-            document.getElementById(
-                "adminSenhaConfirmacao"
-            ).value;
+    const usuarioEncontrado =
+        usuarios.find(
+            u =>
+                u.usuario === usuario &&
+                u.senha === senha
+        );
 
 
-        const erro =
-            document.getElementById(
-                "erroCriacao"
-            );
+    if(usuarioEncontrado){
 
-
-        if (
-            !nome ||
-            !usuario ||
-            !senha ||
-            !confirmacao
-        ) {
+        if(usuarioEncontrado.status === "bloqueado"){
 
             erro.textContent =
-                "❌ Preencha todos os campos.";
-
-            erro.style.display =
-                "block";
+                "🚫 Esta conta está bloqueada.";
 
             return;
         }
 
 
-        if (
-            senha !== confirmacao
-        ) {
+        usuarioEncontrado.online = true;
 
-            erro.textContent =
-                "❌ As senhas não são iguais.";
+        usuarioEncontrado.ultimoAcesso =
+            new Date().toLocaleString("pt-BR");
 
-            erro.style.display =
-                "block";
-
-            return;
-        }
+        localStorage.setItem(
+            CHAVE_USUARIOS,
+            JSON.stringify(usuarios)
+        );
 
 
-        const administrador = {
-
-            nome,
-            usuario,
-            senha,
-
-            tipo:
-                "administrador",
-
-            criadoEm:
-                new Date()
-                .toLocaleString(
-                    "pt-BR"
-                )
-
+        contaAtual = {
+            nome:usuarioEncontrado.nome,
+            usuario:usuarioEncontrado.usuario,
+            tipo:"usuario"
         };
 
 
-        localStorage.setItem(
-            CHAVE_ADMIN,
-            JSON.stringify(
-                administrador
-            )
-        );
+        entrarSistema();
 
-
-        alert(
-            "✅ Administrador criado!"
-        );
-
-
-        verificarAdministrador();
-
-    }
-);
-
-
-/* =========================
-   LOGIN ADMIN
-========================= */
-
-document
-.getElementById(
-    "entrarBot"
-)
-.addEventListener(
-    "click",
-    function() {
-
-        const usuario =
-            document.getElementById(
-                "loginUsuario"
-            ).value.trim();
-
-        const senha =
-            document.getElementById(
-                "loginSenha"
-            ).value;
-
-
-        const dados =
-            localStorage.getItem(
-                CHAVE_ADMIN
-            );
-
-
-        if (!dados) {
-
-            verificarAdministrador();
-
-            return;
-        }
-
-
-        const admin =
-            JSON.parse(
-                dados
-            );
-
-
-        if (
-            usuario === admin.usuario &&
-            senha === admin.senha
-        ) {
-
-            localStorage.setItem(
-                CHAVE_SESSAO,
-                "admin"
-            );
-
-            entrarNoSistema();
-
-        } else {
-
-            const erro =
-                document.getElementById(
-                    "erroLogin"
-                );
-
-            erro.textContent =
-                "❌ Usuário ou senha incorretos.";
-
-            erro.style.display =
-                "block";
-
-        }
-
-    }
-);
-
-
-/* =========================
-   RECUPERAR USUÁRIO
-========================= */
-
-document
-.getElementById(
-    "esqueciUsuario"
-)
-.addEventListener(
-    "click",
-    function() {
-
-        const dados =
-            localStorage.getItem(
-                CHAVE_ADMIN
-            );
-
-        const area =
-            document.getElementById(
-                "usuarioRecuperado"
-            );
-
-
-        if (!dados) {
-
-            area.textContent =
-                "❌ Nenhuma conta encontrada.";
-
-        } else {
-
-            const admin =
-                JSON.parse(
-                    dados
-                );
-
-            area.textContent =
-                "👤 Seu usuário é: " +
-                admin.usuario;
-        }
-
-
-        area.style.display =
-            "block";
-
-    }
-);
-
-
-/* =========================
-   APAGAR ADMIN
-========================= */
-
-document
-.getElementById(
-    "apagarAdministrador"
-)
-.addEventListener(
-    "click",
-    function() {
-
-        if (
-            !confirm(
-                "⚠️ Apagar a conta de administrador?\n\nOs contatos e usuários também permanecerão salvos."
-            )
-        ) {
-
-            return;
-        }
-
-
-        localStorage.removeItem(
-            CHAVE_ADMIN
-        );
-
-        localStorage.removeItem(
-            CHAVE_SESSAO
-        );
-
-
-        alert(
-            "✅ Administrador apagado."
-        );
-
-
-        location.reload();
-
-    }
-);
-
-
-/* =========================
-   MENU
-========================= */
-
-function mostrarTela(nome) {
-
-    document
-    .querySelectorAll(
-        ".tela"
-    )
-    .forEach(
-        function(tela) {
-
-            tela.style.display =
-                "none";
-
-        }
-    );
-
-
-    document.getElementById(
-        "inicio"
-    ).style.display =
-        "none";
-
-    document.getElementById(
-        "menu"
-    ).style.display =
-        "none";
-
-
-    if (
-        nome === "inicio"
-    ) {
-
-        document.getElementById(
-            "inicio"
-        ).style.display =
-            "block";
-
+        return;
     }
 
 
-    else if (
-        nome === "menu"
-    ) {
-
-        document.getElementById(
-            "menu"
-        ).style.display =
-            "block";
-
-    }
-
-
-    else {
-
-        document.getElementById(
-            nome
-        ).style.display =
-            "block";
-
-    }
-
+    erro.textContent =
+        "❌ Usuário ou senha incorretos.";
 }
 
 
-document
-.getElementById(
-    "abrirMenu"
-)
-.addEventListener(
-    "click",
-    () =>
-        mostrarTela("menu")
-);
+/* =========================
+   ENTRAR
+========================= */
+
+function entrarSistema(){
+
+    localStorage.setItem(
+        CHAVE_SESSAO,
+        JSON.stringify(contaAtual)
+    );
 
 
-document
-.getElementById(
-    "menuInicio"
-)
-.addEventListener(
-    "click",
-    () =>
-        mostrarTela("inicio")
-);
+    document
+        .getElementById("telaLogin")
+        .style.display="none";
 
 
-document
-.getElementById(
-    "menuAdicionar"
-)
-.addEventListener(
-    "click",
-    () =>
-        mostrarTela(
-            "telaAdicionar"
-        )
-);
+    document
+        .getElementById("sistema")
+        .style.display="block";
 
 
-document
-.getElementById(
-    "menuPesquisar"
-)
-.addEventListener(
-    "click",
-    () =>
-        mostrarTela(
-            "telaPesquisar"
-        )
-);
+    atualizarConta();
+
+    atualizarResumo();
+
+    atualizarContatos();
+
+    atualizarGrupos();
+
+    verificarAdministrador();
+
+    abrirInicio();
+}
 
 
-document
-.getElementById(
-    "menuContatos"
-)
-.addEventListener(
-    "click",
-    () =>
-        mostrarTela(
-            "telaContatos"
-        )
-);
+/* =========================
+   CONTA
+========================= */
+
+function atualizarConta(){
+
+    if(!contaAtual) return;
 
 
-document
-.getElementById(
-    "menuGrupos"
-)
-.addEventListener(
-    "click",
-    () =>
-        mostrarTela(
-            "telaGrupos"
-        )
-);
+    document
+        .getElementById("contaNome")
+        .textContent =
+        contaAtual.nome;
 
 
-document
-.getElementById(
-    "menuConfiguracoes"
-)
-.addEventListener(
-    "click",
-    () =>
-        mostrarTela(
-            "telaConfiguracoes"
-        )
-);
+    document
+        .getElementById("contaLogin")
+        .textContent =
+        "@" + contaAtual.usuario;
 
 
-document
-.getElementById(
-    "abrirConfiguracoes"
-)
-.addEventListener(
-    "click",
-    () =>
-        mostrarTela(
-            "telaConfiguracoes"
-        )
-);
+    const tipo =
+        document.getElementById("contaTipo");
 
 
-/* ADMIN */
+    if(contaAtual.tipo === "administrador"){
 
-document
-.getElementById(
-    "menuAdministracao"
-)
-.addEventListener(
-    "click",
-    function() {
+        tipo.className =
+            "conta-admin";
 
-        atualizarPainelAdmin();
+        tipo.textContent =
+            "👑 Administrador";
 
-        mostrarTela(
-            "telaAdministracao"
-        );
+    }else{
+
+        tipo.className =
+            "conta-usuario";
+
+        tipo.textContent =
+            "👤 Usuário";
 
     }
-);
 
 
-/* VOLTAR */
-
-document
-.getElementById(
-    "menuVoltar"
-)
-.addEventListener(
-    "click",
-    () =>
-        mostrarTela("inicio")
-);
+    document
+        .getElementById("configContaAtual")
+        .textContent =
+        contaAtual.nome +
+        " — @" +
+        contaAtual.usuario;
+}
 
 
-document
-.querySelectorAll(
-    ".voltarMenu"
-)
-.forEach(
-    function(botao) {
+function abrirConta(){
 
-        botao.addEventListener(
-            "click",
-            function() {
+    const box =
+        document.getElementById("contaBox");
 
-                mostrarTela(
-                    "menu"
-                );
+    box.classList.toggle("aberta");
+}
 
-            }
+
+/* =========================
+   SAIR
+========================= */
+
+function sairDaConta(){
+
+    if(contaAtual){
+
+        const usuario =
+            usuarios.find(
+                u =>
+                    u.usuario ===
+                    contaAtual.usuario
+            );
+
+        if(usuario){
+
+            usuario.online = false;
+
+            localStorage.setItem(
+                CHAVE_USUARIOS,
+                JSON.stringify(usuarios)
+            );
+        }
+    }
+
+
+    localStorage.removeItem(
+        CHAVE_SESSAO
+    );
+
+    contaAtual = null;
+
+
+    document
+        .getElementById("sistema")
+        .style.display="none";
+
+
+    document
+        .getElementById("telaLogin")
+        .style.display="flex";
+
+
+    document
+        .getElementById("loginUsuario")
+        .value="";
+
+
+    document
+        .getElementById("loginSenha")
+        .value="";
+
+
+    document
+        .getElementById("erroLogin")
+        .textContent="";
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+function verificarAdministrador(){
+
+    const botao =
+        document.getElementById(
+            "btnAdministracao"
         );
 
+
+    if(
+        contaAtual &&
+        contaAtual.tipo ===
+        "administrador"
+    ){
+
+        botao.style.display="block";
+
+    }else{
+
+        botao.style.display="none";
     }
-);
+}
 
 
 /* =========================
    CRIAR USUÁRIO
 ========================= */
 
-document
-.getElementById(
-    "criarNovoUsuario"
-)
-.addEventListener(
-    "click",
-    function() {
+function criarUsuario(){
 
-        const nome =
-            document.getElementById(
-                "novoUsuarioNome"
-            ).value.trim();
+    if(
+        !contaAtual ||
+        contaAtual.tipo !==
+        "administrador"
+    ){
 
-        const login =
-            document.getElementById(
-                "novoUsuarioLogin"
-            ).value.trim();
+        alert(
+            "🚫 Somente o administrador pode criar usuários."
+        );
 
-        const senha =
-            document.getElementById(
-                "novoUsuarioSenha"
-            ).value;
+        return;
+    }
 
 
-        const resultado =
-            document.getElementById(
-                "resultadoCriacaoUsuario"
-            );
+    const nome =
+        document
+        .getElementById("novoUsuarioNome")
+        .value
+        .trim();
 
 
-        if (
-            !nome ||
-            !login ||
-            !senha
-        ) {
-
-            alert(
-                "❌ Preencha todos os campos."
-            );
-
-            return;
-        }
+    const login =
+        document
+        .getElementById("novoUsuarioLogin")
+        .value
+        .trim();
 
 
-        const existe =
-            usuarios.some(
-                function(usuario) {
-
-                    return (
-                        usuario.usuario
-                        .toLowerCase() ===
-                        login.toLowerCase()
-                    );
-
-                }
-            );
+    const senha =
+        document
+        .getElementById("novoUsuarioSenha")
+        .value;
 
 
-        if (existe) {
+    if(!nome || !login || !senha){
 
-            alert(
-                "❌ Esse usuário já existe."
-            );
+        alert(
+            "Preencha todos os campos."
+        );
 
-            return;
-        }
-
-
-        const novoUsuario = {
-
-            id:
-                Date.now(),
-
-            nome:
-
-                nome,
-
-            usuario:
-
-                login,
-
-            senha:
-
-                senha,
-
-            status:
-
-                "ativo",
-
-            online:
-
-                false,
-
-            criadoEm:
-
-                new Date()
-                .toLocaleString(
-                    "pt-BR"
-                ),
-
-            ultimoAcesso:
-
-                "Nunca entrou"
-
-        };
+        return;
+    }
 
 
-        usuarios.push(
-            novoUsuario
+    const existe =
+        usuarios.some(
+            u =>
+                u.usuario === login
         );
 
 
-        salvarUsuarios();
+    if(existe){
 
+        alert(
+            "❌ Esse usuário já existe."
+        );
 
-        document.getElementById(
-            "novoUsuarioNome"
-        ).value = "";
-
-        document.getElementById(
-            "novoUsuarioLogin"
-        ).value = "";
-
-        document.getElementById(
-            "novoUsuarioSenha"
-        ).value = "";
-
-
-        resultado.textContent =
-            "✅ Usuário criado com sucesso!";
-
-        resultado.style.display =
-            "block";
-
-
-        atualizarPainelAdmin();
-
+        return;
     }
-);
 
 
-/* =========================
-   SALVAR USUÁRIOS
-========================= */
+    const novoUsuario = {
 
-function salvarUsuarios() {
+        id:Date.now(),
+
+        nome:nome,
+
+        usuario:login,
+
+        senha:senha,
+
+        status:"ativo",
+
+        online:false,
+
+        criadoEm:
+            new Date()
+            .toLocaleString("pt-BR"),
+
+        ultimoAcesso:
+            "Nunca entrou"
+    };
+
+
+    usuarios.push(
+        novoUsuario
+    );
+
 
     localStorage.setItem(
         CHAVE_USUARIOS,
-        JSON.stringify(
-            usuarios
-        )
+        JSON.stringify(usuarios)
     );
 
+
+    document
+        .getElementById("novoUsuarioNome")
+        .value="";
+
+
+    document
+        .getElementById("novoUsuarioLogin")
+        .value="";
+
+
+    document
+        .getElementById("novoUsuarioSenha")
+        .value="";
+
+
+    atualizarPainelAdmin();
+
+
+    alert(
+        "✅ Conta criada com sucesso!"
+    );
 }
 
 
@@ -2076,7 +1676,14 @@ function salvarUsuarios() {
    PAINEL ADMIN
 ========================= */
 
-function atualizarPainelAdmin() {
+function atualizarPainelAdmin(){
+
+    if(
+        !contaAtual ||
+        contaAtual.tipo !==
+        "administrador"
+    ) return;
+
 
     const total =
         usuarios.length;
@@ -2084,48 +1691,56 @@ function atualizarPainelAdmin() {
 
     const ativos =
         usuarios.filter(
-            usuario =>
-                usuario.status ===
+            u =>
+                u.status ===
                 "ativo"
         ).length;
 
 
     const bloqueados =
         usuarios.filter(
-            usuario =>
-                usuario.status ===
+            u =>
+                u.status ===
                 "bloqueado"
         ).length;
 
 
     const online =
         usuarios.filter(
-            usuario =>
-                usuario.online === true
+            u =>
+                u.online === true
         ).length;
 
 
-    document.getElementById(
-        "totalUsuarios"
-    ).textContent =
+    document
+        .getElementById(
+            "adminTotalUsuarios"
+        )
+        .textContent =
         total;
 
 
-    document.getElementById(
-        "usuariosAtivos"
-    ).textContent =
+    document
+        .getElementById(
+            "adminAtivos"
+        )
+        .textContent =
         ativos;
 
 
-    document.getElementById(
-        "usuariosBloqueados"
-    ).textContent =
+    document
+        .getElementById(
+            "adminBloqueados"
+        )
+        .textContent =
         bloqueados;
 
 
-    document.getElementById(
-        "usuariosOnline"
-    ).textContent =
+    document
+        .getElementById(
+            "adminOnline"
+        )
+        .textContent =
         online;
 
 
@@ -2135,196 +1750,135 @@ function atualizarPainelAdmin() {
         );
 
 
-    lista.innerHTML = "";
-
-
-    if (
-        usuarios.length === 0
-    ) {
+    if(usuarios.length === 0){
 
         lista.innerHTML =
-            "<p>Nenhum usuário cadastrado.</p>";
+            "<p>Nenhuma conta criada ainda.</p>";
 
         return;
     }
 
 
-    usuarios.forEach(
-        function(usuario) {
+    lista.innerHTML =
+        usuarios.map(
+            u => `
 
-            const card =
-                document.createElement(
-                    "div"
-                );
+            <div class="usuario-card">
 
+                <div class="usuario-header">
 
-            card.className =
-                "admin-card";
+                    <strong>
+                        👤 ${u.nome}
+                    </strong>
 
-
-            const statusTexto =
-                usuario.status ===
-                "ativo"
-
-                ? "🟢 ATIVO"
-
-                : "🔴 BLOQUEADO";
-
-
-            const onlineTexto =
-                usuario.online
-
-                ? "🟢 ONLINE"
-
-                : "⚫ OFFLINE";
-
-
-            card.innerHTML = `
-
-                <strong>
-                    👤 ${escapeHTML(
-                        usuario.nome
-                    )}
-                </strong>
-
-                <p>
-                    🔑 Usuário:
-                    ${escapeHTML(
-                        usuario.usuario
-                    )}
-                </p>
-
-                <p>
-                    ${onlineTexto}
-                </p>
-
-                <p>
-                    📅 Criado em:
-                    ${escapeHTML(
-                        usuario.criadoEm
-                    )}
-                </p>
-
-                <p>
-                    🕐 Último acesso:
-                    ${escapeHTML(
-                        usuario.ultimoAcesso
-                    )}
-                </p>
-
-                <span
-                    class="admin-status"
-                    style="
-                        background:
+                    <span
+                        class="badge ${
+                            u.status === "ativo"
+                            ? "badge-ativo"
+                            : "badge-bloqueado"
+                        }"
+                    >
                         ${
-                            usuario.status ===
-                            "ativo"
-                            ? "#075c31"
-                            : "#8f1018"
-                        };
-                        color:white;
-                    "
-                >
-                    ${statusTexto}
-                </span>
+                            u.status === "ativo"
+                            ? "ATIVO"
+                            : "BLOQUEADO"
+                        }
+                    </span>
 
-                <div
-                    class="admin-acoes"
-                >
+                </div>
+
+
+                <div class="usuario-info">
+
+                    🔑 Usuário:
+                    @${u.usuario}
+
+                    <br>
+
+                    📅 Criado:
+                    ${u.criadoEm}
+
+                    <br>
+
+                    🕐 Último acesso:
+                    ${u.ultimoAcesso}
+
+                    <br>
+
+                    ${
+                        u.online
+                        ? "🟢 Online"
+                        : "⚫ Offline"
+                    }
+
+                </div>
+
+
+                <div class="usuario-acoes">
 
                     <button
-                        class="${
-                            usuario.status ===
-                            "ativo"
-                            ? "btn-bloquear"
-                            : "btn-desbloquear"
-                        }"
-                        onclick="
-                            alterarStatusUsuario(
-                                ${usuario.id}
-                            )
-                        "
+                        class="btn-bloquear"
+                        onclick="alterarStatusUsuario(${u.id})"
                     >
-
                         ${
-                            usuario.status ===
-                            "ativo"
+                            u.status === "ativo"
                             ? "🚫 Bloquear"
-                            : "🟢 Desbloquear"
+                            : "✅ Desbloquear"
                         }
-
                     </button>
 
 
                     <button
-                        class="btn-excluir"
-                        onclick="
-                            excluirUsuario(
-                                ${usuario.id}
-                            )
-                        "
+                        class="btn-apagar"
+                        onclick="excluirUsuario(${u.id})"
                     >
-
-                        🗑️ Excluir
-
+                        🗑️ Apagar
                     </button>
 
                 </div>
 
-            `;
+            </div>
 
-
-            lista.appendChild(
-                card
-            );
-
-        }
-    );
-
+        `
+        ).join("");
 }
 
 
 /* =========================
-   BLOQUEAR / DESBLOQUEAR
+   STATUS USUÁRIO
 ========================= */
 
-function alterarStatusUsuario(id) {
+function alterarStatusUsuario(id){
+
+    if(
+        !contaAtual ||
+        contaAtual.tipo !==
+        "administrador"
+    ) return;
+
 
     const usuario =
         usuarios.find(
-            u =>
-                u.id === id
+            u => u.id === id
         );
 
 
-    if (!usuario) {
-        return;
-    }
+    if(!usuario) return;
 
 
-    if (
-        usuario.status ===
-        "ativo"
-    ) {
-
-        usuario.status =
-            "bloqueado";
-
-        usuario.online =
-            false;
-
-    } else {
-
-        usuario.status =
-            "ativo";
-
-    }
+    usuario.status =
+        usuario.status === "ativo"
+        ? "bloqueado"
+        : "ativo";
 
 
-    salvarUsuarios();
+    localStorage.setItem(
+        CHAVE_USUARIOS,
+        JSON.stringify(usuarios)
+    );
+
 
     atualizarPainelAdmin();
-
 }
 
 
@@ -2332,43 +1886,37 @@ function alterarStatusUsuario(id) {
    EXCLUIR USUÁRIO
 ========================= */
 
-function excluirUsuario(id) {
+function excluirUsuario(id){
 
-    const usuario =
-        usuarios.find(
-            u =>
-                u.id === id
+    if(
+        !contaAtual ||
+        contaAtual.tipo !==
+        "administrador"
+    ) return;
+
+
+    const confirmar =
+        confirm(
+            "Tem certeza que deseja apagar esta conta?"
         );
 
 
-    if (!usuario) {
-        return;
-    }
-
-
-    if (
-        !confirm(
-            "🗑️ Excluir o usuário " +
-            usuario.nome +
-            "?"
-        )
-    ) {
-
-        return;
-    }
+    if(!confirmar) return;
 
 
     usuarios =
         usuarios.filter(
-            u =>
-                u.id !== id
+            u => u.id !== id
         );
 
 
-    salvarUsuarios();
+    localStorage.setItem(
+        CHAVE_USUARIOS,
+        JSON.stringify(usuarios)
+    );
+
 
     atualizarPainelAdmin();
-
 }
 
 
@@ -2376,135 +1924,592 @@ function excluirUsuario(id) {
    CONTATOS
 ========================= */
 
-document
-.getElementById(
-    "adicionarContato"
-)
-.addEventListener(
-    "click",
-    function() {
+function adicionarContato(){
 
-        const nome =
-            document.getElementById(
-                "nome"
-            ).value.trim();
-
-        const numero =
-            document.getElementById(
-                "numero"
-            ).value.trim();
-
-        const grupo =
-            document.getElementById(
-                "grupo"
-            ).value.trim();
-
-        const observacao =
-            document.getElementById(
-                "observacao"
-            ).value.trim();
+    const nome =
+        document
+        .getElementById("nomeContato")
+        .value
+        .trim();
 
 
-        if (
-            !nome ||
-            !numero
-        ) {
-
-            alert(
-                "❌ Nome e número são obrigatórios."
-            );
-
-            return;
-        }
+    const numero =
+        document
+        .getElementById("numeroContato")
+        .value
+        .trim();
 
 
-        contatos.push({
-
-            nome,
-
-            numero,
-
-            grupo:
-                grupo ||
-                "Sem grupo",
-
-            observacao:
-                observacao ||
-                "Sem observação",
-
-            status:
-                "analise",
-
-            ultimaAtualizacao:
-                new Date()
-                .toLocaleString(
-                    "pt-BR"
-                )
-
-        });
+    const grupo =
+        document
+        .getElementById("grupoContato")
+        .value
+        .trim();
 
 
-        localStorage.setItem(
-            CHAVE_CONTATOS,
-            JSON.stringify(
-                contatos
-            )
-        );
+    const observacao =
+        document
+        .getElementById("obsContato")
+        .value
+        .trim();
 
+
+    if(!nome || !numero){
 
         alert(
-            "✅ Contato adicionado!"
+            "Informe pelo menos o nome e o número."
         );
 
-
-        mostrarTela(
-            "telaContatos"
-        );
-
+        return;
     }
-);
+
+
+    contatos.push({
+
+        id:Date.now(),
+
+        nome,
+
+        numero,
+
+        grupo,
+
+        observacao,
+
+        status:"analise",
+
+        ultimaAtualizacao:
+            new Date()
+            .toLocaleString("pt-BR")
+
+    });
+
+
+    localStorage.setItem(
+        CHAVE_CONTATOS,
+        JSON.stringify(contatos)
+    );
+
+
+    document
+        .getElementById("nomeContato")
+        .value="";
+
+
+    document
+        .getElementById("numeroContato")
+        .value="";
+
+
+    document
+        .getElementById("grupoContato")
+        .value="";
+
+
+    document
+        .getElementById("obsContato")
+        .value="";
+
+
+    atualizarContatos();
+
+    atualizarResumo();
+
+
+    alert(
+        "✅ Contato salvo!"
+    );
+}
+
+
+/* =========================
+   CONTATOS
+========================= */
+
+function atualizarContatos(){
+
+    const lista =
+        document.getElementById(
+            "listaContatos"
+        );
+
+
+    if(!lista) return;
+
+
+    if(contatos.length === 0){
+
+        lista.innerHTML =
+            "<p>Nenhum contato cadastrado.</p>";
+
+        return;
+    }
+
+
+    lista.innerHTML =
+        contatos.map(
+            (c,index) => `
+
+            <div class="contato">
+
+                <h3>
+                    ${c.nome}
+                </h3>
+
+                <p>
+                    📱 ${c.numero}
+                </p>
+
+                ${
+                    c.grupo
+                    ? `<p>🏷️ ${c.grupo}</p>`
+                    : ""
+                }
+
+                ${
+                    c.observacao
+                    ? `<p>📝 ${c.observacao}</p>`
+                    : ""
+                }
+
+
+                <select
+                    class="status-select"
+                    onchange="alterarStatusContato(${index}, this.value)"
+                >
+
+                    <option
+                        value="analise"
+                        ${c.status === "analise" ? "selected" : ""}
+                    >
+                        ⚠️ ZAP EM ANÁLISE
+                    </option>
+
+                    <option
+                        value="on"
+                        ${c.status === "on" ? "selected" : ""}
+                    >
+                        ✅ ZAP ON
+                    </option>
+
+                    <option
+                        value="caiu"
+                        ${c.status === "caiu" ? "selected" : ""}
+                    >
+                        ❌ ZAP CAIU
+                    </option>
+
+                </select>
+
+
+                <p>
+                    🕐 Atualizado:
+                    ${c.ultimaAtualizacao}
+                </p>
+
+
+                <div class="acoes">
+
+                    <button
+                        class="btn-whatsapp"
+                        onclick="abrirWhatsApp('${c.numero}')"
+                    >
+                        🟢 Abrir WhatsApp
+                    </button>
+
+                    <button
+                        class="btn-excluir"
+                        onclick="excluirContato(${index})"
+                    >
+                        🗑️
+                    </button>
+
+                </div>
+
+            </div>
+
+        `
+        ).join("");
+}
+
+
+/* =========================
+   STATUS CONTATO
+========================= */
+
+function alterarStatusContato(
+    index,
+    status
+){
+
+    contatos[index].status =
+        status;
+
+
+    contatos[index]
+        .ultimaAtualizacao =
+        new Date()
+        .toLocaleString("pt-BR");
+
+
+    localStorage.setItem(
+        CHAVE_CONTATOS,
+        JSON.stringify(contatos)
+    );
+
+
+    atualizarContatos();
+
+    atualizarResumo();
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+function abrirWhatsApp(numero){
+
+    const limpo =
+        numero.replace(
+            /\D/g,
+            ""
+        );
+
+
+    let numeroFinal =
+        limpo;
+
+
+    if(
+        numeroFinal.length === 11 ||
+        numeroFinal.length === 10
+    ){
+
+        numeroFinal =
+            "55" +
+            numeroFinal;
+    }
+
+
+    window.open(
+        "https://wa.me/" +
+        numeroFinal,
+        "_blank"
+    );
+}
+
+
+/* =========================
+   EXCLUIR CONTATO
+========================= */
+
+function excluirContato(index){
+
+    if(
+        !confirm(
+            "Apagar este contato?"
+        )
+    ) return;
+
+
+    contatos.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        CHAVE_CONTATOS,
+        JSON.stringify(contatos)
+    );
+
+
+    atualizarContatos();
+
+    atualizarResumo();
+}
+
+
+/* =========================
+   BUSCAR
+========================= */
+
+function buscarContatos(){
+
+    const termo =
+        document
+        .getElementById("campoBusca")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const resultado =
+        document.getElementById(
+            "resultadoBusca"
+        );
+
+
+    const encontrados =
+        contatos.filter(
+            c =>
+                c.nome
+                .toLowerCase()
+                .includes(termo) ||
+
+                c.numero
+                .toLowerCase()
+                .includes(termo) ||
+
+                (c.grupo || "")
+                .toLowerCase()
+                .includes(termo)
+        );
+
+
+    if(!termo){
+
+        resultado.innerHTML =
+            "<p>Digite algo para buscar.</p>";
+
+        return;
+    }
+
+
+    if(encontrados.length === 0){
+
+        resultado.innerHTML =
+            "<p>Nenhum contato encontrado.</p>";
+
+        return;
+    }
+
+
+    resultado.innerHTML =
+        encontrados.map(
+            c => `
+
+            <div class="contato">
+
+                <h3>
+                    ${c.nome}
+                </h3>
+
+                <p>
+                    📱 ${c.numero}
+                </p>
+
+                <p>
+                    🏷️ ${c.grupo || "Sem grupo"}
+                </p>
+
+            </div>
+
+        `
+        ).join("");
+}
+
+
+/* =========================
+   GRUPOS
+========================= */
+
+function atualizarGrupos(){
+
+    const lista =
+        document.getElementById(
+            "listaGrupos"
+        );
+
+
+    if(!lista) return;
+
+
+    const grupos =
+        [...new Set(
+            contatos
+            .map(c => c.grupo)
+            .filter(Boolean)
+        )];
+
+
+    if(grupos.length === 0){
+
+        lista.innerHTML =
+            "<p>Nenhum grupo cadastrado.</p>";
+
+        return;
+    }
+
+
+    lista.innerHTML =
+        grupos.map(
+            g => `
+
+            <div class="config-item">
+
+                🏷️ ${g}
+
+                <small>
+                    ${
+                        contatos.filter(
+                            c =>
+                                c.grupo === g
+                        ).length
+                    }
+                    contato(s)
+                </small>
+
+            </div>
+
+        `
+        ).join("");
+}
 
 
 /* =========================
    RESUMO
 ========================= */
 
-function atualizarResumo() {
+function atualizarResumo(){
 
-    document.getElementById(
-        "totalContatos"
-    ).textContent =
+    document
+        .getElementById("totalContatos")
+        .textContent =
         contatos.length;
 
 
-    document.getElementById(
-        "totalOn"
-    ).textContent =
+    document
+        .getElementById("totalOn")
+        .textContent =
         contatos.filter(
-            c =>
-                c.status === "on"
+            c => c.status === "on"
         ).length;
 
 
-    document.getElementById(
-        "totalAnalise"
-    ).textContent =
+    document
+        .getElementById("totalAnalise")
+        .textContent =
         contatos.filter(
-            c =>
-                c.status ===
-                "analise"
+            c => c.status === "analise"
         ).length;
 
 
-    document.getElementById(
-        "totalCaiu"
-    ).textContent =
+    document
+        .getElementById("totalCaiu")
+        .textContent =
         contatos.filter(
-            c =>
-                c.status ===
-                "caiu"
+            c => c.status === "caiu"
         ).length;
+}
 
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
+function esconderTodas(){
+
+    document
+        .getElementById("inicio")
+        .style.display="none";
+
+
+    document
+        .getElementById("menu")
+        .style.display="none";
+
+
+    document
+        .querySelectorAll(".tela")
+        .forEach(
+            t =>
+                t.style.display="none"
+        );
+}
+
+
+function abrirInicio(){
+
+    esconderTodas();
+
+    document
+        .getElementById("inicio")
+        .style.display="block";
+}
+
+
+function abrirMenu(){
+
+    esconderTodas();
+
+    document
+        .getElementById("menu")
+        .style.display="block";
+}
+
+
+function voltarInicio(){
+
+    abrirInicio();
+}
+
+
+function voltarMenu(){
+
+    abrirMenu();
+}
+
+
+function abrirTela(nome){
+
+    esconderTodas();
+
+
+    const tela =
+        document.getElementById(
+            "tela-" + nome
+        );
+
+
+    if(!tela) return;
+
+
+    tela.style.display="block";
+
+
+    if(nome === "administracao"){
+
+        if(
+            !contaAtual ||
+            contaAtual.tipo !==
+            "administrador"
+        ){
+
+            alert(
+                "🚫 Acesso permitido somente ao administrador."
+            );
+
+            abrirInicio();
+
+            return;
+        }
+
+        atualizarPainelAdmin();
+    }
+
+
+    if(nome === "contatos"){
+
+        atualizarContatos();
+    }
+
+
+    if(nome === "grupos"){
+
+        atualizarGrupos();
+    }
 }
 
 
@@ -2512,230 +2517,112 @@ function atualizarResumo() {
    TEMA
 ========================= */
 
-document
-.getElementById(
-    "alternarTema"
-)
-.addEventListener(
-    "click",
-    function() {
+function carregarTema(){
 
-        document.body
+    const tema =
+        localStorage.getItem(
+            CHAVE_TEMA
+        );
+
+
+    if(tema === "dark"){
+
+        document
+            .body
             .classList
-            .toggle(
-                "tema-escuro"
-            );
+            .add("dark");
 
+    }else{
 
-        localStorage.setItem(
-            CHAVE_TEMA,
-
-            document.body
-                .classList
-                .contains(
-                    "tema-escuro"
-                )
-                ? "escuro"
-                : "claro"
-        );
-
+        document
+            .body
+            .classList
+            .remove("dark");
     }
-);
+}
 
 
-/* =========================
-   BACKUP
-========================= */
+function alternarTema(){
 
-document
-.getElementById(
-    "exportarBackup"
-)
-.addEventListener(
-    "click",
-    function() {
-
-        const dados = {
-
-            contatos,
-
-            usuarios
-
-        };
+    document
+        .body
+        .classList
+        .toggle("dark");
 
 
-        const arquivo =
-            new Blob(
-                [
-                    JSON.stringify(
-                        dados,
-                        null,
-                        2
-                    )
-                ],
-                {
-                    type:
-                        "application/json"
-                }
-            );
+    localStorage.setItem(
+        CHAVE_TEMA,
 
-
-        const url =
-            URL.createObjectURL(
-                arquivo
-            );
-
-
-        const link =
-            document.createElement(
-                "a"
-            );
-
-
-        link.href =
-            url;
-
-        link.download =
-            "backup-bot-bm3.json";
-
-        link.click();
-
-
-        URL.revokeObjectURL(
-            url
-        );
-
-    }
-);
-
-
-/* =========================
-   ESCAPE HTML
-========================= */
-
-function escapeHTML(texto) {
-
-    return String(texto)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
+        document.body.classList.contains("dark")
+        ? "dark"
+        : "light"
+    );
 }
 
 
 /* =========================
-   SAIR
+   RECUPERAR SESSÃO
 ========================= */
 
-document
-.getElementById(
-    "sairConta"
-)
-.addEventListener(
-    "click",
-    function() {
+function verificarSessao(){
 
-        if (
-            !confirm(
-                "🚪 Deseja sair da conta?"
+    carregarTema();
+
+
+    const sessao =
+        JSON.parse(
+            localStorage.getItem(
+                CHAVE_SESSAO
             )
-        ) {
-
-            return;
-        }
-
-
-        localStorage.removeItem(
-            CHAVE_SESSAO
         );
 
 
-        document.getElementById(
-            "sistema"
-        ).style.display =
-            "none";
+    if(sessao){
+
+        contaAtual =
+            sessao;
+
+        document
+            .getElementById("telaLogin")
+            .style.display="none";
 
 
-        document.getElementById(
-            "telaLogin"
-        ).style.display =
-            "flex";
+        document
+            .getElementById("sistema")
+            .style.display="block";
 
+
+        atualizarConta();
+
+        atualizarResumo();
+
+        atualizarContatos();
+
+        atualizarGrupos();
 
         verificarAdministrador();
 
+        abrirInicio();
+
+    }else{
+
+        document
+            .getElementById("telaLogin")
+            .style.display="flex";
+
+
+        document
+            .getElementById("sistema")
+            .style.display="none";
     }
-);
+}
 
 
 /* =========================
-   INICIALIZAÇÃO
+   INICIAR
 ========================= */
 
-setTimeout(
-    function() {
-
-        document.getElementById(
-            "carregando"
-        ).style.display =
-            "none";
-
-
-        const sessao =
-            localStorage.getItem(
-                CHAVE_SESSAO
-            );
-
-
-        const admin =
-            localStorage.getItem(
-                CHAVE_ADMIN
-            );
-
-
-        if (
-            sessao === "admin" &&
-            admin
-        ) {
-
-            entrarNoSistema();
-
-        } else {
-
-            document.getElementById(
-                "telaLogin"
-            ).style.display =
-                "flex";
-
-            verificarAdministrador();
-
-        }
-
-    },
-    1200
-);
+verificarSessao();
 
 </script>
 
