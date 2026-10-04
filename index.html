@@ -502,8 +502,15 @@ function alterarStatus(index, status) {
   mostrarContatos();
 }
 
-
 function abrirOpcoesStatus(index) {
+  const opcoes = document.getElementById("opcoesStatus" + index);
+
+  if (opcoes.style.display === "block") {
+    opcoes.style.display = "none";
+  } else {
+    opcoes.style.display = "block";
+  }
+}
 
   const elemento =
     document.getElementById(
@@ -512,7 +519,7 @@ function abrirOpcoesStatus(index) {
 
   elemento.classList.toggle("mostrar");
 }
-
+oi
 
 function excluirContato(index) {
 
