@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>🍀 BOT DO BM3 🍀</title>
 
 <style>
@@ -133,13 +133,15 @@ button {
 }
 
 input,
-textarea {
+textarea,
+select {
   width: 100%;
   padding: 12px;
   margin: 8px 0 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
+  background: white;
 }
 
 .acao {
@@ -163,54 +165,42 @@ textarea {
 }
 
 .status-box {
-  padding: 12px;
+  padding: 15px;
   margin-top: 15px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #f5f5f5;
 }
 
 .status-atual {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-size: 18px;
   font-weight: bold;
 }
 
-.botao-alterar {
-  width: 100%;
-  padding: 12px;
-  color: white;
-  font-size: 15px;
-  background: #555;
-}
-
-.opcoes-status {
-  display: none;
-  margin-top: 10px;
-}
-
-.opcoes-status button {
+.status-label {
   display: block;
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  color: white;
-  font-size: 15px;
+  margin-bottom: 6px;
+  font-weight: bold;
 }
 
-.status-analise {
-  background: #d99a00;
-}
-
-.status-on {
-  background: #008C45;
-}
-
-.status-caiu {
-  background: #CD212A;
+.status-select {
+  margin: 0;
+  border: 2px solid #555;
+  font-weight: bold;
 }
 
 .whatsapp {
-  background: #008C45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #25D366;
+}
+
+.whatsapp svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
 .excluir {
@@ -224,36 +214,58 @@ textarea {
   background: #f2f2f2;
   font-weight: bold;
 }
+
+.sem-contatos {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
 </style>
 </head>
 
 <body>
 
+<!-- CARREGAMENTO -->
 <div id="carregando">
   <div class="carregando-box">
     <h1>🍀 BOT DO BM3 🍀</h1>
+
     <div class="spinner"></div>
+
     <strong>⏳ Carregando...</strong>
   </div>
 </div>
 
+
 <div class="container">
 
+  <!-- TOPO -->
   <div class="topo">
+
     <div class="bandeira"></div>
+
     <h1>🍀 BOT DO BM3 🍀</h1>
+
     <p>Organizador de contatos</p>
+
   </div>
 
+
+  <!-- INÍCIO -->
   <div class="inicio" id="inicio">
+
     <h2>🏠 Início</h2>
+
     <p>Bem-vindo ao BOT DO BM3</p>
 
     <button id="botaoMenu">
       ☰ Abrir Menu
     </button>
+
   </div>
 
+
+  <!-- MENU -->
   <div class="menu" id="menu">
 
     <button data-tela="adicionar">
@@ -282,28 +294,51 @@ textarea {
 
   </div>
 
+
+  <!-- ADICIONAR -->
   <div class="tela" id="adicionar">
 
     <h2>➕ Adicionar contato</h2>
 
-    <input id="nome" placeholder="Nome">
+    <input
+      id="nome"
+      placeholder="Nome"
+    >
 
-    <input id="numero" placeholder="Número do WhatsApp">
+    <input
+      id="numero"
+      placeholder="Número do WhatsApp"
+      inputmode="tel"
+    >
 
-    <input id="grupo" placeholder="Grupo / Etiqueta">
+    <input
+      id="grupo"
+      placeholder="Grupo / Etiqueta"
+    >
 
-    <textarea id="observacao" placeholder="Observação"></textarea>
+    <textarea
+      id="observacao"
+      placeholder="Observação"
+    ></textarea>
 
-    <button class="acao" id="salvarContato">
+    <button
+      class="acao"
+      id="salvarContato"
+    >
       💾 Salvar contato
     </button>
 
-    <button class="acao voltar" data-voltar>
+    <button
+      class="acao voltar"
+      data-voltar
+    >
       ↩️ Voltar ao menu
     </button>
 
   </div>
 
+
+  <!-- PESQUISA -->
   <div class="tela" id="pesquisar">
 
     <h2>🔎 Pesquisar contatos</h2>
@@ -315,49 +350,74 @@ textarea {
 
     <div id="resultadoPesquisa"></div>
 
-    <button class="acao voltar" data-voltar>
+    <button
+      class="acao voltar"
+      data-voltar
+    >
       ↩️ Voltar ao menu
     </button>
 
   </div>
 
+
+  <!-- CONTATOS -->
   <div class="tela" id="contatos">
 
     <h2>📋 Meus contatos</h2>
 
     <div id="lista"></div>
 
-    <button class="acao voltar" data-voltar>
+    <button
+      class="acao voltar"
+      data-voltar
+    >
       ↩️ Voltar ao menu
     </button>
 
   </div>
 
+
+  <!-- GRUPOS -->
   <div class="tela" id="grupos">
 
     <h2>🏷️ Grupos / Etiquetas</h2>
 
     <div id="listaGrupos"></div>
 
-    <button class="acao voltar" data-voltar>
+    <button
+      class="acao voltar"
+      data-voltar
+    >
       ↩️ Voltar ao menu
     </button>
 
   </div>
 
+
+  <!-- CONFIGURAÇÕES -->
   <div class="tela" id="configuracoes">
 
     <h2>⚙️ Configurações</h2>
 
-    <p><strong>🍀 BOT DO BM3 🍀</strong></p>
+    <p>
+      <strong>🍀 BOT DO BM3 🍀</strong>
+    </p>
 
-    <p>Organizador de contatos</p>
+    <p>
+      Organizador de contatos
+    </p>
 
-    <button class="acao" id="limparContatos">
+    <button
+      class="acao"
+      id="limparContatos"
+    >
       🗑️ Apagar todos os contatos
     </button>
 
-    <button class="acao voltar" data-voltar>
+    <button
+      class="acao voltar"
+      data-voltar
+    >
       ↩️ Voltar ao menu
     </button>
 
@@ -365,30 +425,48 @@ textarea {
 
 </div>
 
+
 <script>
 
 let contatos = [];
 
+
+/* CARREGAR CONTATOS */
 try {
+
   contatos = JSON.parse(
     localStorage.getItem("contatos") || "[]"
   );
+
 } catch (erro) {
+
   contatos = [];
+
 }
 
+
+/* CARREGAMENTO DE 2 SEGUNDOS */
+
 setTimeout(function() {
+
   document.getElementById("carregando").style.display = "none";
+
 }, 2000);
 
 
+/* SALVAR */
+
 function salvar() {
+
   localStorage.setItem(
     "contatos",
     JSON.stringify(contatos)
   );
+
 }
 
+
+/* ESCONDER TELAS */
 
 function esconderTudo() {
 
@@ -397,92 +475,144 @@ function esconderTudo() {
   document.getElementById("menu").style.display = "none";
 
   document.querySelectorAll(".tela").forEach(function(tela) {
+
     tela.style.display = "none";
+
   });
+
 }
 
+
+/* MOSTRAR MENU */
 
 function mostrarMenu() {
 
   esconderTudo();
 
   document.getElementById("menu").style.display = "block";
+
 }
 
+
+/* MOSTRAR INÍCIO */
 
 function mostrarInicio() {
 
   esconderTudo();
 
   document.getElementById("inicio").style.display = "block";
+
 }
 
 
-document.getElementById("botaoMenu").addEventListener(
-  "click",
-  mostrarMenu
-);
+/* BOTÃO MENU */
+
+document
+  .getElementById("botaoMenu")
+  .addEventListener("click", mostrarMenu);
 
 
-document.getElementById("botaoInicio").addEventListener(
-  "click",
-  mostrarInicio
-);
+/* BOTÃO INÍCIO */
+
+document
+  .getElementById("botaoInicio")
+  .addEventListener("click", mostrarInicio);
 
 
-document.querySelectorAll("[data-tela]").forEach(function(botao) {
+/* TELAS DO MENU */
 
-  botao.addEventListener("click", function() {
+document
+  .querySelectorAll("[data-tela]")
+  .forEach(function(botao) {
 
-    const tela = botao.dataset.tela;
+    botao.addEventListener("click", function() {
 
-    esconderTudo();
+      const tela = botao.dataset.tela;
 
-    document.getElementById(tela).style.display = "block";
+      esconderTudo();
 
-    if (tela === "contatos") {
-      mostrarContatos();
-    }
+      document
+        .getElementById(tela)
+        .style.display = "block";
 
-    if (tela === "pesquisar") {
-      mostrarContatos();
-    }
 
-    if (tela === "grupos") {
-      mostrarGrupos();
-    }
+      if (tela === "contatos") {
+
+        mostrarContatos();
+
+      }
+
+
+      if (tela === "pesquisar") {
+
+        mostrarContatos();
+
+      }
+
+
+      if (tela === "grupos") {
+
+        mostrarGrupos();
+
+      }
+
+    });
 
   });
 
-});
+
+/* VOLTAR */
+
+document
+  .querySelectorAll("[data-voltar]")
+  .forEach(function(botao) {
+
+    botao.addEventListener(
+      "click",
+      mostrarMenu
+    );
+
+  });
 
 
-document.querySelectorAll("[data-voltar]").forEach(function(botao) {
+/* SALVAR CONTATO */
 
-  botao.addEventListener("click", mostrarMenu);
+document
+  .getElementById("salvarContato")
+  .addEventListener(
+    "click",
+    adicionarContato
+  );
 
-});
 
-
-document.getElementById("salvarContato").addEventListener(
-  "click",
-  adicionarContato
-);
-
+/* ADICIONAR CONTATO */
 
 function adicionarContato() {
 
   const nome =
-    document.getElementById("nome").value.trim();
+    document
+      .getElementById("nome")
+      .value
+      .trim();
 
   const numero =
-    document.getElementById("numero").value.trim();
+    document
+      .getElementById("numero")
+      .value
+      .trim();
 
   const grupo =
-    document.getElementById("grupo").value.trim();
+    document
+      .getElementById("grupo")
+      .value
+      .trim();
 
   const observacao =
-    document.getElementById("observacao").value.trim();
+    document
+      .getElementById("observacao")
+      .value
+      .trim();
+
 
   if (!nome || !numero) {
 
@@ -491,7 +621,9 @@ function adicionarContato() {
     );
 
     return;
+
   }
+
 
   contatos.push({
 
@@ -510,56 +642,84 @@ function adicionarContato() {
 
   });
 
+
   salvar();
 
+
   document.getElementById("nome").value = "";
+
   document.getElementById("numero").value = "";
+
   document.getElementById("grupo").value = "";
+
   document.getElementById("observacao").value = "";
 
-  alert("✅ Contato salvo com sucesso!");
+
+  alert(
+    "✅ Contato salvo com sucesso!"
+  );
+
+
+  esconderTudo();
+
+  document.getElementById("contatos").style.display = "block";
 
   mostrarContatos();
+
 }
 
+
+/* MOSTRAR CONTATOS */
 
 function mostrarContatos() {
 
   const pesquisa =
     (
       document.getElementById("pesquisa")?.value || ""
-    ).toLowerCase();
+    )
+    .toLowerCase();
+
 
   let html = "";
 
+
   contatos.forEach(function(contato, index) {
 
-    const texto =
-      (
-        contato.nome +
-        " " +
-        contato.numero +
-        " " +
-        contato.grupo
-      ).toLowerCase();
+    const texto = (
+
+      contato.nome +
+      " " +
+      contato.numero +
+      " " +
+      contato.grupo
+
+    ).toLowerCase();
+
 
     if (!texto.includes(pesquisa)) {
+
       return;
+
     }
+
 
     const status =
       contato.status ||
       "⚠️ ZAP EM ANÁLISE";
 
+
     const data =
       contato.ultimaAtualizacao ||
       "Não registrada";
+
 
     html += `
 
       <div class="contato">
 
-        <strong>👤 ${contato.nome}</strong>
+        <strong>
+          👤 ${contato.nome}
+        </strong>
 
         <br><br>
 
@@ -576,49 +736,49 @@ function mostrarContatos() {
         📝 Observação:
         ${contato.observacao || "Sem observação"}
 
+
         <div class="status-box">
 
           <div class="status-atual">
-            Status atual: ${status}
+
+            Status atual:
+            ${status}
+
           </div>
 
-          <button
-            class="botao-alterar"
-            data-abrir-status="${index}"
+
+          <label
+            class="status-label"
+            for="status-${index}"
           >
             🔽 Alterar status
-          </button>
+          </label>
 
-          <div
-            class="opcoes-status"
+
+          <select
+            class="status-select"
             id="status-${index}"
+            data-status-index="${index}"
           >
 
-            <button
-              class="status-analise"
-              data-status-index="${index}"
-              data-status="⚠️ ZAP EM ANÁLISE"
-            >
+            <option value="">
+              Escolher novo status
+            </option>
+
+            <option value="⚠️ ZAP EM ANÁLISE">
               ⚠️ ZAP EM ANÁLISE
-            </button>
+            </option>
 
-            <button
-              class="status-on"
-              data-status-index="${index}"
-              data-status="✅ ZAP ON"
-            >
+            <option value="✅ ZAP ON">
               ✅ ZAP ON
-            </button>
+            </option>
 
-            <button
-              class="status-caiu"
-              data-status-index="${index}"
-              data-status="❌ ZAP CAIU"
-            >
+            <option value="❌ ZAP CAIU">
               ❌ ZAP CAIU
-            </button>
+            </option>
 
-          </div>
+          </select>
+
 
           <br>
 
@@ -627,218 +787,305 @@ function mostrarContatos() {
 
         </div>
 
+
         <button
-  class="botao-alterar"
-  onclick="document.getElementById('status-${index}').style.display='block'"
->
-  🔽 Alterar status
-</button>
+          class="acao whatsapp"
+          data-whatsapp="${contato.numero}"
         >
-          💬 Abrir WhatsApp
+
+          <svg
+            viewBox="0 0 32 32"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+
+            <circle
+              cx="16"
+              cy="16"
+              r="15"
+              fill="white"
+            />
+
+            <path
+              fill="#25D366"
+              d="M22.2 17.8c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.7-1.4-3.8-3.1-.3-.5.3-.5.8-1.7.1-.2.1-.4 0-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.1 3.1 1.2 3.3c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.2-.3-.3-.6-.5z"
+            />
+
+          </svg>
+
+          Abrir WhatsApp
+
         </button>
+
 
         <button
           class="acao excluir"
           data-excluir="${index}"
         >
+
           🗑️ Excluir
+
         </button>
 
       </div>
 
     `;
+
   });
 
+
   const resultado =
-    html || "<p>Nenhum contato encontrado.</p>";
+    html ||
+    '<div class="sem-contatos">Nenhum contato encontrado.</div>';
 
-  document.getElementById("lista").innerHTML = resultado;
 
-  document.getElementById("resultadoPesquisa").innerHTML = resultado;
+  document
+    .getElementById("lista")
+    .innerHTML = resultado;
+
+
+  document
+    .getElementById("resultadoPesquisa")
+    .innerHTML = resultado;
+
 
   ativarBotoesContatos();
+
 }
 
+
+/* BOTÕES DOS CONTATOS */
 
 function ativarBotoesContatos() {
 
-  document.querySelectorAll("[data-abrir-status]").forEach(
-    function(botao) {
 
-      botao.addEventListener("click", function() {
+  /* ALTERAR STATUS */
 
-        const index =
-          botao.dataset.abrirStatus;
+  document
+    .querySelectorAll("[data-status-index]")
+    .forEach(function(select) {
 
-        const opcoes =
-          document.getElementById(
-            "status-" + index
-          );
+      select.addEventListener(
+        "change",
+        function() {
 
-        if (opcoes.style.display === "block") {
-
-          opcoes.style.display = "none";
-
-        } else {
-
-          opcoes.style.display = "block";
-        }
-
-      });
-
-    }
-  );
+          const index =
+            Number(
+              select.dataset.statusIndex
+            );
 
 
-  document.querySelectorAll("[data-status-index]").forEach(
-    function(botao) {
-
-      botao.addEventListener("click", function() {
-
-        const index =
-          Number(botao.dataset.statusIndex);
-
-        const novoStatus =
-          botao.dataset.status;
-
-        contatos[index].status = novoStatus;
-
-        contatos[index].ultimaAtualizacao =
-          new Date().toLocaleString("pt-BR");
-
-        salvar();
-
-        mostrarContatos();
-
-      });
-
-    }
-  );
+          const novoStatus =
+            select.value;
 
 
-  document.querySelectorAll("[data-excluir]").forEach(
-    function(botao) {
+          if (!novoStatus) {
 
-      botao.addEventListener("click", function() {
+            return;
 
-        const index =
-          Number(botao.dataset.excluir);
+          }
 
-        if (confirm("Deseja excluir este contato?")) {
 
-          contatos.splice(index, 1);
+          contatos[index].status =
+            novoStatus;
+
+
+          contatos[index].ultimaAtualizacao =
+            new Date().toLocaleString("pt-BR");
+
 
           salvar();
 
+
           mostrarContatos();
 
-          mostrarGrupos();
+        }
+      );
+
+    });
+
+
+  /* EXCLUIR */
+
+  document
+    .querySelectorAll("[data-excluir]")
+    .forEach(function(botao) {
+
+      botao.addEventListener(
+        "click",
+        function() {
+
+          const index =
+            Number(
+              botao.dataset.excluir
+            );
+
+
+          if (
+            confirm(
+              "Deseja excluir este contato?"
+            )
+          ) {
+
+            contatos.splice(index, 1);
+
+            salvar();
+
+            mostrarContatos();
+
+            mostrarGrupos();
+
+          }
 
         }
+      );
 
-      });
-
-    }
-  );
+    });
 
 
-  document.querySelectorAll("[data-whatsapp]").forEach(
-    function(botao) {
+  /* WHATSAPP */
 
-      botao.addEventListener("click", function() {
+  document
+    .querySelectorAll("[data-whatsapp]")
+    .forEach(function(botao) {
 
-        const numero =
-          botao.dataset.whatsapp.replace(/\D/g, "");
+      botao.addEventListener(
+        "click",
+        function() {
 
-        window.open(
-          "https://wa.me/" + numero,
-          "_blank"
-        );
+          const numero =
+            botao
+              .dataset
+              .whatsapp
+              .replace(/\D/g, "");
 
-      });
 
-    }
-  );
+          if (!numero) {
+
+            alert(
+              "Número de WhatsApp inválido."
+            );
+
+            return;
+
+          }
+
+
+          window.open(
+            "https://wa.me/" + numero,
+            "_blank"
+          );
+
+        }
+      );
+
+    });
 
 }
 
 
-document.getElementById("pesquisa").addEventListener(
-  "input",
-  mostrarContatos
-);
+/* PESQUISA */
 
+document
+  .getElementById("pesquisa")
+  .addEventListener(
+    "input",
+    mostrarContatos
+  );
+
+
+/* GRUPOS */
 
 function mostrarGrupos() {
 
   const lista =
-    document.getElementById("listaGrupos");
+    document.getElementById(
+      "listaGrupos"
+    );
+
 
   const grupos = {};
+
 
   contatos.forEach(function(contato) {
 
     const grupo =
-      contato.grupo || "Sem grupo";
+      contato.grupo ||
+      "Sem grupo";
+
 
     if (!grupos[grupo]) {
+
       grupos[grupo] = 0;
+
     }
+
 
     grupos[grupo]++;
 
   });
 
+
   let html = "";
 
-  Object.keys(grupos).forEach(function(grupo) {
 
-    html += `
+  Object.keys(grupos)
+    .forEach(function(grupo) {
 
-      <div class="grupo-item">
-        🏷️ ${grupo} —
-        ${grupos[grupo]} contato(s)
-      </div>
+      html += `
 
-    `;
+        <div class="grupo-item">
 
-  });
+          🏷️ ${grupo}
+          —
+          ${grupos[grupo]}
+          contato(s)
+
+        </div>
+
+      `;
+
+    });
+
 
   lista.innerHTML =
     html ||
-    "<p>Nenhum grupo cadastrado.</p>";
+    '<div class="sem-contatos">Nenhum grupo cadastrado.</div>';
+
 }
 
 
-document.getElementById("limparContatos").addEventListener(
-  "click",
-  function() {
+/* APAGAR TODOS */
 
-    if (
-      confirm(
-        "Tem certeza que deseja apagar TODOS os contatos?"
-      )
-    ) {
+document
+  .getElementById("limparContatos")
+  .addEventListener(
+    "click",
+    function() {
 
-      contatos = [];
+      if (
+        confirm(
+          "Tem certeza que deseja apagar TODOS os contatos?"
+        )
+      ) {
 
-      salvar();
+        contatos = [];
 
-      mostrarContatos();
+        salvar();
 
-      mostrarGrupos();
+        mostrarContatos();
 
-      alert(
-        "🗑️ Todos os contatos foram apagados."
-      );
+        mostrarGrupos();
+
+        alert(
+          "🗑️ Todos os contatos foram apagados."
+        );
+
+      }
 
     }
-
-  }
-);
+  );
 
 </script>
 
 </body>
 </html>
-
