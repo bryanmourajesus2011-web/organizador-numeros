@@ -7,160 +7,270 @@
 <title>🍀 BOT DO BM3 🍀</title>
 
 <style>
-
 :root{
     --verde:#008c45;
     --verde2:#00a651;
-    --vermelho:#cd212a;
-    --vermelho2:#ff3344;
     --branco:#ffffff;
-    --preto:#111111;
-    --cinza:#f4f6f8;
-    --texto:#171717;
-    --texto2:#666;
-    --painel:#ffffff;
-    --borda:#e7e7e7;
-    --sombra:0 12px 35px rgba(0,0,0,.10);
-    --sombra2:0 5px 18px rgba(0,0,0,.08);
+    --vermelho:#cd212a;
+    --fundo:#f4f7f6;
+    --texto:#17221d;
+    --cinza:#6b756f;
+    --card:#ffffff;
+    --borda:#e1e7e4;
+    --sombra:0 10px 30px rgba(0,0,0,.10);
 }
 
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    background:
-        linear-gradient(135deg,#f5f5f5 0%,#ffffff 45%,#f3fff8 100%);
+    background:var(--fundo);
     color:var(--texto);
     min-height:100vh;
-    transition:.3s;
-}
-
-button,
-input,
-select{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
 }
 
 /* =========================
-   CABEÇALHO
+   TELA DE CARREGAMENTO
+========================= */
+
+#loading{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:linear-gradient(135deg,#008c45,#ffffff,#cd212a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.loading-box{
+    width:90%;
+    max-width:380px;
+    text-align:center;
+    animation:entradaLogo 1s ease;
+}
+
+.loading-logo{
+    width:190px;
+    max-width:70vw;
+    height:190px;
+    object-fit:contain;
+    background:#fff;
+    border-radius:35px;
+    padding:15px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+    animation:pulsar 1.5s ease-in-out infinite;
+}
+
+.loading-title{
+    margin-top:20px;
+    color:#fff;
+    font-size:24px;
+    font-weight:900;
+    text-shadow:0 3px 10px rgba(0,0,0,.3);
+}
+
+.loading-text{
+    margin-top:8px;
+    color:#fff;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.loading-bar{
+    width:190px;
+    height:5px;
+    background:rgba(255,255,255,.35);
+    border-radius:20px;
+    margin:22px auto 0;
+    overflow:hidden;
+}
+
+.loading-bar span{
+    display:block;
+    width:0;
+    height:100%;
+    background:#fff;
+    border-radius:20px;
+    animation:carregar 2s linear forwards;
+}
+
+#loading.saindo{
+    animation:saidaTela .7s ease forwards;
+}
+
+#loading.saindo .loading-box{
+    animation:logoSaindo .7s ease forwards;
+}
+
+@keyframes entradaLogo{
+    from{
+        opacity:0;
+        transform:scale(.65);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes pulsar{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.04)}
+}
+
+@keyframes carregar{
+    from{width:0}
+    to{width:100%}
+}
+
+@keyframes logoSaindo{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-170px) scale(.75);
+    }
+}
+
+@keyframes saidaTela{
+    0%{
+        opacity:1;
+        backdrop-filter:blur(0);
+    }
+    100%{
+        opacity:0;
+        visibility:hidden;
+        backdrop-filter:blur(8px);
+    }
+}
+
+/* =========================
+   TOPO
 ========================= */
 
 .topo{
-    position:relative;
-    overflow:hidden;
-    padding:30px 20px 28px;
-    color:white;
+    background:var(--card);
+    padding:20px 16px 18px;
     text-align:center;
-    background:
-        linear-gradient(135deg,
-        #006b35 0%,
-        #008c45 38%,
-        #009c4d 65%,
-        #c8102e 100%);
-    box-shadow:0 10px 30px rgba(0,0,0,.20);
-}
-
-.topo::before{
-    content:"";
-    position:absolute;
-    width:230px;
-    height:230px;
-    border-radius:50%;
-    background:rgba(255,255,255,.08);
-    top:-120px;
-    left:-70px;
-}
-
-.topo::after{
-    content:"";
-    position:absolute;
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    background:rgba(255,255,255,.07);
-    right:-70px;
-    bottom:-100px;
+    border-bottom:1px solid var(--borda);
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
 }
 
 .bandeira{
-    width:75px;
-    height:8px;
-    margin:0 auto 16px;
+    width:100%;
+    height:5px;
     border-radius:20px;
+    margin-bottom:14px;
     background:linear-gradient(
-        90deg,
-        #008c45 0 33%,
-        #ffffff 33% 66%,
-        #cd212a 66% 100%
+        to right,
+        var(--verde) 0 33%,
+        #fff 33% 66%,
+        var(--vermelho) 66% 100%
     );
-    box-shadow:0 3px 12px rgba(0,0,0,.20);
+}
+
+.logo-topo{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+    border-radius:18px;
+    margin-bottom:8px;
 }
 
 .topo h1{
-    position:relative;
-    z-index:2;
-    font-size:27px;
+    font-size:25px;
     font-weight:900;
-    letter-spacing:.5px;
-    text-shadow:0 3px 10px rgba(0,0,0,.25);
 }
 
 .topo p{
-    position:relative;
-    z-index:2;
-    margin-top:7px;
-    opacity:.90;
-    font-size:14px;
+    margin-top:5px;
+    color:var(--cinza);
+    font-size:13px;
 }
 
 /* =========================
    CONTAINER
 ========================= */
 
-.app{
-    width:100%;
-    max-width:700px;
-    margin:auto;
-    padding:18px 15px 45px;
+.container{
+    width:94%;
+    max-width:900px;
+    margin:20px auto 40px;
 }
 
 .tela{
     display:none;
+    animation:entrarTela .35s ease;
 }
 
 .tela.ativa{
     display:block;
 }
 
+@keyframes entrarTela{
+    from{
+        opacity:0;
+        transform:translateY(12px) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
 /* =========================
-   CARTÃO PRINCIPAL
+   DELAY DE TRANSIÇÃO
 ========================= */
 
-.hero{
-    background:var(--painel);
-    border:1px solid var(--borda);
-    border-radius:25px;
-    padding:22px;
-    box-shadow:var(--sombra);
-    margin-bottom:18px;
+.transicao{
+    opacity:0!important;
+    transform:translateY(8px) scale(.98)!important;
+    transition:.25s ease;
 }
 
-.hero h2{
-    font-size:23px;
+/* =========================
+   TITULOS
+========================= */
+
+.titulo{
+    font-size:25px;
     font-weight:900;
+    margin-bottom:6px;
 }
 
-.hero p{
-    margin-top:7px;
-    color:var(--texto2);
+.subtitulo{
+    color:var(--cinza);
+    margin-bottom:20px;
+    font-size:14px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:20px;
+    padding:18px;
+    margin-bottom:14px;
+    box-shadow:var(--sombra);
+}
+
+.card h3{
+    margin-bottom:7px;
+}
+
+.card p{
+    color:var(--cinza);
     font-size:14px;
 }
 
@@ -172,83 +282,100 @@ button{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
-    margin:18px 0;
+    margin:20px 0;
 }
 
 .resumo-card{
-    position:relative;
-    overflow:hidden;
+    background:var(--card);
     border-radius:20px;
-    padding:17px;
-    background:var(--painel);
+    padding:18px;
+    box-shadow:var(--sombra);
     border:1px solid var(--borda);
-    box-shadow:var(--sombra2);
 }
 
-.resumo-card::after{
-    content:"";
-    position:absolute;
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    right:-25px;
-    bottom:-25px;
-    opacity:.12;
+.resumo-card strong{
+    display:block;
+    font-size:27px;
+    margin-bottom:4px;
 }
 
-.resumo-card.total::after{
-    background:#3478f6;
-}
-
-.resumo-card.on::after{
-    background:#00a651;
-}
-
-.resumo-card.analise::after{
-    background:#f0a000;
-}
-
-.resumo-card.caiu::after{
-    background:#cd212a;
-}
-
-.resumo-icone{
-    font-size:25px;
-}
-
-.resumo-numero{
-    font-size:28px;
-    font-weight:900;
-    margin-top:8px;
-}
-
-.resumo-label{
-    color:var(--texto2);
-    font-size:12px;
-    margin-top:2px;
+.resumo-card span{
+    color:var(--cinza);
+    font-size:13px;
 }
 
 /* =========================
-   BOTÃO MENU
+   BOTOES
 ========================= */
 
-.btn-menu-principal{
+button,
+.btn{
     width:100%;
     border:0;
-    padding:17px;
-    border-radius:18px;
-    color:white;
-    font-size:16px;
+    border-radius:15px;
+    padding:15px;
+    font-size:15px;
     font-weight:800;
-    background:linear-gradient(135deg,#008c45,#00a651);
-    box-shadow:
-        0 9px 20px rgba(0,140,69,.25),
-        inset 0 1px rgba(255,255,255,.2);
+    cursor:pointer;
+    background:linear-gradient(135deg,var(--verde),var(--verde2));
+    color:#fff;
+    box-shadow:0 8px 20px rgba(0,140,69,.22);
     transition:.2s;
+    margin-top:8px;
 }
 
-.btn-menu-principal:active{
-    transform:scale(.98);
+button:hover,
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-secundario{
+    background:#eef2f0;
+    color:var(--texto);
+    box-shadow:none;
+}
+
+.btn-vermelho{
+    background:linear-gradient(135deg,#b91521,#e02b35);
+}
+
+.btn-whatsapp{
+    background:#25D366;
+}
+
+/* =========================
+   FORMULARIOS
+========================= */
+
+label{
+    display:block;
+    margin:12px 0 6px;
+    font-size:13px;
+    font-weight:800;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:14px;
+    border:1px solid var(--borda);
+    border-radius:13px;
+    background:var(--card);
+    color:var(--texto);
+    outline:none;
+    font-size:14px;
+}
+
+textarea{
+    resize:vertical;
+    min-height:90px;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--verde);
 }
 
 /* =========================
@@ -256,234 +383,56 @@ button{
 ========================= */
 
 .menu-titulo{
-    margin:4px 3px 18px;
-}
-
-.menu-titulo h2{
-    font-size:25px;
-    font-weight:900;
-}
-
-.menu-titulo p{
-    margin-top:5px;
-    color:var(--texto2);
-    font-size:13px;
-}
-
-.menu-secao{
-    margin-bottom:24px;
-}
-
-.menu-secao-titulo{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin:0 4px 11px;
+    margin:25px 0 10px;
     font-size:12px;
     font-weight:900;
-    color:var(--texto2);
     letter-spacing:1px;
-    text-transform:uppercase;
+    color:var(--cinza);
 }
 
-.menu-grade{
+.menu-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
 }
 
-.menu-card{
-    position:relative;
-    overflow:hidden;
-    min-height:126px;
-    padding:17px;
-    text-align:left;
+.menu-item{
     border:1px solid var(--borda);
-    border-radius:21px;
-    background:var(--painel);
-    box-shadow:var(--sombra2);
-    transition:.2s;
-}
-
-.menu-card::before{
-    content:"";
-    position:absolute;
-    width:95px;
-    height:95px;
-    border-radius:50%;
-    right:-35px;
-    bottom:-40px;
-    opacity:.10;
-}
-
-.menu-card:active{
-    transform:scale(.97);
-}
-
-.menu-card:hover{
-    transform:translateY(-2px);
+    background:var(--card);
+    border-radius:20px;
+    padding:18px 14px;
+    min-height:115px;
     box-shadow:var(--sombra);
+    cursor:pointer;
+    transition:.25s;
+    text-align:left;
 }
 
-.menu-card .icone{
-    width:48px;
-    height:48px;
+.menu-item:hover{
+    transform:translateY(-4px);
+}
+
+.menu-icon{
+    width:44px;
+    height:44px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:15px;
-    font-size:24px;
-    margin-bottom:13px;
-    box-shadow:0 5px 13px rgba(0,0,0,.12);
-}
-
-.menu-card h3{
-    font-size:15px;
-    font-weight:900;
-}
-
-.menu-card p{
-    margin-top:4px;
-    font-size:11px;
-    line-height:1.35;
-    color:var(--texto2);
-}
-
-/* CORES DOS CARDS */
-
-.card-verde .icone{
-    background:linear-gradient(135deg,#008c45,#00b85a);
-    color:white;
-}
-.card-verde::before{
-    background:#008c45;
-}
-
-.card-vermelho .icone{
-    background:linear-gradient(135deg,#c8102e,#ff3344);
-    color:white;
-}
-.card-vermelho::before{
-    background:#cd212a;
-}
-
-.card-azul .icone{
-    background:linear-gradient(135deg,#1769aa,#3b9cff);
-    color:white;
-}
-.card-azul::before{
-    background:#1769aa;
-}
-
-.card-roxo .icone{
-    background:linear-gradient(135deg,#6a35b8,#9b59ff);
-    color:white;
-}
-.card-roxo::before{
-    background:#6a35b8;
-}
-
-.card-laranja .icone{
-    background:linear-gradient(135deg,#e67e22,#ffb347);
-    color:white;
-}
-.card-laranja::before{
-    background:#e67e22;
-}
-
-.card-dourado .icone{
-    background:linear-gradient(135deg,#b8860b,#f0c14b);
-    color:white;
-}
-.card-dourado::before{
-    background:#b8860b;
-}
-
-.card-cinza .icone{
-    background:linear-gradient(135deg,#444,#777);
-    color:white;
-}
-.card-cinza::before{
-    background:#555;
-}
-
-/* =========================
-   BOTÕES
-========================= */
-
-.btn{
-    width:100%;
-    border:0;
-    border-radius:16px;
-    padding:15px;
-    margin-top:10px;
-    font-size:14px;
-    font-weight:800;
-    transition:.2s;
-}
-
-.btn:active{
-    transform:scale(.98);
-}
-
-.btn-verde{
-    background:linear-gradient(135deg,#008c45,#00a651);
-    color:white;
-    box-shadow:0 7px 17px rgba(0,140,69,.20);
-}
-
-.btn-vermelho{
-    background:linear-gradient(135deg,#c8102e,#e92840);
-    color:white;
-}
-
-.btn-neutro{
-    background:var(--cinza);
-    color:var(--texto);
-}
-
-/* =========================
-   FORMULÁRIOS
-========================= */
-
-.form-card{
-    background:var(--painel);
-    border:1px solid var(--borda);
-    padding:20px;
-    border-radius:23px;
-    box-shadow:var(--sombra);
-}
-
-label{
-    display:block;
-    margin:15px 0 7px;
-    font-size:13px;
-    font-weight:800;
-}
-
-input,
-select,
-textarea{
-    width:100%;
-    border:1px solid var(--borda);
-    background:var(--cinza);
-    color:var(--texto);
     border-radius:14px;
-    padding:14px;
-    outline:none;
-    font-size:14px;
+    background:linear-gradient(135deg,#008c45,#00a651);
+    color:#fff;
+    font-size:21px;
+    margin-bottom:12px;
 }
 
-textarea{
-    min-height:90px;
-    resize:vertical;
+.menu-item h3{
+    font-size:15px;
+    margin-bottom:5px;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:var(--verde);
-    box-shadow:0 0 0 3px rgba(0,140,69,.10);
+.menu-item p{
+    font-size:11px;
+    color:var(--cinza);
 }
 
 /* =========================
@@ -492,323 +441,170 @@ textarea:focus{
 
 .contato{
     position:relative;
-    background:var(--painel);
-    border:1px solid var(--borda);
-    border-radius:22px;
-    padding:18px;
-    margin-top:12px;
-    box-shadow:var(--sombra2);
-}
-
-.contato-topo{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    align-items:flex-start;
 }
 
 .contato-nome{
-    font-size:17px;
+    font-size:18px;
     font-weight:900;
+    margin-bottom:5px;
 }
 
 .contato-numero{
-    color:var(--texto2);
-    margin-top:5px;
+    color:var(--cinza);
     font-size:13px;
-}
-
-.favorito{
-    border:0;
-    background:none;
-    font-size:24px;
-}
-
-.status-badge{
-    display:inline-block;
-    padding:7px 10px;
-    border-radius:999px;
-    font-size:11px;
-    font-weight:900;
-    margin-top:12px;
-}
-
-.status-analise{
-    background:#fff1cc;
-    color:#9b6500;
-}
-
-.status-on{
-    background:#d9f8e8;
-    color:#08783c;
-}
-
-.status-caiu{
-    background:#ffe0e4;
-    color:#a90018;
 }
 
 .contato-info{
-    margin-top:10px;
-    color:var(--texto2);
-    font-size:12px;
-    line-height:1.5;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--borda);
 }
 
-.contato-acoes{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin-top:13px;
-}
-
-.whatsapp{
-    border:0;
-    border-radius:13px;
-    padding:12px;
-    background:#25D366;
-    color:white;
-    font-weight:800;
-}
-
-.excluir{
-    border:0;
-    border-radius:13px;
-    padding:12px;
-    background:#ffe5e8;
-    color:#c8102e;
-    font-weight:800;
-}
-
-/* =========================
-   CABEÇALHO DE TELA
-========================= */
-
-.tela-topo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:17px;
-}
-
-.voltar{
-    width:44px;
-    height:44px;
-    border:1px solid var(--borda);
-    border-radius:14px;
-    background:var(--painel);
-    box-shadow:var(--sombra2);
-    font-size:20px;
-}
-
-.tela-topo h2{
-    font-size:22px;
-    font-weight:900;
-}
-
-/* =========================
-   CONFIGURAÇÕES
-========================= */
-
-.config-card{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    background:var(--painel);
-    border:1px solid var(--borda);
-    border-radius:19px;
-    padding:17px;
-    margin-bottom:10px;
-    box-shadow:var(--sombra2);
-}
-
-.config-icone{
-    width:48px;
-    height:48px;
-    flex-shrink:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-radius:15px;
-    background:linear-gradient(135deg,#008c45,#00a651);
-    color:white;
-    font-size:22px;
-}
-
-.config-card h3{
-    font-size:15px;
-    font-weight:900;
-}
-
-.config-card p{
-    font-size:12px;
-    color:var(--texto2);
-    margin-top:3px;
-}
-
-/* =========================
-   ESTATÍSTICAS
-========================= */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
-
-.stat{
-    padding:20px;
-    border-radius:20px;
-    background:var(--painel);
-    border:1px solid var(--borda);
-    box-shadow:var(--sombra2);
-}
-
-.stat strong{
-    display:block;
-    font-size:29px;
+.status-select{
     margin-top:8px;
-}
-
-/* =========================
-   MENSAGEM VAZIA
-========================= */
-
-.vazio{
-    text-align:center;
-    padding:40px 20px;
-    color:var(--texto2);
-}
-
-.vazio .vazio-icone{
-    font-size:45px;
-    margin-bottom:10px;
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:20px;
-    transform:translateX(-50%) translateY(100px);
-    background:#111;
-    color:white;
-    padding:13px 18px;
-    border-radius:14px;
-    font-size:13px;
     font-weight:700;
-    opacity:0;
-    pointer-events:none;
-    transition:.3s;
-    z-index:9999;
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
-.toast.mostrar{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
+.status{
+    display:inline-block;
+    margin-top:10px;
+    padding:7px 10px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:900;
 }
 
 /* =========================
-   TEMA ESCURO
+   FAVORITO
 ========================= */
 
-body.escuro{
-    --cinza:#171a19;
-    --texto:#f5f5f5;
-    --texto2:#a9b0ad;
-    --painel:#202321;
-    --borda:#343936;
-    background:
-        radial-gradient(circle at top,#14251d 0%,#0d0f0e 40%,#070807 100%);
+.favorito{
+    float:right;
+    border:0;
+    background:none;
+    box-shadow:none;
+    color:#f5b400;
+    width:auto;
+    padding:0;
+    margin:0;
+    font-size:25px;
 }
 
-body.escuro .topo{
-    background:
-        linear-gradient(135deg,
-        #020202 0%,
-        #073b22 48%,
-        #25070b 100%);
+/* =========================
+   GRUPOS / ETIQUETAS
+========================= */
+
+.lista-simples{
+    display:grid;
+    gap:10px;
 }
 
-body.escuro .btn-neutro{
-    background:#292d2b;
+.item-simples{
+    padding:15px;
+    border-radius:15px;
+    background:var(--card);
+    border:1px solid var(--borda);
+    box-shadow:0 5px 15px rgba(0,0,0,.06);
+}
+
+/* =========================
+   RODAPE
+========================= */
+
+.rodape{
+    text-align:center;
+    color:var(--cinza);
+    font-size:11px;
+    padding:20px 0;
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark{
+    --fundo:#0d1210;
+    --texto:#f1f5f3;
+    --cinza:#9da9a3;
+    --card:#151c18;
+    --borda:#29332e;
+}
+
+body.dark .btn-secundario{
+    background:#222c27;
     color:#fff;
 }
 
-body.escuro .status-analise{
-    background:#3a3017;
-    color:#ffd56b;
-}
-
-body.escuro .status-on{
-    background:#123a27;
-    color:#6ff0a5;
-}
-
-body.escuro .status-caiu{
-    background:#42151c;
-    color:#ff8491;
-}
-
-body.escuro .excluir{
-    background:#40171d;
-    color:#ff8b96;
-}
-
 /* =========================
-   MOBILE
+   RESPONSIVO
 ========================= */
 
-@media(max-width:430px){
+@media(max-width:500px){
+    .menu-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .resumo{
+        grid-template-columns:1fr 1fr;
+    }
 
     .topo h1{
-        font-size:24px;
-    }
-
-    .app{
-        padding:15px 12px 35px;
-    }
-
-    .hero{
-        padding:19px;
-    }
-
-    .menu-card{
-        min-height:118px;
-        padding:15px;
-    }
-
-    .menu-card .icone{
-        width:44px;
-        height:44px;
-        font-size:21px;
-    }
-
-    .menu-card h3{
-        font-size:14px;
-    }
-
-    .menu-card p{
-        font-size:10px;
+        font-size:22px;
     }
 }
-
 </style>
 </head>
 
 <body>
 
+<!-- =========================
+     CARREGAMENTO
+========================= -->
+
+<div id="loading">
+    <div class="loading-box">
+
+        <img
+            class="loading-logo"
+            src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
+            alt="Logo BOT DO BM3"
+        >
+
+        <div class="loading-title">
+            🍀 BOT DO BM3 🍀
+        </div>
+
+        <div class="loading-text">
+            Carregando...
+        </div>
+
+        <div class="loading-bar">
+            <span></span>
+        </div>
+
+    </div>
+</div>
+
+<!-- =========================
+     TOPO
+========================= -->
+
 <header class="topo">
+
     <div class="bandeira"></div>
+
+    <img
+        class="logo-topo"
+        src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
+        alt="Logo BM3"
+    >
+
     <h1>🍀 BOT DO BM3 🍀</h1>
-    <p>Central premium de organização</p>
+    <p>Organizador de contatos</p>
+
 </header>
 
-<main class="app">
+<div class="container">
 
 <!-- =========================
      INÍCIO
@@ -816,48 +612,40 @@ body.escuro .excluir{
 
 <section id="inicio" class="tela ativa">
 
-    <div class="hero">
-        <h2>Olá, BM3 👋</h2>
-        <p>
-            Gerencie seus contatos, acompanhe os status
-            e organize tudo em um só lugar.
-        </p>
+    <div class="titulo">Bem-vindo</div>
+    <div class="subtitulo">
+        Controle seus contatos de forma rápida e organizada.
     </div>
 
     <div class="resumo">
 
-        <div class="resumo-card total">
-            <div class="resumo-icone">👥</div>
-            <div class="resumo-numero" id="totalContatos">0</div>
-            <div class="resumo-label">Total de contatos</div>
+        <div class="resumo-card">
+            <strong id="totalContatos">0</strong>
+            <span>👥 Total de contatos</span>
         </div>
 
-        <div class="resumo-card on">
-            <div class="resumo-icone">🟢</div>
-            <div class="resumo-numero" id="totalOn">0</div>
-            <div class="resumo-label">ZAP ON</div>
+        <div class="resumo-card">
+            <strong id="totalOn">0</strong>
+            <span>🟢 ZAP ON</span>
         </div>
 
-        <div class="resumo-card analise">
-            <div class="resumo-icone">🟡</div>
-            <div class="resumo-numero" id="totalAnalise">0</div>
-            <div class="resumo-label">Em análise</div>
+        <div class="resumo-card">
+            <strong id="totalAnalise">0</strong>
+            <span>🟡 Em análise</span>
         </div>
 
-        <div class="resumo-card caiu">
-            <div class="resumo-icone">🔴</div>
-            <div class="resumo-numero" id="totalCaiu">0</div>
-            <div class="resumo-label">ZAP CAIU</div>
+        <div class="resumo-card">
+            <strong id="totalCaiu">0</strong>
+            <span>🔴 ZAP CAIU</span>
         </div>
 
     </div>
 
-    <button class="btn-menu-principal" onclick="mostrarTela('menu')">
+    <button onclick="trocarTela('menu')">
         ☰ Abrir Menu
     </button>
 
 </section>
-
 
 <!-- =========================
      MENU
@@ -865,296 +653,126 @@ body.escuro .excluir{
 
 <section id="menu" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('inicio')">‹</button>
-        <div>
-            <h2>Menu Premium</h2>
-        </div>
+    <div class="titulo">Menu</div>
+    <div class="subtitulo">
+        Escolha uma opção.
     </div>
 
-    <div class="menu-titulo">
-        <p>Central de controle do BOT DO BM3</p>
+    <div class="menu-titulo">CONTATOS</div>
+
+    <div class="menu-grid">
+
+        <div class="menu-item" onclick="trocarTela('adicionar')">
+            <div class="menu-icon">➕</div>
+            <h3>Novo contato</h3>
+            <p>Adicionar contato</p>
+        </div>
+
+        <div class="menu-item" onclick="trocarTela('contatos')">
+            <div class="menu-icon">👥</div>
+            <h3>Meus contatos</h3>
+            <p>Ver todos</p>
+        </div>
+
+        <div class="menu-item" onclick="trocarTela('buscar')">
+            <div class="menu-icon">🔎</div>
+            <h3>Pesquisar</h3>
+            <p>Encontrar contato</p>
+        </div>
+
+        <div class="menu-item" onclick="trocarTela('favoritos')">
+            <div class="menu-icon">⭐</div>
+            <h3>Favoritos</h3>
+            <p>Contatos favoritos</p>
+        </div>
+
     </div>
 
+    <div class="menu-titulo">MONITORAMENTO</div>
 
-    <!-- CONTATOS -->
+    <div class="menu-grid">
 
-    <div class="menu-secao">
-
-        <div class="menu-secao-titulo">
-            👥 Contatos
+        <div class="menu-item" onclick="filtrarStatus('ON')">
+            <div class="menu-icon">🟢</div>
+            <h3>ZAP ON</h3>
+            <p>Contatos ativos</p>
         </div>
 
-        <div class="menu-grade">
-
-            <button class="menu-card card-verde"
-                    onclick="mostrarTela('adicionar')">
-
-                <div class="icone">➕</div>
-
-                <h3>Novo contato</h3>
-
-                <p>
-                    Adicione um novo número
-                    rapidamente.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-azul"
-                    onclick="mostrarTela('contatos')">
-
-                <div class="icone">📱</div>
-
-                <h3>Meus contatos</h3>
-
-                <p>
-                    Visualize todos os
-                    contatos cadastrados.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-roxo"
-                    onclick="mostrarTela('buscar')">
-
-                <div class="icone">🔎</div>
-
-                <h3>Pesquisar</h3>
-
-                <p>
-                    Encontre contatos
-                    rapidamente.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-dourado"
-                    onclick="mostrarTela('favoritos')">
-
-                <div class="icone">⭐</div>
-
-                <h3>Favoritos</h3>
-
-                <p>
-                    Acesse seus contatos
-                    favoritos.
-                </p>
-
-            </button>
-
+        <div class="menu-item" onclick="filtrarStatus('ANALISE')">
+            <div class="menu-icon">🟡</div>
+            <h3>Em análise</h3>
+            <p>Verificação pendente</p>
         </div>
+
+        <div class="menu-item" onclick="filtrarStatus('CAIU')">
+            <div class="menu-icon">🔴</div>
+            <h3>ZAP CAIU</h3>
+            <p>Contatos inativos</p>
+        </div>
+
+        <div class="menu-item" onclick="trocarTela('estatisticas')">
+            <div class="menu-icon">📊</div>
+            <h3>Estatísticas</h3>
+            <p>Painel geral</p>
+        </div>
+
     </div>
 
+    <div class="menu-titulo">ORGANIZAÇÃO</div>
 
-    <!-- MONITORAMENTO -->
+    <div class="menu-grid">
 
-    <div class="menu-secao">
-
-        <div class="menu-secao-titulo">
-            📡 Monitoramento
+        <div class="menu-item" onclick="trocarTela('grupos')">
+            <div class="menu-icon">👨‍👩‍👧‍👦</div>
+            <h3>Grupos</h3>
+            <p>Organizar grupos</p>
         </div>
 
-        <div class="menu-grade">
-
-            <button class="menu-card card-verde"
-                    onclick="filtrarStatus('ON')">
-
-                <div class="icone">🟢</div>
-
-                <h3>ZAP ON</h3>
-
-                <p>
-                    Visualize os números
-                    funcionando.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-laranja"
-                    onclick="filtrarStatus('ANALISE')">
-
-                <div class="icone">🟡</div>
-
-                <h3>Em análise</h3>
-
-                <p>
-                    Números aguardando
-                    verificação.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-vermelho"
-                    onclick="filtrarStatus('CAIU')">
-
-                <div class="icone">🔴</div>
-
-                <h3>ZAP CAIU</h3>
-
-                <p>
-                    Números marcados como
-                    indisponíveis.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-azul"
-                    onclick="mostrarTela('estatisticas')">
-
-                <div class="icone">📊</div>
-
-                <h3>Estatísticas</h3>
-
-                <p>
-                    Veja os números do
-                    seu painel.
-                </p>
-
-            </button>
-
+        <div class="menu-item" onclick="trocarTela('etiquetas')">
+            <div class="menu-icon">🏷️</div>
+            <h3>Etiquetas</h3>
+            <p>Organizar contatos</p>
         </div>
+
+        <div class="menu-item" onclick="trocarTela('favoritos')">
+            <div class="menu-icon">⭐</div>
+            <h3>Favoritos</h3>
+            <p>Acesso rápido</p>
+        </div>
+
     </div>
 
+    <div class="menu-titulo">SISTEMA</div>
 
-    <!-- ORGANIZAÇÃO -->
+    <div class="menu-grid">
 
-    <div class="menu-secao">
-
-        <div class="menu-secao-titulo">
-            🗂️ Organização
+        <div class="menu-item" onclick="trocarTela('configuracoes')">
+            <div class="menu-icon">⚙️</div>
+            <h3>Configurações</h3>
+            <p>Configurações gerais</p>
         </div>
 
-        <div class="menu-grade">
-
-            <button class="menu-card card-roxo"
-                    onclick="mostrarTela('grupos')">
-
-                <div class="icone">👥</div>
-
-                <h3>Grupos</h3>
-
-                <p>
-                    Organize seus contatos
-                    por grupos.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-dourado"
-                    onclick="mostrarTela('etiquetas')">
-
-                <div class="icone">🏷️</div>
-
-                <h3>Etiquetas</h3>
-
-                <p>
-                    Crie categorias para
-                    facilitar a organização.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-vermelho"
-                    onclick="mostrarTela('favoritos')">
-
-                <div class="icone">⭐</div>
-
-                <h3>Favoritos</h3>
-
-                <p>
-                    Seus contatos mais
-                    importantes.
-                </p>
-
-            </button>
-
-        </div>
-    </div>
-
-
-    <!-- SISTEMA -->
-
-    <div class="menu-secao">
-
-        <div class="menu-secao-titulo">
-            ⚙️ Sistema
+        <div class="menu-item" onclick="trocarTela('personalizacao')">
+            <div class="menu-icon">🎨</div>
+            <h3>Personalização</h3>
+            <p>Aparência do bot</p>
         </div>
 
-        <div class="menu-grade">
-
-            <button class="menu-card card-cinza"
-                    onclick="mostrarTela('configuracoes')">
-
-                <div class="icone">⚙️</div>
-
-                <h3>Configurações</h3>
-
-                <p>
-                    Controle as opções
-                    do sistema.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-azul"
-                    onclick="mostrarTela('personalizacao')">
-
-                <div class="icone">🎨</div>
-
-                <h3>Personalização</h3>
-
-                <p>
-                    Altere o visual do
-                    BOT DO BM3.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-verde"
-                    onclick="mostrarTela('backup')">
-
-                <div class="icone">💾</div>
-
-                <h3>Backup</h3>
-
-                <p>
-                    Exporte seus contatos
-                    para segurança.
-                </p>
-
-            </button>
-
-
-            <button class="menu-card card-dourado"
-                    onclick="mostrarTela('sobre')">
-
-                <div class="icone">ℹ️</div>
-
-                <h3>Sobre o BOT</h3>
-
-                <p>
-                    Informações sobre
-                    o sistema.
-                </p>
-
-            </button>
-
+        <div class="menu-item" onclick="trocarTela('backup')">
+            <div class="menu-icon">💾</div>
+            <h3>Backup</h3>
+            <p>Salvar contatos</p>
         </div>
+
+        <div class="menu-item" onclick="trocarTela('sobre')">
+            <div class="menu-icon">ℹ️</div>
+            <h3>Sobre o BOT</h3>
+            <p>Informações</p>
+        </div>
+
     </div>
 
 </section>
-
 
 <!-- =========================
      ADICIONAR
@@ -1162,34 +780,34 @@ body.escuro .excluir{
 
 <section id="adicionar" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('menu')">‹</button>
-        <h2>Novo contato</h2>
-    </div>
+    <div class="titulo">Novo contato</div>
+    <div class="subtitulo">Cadastre um novo número.</div>
 
-    <div class="form-card">
+    <div class="card">
 
-        <label>👤 Nome</label>
-        <input id="nome" type="text" placeholder="Nome do contato">
+        <label>Nome</label>
+        <input id="nome" placeholder="Nome do contato">
 
-        <label>📱 WhatsApp</label>
-        <input id="numero" type="tel" placeholder="Ex: 5513999999999">
+        <label>WhatsApp</label>
+        <input id="numero" placeholder="5513999999999" inputmode="tel">
 
-        <label>👥 Grupo</label>
-        <input id="grupo" type="text" placeholder="Ex: Trabalho">
+        <label>Grupo</label>
+        <input id="grupo" placeholder="Ex.: Trabalho">
 
-        <label>📝 Observação</label>
-        <textarea id="observacao"
-                  placeholder="Observações sobre o contato"></textarea>
+        <label>Observação</label>
+        <textarea id="observacao" placeholder="Observações"></textarea>
 
-        <button class="btn btn-verde" onclick="adicionarContato()">
-            ➕ Salvar contato
+        <button onclick="adicionarContato()">
+            ➕ Adicionar contato
+        </button>
+
+        <button class="btn-secundario" onclick="trocarTela('menu')">
+            ← Voltar
         </button>
 
     </div>
 
 </section>
-
 
 <!-- =========================
      CONTATOS
@@ -1197,15 +815,16 @@ body.escuro .excluir{
 
 <section id="contatos" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('menu')">‹</button>
-        <h2>Meus contatos</h2>
-    </div>
+    <div class="titulo">Meus contatos</div>
+    <div class="subtitulo">Todos os contatos cadastrados.</div>
 
     <div id="listaContatos"></div>
 
-</section>
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
 
+</section>
 
 <!-- =========================
      BUSCAR
@@ -1213,26 +832,22 @@ body.escuro .excluir{
 
 <section id="buscar" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('menu')">‹</button>
-        <h2>Pesquisar</h2>
-    </div>
+    <div class="titulo">Pesquisar</div>
+    <div class="subtitulo">Procure por nome, número ou grupo.</div>
 
-    <div class="form-card">
+    <input
+        id="campoBusca"
+        placeholder="🔎 Digite para pesquisar..."
+        oninput="pesquisar()"
+    >
 
-        <input
-            id="campoBusca"
-            type="search"
-            placeholder="🔎 Nome, número ou grupo..."
-            oninput="buscarContatos()"
-        >
+    <div id="resultadoBusca" style="margin-top:15px"></div>
 
-    </div>
-
-    <div id="resultadoBusca"></div>
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
 
 </section>
-
 
 <!-- =========================
      FAVORITOS
@@ -1240,57 +855,68 @@ body.escuro .excluir{
 
 <section id="favoritos" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('menu')">‹</button>
-        <h2>Favoritos</h2>
-    </div>
+    <div class="titulo">Favoritos</div>
+    <div class="subtitulo">Seus contatos favoritos.</div>
 
     <div id="listaFavoritos"></div>
 
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
+
 </section>
 
+<!-- =========================
+     RESULTADO STATUS
+========================= -->
+
+<section id="resultado" class="tela">
+
+    <div class="titulo" id="tituloResultado">Resultado</div>
+    <div class="subtitulo">Contatos encontrados.</div>
+
+    <div id="listaResultado"></div>
+
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
+
+</section>
 
 <!-- =========================
-     ESTATÍSTICAS
+     ESTATISTICAS
 ========================= -->
 
 <section id="estatisticas" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('menu')">‹</button>
-        <h2>Estatísticas</h2>
+    <div class="titulo">Estatísticas</div>
+    <div class="subtitulo">Resumo dos seus contatos.</div>
+
+    <div class="card">
+        <h3>👥 Total</h3>
+        <p id="estatTotal">0</p>
     </div>
 
-    <div class="stats">
-
-        <div class="stat">
-            👥
-            <strong id="statTotal">0</strong>
-            <span>Total</span>
-        </div>
-
-        <div class="stat">
-            🟢
-            <strong id="statOn">0</strong>
-            <span>ZAP ON</span>
-        </div>
-
-        <div class="stat">
-            🟡
-            <strong id="statAnalise">0</strong>
-            <span>Em análise</span>
-        </div>
-
-        <div class="stat">
-            🔴
-            <strong id="statCaiu">0</strong>
-            <span>ZAP CAIU</span>
-        </div>
-
+    <div class="card">
+        <h3>🟢 ZAP ON</h3>
+        <p id="estatOn">0</p>
     </div>
+
+    <div class="card">
+        <h3>⚠️ Em análise</h3>
+        <p id="estatAnalise">0</p>
+    </div>
+
+    <div class="card">
+        <h3>🔴 ZAP CAIU</h3>
+        <p id="estatCaiu">0</p>
+    </div>
+
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
 
 </section>
-
 
 <!-- =========================
      GRUPOS
@@ -1298,15 +924,16 @@ body.escuro .excluir{
 
 <section id="grupos" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('menu')">‹</button>
-        <h2>Grupos</h2>
-    </div>
+    <div class="titulo">Grupos</div>
+    <div class="subtitulo">Grupos encontrados nos seus contatos.</div>
 
-    <div id="listaGrupos"></div>
+    <div id="listaGrupos" class="lista-simples"></div>
+
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
 
 </section>
-
 
 <!-- =========================
      ETIQUETAS
@@ -1314,27 +941,23 @@ body.escuro .excluir{
 
 <section id="etiquetas" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('menu')">‹</button>
-        <h2>Etiquetas</h2>
-    </div>
+    <div class="titulo">Etiquetas</div>
+    <div class="subtitulo">Organize seus contatos.</div>
 
-    <div class="form-card">
-
-        <p style="color:var(--texto2);font-size:13px;">
-            As etiquetas podem ser utilizadas através
-            do campo de grupo dos contatos.
+    <div class="card">
+        <h3>🏷️ Sistema de etiquetas</h3>
+        <p>
+            As etiquetas podem ser organizadas através dos grupos cadastrados.
         </p>
-
-        <button class="btn btn-verde"
-                onclick="mostrarTela('adicionar')">
-            🏷️ Criar organização
-        </button>
-
     </div>
+
+    <div id="listaEtiquetas" class="lista-simples"></div>
+
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
 
 </section>
-
 
 <!-- =========================
      CONFIGURAÇÕES
@@ -1342,64 +965,31 @@ body.escuro .excluir{
 
 <section id="configuracoes" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('menu')">‹</button>
-        <h2>Configurações</h2>
+    <div class="titulo">Configurações</div>
+    <div class="subtitulo">Configurações gerais do BOT.</div>
+
+    <div class="card">
+        <h3>⚙️ Sistema</h3>
+        <p>BOT DO BM3 — versão atual.</p>
     </div>
 
-    <button class="config-card"
-            onclick="mostrarTela('personalizacao')">
-
-        <div class="config-icone">🎨</div>
-
-        <div>
-            <h3>Personalização</h3>
-            <p>Escolha o tema visual do sistema.</p>
-        </div>
-
+    <button onclick="trocarTela('personalizacao')">
+        🎨 Personalização
     </button>
 
-
-    <button class="config-card"
-            onclick="mostrarTela('backup')">
-
-        <div class="config-icone">💾</div>
-
-        <div>
-            <h3>Backup</h3>
-            <p>Exporte uma cópia dos seus contatos.</p>
-        </div>
-
+    <button onclick="trocarTela('backup')">
+        💾 Backup
     </button>
 
-
-    <button class="config-card"
-            onclick="mostrarTela('estatisticas')">
-
-        <div class="config-icone">📊</div>
-
-        <div>
-            <h3>Estatísticas</h3>
-            <p>Veja o resumo dos seus contatos.</p>
-        </div>
-
+    <button onclick="trocarTela('sobre')">
+        ℹ️ Sobre o BOT
     </button>
 
-
-    <button class="config-card"
-            onclick="mostrarTela('sobre')">
-
-        <div class="config-icone">ℹ️</div>
-
-        <div>
-            <h3>Sobre o BOT</h3>
-            <p>Informações e versão do sistema.</p>
-        </div>
-
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
     </button>
 
 </section>
-
 
 <!-- =========================
      PERSONALIZAÇÃO
@@ -1407,31 +997,25 @@ body.escuro .excluir{
 
 <section id="personalizacao" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('configuracoes')">‹</button>
-        <h2>Personalização</h2>
-    </div>
+    <div class="titulo">Personalização</div>
+    <div class="subtitulo">Escolha a aparência do BOT.</div>
 
-    <div class="form-card">
+    <div class="card">
 
-        <label>🎨 Tema</label>
+        <h3>🌙 Tema</h3>
+        <p>Alterne entre modo claro e escuro.</p>
 
-        <select id="temaSelect" onchange="alterarTema(this.value)">
-
-            <option value="claro">
-                🇮🇹 Claro — Itália
-            </option>
-
-            <option value="escuro">
-                🖤 Escuro — BM3
-            </option>
-
-        </select>
+        <button onclick="alternarTema()">
+            🌙 Alternar tema
+        </button>
 
     </div>
+
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
 
 </section>
-
 
 <!-- =========================
      BACKUP
@@ -1439,31 +1023,41 @@ body.escuro .excluir{
 
 <section id="backup" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('configuracoes')">‹</button>
-        <h2>Backup</h2>
-    </div>
+    <div class="titulo">Backup</div>
+    <div class="subtitulo">Salve seus contatos em um arquivo.</div>
 
-    <div class="form-card">
+    <div class="card">
 
-        <h3>💾 Backup dos contatos</h3>
+        <h3>💾 Exportar contatos</h3>
 
-        <p style="margin-top:8px;color:var(--texto2);font-size:13px;">
-            Exporte seus contatos para um arquivo
-            e mantenha uma cópia de segurança.
+        <p>
+            Crie um arquivo de backup com todos os seus contatos.
         </p>
 
-        <button class="btn btn-verde"
-                onclick="exportarBackup()">
-
-            📥 Exportar backup
-
+        <button onclick="exportarBackup()">
+            📥 Fazer backup
         </button>
 
     </div>
 
-</section>
+    <div class="card">
 
+        <h3>📤 Importar contatos</h3>
+
+        <input
+            type="file"
+            id="arquivoImportacao"
+            accept=".json"
+            onchange="importarBackup(event)"
+        >
+
+    </div>
+
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
+
+</section>
 
 <!-- =========================
      SOBRE
@@ -1471,119 +1065,168 @@ body.escuro .excluir{
 
 <section id="sobre" class="tela">
 
-    <div class="tela-topo">
-        <button class="voltar" onclick="mostrarTela('configuracoes')">‹</button>
-        <h2>Sobre</h2>
-    </div>
+    <div class="titulo">Sobre o BOT</div>
+    <div class="subtitulo">Informações do sistema.</div>
 
-    <div class="hero">
+    <div class="card">
 
-        <h2>🍀 BOT DO BM3 🍀</h2>
+        <img
+            src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
+            alt="Logo BM3"
+            style="width:110px;height:110px;object-fit:contain;display:block;margin:0 auto 15px;border-radius:20px"
+        >
 
-        <p style="margin-top:10px;">
-            Central de organização de contatos,
-            monitoramento de status e gerenciamento
-            pessoal.
+        <h3 style="text-align:center">
+            🍀 BOT DO BM3 🍀
+        </h3>
+
+        <p style="text-align:center;margin-top:8px">
+            Organizador de contatos
         </p>
 
-        <p style="margin-top:14px;">
-            Versão Premium
-        </p>
-
     </div>
+
+    <button class="btn-secundario" onclick="trocarTela('menu')">
+        ← Voltar
+    </button>
 
 </section>
 
-</main>
+<div class="rodape">
+    🍀 BOT DO BM3 🍀
+</div>
 
-<div id="toast" class="toast"></div>
-
+</div>
 
 <script>
+
+/* =========================
+   CONFIGURAÇÕES
+========================= */
 
 const CHAVE_CONTATOS = "botBM3Contatos";
 const CHAVE_TEMA = "temaBotBM3";
 
-let contatos =
-    JSON.parse(localStorage.getItem(CHAVE_CONTATOS)) || [];
-
-
-/* =========================
-   TELA
-========================= */
-
-function mostrarTela(id){
-
-    document.querySelectorAll(".tela")
-        .forEach(tela => tela.classList.remove("ativa"));
-
-    const tela = document.getElementById(id);
-
-    if(tela){
-        tela.classList.add("ativa");
-    }
-
-    atualizarTudo();
-}
-
+let contatos = JSON.parse(
+    localStorage.getItem(CHAVE_CONTATOS)
+) || [];
 
 /* =========================
-   TOAST
+   CARREGAMENTO
 ========================= */
 
-function mostrarToast(texto){
-
-    const toast = document.getElementById("toast");
-
-    toast.textContent = texto;
-
-    toast.classList.add("mostrar");
+window.addEventListener("load", () => {
 
     setTimeout(() => {
-        toast.classList.remove("mostrar");
-    }, 2200);
-}
 
+        const loading = document.getElementById("loading");
+
+        loading.classList.add("saindo");
+
+        setTimeout(() => {
+            loading.style.display = "none";
+        }, 700);
+
+    }, 2100);
+
+    aplicarTema();
+    atualizarTudo();
+
+});
 
 /* =========================
-   SALVAR
+   TROCAR TELA COM DELAY
 ========================= */
 
-function salvar(){
+let telaAtual = "inicio";
+let bloqueioTela = false;
 
-    localStorage.setItem(
-        CHAVE_CONTATOS,
-        JSON.stringify(contatos)
-    );
+function trocarTela(id){
 
-    atualizarTudo();
+    if(bloqueioTela) return;
+
+    if(id === telaAtual) return;
+
+    bloqueioTela = true;
+
+    const atual = document.getElementById(telaAtual);
+    const nova = document.getElementById(id);
+
+    if(!nova){
+        bloqueioTela = false;
+        return;
+    }
+
+    if(atual){
+        atual.classList.add("transicao");
+    }
+
+    setTimeout(() => {
+
+        document.querySelectorAll(".tela").forEach(tela => {
+            tela.classList.remove("ativa");
+            tela.classList.remove("transicao");
+        });
+
+        nova.classList.add("ativa");
+
+        telaAtual = id;
+
+        atualizarTela(id);
+
+        setTimeout(() => {
+            bloqueioTela = false;
+        }, 120);
+
+    }, 280);
 }
 
+/* =========================
+   ATUALIZAR TELA
+========================= */
+
+function atualizarTela(id){
+
+    if(id === "contatos"){
+        renderizarContatos();
+    }
+
+    if(id === "favoritos"){
+        renderizarFavoritos();
+    }
+
+    if(id === "estatisticas"){
+        atualizarEstatisticas();
+    }
+
+    if(id === "grupos"){
+        renderizarGrupos();
+    }
+
+    if(id === "etiquetas"){
+        renderizarEtiquetas();
+    }
+}
 
 /* =========================
-   ADICIONAR
+   ADICIONAR CONTATO
 ========================= */
 
 function adicionarContato(){
 
-    const nome =
-        document.getElementById("nome").value.trim();
-
-    const numero =
-        document.getElementById("numero").value.trim();
-
-    const grupo =
-        document.getElementById("grupo").value.trim();
-
-    const observacao =
-        document.getElementById("observacao").value.trim();
+    const nome = document.getElementById("nome").value.trim();
+    const numero = document.getElementById("numero").value.trim();
+    const grupo = document.getElementById("grupo").value.trim();
+    const observacao = document.getElementById("observacao").value.trim();
 
     if(!nome || !numero){
 
-        mostrarToast("⚠️ Preencha nome e WhatsApp.");
+        alert("Preencha o nome e o número.");
 
         return;
     }
+
+    const agora = new Date();
 
     contatos.push({
 
@@ -1597,28 +1240,197 @@ function adicionarContato(){
         favorito:false,
 
         ultimaAtualizacao:
-            new Date().toLocaleString("pt-BR")
+            agora.toLocaleString("pt-BR")
 
     });
 
     salvar();
 
-    document.getElementById("nome").value="";
-    document.getElementById("numero").value="";
-    document.getElementById("grupo").value="";
-    document.getElementById("observacao").value="";
+    document.getElementById("nome").value = "";
+    document.getElementById("numero").value = "";
+    document.getElementById("grupo").value = "";
+    document.getElementById("observacao").value = "";
 
-    mostrarToast("✅ Contato salvo!");
+    atualizarTudo();
 
-    mostrarTela("contatos");
+    alert("Contato adicionado!");
+
+    trocarTela("contatos");
 }
 
+/* =========================
+   SALVAR
+========================= */
+
+function salvar(){
+
+    localStorage.setItem(
+        CHAVE_CONTATOS,
+        JSON.stringify(contatos)
+    );
+
+}
+
+/* =========================
+   RENDER CONTATOS
+========================= */
+
+function renderizarContatos(){
+
+    const lista =
+        document.getElementById("listaContatos");
+
+    if(!contatos.length){
+
+        lista.innerHTML = `
+            <div class="card">
+                <h3>📭 Nenhum contato</h3>
+                <p>Você ainda não cadastrou contatos.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    lista.innerHTML = contatos.map((c,index) =>
+        criarCardContato(c,index)
+    ).join("");
+
+}
+
+/* =========================
+   CARD CONTATO
+========================= */
+
+function criarCardContato(c,index){
+
+    let statusTexto = "";
+    let statusClasse = "";
+
+    if(c.status === "ON"){
+        statusTexto = "🟢 ZAP ON";
+        statusClasse = "background:#dff7e8;color:#087b38;";
+    }
+
+    if(c.status === "ANALISE"){
+        statusTexto = "⚠️ ZAP EM ANÁLISE";
+        statusClasse = "background:#fff3cd;color:#856404;";
+    }
+
+    if(c.status === "CAIU"){
+        statusTexto = "🔴 ZAP CAIU";
+        statusClasse = "background:#ffdfe2;color:#a31320;";
+    }
+
+    return `
+
+    <div class="card contato">
+
+        <button
+            class="favorito"
+            onclick="alternarFavorito(${index})"
+        >
+            ${c.favorito ? "★" : "☆"}
+        </button>
+
+        <div class="contato-nome">
+            ${escapar(c.nome)}
+        </div>
+
+        <div class="contato-numero">
+            📱 ${escapar(c.numero)}
+        </div>
+
+        ${
+            c.grupo
+            ?
+            `<div class="contato-info">
+                🏷️ ${escapar(c.grupo)}
+            </div>`
+            :
+            ""
+        }
+
+        ${
+            c.observacao
+            ?
+            `<div class="contato-info">
+                📝 ${escapar(c.observacao)}
+            </div>`
+            :
+            ""
+        }
+
+        <div>
+            <span
+                class="status"
+                style="${statusClasse}"
+            >
+                ${statusTexto}
+            </span>
+        </div>
+
+        <label>🔽 Alterar status</label>
+
+        <select
+            class="status-select"
+            onchange="alterarStatus(${index},this.value)"
+        >
+
+            <option
+                value="ANALISE"
+                ${c.status === "ANALISE" ? "selected" : ""}
+            >
+                ⚠️ ZAP EM ANÁLISE
+            </option>
+
+            <option
+                value="ON"
+                ${c.status === "ON" ? "selected" : ""}
+            >
+                🟢 ZAP ON
+            </option>
+
+            <option
+                value="CAIU"
+                ${c.status === "CAIU" ? "selected" : ""}
+            >
+                🔴 ZAP CAIU
+            </option>
+
+        </select>
+
+        <div class="contato-info">
+            🕐 Última atualização:
+            ${escapar(c.ultimaAtualizacao || "-")}
+        </div>
+
+        <button
+            class="btn-whatsapp"
+            onclick="abrirWhatsApp(${index})"
+        >
+            <span style="font-size:19px">●</span>
+            Abrir WhatsApp
+        </button>
+
+        <button
+            class="btn-vermelho"
+            onclick="excluirContato(${index})"
+        >
+            🗑️ Excluir
+        </button>
+
+    </div>
+
+    `;
+
+}
 
 /* =========================
    STATUS
 ========================= */
 
-function alterarStatus(index, status){
+function alterarStatus(index,status){
 
     contatos[index].status = status;
 
@@ -1627,12 +1439,52 @@ function alterarStatus(index, status){
 
     salvar();
 
-    mostrarToast("✅ Status atualizado.");
+    atualizarTudo();
+
+    if(telaAtual === "contatos"){
+        renderizarContatos();
+    }
+
 }
 
+/* =========================
+   WHATSAPP
+========================= */
+
+function abrirWhatsApp(index){
+
+    let numero =
+        contatos[index].numero.replace(/\D/g,"");
+
+    if(!numero) return;
+
+    window.open(
+        "https://wa.me/" + numero,
+        "_blank"
+    );
+
+}
 
 /* =========================
-   FAVORITO
+   EXCLUIR
+========================= */
+
+function excluirContato(index){
+
+    if(!confirm("Deseja excluir este contato?")){
+        return;
+    }
+
+    contatos.splice(index,1);
+
+    salvar();
+
+    atualizarTudo();
+
+}
+
+/* =========================
+   FAVORITOS
 ========================= */
 
 function alternarFavorito(index){
@@ -1642,273 +1494,35 @@ function alternarFavorito(index){
 
     salvar();
 
-    mostrarToast(
-        contatos[index].favorito
-        ? "⭐ Adicionado aos favoritos."
-        : "☆ Removido dos favoritos."
-    );
-}
+    atualizarTudo();
 
-
-/* =========================
-   EXCLUIR
-========================= */
-
-function excluirContato(index){
-
-    if(!confirm("Deseja realmente excluir este contato?")){
-        return;
+    if(telaAtual === "contatos"){
+        renderizarContatos();
     }
 
-    contatos.splice(index,1);
-
-    salvar();
-
-    mostrarToast("🗑️ Contato excluído.");
-}
-
-
-/* =========================
-   WHATSAPP
-========================= */
-
-function abrirWhatsApp(numero){
-
-    const telefone =
-        numero.replace(/\D/g,"");
-
-    window.open(
-        "https://wa.me/" + telefone,
-        "_blank"
-    );
-}
-
-
-/* =========================
-   STATUS TEXTO
-========================= */
-
-function statusTexto(status){
-
-    if(status === "ON")
-        return "🟢 ZAP ON";
-
-    if(status === "CAIU")
-        return "🔴 ZAP CAIU";
-
-    return "⚠️ ZAP EM ANÁLISE";
-}
-
-
-function statusClasse(status){
-
-    if(status === "ON")
-        return "status-on";
-
-    if(status === "CAIU")
-        return "status-caiu";
-
-    return "status-analise";
-}
-
-
-/* =========================
-   CARD CONTATO
-========================= */
-
-function criarContatoHTML(contato,index){
-
-    return `
-
-    <div class="contato">
-
-        <div class="contato-topo">
-
-            <div>
-
-                <div class="contato-nome">
-                    ${escapar(contato.nome)}
-                </div>
-
-                <div class="contato-numero">
-                    📱 ${escapar(contato.numero)}
-                </div>
-
-            </div>
-
-            <button
-                class="favorito"
-                onclick="alternarFavorito(${index})">
-
-                ${contato.favorito ? "⭐" : "☆"}
-
-            </button>
-
-        </div>
-
-
-        <span class="status-badge ${statusClasse(contato.status)}">
-
-            ${statusTexto(contato.status)}
-
-        </span>
-
-
-        <div style="margin-top:10px;">
-
-            <select
-                onchange="alterarStatus(${index},this.value)">
-
-                <option value="ANALISE"
-                    ${contato.status==="ANALISE"?"selected":""}>
-
-                    ⚠️ ZAP EM ANÁLISE
-
-                </option>
-
-                <option value="ON"
-                    ${contato.status==="ON"?"selected":""}>
-
-                    🟢 ZAP ON
-
-                </option>
-
-                <option value="CAIU"
-                    ${contato.status==="CAIU"?"selected":""}>
-
-                    🔴 ZAP CAIU
-
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="contato-info">
-
-            ${contato.grupo
-                ? "👥 Grupo: " + escapar(contato.grupo)
-                : ""}
-
-            <br>
-
-            ${contato.observacao
-                ? "📝 " + escapar(contato.observacao)
-                : ""}
-
-            <br>
-
-            🕐 Atualizado:
-            ${escapar(contato.ultimaAtualizacao)}
-
-        </div>
-
-
-        <div class="contato-acoes">
-
-            <button
-                class="whatsapp"
-                onclick="abrirWhatsApp('${escaparJS(contato.numero)}')">
-
-                💬 Abrir WhatsApp
-
-            </button>
-
-            <button
-                class="excluir"
-                onclick="excluirContato(${index})">
-
-                🗑️ Excluir
-
-            </button>
-
-        </div>
-
-    </div>
-
-    `;
-}
-
-
-/* =========================
-   LISTAR
-========================= */
-
-function atualizarLista(){
-
-    const lista =
-        document.getElementById("listaContatos");
-
-    if(!lista) return;
-
-    if(contatos.length === 0){
-
-        lista.innerHTML = `
-
-            <div class="form-card vazio">
-
-                <div class="vazio-icone">👥</div>
-
-                <h3>Nenhum contato ainda</h3>
-
-                <p style="margin-top:7px;">
-                    Adicione seu primeiro contato.
-                </p>
-
-                <button
-                    class="btn btn-verde"
-                    onclick="mostrarTela('adicionar')">
-
-                    ➕ Adicionar contato
-
-                </button>
-
-            </div>
-
-        `;
-
-        return;
+    if(telaAtual === "favoritos"){
+        renderizarFavoritos();
     }
 
-    lista.innerHTML =
-        contatos
-        .map((c,i) => criarContatoHTML(c,i))
-        .join("");
 }
 
-
-/* =========================
-   FAVORITOS
-========================= */
-
-function atualizarFavoritos(){
+function renderizarFavoritos(){
 
     const lista =
         document.getElementById("listaFavoritos");
 
-    if(!lista) return;
-
     const favoritos =
-        contatos.filter(c => c.favorito);
+        contatos
+        .map((c,i)=>({c,i}))
+        .filter(x=>x.c.favorito);
 
-    if(favoritos.length === 0){
+    if(!favoritos.length){
 
         lista.innerHTML = `
-
-            <div class="form-card vazio">
-
-                <div class="vazio-icone">⭐</div>
-
-                <h3>Nenhum favorito</h3>
-
-                <p style="margin-top:7px;">
-                    Marque contatos com ⭐ para
-                    adicioná-los aqui.
-                </p>
-
+            <div class="card">
+                <h3>⭐ Nenhum favorito</h3>
+                <p>Marque contatos como favoritos.</p>
             </div>
-
         `;
 
         return;
@@ -1916,83 +1530,70 @@ function atualizarFavoritos(){
 
     lista.innerHTML =
         favoritos
-        .map(c => {
-
-            const index =
-                contatos.indexOf(c);
-
-            return criarContatoHTML(c,index);
-
-        })
+        .map(x=>criarCardContato(x.c,x.i))
         .join("");
+
 }
 
-
 /* =========================
-   BUSCAR
+   PESQUISA
 ========================= */
 
-function buscarContatos(){
+function pesquisar(){
 
-    const campo =
-        document.getElementById("campoBusca");
+    const termo =
+        document
+        .getElementById("campoBusca")
+        .value
+        .toLowerCase()
+        .trim();
 
     const resultado =
         document.getElementById("resultadoBusca");
 
-    if(!campo || !resultado) return;
-
-    const termo =
-        campo.value.toLowerCase().trim();
-
     if(!termo){
 
-        resultado.innerHTML="";
+        resultado.innerHTML = "";
 
         return;
     }
 
     const encontrados =
-        contatos.filter(c =>
+        contatos
+        .map((c,i)=>({c,i}))
+        .filter(x => {
 
-            c.nome.toLowerCase().includes(termo) ||
-            c.numero.toLowerCase().includes(termo) ||
-            (c.grupo || "").toLowerCase().includes(termo)
+            const texto = (
 
-        );
+                x.c.nome + " " +
+                x.c.numero + " " +
+                x.c.grupo + " " +
+                x.c.observacao
 
-    if(encontrados.length === 0){
+            ).toLowerCase();
+
+            return texto.includes(termo);
+
+        });
+
+    if(!encontrados.length){
 
         resultado.innerHTML = `
-
-            <div class="form-card vazio">
-
-                <div class="vazio-icone">🔎</div>
-
-                <h3>Nenhum resultado</h3>
-
-                <p style="margin-top:7px;">
-                    Não encontramos esse contato.
-                </p>
-
+            <div class="card">
+                <h3>🔎 Nenhum resultado</h3>
+                <p>Nenhum contato encontrado.</p>
             </div>
-
         `;
 
         return;
     }
 
     resultado.innerHTML =
-        encontrados.map(c => {
+        encontrados
+        .map(x=>criarCardContato(x.c,x.i))
+        .join("");
 
-            const index =
-                contatos.indexOf(c);
-
-            return criarContatoHTML(c,index);
-
-        }).join("");
 }
-
 
 /* =========================
    FILTRO STATUS
@@ -2000,195 +1601,186 @@ function buscarContatos(){
 
 function filtrarStatus(status){
 
-    const filtrados =
-        contatos.filter(c => c.status === status);
+    const resultado =
+        document.getElementById("listaResultado");
 
-    mostrarTela("resultado");
+    const titulo =
+        document.getElementById("tituloResultado");
 
-    const tela =
-        document.getElementById("resultado");
+    let texto = "";
 
-    if(!tela) return;
-
-    tela.innerHTML = `
-
-        <div class="tela-topo">
-
-            <button
-                class="voltar"
-                onclick="mostrarTela('menu')">
-
-                ‹
-
-            </button>
-
-            <h2>${statusTexto(status)}</h2>
-
-        </div>
-
-        <div id="listaFiltrada"></div>
-
-    `;
-
-    const lista =
-        document.getElementById("listaFiltrada");
-
-    if(filtrados.length === 0){
-
-        lista.innerHTML = `
-
-            <div class="form-card vazio">
-
-                <div class="vazio-icone">📭</div>
-
-                <h3>Nenhum contato</h3>
-
-                <p style="margin-top:7px;">
-                    Não existem contatos nesse status.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
+    if(status === "ON"){
+        texto = "🟢 ZAP ON";
     }
 
-    lista.innerHTML =
-        filtrados.map(c => {
+    if(status === "ANALISE"){
+        texto = "⚠️ ZAP EM ANÁLISE";
+    }
 
-            const index =
-                contatos.indexOf(c);
+    if(status === "CAIU"){
+        texto = "🔴 ZAP CAIU";
+    }
 
-            return criarContatoHTML(c,index);
+    titulo.innerText = texto;
 
-        }).join("");
+    const encontrados =
+        contatos
+        .map((c,i)=>({c,i}))
+        .filter(x=>x.c.status === status);
+
+    if(!encontrados.length){
+
+        resultado.innerHTML = `
+            <div class="card">
+                <h3>Nenhum contato</h3>
+                <p>Nenhum contato está nesta categoria.</p>
+            </div>
+        `;
+
+    }else{
+
+        resultado.innerHTML =
+            encontrados
+            .map(x=>criarCardContato(x.c,x.i))
+            .join("");
+
+    }
+
+    trocarTela("resultado");
+
 }
 
+/* =========================
+   ESTATISTICAS
+========================= */
+
+function atualizarEstatisticas(){
+
+    const total = contatos.length;
+
+    const on =
+        contatos.filter(c=>c.status==="ON").length;
+
+    const analise =
+        contatos.filter(c=>c.status==="ANALISE").length;
+
+    const caiu =
+        contatos.filter(c=>c.status==="CAIU").length;
+
+    document.getElementById("estatTotal").innerText = total;
+    document.getElementById("estatOn").innerText = on;
+    document.getElementById("estatAnalise").innerText = analise;
+    document.getElementById("estatCaiu").innerText = caiu;
+
+}
 
 /* =========================
    GRUPOS
 ========================= */
 
-function atualizarGrupos(){
+function renderizarGrupos(){
 
     const lista =
         document.getElementById("listaGrupos");
 
-    if(!lista) return;
+    const grupos = [...new Set(
 
-    const grupos = {};
+        contatos
+        .map(c=>c.grupo)
+        .filter(Boolean)
 
-    contatos.forEach(c => {
+    )];
 
-        const nome =
-            c.grupo || "Sem grupo";
-
-        if(!grupos[nome])
-            grupos[nome] = 0;
-
-        grupos[nome]++;
-
-    });
-
-    const nomes =
-        Object.keys(grupos);
-
-    if(nomes.length === 0){
+    if(!grupos.length){
 
         lista.innerHTML = `
-
-            <div class="form-card vazio">
-
-                <div class="vazio-icone">👥</div>
-
-                <h3>Nenhum grupo</h3>
-
-                <p style="margin-top:7px;">
-                    Adicione um grupo aos contatos.
-                </p>
-
+            <div class="item-simples">
+                📭 Nenhum grupo cadastrado.
             </div>
-
         `;
 
         return;
     }
 
     lista.innerHTML =
-        nomes.map(nome => `
+        grupos
+        .map(g=>`
 
-            <div class="config-card">
-
-                <div class="config-icone">
-                    👥
-                </div>
-
-                <div>
-
-                    <h3>
-                        ${escapar(nome)}
-                    </h3>
-
-                    <p>
-                        ${grupos[nome]}
-                        contato(s)
-                    </p>
-
-                </div>
-
+            <div class="item-simples">
+                🏷️ <strong>
+                    ${escapar(g)}
+                </strong>
             </div>
 
-        `).join("");
-}
+        `)
+        .join("");
 
+}
 
 /* =========================
-   ESTATÍSTICAS
+   ETIQUETAS
 ========================= */
 
-function atualizarEstatisticas(){
+function renderizarEtiquetas(){
 
-    const total =
-        contatos.length;
+    const lista =
+        document.getElementById("listaEtiquetas");
 
-    const on =
-        contatos.filter(c => c.status==="ON").length;
+    const grupos = [...new Set(
 
-    const analise =
-        contatos.filter(c => c.status==="ANALISE").length;
+        contatos
+        .map(c=>c.grupo)
+        .filter(Boolean)
 
-    const caiu =
-        contatos.filter(c => c.status==="CAIU").length;
+    )];
 
+    if(!grupos.length){
 
-    const elementos = {
+        lista.innerHTML = `
+            <div class="item-simples">
+                Nenhuma etiqueta disponível.
+            </div>
+        `;
 
-        statTotal:total,
-        statOn:on,
-        statAnalise:analise,
-        statCaiu:caiu,
+        return;
+    }
 
-        totalContatos:total,
-        totalOn:on,
-        totalAnalise:analise,
-        totalCaiu:caiu
+    lista.innerHTML =
+        grupos
+        .map(g=>`
 
-    };
+            <div class="item-simples">
+                🏷️ ${escapar(g)}
+            </div>
 
+        `)
+        .join("");
 
-    Object.keys(elementos).forEach(id => {
-
-        const elemento =
-            document.getElementById(id);
-
-        if(elemento)
-            elemento.textContent =
-                elementos[id];
-
-    });
 }
 
+/* =========================
+   RESUMO
+========================= */
+
+function atualizarResumo(){
+
+    const total = contatos.length;
+
+    const on =
+        contatos.filter(c=>c.status==="ON").length;
+
+    const analise =
+        contatos.filter(c=>c.status==="ANALISE").length;
+
+    const caiu =
+        contatos.filter(c=>c.status==="CAIU").length;
+
+    document.getElementById("totalContatos").innerText = total;
+    document.getElementById("totalOn").innerText = on;
+    document.getElementById("totalAnalise").innerText = analise;
+    document.getElementById("totalCaiu").innerText = caiu;
+
+}
 
 /* =========================
    BACKUP
@@ -2199,70 +1791,107 @@ function exportarBackup(){
     const dados =
         JSON.stringify(contatos,null,2);
 
-    const arquivo =
-        new Blob([dados],{
-            type:"application/json"
-        });
+    const blob =
+        new Blob(
+            [dados],
+            {type:"application/json"}
+        );
 
     const url =
-        URL.createObjectURL(arquivo);
+        URL.createObjectURL(blob);
 
-    const link =
+    const a =
         document.createElement("a");
 
-    link.href=url;
+    a.href = url;
+    a.download = "backup-bot-bm3.json";
 
-    link.download =
-        "backup-bot-bm3.json";
-
-    link.click();
+    a.click();
 
     URL.revokeObjectURL(url);
 
-    mostrarToast("💾 Backup exportado.");
 }
 
+/* =========================
+   IMPORTAR
+========================= */
+
+function importarBackup(event){
+
+    const arquivo =
+        event.target.files[0];
+
+    if(!arquivo) return;
+
+    const leitor =
+        new FileReader();
+
+    leitor.onload = function(e){
+
+        try{
+
+            const dados =
+                JSON.parse(e.target.result);
+
+            if(!Array.isArray(dados)){
+
+                alert("Arquivo inválido.");
+
+                return;
+            }
+
+            contatos = dados;
+
+            salvar();
+
+            atualizarTudo();
+
+            alert("Backup importado com sucesso!");
+
+        }catch{
+
+            alert("Não foi possível importar o backup.");
+
+        }
+
+    };
+
+    leitor.readAsText(arquivo);
+
+}
 
 /* =========================
    TEMA
 ========================= */
 
-function alterarTema(tema){
+function alternarTema(){
 
-    if(tema === "escuro"){
-
-        document.body.classList.add("escuro");
-
-    }else{
-
-        document.body.classList.remove("escuro");
-
-    }
+    document.body.classList.toggle("dark");
 
     localStorage.setItem(
         CHAVE_TEMA,
-        tema
+        document.body.classList.contains("dark")
+        ? "dark"
+        : "light"
     );
+
 }
 
+function aplicarTema(){
 
-function carregarTema(){
+    if(
+        localStorage.getItem(CHAVE_TEMA)
+        === "dark"
+    ){
 
-    const tema =
-        localStorage.getItem(CHAVE_TEMA) || "claro";
+        document.body.classList.add("dark");
 
-    alterarTema(tema);
+    }
 
-    const select =
-        document.getElementById("temaSelect");
-
-    if(select)
-        select.value = tema;
 }
-
 
 /* =========================
-   SEGURANÇA HTML
+   ESCAPAR TEXTO
 ========================= */
 
 function escapar(texto){
@@ -2273,38 +1902,35 @@ function escapar(texto){
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
         .replace(/'/g,"&#039;");
+
 }
-
-
-function escaparJS(texto){
-
-    return String(texto || "")
-        .replace(/\\/g,"\\\\")
-        .replace(/'/g,"\\'")
-        .replace(/"/g,"&quot;");
-}
-
 
 /* =========================
-   ATUALIZAÇÃO GERAL
+   ATUALIZAR TUDO
 ========================= */
 
 function atualizarTudo(){
 
-    atualizarLista();
-    atualizarFavoritos();
-    atualizarGrupos();
+    atualizarResumo();
     atualizarEstatisticas();
 
+    if(telaAtual === "contatos"){
+        renderizarContatos();
+    }
+
+    if(telaAtual === "favoritos"){
+        renderizarFavoritos();
+    }
+
+    if(telaAtual === "grupos"){
+        renderizarGrupos();
+    }
+
+    if(telaAtual === "etiquetas"){
+        renderizarEtiquetas();
+    }
+
 }
-
-
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-
-carregarTema();
-atualizarTudo();
 
 </script>
 
