@@ -157,12 +157,9 @@ select {
   background: #555;
 }
 
-.contato {
-  padding: 15px;
-  margin-top: 12px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-}
+
+/* RESUMO */
+
 .resumo {
   margin-top: 20px;
   padding: 15px;
@@ -199,6 +196,17 @@ select {
   font-size: 13px;
   font-weight: bold;
 }
+
+
+/* CONTATO */
+
+.contato {
+  padding: 15px;
+  margin-top: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
 .status-box {
   padding: 15px;
   margin-top: 15px;
@@ -262,19 +270,24 @@ select {
 
 <!-- CARREGAMENTO -->
 <div id="carregando">
+
   <div class="carregando-box">
+
     <h1>🍀 BOT DO BM3 🍀</h1>
 
     <div class="spinner"></div>
 
     <strong>⏳ Carregando...</strong>
+
   </div>
+
 </div>
 
 
 <div class="container">
 
   <!-- TOPO -->
+
   <div class="topo">
 
     <div class="bandeira"></div>
@@ -287,6 +300,7 @@ select {
 
 
   <!-- INÍCIO -->
+
   <div class="inicio" id="inicio">
 
     <h2>🏠 Início</h2>
@@ -295,37 +309,61 @@ select {
 
     <button id="botaoMenu">
       ☰ Abrir Menu
-      <div class="resumo">
-  <h3>📊 Resumo</h3>
-
-  <div class="resumo-grid">
-    <div class="resumo-card">
-      <strong id="totalContatos">0</strong>
-      <span>👥 Contatos</span>
-    </div>
-
-    <div class="resumo-card">
-      <strong id="totalOn">0</strong>
-      <span>🟢 ZAP ON</span>
-    </div>
-
-    <div class="resumo-card">
-      <strong id="totalAnalise">0</strong>
-      <span>🟡 Em análise</span>
-    </div>
-
-    <div class="resumo-card">
-      <strong id="totalCaiu">0</strong>
-      <span>🔴 ZAP CAIU</span>
-    </div>
-  </div>
-</div>
     </button>
+
+
+    <!-- RESUMO -->
+
+    <div class="resumo">
+
+      <h3>📊 Resumo</h3>
+
+      <div class="resumo-grid">
+
+        <div class="resumo-card">
+
+          <strong id="totalContatos">0</strong>
+
+          <span>👥 Contatos</span>
+
+        </div>
+
+
+        <div class="resumo-card">
+
+          <strong id="totalOn">0</strong>
+
+          <span>🟢 ZAP ON</span>
+
+        </div>
+
+
+        <div class="resumo-card">
+
+          <strong id="totalAnalise">0</strong>
+
+          <span>🟡 Em análise</span>
+
+        </div>
+
+
+        <div class="resumo-card">
+
+          <strong id="totalCaiu">0</strong>
+
+          <span>🔴 ZAP CAIU</span>
+
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
 
 
   <!-- MENU -->
+
   <div class="menu" id="menu">
 
     <button data-tela="adicionar">
@@ -356,6 +394,7 @@ select {
 
 
   <!-- ADICIONAR -->
+
   <div class="tela" id="adicionar">
 
     <h2>➕ Adicionar contato</h2>
@@ -398,7 +437,8 @@ select {
   </div>
 
 
-  <!-- PESQUISA -->
+  <!-- PESQUISAR -->
+
   <div class="tela" id="pesquisar">
 
     <h2>🔎 Pesquisar contatos</h2>
@@ -421,6 +461,7 @@ select {
 
 
   <!-- CONTATOS -->
+
   <div class="tela" id="contatos">
 
     <h2>📋 Meus contatos</h2>
@@ -438,6 +479,7 @@ select {
 
 
   <!-- GRUPOS -->
+
   <div class="tela" id="grupos">
 
     <h2>🏷️ Grupos / Etiquetas</h2>
@@ -455,6 +497,7 @@ select {
 
 
   <!-- CONFIGURAÇÕES -->
+
   <div class="tela" id="configuracoes">
 
     <h2>⚙️ Configurações</h2>
@@ -492,6 +535,7 @@ let contatos = [];
 
 
 /* CARREGAR CONTATOS */
+
 try {
 
   contatos = JSON.parse(
@@ -505,52 +549,53 @@ try {
 }
 
 
-/* CARREGAMENTO DE 2 SEGUNDOS */
+/* RESUMO */
+
+function atualizarResumo() {
+
+  document.getElementById("totalContatos").textContent =
+    contatos.length;
+
+
+  document.getElementById("totalOn").textContent =
+    contatos.filter(function(contato) {
+
+      return contato.status === "✅ ZAP ON";
+
+    }).length;
+
+
+  document.getElementById("totalAnalise").textContent =
+    contatos.filter(function(contato) {
+
+      return contato.status === "⚠️ ZAP EM ANÁLISE";
+
+    }).length;
+
+
+  document.getElementById("totalCaiu").textContent =
+    contatos.filter(function(contato) {
+
+      return contato.status === "❌ ZAP CAIU";
+
+    }).length;
+
+}
+
+
+/* CARREGAMENTO INICIAL */
 
 setTimeout(function() {
 
   document.getElementById("carregando").style.display = "none";
 
+  atualizarResumo();
+
 }, 2000);
 
 
 /* SALVAR */
-.resumo {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 15px;
-  background: #f5f5f5;
-}
 
-.resumo h3 {
-  margin-top: 0;
-  text-align: center;
-}
-
-.resumo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.resumo-card {
-  padding: 15px 10px;
-  text-align: center;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.10);
-}
-
-.resumo-card strong {
-  display: block;
-  font-size: 25px;
-  margin-bottom: 5px;
-}
-
-.resumo-card span {
-  font-size: 13px;
-  font-weight: bold;
-}
 function salvar() {
 
   localStorage.setItem(
@@ -558,10 +603,12 @@ function salvar() {
     JSON.stringify(contatos)
   );
 
+  atualizarResumo();
+
 }
 
 
-/* ESCONDER TELAS */
+/* ESCONDER TUDO */
 
 function esconderTudo() {
 
@@ -578,7 +625,20 @@ function esconderTudo() {
 }
 
 
-/* MOSTRAR MENU */
+/* INÍCIO */
+
+function mostrarInicio() {
+
+  esconderTudo();
+
+  document.getElementById("inicio").style.display = "block";
+
+  atualizarResumo();
+
+}
+
+
+/* MENU */
 
 function mostrarMenu() {
 
@@ -589,69 +649,70 @@ function mostrarMenu() {
 }
 
 
-/* MOSTRAR INÍCIO */
-
-function mostrarInicio() {
-
-  esconderTudo();
-
-  document.getElementById("inicio").style.display = "block";
-
-}
-
-
 /* BOTÃO MENU */
 
 document
   .getElementById("botaoMenu")
-  .addEventListener("click", mostrarMenu);
+  .addEventListener(
+    "click",
+    mostrarMenu
+  );
 
 
 /* BOTÃO INÍCIO */
 
 document
   .getElementById("botaoInicio")
-  .addEventListener("click", mostrarInicio);
+  .addEventListener(
+    "click",
+    mostrarInicio
+  );
 
 
-/* TELAS DO MENU */
+/* ABRIR TELAS */
 
 document
   .querySelectorAll("[data-tela]")
   .forEach(function(botao) {
 
-    botao.addEventListener("click", function() {
+    botao.addEventListener(
+      "click",
+      function() {
 
-      const tela = botao.dataset.tela;
-
-      esconderTudo();
-
-      document
-        .getElementById(tela)
-        .style.display = "block";
+        const tela =
+          botao.dataset.tela;
 
 
-      if (tela === "contatos") {
+        esconderTudo();
 
-        mostrarContatos();
+
+        document
+          .getElementById(tela)
+          .style.display = "block";
+
+
+        if (tela === "contatos") {
+
+          mostrarContatos();
+
+        }
+
+
+        if (tela === "pesquisar") {
+
+          mostrarContatos();
+
+        }
+
+
+        if (tela === "grupos") {
+
+          mostrarGrupos();
+
+        }
 
       }
-
-
-      if (tela === "pesquisar") {
-
-        mostrarContatos();
-
-      }
-
-
-      if (tela === "grupos") {
-
-        mostrarGrupos();
-
-      }
-
-    });
+    );
 
   });
 
@@ -680,7 +741,7 @@ document
   );
 
 
-/* ADICIONAR CONTATO */
+/* ADICIONAR */
 
 function adicionarContato() {
 
@@ -690,17 +751,20 @@ function adicionarContato() {
       .value
       .trim();
 
+
   const numero =
     document
       .getElementById("numero")
       .value
       .trim();
 
+
   const grupo =
     document
       .getElementById("grupo")
       .value
       .trim();
+
 
   const observacao =
     document
@@ -770,7 +834,9 @@ function mostrarContatos() {
 
   const pesquisa =
     (
-      document.getElementById("pesquisa")?.value || ""
+      document
+        .getElementById("pesquisa")
+        ?.value || ""
     )
     .toLowerCase();
 
@@ -846,7 +912,9 @@ function mostrarContatos() {
             class="status-label"
             for="status-${index}"
           >
+
             🔽 Alterar status
+
           </label>
 
 
@@ -948,12 +1016,12 @@ function mostrarContatos() {
 }
 
 
-/* BOTÕES DOS CONTATOS */
+/* ATIVAR BOTÕES */
 
 function ativarBotoesContatos() {
 
 
-  /* ALTERAR STATUS */
+  /* STATUS */
 
   document
     .querySelectorAll("[data-status-index]")
@@ -1179,6 +1247,11 @@ document
 
     }
   );
+
+
+/* ATUALIZAR RESUMO AO ABRIR */
+
+atualizarResumo();
 
 </script>
 
