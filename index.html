@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#008c45">
 
 <title>🍀 BOT DO BM3 🍀</title>
 
@@ -18,6 +19,7 @@
     --borda:#dfe6e2;
     --card:#fff;
     --sombra:0 12px 30px rgba(0,0,0,.09);
+    --amarelo:#f2b705;
 }
 
 *{
@@ -34,64 +36,70 @@ body{
 }
 
 body.dark{
-    --fundo:#101512;
-    --texto:#f1f5f2;
-    --cinza:#aebbb4;
-    --borda:#29332e;
-    --card:#18201c;
+    --fundo:#101513;
+    --texto:#f2f6f3;
+    --card:#18201d;
+    --borda:#2a3530;
+    --cinza:#aeb9b3;
+    --sombra:0 12px 30px rgba(0,0,0,.35);
 }
 
-button,input,select,textarea{
+button,
+input,
+textarea,
+select{
     font:inherit;
 }
 
 button{
+    border:0;
     cursor:pointer;
 }
 
 #loading{
     position:fixed;
     inset:0;
-    z-index:9999;
-    background:linear-gradient(145deg,#008c45,#005b2d);
+    background:linear-gradient(135deg,#008c45,#00a651);
+    color:white;
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
-    color:#fff;
+    z-index:9999;
 }
 
 .loading-logo{
-    width:120px;
-    height:120px;
-    border-radius:30px;
+    width:110px;
+    height:110px;
+    border-radius:28px;
     object-fit:cover;
-    box-shadow:0 15px 45px rgba(0,0,0,.3);
-    margin-bottom:25px;
-}
-
-.loading-title{
-    font-size:24px;
-    font-weight:800;
-}
-
-.loading-sub{
-    margin-top:8px;
-    opacity:.85;
+    background:white;
+    padding:8px;
+    margin-bottom:22px;
+    animation:pulse 1.5s infinite;
 }
 
 .loader{
-    width:45px;
-    height:45px;
-    border:4px solid rgba(255,255,255,.25);
-    border-top-color:#fff;
+    width:48px;
+    height:48px;
+    border:5px solid rgba(255,255,255,.3);
+    border-top-color:white;
     border-radius:50%;
-    animation:girar .8s linear infinite;
-    margin-top:25px;
+    animation:spin 1s linear infinite;
 }
 
-@keyframes girar{
+.loading-text{
+    margin-top:18px;
+    font-size:15px;
+    font-weight:bold;
+}
+
+@keyframes spin{
     to{transform:rotate(360deg)}
+}
+
+@keyframes pulse{
+    50%{transform:scale(1.05)}
 }
 
 header{
@@ -100,33 +108,37 @@ header{
     z-index:100;
     background:var(--card);
     border-bottom:1px solid var(--borda);
-    padding:12px 15px;
+    padding:15px 16px;
     display:flex;
     align-items:center;
     justify-content:space-between;
 }
 
-.logo-area{
+.brand{
     display:flex;
     align-items:center;
     gap:10px;
 }
 
-.logo{
-    width:43px;
-    height:43px;
-    border-radius:12px;
-    object-fit:cover;
+.brand-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--verde),var(--verde2));
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
 }
 
-.logo-text{
-    font-weight:900;
+.brand h1{
     font-size:17px;
 }
 
-.logo-sub{
+.brand small{
+    display:block;
     color:var(--cinza);
-    font-size:11px;
     margin-top:2px;
 }
 
@@ -135,74 +147,41 @@ header{
     gap:7px;
 }
 
-.header-btn{
+.icon-btn{
     width:40px;
     height:40px;
-    border:1px solid var(--borda);
     border-radius:12px;
-    background:var(--card);
+    background:var(--fundo);
     color:var(--texto);
-    font-size:18px;
 }
 
-.container{
+main{
     max-width:850px;
     margin:auto;
-    padding:20px 15px 100px;
+    padding:18px;
+    padding-bottom:35px;
 }
 
-.tela{
+.screen{
     display:none;
 }
 
-.tela.ativa{
+.screen.active{
     display:block;
-    animation:entrada .2s ease;
 }
 
-@keyframes entrada{
-    from{opacity:0;transform:translateY(7px)}
-    to{opacity:1;transform:translateY(0)}
+.page-title{
+    margin-bottom:16px;
 }
 
-.titulo{
-    font-size:27px;
-    font-weight:900;
-    margin-bottom:7px;
+.page-title h2{
+    font-size:23px;
+    margin-bottom:5px;
 }
 
-.subtitulo{
+.page-title p{
     color:var(--cinza);
-    line-height:1.5;
-    margin-bottom:20px;
-}
-
-.card{
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:18px;
-    padding:18px;
-    box-shadow:var(--sombra);
-    margin-bottom:14px;
-}
-
-.hero{
-    background:linear-gradient(135deg,var(--verde),#005f31);
-    color:#fff;
-    border-radius:22px;
-    padding:25px;
-    margin-bottom:18px;
-    box-shadow:var(--sombra);
-}
-
-.hero h2{
-    font-size:25px;
-    margin-bottom:8px;
-}
-
-.hero p{
-    opacity:.9;
-    line-height:1.5;
+    font-size:14px;
 }
 
 .grid{
@@ -211,440 +190,317 @@ header{
     gap:12px;
 }
 
-.grid3{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
+.grid.one{
+    grid-template-columns:1fr;
 }
 
-.menu-card{
+.menu-btn{
+    min-height:82px;
+    padding:15px;
+    border-radius:18px;
     background:var(--card);
     border:1px solid var(--borda);
-    border-radius:17px;
-    padding:17px;
-    text-align:left;
+    box-shadow:var(--sombra);
     color:var(--texto);
-    box-shadow:0 6px 18px rgba(0,0,0,.05);
-    transition:.15s;
+    text-align:left;
+    transition:.18s;
 }
 
-.menu-card:active{
-    transform:scale(.98);
+.menu-btn:active{
+    transform:scale(.97);
 }
 
-.menu-icon{
+.menu-btn .emoji{
+    display:block;
     font-size:27px;
-    margin-bottom:12px;
+    margin-bottom:8px;
 }
 
-.menu-title{
-    font-weight:800;
+.menu-btn strong{
+    display:block;
+    font-size:14px;
 }
 
-.menu-desc{
-    color:var(--cinza);
-    font-size:12px;
-    margin-top:5px;
-    line-height:1.4;
-}
-
-.opcoes-whatsapp{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.opcao-fileira{
-    width:100%;
-    display:flex;
-    align-items:center;
-    text-align:left;
-    gap:13px;
-    background:var(--card);
-    color:var(--texto);
-    border:1px solid var(--borda);
-    border-radius:17px;
-    padding:14px;
-    box-shadow:0 6px 18px rgba(0,0,0,.05);
-}
-
-.opcao-icone{
-    width:46px;
-    height:46px;
-    border-radius:14px;
-    background:rgba(0,140,69,.11);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    flex-shrink:0;
-}
-
-.opcao-conteudo{
-    flex:1;
-}
-
-.opcao-titulo{
-    font-weight:800;
-    font-size:15px;
-}
-
-.opcao-desc{
+.menu-btn span{
+    display:block;
     color:var(--cinza);
     font-size:12px;
     margin-top:4px;
-    line-height:1.4;
 }
 
-.opcao-seta{
-    color:var(--cinza);
-    font-size:25px;
+.big-btn{
+    min-height:95px;
 }
 
-.voltar{
-    border:0;
-    background:transparent;
-    color:var(--verde);
-    font-weight:800;
-    margin-bottom:14px;
-    padding:4px 0;
-}
-
-input,select,textarea{
+.back{
+    margin-top:18px;
     width:100%;
     background:var(--card);
-    color:var(--texto);
     border:1px solid var(--borda);
-    border-radius:12px;
+    color:var(--texto);
+    border-radius:14px;
+    padding:13px;
+    font-weight:bold;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:14px;
+    box-shadow:var(--sombra);
+}
+
+.card h3{
+    margin-bottom:8px;
+}
+
+.muted{
+    color:var(--cinza);
+    font-size:13px;
+}
+
+textarea,
+input,
+select{
+    width:100%;
+    border:1px solid var(--borda);
+    background:var(--fundo);
+    color:var(--texto);
+    border-radius:13px;
     padding:13px;
     outline:none;
 }
 
 textarea{
-    min-height:120px;
+    min-height:125px;
     resize:vertical;
 }
 
-label{
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--verde);
+}
+
+.field{
+    margin-bottom:12px;
+}
+
+.field label{
     display:block;
-    font-weight:700;
     font-size:13px;
-    margin:13px 0 6px;
+    font-weight:bold;
+    margin-bottom:6px;
 }
 
-.btn{
-    border:0;
-    border-radius:12px;
+.primary{
+    background:linear-gradient(135deg,var(--verde),var(--verde2));
+    color:white;
     padding:13px 16px;
-    font-weight:800;
+    border-radius:13px;
+    font-weight:bold;
+    width:100%;
 }
 
-.btn-verde{
-    background:var(--verde);
-    color:#fff;
-}
-
-.btn-vermelho{
-    background:var(--vermelho);
-    color:#fff;
-}
-
-.btn-sec{
-    background:var(--card);
+.secondary{
+    background:var(--fundo);
     color:var(--texto);
     border:1px solid var(--borda);
+    padding:12px 16px;
+    border-radius:13px;
+    font-weight:bold;
 }
 
-.btn-full{
-    width:100%;
-    margin-top:12px;
-}
-
-.btn-row{
+.row{
     display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:12px;
+    gap:9px;
 }
 
-.btn-row .btn{
+.row > *{
     flex:1;
-    min-width:130px;
 }
 
-.badge{
+.status{
     display:inline-flex;
-    padding:5px 9px;
-    border-radius:30px;
-    background:rgba(0,140,69,.1);
-    color:var(--verde);
-    font-size:11px;
-    font-weight:800;
+    align-items:center;
+    gap:6px;
+    border-radius:20px;
+    padding:6px 10px;
+    font-size:12px;
+    font-weight:bold;
 }
 
-.stats{
+.status.analise{
+    background:#fff3c4;
+    color:#9a7000;
+}
+
+.status.on{
+    background:#d9f7e5;
+    color:#08753a;
+}
+
+.status.off{
+    background:#ffdfe1;
+    color:#a91620;
+}
+
+body.dark .status.analise{
+    background:#4b3c08;
+    color:#ffd94e;
+}
+
+body.dark .status.on{
+    background:#123b25;
+    color:#55df8d;
+}
+
+body.dark .status.off{
+    background:#45171b;
+    color:#ff858c;
+}
+
+.contact{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:13px 0;
+    border-bottom:1px solid var(--borda);
+}
+
+.contact:last-child{
+    border-bottom:0;
+}
+
+.contact-info{
+    min-width:0;
+}
+
+.contact-info strong{
+    display:block;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.contact-info small{
+    color:var(--cinza);
+}
+
+.contact-actions{
+    display:flex;
+    gap:6px;
+}
+
+.small-btn{
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    background:var(--fundo);
+    color:var(--texto);
+}
+
+.stat-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:10px;
+    margin-bottom:14px;
 }
 
 .stat{
+    padding:14px 10px;
     background:var(--card);
     border:1px solid var(--borda);
     border-radius:15px;
-    padding:15px;
     text-align:center;
 }
 
 .stat strong{
     display:block;
-    font-size:24px;
+    font-size:22px;
 }
 
-.stat span{
+.stat small{
     color:var(--cinza);
-    font-size:11px;
 }
 
-.contato{
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:16px;
-    padding:15px;
-    margin-bottom:10px;
+.preview{
+    white-space:pre-wrap;
+    line-height:1.55;
+    background:var(--fundo);
+    border-radius:13px;
+    padding:14px;
 }
 
-.contato-top{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
+.option-list{
+    display:grid;
+    gap:9px;
 }
 
-.contato-nome{
-    font-weight:900;
-}
-
-.contato-numero{
-    color:var(--verde);
-    margin-top:4px;
-    font-size:13px;
-}
-
-.contato-info{
-    color:var(--cinza);
-    font-size:12px;
-    margin-top:8px;
-}
-
-.contato-acoes{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-    margin-top:12px;
-}
-
-.contato-acoes button{
-    border:1px solid var(--borda);
-    background:var(--card);
+.option{
+    width:100%;
+    padding:13px;
+    text-align:left;
+    border-radius:13px;
+    background:var(--fundo);
     color:var(--texto);
-    border-radius:9px;
-    padding:8px 10px;
-    font-size:12px;
-    font-weight:700;
+    border:1px solid var(--borda);
+}
+
+.option:hover{
+    border-color:var(--verde);
 }
 
 .empty{
     text-align:center;
     color:var(--cinza);
-    padding:35px 15px;
+    padding:25px 10px;
 }
 
-/* ADVOGADO */
-
-.adv-header{
-    background:linear-gradient(135deg,#123d28,#008c45);
-    color:#fff;
-    border-radius:22px;
-    padding:22px;
-    margin-bottom:15px;
-    box-shadow:var(--sombra);
-}
-
-.adv-header-top{
-    display:flex;
-    align-items:center;
-    gap:13px;
-}
-
-.adv-icon{
-    width:55px;
-    height:55px;
-    border-radius:17px;
-    background:rgba(255,255,255,.16);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:29px;
-}
-
-.adv-header h2{
-    font-size:23px;
-}
-
-.adv-header p{
-    font-size:12px;
-    opacity:.85;
-    margin-top:4px;
-}
-
-.adv-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-}
-
-.adv-option{
-    border:1px solid var(--borda);
-    background:var(--card);
-    color:var(--texto);
-    border-radius:17px;
-    padding:17px;
-    text-align:left;
-    box-shadow:0 5px 15px rgba(0,0,0,.05);
-}
-
-.adv-option:active{
-    transform:scale(.98);
-}
-
-.adv-option-icon{
-    font-size:25px;
-    margin-bottom:11px;
-}
-
-.adv-option-title{
-    font-weight:900;
-    font-size:14px;
-}
-
-.adv-option-desc{
-    color:var(--cinza);
-    font-size:11px;
-    line-height:1.4;
-    margin-top:5px;
-}
-
-.adv-list-item{
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:16px;
-    padding:15px;
-    margin-bottom:10px;
-}
-
-.adv-list-title{
-    font-weight:900;
-}
-
-.adv-list-text{
-    color:var(--cinza);
-    font-size:13px;
-    line-height:1.5;
-    margin-top:8px;
-    white-space:pre-wrap;
-}
-
-.adv-list-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
-    margin-top:12px;
-}
-
-.adv-list-actions button{
-    border:1px solid var(--borda);
-    background:var(--card);
-    color:var(--texto);
-    border-radius:9px;
-    padding:8px 10px;
-    font-size:11px;
-    font-weight:800;
-}
-
-.faq{
-    border:1px solid var(--borda);
-    border-radius:15px;
-    padding:15px;
-    margin-bottom:10px;
-    background:var(--card);
-}
-
-.faq-q{
-    font-weight:900;
-}
-
-.faq-a{
-    color:var(--cinza);
-    font-size:13px;
-    line-height:1.5;
-    margin-top:8px;
-    white-space:pre-wrap;
-}
-
-hr{
-    border:0;
-    border-top:1px solid var(--borda);
-    margin:18px 0;
-}
-
-.bottom-nav{
+.toast{
     position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    background:var(--card);
-    border-top:1px solid var(--borda);
-    display:flex;
-    justify-content:center;
-    padding:9px 12px;
-    z-index:90;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%) translateY(100px);
+    background:#17221d;
+    color:white;
+    padding:12px 17px;
+    border-radius:13px;
+    z-index:5000;
+    transition:.25s;
+    opacity:0;
+    max-width:90%;
+    text-align:center;
 }
 
-.bottom-inner{
-    width:100%;
-    max-width:850px;
-    display:flex;
-    gap:8px;
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
 }
 
-.nav-btn{
-    flex:1;
-    border:1px solid var(--borda);
-    background:var(--card);
-    color:var(--texto);
-    border-radius:12px;
-    padding:9px 4px;
-    font-size:11px;
-    font-weight:700;
-}
-
-.nav-btn.active{
-    background:var(--verde);
-    color:#fff;
-    border-color:var(--verde);
-}
-
-@media(max-width:600px){
-    .grid,.adv-grid{
-        grid-template-columns:1fr 1fr;
+@media(max-width:560px){
+    main{
+        padding:14px;
     }
 
-    .grid3{
-        grid-template-columns:1fr 1fr 1fr;
+    .grid{
+        gap:9px;
     }
 
-    .stats{
-        grid-template-columns:repeat(3,1fr);
+    .menu-btn{
+        min-height:78px;
+        padding:13px;
+    }
+
+    .menu-btn .emoji{
+        font-size:24px;
+    }
+
+    .stat-grid{
+        grid-template-columns:1fr;
     }
 }
 </style>
@@ -653,2979 +509,1872 @@ hr{
 <body>
 
 <div id="loading">
-    <img
-        class="loading-logo"
-        src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
-        onerror="this.style.display='none'"
-    >
-    <div class="loading-title">🍀 BOT DO BM3 🍀</div>
-    <div class="loading-sub">Carregando seu painel...</div>
+    <div class="loading-logo">🍀</div>
     <div class="loader"></div>
+    <div class="loading-text">CARREGANDO BOT DO BM3...</div>
 </div>
 
 <header>
-    <div class="logo-area">
-        <img
-            class="logo"
-            src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
-            onerror="this.style.display='none'"
-        >
+    <div class="brand">
+        <div class="brand-icon">🍀</div>
         <div>
-            <div class="logo-text">🍀 BOT DO BM3 🍀</div>
-            <div class="logo-sub">Painel de organização</div>
+            <h1>BOT DO BM3</h1>
+            <small>Organização e atendimento</small>
         </div>
     </div>
 
     <div class="header-actions">
-        <button class="header-btn" onclick="alternarTema()">🌙</button>
-        <button class="header-btn" onclick="navegar('configuracao')">⚙️</button>
+        <button class="icon-btn" onclick="alternarTema()">🌙</button>
     </div>
 </header>
 
-<div class="container">
+<main>
 
-<!-- INÍCIO -->
+<!-- ================= HOME ================= -->
 
-<section id="inicio" class="tela ativa">
+<section id="home" class="screen active">
 
-    <div class="hero">
-        <h2>🍀 Bem-vindo ao BOT DO BM3</h2>
-        <p>
-            Organize seus contatos, números, WhatsApp
-            e ferramentas profissionais em um único painel.
-        </p>
+    <div class="page-title">
+        <h2>🍀 BOT DO BM3</h2>
+        <p>Menu principal</p>
     </div>
 
-    <div class="stats">
-        <div class="stat">
-            <strong id="totalInicio">0</strong>
-            <span>Contatos</span>
-        </div>
-
-        <div class="stat">
-            <strong id="onInicio">0</strong>
-            <span>Ativos</span>
-        </div>
-
-        <div class="stat">
-            <strong id="favInicio">0</strong>
-            <span>Favoritos</span>
-        </div>
+    <div class="grid one">
+        <button class="menu-btn big-btn" onclick="abrirTela('whatsapp')">
+            <span class="emoji">📱</span>
+            <strong>WHATSAPP</strong>
+            <span>Ferramentas de atendimento e organização</span>
+        </button>
     </div>
 
     <br>
 
     <div class="grid">
 
-        <button class="menu-card" onclick="navegar('whatsapp')">
-            <div class="menu-icon">📱</div>
-            <div class="menu-title">WhatsApp</div>
-            <div class="menu-desc">
-                Números, contatos e ferramentas
-            </div>
+        <button class="menu-btn" onclick="abrirTela('contatos')">
+            <span class="emoji">👥</span>
+            <strong>CONTATOS</strong>
+            <span>Lista e organização por DDD</span>
         </button>
 
-        <button class="menu-card" onclick="navegar('estatisticas')">
-            <div class="menu-icon">📊</div>
-            <div class="menu-title">Resumo</div>
-            <div class="menu-desc">
-                Veja os dados dos seus contatos
-            </div>
+        <button class="menu-btn" onclick="abrirTela('resumo')">
+            <span class="emoji">📊</span>
+            <strong>RESUMO</strong>
+            <span>Análise, ON e OFF</span>
         </button>
 
-        <button class="menu-card" onclick="navegar('grupos')">
-            <div class="menu-icon">👥</div>
-            <div class="menu-title">Grupos</div>
-            <div class="menu-desc">
-                Organize seus grupos
-            </div>
+        <button class="menu-btn" onclick="abrirTela('favoritos')">
+            <span class="emoji">⭐</span>
+            <strong>FAVORITOS</strong>
+            <span>Acessos rápidos</span>
         </button>
 
-        <button class="menu-card" onclick="navegar('backup')">
-            <div class="menu-icon">💾</div>
-            <div class="menu-title">Backup</div>
-            <div class="menu-desc">
-                Exporte ou importe seus dados
-            </div>
+        <button class="menu-btn" onclick="abrirTela('config')">
+            <span class="emoji">⚙️</span>
+            <strong>CONFIGURAÇÕES</strong>
+            <span>Preferências do bot</span>
         </button>
 
     </div>
 
 </section>
 
-<!-- WHATSAPP -->
 
-<section id="whatsapp" class="tela">
+<!-- ================= WHATSAPP ================= -->
 
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+<section id="whatsapp" class="screen">
 
-    <div class="titulo">📱 WhatsApp</div>
-
-    <div class="subtitulo">
-        Todas as funções relacionadas aos seus números.
+    <div class="page-title">
+        <h2>📱 WhatsApp</h2>
+        <p>Ferramentas do WhatsApp</p>
     </div>
 
-    <div class="opcoes-whatsapp">
+    <div class="grid">
 
-        <button class="opcao-fileira" onclick="navegar('adicionar')">
-            <div class="opcao-icone">➕</div>
-            <div class="opcao-conteudo">
-                <div class="opcao-titulo">Adicionar contato</div>
-                <div class="opcao-desc">Cadastre um novo número</div>
-            </div>
-            <div class="opcao-seta">›</div>
+        <button class="menu-btn" onclick="abrirTela('advogado')">
+            <span class="emoji">⚖️</span>
+            <strong>ADVOGADO</strong>
+            <span>Atendimento sobre processos</span>
         </button>
 
-        <button class="opcao-fileira" onclick="navegar('contatos')">
-            <div class="opcao-icone">👥</div>
-            <div class="opcao-conteudo">
-                <div class="opcao-titulo">Contatos</div>
-                <div class="opcao-desc">Organize seus números por DDD</div>
-            </div>
-            <div class="opcao-seta">›</div>
+        <button class="menu-btn" onclick="abrirTela('mensagens')">
+            <span class="emoji">💬</span>
+            <strong>MENSAGENS</strong>
+            <span>Mensagens salvas</span>
         </button>
 
-        <button class="opcao-fileira" onclick="navegar('listaRapida')">
-            <div class="opcao-icone">📋</div>
-            <div class="opcao-conteudo">
-                <div class="opcao-titulo">Lista rápida</div>
-                <div class="opcao-desc">Selecione vários números e copie</div>
-            </div>
-            <div class="opcao-seta">›</div>
+        <button class="menu-btn" onclick="abrirTela('contatos')">
+            <span class="emoji">👥</span>
+            <strong>CONTATOS</strong>
+            <span>Seus contatos</span>
         </button>
 
-        <button class="opcao-fileira" onclick="navegar('buscar')">
-            <div class="opcao-icone">🔎</div>
-            <div class="opcao-conteudo">
-                <div class="opcao-titulo">Buscar</div>
-                <div class="opcao-desc">Procure qualquer contato</div>
-            </div>
-            <div class="opcao-seta">›</div>
+        <button class="menu-btn" onclick="mostrarToast('Área de grupos pronta para integração.')">
+            <span class="emoji">👨‍👩‍👧</span>
+            <strong>GRUPOS</strong>
+            <span>Organização de grupos</span>
         </button>
 
-        <!-- NOVO SETOR -->
+        <button class="menu-btn" onclick="abrirTela('rapidas')">
+            <span class="emoji">⚡</span>
+            <strong>RÁPIDAS</strong>
+            <span>Respostas rápidas</span>
+        </button>
 
-        <button class="opcao-fileira" onclick="navegar('advogado')">
-            <div class="opcao-icone">⚖️</div>
-            <div class="opcao-conteudo">
-                <div class="opcao-titulo">Advogado</div>
-                <div class="opcao-desc">
-                    Ferramentas, clientes e mensagens profissionais
-                </div>
-            </div>
-            <div class="opcao-seta">›</div>
+        <button class="menu-btn" onclick="abrirTela('favoritos')">
+            <span class="emoji">⭐</span>
+            <strong>FAVORITOS</strong>
+            <span>Acessos favoritos</span>
+        </button>
+
+        <button class="menu-btn" onclick="mostrarToast('Contatos fixados serão exibidos aqui.')">
+            <span class="emoji">📌</span>
+            <strong>FIXADOS</strong>
+            <span>Itens importantes</span>
+        </button>
+
+        <button class="menu-btn" onclick="mostrarToast('Histórico de contatos recentes.')">
+            <span class="emoji">🕘</span>
+            <strong>RECENTES</strong>
+            <span>Últimos acessos</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('envioRapido')">
+            <span class="emoji">📤</span>
+            <strong>ENVIO RÁPIDO</strong>
+            <span>Abrir conversa no WhatsApp</span>
+        </button>
+
+        <button class="menu-btn" onclick="mostrarToast('Área de links personalizados.')">
+            <span class="emoji">🔗</span>
+            <strong>LINKS</strong>
+            <span>Atalhos personalizados</span>
         </button>
 
     </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
 
 </section>
 
-<!-- SETOR ADVOGADO -->
 
-<section id="advogado" class="tela">
+<!-- ================= ADVOGADO ================= -->
 
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+<section id="advogado" class="screen">
 
-    <div class="adv-header">
+    <div class="page-title">
+        <h2>⚖️ Advogado</h2>
+        <p>Atendimento e respostas sobre processos e liberação de valores</p>
+    </div>
 
-        <div class="adv-header-top">
+    <div class="grid">
 
-            <div class="adv-icon">⚖️</div>
+        <button class="menu-btn" onclick="abrirTela('gerarResposta')">
+            <span class="emoji">🤖</span>
+            <strong>GERAR RESPOSTA</strong>
+            <span>Digite a pergunta do cliente</span>
+        </button>
 
-            <div>
-                <h2>Setor Advogado</h2>
-                <p id="advSubtitulo">
-                    Ferramentas profissionais para atendimento
-                </p>
-            </div>
+        <button class="menu-btn" onclick="abrirTela('analisar')">
+            <span class="emoji">🧠</span>
+            <strong>ANALISAR PERGUNTA</strong>
+            <span>Identifique o assunto e gere uma resposta</span>
+        </button>
 
+        <button class="menu-btn" onclick="abrirTela('liberacao')">
+            <span class="emoji">💰</span>
+            <strong>LIBERAÇÃO</strong>
+            <span>Informações sobre valores</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('andamento')">
+            <span class="emoji">📂</span>
+            <strong>ANDAMENTO</strong>
+            <span>Atualização do processo</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('prazos')">
+            <span class="emoji">⏳</span>
+            <strong>PRAZOS</strong>
+            <span>Respostas sobre prazos</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('valores')">
+            <span class="emoji">💵</span>
+            <strong>VALORES</strong>
+            <span>Informações de valores</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('documentacao')">
+            <span class="emoji">📄</span>
+            <strong>DOCUMENTAÇÃO</strong>
+            <span>Documentos e informações</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('rapidas')">
+            <span class="emoji">⚡</span>
+            <strong>RESPOSTAS</strong>
+            <span>Respostas rápidas</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('favoritasAdv')">
+            <span class="emoji">⭐</span>
+            <strong>FAVORITAS</strong>
+            <span>Respostas favoritas</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('montarMensagem')">
+            <span class="emoji">📝</span>
+            <strong>MONTAR MENSAGEM</strong>
+            <span>Monte por partes</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('historicoAdv')">
+            <span class="emoji">📋</span>
+            <strong>HISTÓRICO</strong>
+            <span>Mensagens geradas</span>
+        </button>
+
+    </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+</section>
+
+
+<!-- ================= GERAR RESPOSTA ================= -->
+
+<section id="gerarResposta" class="screen">
+
+    <div class="page-title">
+        <h2>🤖 Gerar resposta</h2>
+        <p>Coloque exatamente o que o cliente perguntou.</p>
+    </div>
+
+    <div class="card">
+
+        <div class="field">
+            <label>Nome do cliente</label>
+            <input id="nomeClienteResposta" placeholder="Ex.: João">
         </div>
 
-    </div>
+        <div class="field">
+            <label>Pergunta do cliente</label>
+            <textarea id="perguntaCliente" placeholder="Ex.: Doutor, já liberou o valor do meu processo?"></textarea>
+        </div>
 
-    <div class="adv-grid">
+        <div class="field">
+            <label>Status real do atendimento</label>
+            <select id="statusResposta">
+                <option value="analise">Em análise</option>
+                <option value="atualizacao">Aguardando atualização</option>
+                <option value="liberado">Valor confirmado como liberado</option>
+                <option value="concluido">Atendimento concluído</option>
+            </select>
+        </div>
 
-        <button class="adv-option" onclick="navegar('gerarResposta')">
-            <div class="adv-option-icon">✍️</div>
-            <div class="adv-option-title">Gerar resposta</div>
-            <div class="adv-option-desc">
-                Monte uma resposta profissional para o cliente
-            </div>
-        </button>
+        <div class="field">
+            <label>Valor confirmado (opcional)</label>
+            <input id="valorResposta" placeholder="Ex.: R$ 25.000,00">
+        </div>
 
-        <button class="adv-option" onclick="navegar('respostaRapida')">
-            <div class="adv-option-icon">⚡</div>
-            <div class="adv-option-title">Respostas rápidas</div>
-            <div class="adv-option-desc">
-                Mensagens prontas para situações comuns
-            </div>
-        </button>
-
-        <button class="adv-option" onclick="navegar('mensagensProntas')">
-            <div class="adv-option-icon">💬</div>
-            <div class="adv-option-title">Mensagens prontas</div>
-            <div class="adv-option-desc">
-                Modelos completos para enviar pelo WhatsApp
-            </div>
-        </button>
-
-        <button class="adv-option" onclick="navegar('perguntasFrequentes')">
-            <div class="adv-option-icon">❓</div>
-            <div class="adv-option-title">Perguntas frequentes</div>
-            <div class="adv-option-desc">
-                Respostas para dúvidas frequentes
-            </div>
-        </button>
-
-        <button class="adv-option" onclick="navegar('clientesAdvogado')">
-            <div class="adv-option-icon">👤</div>
-            <div class="adv-option-title">Clientes</div>
-            <div class="adv-option-desc">
-                Cadastre e organize seus clientes
-            </div>
-        </button>
-
-        <button class="adv-option" onclick="navegar('favoritosAdvogado')">
-            <div class="adv-option-icon">⭐</div>
-            <div class="adv-option-title">Favoritos</div>
-            <div class="adv-option-desc">
-                Mensagens profissionais salvas
-            </div>
-        </button>
-
-        <button class="adv-option" onclick="navegar('configAdvogado')">
-            <div class="adv-option-icon">⚙️</div>
-            <div class="adv-option-title">Configuração</div>
-            <div class="adv-option-desc">
-                Nome, OAB e assinatura profissional
-            </div>
-        </button>
-
-        <button class="adv-option" onclick="limparFormularioAdvogado()">
-            <div class="adv-option-icon">🧹</div>
-            <div class="adv-option-title">Limpar respostas</div>
-            <div class="adv-option-desc">
-                Limpe rapidamente o gerador
-            </div>
-        </button>
+        <button class="primary" onclick="gerarResposta()">🤖 GERAR RESPOSTA</button>
 
     </div>
+
+    <div id="resultadoResposta" class="card" style="display:none;">
+        <h3>💬 Resposta sugerida</h3>
+        <br>
+        <div id="textoResposta" class="preview"></div>
+        <br>
+
+        <div class="row">
+            <button class="secondary" onclick="copiarResposta()">📋 Copiar</button>
+            <button class="primary" onclick="abrirWhatsAppComResposta()">📲 WhatsApp</button>
+        </div>
+    </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
 
 </section>
 
-<!-- GERAR RESPOSTA -->
 
-<section id="gerarResposta" class="tela">
+<!-- ================= ANALISAR ================= -->
 
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+<section id="analisar" class="screen">
 
-    <div class="titulo">✍️ Gerar resposta</div>
-
-    <div class="subtitulo">
-        Crie uma resposta profissional para enviar ao cliente.
+    <div class="page-title">
+        <h2>🧠 Analisar pergunta</h2>
+        <p>O bot identifica o assunto e sugere uma resposta.</p>
     </div>
 
     <div class="card">
 
-        <label>Nome do cliente</label>
-        <input id="advNomeCliente" placeholder="Ex.: João">
+        <div class="field">
+            <label>Pergunta recebida</label>
+            <textarea id="perguntaAnalise" placeholder="Cole aqui a pergunta do cliente..."></textarea>
+        </div>
 
-        <label>Telefone do cliente</label>
-        <input id="advTelefoneCliente" placeholder="Ex.: 13999999999">
+        <button class="primary" onclick="analisarPergunta()">🧠 ANALISAR</button>
 
-        <label>Pergunta ou situação do cliente</label>
-        <textarea
-            id="advPergunta"
-            placeholder="Digite aqui o que o cliente perguntou..."
-        ></textarea>
+    </div>
 
-        <label>Estilo da resposta</label>
-        <select id="advEstilo">
-            <option value="profissional">Profissional</option>
-            <option value="formal">Formal</option>
-            <option value="cordial">Cordial</option>
-            <option value="objetivo">Objetivo</option>
-        </select>
+    <div id="resultadoAnalise" class="card" style="display:none;"></div>
 
-        <label>Assunto</label>
-        <select id="advAssunto">
-            <option value="geral">Atendimento geral</option>
-            <option value="processo">Andamento do processo</option>
-            <option value="documentos">Documentos</option>
-            <option value="audiencia">Audiência</option>
-            <option value="prazo">Prazo</option>
-            <option value="honorarios">Honorários</option>
-            <option value="consulta">Consulta jurídica</option>
-        </select>
+    <button class="back" onclick="voltar()">← Voltar</button>
 
-        <button class="btn btn-verde btn-full"
-                onclick="gerarRespostaAdvogado()">
-            ⚖️ Gerar resposta
+</section>
+
+
+<!-- ================= LIBERAÇÃO ================= -->
+
+<section id="liberacao" class="screen">
+
+    <div class="page-title">
+        <h2>💰 Liberação de valores</h2>
+        <p>Atalhos para situações relacionadas à liberação.</p>
+    </div>
+
+    <div class="option-list">
+
+        <button class="option" onclick="usarModelo('liberado')">
+            💰 Valor confirmado como liberado
+        </button>
+
+        <button class="option" onclick="usarModelo('atualizacao')">
+            📢 Atualização sobre a liberação
+        </button>
+
+        <button class="option" onclick="usarModelo('aguardando')">
+            ⏳ Aguardando atualização
+        </button>
+
+        <button class="option" onclick="usarModelo('proximos')">
+            📋 Próximos passos
         </button>
 
     </div>
 
-    <div id="resultadoRespostaAdvogado"></div>
+    <button class="back" onclick="voltar()">← Voltar</button>
 
 </section>
 
-<!-- RESPOSTAS RÁPIDAS -->
 
-<section id="respostaRapida" class="tela">
+<!-- ================= ANDAMENTO ================= -->
 
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+<section id="andamento" class="screen">
 
-    <div class="titulo">⚡ Respostas rápidas</div>
-
-    <div class="subtitulo">
-        Toque em uma opção para usar a mensagem.
+    <div class="page-title">
+        <h2>📂 Andamento</h2>
+        <p>Respostas para dúvidas sobre o andamento do processo.</p>
     </div>
 
-    <div id="listaRespostasRapidas"></div>
+    <div class="option-list">
 
-</section>
+        <button class="option" onclick="usarModelo('andamento')">
+            📂 Atualização do processo
+        </button>
 
-<!-- MENSAGENS PRONTAS -->
+        <button class="option" onclick="usarModelo('movimentacao')">
+            📌 Nova movimentação
+        </button>
 
-<section id="mensagensProntas" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">💬 Mensagens prontas</div>
-
-    <div class="subtitulo">
-        Modelos profissionais para situações do dia a dia.
-    </div>
-
-    <div id="listaMensagensProntas"></div>
-
-</section>
-
-<!-- FAQ -->
-
-<section id="perguntasFrequentes" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">❓ Perguntas frequentes</div>
-
-    <div class="subtitulo">
-        Respostas-modelo para dúvidas comuns de clientes.
-    </div>
-
-    <div id="listaPerguntasFrequentes"></div>
-
-</section>
-
-<!-- CLIENTES ADVOGADO -->
-
-<section id="clientesAdvogado" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">👤 Clientes</div>
-
-    <div class="subtitulo">
-        Cadastre seus clientes para facilitar o atendimento.
-    </div>
-
-    <div class="card">
-
-        <label>Nome</label>
-        <input id="clienteAdvNome" placeholder="Nome do cliente">
-
-        <label>WhatsApp</label>
-        <input id="clienteAdvNumero" placeholder="5513999999999">
-
-        <label>Número do processo</label>
-        <input id="clienteAdvProcesso" placeholder="Opcional">
-
-        <label>Assunto</label>
-        <input id="clienteAdvAssunto" placeholder="Ex.: Trabalhista">
-
-        <label>Observações</label>
-        <textarea
-            id="clienteAdvObs"
-            placeholder="Observações sobre o atendimento..."
-        ></textarea>
-
-        <button class="btn btn-verde btn-full"
-                onclick="adicionarClienteAdvogado()">
-            ➕ Cadastrar cliente
+        <button class="option" onclick="usarModelo('acompanhamento')">
+            🔎 Processo em acompanhamento
         </button>
 
     </div>
 
-    <div id="listaClientesAdvogado"></div>
+    <button class="back" onclick="voltar()">← Voltar</button>
 
 </section>
 
-<!-- FAVORITOS -->
 
-<section id="favoritosAdvogado" class="tela">
+<!-- ================= PRAZOS ================= -->
 
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+<section id="prazos" class="screen">
 
-    <div class="titulo">⭐ Favoritos</div>
-
-    <div class="subtitulo">
-        Suas mensagens profissionais salvas.
+    <div class="page-title">
+        <h2>⏳ Prazos</h2>
+        <p>Modelos para perguntas sobre prazo.</p>
     </div>
 
-    <div id="listaFavoritosAdvogado"></div>
+    <div class="option-list">
 
-</section>
+        <button class="option" onclick="usarModelo('prazo')">
+            ⏳ Pergunta sobre prazo
+        </button>
 
-<!-- CONFIG ADVOGADO -->
+        <button class="option" onclick="usarModelo('semPrevisao')">
+            📅 Ainda sem previsão confirmada
+        </button>
 
-<section id="configAdvogado" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">⚙️ Configuração profissional</div>
-
-    <div class="subtitulo">
-        Essas informações podem aparecer na assinatura das mensagens.
-    </div>
-
-    <div class="card">
-
-        <label>Nome do advogado</label>
-        <input id="advConfigNome" placeholder="Seu nome">
-
-        <label>OAB</label>
-        <input id="advConfigOab" placeholder="Ex.: OAB/SP 000000">
-
-        <label>Escritório</label>
-        <input id="advConfigEscritorio" placeholder="Nome do escritório">
-
-        <label>Estilo padrão</label>
-        <select id="advConfigEstilo">
-            <option value="profissional">Profissional</option>
-            <option value="formal">Formal</option>
-            <option value="cordial">Cordial</option>
-            <option value="objetivo">Objetivo</option>
-        </select>
-
-        <button class="btn btn-verde btn-full"
-                onclick="salvarConfigAdvogado()">
-            💾 Salvar configuração
+        <button class="option" onclick="usarModelo('atualizacaoPrazo')">
+            📢 Avisar quando houver atualização
         </button>
 
     </div>
 
+    <button class="back" onclick="voltar()">← Voltar</button>
+
 </section>
 
-<!-- ADICIONAR -->
 
-<section id="adicionar" class="tela">
+<!-- ================= VALORES ================= -->
 
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+<section id="valores" class="screen">
 
-    <div class="titulo">➕ Adicionar contato</div>
-
-    <div class="subtitulo">
-        Cadastre um novo número.
+    <div class="page-title">
+        <h2>💵 Valores</h2>
+        <p>Respostas relacionadas aos valores do atendimento.</p>
     </div>
 
     <div class="card">
 
-        <label>Nome</label>
-        <input id="nomeContato" placeholder="Nome">
+        <div class="field">
+            <label>Valor</label>
+            <input id="valorModelo" placeholder="Ex.: R$ 25.000,00">
+        </div>
 
-        <label>Número</label>
-        <input id="numeroContato" placeholder="DDD + número">
+        <button class="primary" onclick="gerarModeloValor()">💵 GERAR</button>
 
-        <label>DDD</label>
-        <select id="dddContato"></select>
+        <br><br>
 
-        <label>Grupo</label>
-        <input id="grupoContato" placeholder="Grupo">
+        <div id="resultadoValor" class="preview" style="display:none;"></div>
 
-        <label>Observação</label>
-        <textarea id="obsContato"></textarea>
+    </div>
 
-        <label>Status</label>
-        <select id="statusContato">
-            <option value="ON">ON</option>
-            <option value="ANALISE">ANALISE</option>
-            <option value="CAIU">CAIU</option>
-        </select>
+    <button class="back" onclick="voltar()">← Voltar</button>
 
-        <button class="btn btn-verde btn-full"
-                onclick="adicionarContato()">
-            ➕ Salvar contato
+</section>
+
+
+<!-- ================= DOCUMENTAÇÃO ================= -->
+
+<section id="documentacao" class="screen">
+
+    <div class="page-title">
+        <h2>📄 Documentação</h2>
+        <p>Respostas sobre documentos e informações.</p>
+    </div>
+
+    <div class="option-list">
+
+        <button class="option" onclick="usarModelo('documentacao')">
+            📄 Documentação necessária
+        </button>
+
+        <button class="option" onclick="usarModelo('documentoPendente')">
+            ⚠️ Documento pendente
+        </button>
+
+        <button class="option" onclick="usarModelo('conferencia')">
+            🔎 Conferência de documentação
         </button>
 
     </div>
 
-</section>
-
-<!-- CONTATOS -->
-
-<section id="contatos" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">👥 Contatos</div>
-
-    <div class="subtitulo">
-        Organize seus números por DDD.
-    </div>
-
-    <div id="listaDDDs" class="grid"></div>
+    <button class="back" onclick="voltar()">← Voltar</button>
 
 </section>
 
-<!-- CONTATOS DDD -->
 
-<section id="contatosDDD" class="tela">
+<!-- ================= MONTAR MENSAGEM ================= -->
 
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+<section id="montarMensagem" class="screen">
 
-    <div class="titulo" id="tituloDDD">📍 DDD</div>
-
-    <div id="listaContatosDDD"></div>
-
-</section>
-
-<!-- BUSCAR -->
-
-<section id="buscar" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">🔎 Buscar</div>
-
-    <div class="subtitulo">
-        Procure qualquer contato.
-    </div>
-
-    <div class="card">
-        <input
-            id="campoBusca"
-            placeholder="Nome, número, grupo ou DDD..."
-            oninput="buscarContatos()"
-        >
-    </div>
-
-    <div id="resultadoBusca"></div>
-
-</section>
-
-<!-- LISTA RÁPIDA -->
-
-<section id="listaRapida" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">📋 Lista rápida</div>
-
-    <div class="subtitulo">
-        Selecione contatos e copie os números.
-    </div>
-
-    <div id="listaRapidaConteudo"></div>
-
-</section>
-
-<!-- ESTATÍSTICAS -->
-
-<section id="estatisticas" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">📊 Resumo</div>
-
-    <div class="subtitulo">
-        Resumo dos seus contatos.
-    </div>
-
-    <div id="estatisticasConteudo"></div>
-
-</section>
-
-<!-- GRUPOS -->
-
-<section id="grupos" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">👥 Grupos</div>
-
-    <div class="subtitulo">
-        Grupos cadastrados nos seus contatos.
-    </div>
-
-    <div id="gruposConteudo"></div>
-
-</section>
-
-<!-- BACKUP -->
-
-<section id="backup" class="tela">
-
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
-
-    <div class="titulo">💾 Backup</div>
-
-    <div class="subtitulo">
-        Faça uma cópia dos seus dados.
+    <div class="page-title">
+        <h2>📝 Montar mensagem</h2>
+        <p>Monte a mensagem por partes.</p>
     </div>
 
     <div class="card">
 
-        <button class="btn btn-verde btn-full"
-                onclick="exportarBackup()">
-            📤 Exportar backup
+        <div class="field">
+            <label>1️⃣ Saudação</label>
+            <select id="parteSaudacao">
+                <option>Olá, [NOME], bom dia! Tudo bem?</option>
+                <option>Olá, [NOME], boa tarde! Tudo bem?</option>
+                <option>Olá, [NOME], boa noite! Tudo bem?</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>2️⃣ Introdução</label>
+            <select id="parteIntroducao">
+                <option>Estou entrando em contato para trazer uma atualização importante sobre o seu processo.</option>
+                <option>Estou entrando em contato porque tenho uma informação importante referente ao seu processo.</option>
+                <option>Tenho uma novidade importante para te passar sobre o andamento do seu processo.</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>3️⃣ Notícia</label>
+            <select id="parteNoticia">
+                <option>Tivemos uma atualização positiva referente ao seu processo.</option>
+                <option>O processo teve uma nova atualização e gostaria de te informar.</option>
+                <option>Tenho uma informação importante relacionada ao processo.</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>4️⃣ Valor</label>
+            <input id="parteValor" placeholder="Ex.: R$ 25.000,00">
+        </div>
+
+        <div class="field">
+            <label>5️⃣ Próximos passos</label>
+            <select id="parteProximo">
+                <option>Vou te explicar certinho como está o andamento e os próximos passos.</option>
+                <option>Posso te explicar todos os detalhes e tirar suas dúvidas.</option>
+                <option>Gostaria de conversar com você para passar as informações completas.</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>6️⃣ Encerramento</label>
+            <select id="parteEncerramento">
+                <option>Assim que você puder, me chama para conversarmos.</option>
+                <option>Fico à disposição para qualquer dúvida.</option>
+                <option>Qualquer dúvida, pode me chamar por aqui.</option>
+            </select>
+        </div>
+
+        <button class="primary" onclick="montarMensagem()">📝 MONTAR MENSAGEM</button>
+
+    </div>
+
+    <div id="mensagemMontada" class="card" style="display:none;">
+        <h3>👁️ Pré-visualização</h3>
+        <br>
+        <div id="previewMontada" class="preview"></div>
+        <br>
+
+        <div class="row">
+            <button class="secondary" onclick="copiarMontada()">📋 Copiar</button>
+            <button class="primary" onclick="abrirWhatsAppMontada()">📲 WhatsApp</button>
+        </div>
+    </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+</section>
+
+
+<!-- ================= CONTATOS ================= -->
+
+<section id="contatos" class="screen">
+
+    <div class="page-title">
+        <h2>👥 Contatos</h2>
+        <p>Organize seus números e DDDs.</p>
+    </div>
+
+    <div class="grid">
+
+        <button class="menu-btn" onclick="mostrarAdicionarContato()">
+            <span class="emoji">➕</span>
+            <strong>ADICIONAR</strong>
+            <span>Novo contato</span>
         </button>
 
-        <label>Importar backup</label>
+        <button class="menu-btn" onclick="mostrarListaContatos()">
+            <span class="emoji">📋</span>
+            <strong>LISTA</strong>
+            <span>Todos os contatos</span>
+        </button>
 
-        <input
-            type="file"
-            id="arquivoBackup"
-            accept=".json"
-            onchange="importarBackup(event)"
-        >
+        <button class="menu-btn" onclick="mostrarDDDs()">
+            <span class="emoji">📍</span>
+            <strong>POR DDD</strong>
+            <span>DDD + cidade</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirTela('favoritos')">
+            <span class="emoji">⭐</span>
+            <strong>FAVORITOS</strong>
+            <span>Contatos favoritos</span>
+        </button>
 
     </div>
 
+    <div id="areaContato" style="margin-top:15px;"></div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
 </section>
 
-<!-- CONFIGURAÇÃO -->
 
-<section id="configuracao" class="tela">
+<!-- ================= RESUMO ================= -->
 
-    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+<section id="resumo" class="screen">
 
-    <div class="titulo">⚙️ Configuração</div>
+    <div class="page-title">
+        <h2>📊 Resumo</h2>
+        <p>Status dos seus contatos.</p>
+    </div>
+
+    <div class="stat-grid">
+        <div class="stat">
+            <strong id="qtdAnalise">0</strong>
+            <span class="status analise">🟡 ANÁLISE</span>
+        </div>
+
+        <div class="stat">
+            <strong id="qtdOn">0</strong>
+            <span class="status on">🟢 ON</span>
+        </div>
+
+        <div class="stat">
+            <strong id="qtdOff">0</strong>
+            <span class="status off">🔴 OFF</span>
+        </div>
+    </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+</section>
+
+
+<!-- ================= FAVORITOS ================= -->
+
+<section id="favoritos" class="screen">
+
+    <div class="page-title">
+        <h2>⭐ Favoritos</h2>
+        <p>Contatos favoritos.</p>
+    </div>
+
+    <div id="listaFavoritos" class="card"></div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+</section>
+
+
+<!-- ================= FAVORITAS ADV ================= -->
+
+<section id="favoritasAdv" class="screen">
+
+    <div class="page-title">
+        <h2>⭐ Favoritas</h2>
+        <p>Respostas favoritas do setor Advogado.</p>
+    </div>
+
+    <div class="card">
+        <div class="empty">
+            Nenhuma resposta favorita salva ainda.
+        </div>
+    </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+</section>
+
+
+<!-- ================= HISTÓRICO ================= -->
+
+<section id="historicoAdv" class="screen">
+
+    <div class="page-title">
+        <h2>📋 Histórico</h2>
+        <p>Respostas geradas recentemente.</p>
+    </div>
+
+    <div id="listaHistorico" class="card"></div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+</section>
+
+
+<!-- ================= MENSAGENS ================= -->
+
+<section id="mensagens" class="screen">
+
+    <div class="page-title">
+        <h2>💬 Mensagens</h2>
+        <p>Mensagens rápidas do WhatsApp.</p>
+    </div>
+
+    <div class="card">
+        <div class="option-list">
+            <button class="option" onclick="copiarTexto('Olá! Tudo bem? Estou entrando em contato para conversarmos.')">
+                💬 Mensagem de contato
+            </button>
+
+            <button class="option" onclick="copiarTexto('Olá! Assim que possível, me chama por aqui para conversarmos.')">
+                📲 Solicitar retorno
+            </button>
+        </div>
+    </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+</section>
+
+
+<!-- ================= RÁPIDAS ================= -->
+
+<section id="rapidas" class="screen">
+
+    <div class="page-title">
+        <h2>⚡ Respostas rápidas</h2>
+        <p>Frases prontas para copiar.</p>
+    </div>
+
+    <div class="option-list">
+
+        <button class="option" onclick="copiarTexto('Olá! Estou verificando as informações e assim que tiver uma atualização confirmada, aviso você.')">
+            📢 Estou verificando as informações
+        </button>
+
+        <button class="option" onclick="copiarTexto('Assim que houver uma nova atualização disponível, entro em contato com você.')">
+            ⏳ Aguardar atualização
+        </button>
+
+        <button class="option" onclick="copiarTexto('Vou verificar os detalhes e retorno com as informações corretas.')">
+            🔎 Vou verificar
+        </button>
+
+    </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+</section>
+
+
+<!-- ================= ENVIO RÁPIDO ================= -->
+
+<section id="envioRapido" class="screen">
+
+    <div class="page-title">
+        <h2>📤 Envio rápido</h2>
+        <p>Abra uma conversa do WhatsApp.</p>
+    </div>
 
     <div class="card">
 
-        <button class="btn btn-sec btn-full"
-                onclick="alternarTema()">
+        <div class="field">
+            <label>Número</label>
+            <input id="numeroEnvio" placeholder="Ex.: 13999999999">
+        </div>
+
+        <div class="field">
+            <label>Mensagem</label>
+            <textarea id="mensagemEnvio" placeholder="Digite sua mensagem..."></textarea>
+        </div>
+
+        <button class="primary" onclick="abrirWhatsApp()">📲 ABRIR WHATSAPP</button>
+
+    </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+</section>
+
+
+<!-- ================= CONFIG ================= -->
+
+<section id="config" class="screen">
+
+    <div class="page-title">
+        <h2>⚙️ Configurações</h2>
+        <p>Preferências do BOT DO BM3.</p>
+    </div>
+
+    <div class="card">
+
+        <button class="secondary" style="width:100%;" onclick="alternarTema()">
             🌙 Alternar tema
         </button>
 
-        <button class="btn btn-vermelho btn-full"
-                onclick="limparTodosDados()">
-            🗑️ Apagar todos os contatos
+        <br><br>
+
+        <button class="secondary" style="width:100%;" onclick="exportarBackup()">
+            💾 Exportar backup
+        </button>
+
+        <br><br>
+
+        <button class="secondary" style="width:100%;" onclick="limparTudo()">
+            🗑️ Limpar contatos
         </button>
 
     </div>
+
+    <button class="back" onclick="voltar()">← Voltar</button>
 
 </section>
 
-</div>
+</main>
 
-<div class="bottom-nav">
-
-    <div class="bottom-inner">
-
-        <button class="nav-btn active"
-                onclick="navegar('inicio')">
-            🏠 Início
-        </button>
-
-        <button class="nav-btn"
-                onclick="navegar('whatsapp')">
-            📱 WhatsApp
-        </button>
-
-        <button class="nav-btn"
-                onclick="navegar('contatos')">
-            👥 Contatos
-        </button>
-
-        <button class="nav-btn"
-                onclick="navegar('estatisticas')">
-            📊 Resumo
-        </button>
-
-    </div>
-
-</div>
+<div id="toast" class="toast"></div>
 
 <script>
 
-/* =========================
-   DADOS PRINCIPAIS
-========================= */
+/* ================= DADOS ================= */
 
-const CHAVE_CONTATOS = "botBM3Contatos";
-const CHAVE_TEMA = "temaBotBM3";
+let contatos = JSON.parse(localStorage.getItem('botBM3Contatos') || '[]');
+let historico = JSON.parse(localStorage.getItem('botBM3Historico') || '[]');
+let telaAnterior = 'home';
 
-let contatos = JSON.parse(
-    localStorage.getItem(CHAVE_CONTATOS) || "[]"
-);
-
-let telaAtual = "inicio";
-let historicoTelas = [];
-
-const ddds = [
-    {ddd:"011",regiao:"São Paulo"},
-    {ddd:"012",regiao:"Vale do Paraíba"},
-    {ddd:"013",regiao:"Baixada Santista"},
-    {ddd:"014",regiao:"Bauru e região"},
-    {ddd:"015",regiao:"Sorocaba e região"},
-    {ddd:"016",regiao:"Ribeirão Preto e região"},
-    {ddd:"017",regiao:"São José do Rio Preto e região"},
-    {ddd:"018",regiao:"Presidente Prudente e região"},
-    {ddd:"019",regiao:"Campinas e região"}
-];
+const cidadesDDD = {
+    "011":"São Paulo - SP",
+    "012":"Vale do Paraíba / Litoral Norte - SP",
+    "013":"Santos / Baixada Santista - SP",
+    "014":"Bauru / região - SP",
+    "015":"Sorocaba / região - SP",
+    "016":"Ribeirão Preto / região - SP",
+    "017":"São José do Rio Preto / região - SP",
+    "018":"Presidente Prudente / região - SP",
+    "019":"Campinas / região - SP"
+};
 
 
-/* =========================
-   ADVOGADO
-========================= */
+/* ================= NAVEGAÇÃO ================= */
 
-const CHAVE_ADV_CLIENTES = "botBM3AdvClientes";
-const CHAVE_ADV_FAVORITOS = "botBM3AdvFavoritos";
-const CHAVE_ADV_CONFIG = "botBM3AdvConfig";
+function abrirTela(id){
 
-let advClientes = JSON.parse(
-    localStorage.getItem(CHAVE_ADV_CLIENTES) || "[]"
-);
+    const atual = document.querySelector('.screen.active');
 
-let advFavoritos = JSON.parse(
-    localStorage.getItem(CHAVE_ADV_FAVORITOS) || "[]"
-);
+    if(atual && atual.id !== id){
+        telaAnterior = atual.id;
+    }
 
-let advConfig = JSON.parse(
-    localStorage.getItem(CHAVE_ADV_CONFIG) ||
-    '{"nome":"","oab":"","escritorio":"","estilo":"profissional"}'
-);
+    document.querySelectorAll('.screen').forEach(t => {
+        t.classList.remove('active');
+    });
+
+    const destino = document.getElementById(id);
+
+    if(destino){
+        destino.classList.add('active');
+        window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    atualizarTudo();
+}
+
+function voltar(){
+
+    const atual = document.querySelector('.screen.active');
+
+    if(!atual) return;
+
+    if(atual.id === 'home'){
+        return;
+    }
+
+    abrirTela(telaAnterior || 'home');
+}
 
 
-/* =========================
-   UTILITÁRIOS
-========================= */
+/* ================= TOAST ================= */
 
-function salvarContatos(){
+function mostrarToast(texto){
+
+    const toast = document.getElementById('toast');
+
+    toast.textContent = texto;
+    toast.classList.add('show');
+
+    setTimeout(()=>{
+        toast.classList.remove('show');
+    },2500);
+}
+
+
+/* ================= TEMA ================= */
+
+function alternarTema(){
+
+    document.body.classList.toggle('dark');
+
     localStorage.setItem(
-        CHAVE_CONTATOS,
-        JSON.stringify(contatos)
+        'temaBotBM3',
+        document.body.classList.contains('dark') ? 'dark' : 'light'
     );
 }
 
-function escapar(texto){
-    return String(texto ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+if(localStorage.getItem('temaBotBM3') === 'dark'){
+    document.body.classList.add('dark');
 }
 
-function normalizarNumero(numero){
-    return String(numero || "").replace(/\D/g,"");
-}
 
-function copiarTexto(texto){
-    if(navigator.clipboard){
-        navigator.clipboard.writeText(texto)
-            .then(()=>alert("Texto copiado!"))
-            .catch(()=>copiarFallback(texto));
+/* ================= RESPOSTAS ================= */
+
+function gerarResposta(){
+
+    const nome =
+        document.getElementById('nomeClienteResposta').value.trim() ||
+        'cliente';
+
+    const pergunta =
+        document.getElementById('perguntaCliente').value.trim();
+
+    const status =
+        document.getElementById('statusResposta').value;
+
+    const valor =
+        document.getElementById('valorResposta').value.trim();
+
+    if(!pergunta){
+        mostrarToast('Digite a pergunta do cliente.');
+        return;
+    }
+
+    let resposta = '';
+
+    if(status === 'liberado'){
+
+        resposta =
+`Olá, ${nome}! Tudo bem? Tenho uma ótima notícia sobre o seu processo. Houve uma atualização referente à liberação de valores e o valor de ${valor || '[VALOR]'} consta como liberado conforme a informação registrada. Vou te explicar os próximos passos e passar as informações necessárias.`;
+
+    }else if(status === 'atualizacao'){
+
+        resposta =
+`Olá, ${nome}! Tudo bem? Estou entrando em contato porque houve uma atualização importante referente ao seu processo. Estou acompanhando as informações e vou te passar os detalhes assim que estiverem confirmados.`;
+
+    }else if(status === 'concluido'){
+
+        resposta =
+`Olá, ${nome}! Tudo bem? O atendimento referente ao seu processo foi atualizado. Vou te passar as informações registradas e os próximos detalhes para que você fique ciente de todo o andamento.`;
+
     }else{
-        copiarFallback(texto);
-    }
-}
 
-function copiarFallback(texto){
-    const area=document.createElement("textarea");
-    area.value=texto;
-    document.body.appendChild(area);
-    area.select();
-    document.execCommand("copy");
-    area.remove();
-    alert("Texto copiado!");
-}
-
-function abrirWhatsApp(numero,mensagem=""){
-    let n=normalizarNumero(numero);
-
-    if(!n){
-        n=prompt("Digite o número com DDD:");
+        resposta =
+`Olá, ${nome}! Tudo bem? Estou acompanhando a situação do seu processo. No momento, a informação disponível está em acompanhamento e aguardando uma nova atualização confirmada. Assim que houver uma nova informação, entrarei em contato com você.`;
     }
 
-    if(!n) return;
+    document.getElementById('textoResposta').textContent = resposta;
+    document.getElementById('resultadoResposta').style.display = 'block';
 
-    if(n.length<=11){
-        n="55"+n;
-    }
-
-    let url="https://wa.me/"+n;
-
-    if(mensagem){
-        url+="?text="+encodeURIComponent(mensagem);
-    }
-
-    window.open(url,"_blank");
-}
-
-
-/* =========================
-   NAVEGAÇÃO
-========================= */
-
-function navegar(id){
-
-    if(id===telaAtual) return;
-
-    historicoTelas.push(telaAtual);
-    trocarTela(id);
-}
-
-function trocarTela(id){
-
-    document.querySelectorAll(".tela")
-        .forEach(t=>t.classList.remove("ativa"));
-
-    const tela=document.getElementById(id);
-
-    if(!tela) return;
-
-    tela.classList.add("ativa");
-
-    telaAtual=id;
-
-    atualizarNavegacao();
-    atualizarTela(id);
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+    historico.unshift({
+        pergunta,
+        resposta,
+        data:new Date().toLocaleString('pt-BR')
     });
+
+    historico = historico.slice(0,50);
+
+    localStorage.setItem(
+        'botBM3Historico',
+        JSON.stringify(historico)
+    );
+
+    atualizarHistorico();
 }
 
-function voltarTela(){
 
-    if(historicoTelas.length){
+/* ================= ANALISAR PERGUNTA ================= */
 
-        const anterior=
-            historicoTelas.pop();
+function analisarPergunta(){
 
-        trocarTela(anterior);
+    const pergunta =
+        document.getElementById('perguntaAnalise').value
+        .trim()
+        .toLowerCase();
 
-    }else{
-
-        trocarTela("inicio");
-
+    if(!pergunta){
+        mostrarToast('Digite uma pergunta.');
+        return;
     }
-}
 
-function atualizarNavegacao(){
-
-    document.querySelectorAll(".nav-btn")
-        .forEach(btn=>btn.classList.remove("active"));
+    let assunto = 'Atendimento geral';
+    let resposta =
+        'Olá! Estou verificando as informações referentes ao seu processo e, assim que houver uma atualização confirmada, entrarei em contato.';
 
     if(
-        telaAtual==="inicio"
+        pergunta.includes('liber') ||
+        pergunta.includes('soltou') ||
+        pergunta.includes('dispon')
     ){
-        document.querySelectorAll(".nav-btn")[0]
-            ?.classList.add("active");
+        assunto = '💰 Liberação de valores';
+
+        resposta =
+        'Olá! Estou acompanhando as informações referentes à liberação de valores do seu processo. Assim que houver uma atualização confirmada, vou te informar os detalhes e os próximos passos.';
     }
 
     else if(
-        telaAtual==="whatsapp" ||
-        telaAtual==="adicionar" ||
-        telaAtual==="contatos" ||
-        telaAtual==="contatosDDD" ||
-        telaAtual==="buscar" ||
-        telaAtual==="listaRapida" ||
-        telaAtual==="advogado" ||
-        telaAtual==="gerarResposta" ||
-        telaAtual==="respostaRapida" ||
-        telaAtual==="mensagensProntas" ||
-        telaAtual==="perguntasFrequentes" ||
-        telaAtual==="clientesAdvogado" ||
-        telaAtual==="favoritosAdvogado" ||
-        telaAtual==="configAdvogado"
+        pergunta.includes('prazo') ||
+        pergunta.includes('quando') ||
+        pergunta.includes('tempo')
     ){
-        document.querySelectorAll(".nav-btn")[1]
-            ?.classList.add("active");
+        assunto = '⏳ Prazo';
+
+        resposta =
+        'Olá! Estou acompanhando o andamento para verificar as informações disponíveis sobre prazo. Assim que houver uma previsão ou atualização confirmada, informarei você.';
     }
 
-    else if(telaAtual==="contatos"){
-        document.querySelectorAll(".nav-btn")[2]
-            ?.classList.add("active");
+    else if(
+        pergunta.includes('quanto') ||
+        pergunta.includes('valor') ||
+        pergunta.includes('dinheiro')
+    ){
+        assunto = '💵 Valor';
+
+        resposta =
+        'Olá! Estou verificando as informações referentes ao valor relacionado ao seu processo. Assim que os dados estiverem confirmados, passo os detalhes para você.';
     }
 
-    else if(telaAtual==="estatisticas"){
-        document.querySelectorAll(".nav-btn")[3]
-            ?.classList.add("active");
+    else if(
+        pergunta.includes('processo') ||
+        pergunta.includes('andamento') ||
+        pergunta.includes('atualiza')
+    ){
+        assunto = '📂 Andamento';
+
+        resposta =
+        'Olá! Estou acompanhando o andamento do seu processo. Assim que houver uma nova movimentação ou atualização confirmada, entro em contato com você.';
     }
-}
 
-function atualizarTela(id){
+    else if(
+        pergunta.includes('document') ||
+        pergunta.includes('papel')
+    ){
+        assunto = '📄 Documentação';
 
-    if(id==="inicio") atualizarInicio();
+        resposta =
+        'Olá! Vou verificar as informações referentes à documentação do seu processo e te informar caso exista alguma pendência ou orientação confirmada.';
+    }
 
-    if(id==="contatos") renderizarDDDs();
+    const area = document.getElementById('resultadoAnalise');
 
-    if(id==="contatosDDD") renderizarContatosDDD();
+    area.style.display = 'block';
 
-    if(id==="buscar") buscarContatos();
-
-    if(id==="listaRapida") renderizarListaRapida();
-
-    if(id==="estatisticas") renderizarEstatisticas();
-
-    if(id==="grupos") renderizarGrupos();
-
-    if(id==="respostaRapida")
-        renderizarRespostasRapidasAdvogado();
-
-    if(id==="mensagensProntas")
-        renderizarMensagensProntasAdvogado();
-
-    if(id==="perguntasFrequentes")
-        renderizarPerguntasAdvogado();
-
-    if(id==="clientesAdvogado")
-        renderizarClientesAdvogado();
-
-    if(id==="favoritosAdvogado")
-        renderizarFavoritosAdvogado();
-
-    if(id==="configAdvogado")
-        carregarConfigAdvogado();
-}
-
-function atualizarTudo(){
-
-    atualizarInicio();
-
-    if(telaAtual==="contatos")
-        renderizarDDDs();
-
-    if(telaAtual==="contatosDDD")
-        renderizarContatosDDD();
-
-    if(telaAtual==="buscar")
-        buscarContatos();
-
-    if(telaAtual==="listaRapida")
-        renderizarListaRapida();
-
-    if(telaAtual==="estatisticas")
-        renderizarEstatisticas();
-
-    if(telaAtual==="grupos")
-        renderizarGrupos();
-
-    if(telaAtual==="clientesAdvogado")
-        renderizarClientesAdvogado();
-
-    if(telaAtual==="favoritosAdvogado")
-        renderizarFavoritosAdvogado();
-}
-
-
-/* =========================
-   INÍCIO
-========================= */
-
-function atualizarInicio(){
-
-    const total=contatos.length;
-
-    const on=contatos.filter(
-        c=>c.status==="ON"
-    ).length;
-
-    const fav=contatos.filter(
-        c=>c.favorito
-    ).length;
-
-    document.getElementById("totalInicio")
-        .textContent=total;
-
-    document.getElementById("onInicio")
-        .textContent=on;
-
-    document.getElementById("favInicio")
-        .textContent=fav;
-}
-
-
-/* =========================
-   DDD
-========================= */
-
-function carregarSelectDDDs(){
-
-    const select=document.getElementById("dddContato");
-
-    if(!select) return;
-
-    select.innerHTML=ddds.map(d=>
-        `<option value="${d.ddd}">
-            ${d.ddd} — ${d.regiao}
-        </option>`
-    ).join("");
-}
-
-function renderizarDDDs(){
-
-    const box=document.getElementById("listaDDDs");
-
-    if(!box) return;
-
-    box.innerHTML=ddds.map(d=>{
-
-        const quantidade=contatos.filter(
-            c=>c.ddd===d.ddd
-        ).length;
-
-        return `
-        <button class="menu-card"
-                onclick="abrirDDD('${d.ddd}')">
-
-            <div class="menu-icon">📍</div>
-
-            <div class="menu-title">
-                DDD ${d.ddd}
-            </div>
-
-            <div class="menu-desc">
-                ${d.regiao}<br>
-                ${quantidade} contato(s)
-            </div>
-
+    area.innerHTML = `
+        <h3>${assunto}</h3>
+        <br>
+        <p class="muted">Resposta sugerida:</p>
+        <br>
+        <div class="preview">${resposta}</div>
+        <br>
+        <button class="primary" onclick="copiarTexto(${JSON.stringify(resposta)})">
+            📋 COPIAR RESPOSTA
         </button>
-        `;
-
-    }).join("");
-}
-
-function abrirDDD(ddd){
-
-    localStorage.setItem(
-        "botBM3DDDSelecionado",
-        ddd
-    );
-
-    navegar("contatosDDD");
-}
-
-function renderizarContatosDDD(){
-
-    const ddd=
-        localStorage.getItem(
-            "botBM3DDDSelecionado"
-        );
-
-    const dados=ddds.find(d=>d.ddd===ddd);
-
-    document.getElementById("tituloDDD")
-        .textContent=
-        `📍 DDD ${ddd}`;
-
-    const lista=contatos.filter(
-        c=>c.ddd===ddd
-    );
-
-    renderizarListaContatos(
-        lista,
-        "listaContatosDDD"
-    );
+    `;
 }
 
 
-/* =========================
-   CONTATOS
-========================= */
+/* ================= MODELOS ================= */
 
-function adicionarContato(){
+function usarModelo(tipo){
 
-    const nome=
-        document.getElementById("nomeContato")
-        .value.trim();
+    abrirTela('gerarResposta');
 
-    const numero=
-        document.getElementById("numeroContato")
-        .value.trim();
+    const pergunta = document.getElementById('perguntaCliente');
 
-    const ddd=
-        document.getElementById("dddContato")
-        .value;
+    const modelos = {
 
-    const grupo=
-        document.getElementById("grupoContato")
-        .value.trim();
+        liberado:
+        'Meu valor já foi liberado?',
 
-    const observacao=
-        document.getElementById("obsContato")
-        .value.trim();
+        atualizacao:
+        'Tem alguma atualização sobre a liberação do meu processo?',
 
-    const status=
-        document.getElementById("statusContato")
-        .value;
+        aguardando:
+        'Por que ainda não liberou o meu valor?',
+
+        proximos:
+        'O que acontece agora depois da liberação?',
+
+        andamento:
+        'Como está o andamento do meu processo?',
+
+        movimentacao:
+        'Teve alguma movimentação no meu processo?',
+
+        acompanhamento:
+        'Vocês estão acompanhando meu processo?',
+
+        prazo:
+        'Qual o prazo para receber?',
+
+        semPrevisao:
+        'Já tem uma previsão para o pagamento?',
+
+        atualizacaoPrazo:
+        'Quando vou ter uma atualização?',
+
+        documentacao:
+        'Preciso enviar algum documento?',
+
+        documentoPendente:
+        'Está faltando algum documento?',
+
+        conferencia:
+        'Os documentos já foram conferidos?'
+    };
+
+    pergunta.value = modelos[tipo] || '';
+}
+
+
+/* ================= MODELO VALOR ================= */
+
+function gerarModeloValor(){
+
+    const valor =
+        document.getElementById('valorModelo').value.trim();
+
+    if(!valor){
+        mostrarToast('Digite o valor.');
+        return;
+    }
+
+    const texto =
+`Olá! Tenho uma atualização importante referente ao seu processo. O valor informado para liberação é de ${valor}. Vou te explicar os detalhes e os próximos passos.`;
+
+    const resultado =
+        document.getElementById('resultadoValor');
+
+    resultado.style.display = 'block';
+    resultado.textContent = texto;
+}
+
+
+/* ================= MONTAR MENSAGEM ================= */
+
+let ultimaMensagemMontada = '';
+
+function montarMensagem(){
+
+    const saudacao =
+        document.getElementById('parteSaudacao').value;
+
+    const introducao =
+        document.getElementById('parteIntroducao').value;
+
+    const noticia =
+        document.getElementById('parteNoticia').value;
+
+    const valor =
+        document.getElementById('parteValor').value.trim();
+
+    const proximo =
+        document.getElementById('parteProximo').value;
+
+    const encerramento =
+        document.getElementById('parteEncerramento').value;
+
+    const blocoValor =
+        valor
+        ? ` O valor relacionado ao processo é de ${valor}.`
+        : '';
+
+    ultimaMensagemMontada =
+`${saudacao}
+
+${introducao}
+
+${noticia}${blocoValor}
+
+${proximo}
+
+${encerramento}`;
+
+    document.getElementById('previewMontada').textContent =
+        ultimaMensagemMontada;
+
+    document.getElementById('mensagemMontada').style.display =
+        'block';
+}
+
+
+/* ================= COPIAR ================= */
+
+function copiarTexto(texto){
+
+    navigator.clipboard.writeText(texto)
+    .then(()=>{
+        mostrarToast('Texto copiado.');
+    })
+    .catch(()=>{
+        mostrarToast('Não foi possível copiar automaticamente.');
+    });
+}
+
+function copiarResposta(){
+
+    const texto =
+        document.getElementById('textoResposta').textContent;
+
+    copiarTexto(texto);
+}
+
+function copiarMontada(){
+    copiarTexto(ultimaMensagemMontada);
+}
+
+
+/* ================= WHATSAPP ================= */
+
+function abrirWhatsApp(){
+
+    const numero =
+        document.getElementById('numeroEnvio').value
+        .replace(/\D/g,'');
+
+    const mensagem =
+        document.getElementById('mensagemEnvio').value;
 
     if(!numero){
+        mostrarToast('Digite um número.');
+        return;
+    }
 
-        alert("Digite o número.");
+    const url =
+        `https://wa.me/55${numero}?text=${encodeURIComponent(mensagem)}`;
 
+    window.open(url,'_blank');
+}
+
+function abrirWhatsAppComResposta(){
+
+    const texto =
+        document.getElementById('textoResposta').textContent;
+
+    const numero =
+        prompt('Digite o número do WhatsApp:');
+
+    if(!numero) return;
+
+    const limpo =
+        numero.replace(/\D/g,'');
+
+    window.open(
+        `https://wa.me/55${limpo}?text=${encodeURIComponent(texto)}`,
+        '_blank'
+    );
+}
+
+function abrirWhatsAppMontada(){
+
+    const numero =
+        prompt('Digite o número do WhatsApp:');
+
+    if(!numero) return;
+
+    const limpo =
+        numero.replace(/\D/g,'');
+
+    window.open(
+        `https://wa.me/55${limpo}?text=${encodeURIComponent(ultimaMensagemMontada)}`,
+        '_blank'
+    );
+}
+
+
+/* ================= CONTATOS ================= */
+
+function mostrarAdicionarContato(){
+
+    const area =
+        document.getElementById('areaContato');
+
+    area.innerHTML = `
+        <div class="card">
+            <h3>➕ Novo contato</h3>
+            <br>
+
+            <div class="field">
+                <label>Nome</label>
+                <input id="novoNome" placeholder="Nome">
+            </div>
+
+            <div class="field">
+                <label>Número</label>
+                <input id="novoNumero" placeholder="Ex.: 13999999999" oninput="detectarDDD()">
+            </div>
+
+            <div class="field">
+                <label>DDD</label>
+                <input id="novoDDD" maxlength="3" placeholder="013" oninput="mostrarCidadeDDD()">
+            </div>
+
+            <div class="field">
+                <label>Cidade / região</label>
+                <input id="novaCidade" readonly placeholder="Digite o DDD">
+            </div>
+
+            <div class="field">
+                <label>Status</label>
+                <select id="novoStatus">
+                    <option value="analise">🟡 ANÁLISE</option>
+                    <option value="on">🟢 ON</option>
+                    <option value="off">🔴 OFF</option>
+                </select>
+            </div>
+
+            <button class="primary" onclick="salvarContato()">
+                💾 SALVAR CONTATO
+            </button>
+        </div>
+    `;
+}
+
+function detectarDDD(){
+
+    const numero =
+        document.getElementById('novoNumero');
+
+    if(!numero) return;
+
+    const digitos =
+        numero.value.replace(/\D/g,'');
+
+    if(digitos.length >= 2){
+
+        document.getElementById('novoDDD').value =
+            digitos.substring(0,3);
+
+        mostrarCidadeDDD();
+    }
+}
+
+function mostrarCidadeDDD(){
+
+    const ddd =
+        document.getElementById('novoDDD').value
+        .replace(/\D/g,'');
+
+    const cidade =
+        cidadesDDD[ddd] || '';
+
+    document.getElementById('novaCidade').value =
+        cidade;
+}
+
+function salvarContato(){
+
+    const nome =
+        document.getElementById('novoNome').value.trim();
+
+    const numero =
+        document.getElementById('novoNumero').value.trim();
+
+    const ddd =
+        document.getElementById('novoDDD').value.trim();
+
+    const cidade =
+        document.getElementById('novaCidade').value.trim();
+
+    const status =
+        document.getElementById('novoStatus').value;
+
+    if(!nome || !numero){
+        mostrarToast('Preencha nome e número.');
         return;
     }
 
     contatos.push({
-
-        nome:nome || "Sem nome",
-
-        numero:normalizarNumero(numero),
-
+        id:Date.now(),
+        nome,
+        numero,
         ddd,
-
-        grupo,
-
-        observacao,
-
+        cidade,
         status,
-
         favorito:false,
-
-        ultimaAtualizacao:
-            new Date().toISOString()
-
+        data:new Date().toLocaleString('pt-BR')
     });
 
     salvarContatos();
 
-    document.getElementById("nomeContato").value="";
-    document.getElementById("numeroContato").value="";
-    document.getElementById("grupoContato").value="";
-    document.getElementById("obsContato").value="";
+    mostrarToast('Contato salvo.');
 
-    alert("Contato adicionado!");
-
-    atualizarTudo();
-
-    navegar("contatos");
+    mostrarListaContatos();
 }
 
-function renderizarListaContatos(lista,id){
+function mostrarListaContatos(){
 
-    const box=document.getElementById(id);
-
-    if(!box) return;
-
-    if(!lista.length){
-
-        box.innerHTML=
-            `<div class="empty">
-                Nenhum contato encontrado.
-            </div>`;
-
-        return;
-    }
-
-    box.innerHTML=lista.map((c)=>{
-
-        const indice=contatos.indexOf(c);
-
-        return `
-        <div class="contato">
-
-            <div class="contato-top">
-
-                <div>
-                    <div class="contato-nome">
-                        ${escapar(c.nome)}
-                    </div>
-
-                    <div class="contato-numero">
-                        ${escapar(c.numero)}
-                    </div>
-                </div>
-
-                <span class="badge">
-                    ${escapar(c.status)}
-                </span>
-
-            </div>
-
-            <div class="contato-info">
-                DDD: ${escapar(c.ddd)}
-                ${c.grupo ? " • Grupo: "+escapar(c.grupo) : ""}
-                ${c.observacao ? "<br>"+escapar(c.observacao) : ""}
-            </div>
-
-            <div class="contato-acoes">
-
-                <button onclick="abrirWhatsApp('${escapar(c.numero)}')">
-                    📱 WhatsApp
-                </button>
-
-                <button onclick="alternarFavorito(${indice})">
-                    ${c.favorito ? "⭐ Favorito" : "☆ Favoritar"}
-                </button>
-
-                <button onclick="alterarStatus(${indice})">
-                    🔄 Status
-                </button>
-
-                <button onclick="excluirContato(${indice})">
-                    🗑️ Excluir
-                </button>
-
-            </div>
-
-        </div>
-        `;
-
-    }).join("");
-}
-
-function excluirContato(indice){
-
-    if(!confirm("Excluir este contato?"))
-        return;
-
-    contatos.splice(indice,1);
-
-    salvarContatos();
-
-    atualizarTudo();
-}
-
-function alternarFavorito(indice){
-
-    contatos[indice].favorito=
-        !contatos[indice].favorito;
-
-    salvarContatos();
-
-    atualizarTudo();
-}
-
-function alterarStatus(indice){
-
-    const ordem=[
-        "ON",
-        "ANALISE",
-        "CAIU"
-    ];
-
-    const atual=
-        ordem.indexOf(
-            contatos[indice].status
-        );
-
-    contatos[indice].status=
-        ordem[(atual+1)%ordem.length];
-
-    salvarContatos();
-
-    atualizarTudo();
-}
-
-
-/* =========================
-   BUSCA
-========================= */
-
-function buscarContatos(){
-
-    const box=
-        document.getElementById(
-            "resultadoBusca"
-        );
-
-    if(!box) return;
-
-    const campo=
-        document.getElementById(
-            "campoBusca"
-        );
-
-    const termo=
-        (campo?.value || "")
-        .toLowerCase()
-        .trim();
-
-    if(!termo){
-
-        box.innerHTML=
-            `<div class="empty">
-                Digite algo para pesquisar.
-            </div>`;
-
-        return;
-    }
-
-    const encontrados=
-        contatos.filter(c=>
-
-            c.nome.toLowerCase().includes(termo) ||
-
-            c.numero.includes(termo) ||
-
-            c.ddd.includes(termo) ||
-
-            c.grupo.toLowerCase().includes(termo) ||
-
-            c.observacao.toLowerCase().includes(termo)
-
-        );
-
-    renderizarListaContatos(
-        encontrados,
-        "resultadoBusca"
-    );
-}
-
-
-/* =========================
-   LISTA RÁPIDA
-========================= */
-
-function renderizarListaRapida(){
-
-    const box=
-        document.getElementById(
-            "listaRapidaConteudo"
-        );
-
-    if(!box) return;
+    const area =
+        document.getElementById('areaContato');
 
     if(!contatos.length){
 
-        box.innerHTML=
-            `<div class="empty">
+        area.innerHTML = `
+            <div class="card empty">
                 Nenhum contato cadastrado.
-            </div>`;
+            </div>
+        `;
 
         return;
     }
 
-    box.innerHTML=`
+    area.innerHTML = `
+        <div class="card">
+            <h3>📋 Contatos</h3>
 
+            ${contatos.map(c => `
+                <div class="contact">
+
+                    <div class="contact-info">
+                        <strong>${esc(c.nome)}</strong>
+                        <small>${esc(c.numero)} • DDD ${esc(c.ddd || '-')}</small>
+                        <br>
+                        <small>${esc(c.cidade || '')}</small>
+                    </div>
+
+                    <div class="contact-actions">
+
+                        <span class="status ${c.status}">
+                            ${c.status === 'analise' ? '🟡' :
+                              c.status === 'on' ? '🟢' : '🔴'}
+                        </span>
+
+                        <button class="small-btn"
+                            onclick="editarContato(${c.id})">
+                            ✏️
+                        </button>
+
+                        <button class="small-btn"
+                            onclick="abrirContatoWhatsApp('${esc(c.numero)}')">
+                            📲
+                        </button>
+
+                    </div>
+
+                </div>
+            `).join('')}
+
+        </div>
+    `;
+}
+
+function editarContato(id){
+
+    const c =
+        contatos.find(x => x.id === id);
+
+    if(!c) return;
+
+    const area =
+        document.getElementById('areaContato');
+
+    area.innerHTML = `
         <div class="card">
 
-            <button
-                class="btn btn-verde btn-full"
-                onclick="copiarTodosNumeros()">
+            <h3>✏️ Editar contato</h3>
 
-                📋 Copiar todos os números
+            <br>
 
+            <div class="field">
+                <label>Nome</label>
+                <input id="editNome" value="${esc(c.nome)}">
+            </div>
+
+            <div class="field">
+                <label>Número</label>
+                <input id="editNumero" value="${esc(c.numero)}">
+            </div>
+
+            <div class="field">
+                <label>DDD</label>
+                <input id="editDDD" maxlength="3"
+                    value="${esc(c.ddd || '')}"
+                    oninput="editarCidadeDDD()">
+            </div>
+
+            <div class="field">
+                <label>Cidade / região</label>
+                <input id="editCidade"
+                    value="${esc(c.cidade || '')}"
+                    readonly>
+            </div>
+
+            <div class="field">
+                <label>Status</label>
+                <select id="editStatus">
+
+                    <option value="analise"
+                        ${c.status === 'analise' ? 'selected' : ''}>
+                        🟡 ANÁLISE
+                    </option>
+
+                    <option value="on"
+                        ${c.status === 'on' ? 'selected' : ''}>
+                        🟢 ON
+                    </option>
+
+                    <option value="off"
+                        ${c.status === 'off' ? 'selected' : ''}>
+                        🔴 OFF
+                    </option>
+
+                </select>
+            </div>
+
+            <button class="primary"
+                onclick="salvarEdicao(${id})">
+                💾 SALVAR ALTERAÇÕES
             </button>
 
-            <button
-                class="btn btn-sec btn-full"
-                onclick="abrirTodosWhatsApp()">
+        </div>
+    `;
+}
 
-                📱 Abrir WhatsApp dos contatos
+function editarCidadeDDD(){
 
+    const ddd =
+        document.getElementById('editDDD').value;
+
+    document.getElementById('editCidade').value =
+        cidadesDDD[ddd] || '';
+}
+
+function salvarEdicao(id){
+
+    const c =
+        contatos.find(x => x.id === id);
+
+    if(!c) return;
+
+    c.nome =
+        document.getElementById('editNome').value.trim();
+
+    c.numero =
+        document.getElementById('editNumero').value.trim();
+
+    c.ddd =
+        document.getElementById('editDDD').value.trim();
+
+    c.cidade =
+        document.getElementById('editCidade').value.trim();
+
+    c.status =
+        document.getElementById('editStatus').value;
+
+    salvarContatos();
+
+    mostrarToast('Contato atualizado.');
+
+    mostrarListaContatos();
+}
+
+function abrirContatoWhatsApp(numero){
+
+    const limpo =
+        numero.replace(/\D/g,'');
+
+    window.open(
+        `https://wa.me/55${limpo}`,
+        '_blank'
+    );
+}
+
+
+/* ================= DDD ================= */
+
+function mostrarDDDs(){
+
+    const area =
+        document.getElementById('areaContato');
+
+    area.innerHTML = `
+        <div class="card">
+            <h3>📍 DDDs</h3>
+            <p class="muted">
+                Toque em um DDD para visualizar os contatos.
+            </p>
+
+            <br>
+
+            <div class="option-list">
+
+                ${Object.keys(cidadesDDD).map(ddd => `
+                    <button class="option"
+                        onclick="abrirDDD('${ddd}')">
+                        📍 <strong>${ddd}</strong>
+                        — ${cidadesDDD[ddd]}
+                    </button>
+                `).join('')}
+
+            </div>
+        </div>
+    `;
+}
+
+function abrirDDD(ddd){
+
+    const area =
+        document.getElementById('areaContato');
+
+    const lista =
+        contatos.filter(c => c.ddd === ddd);
+
+    area.innerHTML = `
+        <div class="card">
+
+            <h3>📍 DDD ${ddd}</h3>
+
+            <p class="muted">
+                ${cidadesDDD[ddd] || 'Cidade não cadastrada'}
+            </p>
+
+            <br>
+
+            <button class="secondary"
+                style="width:100%;"
+                onclick="editarDDD('${ddd}')">
+                ✏️ EDITAR DDD
             </button>
 
-        </div>
+            <br><br>
 
-        ${contatos.map((c,i)=>`
+            ${
+                lista.length
+                ? lista.map(c => `
+                    <div class="contact">
 
-            <label style="
-                display:flex;
-                align-items:center;
-                gap:10px;
-                background:var(--card);
-                border:1px solid var(--borda);
-                border-radius:12px;
-                padding:12px;
-                margin-bottom:7px;
-            ">
+                        <div class="contact-info">
+                            <strong>${esc(c.nome)}</strong>
+                            <small>${esc(c.numero)}</small>
+                        </div>
 
-                <input
-                    type="checkbox"
-                    class="checkRapido"
-                    value="${i}"
-                    style="width:auto"
-                >
+                        <span class="status ${c.status}">
+                            ${c.status === 'analise' ? '🟡 ANÁLISE' :
+                              c.status === 'on' ? '🟢 ON' : '🔴 OFF'}
+                        </span>
 
-                <span>
-                    <strong>${escapar(c.nome)}</strong><br>
-                    <small>${escapar(c.numero)}</small>
-                </span>
-
-            </label>
-
-        `).join("")}
-    `;
-}
-
-function copiarTodosNumeros(){
-
-    const checks=
-        document.querySelectorAll(
-            ".checkRapido:checked"
-        );
-
-    let lista=[];
-
-    checks.forEach(ch=>{
-        lista.push(
-            contatos[
-                Number(ch.value)
-            ].numero
-        );
-    });
-
-    if(!lista.length){
-        lista=contatos.map(c=>c.numero);
-    }
-
-    copiarTexto(lista.join("\n"));
-}
-
-function abrirTodosWhatsApp(){
-
-    const checks=
-        document.querySelectorAll(
-            ".checkRapido:checked"
-        );
-
-    let lista=[];
-
-    checks.forEach(ch=>{
-        lista.push(
-            contatos[
-                Number(ch.value)
-            ].numero
-        );
-    });
-
-    if(!lista.length){
-        alert("Selecione pelo menos um número.");
-        return;
-    }
-
-    lista.forEach((numero,i)=>{
-
-        setTimeout(()=>{
-            abrirWhatsApp(numero);
-        },i*700);
-
-    });
-}
-
-
-/* =========================
-   ESTATÍSTICAS
-========================= */
-
-function renderizarEstatisticas(){
-
-    const box=
-        document.getElementById(
-            "estatisticasConteudo"
-        );
-
-    if(!box) return;
-
-    const total=contatos.length;
-
-    const on=contatos.filter(
-        c=>c.status==="ON"
-    ).length;
-
-    const analise=contatos.filter(
-        c=>c.status==="ANALISE"
-    ).length;
-
-    const caiu=contatos.filter(
-        c=>c.status==="CAIU"
-    ).length;
-
-    const favoritos=contatos.filter(
-        c=>c.favorito
-    ).length;
-
-    box.innerHTML=`
-
-        <div class="stats">
-
-            <div class="stat">
-                <strong>${total}</strong>
-                <span>Total</span>
-            </div>
-
-            <div class="stat">
-                <strong>${on}</strong>
-                <span>ON</span>
-            </div>
-
-            <div class="stat">
-                <strong>${analise}</strong>
-                <span>ANÁLISE</span>
-            </div>
-
-            <div class="stat">
-                <strong>${caiu}</strong>
-                <span>CAIU</span>
-            </div>
-
-            <div class="stat">
-                <strong>${favoritos}</strong>
-                <span>Favoritos</span>
-            </div>
-
-            <div class="stat">
-                <strong>${new Set(contatos.map(c=>c.ddd)).size}</strong>
-                <span>DDDs</span>
-            </div>
+                    </div>
+                `).join('')
+                : `<div class="empty">Nenhum contato neste DDD.</div>`
+            }
 
         </div>
     `;
 }
 
+function editarDDD(ddd){
 
-/* =========================
-   GRUPOS
-========================= */
+    const atual =
+        cidadesDDD[ddd] || '';
 
-function renderizarGrupos(){
-
-    const box=
-        document.getElementById(
-            "gruposConteudo"
+    const novo =
+        prompt(
+            `Digite a cidade/região do DDD ${ddd}:`,
+            atual
         );
 
-    if(!box) return;
+    if(novo === null) return;
 
-    const mapa={};
-
-    contatos.forEach(c=>{
-
-        const grupo=
-            c.grupo || "Sem grupo";
-
-        if(!mapa[grupo])
-            mapa[grupo]=[];
-
-        mapa[grupo].push(c);
-
-    });
-
-    const grupos=
-        Object.keys(mapa);
-
-    if(!grupos.length){
-
-        box.innerHTML=
-            `<div class="empty">
-                Nenhum grupo encontrado.
-            </div>`;
-
-        return;
-    }
-
-    box.innerHTML=
-        grupos.map(grupo=>`
-
-        <div class="card">
-
-            <div style="font-weight:900">
-                👥 ${escapar(grupo)}
-            </div>
-
-            <div style="
-                color:var(--cinza);
-                margin-top:6px;
-                font-size:13px;
-            ">
-                ${mapa[grupo].length} contato(s)
-            </div>
-
-        </div>
-
-    `).join("");
-}
-
-
-/* =========================
-   ADVOGADO — CONFIG
-========================= */
-
-function salvarConfigAdvogado(){
-
-    advConfig={
-
-        nome:
-            document.getElementById(
-                "advConfigNome"
-            ).value.trim(),
-
-        oab:
-            document.getElementById(
-                "advConfigOab"
-            ).value.trim(),
-
-        escritorio:
-            document.getElementById(
-                "advConfigEscritorio"
-            ).value.trim(),
-
-        estilo:
-            document.getElementById(
-                "advConfigEstilo"
-            ).value
-
-    };
+    cidadesDDD[ddd] = novo;
 
     localStorage.setItem(
-        CHAVE_ADV_CONFIG,
-        JSON.stringify(advConfig)
+        'botBM3DDDs',
+        JSON.stringify(cidadesDDD)
     );
 
-    atualizarAssinaturaAdvogado();
+    mostrarToast('DDD atualizado.');
 
-    alert("Configuração salva!");
-}
-
-function carregarConfigAdvogado(){
-
-    document.getElementById(
-        "advConfigNome"
-    ).value=advConfig.nome || "";
-
-    document.getElementById(
-        "advConfigOab"
-    ).value=advConfig.oab || "";
-
-    document.getElementById(
-        "advConfigEscritorio"
-    ).value=advConfig.escritorio || "";
-
-    document.getElementById(
-        "advConfigEstilo"
-    ).value=
-        advConfig.estilo || "profissional";
-
-    atualizarAssinaturaAdvogado();
-}
-
-function atualizarAssinaturaAdvogado(){
-
-    const sub=
-        document.getElementById(
-            "advSubtitulo"
-        );
-
-    if(!sub) return;
-
-    if(advConfig.nome){
-
-        sub.textContent=
-            advConfig.nome+
-            (advConfig.oab
-                ? " • "+advConfig.oab
-                : "");
-
-    }else{
-
-        sub.textContent=
-            "Ferramentas profissionais para atendimento";
-
-    }
-}
-
-function assinaturaAdvogado(){
-
-    let linhas=[];
-
-    if(advConfig.nome)
-        linhas.push(advConfig.nome);
-
-    if(advConfig.oab)
-        linhas.push(advConfig.oab);
-
-    if(advConfig.escritorio)
-        linhas.push(advConfig.escritorio);
-
-    return linhas.length
-        ? "\n\n"+linhas.join("\n")
-        : "";
+    mostrarDDDs();
 }
 
 
-/* =========================
-   GERADOR DE RESPOSTAS
-========================= */
+/* ================= FAVORITOS ================= */
 
-function gerarRespostaAdvogado(){
+function atualizarFavoritos(){
 
-    const nome=
-        document.getElementById(
-            "advNomeCliente"
-        ).value.trim();
+    const area =
+        document.getElementById('listaFavoritos');
 
-    const pergunta=
-        document.getElementById(
-            "advPergunta"
-        ).value.trim();
+    const favoritos =
+        contatos.filter(c => c.favorito);
 
-    const estilo=
-        document.getElementById(
-            "advEstilo"
-        ).value;
+    if(!favoritos.length){
 
-    const assunto=
-        document.getElementById(
-            "advAssunto"
-        ).value;
-
-    if(!pergunta){
-
-        alert("Digite a pergunta ou situação do cliente.");
+        area.innerHTML =
+            '<div class="empty">Nenhum favorito.</div>';
 
         return;
     }
 
-    const saudacao=
-        nome ? "Olá, "+nome+"!" : "Olá!";
+    area.innerHTML =
+        favoritos.map(c => `
+            <div class="contact">
+                <div class="contact-info">
+                    <strong>${esc(c.nome)}</strong>
+                    <small>${esc(c.numero)}</small>
+                </div>
 
-    let corpo="";
-
-    if(assunto==="processo"){
-
-        corpo=
-        `${saudacao}\n\n`+
-        `Recebi sua mensagem. Sobre o andamento do processo, vou verificar as informações disponíveis e lhe atualizar com os dados pertinentes.\n\n`+
-        `Assim que eu tiver a informação confirmada, retorno para você.`;
-
-    }else if(assunto==="documentos"){
-
-        corpo=
-        `${saudacao}\n\n`+
-        `Para dar continuidade ao atendimento, preciso conferir os documentos necessários para o seu caso.\n\n`+
-        `Por favor, envie os documentos que foram solicitados para que possamos analisá-los adequadamente.`;
-
-    }else if(assunto==="audiencia"){
-
-        corpo=
-        `${saudacao}\n\n`+
-        `Sobre a audiência, vou conferir a data, horário, local e demais informações oficiais antes de lhe confirmar os detalhes.\n\n`+
-        `Assim que estiver tudo conferido, retorno para você.`;
-
-    }else if(assunto==="prazo"){
-
-        corpo=
-        `${saudacao}\n\n`+
-        `Sobre o prazo mencionado, é importante verificar as informações oficiais do processo e os documentos correspondentes antes de confirmar qualquer data.\n\n`+
-        `Vou conferir a situação e lhe passar uma orientação adequada.`;
-
-    }else if(assunto==="honorarios"){
-
-        corpo=
-        `${saudacao}\n\n`+
-        `Sobre os honorários, podemos conversar sobre os valores, condições e forma de pagamento de acordo com o serviço a ser realizado.\n\n`+
-        `Se desejar, podemos alinhar esses detalhes no atendimento.`;
-
-    }else if(assunto==="consulta"){
-
-        corpo=
-        `${saudacao}\n\n`+
-        `Para avaliar sua situação com segurança, preciso conhecer os detalhes do caso e analisar os documentos pertinentes.\n\n`+
-        `Podemos organizar uma consulta para tratar especificamente da sua situação.`;
-
-    }else{
-
-        corpo=
-        `${saudacao}\n\n`+
-        `Obrigado pelo contato. Recebi sua mensagem e vou analisar as informações apresentadas para poder lhe responder de forma adequada.\n\n`+
-        `Assim que eu concluir a verificação, retorno para você.`;
-
-    }
-
-    if(estilo==="formal"){
-
-        corpo=corpo
-            .replace("Olá!","Prezado(a),")
-            .replace("Olá,","Prezado(a),");
-
-    }
-
-    if(estilo==="objetivo"){
-
-        corpo=
-            `${saudacao}\n\n`+
-            `Recebi sua mensagem. Vou verificar as informações necessárias e retorno assim que possível.`;
-
-    }
-
-    if(estilo==="cordial"){
-
-        corpo=
-            `${saudacao}\n\n`+
-            `Obrigado por entrar em contato. Vou verificar sua situação com atenção e retorno assim que tiver as informações necessárias.\n\n`+
-            `Fico à disposição.`;
-
-    }
-
-    corpo+=assinaturaAdvogado();
-
-    const resultado=
-        document.getElementById(
-            "resultadoRespostaAdvogado"
-        );
-
-    resultado.innerHTML=`
-
-        <div class="card">
-
-            <span class="badge">
-                RESPOSTA GERADA
-            </span>
-
-            <div
-                id="textoRespostaAdvogado"
-                class="adv-list-text"
-                style="
-                    color:var(--texto);
-                    font-size:14px;
-                "
-            >${escapar(corpo)}</div>
-
-            <div class="btn-row">
-
-                <button
-                    class="btn btn-verde"
-                    onclick="copiarRespostaAdvogado()">
-                    📋 Copiar
+                <button class="small-btn"
+                    onclick="abrirContatoWhatsApp('${esc(c.numero)}')">
+                    📲
                 </button>
+            </div>
+        `).join('');
+}
 
-                <button
-                    class="btn btn-sec"
-                    onclick="salvarFavoritoAdvogado()">
-                    ⭐ Salvar
-                </button>
 
-                <button
-                    class="btn btn-sec"
-                    onclick="enviarRespostaWhatsApp()">
-                    📱 WhatsApp
-                </button>
+/* ================= HISTÓRICO ================= */
+
+function atualizarHistorico(){
+
+    const area =
+        document.getElementById('listaHistorico');
+
+    if(!historico.length){
+
+        area.innerHTML =
+            '<div class="empty">Nenhuma resposta gerada ainda.</div>';
+
+        return;
+    }
+
+    area.innerHTML =
+        historico.map(h => `
+            <div style="padding:12px 0;border-bottom:1px solid var(--borda);">
+
+                <small class="muted">${esc(h.data)}</small>
+
+                <p style="margin-top:6px;font-size:13px;">
+                    <strong>Pergunta:</strong>
+                    ${esc(h.pergunta)}
+                </p>
+
+                <p style="margin-top:6px;font-size:13px;">
+                    <strong>Resposta:</strong>
+                    ${esc(h.resposta)}
+                </p>
 
             </div>
-
-        </div>
-    `;
-
-    window.ultimaRespostaAdvogado=corpo;
+        `).join('');
 }
 
-function copiarRespostaAdvogado(){
 
-    if(!window.ultimaRespostaAdvogado)
-        return;
+/* ================= RESUMO ================= */
 
-    copiarTexto(
-        window.ultimaRespostaAdvogado
-    );
+function atualizarResumo(){
+
+    const analise =
+        contatos.filter(c => c.status === 'analise').length;
+
+    const on =
+        contatos.filter(c => c.status === 'on').length;
+
+    const off =
+        contatos.filter(c => c.status === 'off').length;
+
+    document.getElementById('qtdAnalise').textContent =
+        analise;
+
+    document.getElementById('qtdOn').textContent =
+        on;
+
+    document.getElementById('qtdOff').textContent =
+        off;
 }
 
-function enviarRespostaWhatsApp(){
 
-    if(!window.ultimaRespostaAdvogado)
-        return;
+/* ================= STORAGE ================= */
 
-    let numero=
-        document.getElementById(
-            "advTelefoneCliente"
-        ).value.trim();
-
-    const nome=
-        document.getElementById(
-            "advNomeCliente"
-        ).value.trim();
-
-    if(!numero && nome){
-
-        const cliente=
-            advClientes.find(c=>
-                c.nome.toLowerCase()===
-                nome.toLowerCase()
-            );
-
-        if(cliente)
-            numero=cliente.numero;
-    }
-
-    abrirWhatsApp(
-        numero,
-        window.ultimaRespostaAdvogado
-    );
-}
-
-function salvarFavoritoAdvogado(){
-
-    if(!window.ultimaRespostaAdvogado)
-        return;
-
-    const nome=
-        document.getElementById(
-            "advNomeCliente"
-        ).value.trim();
-
-    advFavoritos.unshift({
-
-        id:Date.now(),
-
-        titulo:
-            nome
-                ? "Resposta para "+nome
-                : "Resposta profissional",
-
-        texto:
-            window.ultimaRespostaAdvogado,
-
-        criadoEm:
-            new Date().toISOString()
-
-    });
+function salvarContatos(){
 
     localStorage.setItem(
-        CHAVE_ADV_FAVORITOS,
-        JSON.stringify(advFavoritos)
+        'botBM3Contatos',
+        JSON.stringify(contatos)
     );
 
-    alert("Mensagem salva nos favoritos!");
+    atualizarResumo();
+    atualizarFavoritos();
+}
 
-    renderizarFavoritosAdvogado();
+function atualizarTudo(){
+
+    atualizarResumo();
+    atualizarFavoritos();
+    atualizarHistorico();
 }
 
 
-/* =========================
-   RESPOSTAS RÁPIDAS
-========================= */
-
-const respostasRapidasAdvogado=[
-
-    {
-        titulo:"Mensagem recebida",
-        texto:
-`Olá! Recebi sua mensagem.
-
-Vou verificar as informações e retorno assim que possível.`
-    },
-
-    {
-        titulo:"Vou verificar o processo",
-        texto:
-`Olá!
-
-Vou verificar as informações disponíveis no processo e retorno assim que tiver uma atualização confirmada.`
-    },
-
-    {
-        titulo:"Solicitação de documentos",
-        texto:
-`Olá!
-
-Para dar continuidade ao atendimento, preciso que você envie os documentos solicitados.
-
-Assim que receber, farei a conferência necessária.`
-    },
-
-    {
-        titulo:"Confirmação de audiência",
-        texto:
-`Olá!
-
-Vou conferir os dados oficiais da audiência e confirmar a data, horário e demais informações para você.`
-    },
-
-    {
-        titulo:"Prazo",
-        texto:
-`Olá!
-
-Sobre o prazo, vou conferir as informações oficiais antes de lhe passar a confirmação da data.`
-    },
-
-    {
-        titulo:"Retorno ao cliente",
-        texto:
-`Olá!
-
-Estou verificando sua solicitação e retorno assim que tiver as informações necessárias.`
-    },
-
-    {
-        titulo:"Agradecimento",
-        texto:
-`Obrigado pelo contato.
-
-Fico à disposição para qualquer informação adicional relacionada ao atendimento.`
-    },
-
-    {
-        titulo:"Atendimento",
-        texto:
-`Olá!
-
-Podemos organizar o atendimento para entender melhor sua situação e verificar os documentos e informações necessários.`
-    }
-
-];
-
-function renderizarRespostasRapidasAdvogado(){
-
-    const box=
-        document.getElementById(
-            "listaRespostasRapidas"
-        );
-
-    if(!box) return;
-
-    box.innerHTML=
-        respostasRapidasAdvogado.map((item,i)=>`
-
-        <div class="adv-list-item">
-
-            <div class="adv-list-title">
-                ⚡ ${escapar(item.titulo)}
-            </div>
-
-            <div class="adv-list-text">
-                ${escapar(item.texto)}
-            </div>
-
-            <div class="adv-list-actions">
-
-                <button
-                    onclick="usarMensagemAdvogado(${i})">
-                    ✍️ Usar
-                </button>
-
-                <button
-                    onclick="copiarTextoAdvogado('${encodeURIComponent(item.texto)}')">
-                    📋 Copiar
-                </button>
-
-                <button
-                    onclick="salvarMensagemRapida(${i})">
-                    ⭐ Favoritar
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
-}
-
-function usarMensagemAdvogado(indice){
-
-    const item=
-        respostasRapidasAdvogado[indice];
-
-    navegar("gerarResposta");
-
-    setTimeout(()=>{
-
-        document.getElementById(
-            "advPergunta"
-        ).value=item.texto;
-
-        window.ultimaRespostaAdvogado=
-            item.texto;
-
-    },100);
-}
-
-function copiarTextoAdvogado(textoCodificado){
-
-    copiarTexto(
-        decodeURIComponent(textoCodificado)
-    );
-}
-
-function salvarMensagemRapida(indice){
-
-    const item=
-        respostasRapidasAdvogado[indice];
-
-    advFavoritos.unshift({
-
-        id:Date.now(),
-
-        titulo:item.titulo,
-
-        texto:item.texto,
-
-        criadoEm:
-            new Date().toISOString()
-
-    });
-
-    localStorage.setItem(
-        CHAVE_ADV_FAVORITOS,
-        JSON.stringify(advFavoritos)
-    );
-
-    alert("Salvo nos favoritos!");
-}
-
-
-/* =========================
-   MENSAGENS PRONTAS
-========================= */
-
-const mensagensProntasAdvogado=[
-
-    {
-        titulo:"Primeiro atendimento",
-
-        texto:
-`Olá!
-
-Obrigado por entrar em contato.
-
-Para que eu possa entender melhor sua situação, envie um breve relato dos acontecimentos e, se possível, os documentos relacionados ao caso.
-
-Após analisar as informações, podemos definir os próximos passos do atendimento.`
-    },
-
-    {
-        titulo:"Solicitar documentos",
-
-        texto:
-`Olá!
-
-Para prosseguirmos com o atendimento, preciso que você encaminhe os documentos solicitados.
-
-Se possível, envie os arquivos de forma legível e completa para que possam ser analisados adequadamente.
-
-Obrigado.`
-    },
-
-    {
-        titulo:"Atualização do processo",
-
-        texto:
-`Olá!
-
-Passando para informar que estou acompanhando a situação do processo.
-
-Assim que houver uma movimentação relevante ou uma informação que necessite da sua atenção, entrarei em contato para atualizar você.`
-    },
-
-    {
-        titulo:"Confirmação de atendimento",
-
-        texto:
-`Olá!
-
-Seu atendimento está confirmado.
-
-Caso precise enviar algum documento ou informação antes do horário combinado, pode encaminhar por aqui.`
-    },
-
-    {
-        titulo:"Lembrete de audiência",
-
-        texto:
-`Olá!
-
-Passando para lembrar sobre a audiência previamente informada.
-
-Antes do compromisso, confira atentamente a data, o horário e o local indicados nas informações oficiais encaminhadas pelo escritório.`
-    },
-
-    {
-        titulo:"Honorários",
-
-        texto:
-`Olá!
-
-Sobre os honorários, podemos alinhar os valores, condições e forma de pagamento conforme o serviço contratado.
-
-Caso tenha alguma dúvida sobre as condições, fico à disposição para esclarecer.`
-    },
-
-    {
-        titulo:"Encerramento",
-
-        texto:
-`Olá!
-
-Agradeço pelo contato.
-
-Caso surja alguma nova informação ou documento relacionado ao atendimento, pode encaminhar por este canal.
-
-Fico à disposição.`
-    },
-
-    {
-        titulo:"Aguardando documentos",
-
-        texto:
-`Olá!
-
-Ainda estou aguardando os documentos necessários para dar continuidade à análise.
-
-Assim que você encaminhar os arquivos, farei a conferência e seguiremos com o atendimento.`
-    }
-
-];
-
-function renderizarMensagensProntasAdvogado(){
-
-    const box=
-        document.getElementById(
-            "listaMensagensProntas"
-        );
-
-    if(!box) return;
-
-    box.innerHTML=
-        mensagensProntasAdvogado.map((item,i)=>`
-
-        <div class="adv-list-item">
-
-            <div class="adv-list-title">
-                💬 ${escapar(item.titulo)}
-            </div>
-
-            <div class="adv-list-text">
-                ${escapar(item.texto)}
-            </div>
-
-            <div class="adv-list-actions">
-
-                <button
-                    onclick="usarMensagemPronta(${i})">
-                    ✍️ Usar
-                </button>
-
-                <button
-                    onclick="copiarTextoAdvogado('${encodeURIComponent(item.texto)}')">
-                    📋 Copiar
-                </button>
-
-                <button
-                    onclick="salvarMensagemPronta(${i})">
-                    ⭐ Favoritar
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
-}
-
-function usarMensagemPronta(indice){
-
-    const item=
-        mensagensProntasAdvogado[indice];
-
-    window.ultimaRespostaAdvogado=
-        item.texto;
-
-    navegar("gerarResposta");
-
-    setTimeout(()=>{
-
-        document.getElementById(
-            "advPergunta"
-        ).value=item.texto;
-
-    },100);
-}
-
-function salvarMensagemPronta(indice){
-
-    const item=
-        mensagensProntasAdvogado[indice];
-
-    advFavoritos.unshift({
-
-        id:Date.now(),
-
-        titulo:item.titulo,
-
-        texto:item.texto,
-
-        criadoEm:
-            new Date().toISOString()
-
-    });
-
-    localStorage.setItem(
-        CHAVE_ADV_FAVORITOS,
-        JSON.stringify(advFavoritos)
-    );
-
-    alert("Mensagem salva nos favoritos!");
-}
-
-
-/* =========================
-   PERGUNTAS FREQUENTES
-========================= */
-
-const perguntasAdvogado=[
-
-    {
-        pergunta:"Como está meu processo?",
-
-        resposta:
-`Vou verificar a movimentação e as informações disponíveis no processo antes de lhe passar uma atualização confirmada.`
-    },
-
-    {
-        pergunta:"Quando sai a sentença?",
-
-        resposta:
-`A data de uma sentença depende do andamento do processo e dos atos realizados pelo juízo. Vou verificar a situação atual para lhe informar o que for possível confirmar.`
-    },
-
-    {
-        pergunta:"Qual é o prazo?",
-
-        resposta:
-`Para confirmar um prazo, é necessário verificar o processo e as informações oficiais correspondentes. Vou conferir os dados antes de confirmar uma data.`
-    },
-
-    {
-        pergunta:"Preciso ir à audiência?",
-
-        resposta:
-`Vou conferir os dados da audiência e as orientações específicas do seu caso para informar corretamente sobre o comparecimento.`
-    },
-
-    {
-        pergunta:"Quais documentos devo enviar?",
-
-        resposta:
-`Os documentos necessários dependem da situação analisada. Envie os documentos que foram solicitados e, caso seja necessário algum documento adicional, informarei.`
-    },
-
-    {
-        pergunta:"Quanto são os honorários?",
-
-        resposta:
-`Os honorários dependem do serviço e das condições do atendimento. Podemos conversar sobre os valores e a forma de pagamento antes da contratação.`
-    },
-
-    {
-        pergunta:"Como faço o pagamento?",
-
-        resposta:
-`Posso informar as condições e formas de pagamento utilizadas no atendimento. Se precisar, encaminho os dados correspondentes.`
-    },
-
-    {
-        pergunta:"Quando posso ser atendido?",
-
-        resposta:
-`Vou verificar os horários disponíveis para atendimento e podemos combinar o melhor horário para conversarmos sobre sua situação.`
-    }
-
-];
-
-function renderizarPerguntasAdvogado(){
-
-    const box=
-        document.getElementById(
-            "listaPerguntasFrequentes"
-        );
-
-    if(!box) return;
-
-    box.innerHTML=
-        perguntasAdvogado.map((item,i)=>`
-
-        <div class="faq">
-
-            <div class="faq-q">
-                ❓ ${escapar(item.pergunta)}
-            </div>
-
-            <div class="faq-a">
-                ${escapar(item.resposta)}
-            </div>
-
-            <div class="adv-list-actions">
-
-                <button
-                    onclick="usarPerguntaAdvogado(${i})">
-                    ✍️ Usar resposta
-                </button>
-
-                <button
-                    onclick="copiarTextoAdvogado('${encodeURIComponent(item.resposta)}')">
-                    📋 Copiar
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
-}
-
-function usarPerguntaAdvogado(indice){
-
-    const item=
-        perguntasAdvogado[indice];
-
-    window.ultimaRespostaAdvogado=
-        item.resposta;
-
-    navegar("gerarResposta");
-
-    setTimeout(()=>{
-
-        document.getElementById(
-            "advPergunta"
-        ).value=item.pergunta;
-
-    },100);
-}
-
-
-/* =========================
-   CLIENTES DO ADVOGADO
-========================= */
-
-function adicionarClienteAdvogado(){
-
-    const nome=
-        document.getElementById(
-            "clienteAdvNome"
-        ).value.trim();
-
-    const numero=
-        document.getElementById(
-            "clienteAdvNumero"
-        ).value.trim();
-
-    const processo=
-        document.getElementById(
-            "clienteAdvProcesso"
-        ).value.trim();
-
-    const assunto=
-        document.getElementById(
-            "clienteAdvAssunto"
-        ).value.trim();
-
-    const observacoes=
-        document.getElementById(
-            "clienteAdvObs"
-        ).value.trim();
-
-    if(!nome){
-
-        alert("Digite o nome do cliente.");
-
-        return;
-    }
-
-    advClientes.push({
-
-        id:Date.now(),
-
-        nome,
-
-        numero:normalizarNumero(numero),
-
-        processo,
-
-        assunto,
-
-        observacoes,
-
-        criadoEm:
-            new Date().toISOString()
-
-    });
-
-    localStorage.setItem(
-        CHAVE_ADV_CLIENTES,
-        JSON.stringify(advClientes)
-    );
-
-    document.getElementById(
-        "clienteAdvNome"
-    ).value="";
-
-    document.getElementById(
-        "clienteAdvNumero"
-    ).value="";
-
-    document.getElementById(
-        "clienteAdvProcesso"
-    ).value="";
-
-    document.getElementById(
-        "clienteAdvAssunto"
-    ).value="";
-
-    document.getElementById(
-        "clienteAdvObs"
-    ).value="";
-
-    renderizarClientesAdvogado();
-
-    alert("Cliente cadastrado!");
-}
-
-function renderizarClientesAdvogado(){
-
-    const box=
-        document.getElementById(
-            "listaClientesAdvogado"
-        );
-
-    if(!box) return;
-
-    if(!advClientes.length){
-
-        box.innerHTML=
-            `<div class="empty">
-                Nenhum cliente cadastrado.
-            </div>`;
-
-        return;
-    }
-
-    box.innerHTML=
-        advClientes.map(cliente=>`
-
-        <div class="adv-list-item">
-
-            <div class="adv-list-title">
-                👤 ${escapar(cliente.nome)}
-            </div>
-
-            <div class="adv-list-text">
-
-                ${cliente.numero
-                    ? "📱 "+escapar(cliente.numero)+"\n"
-                    : ""}
-
-                ${cliente.processo
-                    ? "📄 Processo: "+escapar(cliente.processo)+"\n"
-                    : ""}
-
-                ${cliente.assunto
-                    ? "⚖️ Assunto: "+escapar(cliente.assunto)+"\n"
-                    : ""}
-
-                ${cliente.observacoes
-                    ? "📝 "+escapar(cliente.observacoes)
-                    : ""}
-
-            </div>
-
-            <div class="adv-list-actions">
-
-                <button
-                    onclick="usarClienteAdvogado(${cliente.id})">
-                    ✍️ Atendimento
-                </button>
-
-                <button
-                    onclick="abrirWhatsApp('${escapar(cliente.numero)}')">
-                    📱 WhatsApp
-                </button>
-
-                <button
-                    onclick="excluirClienteAdvogado(${cliente.id})">
-                    🗑️ Excluir
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
-}
-
-function usarClienteAdvogado(id){
-
-    const cliente=
-        advClientes.find(c=>c.id===id);
-
-    if(!cliente) return;
-
-    navegar("gerarResposta");
-
-    setTimeout(()=>{
-
-        document.getElementById(
-            "advNomeCliente"
-        ).value=cliente.nome;
-
-        document.getElementById(
-            "advTelefoneCliente"
-        ).value=cliente.numero;
-
-    },100);
-}
-
-function excluirClienteAdvogado(id){
-
-    if(!confirm("Excluir este cliente?"))
-        return;
-
-    advClientes=
-        advClientes.filter(
-            c=>c.id!==id
-        );
-
-    localStorage.setItem(
-        CHAVE_ADV_CLIENTES,
-        JSON.stringify(advClientes)
-    );
-
-    renderizarClientesAdvogado();
-}
-
-
-/* =========================
-   FAVORITOS ADVOGADO
-========================= */
-
-function renderizarFavoritosAdvogado(){
-
-    const box=
-        document.getElementById(
-            "listaFavoritosAdvogado"
-        );
-
-    if(!box) return;
-
-    if(!advFavoritos.length){
-
-        box.innerHTML=
-            `<div class="empty">
-                Nenhuma mensagem salva.
-            </div>`;
-
-        return;
-    }
-
-    box.innerHTML=
-        advFavoritos.map(item=>`
-
-        <div class="adv-list-item">
-
-            <div class="adv-list-title">
-                ⭐ ${escapar(item.titulo)}
-            </div>
-
-            <div class="adv-list-text">
-                ${escapar(item.texto)}
-            </div>
-
-            <div class="adv-list-actions">
-
-                <button
-                    onclick="usarFavoritoAdvogado(${item.id})">
-                    ✍️ Usar
-                </button>
-
-                <button
-                    onclick="copiarTextoAdvogado('${encodeURIComponent(item.texto)}')">
-                    📋 Copiar
-                </button>
-
-                <button
-                    onclick="abrirWhatsApp('', '${encodeURIComponent(item.texto)}')">
-                    📱 WhatsApp
-                </button>
-
-                <button
-                    onclick="excluirFavoritoAdvogado(${item.id})">
-                    🗑️ Excluir
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
-}
-
-function usarFavoritoAdvogado(id){
-
-    const item=
-        advFavoritos.find(
-            f=>f.id===id
-        );
-
-    if(!item) return;
-
-    window.ultimaRespostaAdvogado=
-        item.texto;
-
-    navegar("gerarResposta");
-
-    setTimeout(()=>{
-
-        document.getElementById(
-            "advPergunta"
-        ).value=item.texto;
-
-    },100);
-}
-
-function excluirFavoritoAdvogado(id){
-
-    if(!confirm("Excluir esta mensagem?"))
-        return;
-
-    advFavoritos=
-        advFavoritos.filter(
-            f=>f.id!==id
-        );
-
-    localStorage.setItem(
-        CHAVE_ADV_FAVORITOS,
-        JSON.stringify(advFavoritos)
-    );
-
-    renderizarFavoritosAdvogado();
-}
-
-function limparFormularioAdvogado(){
-
-    const ids=[
-        "advNomeCliente",
-        "advTelefoneCliente",
-        "advPergunta"
-    ];
-
-    ids.forEach(id=>{
-
-        const el=
-            document.getElementById(id);
-
-        if(el) el.value="";
-
-    });
-
-    const resultado=
-        document.getElementById(
-            "resultadoRespostaAdvogado"
-        );
-
-    if(resultado)
-        resultado.innerHTML="";
-
-    window.ultimaRespostaAdvogado="";
-
-    alert("Gerador limpo!");
-}
-
-
-/* =========================
-   BACKUP
-========================= */
+/* ================= BACKUP ================= */
 
 function exportarBackup(){
 
-    const backup={
-
+    const dados = {
         contatos,
-
-        advClientes,
-
-        advFavoritos,
-
-        advConfig,
-
-        data:
-            new Date().toISOString()
-
+        historico,
+        cidadesDDD,
+        data:new Date().toISOString()
     };
 
-    const blob=
+    const blob =
         new Blob(
-            [JSON.stringify(backup,null,2)],
-            {type:"application/json"}
+            [JSON.stringify(dados,null,2)],
+            {type:'application/json'}
         );
 
-    const url=
+    const url =
         URL.createObjectURL(blob);
 
-    const a=
-        document.createElement("a");
+    const a =
+        document.createElement('a');
 
-    a.href=url;
-
-    a.download=
-        "backup-bot-bm3.json";
-
+    a.href = url;
+    a.download = 'backup-bot-bm3.json';
     a.click();
 
     URL.revokeObjectURL(url);
+
+    mostrarToast('Backup exportado.');
 }
 
-function importarBackup(event){
+function limparTudo(){
 
-    const arquivo=
-        event.target.files[0];
-
-    if(!arquivo) return;
-
-    const leitor=
-        new FileReader();
-
-    leitor.onload=function(e){
-
-        try{
-
-            const dados=
-                JSON.parse(e.target.result);
-
-            if(dados.contatos)
-                contatos=dados.contatos;
-
-            if(dados.advClientes)
-                advClientes=dados.advClientes;
-
-            if(dados.advFavoritos)
-                advFavoritos=dados.advFavoritos;
-
-            if(dados.advConfig)
-                advConfig=dados.advConfig;
-
-            salvarContatos();
-
-            localStorage.setItem(
-                CHAVE_ADV_CLIENTES,
-                JSON.stringify(advClientes)
-            );
-
-            localStorage.setItem(
-                CHAVE_ADV_FAVORITOS,
-                JSON.stringify(advFavoritos)
-            );
-
-            localStorage.setItem(
-                CHAVE_ADV_CONFIG,
-                JSON.stringify(advConfig)
-            );
-
-            atualizarTudo();
-
-            alert("Backup importado com sucesso!");
-
-        }catch{
-
-            alert("Arquivo de backup inválido.");
-
-        }
-
-    };
-
-    leitor.readAsText(arquivo);
-}
-
-
-/* =========================
-   TEMA
-========================= */
-
-function alternarTema(){
-
-    document.body.classList.toggle("dark");
-
-    localStorage.setItem(
-        CHAVE_TEMA,
-        document.body.classList.contains("dark")
-            ? "dark"
-            : "light"
-    );
-}
-
-function carregarTema(){
-
-    const tema=
-        localStorage.getItem(
-            CHAVE_TEMA
-        );
-
-    if(tema==="dark")
-        document.body.classList.add("dark");
-}
-
-
-/* =========================
-   APAGAR DADOS
-========================= */
-
-function limparTodosDados(){
-
-    if(!confirm(
-        "Tem certeza que deseja apagar todos os contatos?"
-    )) return;
-
-    contatos=[];
-
-    salvarContatos();
-
-    atualizarTudo();
-
-    alert("Contatos apagados.");
-}
-
-
-/* =========================
-   ABRIR TODOS
-========================= */
-
-function abrirTodosWhatsApp(){
-
-    if(!contatos.length){
-
-        alert("Nenhum contato cadastrado.");
-
+    if(!confirm('Tem certeza que deseja apagar os contatos?')){
         return;
     }
 
-    contatos.forEach((c,i)=>{
+    contatos = [];
 
-        setTimeout(()=>{
+    salvarContatos();
 
-            abrirWhatsApp(c.numero);
-
-        },i*700);
-
-    });
+    mostrarToast('Contatos apagados.');
 }
 
 
-/* =========================
-   INICIALIZAÇÃO
-========================= */
+/* ================= UTIL ================= */
 
-carregarTema();
+function esc(valor){
 
-carregarSelectDDDs();
+    return String(valor ?? '')
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#039;');
+}
 
-atualizarInicio();
 
-atualizarAssinaturaAdvogado();
+/* ================= DDD SALVO ================= */
 
-setTimeout(()=>{
+const dddSalvo =
+    localStorage.getItem('botBM3DDDs');
 
-    const loading=
-        document.getElementById(
-            "loading"
+if(dddSalvo){
+
+    try{
+
+        const personalizado =
+            JSON.parse(dddSalvo);
+
+        Object.assign(
+            cidadesDDD,
+            personalizado
         );
 
-    if(loading)
-        loading.style.display="none";
+    }catch(e){}
+}
 
-},2500);
+
+/* ================= INICIALIZAÇÃO ================= */
+
+atualizarTudo();
+
+setTimeout(()=>{
+    document.getElementById('loading').style.display = 'none';
+},1800);
 
 </script>
 
