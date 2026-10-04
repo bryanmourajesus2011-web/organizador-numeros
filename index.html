@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizador de Números</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f4f7;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    input, textarea, button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background: #111;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    .contato {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 10px;
+    }
+
+    .excluir {
+      background: #d62828;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>📱 Organizador de Números</h1>
+
+  <div class="card">
+    <h2>Adicionar contato</h2>
+
+    <input id="nome" placeholder="Nome">
+
+    <input id="numero" placeholder="Número do WhatsApp">
+
+    <input id="grupo" placeholder="Grupo / Etiqueta">
+
+    <textarea id="observacao" placeholder="Observação"></textarea>
+
+    <button onclick="adicionarContato()">
+      ➕ Adicionar número
+    </button>
+  </div>
+
+  <div class="card">
+
+    <h2>🔎 Pesquisar</h2>
+
+    <input
+      id="pesquisa"
+      placeholder="Digite nome ou número..."
+      oninput="mostrarContatos()"
+    >
+
+  </div>
+
+  <div class="card">
+
+    <h2>📋 Meus contatos</h2>
+
+    <div id="lista"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+let contatos = JSON.parse(
+  localStorage.getItem("contatos") || "[]"
+);
+
+function salvar() {
+  localStorage.setItem(
+    "contatos",
+    JSON.stringify(contatos)
+  );
+}
+
+function adicionarContato() {
+
+  const nome = document.getElementById("nome").value;
+  const numero = document.getElementById("numero").value;
+  const grupo = document.getElementById("grupo").value;
+  const observacao =
+    document.getElementById("observacao").value;
+
+  if (!nome || !numero) {
+    alert("Digite pelo menos o nome e o número.");
+    return;
+  }
+
+  contatos.push({
+    nome,
+    numero,
+    grupo,
+    observacao
+  });
+
+  salvar();
+
+  document.getElementById("nome").value = "";
+  document.getElementById("numero").value = "";
+  document.getElementById("grupo").value = "";
+  document.getElementById("observacao").value = "";
+
+  mostrarContatos();
+
+  alert("Contato adicionado!");
+}
+
+function excluirContato(index) {
+
+  if (confirm("Deseja excluir este contato?")) {
+
+    contatos.splice(index, 1);
+
+    salvar();
+
+    mostrarContatos();
+  }
+}
+
+function mostrarContatos() {
+
+  const lista = document.getElementById("lista");
+
+  const pesquisa =
+    document.getElementById("pesquisa").value.toLowerCase();
+
+  lista.innerHTML = "";
+
+  contatos.forEach((contato, index) => {
+
+    const texto =
+      `${contato.nome} ${contato.numero} ${contato.grupo}`
+      .toLowerCase();
+
+    if (!texto.includes(pesquisa)) return;
+
+    const div = document.createElement("div");
+
+    div.className = "contato";
+
+    div.innerHTML = `
+      <strong>👤 ${contato.nome}</strong><br>
+      📱 ${contato.numero}<br>
+      🏷️ ${contato.grupo || "Sem grupo"}<br>
+      📝 ${contato.observacao || "Sem observação"}
+
+      <button onclick="window.open('https://wa.me/${contato.numero.replace(/\D/g,'')}', '_blank')">
+        💬 Abrir WhatsApp
+      </button>
+
+      <button class="excluir"
+        onclick="excluirContato(${index})">
+        🗑️ Excluir
+      </button>
+    `;
+
+    lista.appendChild(div);
+
+  });
+}
+
+mostrarContatos();
+
+</script>
+
+</body>
+</html>
