@@ -7,6 +7,7 @@
 <title>🍀 BOT DO BM3 🍀</title>
 
 <style>
+
 :root{
     --verde:#008c45;
     --verde2:#00a651;
@@ -34,7 +35,7 @@ body{
 }
 
 /* =========================
-   TELA DE ABERTURA
+   ABERTURA
 ========================= */
 
 #loading{
@@ -44,12 +45,18 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
+
     background:
-        linear-gradient(145deg,
-        #008c45 0%,
-        #ffffff 48%,
-        #cd212a 100%);
-    transition:opacity .7s ease,visibility .7s ease;
+        linear-gradient(
+            145deg,
+            #008c45 0%,
+            #ffffff 48%,
+            #cd212a 100%
+        );
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
 }
 
 #loading.saindo{
@@ -72,17 +79,24 @@ body{
     display:block;
     margin:0 auto 20px;
     border-radius:28px;
+
     animation:
         logoPulso 1.8s ease-in-out infinite,
         logoEntrada 1.2s ease both;
-    filter:drop-shadow(0 15px 25px rgba(0,0,0,.25));
+
+    filter:
+        drop-shadow(
+            0 15px 25px rgba(0,0,0,.25)
+        );
 }
 
 .loading-title{
     font-size:27px;
     font-weight:900;
     letter-spacing:.5px;
-    text-shadow:0 3px 10px rgba(0,0,0,.25);
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,.25);
 }
 
 .loading-status{
@@ -90,14 +104,15 @@ body{
     font-size:15px;
     font-weight:700;
     opacity:.95;
-    animation:statusEntrada 1.5s ease both;
 }
 
 .loading-bar{
     width:220px;
     height:5px;
     margin:24px auto 0;
+
     background:rgba(255,255,255,.35);
+
     border-radius:20px;
     overflow:hidden;
 }
@@ -108,28 +123,40 @@ body{
     height:100%;
     background:white;
     border-radius:20px;
-    animation:carregamento 2s ease forwards;
+
+    animation:
+        carregamento 2s ease forwards;
 }
 
 @keyframes entradaPremium{
     from{
         opacity:0;
-        transform:translateY(25px) scale(.96);
+        transform:
+            translateY(25px)
+            scale(.96);
     }
+
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
 @keyframes logoEntrada{
     from{
         opacity:0;
-        transform:translateY(35px) scale(.7);
+        transform:
+            translateY(35px)
+            scale(.7);
     }
+
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
@@ -137,23 +164,20 @@ body{
     0%,100%{
         transform:scale(1);
     }
+
     50%{
         transform:scale(1.045);
     }
 }
 
-@keyframes statusEntrada{
-    from{
-        opacity:0;
-    }
-    to{
-        opacity:1;
-    }
-}
-
 @keyframes carregamento{
-    from{width:0;}
-    to{width:100%;}
+    from{
+        width:0;
+    }
+
+    to{
+        width:100%;
+    }
 }
 
 /* =========================
@@ -162,24 +186,36 @@ body{
 
 .topo{
     background:
-        linear-gradient(135deg,
-        var(--verde) 0%,
-        var(--verde2) 45%,
-        var(--vermelho) 100%);
+        linear-gradient(
+            135deg,
+            var(--verde),
+            var(--verde2) 45%,
+            var(--vermelho)
+        );
+
     color:white;
-    padding:22px 18px;
+    padding:20px 18px;
     text-align:center;
-    box-shadow:0 5px 20px rgba(0,0,0,.12);
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.12);
 }
 
 .logo-topo{
-    width:82px;
-    height:82px;
+    width:78px;
+    height:78px;
+
     object-fit:contain;
+
     display:block;
     margin:0 auto 8px;
+
     border-radius:18px;
-    filter:drop-shadow(0 5px 10px rgba(0,0,0,.20));
+
+    filter:
+        drop-shadow(
+            0 5px 10px rgba(0,0,0,.20)
+        );
 }
 
 .topo h1{
@@ -206,14 +242,21 @@ body{
 .menu-btn{
     width:100%;
     border:none;
+
     border-radius:15px;
+
     padding:15px;
+
     background:white;
     color:var(--texto);
+
     font-size:16px;
     font-weight:800;
+
     box-shadow:var(--sombra);
+
     cursor:pointer;
+
     transition:.2s ease;
 }
 
@@ -231,68 +274,127 @@ body{
 }
 
 /* =========================
-   CARDS DO MENU
+   CARDS MENU
 ========================= */
 
 .menu-card{
     background:var(--card);
+
     border:1px solid var(--borda);
+
     border-radius:18px;
+
     padding:17px;
+
     margin-bottom:11px;
+
     box-shadow:var(--sombra);
+
     cursor:pointer;
+
     display:flex;
     align-items:center;
     gap:13px;
+
     transition:
         transform .22s ease,
         box-shadow .22s ease;
+
     opacity:0;
     transform:translateY(18px);
 }
 
 .menu.aberto .menu-card{
-    animation:cardEntrada .5s ease forwards;
+    animation:
+        cardEntrada .5s ease forwards;
 }
 
-.menu.aberto .menu-card:nth-child(1){animation-delay:.04s;}
-.menu.aberto .menu-card:nth-child(2){animation-delay:.09s;}
-.menu.aberto .menu-card:nth-child(3){animation-delay:.14s;}
-.menu.aberto .menu-card:nth-child(4){animation-delay:.19s;}
-.menu.aberto .menu-card:nth-child(5){animation-delay:.24s;}
-.menu.aberto .menu-card:nth-child(6){animation-delay:.29s;}
-.menu.aberto .menu-card:nth-child(7){animation-delay:.34s;}
-.menu.aberto .menu-card:nth-child(8){animation-delay:.39s;}
-.menu.aberto .menu-card:nth-child(9){animation-delay:.44s;}
-.menu.aberto .menu-card:nth-child(10){animation-delay:.49s;}
+.menu.aberto .menu-card:nth-child(1){
+    animation-delay:.04s;
+}
+
+.menu.aberto .menu-card:nth-child(2){
+    animation-delay:.09s;
+}
+
+.menu.aberto .menu-card:nth-child(3){
+    animation-delay:.14s;
+}
+
+.menu.aberto .menu-card:nth-child(4){
+    animation-delay:.19s;
+}
+
+.menu.aberto .menu-card:nth-child(5){
+    animation-delay:.24s;
+}
+
+.menu.aberto .menu-card:nth-child(6){
+    animation-delay:.29s;
+}
+
+.menu.aberto .menu-card:nth-child(7){
+    animation-delay:.34s;
+}
+
+.menu.aberto .menu-card:nth-child(8){
+    animation-delay:.39s;
+}
+
+.menu.aberto .menu-card:nth-child(9){
+    animation-delay:.44s;
+}
+
+.menu.aberto .menu-card:nth-child(10){
+    animation-delay:.49s;
+}
+
+.menu.aberto .menu-card:nth-child(11){
+    animation-delay:.54s;
+}
 
 @keyframes cardEntrada{
+
     from{
         opacity:0;
         transform:translateY(18px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
+
 }
 
 .menu-card:hover{
     transform:translateY(-2px);
-    box-shadow:0 14px 35px rgba(0,0,0,.13);
+
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.13);
 }
 
 .menu-icon{
     width:45px;
     height:45px;
+
     border-radius:13px;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-size:22px;
-    background:linear-gradient(135deg,#008c45,#00a651);
+
+    background:
+        linear-gradient(
+            135deg,
+            #008c45,
+            #00a651
+        );
+
     color:white;
+
     flex-shrink:0;
 }
 
@@ -303,8 +405,11 @@ body{
 
 .menu-info span{
     display:block;
+
     color:var(--cinza);
+
     font-size:12px;
+
     margin-top:3px;
 }
 
@@ -314,25 +419,36 @@ body{
 
 .tela{
     display:none;
+
     max-width:900px;
+
     margin:20px auto;
-    padding:0 15px 40px;
+
+    padding:
+        0
+        15px
+        40px;
 }
 
 .tela.ativa{
     display:block;
-    animation:telaEntrada .35s ease both;
+
+    animation:
+        telaEntrada .35s ease both;
 }
 
 @keyframes telaEntrada{
+
     from{
         opacity:0;
         transform:translateY(10px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
+
 }
 
 .tela.transicao{
@@ -342,78 +458,133 @@ body{
 .titulo-tela{
     font-size:23px;
     font-weight:900;
+
     margin-bottom:15px;
 }
 
 .subtitulo{
     color:var(--cinza);
+
     margin-bottom:18px;
 }
 
 /* =========================
-   CARDS
+   CARD
 ========================= */
 
 .card{
     background:var(--card);
+
     border:1px solid var(--borda);
+
     border-radius:18px;
-    padding:18px;
+
+    padding:16px;
+
     margin-bottom:14px;
+
     box-shadow:var(--sombra);
 }
 
 .card h3{
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
 /* =========================
-   FORMULÁRIOS
+   FORMULÁRIO COMPACTO
 ========================= */
+
+.form-card{
+    padding:15px;
+}
+
+.form-row{
+    margin-bottom:11px;
+}
+
+.form-row:last-child{
+    margin-bottom:0;
+}
 
 label{
     display:block;
+
     font-weight:800;
-    margin:12px 0 7px;
+
+    margin-bottom:6px;
+
+    font-size:14px;
 }
 
 input,
 textarea,
 select{
+
     width:100%;
-    border:1px solid var(--borda);
-    border-radius:12px;
-    padding:13px;
+
+    border:
+        1px solid
+        var(--borda);
+
+    border-radius:11px;
+
+    padding:11px 12px;
+
     font-size:15px;
+
     outline:none;
+
     background:white;
+
     color:var(--texto);
+
 }
 
 textarea{
-    min-height:90px;
+    min-height:75px;
     resize:vertical;
 }
 
 input:focus,
 textarea:focus,
 select:focus{
+
     border-color:var(--verde);
-    box-shadow:0 0 0 3px rgba(0,140,69,.10);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0,140,69,.10);
+
 }
 
+/* =========================
+   BOTÕES
+========================= */
+
 .btn{
+
     width:100%;
+
     border:none;
-    border-radius:13px;
-    padding:14px;
-    margin-top:14px;
+
+    border-radius:12px;
+
+    padding:13px;
+
+    margin-top:12px;
+
     background:var(--verde);
+
     color:white;
+
     font-size:15px;
+
     font-weight:900;
+
     cursor:pointer;
+
     transition:.2s ease;
+
 }
 
 .btn:active{
@@ -428,34 +599,59 @@ select:focus{
     background:#17221d;
 }
 
+.btn.whatsapp{
+    background:#25D366;
+}
+
 /* =========================
    RESUMO
 ========================= */
 
 .resumo{
+
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+        repeat(2,1fr);
+
     gap:12px;
+
     margin-bottom:18px;
+
 }
 
 .resumo-card{
+
     background:white;
-    border:1px solid var(--borda);
+
+    border:
+        1px solid
+        var(--borda);
+
     border-radius:17px;
+
     padding:16px;
+
     box-shadow:var(--sombra);
+
 }
 
 .resumo-card .numero{
+
     font-size:27px;
+
     font-weight:900;
+
 }
 
 .resumo-card .texto{
+
     color:var(--cinza);
+
     font-size:12px;
+
     margin-top:4px;
+
 }
 
 /* =========================
@@ -463,19 +659,33 @@ select:focus{
 ========================= */
 
 .contato{
+
     background:white;
-    border:1px solid var(--borda);
+
+    border:
+        1px solid
+        var(--borda);
+
     border-radius:18px;
+
     padding:17px;
+
     margin-bottom:13px;
+
     box-shadow:var(--sombra);
+
 }
 
 .contato-topo{
+
     display:flex;
+
     justify-content:space-between;
+
     gap:10px;
+
     align-items:flex-start;
+
 }
 
 .contato h3{
@@ -488,43 +698,67 @@ select:focus{
 }
 
 .info{
-    margin-top:11px;
+
+    margin-top:10px;
+
     font-size:13px;
+
     color:var(--cinza);
+
 }
 
 .acoes{
+
     display:flex;
+
     flex-direction:column;
+
     gap:8px;
+
     margin-top:13px;
+
 }
 
 .acoes button{
+
     border:none;
+
     border-radius:11px;
+
     padding:11px;
+
     font-weight:800;
+
     cursor:pointer;
+
 }
 
 .whatsapp{
+
     background:#25D366;
+
     color:white;
+
 }
 
 .excluir{
+
     background:#ffe9e9;
+
     color:#b40000;
+
 }
 
 .status-select{
-    margin-top:10px;
+    margin-top:7px;
 }
 
 .favorito{
+
     font-size:22px;
+
     cursor:pointer;
+
 }
 
 /* =========================
@@ -532,27 +766,46 @@ select:focus{
 ========================= */
 
 .stats-grid{
+
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+        repeat(2,1fr);
+
     gap:12px;
+
 }
 
 .stat{
+
     padding:18px;
+
     border-radius:17px;
+
     background:white;
-    border:1px solid var(--borda);
+
+    border:
+        1px solid
+        var(--borda);
+
     box-shadow:var(--sombra);
+
 }
 
 .stat strong{
+
     display:block;
+
     font-size:25px;
+
 }
 
 .stat span{
+
     color:var(--cinza);
+
     font-size:12px;
+
 }
 
 /* =========================
@@ -560,34 +813,220 @@ select:focus{
 ========================= */
 
 .grupo-item{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
+    gap:10px;
+
     padding:15px;
+
     background:white;
-    border:1px solid var(--borda);
+
+    border:
+        1px solid
+        var(--borda);
+
     border-radius:14px;
+
     margin-bottom:10px;
-    box-shadow:0 5px 18px rgba(0,0,0,.06);
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,.06);
+
 }
 
 /* =========================
-   DARK MODE
+   LISTA RÁPIDA
+========================= */
+
+.lista-rapida-topo{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:14px;
+
+}
+
+.contador-selecao{
+
+    background:#eaf7ef;
+
+    color:var(--verde);
+
+    padding:7px 11px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+
+}
+
+.selecao-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:13px;
+
+    margin-bottom:8px;
+
+    background:white;
+
+    border:
+        1px solid
+        var(--borda);
+
+    border-radius:14px;
+
+    transition:.2s ease;
+
+}
+
+.selecao-item.selecionado{
+
+    border-color:var(--verde);
+
+    background:#f0faf4;
+
+}
+
+.selecao-item input[type="checkbox"]{
+
+    width:21px;
+
+    height:21px;
+
+    accent-color:var(--verde);
+
+    flex-shrink:0;
+
+}
+
+.selecao-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.selecao-info strong{
+
+    display:block;
+
+    font-size:15px;
+
+}
+
+.selecao-info span{
+
+    display:block;
+
+    color:var(--cinza);
+
+    font-size:12px;
+
+    margin-top:3px;
+
+}
+
+.acoes-lista{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:8px;
+
+    margin-top:14px;
+
+}
+
+.acoes-lista button{
+
+    border:none;
+
+    border-radius:11px;
+
+    padding:12px 8px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+}
+
+.btn-copiar{
+
+    background:var(--verde);
+
+    color:white;
+
+}
+
+.btn-limpar{
+
+    background:#ecefed;
+
+    color:var(--texto);
+
+}
+
+.lista-vazia{
+
+    text-align:center;
+
+    padding:20px;
+
+    color:var(--cinza);
+
+}
+
+/* =========================
+   DARK
 ========================= */
 
 body.dark{
+
     --fundo:#101513;
+
     --texto:#f2f5f3;
+
     --cinza:#a8b1ac;
+
     --card:#18201c;
+
     --borda:#29332e;
+
 }
 
 body.dark input,
 body.dark textarea,
 body.dark select{
+
     background:#111714;
+
     color:white;
+
 }
 
 body.dark .menu-btn{
@@ -599,33 +1038,56 @@ body.dark .excluir{
     background:#381d1d;
 }
 
+body.dark .selecao-item{
+    background:#18201c;
+}
+
+body.dark .selecao-item.selecionado{
+    background:#15281e;
+}
+
+body.dark .contador-selecao{
+    background:#183522;
+}
+
 /* =========================
    RESPONSIVO
 ========================= */
 
 @media(min-width:700px){
+
     .resumo{
-        grid-template-columns:repeat(4,1fr);
+
+        grid-template-columns:
+            repeat(4,1fr);
+
     }
 
     .acoes{
+
         flex-direction:row;
+
     }
 
     .acoes button{
+
         flex:1;
+
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <!-- =========================
-     ABERTURA PREMIUM
+     ABERTURA
 ========================= -->
 
 <div id="loading">
+
     <div class="loading-box">
 
         <img
@@ -647,6 +1109,7 @@ body.dark .excluir{
         </div>
 
     </div>
+
 </div>
 
 <!-- =========================
@@ -662,7 +1125,10 @@ body.dark .excluir{
     >
 
     <h1>🍀 BOT DO BM3 🍀</h1>
-    <p>Organizador de contatos</p>
+
+    <p>
+        Organizador de contatos
+    </p>
 
 </header>
 
@@ -672,90 +1138,269 @@ body.dark .excluir{
 
 <div class="menu-area">
 
-    <button class="menu-btn" onclick="abrirMenu()">
+    <button
+        class="menu-btn"
+        onclick="abrirMenu()"
+    >
         ☰ Abrir Menu
     </button>
 
-    <div class="menu" id="menu">
+    <div
+        class="menu"
+        id="menu"
+    >
 
-        <div class="menu-card" onclick="trocarTela('inicio')">
-            <div class="menu-icon">🏠</div>
-            <div class="menu-info">
-                <strong>Início</strong>
-                <span>Resumo do sistema</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('inicio')"
+        >
+
+            <div class="menu-icon">
+                🏠
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Início
+                </strong>
+
+                <span>
+                    Resumo do sistema
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="menu-card" onclick="trocarTela('adicionar')">
-            <div class="menu-icon">➕</div>
-            <div class="menu-info">
-                <strong>Adicionar contato</strong>
-                <span>Cadastrar novo número</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('adicionar')"
+        >
+
+            <div class="menu-icon">
+                ➕
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Adicionar contato
+                </strong>
+
+                <span>
+                    Cadastrar novo número
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="menu-card" onclick="trocarTela('buscar')">
-            <div class="menu-icon">🔎</div>
-            <div class="menu-info">
-                <strong>Buscar</strong>
-                <span>Pesquisar contatos</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('buscar')"
+        >
+
+            <div class="menu-icon">
+                🔎
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Buscar
+                </strong>
+
+                <span>
+                    Pesquisar contatos
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="menu-card" onclick="trocarTela('contatos')">
-            <div class="menu-icon">👥</div>
-            <div class="menu-info">
-                <strong>Contatos</strong>
-                <span>Ver todos os números</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('contatos')"
+        >
+
+            <div class="menu-icon">
+                👥
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Contatos
+                </strong>
+
+                <span>
+                    Ver todos os números
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="menu-card" onclick="trocarTela('grupos')">
-            <div class="menu-icon">🏷️</div>
-            <div class="menu-info">
-                <strong>Grupos</strong>
-                <span>Organizar por grupos</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('listaRapida')"
+        >
+
+            <div class="menu-icon">
+                📋
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Lista rápida
+                </strong>
+
+                <span>
+                    Selecionar e copiar números
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="menu-card" onclick="trocarTela('estatisticas')">
-            <div class="menu-icon">📊</div>
-            <div class="menu-info">
-                <strong>Estatísticas</strong>
-                <span>Visualizar números e status</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('grupos')"
+        >
+
+            <div class="menu-icon">
+                🏷️
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Grupos
+                </strong>
+
+                <span>
+                    Organizar por grupos
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="menu-card" onclick="trocarTela('favoritos')">
-            <div class="menu-icon">⭐</div>
-            <div class="menu-info">
-                <strong>Favoritos</strong>
-                <span>Contatos favoritos</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('estatisticas')"
+        >
+
+            <div class="menu-icon">
+                📊
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Estatísticas
+                </strong>
+
+                <span>
+                    Visualizar números e status
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="menu-card" onclick="trocarTela('backup')">
-            <div class="menu-icon">💾</div>
-            <div class="menu-info">
-                <strong>Backup</strong>
-                <span>Salvar e importar dados</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('favoritos')"
+        >
+
+            <div class="menu-icon">
+                ⭐
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Favoritos
+                </strong>
+
+                <span>
+                    Contatos favoritos
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="menu-card" onclick="trocarTela('configuracao')">
-            <div class="menu-icon">⚙️</div>
-            <div class="menu-info">
-                <strong>Configuração</strong>
-                <span>Personalizar o sistema</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('backup')"
+        >
+
+            <div class="menu-icon">
+                💾
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Backup
+                </strong>
+
+                <span>
+                    Salvar e importar dados
+                </span>
+
+            </div>
+
         </div>
 
-        <div class="menu-card" onclick="trocarTela('sobre')">
-            <div class="menu-icon">ℹ️</div>
-            <div class="menu-info">
-                <strong>Sobre o BOT</strong>
-                <span>Informações do sistema</span>
+        <div
+            class="menu-card"
+            onclick="trocarTela('configuracao')"
+        >
+
+            <div class="menu-icon">
+                ⚙️
             </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Configuração
+                </strong>
+
+                <span>
+                    Personalizar o sistema
+                </span>
+
+            </div>
+
+        </div>
+
+        <div
+            class="menu-card"
+            onclick="trocarTela('sobre')"
+        >
+
+            <div class="menu-icon">
+                ℹ️
+            </div>
+
+            <div class="menu-info">
+
+                <strong>
+                    Sobre o BOT
+                </strong>
+
+                <span>
+                    Informações do sistema
+                </span>
+
+            </div>
+
         </div>
 
     </div>
@@ -766,7 +1411,10 @@ body.dark .excluir{
      INÍCIO
 ========================= -->
 
-<section class="tela ativa" id="inicio">
+<section
+    class="tela ativa"
+    id="inicio"
+>
 
     <div class="titulo-tela">
         🏠 Início
@@ -779,36 +1427,84 @@ body.dark .excluir{
     <div class="resumo">
 
         <div class="resumo-card">
-            <div class="numero" id="totalContatos">0</div>
-            <div class="texto">👥 Total contatos</div>
+
+            <div
+                class="numero"
+                id="totalContatos"
+            >
+                0
+            </div>
+
+            <div class="texto">
+                👥 Total contatos
+            </div>
+
         </div>
 
         <div class="resumo-card">
-            <div class="numero" id="totalOn">0</div>
-            <div class="texto">🟢 ZAP ON</div>
+
+            <div
+                class="numero"
+                id="totalOn"
+            >
+                0
+            </div>
+
+            <div class="texto">
+                🟢 ZAP ON
+            </div>
+
         </div>
 
         <div class="resumo-card">
-            <div class="numero" id="totalAnalise">0</div>
-            <div class="texto">🟡 Em análise</div>
+
+            <div
+                class="numero"
+                id="totalAnalise"
+            >
+                0
+            </div>
+
+            <div class="texto">
+                🟡 Em análise
+            </div>
+
         </div>
 
         <div class="resumo-card">
-            <div class="numero" id="totalCaiu">0</div>
-            <div class="texto">🔴 ZAP CAIU</div>
+
+            <div
+                class="numero"
+                id="totalCaiu"
+            >
+                0
+            </div>
+
+            <div class="texto">
+                🔴 ZAP CAIU
+            </div>
+
         </div>
 
     </div>
 
     <div class="card">
-        <h3>🍀 BOT DO BM3</h3>
+
+        <h3>
+            🍀 BOT DO BM3
+        </h3>
+
         <p class="subtitulo">
             Sistema de organização e gerenciamento dos seus contatos.
         </p>
 
-        <button class="btn" onclick="trocarTela('adicionar')">
+        <button
+            class="btn"
+            onclick="trocarTela('adicionar')"
+        >
             ➕ Adicionar contato
         </button>
+
     </div>
 
 </section>
@@ -817,25 +1513,74 @@ body.dark .excluir{
      ADICIONAR
 ========================= -->
 
-<section class="tela" id="adicionar">
+<section
+    class="tela"
+    id="adicionar"
+>
 
-    <div class="titulo-tela">➕ Adicionar contato</div>
+    <div class="titulo-tela">
+        ➕ Adicionar contato
+    </div>
 
-    <div class="card">
+    <div class="card form-card">
 
-        <label>Nome</label>
-        <input id="nome" placeholder="Digite o nome">
+        <div class="form-row">
 
-        <label>WhatsApp</label>
-        <input id="numero" type="tel" placeholder="Ex: 5513999999999">
+            <label>
+                Nome
+            </label>
 
-        <label>Grupo</label>
-        <input id="grupo" placeholder="Ex: Clientes">
+            <input
+                id="nome"
+                placeholder="Nome do contato"
+            >
 
-        <label>Observação</label>
-        <textarea id="observacao" placeholder="Digite uma observação"></textarea>
+        </div>
 
-        <button class="btn" onclick="adicionarContato()">
+        <div class="form-row">
+
+            <label>
+                WhatsApp
+            </label>
+
+            <input
+                id="numero"
+                type="tel"
+                placeholder="Ex: 5513999999999"
+            >
+
+        </div>
+
+        <div class="form-row">
+
+            <label>
+                Grupo
+            </label>
+
+            <input
+                id="grupo"
+                placeholder="Ex: Clientes"
+            >
+
+        </div>
+
+        <div class="form-row">
+
+            <label>
+                Observação
+            </label>
+
+            <textarea
+                id="observacao"
+                placeholder="Observação opcional"
+            ></textarea>
+
+        </div>
+
+        <button
+            class="btn"
+            onclick="adicionarContato()"
+        >
             💾 Salvar contato
         </button>
 
@@ -847,9 +1592,14 @@ body.dark .excluir{
      BUSCAR
 ========================= -->
 
-<section class="tela" id="buscar">
+<section
+    class="tela"
+    id="buscar"
+>
 
-    <div class="titulo-tela">🔎 Buscar</div>
+    <div class="titulo-tela">
+        🔎 Buscar
+    </div>
 
     <div class="card">
 
@@ -869,11 +1619,74 @@ body.dark .excluir{
      CONTATOS
 ========================= -->
 
-<section class="tela" id="contatos">
+<section
+    class="tela"
+    id="contatos"
+>
 
-    <div class="titulo-tela">👥 Contatos</div>
+    <div class="titulo-tela">
+        👥 Contatos
+    </div>
 
     <div id="listaContatos"></div>
+
+</section>
+
+<!-- =========================
+     LISTA RÁPIDA
+========================= -->
+
+<section
+    class="tela"
+    id="listaRapida"
+>
+
+    <div class="titulo-tela">
+        📋 Lista rápida para WhatsApp
+    </div>
+
+    <div class="subtitulo">
+        Selecione os contatos que deseja copiar.
+    </div>
+
+    <div class="card">
+
+        <div class="lista-rapida-topo">
+
+            <strong>
+                Contatos
+            </strong>
+
+            <div
+                class="contador-selecao"
+                id="contadorSelecao"
+            >
+                0 selecionados
+            </div>
+
+        </div>
+
+        <div id="listaSelecao"></div>
+
+        <div class="acoes-lista">
+
+            <button
+                class="btn-copiar"
+                onclick="copiarSelecionados()"
+            >
+                📋 Copiar números
+            </button>
+
+            <button
+                class="btn-limpar"
+                onclick="limparSelecao()"
+            >
+                🧹 Limpar seleção
+            </button>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -881,9 +1694,14 @@ body.dark .excluir{
      GRUPOS
 ========================= -->
 
-<section class="tela" id="grupos">
+<section
+    class="tela"
+    id="grupos"
+>
 
-    <div class="titulo-tela">🏷️ Grupos</div>
+    <div class="titulo-tela">
+        🏷️ Grupos
+    </div>
 
     <div id="listaGrupos"></div>
 
@@ -893,30 +1711,63 @@ body.dark .excluir{
      ESTATÍSTICAS
 ========================= -->
 
-<section class="tela" id="estatisticas">
+<section
+    class="tela"
+    id="estatisticas"
+>
 
-    <div class="titulo-tela">📊 Estatísticas</div>
+    <div class="titulo-tela">
+        📊 Estatísticas
+    </div>
 
     <div class="stats-grid">
 
         <div class="stat">
-            <strong id="statTotal">0</strong>
-            <span>👥 Total</span>
+
+            <strong id="statTotal">
+                0
+            </strong>
+
+            <span>
+                👥 Total
+            </span>
+
         </div>
 
         <div class="stat">
-            <strong id="statOn">0</strong>
-            <span>🟢 ZAP ON</span>
+
+            <strong id="statOn">
+                0
+            </strong>
+
+            <span>
+                🟢 ZAP ON
+            </span>
+
         </div>
 
         <div class="stat">
-            <strong id="statAnalise">0</strong>
-            <span>⚠️ Em análise</span>
+
+            <strong id="statAnalise">
+                0
+            </strong>
+
+            <span>
+                ⚠️ Em análise
+            </span>
+
         </div>
 
         <div class="stat">
-            <strong id="statCaiu">0</strong>
-            <span>🔴 ZAP CAIU</span>
+
+            <strong id="statCaiu">
+                0
+            </strong>
+
+            <span>
+                🔴 ZAP CAIU
+            </span>
+
         </div>
 
     </div>
@@ -927,9 +1778,14 @@ body.dark .excluir{
      FAVORITOS
 ========================= -->
 
-<section class="tela" id="favoritos">
+<section
+    class="tela"
+    id="favoritos"
+>
 
-    <div class="titulo-tela">⭐ Favoritos</div>
+    <div class="titulo-tela">
+        ⭐ Favoritos
+    </div>
 
     <div id="listaFavoritos"></div>
 
@@ -939,19 +1795,29 @@ body.dark .excluir{
      BACKUP
 ========================= -->
 
-<section class="tela" id="backup">
+<section
+    class="tela"
+    id="backup"
+>
 
-    <div class="titulo-tela">💾 Backup</div>
+    <div class="titulo-tela">
+        💾 Backup
+    </div>
 
     <div class="card">
 
-        <h3>Exportar dados</h3>
+        <h3>
+            Exportar dados
+        </h3>
 
         <p class="subtitulo">
             Salve todos os seus contatos em um arquivo.
         </p>
 
-        <button class="btn" onclick="exportarBackup()">
+        <button
+            class="btn"
+            onclick="exportarBackup()"
+        >
             📤 Exportar backup
         </button>
 
@@ -959,7 +1825,9 @@ body.dark .excluir{
 
     <div class="card">
 
-        <h3>Importar dados</h3>
+        <h3>
+            Importar dados
+        </h3>
 
         <p class="subtitulo">
             Restaure um backup salvo anteriormente.
@@ -971,7 +1839,10 @@ body.dark .excluir{
             accept=".json"
         >
 
-        <button class="btn" onclick="importarBackup()">
+        <button
+            class="btn"
+            onclick="importarBackup()"
+        >
             📥 Importar backup
         </button>
 
@@ -983,15 +1854,25 @@ body.dark .excluir{
      CONFIGURAÇÃO
 ========================= -->
 
-<section class="tela" id="configuracao">
+<section
+    class="tela"
+    id="configuracao"
+>
 
-    <div class="titulo-tela">⚙️ Configuração</div>
+    <div class="titulo-tela">
+        ⚙️ Configuração
+    </div>
 
     <div class="card">
 
-        <h3>🎨 Personalização</h3>
+        <h3>
+            🎨 Personalização
+        </h3>
 
-        <button class="btn" onclick="alternarTema()">
+        <button
+            class="btn"
+            onclick="alternarTema()"
+        >
             🌙 Alternar tema
         </button>
 
@@ -999,7 +1880,9 @@ body.dark .excluir{
 
     <div class="card">
 
-        <h3>🕐 Atualizações</h3>
+        <h3>
+            🕐 Atualizações
+        </h3>
 
         <p class="subtitulo">
             O status dos contatos registra automaticamente
@@ -1014,26 +1897,34 @@ body.dark .excluir{
      SOBRE
 ========================= -->
 
-<section class="tela" id="sobre">
+<section
+    class="tela"
+    id="sobre"
+>
 
-    <div class="titulo-tela">ℹ️ Sobre o BOT</div>
+    <div class="titulo-tela">
+        ℹ️ Sobre o BOT
+    </div>
 
     <div class="card">
 
-        <h3>🍀 BOT DO BM3 🍀</h3>
+        <h3>
+            🍀 BOT DO BM3 🍀
+        </h3>
 
         <p class="subtitulo">
-            Organizador de contatos desenvolvido para facilitar
-            o gerenciamento de números, grupos e status.
+            Sistema de organização e gerenciamento
+            de contatos, grupos e status.
         </p>
 
         <p class="subtitulo">
-            🇮🇹 Sistema com identidade visual inspirada nas cores
-            da Itália.
+            🇮🇹 Identidade visual inspirada nas
+            cores da Itália.
         </p>
 
         <p class="subtitulo">
-            Versão atual: <strong>Premium</strong>
+            Versão atual:
+            <strong>Premium</strong>
         </p>
 
     </div>
@@ -1046,39 +1937,67 @@ body.dark .excluir{
    CONFIGURAÇÃO
 ========================= */
 
-const CHAVE_CONTATOS = "botBM3Contatos";
-const CHAVE_TEMA = "temaBotBM3";
+const CHAVE_CONTATOS =
+    "botBM3Contatos";
+
+const CHAVE_TEMA =
+    "temaBotBM3";
 
 let contatos =
-    JSON.parse(localStorage.getItem(CHAVE_CONTATOS)) || [];
+    JSON.parse(
+        localStorage.getItem(CHAVE_CONTATOS)
+    ) || [];
 
-let telaAtual = "inicio";
-let bloqueioTela = false;
+let selecionados =
+    new Set();
+
+let telaAtual =
+    "inicio";
+
+let bloqueioTela =
+    false;
 
 
 /* =========================
    CARREGAMENTO
 ========================= */
 
-window.addEventListener("load", () => {
+window.addEventListener(
+    "load",
+    () => {
 
-    setTimeout(() => {
+        setTimeout(
+            () => {
 
-        const loading =
-            document.getElementById("loading");
+                const loading =
+                    document.getElementById(
+                        "loading"
+                    );
 
-        loading.classList.add("saindo");
+                loading.classList.add(
+                    "saindo"
+                );
 
-        setTimeout(() => {
-            loading.style.display = "none";
-        }, 700);
+                setTimeout(
+                    () => {
 
-    }, 2100);
+                        loading.style.display =
+                            "none";
 
-    aplicarTema();
-    atualizarTudo();
+                    },
+                    700
+                );
 
-});
+            },
+            2100
+        );
+
+        aplicarTema();
+
+        atualizarTudo();
+
+    }
+);
 
 
 /* =========================
@@ -1088,9 +2007,13 @@ window.addEventListener("load", () => {
 function abrirMenu(){
 
     const menu =
-        document.getElementById("menu");
+        document.getElementById(
+            "menu"
+        );
 
-    menu.classList.toggle("aberto");
+    menu.classList.toggle(
+        "aberto"
+    );
 
 }
 
@@ -1101,53 +2024,91 @@ function abrirMenu(){
 
 function trocarTela(id){
 
-    if(bloqueioTela) return;
+    if(bloqueioTela)
+        return;
 
-    if(id === telaAtual) return;
+    if(id === telaAtual)
+        return;
 
-    bloqueioTela = true;
+    bloqueioTela =
+        true;
 
     const atual =
-        document.getElementById(telaAtual);
+        document.getElementById(
+            telaAtual
+        );
 
     const nova =
-        document.getElementById(id);
+        document.getElementById(
+            id
+        );
 
     if(!nova){
-        bloqueioTela = false;
+
+        bloqueioTela =
+            false;
+
         return;
+
     }
 
     if(atual){
-        atual.classList.add("transicao");
+
+        atual.classList.add(
+            "transicao"
+        );
+
     }
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        document
-            .querySelectorAll(".tela")
-            .forEach(tela => {
+            document
+                .querySelectorAll(
+                    ".tela"
+                )
+                .forEach(
+                    tela => {
 
-                tela.classList.remove("ativa");
-                tela.classList.remove("transicao");
+                        tela.classList.remove(
+                            "ativa"
+                        );
 
-            });
+                        tela.classList.remove(
+                            "transicao"
+                        );
 
-        nova.classList.add("ativa");
+                    }
+                );
 
-        telaAtual = id;
+            nova.classList.add(
+                "ativa"
+            );
 
-        atualizarTela(id);
+            telaAtual =
+                id;
 
-        document
-            .getElementById("menu")
-            .classList.remove("aberto");
+            atualizarTela(id);
 
-        setTimeout(() => {
-            bloqueioTela = false;
-        },120);
+            document
+                .getElementById("menu")
+                .classList.remove(
+                    "aberto"
+                );
 
-    },280);
+            setTimeout(
+                () => {
+
+                    bloqueioTela =
+                        false;
+
+                },
+                120
+            );
+
+        },
+        280
+    );
 
 }
 
@@ -1158,21 +2119,20 @@ function trocarTela(id){
 
 function atualizarTela(id){
 
-    if(id === "contatos"){
+    if(id === "contatos")
         renderizarContatos();
-    }
 
-    if(id === "grupos"){
+    if(id === "grupos")
         renderizarGrupos();
-    }
 
-    if(id === "favoritos"){
+    if(id === "favoritos")
         renderizarFavoritos();
-    }
 
-    if(id === "estatisticas"){
+    if(id === "estatisticas")
         atualizarEstatisticas();
-    }
+
+    if(id === "listaRapida")
+        renderizarListaRapida();
 
 }
 
@@ -1192,28 +2152,43 @@ function salvar(){
 
 
 /* =========================
-   ADICIONAR
+   ADICIONAR CONTATO
 ========================= */
 
 function adicionarContato(){
 
     const nome =
-        document.getElementById("nome").value.trim();
+        document
+        .getElementById("nome")
+        .value
+        .trim();
 
     const numero =
-        document.getElementById("numero").value.trim();
+        document
+        .getElementById("numero")
+        .value
+        .trim();
 
     const grupo =
-        document.getElementById("grupo").value.trim();
+        document
+        .getElementById("grupo")
+        .value
+        .trim();
 
     const observacao =
-        document.getElementById("observacao").value.trim();
+        document
+        .getElementById("observacao")
+        .value
+        .trim();
 
     if(!nome || !numero){
 
-        alert("Preencha o nome e o WhatsApp.");
+        alert(
+            "Preencha o nome e o WhatsApp."
+        );
 
         return;
+
     }
 
     const agora =
@@ -1222,29 +2197,49 @@ function adicionarContato(){
     contatos.push({
 
         nome,
+
         numero,
+
         grupo,
+
         observacao,
 
-        status:"ANALISE",
+        status:
+            "ANALISE",
 
-        favorito:false,
+        favorito:
+            false,
 
         ultimaAtualizacao:
-            agora.toLocaleString("pt-BR")
+            agora.toLocaleString(
+                "pt-BR"
+            )
 
     });
 
     salvar();
 
-    document.getElementById("nome").value = "";
-    document.getElementById("numero").value = "";
-    document.getElementById("grupo").value = "";
-    document.getElementById("observacao").value = "";
+    document
+        .getElementById("nome")
+        .value = "";
+
+    document
+        .getElementById("numero")
+        .value = "";
+
+    document
+        .getElementById("grupo")
+        .value = "";
+
+    document
+        .getElementById("observacao")
+        .value = "";
 
     atualizarTudo();
 
-    alert("Contato adicionado com sucesso!");
+    alert(
+        "Contato adicionado com sucesso!"
+    );
 
 }
 
@@ -1253,19 +2248,35 @@ function adicionarContato(){
    STATUS
 ========================= */
 
-function alterarStatus(index,status){
+function alterarStatus(
+    index,
+    status
+){
 
-    contatos[index].status = status;
+    if(!contatos[index])
+        return;
 
-    contatos[index].ultimaAtualizacao =
-        new Date().toLocaleString("pt-BR");
+    contatos[index].status =
+        status;
+
+    contatos[index]
+        .ultimaAtualizacao =
+            new Date()
+            .toLocaleString(
+                "pt-BR"
+            );
 
     salvar();
 
     atualizarTudo();
 
-    if(telaAtual === "contatos"){
+    if(
+        telaAtual ===
+        "contatos"
+    ){
+
         renderizarContatos();
+
     }
 
 }
@@ -1277,13 +2288,30 @@ function alterarStatus(index,status){
 
 function abrirWhatsApp(index){
 
-    let numero =
-        contatos[index].numero.replace(/\D/g,"");
+    if(!contatos[index])
+        return;
 
-    if(!numero) return;
+    let numero =
+        contatos[index]
+        .numero
+        .replace(
+            /\D/g,
+            ""
+        );
+
+    if(!numero){
+
+        alert(
+            "Número inválido."
+        );
+
+        return;
+
+    }
 
     window.open(
-        "https://wa.me/" + numero,
+        "https://wa.me/" +
+        numero,
         "_blank"
     );
 
@@ -1295,6 +2323,9 @@ function abrirWhatsApp(index){
 ========================= */
 
 function alternarFavorito(index){
+
+    if(!contatos[index])
+        return;
 
     contatos[index].favorito =
         !contatos[index].favorito;
@@ -1312,11 +2343,30 @@ function alternarFavorito(index){
 
 function excluirContato(index){
 
-    if(!confirm("Deseja excluir este contato?")){
+    if(
+        !confirm(
+            "Deseja excluir este contato?"
+        )
+    ){
+
         return;
+
     }
 
-    contatos.splice(index,1);
+    contatos.splice(
+        index,
+        1
+    );
+
+    selecionados =
+        new Set(
+            [...selecionados]
+            .filter(
+                i =>
+                    Number(i) <
+                    contatos.length
+            )
+        );
 
     salvar();
 
@@ -1326,27 +2376,34 @@ function excluirContato(index){
 
 
 /* =========================
-   RENDER CONTATOS
+   CONTATOS
 ========================= */
 
 function renderizarContatos(){
 
     const lista =
-        document.getElementById("listaContatos");
+        document.getElementById(
+            "listaContatos"
+        );
 
     if(contatos.length === 0){
 
         lista.innerHTML = `
             <div class="card">
-                <p>Nenhum contato cadastrado.</p>
+                <p>
+                    Nenhum contato cadastrado.
+                </p>
             </div>
         `;
 
         return;
+
     }
 
     lista.innerHTML =
-        contatos.map((c,index) => `
+        contatos
+        .map(
+            (c,index) => `
 
         <div class="contato">
 
@@ -1354,7 +2411,9 @@ function renderizarContatos(){
 
                 <div>
 
-                    <h3>${escapar(c.nome)}</h3>
+                    <h3>
+                        ${escapar(c.nome)}
+                    </h3>
 
                     <div class="numero">
                         📱 ${escapar(c.numero)}
@@ -1364,53 +2423,103 @@ function renderizarContatos(){
 
                 <div
                     class="favorito"
-                    onclick="alternarFavorito(${index})"
+                    onclick="
+                        alternarFavorito(
+                            ${index}
+                        )
+                    "
                 >
-                    ${c.favorito ? "⭐" : "☆"}
+                    ${
+                        c.favorito
+                        ? "⭐"
+                        : "☆"
+                    }
                 </div>
 
             </div>
 
             ${
                 c.grupo
-                ? `<div class="info">🏷️ ${escapar(c.grupo)}</div>`
-                : ""
+                ?
+                `
+                <div class="info">
+                    🏷️
+                    ${escapar(c.grupo)}
+                </div>
+                `
+                :
+                ""
             }
 
             ${
                 c.observacao
-                ? `<div class="info">📝 ${escapar(c.observacao)}</div>`
-                : ""
+                ?
+                `
+                <div class="info">
+                    📝
+                    ${escapar(c.observacao)}
+                </div>
+                `
+                :
+                ""
             }
 
             <div class="info">
-                🕐 Atualizado: ${escapar(c.ultimaAtualizacao || "-")}
+
+                🕐 Atualizado:
+                ${escapar(
+                    c.ultimaAtualizacao ||
+                    "-"
+                )}
+
             </div>
 
-            <label>🔽 Alterar status</label>
+            <label>
+                🔽 Alterar status
+            </label>
 
             <select
                 class="status-select"
-                onchange="alterarStatus(${index},this.value)"
+                onchange="
+                    alterarStatus(
+                        ${index},
+                        this.value
+                    )
+                "
             >
 
                 <option
                     value="ANALISE"
-                    ${c.status === "ANALISE" ? "selected" : ""}
+                    ${
+                        c.status ===
+                        "ANALISE"
+                        ? "selected"
+                        : ""
+                    }
                 >
                     ⚠️ ZAP EM ANÁLISE
                 </option>
 
                 <option
                     value="ON"
-                    ${c.status === "ON" ? "selected" : ""}
+                    ${
+                        c.status ===
+                        "ON"
+                        ? "selected"
+                        : ""
+                    }
                 >
                     🟢 ZAP ON
                 </option>
 
                 <option
                     value="CAIU"
-                    ${c.status === "CAIU" ? "selected" : ""}
+                    ${
+                        c.status ===
+                        "CAIU"
+                        ? "selected"
+                        : ""
+                    }
                 >
                     🔴 ZAP CAIU
                 </option>
@@ -1421,14 +2530,22 @@ function renderizarContatos(){
 
                 <button
                     class="whatsapp"
-                    onclick="abrirWhatsApp(${index})"
+                    onclick="
+                        abrirWhatsApp(
+                            ${index}
+                        )
+                    "
                 >
                     🟢 Abrir WhatsApp
                 </button>
 
                 <button
                     class="excluir"
-                    onclick="excluirContato(${index})"
+                    onclick="
+                        excluirContato(
+                            ${index}
+                        )
+                    "
                 >
                     🗑️ Excluir
                 </button>
@@ -1437,7 +2554,9 @@ function renderizarContatos(){
 
         </div>
 
-    `).join("");
+    `
+        )
+        .join("");
 
 }
 
@@ -1450,39 +2569,55 @@ function buscarContatos(){
 
     const termo =
         document
-        .getElementById("campoBusca")
+        .getElementById(
+            "campoBusca"
+        )
         .value
         .toLowerCase()
         .trim();
 
     const resultado =
-        document.getElementById("resultadoBusca");
+        document.getElementById(
+            "resultadoBusca"
+        );
 
     if(!termo){
 
-        resultado.innerHTML = "";
+        resultado.innerHTML =
+            "";
 
         return;
+
     }
 
     const encontrados =
-        contatos.filter(c => {
+        contatos.filter(
+            c => {
 
-            const texto = (
+                const texto =
+                    (
+                        c.nome +
+                        " " +
+                        c.numero +
+                        " " +
+                        c.grupo +
+                        " " +
+                        c.observacao +
+                        " " +
+                        c.status
+                    )
+                    .toLowerCase();
 
-                c.nome + " " +
-                c.numero + " " +
-                c.grupo + " " +
-                c.observacao + " " +
-                c.status
+                return texto.includes(
+                    termo
+                );
 
-            ).toLowerCase();
+            }
+        );
 
-            return texto.includes(termo);
-
-        });
-
-    if(encontrados.length === 0){
+    if(
+        encontrados.length === 0
+    ){
 
         resultado.innerHTML = `
             <div class="card">
@@ -1491,32 +2626,46 @@ function buscarContatos(){
         `;
 
         return;
+
     }
 
     resultado.innerHTML =
-        encontrados.map(c => `
+        encontrados
+        .map(
+            c => `
 
             <div class="contato">
 
-                <h3>${escapar(c.nome)}</h3>
+                <h3>
+                    ${escapar(c.nome)}
+                </h3>
 
                 <div class="numero">
-                    📱 ${escapar(c.numero)}
+                    📱
+                    ${escapar(c.numero)}
                 </div>
 
                 <div class="info">
+
                     ${
                         c.status === "ON"
-                        ? "🟢 ZAP ON"
-                        : c.status === "CAIU"
-                        ? "🔴 ZAP CAIU"
-                        : "⚠️ ZAP EM ANÁLISE"
+                        ?
+                        "🟢 ZAP ON"
+                        :
+                        c.status === "CAIU"
+                        ?
+                        "🔴 ZAP CAIU"
+                        :
+                        "⚠️ ZAP EM ANÁLISE"
                     }
+
                 </div>
 
             </div>
 
-        `).join("");
+        `
+        )
+        .join("");
 
 }
 
@@ -1528,24 +2677,34 @@ function buscarContatos(){
 function renderizarGrupos(){
 
     const lista =
-        document.getElementById("listaGrupos");
+        document.getElementById(
+            "listaGrupos"
+        );
 
     const grupos = {};
 
-    contatos.forEach(c => {
+    contatos.forEach(
+        c => {
 
-        const nome =
-            c.grupo || "Sem grupo";
+            const nome =
+                c.grupo ||
+                "Sem grupo";
 
-        grupos[nome] =
-            (grupos[nome] || 0) + 1;
+            grupos[nome] =
+                (
+                    grupos[nome] ||
+                    0
+                ) + 1;
 
-    });
+        }
+    );
 
     const nomes =
         Object.keys(grupos);
 
-    if(nomes.length === 0){
+    if(
+        nomes.length === 0
+    ){
 
         lista.innerHTML = `
             <div class="card">
@@ -1554,24 +2713,33 @@ function renderizarGrupos(){
         `;
 
         return;
+
     }
 
     lista.innerHTML =
-        nomes.map(grupo => `
+        nomes
+        .map(
+            grupo => `
 
             <div class="grupo-item">
 
                 <strong>
-                    🏷️ ${escapar(grupo)}
+                    🏷️
+                    ${escapar(grupo)}
                 </strong>
 
                 <span>
-                    ${grupos[grupo]} contato(s)
+                    ${
+                        grupos[grupo]
+                    }
+                    contato(s)
                 </span>
 
             </div>
 
-        `).join("");
+        `
+        )
+        .join("");
 
 }
 
@@ -1583,12 +2751,18 @@ function renderizarGrupos(){
 function renderizarFavoritos(){
 
     const lista =
-        document.getElementById("listaFavoritos");
+        document.getElementById(
+            "listaFavoritos"
+        );
 
     const favoritos =
-        contatos.filter(c => c.favorito);
+        contatos.filter(
+            c => c.favorito
+        );
 
-    if(favoritos.length === 0){
+    if(
+        favoritos.length === 0
+    ){
 
         lista.innerHTML = `
             <div class="card">
@@ -1597,26 +2771,39 @@ function renderizarFavoritos(){
         `;
 
         return;
+
     }
 
     lista.innerHTML =
-        favoritos.map(c => `
+        favoritos
+        .map(
+            c => `
 
             <div class="contato">
 
-                <h3>⭐ ${escapar(c.nome)}</h3>
+                <h3>
+                    ⭐
+                    ${escapar(c.nome)}
+                </h3>
 
                 <div class="numero">
-                    📱 ${escapar(c.numero)}
+                    📱
+                    ${escapar(c.numero)}
                 </div>
 
                 <div class="info">
-                    ${escapar(c.grupo || "Sem grupo")}
+                    🏷️
+                    ${escapar(
+                        c.grupo ||
+                        "Sem grupo"
+                    )}
                 </div>
 
             </div>
 
-        `).join("");
+        `
+        )
+        .join("");
 
 }
 
@@ -1631,18 +2818,51 @@ function atualizarEstatisticas(){
         contatos.length;
 
     const on =
-        contatos.filter(c => c.status === "ON").length;
+        contatos.filter(
+            c =>
+                c.status === "ON"
+        ).length;
 
     const analise =
-        contatos.filter(c => c.status === "ANALISE").length;
+        contatos.filter(
+            c =>
+                c.status ===
+                "ANALISE"
+        ).length;
 
     const caiu =
-        contatos.filter(c => c.status === "CAIU").length;
+        contatos.filter(
+            c =>
+                c.status === "CAIU"
+        ).length;
 
-    document.getElementById("statTotal").textContent = total;
-    document.getElementById("statOn").textContent = on;
-    document.getElementById("statAnalise").textContent = analise;
-    document.getElementById("statCaiu").textContent = caiu;
+    document
+        .getElementById(
+            "statTotal"
+        )
+        .textContent =
+            total;
+
+    document
+        .getElementById(
+            "statOn"
+        )
+        .textContent =
+            on;
+
+    document
+        .getElementById(
+            "statAnalise"
+        )
+        .textContent =
+            analise;
+
+    document
+        .getElementById(
+            "statCaiu"
+        )
+        .textContent =
+            caiu;
 
 }
 
@@ -1657,18 +2877,273 @@ function atualizarResumo(){
         contatos.length;
 
     const on =
-        contatos.filter(c => c.status === "ON").length;
+        contatos.filter(
+            c =>
+                c.status === "ON"
+        ).length;
 
     const analise =
-        contatos.filter(c => c.status === "ANALISE").length;
+        contatos.filter(
+            c =>
+                c.status ===
+                "ANALISE"
+        ).length;
 
     const caiu =
-        contatos.filter(c => c.status === "CAIU").length;
+        contatos.filter(
+            c =>
+                c.status === "CAIU"
+        ).length;
 
-    document.getElementById("totalContatos").textContent = total;
-    document.getElementById("totalOn").textContent = on;
-    document.getElementById("totalAnalise").textContent = analise;
-    document.getElementById("totalCaiu").textContent = caiu;
+    document
+        .getElementById(
+            "totalContatos"
+        )
+        .textContent =
+            total;
+
+    document
+        .getElementById(
+            "totalOn"
+        )
+        .textContent =
+            on;
+
+    document
+        .getElementById(
+            "totalAnalise"
+        )
+        .textContent =
+            analise;
+
+    document
+        .getElementById(
+            "totalCaiu"
+        )
+        .textContent =
+            caiu;
+
+}
+
+
+/* =========================
+   LISTA RÁPIDA
+========================= */
+
+function renderizarListaRapida(){
+
+    const lista =
+        document.getElementById(
+            "listaSelecao"
+        );
+
+    const contador =
+        document.getElementById(
+            "contadorSelecao"
+        );
+
+    contador.textContent =
+        selecionados.size +
+        (
+            selecionados.size === 1
+            ? " selecionado"
+            : " selecionados"
+        );
+
+    if(
+        contatos.length === 0
+    ){
+
+        lista.innerHTML = `
+            <div class="lista-vazia">
+                Nenhum contato cadastrado.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    lista.innerHTML =
+        contatos
+        .map(
+            (c,index) => {
+
+                const marcado =
+                    selecionados.has(
+                        index
+                    );
+
+                return `
+
+                <label
+                    class="
+                        selecao-item
+                        ${
+                            marcado
+                            ? "selecionado"
+                            : ""
+                        }
+                    "
+                >
+
+                    <input
+                        type="checkbox"
+                        ${
+                            marcado
+                            ? "checked"
+                            : ""
+                        }
+                        onchange="
+                            alternarSelecao(
+                                ${index},
+                                this.checked
+                            )
+                        "
+                    >
+
+                    <div class="selecao-info">
+
+                        <strong>
+                            ${escapar(c.nome)}
+                        </strong>
+
+                        <span>
+                            📱
+                            ${escapar(c.numero)}
+                        </span>
+
+                    </div>
+
+                </label>
+
+            `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================
+   SELECIONAR
+========================= */
+
+function alternarSelecao(
+    index,
+    marcado
+){
+
+    if(marcado){
+
+        selecionados.add(
+            index
+        );
+
+    }else{
+
+        selecionados.delete(
+            index
+        );
+
+    }
+
+    renderizarListaRapida();
+
+}
+
+
+/* =========================
+   LIMPAR
+========================= */
+
+function limparSelecao(){
+
+    selecionados.clear();
+
+    renderizarListaRapida();
+
+}
+
+
+/* =========================
+   COPIAR NÚMEROS
+========================= */
+
+async function copiarSelecionados(){
+
+    if(
+        selecionados.size === 0
+    ){
+
+        alert(
+            "Selecione pelo menos um contato."
+        );
+
+        return;
+
+    }
+
+    const numeros =
+        [...selecionados]
+        .sort(
+            (a,b) =>
+                a - b
+        )
+        .map(
+            index =>
+                contatos[index]
+                ?.numero
+                ?.trim()
+        )
+        .filter(Boolean);
+
+    const texto =
+        numeros.join("\n");
+
+    try{
+
+        await navigator.clipboard.writeText(
+            texto
+        );
+
+        alert(
+            numeros.length +
+            (
+                numeros.length === 1
+                ? " número copiado!"
+                : " números copiados!"
+            )
+        );
+
+    }catch{
+
+        const area =
+            document.createElement(
+                "textarea"
+            );
+
+        area.value =
+            texto;
+
+        document.body.appendChild(
+            area
+        );
+
+        area.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+        area.remove();
+
+        alert(
+            "Números copiados!"
+        );
+
+    }
 
 }
 
@@ -1683,16 +3158,36 @@ function atualizarTudo(){
 
     atualizarEstatisticas();
 
-    if(telaAtual === "contatos"){
+    if(
+        telaAtual === "contatos"
+    ){
+
         renderizarContatos();
+
     }
 
-    if(telaAtual === "grupos"){
+    if(
+        telaAtual === "grupos"
+    ){
+
         renderizarGrupos();
+
     }
 
-    if(telaAtual === "favoritos"){
+    if(
+        telaAtual === "favoritos"
+    ){
+
         renderizarFavoritos();
+
+    }
+
+    if(
+        telaAtual === "listaRapida"
+    ){
+
+        renderizarListaRapida();
+
     }
 
 }
@@ -1705,28 +3200,42 @@ function atualizarTudo(){
 function exportarBackup(){
 
     const dados =
-        JSON.stringify(contatos,null,2);
+        JSON.stringify(
+            contatos,
+            null,
+            2
+        );
 
     const blob =
         new Blob(
             [dados],
-            {type:"application/json"}
+            {
+                type:
+                    "application/json"
+            }
         );
 
     const url =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
     const a =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
-    a.href = url;
+    a.href =
+        url;
 
     a.download =
         "backup-bot-bm3.json";
 
     a.click();
 
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(
+        url
+    );
 
 }
 
@@ -1738,54 +3247,75 @@ function exportarBackup(){
 function importarBackup(){
 
     const arquivo =
-        document.getElementById("arquivoBackup")
+        document
+        .getElementById(
+            "arquivoBackup"
+        )
         .files[0];
 
     if(!arquivo){
 
-        alert("Selecione um arquivo de backup.");
+        alert(
+            "Selecione um arquivo de backup."
+        );
 
         return;
+
     }
 
     const leitor =
         new FileReader();
 
-    leitor.onload = function(e){
+    leitor.onload =
+        function(e){
 
-        try{
+            try{
 
-            const dados =
-                JSON.parse(e.target.result);
+                const dados =
+                    JSON.parse(
+                        e.target.result
+                    );
 
-            if(!Array.isArray(dados)){
+                if(
+                    !Array.isArray(
+                        dados
+                    )
+                ){
 
-                alert("Backup inválido.");
+                    alert(
+                        "Backup inválido."
+                    );
 
-                return;
+                    return;
+
+                }
+
+                contatos =
+                    dados;
+
+                selecionados.clear();
+
+                salvar();
+
+                atualizarTudo();
+
+                alert(
+                    "Backup importado com sucesso!"
+                );
+
+            }catch{
+
+                alert(
+                    "Não foi possível importar este backup."
+                );
+
             }
 
-            contatos = dados;
+        };
 
-            salvar();
-
-            atualizarTudo();
-
-            alert(
-                "Backup importado com sucesso!"
-            );
-
-        }catch{
-
-            alert(
-                "Não foi possível importar este backup."
-            );
-
-        }
-
-    };
-
-    leitor.readAsText(arquivo);
+    leitor.readAsText(
+        arquivo
+    );
 
 }
 
@@ -1796,11 +3326,15 @@ function importarBackup(){
 
 function alternarTema(){
 
-    document.body.classList.toggle("dark");
+    document.body.classList.toggle(
+        "dark"
+    );
 
     localStorage.setItem(
         CHAVE_TEMA,
-        document.body.classList.contains("dark")
+        document.body.classList.contains(
+            "dark"
+        )
         ? "dark"
         : "light"
     );
@@ -1811,27 +3345,52 @@ function alternarTema(){
 function aplicarTema(){
 
     const tema =
-        localStorage.getItem(CHAVE_TEMA);
+        localStorage.getItem(
+            CHAVE_TEMA
+        );
 
-    if(tema === "dark"){
-        document.body.classList.add("dark");
+    if(
+        tema === "dark"
+    ){
+
+        document.body.classList.add(
+            "dark"
+        );
+
     }
 
 }
 
 
 /* =========================
-   SEGURANÇA DE TEXTO
+   ESCAPAR TEXTO
 ========================= */
 
 function escapar(texto){
 
-    return String(texto ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return String(
+        texto ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
 
