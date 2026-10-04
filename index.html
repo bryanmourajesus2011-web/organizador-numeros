@@ -11,186 +11,88 @@
     --verde:#008c45;
     --verde2:#00a651;
     --vermelho:#cd212a;
-    --branco:#ffffff;
+    --branco:#fff;
     --fundo:#f3f6f4;
     --texto:#17221d;
     --cinza:#68736d;
     --borda:#dfe6e2;
-    --card:#ffffff;
+    --card:#fff;
     --sombra:0 12px 30px rgba(0,0,0,.09);
 }
 
 *{
     box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
     background:var(--fundo);
     color:var(--texto);
-    transition:.3s;
+    min-height:100vh;
 }
 
 body.dark{
-    --fundo:#101513;
-    --texto:#f3f7f5;
-    --cinza:#aab5af;
-    --borda:#29342f;
-    --card:#18201d;
+    --fundo:#101512;
+    --texto:#f1f5f2;
+    --cinza:#aebbb4;
+    --borda:#29332e;
+    --card:#18201c;
 }
 
-/* =========================
-   CARREGAMENTO PREMIUM
-========================= */
+button,input,select,textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
 
 #loading{
     position:fixed;
     inset:0;
-    z-index:99999;
+    z-index:9999;
+    background:linear-gradient(145deg,#008c45,#005b2d);
     display:flex;
     align-items:center;
     justify-content:center;
-    background:
-        radial-gradient(circle at 50% 35%,rgba(255,255,255,.16),transparent 28%),
-        linear-gradient(135deg,#006b35 0%,#008c45 38%,#ffffff 50%,#cd212a 68%,#a71921 100%);
-    overflow:hidden;
-    transition:opacity .7s ease,visibility .7s ease;
-}
-
-#loading.saindo{
-    opacity:0;
-    visibility:hidden;
-}
-
-.loading-glow{
-    position:absolute;
-    width:280px;
-    height:280px;
-    border-radius:50%;
-    background:rgba(255,255,255,.16);
-    filter:blur(45px);
-    animation:glow 2.2s infinite alternate;
-}
-
-.loading-box{
-    position:relative;
-    width:88%;
-    max-width:390px;
-    padding:38px 25px;
-    text-align:center;
-    color:white;
+    flex-direction:column;
+    color:#fff;
 }
 
 .loading-logo{
-    width:125px;
-    height:125px;
-    object-fit:contain;
-    border-radius:28px;
-    filter:drop-shadow(0 15px 25px rgba(0,0,0,.30));
-    animation:logoEntrada 1.3s ease,logoPulso 2s 1.3s infinite;
+    width:120px;
+    height:120px;
+    border-radius:30px;
+    object-fit:cover;
+    box-shadow:0 15px 45px rgba(0,0,0,.3);
+    margin-bottom:25px;
 }
 
 .loading-title{
-    margin-top:22px;
-    font-size:25px;
-    font-weight:900;
-    letter-spacing:.5px;
-    text-shadow:0 4px 12px rgba(0,0,0,.25);
-    animation:textEntrada .8s .4s both;
+    font-size:24px;
+    font-weight:800;
 }
 
-.loading-subtitle{
+.loading-sub{
     margin-top:8px;
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:2px;
-    opacity:.9;
-    animation:textEntrada .8s .7s both;
+    opacity:.85;
 }
 
-.loading-status{
-    margin-top:28px;
-    min-height:20px;
-    font-size:13px;
-    font-weight:600;
-    animation:textEntrada .8s .9s both;
-}
-
-.loading-bar{
-    width:100%;
-    height:7px;
-    margin-top:13px;
-    background:rgba(255,255,255,.28);
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:inset 0 1px 4px rgba(0,0,0,.12);
-}
-
-.loading-bar span{
-    display:block;
-    width:0%;
-    height:100%;
-    border-radius:20px;
-    background:white;
-    box-shadow:0 0 14px rgba(255,255,255,.9);
-    animation:carregando 2.1s ease forwards;
-}
-
-.loading-dots{
-    margin-top:16px;
-    display:flex;
-    justify-content:center;
-    gap:6px;
-}
-
-.loading-dots span{
-    width:6px;
-    height:6px;
+.loader{
+    width:45px;
+    height:45px;
+    border:4px solid rgba(255,255,255,.25);
+    border-top-color:#fff;
     border-radius:50%;
-    background:white;
-    opacity:.4;
-    animation:dot 1s infinite;
+    animation:girar .8s linear infinite;
+    margin-top:25px;
 }
 
-.loading-dots span:nth-child(2){animation-delay:.15s}
-.loading-dots span:nth-child(3){animation-delay:.3s}
-
-@keyframes logoEntrada{
-    0%{opacity:0;transform:scale(.35) rotate(-12deg)}
-    70%{opacity:1;transform:scale(1.08) rotate(2deg)}
-    100%{transform:scale(1)}
+@keyframes girar{
+    to{transform:rotate(360deg)}
 }
-
-@keyframes logoPulso{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.045)}
-}
-
-@keyframes textEntrada{
-    from{opacity:0;transform:translateY(12px)}
-    to{opacity:1;transform:translateY(0)}
-}
-
-@keyframes carregando{
-    from{width:0}
-    to{width:100%}
-}
-
-@keyframes glow{
-    from{transform:scale(.8);opacity:.35}
-    to{transform:scale(1.25);opacity:.7}
-}
-
-@keyframes dot{
-    0%,100%{opacity:.3;transform:translateY(0)}
-    50%{opacity:1;transform:translateY(-3px)}
-}
-
-/* =========================
-   TOPO
-========================= */
 
 header{
     position:sticky;
@@ -198,17 +100,10 @@ header{
     z-index:100;
     background:var(--card);
     border-bottom:1px solid var(--borda);
-    box-shadow:0 3px 15px rgba(0,0,0,.05);
-}
-
-.header-inner{
-    max-width:850px;
-    margin:auto;
-    padding:13px 16px;
+    padding:12px 15px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:12px;
 }
 
 .logo-area{
@@ -217,347 +112,172 @@ header{
     gap:10px;
 }
 
-.logo-area img{
-    width:45px;
-    height:45px;
-    object-fit:contain;
+.logo{
+    width:43px;
+    height:43px;
     border-radius:12px;
+    object-fit:cover;
 }
 
 .logo-text{
-    font-size:16px;
     font-weight:900;
+    font-size:17px;
 }
 
 .logo-sub{
     color:var(--cinza);
-    font-size:10px;
+    font-size:11px;
     margin-top:2px;
-    font-weight:700;
-    letter-spacing:.5px;
 }
 
-.theme-btn{
+.header-actions{
+    display:flex;
+    gap:7px;
+}
+
+.header-btn{
+    width:40px;
+    height:40px;
     border:1px solid var(--borda);
+    border-radius:12px;
     background:var(--card);
     color:var(--texto);
-    width:42px;
-    height:42px;
-    border-radius:12px;
     font-size:18px;
-    cursor:pointer;
 }
 
-/* =========================
-   ESTRUTURA
-========================= */
-
 .container{
-    width:calc(100% - 24px);
     max-width:850px;
-    margin:18px auto 50px;
+    margin:auto;
+    padding:20px 15px 100px;
 }
 
 .tela{
     display:none;
-    animation:entradaTela .3s ease;
 }
 
 .tela.ativa{
     display:block;
+    animation:entrada .2s ease;
 }
 
-@keyframes entradaTela{
-    from{
-        opacity:0;
-        transform:translateX(14px);
-    }
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
+@keyframes entrada{
+    from{opacity:0;transform:translateY(7px)}
+    to{opacity:1;transform:translateY(0)}
 }
-
-/* =========================
-   NAVEGAÇÃO
-========================= */
-
-.navegacao{
-    margin-bottom:15px;
-}
-
-.menu-btn,
-.voltar-btn{
-    width:100%;
-    border:0;
-    border-radius:14px;
-    padding:14px 16px;
-    font-size:14px;
-    font-weight:800;
-    cursor:pointer;
-    color:white;
-    box-shadow:var(--sombra);
-}
-
-.menu-btn{
-    background:linear-gradient(135deg,var(--verde),var(--verde2));
-}
-
-.voltar-btn{
-    background:var(--card);
-    color:var(--texto);
-    border:1px solid var(--borda);
-    box-shadow:none;
-    text-align:left;
-}
-
-.menu{
-    display:none;
-    margin-top:10px;
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:var(--sombra);
-}
-
-.menu.aberto{
-    display:block;
-}
-
-.menu-section{
-    padding:14px 15px 7px;
-    color:var(--cinza);
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:1px;
-    text-transform:uppercase;
-}
-
-.menu-item{
-    width:100%;
-    border:0;
-    border-top:1px solid var(--borda);
-    background:var(--card);
-    color:var(--texto);
-    padding:16px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-align:left;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.menu-item:active{
-    background:rgba(0,140,69,.08);
-}
-
-.menu-icon{
-    width:35px;
-    height:35px;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(0,140,69,.10);
-    font-size:18px;
-    flex:none;
-}
-
-.menu-info{
-    flex:1;
-}
-
-.menu-title{
-    font-weight:800;
-    font-size:14px;
-}
-
-.menu-description{
-    color:var(--cinza);
-    font-size:11px;
-    margin-top:3px;
-}
-
-.menu-arrow{
-    color:var(--cinza);
-    font-size:18px;
-}
-
-/* =========================
-   TITULOS
-========================= */
 
 .titulo{
-    font-size:22px;
+    font-size:27px;
     font-weight:900;
-    margin:7px 0 4px;
+    margin-bottom:7px;
 }
 
 .subtitulo{
     color:var(--cinza);
-    font-size:13px;
-    margin-bottom:16px;
+    line-height:1.5;
+    margin-bottom:20px;
 }
-
-/* =========================
-   RESUMO
-========================= */
-
-.resumo-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:8px;
-    margin:15px 0;
-}
-
-.resumo-card{
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:14px;
-    padding:12px 7px;
-    text-align:center;
-    box-shadow:0 5px 18px rgba(0,0,0,.04);
-}
-
-.resumo-num{
-    font-size:20px;
-    font-weight:900;
-}
-
-.resumo-label{
-    color:var(--cinza);
-    font-size:9px;
-    font-weight:700;
-    margin-top:3px;
-}
-
-/* =========================
-   CARDS / FORM
-========================= */
 
 .card{
     background:var(--card);
     border:1px solid var(--borda);
     border-radius:18px;
-    padding:16px;
-    margin-bottom:12px;
+    padding:18px;
+    box-shadow:var(--sombra);
+    margin-bottom:14px;
+}
+
+.hero{
+    background:linear-gradient(135deg,var(--verde),#005f31);
+    color:#fff;
+    border-radius:22px;
+    padding:25px;
+    margin-bottom:18px;
     box-shadow:var(--sombra);
 }
 
-input,
-textarea,
-select{
-    width:100%;
+.hero h2{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.hero p{
+    opacity:.9;
+    line-height:1.5;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.grid3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.menu-card{
+    background:var(--card);
     border:1px solid var(--borda);
-    background:var(--fundo);
+    border-radius:17px;
+    padding:17px;
+    text-align:left;
     color:var(--texto);
-    border-radius:11px;
-    padding:12px;
-    font-size:14px;
-    outline:none;
-    margin-bottom:9px;
+    box-shadow:0 6px 18px rgba(0,0,0,.05);
+    transition:.15s;
 }
 
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:var(--verde);
+.menu-card:active{
+    transform:scale(.98);
 }
 
-textarea{
-    min-height:80px;
-    resize:vertical;
+.menu-icon{
+    font-size:27px;
+    margin-bottom:12px;
 }
 
-label{
-    display:block;
-    font-size:11px;
+.menu-title{
     font-weight:800;
+}
+
+.menu-desc{
     color:var(--cinza);
-    margin:2px 0 5px;
+    font-size:12px;
+    margin-top:5px;
+    line-height:1.4;
 }
-
-.btn{
-    border:0;
-    border-radius:11px;
-    padding:12px 14px;
-    font-size:13px;
-    font-weight:800;
-    cursor:pointer;
-}
-
-.btn-verde{
-    background:linear-gradient(135deg,var(--verde),var(--verde2));
-    color:white;
-}
-
-.btn-cinza{
-    background:var(--fundo);
-    border:1px solid var(--borda);
-    color:var(--texto);
-}
-
-.btn-vermelho{
-    background:#cd212a;
-    color:white;
-}
-
-.btn-full{
-    width:100%;
-}
-
-.botoes{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.botoes .btn{
-    flex:1;
-    min-width:120px;
-}
-
-/* =========================
-   WHATSAPP HUB
-========================= */
 
 .opcoes-whatsapp{
     display:flex;
     flex-direction:column;
-    gap:9px;
+    gap:10px;
 }
 
 .opcao-fileira{
     width:100%;
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:15px;
-    padding:14px;
     display:flex;
     align-items:center;
-    gap:12px;
-    cursor:pointer;
-    box-shadow:0 5px 16px rgba(0,0,0,.05);
-    color:var(--texto);
     text-align:left;
-}
-
-.opcao-fileira:active{
-    transform:scale(.99);
+    gap:13px;
+    background:var(--card);
+    color:var(--texto);
+    border:1px solid var(--borda);
+    border-radius:17px;
+    padding:14px;
+    box-shadow:0 6px 18px rgba(0,0,0,.05);
 }
 
 .opcao-icone{
-    width:42px;
-    height:42px;
-    border-radius:12px;
+    width:46px;
+    height:46px;
+    border-radius:14px;
+    background:rgba(0,140,69,.11);
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(0,140,69,.10);
-    font-size:21px;
-    flex:none;
+    font-size:22px;
+    flex-shrink:0;
 }
 
 .opcao-conteudo{
@@ -565,289 +285,366 @@ label{
 }
 
 .opcao-titulo{
-    font-size:14px;
-    font-weight:900;
+    font-weight:800;
+    font-size:15px;
 }
 
 .opcao-desc{
     color:var(--cinza);
-    font-size:11px;
-    margin-top:3px;
+    font-size:12px;
+    margin-top:4px;
+    line-height:1.4;
 }
 
 .opcao-seta{
-    font-size:20px;
     color:var(--cinza);
+    font-size:25px;
 }
 
-/* =========================
-   DDD
-========================= */
+.voltar{
+    border:0;
+    background:transparent;
+    color:var(--verde);
+    font-weight:800;
+    margin-bottom:14px;
+    padding:4px 0;
+}
 
-.ddd-lista{
+input,select,textarea{
+    width:100%;
+    background:var(--card);
+    color:var(--texto);
+    border:1px solid var(--borda);
+    border-radius:12px;
+    padding:13px;
+    outline:none;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+label{
+    display:block;
+    font-weight:700;
+    font-size:13px;
+    margin:13px 0 6px;
+}
+
+.btn{
+    border:0;
+    border-radius:12px;
+    padding:13px 16px;
+    font-weight:800;
+}
+
+.btn-verde{
+    background:var(--verde);
+    color:#fff;
+}
+
+.btn-vermelho{
+    background:var(--vermelho);
+    color:#fff;
+}
+
+.btn-sec{
+    background:var(--card);
+    color:var(--texto);
+    border:1px solid var(--borda);
+}
+
+.btn-full{
+    width:100%;
+    margin-top:12px;
+}
+
+.btn-row{
     display:flex;
-    flex-direction:column;
-    gap:9px;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
 }
 
-.ddd-item{
+.btn-row .btn{
+    flex:1;
+    min-width:130px;
+}
+
+.badge{
+    display:inline-flex;
+    padding:5px 9px;
+    border-radius:30px;
+    background:rgba(0,140,69,.1);
+    color:var(--verde);
+    font-size:11px;
+    font-weight:800;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.stat{
     background:var(--card);
     border:1px solid var(--borda);
     border-radius:15px;
-    padding:14px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    box-shadow:0 5px 16px rgba(0,0,0,.05);
+    padding:15px;
+    text-align:center;
 }
 
-.ddd-numero{
-    width:52px;
-    height:42px;
-    border-radius:11px;
-    background:linear-gradient(135deg,var(--verde),var(--verde2));
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:13px;
-    font-weight:900;
-    flex:none;
+.stat strong{
+    display:block;
+    font-size:24px;
 }
 
-.ddd-info{
-    flex:1;
-    min-width:0;
-}
-
-.ddd-nome{
-    font-size:14px;
-    font-weight:900;
-}
-
-.ddd-qtd{
-    font-size:11px;
+.stat span{
     color:var(--cinza);
-    margin-top:3px;
+    font-size:11px;
 }
 
-.ddd-acoes{
-    display:flex;
-    gap:5px;
-}
-
-.icon-btn{
-    width:34px;
-    height:34px;
-    border:1px solid var(--borda);
-    background:var(--fundo);
-    color:var(--texto);
-    border-radius:9px;
-    cursor:pointer;
-}
-
-/* =========================
-   CONTATOS
-========================= */
-
-.contato-item{
+.contato{
     background:var(--card);
     border:1px solid var(--borda);
     border-radius:16px;
-    padding:14px;
-    margin-bottom:9px;
+    padding:15px;
+    margin-bottom:10px;
 }
 
 .contato-top{
     display:flex;
-    align-items:flex-start;
+    justify-content:space-between;
     gap:10px;
 }
 
-.contato-info{
-    flex:1;
-    min-width:0;
-}
-
 .contato-nome{
-    font-size:15px;
     font-weight:900;
 }
 
 .contato-numero{
-    color:var(--cinza);
-    font-size:12px;
+    color:var(--verde);
     margin-top:4px;
+    font-size:13px;
 }
 
-.contato-meta{
+.contato-info{
     color:var(--cinza);
-    font-size:10px;
-    margin-top:5px;
+    font-size:12px;
+    margin-top:8px;
 }
 
 .contato-acoes{
     display:flex;
-    gap:7px;
     flex-wrap:wrap;
+    gap:7px;
     margin-top:12px;
 }
 
-.contato-acoes .btn{
-    flex:1;
-    min-width:100px;
+.contato-acoes button{
+    border:1px solid var(--borda);
+    background:var(--card);
+    color:var(--texto);
+    border-radius:9px;
+    padding:8px 10px;
+    font-size:12px;
+    font-weight:700;
 }
 
-/* =========================
-   STATUS
-========================= */
-
-.status-on{
-    color:#087f3e;
-    font-weight:900;
+.empty{
+    text-align:center;
+    color:var(--cinza);
+    padding:35px 15px;
 }
 
-.status-analise{
-    color:#a87900;
-    font-weight:900;
+/* ADVOGADO */
+
+.adv-header{
+    background:linear-gradient(135deg,#123d28,#008c45);
+    color:#fff;
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:15px;
+    box-shadow:var(--sombra);
 }
 
-.status-caiu{
-    color:#c8202a;
-    font-weight:900;
-}
-
-.status-badge{
-    display:inline-block;
-    padding:5px 8px;
-    border-radius:8px;
-    background:var(--fundo);
-    font-size:10px;
-}
-
-/* =========================
-   PESQUISA
-========================= */
-
-.busca{
-    position:relative;
-}
-
-.busca input{
-    padding-left:40px;
-}
-
-.busca span{
-    position:absolute;
-    left:13px;
-    top:11px;
-}
-
-/* =========================
-   LISTA RÁPIDA
-========================= */
-
-.selecao-item{
+.adv-header-top{
     display:flex;
     align-items:center;
-    gap:10px;
-    padding:12px;
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:13px;
-    margin-bottom:7px;
-    cursor:pointer;
+    gap:13px;
 }
 
-.selecao-item.selecionado{
-    border-color:var(--verde);
-    background:rgba(0,140,69,.06);
+.adv-icon{
+    width:55px;
+    height:55px;
+    border-radius:17px;
+    background:rgba(255,255,255,.16);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
 }
 
-.selecao-item input{
-    width:18px;
-    height:18px;
-    margin:0;
+.adv-header h2{
+    font-size:23px;
 }
 
-.selecao-info{
-    flex:1;
+.adv-header p{
+    font-size:12px;
+    opacity:.85;
+    margin-top:4px;
 }
 
-.selecao-info strong{
-    display:block;
-    font-size:13px;
-}
-
-.selecao-info span{
-    color:var(--cinza);
-    font-size:11px;
-}
-
-/* =========================
-   ESTATÍSTICAS
-========================= */
-
-.stats-grid{
+.adv-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:9px;
+    gap:10px;
 }
 
-.stat-card{
-    background:var(--card);
+.adv-option{
     border:1px solid var(--borda);
-    border-radius:15px;
-    padding:18px;
+    background:var(--card);
+    color:var(--texto);
+    border-radius:17px;
+    padding:17px;
+    text-align:left;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
 }
 
-.stat-num{
-    font-size:26px;
+.adv-option:active{
+    transform:scale(.98);
+}
+
+.adv-option-icon{
+    font-size:25px;
+    margin-bottom:11px;
+}
+
+.adv-option-title{
     font-weight:900;
+    font-size:14px;
 }
 
-.stat-label{
+.adv-option-desc{
     color:var(--cinza);
     font-size:11px;
-    margin-top:3px;
+    line-height:1.4;
+    margin-top:5px;
 }
 
-/* =========================
-   VAZIO
-========================= */
-
-.vazio{
-    text-align:center;
-    padding:35px 15px;
-    color:var(--cinza);
-}
-
-.vazio-icon{
-    font-size:38px;
+.adv-list-item{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:16px;
+    padding:15px;
     margin-bottom:10px;
 }
 
-.vazio strong{
-    display:block;
-    color:var(--texto);
-    margin-bottom:5px;
+.adv-list-title{
+    font-weight:900;
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
+.adv-list-text{
+    color:var(--cinza);
+    font-size:13px;
+    line-height:1.5;
+    margin-top:8px;
+    white-space:pre-wrap;
+}
+
+.adv-list-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:12px;
+}
+
+.adv-list-actions button{
+    border:1px solid var(--borda);
+    background:var(--card);
+    color:var(--texto);
+    border-radius:9px;
+    padding:8px 10px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.faq{
+    border:1px solid var(--borda);
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:10px;
+    background:var(--card);
+}
+
+.faq-q{
+    font-weight:900;
+}
+
+.faq-a{
+    color:var(--cinza);
+    font-size:13px;
+    line-height:1.5;
+    margin-top:8px;
+    white-space:pre-wrap;
+}
+
+hr{
+    border:0;
+    border-top:1px solid var(--borda);
+    margin:18px 0;
+}
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:var(--card);
+    border-top:1px solid var(--borda);
+    display:flex;
+    justify-content:center;
+    padding:9px 12px;
+    z-index:90;
+}
+
+.bottom-inner{
+    width:100%;
+    max-width:850px;
+    display:flex;
+    gap:8px;
+}
+
+.nav-btn{
+    flex:1;
+    border:1px solid var(--borda);
+    background:var(--card);
+    color:var(--texto);
+    border-radius:12px;
+    padding:9px 4px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.nav-btn.active{
+    background:var(--verde);
+    color:#fff;
+    border-color:var(--verde);
+}
 
 @media(max-width:600px){
-    .resumo-grid{
-        grid-template-columns:repeat(2,1fr);
+    .grid,.adv-grid{
+        grid-template-columns:1fr 1fr;
     }
 
-    .container{
-        margin-top:14px;
+    .grid3{
+        grid-template-columns:1fr 1fr 1fr;
     }
 
-    .titulo{
-        font-size:20px;
+    .stats{
+        grid-template-columns:repeat(3,1fr);
     }
 }
 </style>
@@ -855,802 +652,765 @@ label{
 
 <body>
 
-<!-- =========================
-     LOADING
-========================= -->
-
 <div id="loading">
-    <div class="loading-glow"></div>
-
-    <div class="loading-box">
-        <img
-            class="loading-logo"
-            src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
-            alt="Logo BOT DO BM3"
-        >
-
-        <div class="loading-title">🍀 BOT DO BM3 🍀</div>
-
-        <div class="loading-subtitle">
-            SISTEMA DE ORGANIZAÇÃO
-        </div>
-
-        <div class="loading-status" id="loadingStatus">
-            Inicializando sistema...
-        </div>
-
-        <div class="loading-bar">
-            <span></span>
-        </div>
-
-        <div class="loading-dots">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+    <img
+        class="loading-logo"
+        src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
+        onerror="this.style.display='none'"
+    >
+    <div class="loading-title">🍀 BOT DO BM3 🍀</div>
+    <div class="loading-sub">Carregando seu painel...</div>
+    <div class="loader"></div>
 </div>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <header>
-    <div class="header-inner">
-
-        <div class="logo-area">
-            <img
-                src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
-                alt="BOT DO BM3"
-            >
-
-            <div>
-                <div class="logo-text">🍀 BOT DO BM3 🍀</div>
-                <div class="logo-sub">ORGANIZADOR DE WHATSAPP</div>
-            </div>
+    <div class="logo-area">
+        <img
+            class="logo"
+            src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
+            onerror="this.style.display='none'"
+        >
+        <div>
+            <div class="logo-text">🍀 BOT DO BM3 🍀</div>
+            <div class="logo-sub">Painel de organização</div>
         </div>
+    </div>
 
-        <button class="theme-btn" onclick="alternarTema()" id="themeBtn">
-            🌙
-        </button>
-
+    <div class="header-actions">
+        <button class="header-btn" onclick="alternarTema()">🌙</button>
+        <button class="header-btn" onclick="navegar('configuracao')">⚙️</button>
     </div>
 </header>
 
-
 <div class="container">
 
-    <!-- =========================
-         NAVEGAÇÃO
-    ========================= -->
+<!-- INÍCIO -->
 
-    <div class="navegacao">
+<section id="inicio" class="tela ativa">
 
-        <button
-            class="menu-btn"
-            id="botaoMenu"
-            onclick="abrirMenu()"
-        >
-            ☰ Abrir Menu
-        </button>
+    <div class="hero">
+        <h2>🍀 Bem-vindo ao BOT DO BM3</h2>
+        <p>
+            Organize seus contatos, números, WhatsApp
+            e ferramentas profissionais em um único painel.
+        </p>
+    </div>
 
-        <button
-            class="voltar-btn"
-            id="botaoVoltar"
-            onclick="voltarTela()"
-            style="display:none;"
-        >
-            ← Voltar
-        </button>
+    <div class="stats">
+        <div class="stat">
+            <strong id="totalInicio">0</strong>
+            <span>Contatos</span>
+        </div>
 
-        <div class="menu" id="menu">
+        <div class="stat">
+            <strong id="onInicio">0</strong>
+            <span>Ativos</span>
+        </div>
 
-            <div class="menu-section">
-                WhatsApp
-            </div>
-
-            <button class="menu-item" onclick="navegar('whatsapp')">
-                <div class="menu-icon">📱</div>
-                <div class="menu-info">
-                    <div class="menu-title">WhatsApp</div>
-                    <div class="menu-description">
-                        Contatos, DDD, busca e lista rápida
-                    </div>
-                </div>
-                <div class="menu-arrow">›</div>
-            </button>
-
-
-            <div class="menu-section">
-                Organização
-            </div>
-
-            <button class="menu-item" onclick="navegar('estatisticas')">
-                <div class="menu-icon">📊</div>
-                <div class="menu-info">
-                    <div class="menu-title">Estatísticas</div>
-                    <div class="menu-description">
-                        Resumo dos seus números
-                    </div>
-                </div>
-                <div class="menu-arrow">›</div>
-            </button>
-
-            <button class="menu-item" onclick="navegar('grupos')">
-                <div class="menu-icon">🏷️</div>
-                <div class="menu-info">
-                    <div class="menu-title">Grupos</div>
-                    <div class="menu-description">
-                        Organize contatos por grupo
-                    </div>
-                </div>
-                <div class="menu-arrow">›</div>
-            </button>
-
-            <button class="menu-item" onclick="navegar('favoritos')">
-                <div class="menu-icon">⭐</div>
-                <div class="menu-info">
-                    <div class="menu-title">Favoritos</div>
-                    <div class="menu-description">
-                        Acesse seus contatos favoritos
-                    </div>
-                </div>
-                <div class="menu-arrow">›</div>
-            </button>
-
-
-            <div class="menu-section">
-                Sistema
-            </div>
-
-            <button class="menu-item" onclick="navegar('backup')">
-                <div class="menu-icon">💾</div>
-                <div class="menu-info">
-                    <div class="menu-title">Backup</div>
-                    <div class="menu-description">
-                        Exportar e importar seus dados
-                    </div>
-                </div>
-                <div class="menu-arrow">›</div>
-            </button>
-
-            <button class="menu-item" onclick="navegar('configuracao')">
-                <div class="menu-icon">⚙️</div>
-                <div class="menu-info">
-                    <div class="menu-title">Configuração</div>
-                    <div class="menu-description">
-                        Personalização do BOT
-                    </div>
-                </div>
-                <div class="menu-arrow">›</div>
-            </button>
-
-            <button class="menu-item" onclick="navegar('sobre')">
-                <div class="menu-icon">ℹ️</div>
-                <div class="menu-info">
-                    <div class="menu-title">Sobre o BOT</div>
-                    <div class="menu-description">
-                        Informações do sistema
-                    </div>
-                </div>
-                <div class="menu-arrow">›</div>
-            </button>
-
+        <div class="stat">
+            <strong id="favInicio">0</strong>
+            <span>Favoritos</span>
         </div>
     </div>
 
+    <br>
 
-    <!-- =========================
-         INÍCIO
-    ========================= -->
+    <div class="grid">
 
-    <section id="inicio" class="tela ativa">
-
-        <div class="titulo">
-            Painel inicial
-        </div>
-
-        <div class="subtitulo">
-            Organize seus contatos de WhatsApp de forma rápida.
-        </div>
-
-        <div class="resumo-grid">
-
-            <div class="resumo-card">
-                <div class="resumo-num" id="totalContatos">0</div>
-                <div class="resumo-label">👥 CONTATOS</div>
+        <button class="menu-card" onclick="navegar('whatsapp')">
+            <div class="menu-icon">📱</div>
+            <div class="menu-title">WhatsApp</div>
+            <div class="menu-desc">
+                Números, contatos e ferramentas
             </div>
+        </button>
 
-            <div class="resumo-card">
-                <div class="resumo-num" id="totalOn">0</div>
-                <div class="resumo-label">🟢 ZAP ON</div>
+        <button class="menu-card" onclick="navegar('estatisticas')">
+            <div class="menu-icon">📊</div>
+            <div class="menu-title">Resumo</div>
+            <div class="menu-desc">
+                Veja os dados dos seus contatos
             </div>
+        </button>
 
-            <div class="resumo-card">
-                <div class="resumo-num" id="totalAnalise">0</div>
-                <div class="resumo-label">🟡 ANÁLISE</div>
+        <button class="menu-card" onclick="navegar('grupos')">
+            <div class="menu-icon">👥</div>
+            <div class="menu-title">Grupos</div>
+            <div class="menu-desc">
+                Organize seus grupos
             </div>
+        </button>
 
-            <div class="resumo-card">
-                <div class="resumo-num" id="totalCaiu">0</div>
-                <div class="resumo-label">🔴 ZAP CAIU</div>
+        <button class="menu-card" onclick="navegar('backup')">
+            <div class="menu-icon">💾</div>
+            <div class="menu-title">Backup</div>
+            <div class="menu-desc">
+                Exporte ou importe seus dados
             </div>
+        </button>
 
-        </div>
+    </div>
 
-        <div class="card">
-            <strong>🍀 BOT DO BM3</strong>
-            <p style="color:var(--cinza);font-size:12px;line-height:1.6;margin-bottom:0;">
-                Use o menu para acessar seus contatos, organizar por DDD,
-                acompanhar status e gerenciar seus dados.
-            </p>
-        </div>
+</section>
 
-    </section>
+<!-- WHATSAPP -->
 
+<section id="whatsapp" class="tela">
 
-    <!-- =========================
-         WHATSAPP
-    ========================= -->
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
 
-    <section id="whatsapp" class="tela">
+    <div class="titulo">📱 WhatsApp</div>
 
-        <div class="titulo">📱 WhatsApp</div>
+    <div class="subtitulo">
+        Todas as funções relacionadas aos seus números.
+    </div>
 
-        <div class="subtitulo">
-            Todas as funções relacionadas aos seus números.
-        </div>
+    <div class="opcoes-whatsapp">
 
-        <div class="opcoes-whatsapp">
+        <button class="opcao-fileira" onclick="navegar('adicionar')">
+            <div class="opcao-icone">➕</div>
+            <div class="opcao-conteudo">
+                <div class="opcao-titulo">Adicionar contato</div>
+                <div class="opcao-desc">Cadastre um novo número</div>
+            </div>
+            <div class="opcao-seta">›</div>
+        </button>
 
-            <button class="opcao-fileira" onclick="navegar('adicionar')">
+        <button class="opcao-fileira" onclick="navegar('contatos')">
+            <div class="opcao-icone">👥</div>
+            <div class="opcao-conteudo">
+                <div class="opcao-titulo">Contatos</div>
+                <div class="opcao-desc">Organize seus números por DDD</div>
+            </div>
+            <div class="opcao-seta">›</div>
+        </button>
 
-                <div class="opcao-icone">➕</div>
+        <button class="opcao-fileira" onclick="navegar('listaRapida')">
+            <div class="opcao-icone">📋</div>
+            <div class="opcao-conteudo">
+                <div class="opcao-titulo">Lista rápida</div>
+                <div class="opcao-desc">Selecione vários números e copie</div>
+            </div>
+            <div class="opcao-seta">›</div>
+        </button>
 
-                <div class="opcao-conteudo">
-                    <div class="opcao-titulo">Adicionar contato</div>
-                    <div class="opcao-desc">
-                        Cadastre um novo número
-                    </div>
+        <button class="opcao-fileira" onclick="navegar('buscar')">
+            <div class="opcao-icone">🔎</div>
+            <div class="opcao-conteudo">
+                <div class="opcao-titulo">Buscar</div>
+                <div class="opcao-desc">Procure qualquer contato</div>
+            </div>
+            <div class="opcao-seta">›</div>
+        </button>
+
+        <!-- NOVO SETOR -->
+
+        <button class="opcao-fileira" onclick="navegar('advogado')">
+            <div class="opcao-icone">⚖️</div>
+            <div class="opcao-conteudo">
+                <div class="opcao-titulo">Advogado</div>
+                <div class="opcao-desc">
+                    Ferramentas, clientes e mensagens profissionais
                 </div>
-
-                <div class="opcao-seta">›</div>
-
-            </button>
-
-
-            <button class="opcao-fileira" onclick="navegar('contatos')">
-
-                <div class="opcao-icone">👥</div>
-
-                <div class="opcao-conteudo">
-                    <div class="opcao-titulo">Contatos</div>
-                    <div class="opcao-desc">
-                        Organize seus números por DDD
-                    </div>
-                </div>
-
-                <div class="opcao-seta">›</div>
-
-            </button>
-
-
-            <button class="opcao-fileira" onclick="navegar('listaRapida')">
-
-                <div class="opcao-icone">📋</div>
-
-                <div class="opcao-conteudo">
-                    <div class="opcao-titulo">Lista rápida</div>
-                    <div class="opcao-desc">
-                        Selecione vários números e copie
-                    </div>
-                </div>
-
-                <div class="opcao-seta">›</div>
-
-            </button>
-
-
-            <button class="opcao-fileira" onclick="navegar('buscar')">
-
-                <div class="opcao-icone">🔎</div>
-
-                <div class="opcao-conteudo">
-                    <div class="opcao-titulo">Buscar</div>
-                    <div class="opcao-desc">
-                        Procure qualquer contato
-                    </div>
-                </div>
-
-                <div class="opcao-seta">›</div>
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         ADICIONAR
-    ========================= -->
-
-    <section id="adicionar" class="tela">
-
-        <div class="titulo">➕ Adicionar contato</div>
-
-        <div class="subtitulo">
-            Cadastre um novo número no BOT.
-        </div>
-
-        <div class="card">
-
-            <label>Nome</label>
-            <input id="nome" type="text" placeholder="Nome do contato">
-
-            <label>WhatsApp</label>
-            <input id="numero" type="tel" placeholder="Ex.: 5513999999999">
-
-            <label>DDD</label>
-            <input id="dddContato" type="text" maxlength="3" placeholder="Ex.: 013">
-
-            <label>Grupo</label>
-            <input id="grupo" type="text" placeholder="Ex.: Clientes">
-
-            <label>Observação</label>
-            <textarea
-                id="observacao"
-                placeholder="Observação opcional"
-            ></textarea>
-
-            <button
-                class="btn btn-verde btn-full"
-                onclick="adicionarContato()"
-            >
-                ➕ Salvar contato
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         CONTATOS / DDD
-    ========================= -->
-
-    <section id="contatos" class="tela">
-
-        <div class="titulo">👥 Contatos</div>
-
-        <div class="subtitulo">
-            Escolha um DDD para visualizar os números.
-        </div>
-
-        <div class="card">
-
-            <div class="botoes">
-
-                <button
-                    class="btn btn-verde"
-                    onclick="abrirModalDDD()"
-                >
-                    ➕ Adicionar DDD
-                </button>
-
-                <button
-                    class="btn btn-cinza"
-                    onclick="navegar('adicionar')"
-                >
-                    ➕ Contato
-                </button>
-
             </div>
+            <div class="opcao-seta">›</div>
+        </button>
 
-        </div>
+    </div>
 
-        <div id="listaDDD" class="ddd-lista"></div>
+</section>
 
-    </section>
+<!-- SETOR ADVOGADO -->
 
+<section id="advogado" class="tela">
 
-    <!-- =========================
-         CONTATOS DO DDD
-    ========================= -->
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
 
-    <section id="contatosDDD" class="tela">
+    <div class="adv-header">
 
-        <div class="titulo" id="tituloDDD">
-            📱 DDD
-        </div>
+        <div class="adv-header-top">
 
-        <div class="subtitulo" id="subtituloDDD">
-            Contatos deste DDD
-        </div>
+            <div class="adv-icon">⚖️</div>
 
-        <div id="listaContatosDDD"></div>
-
-    </section>
-
-
-    <!-- =========================
-         BUSCAR
-    ========================= -->
-
-    <section id="buscar" class="tela">
-
-        <div class="titulo">🔎 Buscar</div>
-
-        <div class="subtitulo">
-            Pesquise por nome, número, DDD, grupo ou status.
-        </div>
-
-        <div class="card busca">
-
-            <span>🔎</span>
-
-            <input
-                id="campoBusca"
-                type="text"
-                placeholder="Digite para pesquisar..."
-                oninput="renderizarBusca()"
-            >
-
-        </div>
-
-        <div id="resultadoBusca"></div>
-
-    </section>
-
-
-    <!-- =========================
-         LISTA RÁPIDA
-    ========================= -->
-
-    <section id="listaRapida" class="tela">
-
-        <div class="titulo">📋 Lista rápida</div>
-
-        <div class="subtitulo">
-            Selecione os números que deseja copiar.
-        </div>
-
-        <div class="card">
-
-            <div style="font-size:13px;font-weight:900;margin-bottom:10px;">
-                <span id="contadorSelecao">0 selecionados</span>
-            </div>
-
-            <div class="botoes">
-
-                <button
-                    class="btn btn-verde"
-                    onclick="copiarSelecionados()"
-                >
-                    📋 Copiar números
-                </button>
-
-                <button
-                    class="btn btn-cinza"
-                    onclick="limparSelecao()"
-                >
-                    Limpar
-                </button>
-
-            </div>
-
-        </div>
-
-        <div id="listaSelecao"></div>
-
-    </section>
-
-
-    <!-- =========================
-         ESTATÍSTICAS
-    ========================= -->
-
-    <section id="estatisticas" class="tela">
-
-        <div class="titulo">📊 Estatísticas</div>
-
-        <div class="subtitulo">
-            Visão geral dos seus contatos.
-        </div>
-
-        <div class="stats-grid">
-
-            <div class="stat-card">
-                <div class="stat-num" id="statTotal">0</div>
-                <div class="stat-label">👥 Total de contatos</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-num status-on" id="statOn">0</div>
-                <div class="stat-label">🟢 ZAP ON</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-num status-analise" id="statAnalise">0</div>
-                <div class="stat-label">🟡 Em análise</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-num status-caiu" id="statCaiu">0</div>
-                <div class="stat-label">🔴 ZAP CAIU</div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         GRUPOS
-    ========================= -->
-
-    <section id="grupos" class="tela">
-
-        <div class="titulo">🏷️ Grupos</div>
-
-        <div class="subtitulo">
-            Veja quantos contatos existem em cada grupo.
-        </div>
-
-        <div id="listaGrupos"></div>
-
-    </section>
-
-
-    <!-- =========================
-         FAVORITOS
-    ========================= -->
-
-    <section id="favoritos" class="tela">
-
-        <div class="titulo">⭐ Favoritos</div>
-
-        <div class="subtitulo">
-            Seus contatos favoritos.
-        </div>
-
-        <div id="listaFavoritos"></div>
-
-    </section>
-
-
-    <!-- =========================
-         BACKUP
-    ========================= -->
-
-    <section id="backup" class="tela">
-
-        <div class="titulo">💾 Backup</div>
-
-        <div class="subtitulo">
-            Salve seus contatos ou restaure um backup.
-        </div>
-
-        <div class="card">
-
-            <button
-                class="btn btn-verde btn-full"
-                onclick="exportarBackup()"
-            >
-                📤 Exportar backup
-            </button>
-
-            <br>
-
-            <label style="margin-top:10px;">
-                Restaurar backup
-            </label>
-
-            <input
-                id="arquivoBackup"
-                type="file"
-                accept=".json,application/json"
-                onchange="importarBackup(event)"
-            >
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         CONFIGURAÇÃO
-    ========================= -->
-
-    <section id="configuracao" class="tela">
-
-        <div class="titulo">⚙️ Configuração</div>
-
-        <div class="subtitulo">
-            Personalize o funcionamento do BOT.
-        </div>
-
-        <div class="card">
-
-            <strong>🎨 Tema</strong>
-
-            <p style="font-size:12px;color:var(--cinza);">
-                Alterne entre o modo claro e escuro.
-            </p>
-
-            <button
-                class="btn btn-cinza"
-                onclick="alternarTema()"
-            >
-                🌙 Alterar tema
-            </button>
-
-        </div>
-
-        <div class="card">
-
-            <strong>🕐 Atualizações</strong>
-
-            <p style="font-size:12px;color:var(--cinza);line-height:1.6;">
-                O status e o horário de atualização são registrados
-                automaticamente quando você altera um contato.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         SOBRE
-    ========================= -->
-
-    <section id="sobre" class="tela">
-
-        <div class="titulo">ℹ️ Sobre o BOT</div>
-
-        <div class="card">
-
-            <div style="text-align:center;padding:10px;">
-
-                <img
-                    src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
-                    alt="BOT DO BM3"
-                    style="width:95px;height:95px;object-fit:contain;border-radius:20px;"
-                >
-
-                <h2 style="margin-bottom:4px;">
-                    🍀 BOT DO BM3 🍀
-                </h2>
-
-                <p style="color:var(--cinza);font-size:12px;">
-                    Sistema de organização de contatos e números.
+            <div>
+                <h2>Setor Advogado</h2>
+                <p id="advSubtitulo">
+                    Ferramentas profissionais para atendimento
                 </p>
-
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+    <div class="adv-grid">
+
+        <button class="adv-option" onclick="navegar('gerarResposta')">
+            <div class="adv-option-icon">✍️</div>
+            <div class="adv-option-title">Gerar resposta</div>
+            <div class="adv-option-desc">
+                Monte uma resposta profissional para o cliente
+            </div>
+        </button>
+
+        <button class="adv-option" onclick="navegar('respostaRapida')">
+            <div class="adv-option-icon">⚡</div>
+            <div class="adv-option-title">Respostas rápidas</div>
+            <div class="adv-option-desc">
+                Mensagens prontas para situações comuns
+            </div>
+        </button>
+
+        <button class="adv-option" onclick="navegar('mensagensProntas')">
+            <div class="adv-option-icon">💬</div>
+            <div class="adv-option-title">Mensagens prontas</div>
+            <div class="adv-option-desc">
+                Modelos completos para enviar pelo WhatsApp
+            </div>
+        </button>
+
+        <button class="adv-option" onclick="navegar('perguntasFrequentes')">
+            <div class="adv-option-icon">❓</div>
+            <div class="adv-option-title">Perguntas frequentes</div>
+            <div class="adv-option-desc">
+                Respostas para dúvidas frequentes
+            </div>
+        </button>
+
+        <button class="adv-option" onclick="navegar('clientesAdvogado')">
+            <div class="adv-option-icon">👤</div>
+            <div class="adv-option-title">Clientes</div>
+            <div class="adv-option-desc">
+                Cadastre e organize seus clientes
+            </div>
+        </button>
+
+        <button class="adv-option" onclick="navegar('favoritosAdvogado')">
+            <div class="adv-option-icon">⭐</div>
+            <div class="adv-option-title">Favoritos</div>
+            <div class="adv-option-desc">
+                Mensagens profissionais salvas
+            </div>
+        </button>
+
+        <button class="adv-option" onclick="navegar('configAdvogado')">
+            <div class="adv-option-icon">⚙️</div>
+            <div class="adv-option-title">Configuração</div>
+            <div class="adv-option-desc">
+                Nome, OAB e assinatura profissional
+            </div>
+        </button>
+
+        <button class="adv-option" onclick="limparFormularioAdvogado()">
+            <div class="adv-option-icon">🧹</div>
+            <div class="adv-option-title">Limpar respostas</div>
+            <div class="adv-option-desc">
+                Limpe rapidamente o gerador
+            </div>
+        </button>
+
+    </div>
+
+</section>
+
+<!-- GERAR RESPOSTA -->
+
+<section id="gerarResposta" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">✍️ Gerar resposta</div>
+
+    <div class="subtitulo">
+        Crie uma resposta profissional para enviar ao cliente.
+    </div>
+
+    <div class="card">
+
+        <label>Nome do cliente</label>
+        <input id="advNomeCliente" placeholder="Ex.: João">
+
+        <label>Telefone do cliente</label>
+        <input id="advTelefoneCliente" placeholder="Ex.: 13999999999">
+
+        <label>Pergunta ou situação do cliente</label>
+        <textarea
+            id="advPergunta"
+            placeholder="Digite aqui o que o cliente perguntou..."
+        ></textarea>
+
+        <label>Estilo da resposta</label>
+        <select id="advEstilo">
+            <option value="profissional">Profissional</option>
+            <option value="formal">Formal</option>
+            <option value="cordial">Cordial</option>
+            <option value="objetivo">Objetivo</option>
+        </select>
+
+        <label>Assunto</label>
+        <select id="advAssunto">
+            <option value="geral">Atendimento geral</option>
+            <option value="processo">Andamento do processo</option>
+            <option value="documentos">Documentos</option>
+            <option value="audiencia">Audiência</option>
+            <option value="prazo">Prazo</option>
+            <option value="honorarios">Honorários</option>
+            <option value="consulta">Consulta jurídica</option>
+        </select>
+
+        <button class="btn btn-verde btn-full"
+                onclick="gerarRespostaAdvogado()">
+            ⚖️ Gerar resposta
+        </button>
+
+    </div>
+
+    <div id="resultadoRespostaAdvogado"></div>
+
+</section>
+
+<!-- RESPOSTAS RÁPIDAS -->
+
+<section id="respostaRapida" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">⚡ Respostas rápidas</div>
+
+    <div class="subtitulo">
+        Toque em uma opção para usar a mensagem.
+    </div>
+
+    <div id="listaRespostasRapidas"></div>
+
+</section>
+
+<!-- MENSAGENS PRONTAS -->
+
+<section id="mensagensProntas" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">💬 Mensagens prontas</div>
+
+    <div class="subtitulo">
+        Modelos profissionais para situações do dia a dia.
+    </div>
+
+    <div id="listaMensagensProntas"></div>
+
+</section>
+
+<!-- FAQ -->
+
+<section id="perguntasFrequentes" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">❓ Perguntas frequentes</div>
+
+    <div class="subtitulo">
+        Respostas-modelo para dúvidas comuns de clientes.
+    </div>
+
+    <div id="listaPerguntasFrequentes"></div>
+
+</section>
+
+<!-- CLIENTES ADVOGADO -->
+
+<section id="clientesAdvogado" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">👤 Clientes</div>
+
+    <div class="subtitulo">
+        Cadastre seus clientes para facilitar o atendimento.
+    </div>
+
+    <div class="card">
+
+        <label>Nome</label>
+        <input id="clienteAdvNome" placeholder="Nome do cliente">
+
+        <label>WhatsApp</label>
+        <input id="clienteAdvNumero" placeholder="5513999999999">
+
+        <label>Número do processo</label>
+        <input id="clienteAdvProcesso" placeholder="Opcional">
+
+        <label>Assunto</label>
+        <input id="clienteAdvAssunto" placeholder="Ex.: Trabalhista">
+
+        <label>Observações</label>
+        <textarea
+            id="clienteAdvObs"
+            placeholder="Observações sobre o atendimento..."
+        ></textarea>
+
+        <button class="btn btn-verde btn-full"
+                onclick="adicionarClienteAdvogado()">
+            ➕ Cadastrar cliente
+        </button>
+
+    </div>
+
+    <div id="listaClientesAdvogado"></div>
+
+</section>
+
+<!-- FAVORITOS -->
+
+<section id="favoritosAdvogado" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">⭐ Favoritos</div>
+
+    <div class="subtitulo">
+        Suas mensagens profissionais salvas.
+    </div>
+
+    <div id="listaFavoritosAdvogado"></div>
+
+</section>
+
+<!-- CONFIG ADVOGADO -->
+
+<section id="configAdvogado" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">⚙️ Configuração profissional</div>
+
+    <div class="subtitulo">
+        Essas informações podem aparecer na assinatura das mensagens.
+    </div>
+
+    <div class="card">
+
+        <label>Nome do advogado</label>
+        <input id="advConfigNome" placeholder="Seu nome">
+
+        <label>OAB</label>
+        <input id="advConfigOab" placeholder="Ex.: OAB/SP 000000">
+
+        <label>Escritório</label>
+        <input id="advConfigEscritorio" placeholder="Nome do escritório">
+
+        <label>Estilo padrão</label>
+        <select id="advConfigEstilo">
+            <option value="profissional">Profissional</option>
+            <option value="formal">Formal</option>
+            <option value="cordial">Cordial</option>
+            <option value="objetivo">Objetivo</option>
+        </select>
+
+        <button class="btn btn-verde btn-full"
+                onclick="salvarConfigAdvogado()">
+            💾 Salvar configuração
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ADICIONAR -->
+
+<section id="adicionar" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">➕ Adicionar contato</div>
+
+    <div class="subtitulo">
+        Cadastre um novo número.
+    </div>
+
+    <div class="card">
+
+        <label>Nome</label>
+        <input id="nomeContato" placeholder="Nome">
+
+        <label>Número</label>
+        <input id="numeroContato" placeholder="DDD + número">
+
+        <label>DDD</label>
+        <select id="dddContato"></select>
+
+        <label>Grupo</label>
+        <input id="grupoContato" placeholder="Grupo">
+
+        <label>Observação</label>
+        <textarea id="obsContato"></textarea>
+
+        <label>Status</label>
+        <select id="statusContato">
+            <option value="ON">ON</option>
+            <option value="ANALISE">ANALISE</option>
+            <option value="CAIU">CAIU</option>
+        </select>
+
+        <button class="btn btn-verde btn-full"
+                onclick="adicionarContato()">
+            ➕ Salvar contato
+        </button>
+
+    </div>
+
+</section>
+
+<!-- CONTATOS -->
+
+<section id="contatos" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">👥 Contatos</div>
+
+    <div class="subtitulo">
+        Organize seus números por DDD.
+    </div>
+
+    <div id="listaDDDs" class="grid"></div>
+
+</section>
+
+<!-- CONTATOS DDD -->
+
+<section id="contatosDDD" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo" id="tituloDDD">📍 DDD</div>
+
+    <div id="listaContatosDDD"></div>
+
+</section>
+
+<!-- BUSCAR -->
+
+<section id="buscar" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">🔎 Buscar</div>
+
+    <div class="subtitulo">
+        Procure qualquer contato.
+    </div>
+
+    <div class="card">
+        <input
+            id="campoBusca"
+            placeholder="Nome, número, grupo ou DDD..."
+            oninput="buscarContatos()"
+        >
+    </div>
+
+    <div id="resultadoBusca"></div>
+
+</section>
+
+<!-- LISTA RÁPIDA -->
+
+<section id="listaRapida" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">📋 Lista rápida</div>
+
+    <div class="subtitulo">
+        Selecione contatos e copie os números.
+    </div>
+
+    <div id="listaRapidaConteudo"></div>
+
+</section>
+
+<!-- ESTATÍSTICAS -->
+
+<section id="estatisticas" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">📊 Resumo</div>
+
+    <div class="subtitulo">
+        Resumo dos seus contatos.
+    </div>
+
+    <div id="estatisticasConteudo"></div>
+
+</section>
+
+<!-- GRUPOS -->
+
+<section id="grupos" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">👥 Grupos</div>
+
+    <div class="subtitulo">
+        Grupos cadastrados nos seus contatos.
+    </div>
+
+    <div id="gruposConteudo"></div>
+
+</section>
+
+<!-- BACKUP -->
+
+<section id="backup" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">💾 Backup</div>
+
+    <div class="subtitulo">
+        Faça uma cópia dos seus dados.
+    </div>
+
+    <div class="card">
+
+        <button class="btn btn-verde btn-full"
+                onclick="exportarBackup()">
+            📤 Exportar backup
+        </button>
+
+        <label>Importar backup</label>
+
+        <input
+            type="file"
+            id="arquivoBackup"
+            accept=".json"
+            onchange="importarBackup(event)"
+        >
+
+    </div>
+
+</section>
+
+<!-- CONFIGURAÇÃO -->
+
+<section id="configuracao" class="tela">
+
+    <button class="voltar" onclick="voltarTela()">‹ Voltar</button>
+
+    <div class="titulo">⚙️ Configuração</div>
+
+    <div class="card">
+
+        <button class="btn btn-sec btn-full"
+                onclick="alternarTema()">
+            🌙 Alternar tema
+        </button>
+
+        <button class="btn btn-vermelho btn-full"
+                onclick="limparTodosDados()">
+            🗑️ Apagar todos os contatos
+        </button>
+
+    </div>
+
+</section>
 
 </div>
 
+<div class="bottom-nav">
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+    <div class="bottom-inner">
+
+        <button class="nav-btn active"
+                onclick="navegar('inicio')">
+            🏠 Início
+        </button>
+
+        <button class="nav-btn"
+                onclick="navegar('whatsapp')">
+            📱 WhatsApp
+        </button>
+
+        <button class="nav-btn"
+                onclick="navegar('contatos')">
+            👥 Contatos
+        </button>
+
+        <button class="nav-btn"
+                onclick="navegar('estatisticas')">
+            📊 Resumo
+        </button>
+
+    </div>
+
+</div>
 
 <script>
 
 /* =========================
-   DADOS
+   DADOS PRINCIPAIS
 ========================= */
 
 const CHAVE_CONTATOS = "botBM3Contatos";
 const CHAVE_TEMA = "temaBotBM3";
-const CHAVE_DDDS = "botBM3DDDs";
 
 let contatos = JSON.parse(
-    localStorage.getItem(CHAVE_CONTATOS)
-) || [];
-
-let ddds = JSON.parse(
-    localStorage.getItem(CHAVE_DDDS)
-) || [];
-
-let selecionados = new Set();
+    localStorage.getItem(CHAVE_CONTATOS) || "[]"
+);
 
 let telaAtual = "inicio";
-
 let historicoTelas = [];
 
-let bloqueioTela = false;
-
-let dddAtual = null;
-
-
-/* =========================
-   DDDS PADRÃO
-========================= */
-
-function criarDDDsPadrao(){
-
-    if(ddds.length > 0) return;
-
-    ddds = [
-        {
-            numero:"011",
-            nome:"São Paulo"
-        },
-        {
-            numero:"012",
-            nome:"Vale do Paraíba"
-        },
-        {
-            numero:"013",
-            nome:"Baixada Santista"
-        },
-        {
-            numero:"014",
-            nome:"Bauru e região"
-        },
-        {
-            numero:"015",
-            nome:"Sorocaba e região"
-        },
-        {
-            numero:"016",
-            nome:"Ribeirão Preto e região"
-        },
-        {
-            numero:"017",
-            nome:"São José do Rio Preto e região"
-        },
-        {
-            numero:"018",
-            nome:"Presidente Prudente e região"
-        },
-        {
-            numero:"019",
-            nome:"Campinas e região"
-        }
-    ];
-
-    salvarDDDs();
-}
-
-criarDDDsPadrao();
+const ddds = [
+    {ddd:"011",regiao:"São Paulo"},
+    {ddd:"012",regiao:"Vale do Paraíba"},
+    {ddd:"013",regiao:"Baixada Santista"},
+    {ddd:"014",regiao:"Bauru e região"},
+    {ddd:"015",regiao:"Sorocaba e região"},
+    {ddd:"016",regiao:"Ribeirão Preto e região"},
+    {ddd:"017",regiao:"São José do Rio Preto e região"},
+    {ddd:"018",regiao:"Presidente Prudente e região"},
+    {ddd:"019",regiao:"Campinas e região"}
+];
 
 
 /* =========================
-   SALVAR
+   ADVOGADO
 ========================= */
 
-function salvar(){
+const CHAVE_ADV_CLIENTES = "botBM3AdvClientes";
+const CHAVE_ADV_FAVORITOS = "botBM3AdvFavoritos";
+const CHAVE_ADV_CONFIG = "botBM3AdvConfig";
 
+let advClientes = JSON.parse(
+    localStorage.getItem(CHAVE_ADV_CLIENTES) || "[]"
+);
+
+let advFavoritos = JSON.parse(
+    localStorage.getItem(CHAVE_ADV_FAVORITOS) || "[]"
+);
+
+let advConfig = JSON.parse(
+    localStorage.getItem(CHAVE_ADV_CONFIG) ||
+    '{"nome":"","oab":"","escritorio":"","estilo":"profissional"}'
+);
+
+
+/* =========================
+   UTILITÁRIOS
+========================= */
+
+function salvarContatos(){
     localStorage.setItem(
         CHAVE_CONTATOS,
         JSON.stringify(contatos)
     );
 }
 
-function salvarDDDs(){
-
-    localStorage.setItem(
-        CHAVE_DDDS,
-        JSON.stringify(ddds)
-    );
-}
-
-
-/* =========================
-   ESCAPAR HTML
-========================= */
-
-function escapar(valor){
-
-    return String(valor ?? "")
+function escapar(texto){
+    return String(texto ?? "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -1658,419 +1418,235 @@ function escapar(valor){
         .replace(/'/g,"&#039;");
 }
 
+function normalizarNumero(numero){
+    return String(numero || "").replace(/\D/g,"");
+}
+
+function copiarTexto(texto){
+    if(navigator.clipboard){
+        navigator.clipboard.writeText(texto)
+            .then(()=>alert("Texto copiado!"))
+            .catch(()=>copiarFallback(texto));
+    }else{
+        copiarFallback(texto);
+    }
+}
+
+function copiarFallback(texto){
+    const area=document.createElement("textarea");
+    area.value=texto;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+    alert("Texto copiado!");
+}
+
+function abrirWhatsApp(numero,mensagem=""){
+    let n=normalizarNumero(numero);
+
+    if(!n){
+        n=prompt("Digite o número com DDD:");
+    }
+
+    if(!n) return;
+
+    if(n.length<=11){
+        n="55"+n;
+    }
+
+    let url="https://wa.me/"+n;
+
+    if(mensagem){
+        url+="?text="+encodeURIComponent(mensagem);
+    }
+
+    window.open(url,"_blank");
+}
+
 
 /* =========================
    NAVEGAÇÃO
 ========================= */
 
-function abrirMenu(){
-
-    if(telaAtual !== "inicio") return;
-
-    document
-        .getElementById("menu")
-        .classList.toggle("aberto");
-}
-
-
 function navegar(id){
 
-    if(bloqueioTela) return;
-
-    if(id === telaAtual) return;
+    if(id===telaAtual) return;
 
     historicoTelas.push(telaAtual);
-
     trocarTela(id);
-
-    document
-        .getElementById("menu")
-        .classList.remove("aberto");
 }
-
 
 function trocarTela(id){
 
-    if(bloqueioTela) return;
+    document.querySelectorAll(".tela")
+        .forEach(t=>t.classList.remove("ativa"));
 
-    const atual = document.getElementById(telaAtual);
-    const nova = document.getElementById(id);
+    const tela=document.getElementById(id);
 
-    if(!nova) return;
+    if(!tela) return;
 
-    bloqueioTela = true;
+    tela.classList.add("ativa");
 
-    if(atual){
-        atual.classList.remove("ativa");
-    }
+    telaAtual=id;
 
-    setTimeout(() => {
+    atualizarNavegacao();
+    atualizarTela(id);
 
-        document
-            .querySelectorAll(".tela")
-            .forEach(tela => tela.classList.remove("ativa"));
-
-        nova.classList.add("ativa");
-
-        telaAtual = id;
-
-        atualizarNavegacao();
-
-        atualizarTela(id);
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-        setTimeout(() => {
-            bloqueioTela = false;
-        },100);
-
-    },100);
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
-
 
 function voltarTela(){
 
-    if(bloqueioTela) return;
+    if(historicoTelas.length){
 
-    const destino =
-        historicoTelas.pop() || "inicio";
+        const anterior=
+            historicoTelas.pop();
 
-    trocarTela(destino);
-}
-
-
-function atualizarNavegacao(){
-
-    const botaoMenu =
-        document.getElementById("botaoMenu");
-
-    const botaoVoltar =
-        document.getElementById("botaoVoltar");
-
-    const menu =
-        document.getElementById("menu");
-
-    if(telaAtual === "inicio"){
-
-        botaoMenu.style.display = "block";
-        botaoVoltar.style.display = "none";
+        trocarTela(anterior);
 
     }else{
 
-        botaoMenu.style.display = "none";
-        botaoVoltar.style.display = "block";
+        trocarTela("inicio");
 
-        menu.classList.remove("aberto");
-
-        const anterior =
-            historicoTelas[historicoTelas.length - 1];
-
-        if(anterior === "whatsapp"){
-
-            botaoVoltar.textContent =
-                "← Voltar para WhatsApp";
-
-        }else if(anterior === "contatos"){
-
-            botaoVoltar.textContent =
-                "← Voltar para Contatos";
-
-        }else{
-
-            botaoVoltar.textContent =
-                "← Voltar";
-
-        }
     }
 }
 
+function atualizarNavegacao(){
 
-/* =========================
-   ATUALIZAR TELA
-========================= */
+    document.querySelectorAll(".nav-btn")
+        .forEach(btn=>btn.classList.remove("active"));
+
+    if(
+        telaAtual==="inicio"
+    ){
+        document.querySelectorAll(".nav-btn")[0]
+            ?.classList.add("active");
+    }
+
+    else if(
+        telaAtual==="whatsapp" ||
+        telaAtual==="adicionar" ||
+        telaAtual==="contatos" ||
+        telaAtual==="contatosDDD" ||
+        telaAtual==="buscar" ||
+        telaAtual==="listaRapida" ||
+        telaAtual==="advogado" ||
+        telaAtual==="gerarResposta" ||
+        telaAtual==="respostaRapida" ||
+        telaAtual==="mensagensProntas" ||
+        telaAtual==="perguntasFrequentes" ||
+        telaAtual==="clientesAdvogado" ||
+        telaAtual==="favoritosAdvogado" ||
+        telaAtual==="configAdvogado"
+    ){
+        document.querySelectorAll(".nav-btn")[1]
+            ?.classList.add("active");
+    }
+
+    else if(telaAtual==="contatos"){
+        document.querySelectorAll(".nav-btn")[2]
+            ?.classList.add("active");
+    }
+
+    else if(telaAtual==="estatisticas"){
+        document.querySelectorAll(".nav-btn")[3]
+            ?.classList.add("active");
+    }
+}
 
 function atualizarTela(id){
 
-    if(id === "contatos"){
+    if(id==="inicio") atualizarInicio();
+
+    if(id==="contatos") renderizarDDDs();
+
+    if(id==="contatosDDD") renderizarContatosDDD();
+
+    if(id==="buscar") buscarContatos();
+
+    if(id==="listaRapida") renderizarListaRapida();
+
+    if(id==="estatisticas") renderizarEstatisticas();
+
+    if(id==="grupos") renderizarGrupos();
+
+    if(id==="respostaRapida")
+        renderizarRespostasRapidasAdvogado();
+
+    if(id==="mensagensProntas")
+        renderizarMensagensProntasAdvogado();
+
+    if(id==="perguntasFrequentes")
+        renderizarPerguntasAdvogado();
+
+    if(id==="clientesAdvogado")
+        renderizarClientesAdvogado();
+
+    if(id==="favoritosAdvogado")
+        renderizarFavoritosAdvogado();
+
+    if(id==="configAdvogado")
+        carregarConfigAdvogado();
+}
+
+function atualizarTudo(){
+
+    atualizarInicio();
+
+    if(telaAtual==="contatos")
         renderizarDDDs();
-    }
 
-    if(id === "contatosDDD"){
+    if(telaAtual==="contatosDDD")
         renderizarContatosDDD();
-    }
 
-    if(id === "listaRapida"){
+    if(telaAtual==="buscar")
+        buscarContatos();
+
+    if(telaAtual==="listaRapida")
         renderizarListaRapida();
-    }
 
-    if(id === "buscar"){
-        renderizarBusca();
-    }
+    if(telaAtual==="estatisticas")
+        renderizarEstatisticas();
 
-    if(id === "grupos"){
+    if(telaAtual==="grupos")
         renderizarGrupos();
-    }
 
-    if(id === "favoritos"){
-        renderizarFavoritos();
-    }
+    if(telaAtual==="clientesAdvogado")
+        renderizarClientesAdvogado();
 
-    if(id === "estatisticas"){
-        atualizarEstatisticas();
-    }
-
-    atualizarResumo();
+    if(telaAtual==="favoritosAdvogado")
+        renderizarFavoritosAdvogado();
 }
 
 
 /* =========================
-   ADICIONAR CONTATO
+   INÍCIO
 ========================= */
 
-function adicionarContato(){
+function atualizarInicio(){
 
-    const nome =
-        document.getElementById("nome").value.trim();
+    const total=contatos.length;
 
-    const numero =
-        document.getElementById("numero").value.trim();
+    const on=contatos.filter(
+        c=>c.status==="ON"
+    ).length;
 
-    const ddd =
-        document.getElementById("dddContato").value
-        .replace(/\D/g,"")
-        .padStart(3,"0");
+    const fav=contatos.filter(
+        c=>c.favorito
+    ).length;
 
-    const grupo =
-        document.getElementById("grupo").value.trim();
+    document.getElementById("totalInicio")
+        .textContent=total;
 
-    const observacao =
-        document.getElementById("observacao").value.trim();
+    document.getElementById("onInicio")
+        .textContent=on;
 
-    if(!nome || !numero){
-
-        alert("Preencha o nome e o WhatsApp.");
-
-        return;
-    }
-
-    const agora = new Date();
-
-    contatos.push({
-
-        nome,
-        numero,
-        ddd:ddd || detectarDDD(numero),
-        grupo,
-        observacao,
-
-        status:"ANALISE",
-
-        favorito:false,
-
-        ultimaAtualizacao:
-            agora.toLocaleString("pt-BR")
-
-    });
-
-    salvar();
-
-    document.getElementById("nome").value = "";
-    document.getElementById("numero").value = "";
-    document.getElementById("dddContato").value = "";
-    document.getElementById("grupo").value = "";
-    document.getElementById("observacao").value = "";
-
-    atualizarTudo();
-
-    alert("Contato adicionado com sucesso!");
-
-    voltarTela();
-}
-
-
-/* =========================
-   DETECTAR DDD
-========================= */
-
-function detectarDDD(numero){
-
-    const limpo =
-        numero.replace(/\D/g,"");
-
-    if(limpo.length >= 12){
-
-        return limpo.substring(2,5);
-
-    }
-
-    if(limpo.length >= 10){
-
-        return limpo.substring(0,3);
-
-    }
-
-    return "OUT";
-}
-
-
-/* =========================
-   RESUMO
-========================= */
-
-function atualizarResumo(){
-
-    const total = contatos.length;
-
-    const on =
-        contatos.filter(c => c.status === "ON").length;
-
-    const analise =
-        contatos.filter(c => c.status === "ANALISE").length;
-
-    const caiu =
-        contatos.filter(c => c.status === "CAIU").length;
-
-    document.getElementById("totalContatos").textContent = total;
-    document.getElementById("totalOn").textContent = on;
-    document.getElementById("totalAnalise").textContent = analise;
-    document.getElementById("totalCaiu").textContent = caiu;
-}
-
-
-/* =========================
-   STATUS
-========================= */
-
-function alterarStatus(index,status){
-
-    if(!contatos[index]) return;
-
-    contatos[index].status = status;
-
-    contatos[index].ultimaAtualizacao =
-        new Date().toLocaleString("pt-BR");
-
-    salvar();
-
-    atualizarTudo();
-
-    if(telaAtual === "contatosDDD"){
-        renderizarContatosDDD();
-    }
-
-    if(telaAtual === "buscar"){
-        renderizarBusca();
-    }
-
-    if(telaAtual === "favoritos"){
-        renderizarFavoritos();
-    }
-}
-
-
-/* =========================
-   WHATSAPP
-========================= */
-
-function abrirWhatsApp(index){
-
-    if(!contatos[index]) return;
-
-    let numero =
-        contatos[index].numero.replace(/\D/g,"");
-
-    if(!numero){
-
-        alert("Número inválido.");
-
-        return;
-    }
-
-    window.open(
-        "https://wa.me/" + numero,
-        "_blank"
-    );
-}
-
-
-/* =========================
-   FAVORITO
-========================= */
-
-function alternarFavorito(index){
-
-    if(!contatos[index]) return;
-
-    contatos[index].favorito =
-        !contatos[index].favorito;
-
-    salvar();
-
-    atualizarTudo();
-
-    if(telaAtual === "favoritos"){
-        renderizarFavoritos();
-    }
-}
-
-
-/* =========================
-   EXCLUIR
-========================= */
-
-function excluirContato(index){
-
-    if(!contatos[index]) return;
-
-    if(!confirm(
-        "Deseja excluir este contato?"
-    )) return;
-
-    contatos.splice(index,1);
-
-    selecionados =
-        new Set(
-            [...selecionados]
-            .filter(i => Number(i) < contatos.length)
-        );
-
-    salvar();
-
-    atualizarTudo();
-
-    if(telaAtual === "contatosDDD"){
-        renderizarContatosDDD();
-    }
-}
-
-
-/* =========================
-   STATUS HTML
-========================= */
-
-function htmlStatus(c,index){
-
-    return `
-        <select
-            onchange="alterarStatus(${index},this.value)"
-            style="margin:0;"
-        >
-            <option value="ANALISE" ${c.status==="ANALISE"?"selected":""}>
-                ⚠️ ZAP EM ANÁLISE
-            </option>
-
-            <option value="ON" ${c.status==="ON"?"selected":""}>
-                🟢 ZAP ON
-            </option>
-
-            <option value="CAIU" ${c.status==="CAIU"?"selected":""}>
-                🔴 ZAP CAIU
-            </option>
-        </select>
-    `;
+    document.getElementById("favInicio")
+        .textContent=fav;
 }
 
 
@@ -2078,499 +1654,327 @@ function htmlStatus(c,index){
    DDD
 ========================= */
 
+function carregarSelectDDDs(){
+
+    const select=document.getElementById("dddContato");
+
+    if(!select) return;
+
+    select.innerHTML=ddds.map(d=>
+        `<option value="${d.ddd}">
+            ${d.ddd} — ${d.regiao}
+        </option>`
+    ).join("");
+}
+
 function renderizarDDDs(){
 
-    const lista =
-        document.getElementById("listaDDD");
+    const box=document.getElementById("listaDDDs");
 
-    if(ddds.length === 0){
+    if(!box) return;
 
-        lista.innerHTML = `
-            <div class="card vazio">
-                <div class="vazio-icon">📱</div>
-                <strong>Nenhum DDD cadastrado</strong>
-                Adicione seu primeiro DDD.
+    box.innerHTML=ddds.map(d=>{
+
+        const quantidade=contatos.filter(
+            c=>c.ddd===d.ddd
+        ).length;
+
+        return `
+        <button class="menu-card"
+                onclick="abrirDDD('${d.ddd}')">
+
+            <div class="menu-icon">📍</div>
+
+            <div class="menu-title">
+                DDD ${d.ddd}
             </div>
+
+            <div class="menu-desc">
+                ${d.regiao}<br>
+                ${quantidade} contato(s)
+            </div>
+
+        </button>
         `;
 
-        return;
-    }
-
-    lista.innerHTML =
-        ddds.map((ddd,index) => {
-
-            const quantidade =
-                contatos.filter(c =>
-                    normalizarDDD(c.ddd) ===
-                    normalizarDDD(ddd.numero)
-                ).length;
-
-            return `
-
-                <div class="ddd-item">
-
-                    <div class="ddd-numero">
-                        ${escapar(ddd.numero)}
-                    </div>
-
-                    <div
-                        class="ddd-info"
-                        onclick="abrirDDD('${escapar(ddd.numero)}')"
-                        style="cursor:pointer;"
-                    >
-
-                        <div class="ddd-nome">
-                            ${escapar(ddd.nome)}
-                        </div>
-
-                        <div class="ddd-qtd">
-                            ${quantidade}
-                            ${quantidade === 1 ? "contato" : "contatos"}
-                        </div>
-
-                    </div>
-
-                    <div class="ddd-acoes">
-
-                        <button
-                            class="icon-btn"
-                            onclick="editarDDD(${index})"
-                            title="Editar"
-                        >
-                            ✏️
-                        </button>
-
-                        <button
-                            class="icon-btn"
-                            onclick="abrirDDD('${escapar(ddd.numero)}')"
-                            title="Abrir"
-                        >
-                            ›
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
+    }).join("");
 }
 
+function abrirDDD(ddd){
 
-function normalizarDDD(valor){
-
-    return String(valor || "")
-        .replace(/\D/g,"")
-        .padStart(3,"0");
-}
-
-
-function abrirDDD(numero){
-
-    dddAtual =
-        normalizarDDD(numero);
+    localStorage.setItem(
+        "botBM3DDDSelecionado",
+        ddd
+    );
 
     navegar("contatosDDD");
 }
 
-
 function renderizarContatosDDD(){
 
-    const ddd =
-        ddds.find(d =>
-            normalizarDDD(d.numero) === dddAtual
+    const ddd=
+        localStorage.getItem(
+            "botBM3DDDSelecionado"
         );
 
-    const titulo =
-        document.getElementById("tituloDDD");
+    const dados=ddds.find(d=>d.ddd===ddd);
 
-    const subtitulo =
-        document.getElementById("subtituloDDD");
+    document.getElementById("tituloDDD")
+        .textContent=
+        `📍 DDD ${ddd}`;
 
-    const lista =
-        document.getElementById("listaContatosDDD");
+    const lista=contatos.filter(
+        c=>c.ddd===ddd
+    );
 
-    if(!ddd){
-
-        titulo.textContent =
-            "📱 DDD " + dddAtual;
-
-        subtitulo.textContent =
-            "DDD não cadastrado";
-
-        lista.innerHTML = "";
-
-        return;
-    }
-
-    titulo.textContent =
-        "📱 " + ddd.numero;
-
-    subtitulo.textContent =
-        ddd.nome + " • contatos deste DDD";
-
-    const encontrados =
-        contatos
-        .map((c,index)=>({c,index}))
-        .filter(item =>
-            normalizarDDD(item.c.ddd) ===
-            normalizarDDD(ddd.numero)
-        );
-
-    if(encontrados.length === 0){
-
-        lista.innerHTML = `
-            <div class="card vazio">
-
-                <div class="vazio-icon">👥</div>
-
-                <strong>Nenhum contato neste DDD</strong>
-
-                Você ainda não possui contatos cadastrados
-                neste DDD.
-
-                <br><br>
-
-                <button
-                    class="btn btn-verde"
-                    onclick="navegar('adicionar')"
-                >
-                    ➕ Adicionar contato
-                </button>
-
-            </div>
-        `;
-
-        return;
-    }
-
-    lista.innerHTML =
-        encontrados.map(item => {
-
-            const c = item.c;
-            const index = item.index;
-
-            return `
-                <div class="contato-item">
-
-                    <div class="contato-top">
-
-                        <div class="contato-info">
-
-                            <div class="contato-nome">
-                                ${escapar(c.nome)}
-                            </div>
-
-                            <div class="contato-numero">
-                                📱 ${escapar(c.numero)}
-                            </div>
-
-                            ${
-                                c.grupo
-                                ?
-                                `<div class="contato-meta">
-                                    🏷️ ${escapar(c.grupo)}
-                                </div>`
-                                :""
-                            }
-
-                            ${
-                                c.observacao
-                                ?
-                                `<div class="contato-meta">
-                                    📝 ${escapar(c.observacao)}
-                                </div>`
-                                :""
-                            }
-
-                            <div class="contato-meta">
-                                🕐 ${escapar(c.ultimaAtualizacao || "-")}
-                            </div>
-
-                        </div>
-
-                        <button
-                            class="icon-btn"
-                            onclick="alternarFavorito(${index})"
-                        >
-                            ${c.favorito ? "⭐" : "☆"}
-                        </button>
-
-                    </div>
-
-                    <div style="margin-top:10px;">
-                        ${htmlStatus(c,index)}
-                    </div>
-
-                    <div class="contato-acoes">
-
-                        <button
-                            class="btn btn-verde"
-                            onclick="abrirWhatsApp(${index})"
-                        >
-                            🟢 Abrir WhatsApp
-                        </button>
-
-                        <button
-                            class="btn btn-vermelho"
-                            onclick="excluirContato(${index})"
-                        >
-                            🗑️ Excluir
-                        </button>
-
-                    </div>
-
-                </div>
-            `;
-
-        }).join("");
+    renderizarListaContatos(
+        lista,
+        "listaContatosDDD"
+    );
 }
 
 
 /* =========================
-   MODAL DDD
+   CONTATOS
 ========================= */
 
-function abrirModalDDD(){
+function adicionarContato(){
 
-    const numero =
-        prompt("Digite o DDD (ex.: 013):");
+    const nome=
+        document.getElementById("nomeContato")
+        .value.trim();
 
-    if(numero === null) return;
+    const numero=
+        document.getElementById("numeroContato")
+        .value.trim();
 
-    const ddd =
-        normalizarDDD(numero);
+    const ddd=
+        document.getElementById("dddContato")
+        .value;
 
-    if(ddd.length !== 3){
+    const grupo=
+        document.getElementById("grupoContato")
+        .value.trim();
 
-        alert("Digite um DDD com 3 números.");
+    const observacao=
+        document.getElementById("obsContato")
+        .value.trim();
 
-        return;
-    }
+    const status=
+        document.getElementById("statusContato")
+        .value;
 
-    if(ddds.some(d =>
-        normalizarDDD(d.numero) === ddd
-    )){
+    if(!numero){
 
-        alert("Esse DDD já existe.");
-
-        return;
-    }
-
-    const nome =
-        prompt("Digite o nome/região desse DDD:");
-
-    if(nome === null || !nome.trim()) return;
-
-    ddds.push({
-        numero:ddd,
-        nome:nome.trim()
-    });
-
-    salvarDDDs();
-
-    renderizarDDDs();
-
-    alert("DDD adicionado com sucesso!");
-}
-
-
-function editarDDD(index){
-
-    if(!ddds[index]) return;
-
-    const antigo = ddds[index];
-
-    const novoNumero =
-        prompt(
-            "Novo número do DDD:",
-            antigo.numero
-        );
-
-    if(novoNumero === null) return;
-
-    const ddd =
-        normalizarDDD(novoNumero);
-
-    if(ddd.length !== 3){
-
-        alert("DDD inválido.");
+        alert("Digite o número.");
 
         return;
     }
 
-    const conflito =
-        ddds.some((d,i) =>
-            i !== index &&
-            normalizarDDD(d.numero) === ddd
-        );
+    contatos.push({
 
-    if(conflito){
+        nome:nome || "Sem nome",
 
-        alert("Esse DDD já está cadastrado.");
+        numero:normalizarNumero(numero),
 
-        return;
-    }
+        ddd,
 
-    const novoNome =
-        prompt(
-            "Novo nome/região:",
-            antigo.nome
-        );
+        grupo,
 
-    if(novoNome === null || !novoNome.trim()) return;
+        observacao,
 
-    const antigoNumero =
-        normalizarDDD(antigo.numero);
+        status,
 
-    ddds[index].numero = ddd;
-    ddds[index].nome = novoNome.trim();
+        favorito:false,
 
-    /* Atualiza os contatos que estavam no DDD antigo */
-    contatos.forEach(c => {
-
-        if(
-            normalizarDDD(c.ddd) ===
-            antigoNumero
-        ){
-            c.ddd = ddd;
-        }
+        ultimaAtualizacao:
+            new Date().toISOString()
 
     });
 
-    salvarDDDs();
-    salvar();
+    salvarContatos();
+
+    document.getElementById("nomeContato").value="";
+    document.getElementById("numeroContato").value="";
+    document.getElementById("grupoContato").value="";
+    document.getElementById("obsContato").value="";
+
+    alert("Contato adicionado!");
 
     atualizarTudo();
 
-    if(telaAtual === "contatos"){
-        renderizarDDDs();
+    navegar("contatos");
+}
+
+function renderizarListaContatos(lista,id){
+
+    const box=document.getElementById(id);
+
+    if(!box) return;
+
+    if(!lista.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Nenhum contato encontrado.
+            </div>`;
+
+        return;
     }
 
-    alert("DDD atualizado com sucesso!");
+    box.innerHTML=lista.map((c)=>{
+
+        const indice=contatos.indexOf(c);
+
+        return `
+        <div class="contato">
+
+            <div class="contato-top">
+
+                <div>
+                    <div class="contato-nome">
+                        ${escapar(c.nome)}
+                    </div>
+
+                    <div class="contato-numero">
+                        ${escapar(c.numero)}
+                    </div>
+                </div>
+
+                <span class="badge">
+                    ${escapar(c.status)}
+                </span>
+
+            </div>
+
+            <div class="contato-info">
+                DDD: ${escapar(c.ddd)}
+                ${c.grupo ? " • Grupo: "+escapar(c.grupo) : ""}
+                ${c.observacao ? "<br>"+escapar(c.observacao) : ""}
+            </div>
+
+            <div class="contato-acoes">
+
+                <button onclick="abrirWhatsApp('${escapar(c.numero)}')">
+                    📱 WhatsApp
+                </button>
+
+                <button onclick="alternarFavorito(${indice})">
+                    ${c.favorito ? "⭐ Favorito" : "☆ Favoritar"}
+                </button>
+
+                <button onclick="alterarStatus(${indice})">
+                    🔄 Status
+                </button>
+
+                <button onclick="excluirContato(${indice})">
+                    🗑️ Excluir
+                </button>
+
+            </div>
+
+        </div>
+        `;
+
+    }).join("");
+}
+
+function excluirContato(indice){
+
+    if(!confirm("Excluir este contato?"))
+        return;
+
+    contatos.splice(indice,1);
+
+    salvarContatos();
+
+    atualizarTudo();
+}
+
+function alternarFavorito(indice){
+
+    contatos[indice].favorito=
+        !contatos[indice].favorito;
+
+    salvarContatos();
+
+    atualizarTudo();
+}
+
+function alterarStatus(indice){
+
+    const ordem=[
+        "ON",
+        "ANALISE",
+        "CAIU"
+    ];
+
+    const atual=
+        ordem.indexOf(
+            contatos[indice].status
+        );
+
+    contatos[indice].status=
+        ordem[(atual+1)%ordem.length];
+
+    salvarContatos();
+
+    atualizarTudo();
 }
 
 
 /* =========================
-   BUSCAR
+   BUSCA
 ========================= */
 
-function renderizarBusca(){
+function buscarContatos(){
 
-    const campo =
-        document.getElementById("campoBusca");
+    const box=
+        document.getElementById(
+            "resultadoBusca"
+        );
 
-    const resultado =
-        document.getElementById("resultadoBusca");
+    if(!box) return;
 
-    const termo =
+    const campo=
+        document.getElementById(
+            "campoBusca"
+        );
+
+    const termo=
         (campo?.value || "")
         .toLowerCase()
         .trim();
 
     if(!termo){
 
-        resultado.innerHTML = `
-            <div class="card vazio">
-                <div class="vazio-icon">🔎</div>
-                <strong>Digite algo para pesquisar</strong>
-                Pesquise por nome, número, DDD, grupo ou status.
-            </div>
-        `;
+        box.innerHTML=
+            `<div class="empty">
+                Digite algo para pesquisar.
+            </div>`;
 
         return;
     }
 
-    const encontrados =
-        contatos
-        .map((c,index)=>({c,index}))
-        .filter(item => {
+    const encontrados=
+        contatos.filter(c=>
 
-            const c = item.c;
+            c.nome.toLowerCase().includes(termo) ||
 
-            const texto = [
+            c.numero.includes(termo) ||
 
-                c.nome,
-                c.numero,
-                c.ddd,
-                c.grupo,
-                c.observacao,
-                c.status
+            c.ddd.includes(termo) ||
 
-            ]
-            .join(" ")
-            .toLowerCase();
+            c.grupo.toLowerCase().includes(termo) ||
 
-            return texto.includes(termo);
+            c.observacao.toLowerCase().includes(termo)
 
-        });
+        );
 
-    if(encontrados.length === 0){
-
-        resultado.innerHTML = `
-            <div class="card vazio">
-                <div class="vazio-icon">😕</div>
-                <strong>Nenhum resultado</strong>
-                Não encontramos contatos para essa pesquisa.
-            </div>
-        `;
-
-        return;
-    }
-
-    resultado.innerHTML =
-        encontrados.map(item => {
-
-            const c = item.c;
-            const index = item.index;
-
-            return `
-                <div class="contato-item">
-
-                    <div class="contato-nome">
-                        ${escapar(c.nome)}
-                    </div>
-
-                    <div class="contato-numero">
-                        📱 ${escapar(c.numero)}
-                    </div>
-
-                    <div class="contato-meta">
-                        📍 DDD ${escapar(c.ddd || "-")}
-                        ${
-                            c.grupo
-                            ? " • 🏷️ " + escapar(c.grupo)
-                            : ""
-                        }
-                    </div>
-
-                    <div style="margin-top:10px;">
-                        ${htmlStatus(c,index)}
-                    </div>
-
-                    <div class="contato-acoes">
-
-                        <button
-                            class="btn btn-verde"
-                            onclick="abrirWhatsApp(${index})"
-                        >
-                            🟢 WhatsApp
-                        </button>
-
-                        <button
-                            class="btn btn-cinza"
-                            onclick="alternarFavorito(${index})"
-                        >
-                            ${c.favorito ? "⭐ Favorito" : "☆ Favoritar"}
-                        </button>
-
-                    </div>
-
-                </div>
-            `;
-
-        }).join("");
+    renderizarListaContatos(
+        encontrados,
+        "resultadoBusca"
+    );
 }
 
 
@@ -2580,162 +1984,199 @@ function renderizarBusca(){
 
 function renderizarListaRapida(){
 
-    const lista =
-        document.getElementById("listaSelecao");
-
-    const contador =
-        document.getElementById("contadorSelecao");
-
-    contador.textContent =
-        selecionados.size +
-        (
-            selecionados.size === 1
-            ? " selecionado"
-            : " selecionados"
+    const box=
+        document.getElementById(
+            "listaRapidaConteudo"
         );
 
-    if(contatos.length === 0){
+    if(!box) return;
 
-        lista.innerHTML = `
-            <div class="card vazio">
-                <div class="vazio-icon">📋</div>
-                <strong>Nenhum contato</strong>
-                Adicione contatos primeiro.
-            </div>
-        `;
+    if(!contatos.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Nenhum contato cadastrado.
+            </div>`;
 
         return;
     }
 
-    lista.innerHTML =
-        contatos.map((c,index) => {
+    box.innerHTML=`
 
-            const marcado =
-                selecionados.has(index);
+        <div class="card">
 
-            return `
-                <label
-                    class="selecao-item ${
-                        marcado ? "selecionado" : ""
-                    }"
+            <button
+                class="btn btn-verde btn-full"
+                onclick="copiarTodosNumeros()">
+
+                📋 Copiar todos os números
+
+            </button>
+
+            <button
+                class="btn btn-sec btn-full"
+                onclick="abrirTodosWhatsApp()">
+
+                📱 Abrir WhatsApp dos contatos
+
+            </button>
+
+        </div>
+
+        ${contatos.map((c,i)=>`
+
+            <label style="
+                display:flex;
+                align-items:center;
+                gap:10px;
+                background:var(--card);
+                border:1px solid var(--borda);
+                border-radius:12px;
+                padding:12px;
+                margin-bottom:7px;
+            ">
+
+                <input
+                    type="checkbox"
+                    class="checkRapido"
+                    value="${i}"
+                    style="width:auto"
                 >
 
-                    <input
-                        type="checkbox"
-                        ${
-                            marcado
-                            ? "checked"
-                            : ""
-                        }
-                        onchange="
-                            alternarSelecao(
-                                ${index},
-                                this.checked
-                            )
-                        "
-                    >
+                <span>
+                    <strong>${escapar(c.nome)}</strong><br>
+                    <small>${escapar(c.numero)}</small>
+                </span>
 
-                    <div class="selecao-info">
+            </label>
 
-                        <strong>
-                            ${escapar(c.nome)}
-                        </strong>
-
-                        <span>
-                            📱 ${escapar(c.numero)}
-                            ${
-                                c.ddd
-                                ? " • DDD " + escapar(c.ddd)
-                                : ""
-                            }
-                        </span>
-
-                    </div>
-
-                </label>
-            `;
-
-        }).join("");
+        `).join("")}
+    `;
 }
 
+function copiarTodosNumeros(){
 
-function alternarSelecao(index,marcado){
-
-    if(marcado){
-
-        selecionados.add(index);
-
-    }else{
-
-        selecionados.delete(index);
-
-    }
-
-    renderizarListaRapida();
-}
-
-
-function limparSelecao(){
-
-    selecionados.clear();
-
-    renderizarListaRapida();
-}
-
-
-async function copiarSelecionados(){
-
-    if(selecionados.size === 0){
-
-        alert(
-            "Selecione pelo menos um contato."
+    const checks=
+        document.querySelectorAll(
+            ".checkRapido:checked"
         );
 
+    let lista=[];
+
+    checks.forEach(ch=>{
+        lista.push(
+            contatos[
+                Number(ch.value)
+            ].numero
+        );
+    });
+
+    if(!lista.length){
+        lista=contatos.map(c=>c.numero);
+    }
+
+    copiarTexto(lista.join("\n"));
+}
+
+function abrirTodosWhatsApp(){
+
+    const checks=
+        document.querySelectorAll(
+            ".checkRapido:checked"
+        );
+
+    let lista=[];
+
+    checks.forEach(ch=>{
+        lista.push(
+            contatos[
+                Number(ch.value)
+            ].numero
+        );
+    });
+
+    if(!lista.length){
+        alert("Selecione pelo menos um número.");
         return;
     }
 
-    const numeros =
-        [...selecionados]
-        .sort((a,b)=>a-b)
-        .map(index =>
-            contatos[index]?.numero?.trim()
-        )
-        .filter(Boolean);
+    lista.forEach((numero,i)=>{
 
-    const texto =
-        numeros.join("\n");
+        setTimeout(()=>{
+            abrirWhatsApp(numero);
+        },i*700);
 
-    try{
+    });
+}
 
-        await navigator.clipboard.writeText(texto);
 
-        alert(
-            numeros.length +
-            (
-                numeros.length === 1
-                ? " número copiado!"
-                : " números copiados!"
-            )
+/* =========================
+   ESTATÍSTICAS
+========================= */
+
+function renderizarEstatisticas(){
+
+    const box=
+        document.getElementById(
+            "estatisticasConteudo"
         );
 
-    }catch{
+    if(!box) return;
 
-        const area =
-            document.createElement("textarea");
+    const total=contatos.length;
 
-        area.value = texto;
+    const on=contatos.filter(
+        c=>c.status==="ON"
+    ).length;
 
-        document.body.appendChild(area);
+    const analise=contatos.filter(
+        c=>c.status==="ANALISE"
+    ).length;
 
-        area.select();
+    const caiu=contatos.filter(
+        c=>c.status==="CAIU"
+    ).length;
 
-        document.execCommand("copy");
+    const favoritos=contatos.filter(
+        c=>c.favorito
+    ).length;
 
-        area.remove();
+    box.innerHTML=`
 
-        alert("Números copiados!");
+        <div class="stats">
 
-    }
+            <div class="stat">
+                <strong>${total}</strong>
+                <span>Total</span>
+            </div>
+
+            <div class="stat">
+                <strong>${on}</strong>
+                <span>ON</span>
+            </div>
+
+            <div class="stat">
+                <strong>${analise}</strong>
+                <span>ANÁLISE</span>
+            </div>
+
+            <div class="stat">
+                <strong>${caiu}</strong>
+                <span>CAIU</span>
+            </div>
+
+            <div class="stat">
+                <strong>${favoritos}</strong>
+                <span>Favoritos</span>
+            </div>
+
+            <div class="stat">
+                <strong>${new Set(contatos.map(c=>c.ddd)).size}</strong>
+                <span>DDDs</span>
+            </div>
+
+        </div>
+    `;
 }
 
 
@@ -2745,175 +2186,1242 @@ async function copiarSelecionados(){
 
 function renderizarGrupos(){
 
-    const lista =
-        document.getElementById("listaGrupos");
+    const box=
+        document.getElementById(
+            "gruposConteudo"
+        );
 
-    const grupos = {};
+    if(!box) return;
 
-    contatos.forEach(c => {
+    const mapa={};
 
-        const grupo =
-            c.grupo?.trim() || "Sem grupo";
+    contatos.forEach(c=>{
 
-        grupos[grupo] =
-            (grupos[grupo] || 0) + 1;
+        const grupo=
+            c.grupo || "Sem grupo";
+
+        if(!mapa[grupo])
+            mapa[grupo]=[];
+
+        mapa[grupo].push(c);
 
     });
 
-    const nomes =
-        Object.keys(grupos)
-        .sort((a,b)=>a.localeCompare(b));
+    const grupos=
+        Object.keys(mapa);
 
-    if(nomes.length === 0){
+    if(!grupos.length){
 
-        lista.innerHTML = `
-            <div class="card vazio">
-                <div class="vazio-icon">🏷️</div>
-                <strong>Nenhum grupo</strong>
-                Cadastre contatos com grupos.
-            </div>
-        `;
+        box.innerHTML=
+            `<div class="empty">
+                Nenhum grupo encontrado.
+            </div>`;
 
         return;
     }
 
-    lista.innerHTML =
-        nomes.map(nome => `
+    box.innerHTML=
+        grupos.map(grupo=>`
 
-            <div class="opcao-fileira">
+        <div class="card">
 
-                <div class="opcao-icone">
-                    🏷️
-                </div>
-
-                <div class="opcao-conteudo">
-
-                    <div class="opcao-titulo">
-                        ${escapar(nome)}
-                    </div>
-
-                    <div class="opcao-desc">
-                        ${grupos[nome]}
-                        ${
-                            grupos[nome] === 1
-                            ? " contato"
-                            : " contatos"
-                        }
-                    </div>
-
-                </div>
-
-                <div class="opcao-seta">
-                    ›
-                </div>
-
+            <div style="font-weight:900">
+                👥 ${escapar(grupo)}
             </div>
 
-        `).join("");
+            <div style="
+                color:var(--cinza);
+                margin-top:6px;
+                font-size:13px;
+            ">
+                ${mapa[grupo].length} contato(s)
+            </div>
+
+        </div>
+
+    `).join("");
 }
 
 
 /* =========================
-   FAVORITOS
+   ADVOGADO — CONFIG
 ========================= */
 
-function renderizarFavoritos(){
+function salvarConfigAdvogado(){
 
-    const lista =
-        document.getElementById("listaFavoritos");
+    advConfig={
 
-    const favoritos =
-        contatos
-        .map((c,index)=>({c,index}))
-        .filter(item => item.c.favorito);
+        nome:
+            document.getElementById(
+                "advConfigNome"
+            ).value.trim(),
 
-    if(favoritos.length === 0){
+        oab:
+            document.getElementById(
+                "advConfigOab"
+            ).value.trim(),
 
-        lista.innerHTML = `
-            <div class="card vazio">
-                <div class="vazio-icon">⭐</div>
-                <strong>Nenhum favorito</strong>
-                Marque contatos como favoritos para eles aparecerem aqui.
-            </div>
-        `;
+        escritorio:
+            document.getElementById(
+                "advConfigEscritorio"
+            ).value.trim(),
+
+        estilo:
+            document.getElementById(
+                "advConfigEstilo"
+            ).value
+
+    };
+
+    localStorage.setItem(
+        CHAVE_ADV_CONFIG,
+        JSON.stringify(advConfig)
+    );
+
+    atualizarAssinaturaAdvogado();
+
+    alert("Configuração salva!");
+}
+
+function carregarConfigAdvogado(){
+
+    document.getElementById(
+        "advConfigNome"
+    ).value=advConfig.nome || "";
+
+    document.getElementById(
+        "advConfigOab"
+    ).value=advConfig.oab || "";
+
+    document.getElementById(
+        "advConfigEscritorio"
+    ).value=advConfig.escritorio || "";
+
+    document.getElementById(
+        "advConfigEstilo"
+    ).value=
+        advConfig.estilo || "profissional";
+
+    atualizarAssinaturaAdvogado();
+}
+
+function atualizarAssinaturaAdvogado(){
+
+    const sub=
+        document.getElementById(
+            "advSubtitulo"
+        );
+
+    if(!sub) return;
+
+    if(advConfig.nome){
+
+        sub.textContent=
+            advConfig.nome+
+            (advConfig.oab
+                ? " • "+advConfig.oab
+                : "");
+
+    }else{
+
+        sub.textContent=
+            "Ferramentas profissionais para atendimento";
+
+    }
+}
+
+function assinaturaAdvogado(){
+
+    let linhas=[];
+
+    if(advConfig.nome)
+        linhas.push(advConfig.nome);
+
+    if(advConfig.oab)
+        linhas.push(advConfig.oab);
+
+    if(advConfig.escritorio)
+        linhas.push(advConfig.escritorio);
+
+    return linhas.length
+        ? "\n\n"+linhas.join("\n")
+        : "";
+}
+
+
+/* =========================
+   GERADOR DE RESPOSTAS
+========================= */
+
+function gerarRespostaAdvogado(){
+
+    const nome=
+        document.getElementById(
+            "advNomeCliente"
+        ).value.trim();
+
+    const pergunta=
+        document.getElementById(
+            "advPergunta"
+        ).value.trim();
+
+    const estilo=
+        document.getElementById(
+            "advEstilo"
+        ).value;
+
+    const assunto=
+        document.getElementById(
+            "advAssunto"
+        ).value;
+
+    if(!pergunta){
+
+        alert("Digite a pergunta ou situação do cliente.");
 
         return;
     }
 
-    lista.innerHTML =
-        favoritos.map(item => {
+    const saudacao=
+        nome ? "Olá, "+nome+"!" : "Olá!";
 
-            const c = item.c;
-            const index = item.index;
+    let corpo="";
 
-            return `
-                <div class="contato-item">
+    if(assunto==="processo"){
 
-                    <div class="contato-nome">
-                        ⭐ ${escapar(c.nome)}
-                    </div>
+        corpo=
+        `${saudacao}\n\n`+
+        `Recebi sua mensagem. Sobre o andamento do processo, vou verificar as informações disponíveis e lhe atualizar com os dados pertinentes.\n\n`+
+        `Assim que eu tiver a informação confirmada, retorno para você.`;
 
-                    <div class="contato-numero">
-                        📱 ${escapar(c.numero)}
-                    </div>
+    }else if(assunto==="documentos"){
 
-                    <div class="contato-meta">
-                        📍 DDD ${escapar(c.ddd || "-")}
-                    </div>
+        corpo=
+        `${saudacao}\n\n`+
+        `Para dar continuidade ao atendimento, preciso conferir os documentos necessários para o seu caso.\n\n`+
+        `Por favor, envie os documentos que foram solicitados para que possamos analisá-los adequadamente.`;
 
-                    <div class="contato-acoes">
+    }else if(assunto==="audiencia"){
 
-                        <button
-                            class="btn btn-verde"
-                            onclick="abrirWhatsApp(${index})"
-                        >
-                            🟢 Abrir WhatsApp
-                        </button>
+        corpo=
+        `${saudacao}\n\n`+
+        `Sobre a audiência, vou conferir a data, horário, local e demais informações oficiais antes de lhe confirmar os detalhes.\n\n`+
+        `Assim que estiver tudo conferido, retorno para você.`;
 
-                        <button
-                            class="btn btn-cinza"
-                            onclick="alternarFavorito(${index})"
-                        >
-                            ☆ Remover
-                        </button>
+    }else if(assunto==="prazo"){
 
-                    </div>
+        corpo=
+        `${saudacao}\n\n`+
+        `Sobre o prazo mencionado, é importante verificar as informações oficiais do processo e os documentos correspondentes antes de confirmar qualquer data.\n\n`+
+        `Vou conferir a situação e lhe passar uma orientação adequada.`;
 
-                </div>
-            `;
+    }else if(assunto==="honorarios"){
 
-        }).join("");
+        corpo=
+        `${saudacao}\n\n`+
+        `Sobre os honorários, podemos conversar sobre os valores, condições e forma de pagamento de acordo com o serviço a ser realizado.\n\n`+
+        `Se desejar, podemos alinhar esses detalhes no atendimento.`;
+
+    }else if(assunto==="consulta"){
+
+        corpo=
+        `${saudacao}\n\n`+
+        `Para avaliar sua situação com segurança, preciso conhecer os detalhes do caso e analisar os documentos pertinentes.\n\n`+
+        `Podemos organizar uma consulta para tratar especificamente da sua situação.`;
+
+    }else{
+
+        corpo=
+        `${saudacao}\n\n`+
+        `Obrigado pelo contato. Recebi sua mensagem e vou analisar as informações apresentadas para poder lhe responder de forma adequada.\n\n`+
+        `Assim que eu concluir a verificação, retorno para você.`;
+
+    }
+
+    if(estilo==="formal"){
+
+        corpo=corpo
+            .replace("Olá!","Prezado(a),")
+            .replace("Olá,","Prezado(a),");
+
+    }
+
+    if(estilo==="objetivo"){
+
+        corpo=
+            `${saudacao}\n\n`+
+            `Recebi sua mensagem. Vou verificar as informações necessárias e retorno assim que possível.`;
+
+    }
+
+    if(estilo==="cordial"){
+
+        corpo=
+            `${saudacao}\n\n`+
+            `Obrigado por entrar em contato. Vou verificar sua situação com atenção e retorno assim que tiver as informações necessárias.\n\n`+
+            `Fico à disposição.`;
+
+    }
+
+    corpo+=assinaturaAdvogado();
+
+    const resultado=
+        document.getElementById(
+            "resultadoRespostaAdvogado"
+        );
+
+    resultado.innerHTML=`
+
+        <div class="card">
+
+            <span class="badge">
+                RESPOSTA GERADA
+            </span>
+
+            <div
+                id="textoRespostaAdvogado"
+                class="adv-list-text"
+                style="
+                    color:var(--texto);
+                    font-size:14px;
+                "
+            >${escapar(corpo)}</div>
+
+            <div class="btn-row">
+
+                <button
+                    class="btn btn-verde"
+                    onclick="copiarRespostaAdvogado()">
+                    📋 Copiar
+                </button>
+
+                <button
+                    class="btn btn-sec"
+                    onclick="salvarFavoritoAdvogado()">
+                    ⭐ Salvar
+                </button>
+
+                <button
+                    class="btn btn-sec"
+                    onclick="enviarRespostaWhatsApp()">
+                    📱 WhatsApp
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    window.ultimaRespostaAdvogado=corpo;
+}
+
+function copiarRespostaAdvogado(){
+
+    if(!window.ultimaRespostaAdvogado)
+        return;
+
+    copiarTexto(
+        window.ultimaRespostaAdvogado
+    );
+}
+
+function enviarRespostaWhatsApp(){
+
+    if(!window.ultimaRespostaAdvogado)
+        return;
+
+    let numero=
+        document.getElementById(
+            "advTelefoneCliente"
+        ).value.trim();
+
+    const nome=
+        document.getElementById(
+            "advNomeCliente"
+        ).value.trim();
+
+    if(!numero && nome){
+
+        const cliente=
+            advClientes.find(c=>
+                c.nome.toLowerCase()===
+                nome.toLowerCase()
+            );
+
+        if(cliente)
+            numero=cliente.numero;
+    }
+
+    abrirWhatsApp(
+        numero,
+        window.ultimaRespostaAdvogado
+    );
+}
+
+function salvarFavoritoAdvogado(){
+
+    if(!window.ultimaRespostaAdvogado)
+        return;
+
+    const nome=
+        document.getElementById(
+            "advNomeCliente"
+        ).value.trim();
+
+    advFavoritos.unshift({
+
+        id:Date.now(),
+
+        titulo:
+            nome
+                ? "Resposta para "+nome
+                : "Resposta profissional",
+
+        texto:
+            window.ultimaRespostaAdvogado,
+
+        criadoEm:
+            new Date().toISOString()
+
+    });
+
+    localStorage.setItem(
+        CHAVE_ADV_FAVORITOS,
+        JSON.stringify(advFavoritos)
+    );
+
+    alert("Mensagem salva nos favoritos!");
+
+    renderizarFavoritosAdvogado();
 }
 
 
 /* =========================
-   ESTATÍSTICAS
+   RESPOSTAS RÁPIDAS
 ========================= */
 
-function atualizarEstatisticas(){
+const respostasRapidasAdvogado=[
 
-    const total = contatos.length;
+    {
+        titulo:"Mensagem recebida",
+        texto:
+`Olá! Recebi sua mensagem.
 
-    const on =
-        contatos.filter(c => c.status === "ON").length;
+Vou verificar as informações e retorno assim que possível.`
+    },
 
-    const analise =
-        contatos.filter(c => c.status === "ANALISE").length;
+    {
+        titulo:"Vou verificar o processo",
+        texto:
+`Olá!
 
-    const caiu =
-        contatos.filter(c => c.status === "CAIU").length;
+Vou verificar as informações disponíveis no processo e retorno assim que tiver uma atualização confirmada.`
+    },
 
-    document.getElementById("statTotal").textContent =
-        total;
+    {
+        titulo:"Solicitação de documentos",
+        texto:
+`Olá!
 
-    document.getElementById("statOn").textContent =
-        on;
+Para dar continuidade ao atendimento, preciso que você envie os documentos solicitados.
 
-    document.getElementById("statAnalise").textContent =
-        analise;
+Assim que receber, farei a conferência necessária.`
+    },
 
-    document.getElementById("statCaiu").textContent =
-        caiu;
+    {
+        titulo:"Confirmação de audiência",
+        texto:
+`Olá!
+
+Vou conferir os dados oficiais da audiência e confirmar a data, horário e demais informações para você.`
+    },
+
+    {
+        titulo:"Prazo",
+        texto:
+`Olá!
+
+Sobre o prazo, vou conferir as informações oficiais antes de lhe passar a confirmação da data.`
+    },
+
+    {
+        titulo:"Retorno ao cliente",
+        texto:
+`Olá!
+
+Estou verificando sua solicitação e retorno assim que tiver as informações necessárias.`
+    },
+
+    {
+        titulo:"Agradecimento",
+        texto:
+`Obrigado pelo contato.
+
+Fico à disposição para qualquer informação adicional relacionada ao atendimento.`
+    },
+
+    {
+        titulo:"Atendimento",
+        texto:
+`Olá!
+
+Podemos organizar o atendimento para entender melhor sua situação e verificar os documentos e informações necessários.`
+    }
+
+];
+
+function renderizarRespostasRapidasAdvogado(){
+
+    const box=
+        document.getElementById(
+            "listaRespostasRapidas"
+        );
+
+    if(!box) return;
+
+    box.innerHTML=
+        respostasRapidasAdvogado.map((item,i)=>`
+
+        <div class="adv-list-item">
+
+            <div class="adv-list-title">
+                ⚡ ${escapar(item.titulo)}
+            </div>
+
+            <div class="adv-list-text">
+                ${escapar(item.texto)}
+            </div>
+
+            <div class="adv-list-actions">
+
+                <button
+                    onclick="usarMensagemAdvogado(${i})">
+                    ✍️ Usar
+                </button>
+
+                <button
+                    onclick="copiarTextoAdvogado('${encodeURIComponent(item.texto)}')">
+                    📋 Copiar
+                </button>
+
+                <button
+                    onclick="salvarMensagemRapida(${i})">
+                    ⭐ Favoritar
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function usarMensagemAdvogado(indice){
+
+    const item=
+        respostasRapidasAdvogado[indice];
+
+    navegar("gerarResposta");
+
+    setTimeout(()=>{
+
+        document.getElementById(
+            "advPergunta"
+        ).value=item.texto;
+
+        window.ultimaRespostaAdvogado=
+            item.texto;
+
+    },100);
+}
+
+function copiarTextoAdvogado(textoCodificado){
+
+    copiarTexto(
+        decodeURIComponent(textoCodificado)
+    );
+}
+
+function salvarMensagemRapida(indice){
+
+    const item=
+        respostasRapidasAdvogado[indice];
+
+    advFavoritos.unshift({
+
+        id:Date.now(),
+
+        titulo:item.titulo,
+
+        texto:item.texto,
+
+        criadoEm:
+            new Date().toISOString()
+
+    });
+
+    localStorage.setItem(
+        CHAVE_ADV_FAVORITOS,
+        JSON.stringify(advFavoritos)
+    );
+
+    alert("Salvo nos favoritos!");
+}
+
+
+/* =========================
+   MENSAGENS PRONTAS
+========================= */
+
+const mensagensProntasAdvogado=[
+
+    {
+        titulo:"Primeiro atendimento",
+
+        texto:
+`Olá!
+
+Obrigado por entrar em contato.
+
+Para que eu possa entender melhor sua situação, envie um breve relato dos acontecimentos e, se possível, os documentos relacionados ao caso.
+
+Após analisar as informações, podemos definir os próximos passos do atendimento.`
+    },
+
+    {
+        titulo:"Solicitar documentos",
+
+        texto:
+`Olá!
+
+Para prosseguirmos com o atendimento, preciso que você encaminhe os documentos solicitados.
+
+Se possível, envie os arquivos de forma legível e completa para que possam ser analisados adequadamente.
+
+Obrigado.`
+    },
+
+    {
+        titulo:"Atualização do processo",
+
+        texto:
+`Olá!
+
+Passando para informar que estou acompanhando a situação do processo.
+
+Assim que houver uma movimentação relevante ou uma informação que necessite da sua atenção, entrarei em contato para atualizar você.`
+    },
+
+    {
+        titulo:"Confirmação de atendimento",
+
+        texto:
+`Olá!
+
+Seu atendimento está confirmado.
+
+Caso precise enviar algum documento ou informação antes do horário combinado, pode encaminhar por aqui.`
+    },
+
+    {
+        titulo:"Lembrete de audiência",
+
+        texto:
+`Olá!
+
+Passando para lembrar sobre a audiência previamente informada.
+
+Antes do compromisso, confira atentamente a data, o horário e o local indicados nas informações oficiais encaminhadas pelo escritório.`
+    },
+
+    {
+        titulo:"Honorários",
+
+        texto:
+`Olá!
+
+Sobre os honorários, podemos alinhar os valores, condições e forma de pagamento conforme o serviço contratado.
+
+Caso tenha alguma dúvida sobre as condições, fico à disposição para esclarecer.`
+    },
+
+    {
+        titulo:"Encerramento",
+
+        texto:
+`Olá!
+
+Agradeço pelo contato.
+
+Caso surja alguma nova informação ou documento relacionado ao atendimento, pode encaminhar por este canal.
+
+Fico à disposição.`
+    },
+
+    {
+        titulo:"Aguardando documentos",
+
+        texto:
+`Olá!
+
+Ainda estou aguardando os documentos necessários para dar continuidade à análise.
+
+Assim que você encaminhar os arquivos, farei a conferência e seguiremos com o atendimento.`
+    }
+
+];
+
+function renderizarMensagensProntasAdvogado(){
+
+    const box=
+        document.getElementById(
+            "listaMensagensProntas"
+        );
+
+    if(!box) return;
+
+    box.innerHTML=
+        mensagensProntasAdvogado.map((item,i)=>`
+
+        <div class="adv-list-item">
+
+            <div class="adv-list-title">
+                💬 ${escapar(item.titulo)}
+            </div>
+
+            <div class="adv-list-text">
+                ${escapar(item.texto)}
+            </div>
+
+            <div class="adv-list-actions">
+
+                <button
+                    onclick="usarMensagemPronta(${i})">
+                    ✍️ Usar
+                </button>
+
+                <button
+                    onclick="copiarTextoAdvogado('${encodeURIComponent(item.texto)}')">
+                    📋 Copiar
+                </button>
+
+                <button
+                    onclick="salvarMensagemPronta(${i})">
+                    ⭐ Favoritar
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function usarMensagemPronta(indice){
+
+    const item=
+        mensagensProntasAdvogado[indice];
+
+    window.ultimaRespostaAdvogado=
+        item.texto;
+
+    navegar("gerarResposta");
+
+    setTimeout(()=>{
+
+        document.getElementById(
+            "advPergunta"
+        ).value=item.texto;
+
+    },100);
+}
+
+function salvarMensagemPronta(indice){
+
+    const item=
+        mensagensProntasAdvogado[indice];
+
+    advFavoritos.unshift({
+
+        id:Date.now(),
+
+        titulo:item.titulo,
+
+        texto:item.texto,
+
+        criadoEm:
+            new Date().toISOString()
+
+    });
+
+    localStorage.setItem(
+        CHAVE_ADV_FAVORITOS,
+        JSON.stringify(advFavoritos)
+    );
+
+    alert("Mensagem salva nos favoritos!");
+}
+
+
+/* =========================
+   PERGUNTAS FREQUENTES
+========================= */
+
+const perguntasAdvogado=[
+
+    {
+        pergunta:"Como está meu processo?",
+
+        resposta:
+`Vou verificar a movimentação e as informações disponíveis no processo antes de lhe passar uma atualização confirmada.`
+    },
+
+    {
+        pergunta:"Quando sai a sentença?",
+
+        resposta:
+`A data de uma sentença depende do andamento do processo e dos atos realizados pelo juízo. Vou verificar a situação atual para lhe informar o que for possível confirmar.`
+    },
+
+    {
+        pergunta:"Qual é o prazo?",
+
+        resposta:
+`Para confirmar um prazo, é necessário verificar o processo e as informações oficiais correspondentes. Vou conferir os dados antes de confirmar uma data.`
+    },
+
+    {
+        pergunta:"Preciso ir à audiência?",
+
+        resposta:
+`Vou conferir os dados da audiência e as orientações específicas do seu caso para informar corretamente sobre o comparecimento.`
+    },
+
+    {
+        pergunta:"Quais documentos devo enviar?",
+
+        resposta:
+`Os documentos necessários dependem da situação analisada. Envie os documentos que foram solicitados e, caso seja necessário algum documento adicional, informarei.`
+    },
+
+    {
+        pergunta:"Quanto são os honorários?",
+
+        resposta:
+`Os honorários dependem do serviço e das condições do atendimento. Podemos conversar sobre os valores e a forma de pagamento antes da contratação.`
+    },
+
+    {
+        pergunta:"Como faço o pagamento?",
+
+        resposta:
+`Posso informar as condições e formas de pagamento utilizadas no atendimento. Se precisar, encaminho os dados correspondentes.`
+    },
+
+    {
+        pergunta:"Quando posso ser atendido?",
+
+        resposta:
+`Vou verificar os horários disponíveis para atendimento e podemos combinar o melhor horário para conversarmos sobre sua situação.`
+    }
+
+];
+
+function renderizarPerguntasAdvogado(){
+
+    const box=
+        document.getElementById(
+            "listaPerguntasFrequentes"
+        );
+
+    if(!box) return;
+
+    box.innerHTML=
+        perguntasAdvogado.map((item,i)=>`
+
+        <div class="faq">
+
+            <div class="faq-q">
+                ❓ ${escapar(item.pergunta)}
+            </div>
+
+            <div class="faq-a">
+                ${escapar(item.resposta)}
+            </div>
+
+            <div class="adv-list-actions">
+
+                <button
+                    onclick="usarPerguntaAdvogado(${i})">
+                    ✍️ Usar resposta
+                </button>
+
+                <button
+                    onclick="copiarTextoAdvogado('${encodeURIComponent(item.resposta)}')">
+                    📋 Copiar
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function usarPerguntaAdvogado(indice){
+
+    const item=
+        perguntasAdvogado[indice];
+
+    window.ultimaRespostaAdvogado=
+        item.resposta;
+
+    navegar("gerarResposta");
+
+    setTimeout(()=>{
+
+        document.getElementById(
+            "advPergunta"
+        ).value=item.pergunta;
+
+    },100);
+}
+
+
+/* =========================
+   CLIENTES DO ADVOGADO
+========================= */
+
+function adicionarClienteAdvogado(){
+
+    const nome=
+        document.getElementById(
+            "clienteAdvNome"
+        ).value.trim();
+
+    const numero=
+        document.getElementById(
+            "clienteAdvNumero"
+        ).value.trim();
+
+    const processo=
+        document.getElementById(
+            "clienteAdvProcesso"
+        ).value.trim();
+
+    const assunto=
+        document.getElementById(
+            "clienteAdvAssunto"
+        ).value.trim();
+
+    const observacoes=
+        document.getElementById(
+            "clienteAdvObs"
+        ).value.trim();
+
+    if(!nome){
+
+        alert("Digite o nome do cliente.");
+
+        return;
+    }
+
+    advClientes.push({
+
+        id:Date.now(),
+
+        nome,
+
+        numero:normalizarNumero(numero),
+
+        processo,
+
+        assunto,
+
+        observacoes,
+
+        criadoEm:
+            new Date().toISOString()
+
+    });
+
+    localStorage.setItem(
+        CHAVE_ADV_CLIENTES,
+        JSON.stringify(advClientes)
+    );
+
+    document.getElementById(
+        "clienteAdvNome"
+    ).value="";
+
+    document.getElementById(
+        "clienteAdvNumero"
+    ).value="";
+
+    document.getElementById(
+        "clienteAdvProcesso"
+    ).value="";
+
+    document.getElementById(
+        "clienteAdvAssunto"
+    ).value="";
+
+    document.getElementById(
+        "clienteAdvObs"
+    ).value="";
+
+    renderizarClientesAdvogado();
+
+    alert("Cliente cadastrado!");
+}
+
+function renderizarClientesAdvogado(){
+
+    const box=
+        document.getElementById(
+            "listaClientesAdvogado"
+        );
+
+    if(!box) return;
+
+    if(!advClientes.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Nenhum cliente cadastrado.
+            </div>`;
+
+        return;
+    }
+
+    box.innerHTML=
+        advClientes.map(cliente=>`
+
+        <div class="adv-list-item">
+
+            <div class="adv-list-title">
+                👤 ${escapar(cliente.nome)}
+            </div>
+
+            <div class="adv-list-text">
+
+                ${cliente.numero
+                    ? "📱 "+escapar(cliente.numero)+"\n"
+                    : ""}
+
+                ${cliente.processo
+                    ? "📄 Processo: "+escapar(cliente.processo)+"\n"
+                    : ""}
+
+                ${cliente.assunto
+                    ? "⚖️ Assunto: "+escapar(cliente.assunto)+"\n"
+                    : ""}
+
+                ${cliente.observacoes
+                    ? "📝 "+escapar(cliente.observacoes)
+                    : ""}
+
+            </div>
+
+            <div class="adv-list-actions">
+
+                <button
+                    onclick="usarClienteAdvogado(${cliente.id})">
+                    ✍️ Atendimento
+                </button>
+
+                <button
+                    onclick="abrirWhatsApp('${escapar(cliente.numero)}')">
+                    📱 WhatsApp
+                </button>
+
+                <button
+                    onclick="excluirClienteAdvogado(${cliente.id})">
+                    🗑️ Excluir
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function usarClienteAdvogado(id){
+
+    const cliente=
+        advClientes.find(c=>c.id===id);
+
+    if(!cliente) return;
+
+    navegar("gerarResposta");
+
+    setTimeout(()=>{
+
+        document.getElementById(
+            "advNomeCliente"
+        ).value=cliente.nome;
+
+        document.getElementById(
+            "advTelefoneCliente"
+        ).value=cliente.numero;
+
+    },100);
+}
+
+function excluirClienteAdvogado(id){
+
+    if(!confirm("Excluir este cliente?"))
+        return;
+
+    advClientes=
+        advClientes.filter(
+            c=>c.id!==id
+        );
+
+    localStorage.setItem(
+        CHAVE_ADV_CLIENTES,
+        JSON.stringify(advClientes)
+    );
+
+    renderizarClientesAdvogado();
+}
+
+
+/* =========================
+   FAVORITOS ADVOGADO
+========================= */
+
+function renderizarFavoritosAdvogado(){
+
+    const box=
+        document.getElementById(
+            "listaFavoritosAdvogado"
+        );
+
+    if(!box) return;
+
+    if(!advFavoritos.length){
+
+        box.innerHTML=
+            `<div class="empty">
+                Nenhuma mensagem salva.
+            </div>`;
+
+        return;
+    }
+
+    box.innerHTML=
+        advFavoritos.map(item=>`
+
+        <div class="adv-list-item">
+
+            <div class="adv-list-title">
+                ⭐ ${escapar(item.titulo)}
+            </div>
+
+            <div class="adv-list-text">
+                ${escapar(item.texto)}
+            </div>
+
+            <div class="adv-list-actions">
+
+                <button
+                    onclick="usarFavoritoAdvogado(${item.id})">
+                    ✍️ Usar
+                </button>
+
+                <button
+                    onclick="copiarTextoAdvogado('${encodeURIComponent(item.texto)}')">
+                    📋 Copiar
+                </button>
+
+                <button
+                    onclick="abrirWhatsApp('', '${encodeURIComponent(item.texto)}')">
+                    📱 WhatsApp
+                </button>
+
+                <button
+                    onclick="excluirFavoritoAdvogado(${item.id})">
+                    🗑️ Excluir
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function usarFavoritoAdvogado(id){
+
+    const item=
+        advFavoritos.find(
+            f=>f.id===id
+        );
+
+    if(!item) return;
+
+    window.ultimaRespostaAdvogado=
+        item.texto;
+
+    navegar("gerarResposta");
+
+    setTimeout(()=>{
+
+        document.getElementById(
+            "advPergunta"
+        ).value=item.texto;
+
+    },100);
+}
+
+function excluirFavoritoAdvogado(id){
+
+    if(!confirm("Excluir esta mensagem?"))
+        return;
+
+    advFavoritos=
+        advFavoritos.filter(
+            f=>f.id!==id
+        );
+
+    localStorage.setItem(
+        CHAVE_ADV_FAVORITOS,
+        JSON.stringify(advFavoritos)
+    );
+
+    renderizarFavoritosAdvogado();
+}
+
+function limparFormularioAdvogado(){
+
+    const ids=[
+        "advNomeCliente",
+        "advTelefoneCliente",
+        "advPergunta"
+    ];
+
+    ids.forEach(id=>{
+
+        const el=
+            document.getElementById(id);
+
+        if(el) el.value="";
+
+    });
+
+    const resultado=
+        document.getElementById(
+            "resultadoRespostaAdvogado"
+        );
+
+    if(resultado)
+        resultado.innerHTML="";
+
+    window.ultimaRespostaAdvogado="";
+
+    alert("Gerador limpo!");
 }
 
 
@@ -2923,31 +3431,36 @@ function atualizarEstatisticas(){
 
 function exportarBackup(){
 
-    const dados = {
+    const backup={
 
-        contatos:contatos,
-        ddds:ddds,
+        contatos,
 
-        dataBackup:
-            new Date().toLocaleString("pt-BR")
+        advClientes,
+
+        advFavoritos,
+
+        advConfig,
+
+        data:
+            new Date().toISOString()
 
     };
 
-    const arquivo =
+    const blob=
         new Blob(
-            [JSON.stringify(dados,null,2)],
+            [JSON.stringify(backup,null,2)],
             {type:"application/json"}
         );
 
-    const url =
-        URL.createObjectURL(arquivo);
+    const url=
+        URL.createObjectURL(blob);
 
-    const a =
+    const a=
         document.createElement("a");
 
-    a.href = url;
+    a.href=url;
 
-    a.download =
+    a.download=
         "backup-bot-bm3.json";
 
     a.click();
@@ -2955,72 +3468,61 @@ function exportarBackup(){
     URL.revokeObjectURL(url);
 }
 
-
 function importarBackup(event){
 
-    const arquivo =
+    const arquivo=
         event.target.files[0];
 
     if(!arquivo) return;
 
-    const leitor =
+    const leitor=
         new FileReader();
 
-    leitor.onload = function(e){
+    leitor.onload=function(e){
 
         try{
 
-            const dados =
+            const dados=
                 JSON.parse(e.target.result);
 
-            if(
-                !dados ||
-                !Array.isArray(dados.contatos)
-            ){
+            if(dados.contatos)
+                contatos=dados.contatos;
 
-                throw new Error();
+            if(dados.advClientes)
+                advClientes=dados.advClientes;
 
-            }
+            if(dados.advFavoritos)
+                advFavoritos=dados.advFavoritos;
 
-            if(
-                !confirm(
-                    "Importar este backup irá substituir os dados atuais. Continuar?"
-                )
-            ){
+            if(dados.advConfig)
+                advConfig=dados.advConfig;
 
-                event.target.value = "";
+            salvarContatos();
 
-                return;
-            }
+            localStorage.setItem(
+                CHAVE_ADV_CLIENTES,
+                JSON.stringify(advClientes)
+            );
 
-            contatos =
-                dados.contatos;
+            localStorage.setItem(
+                CHAVE_ADV_FAVORITOS,
+                JSON.stringify(advFavoritos)
+            );
 
-            if(Array.isArray(dados.ddds)){
-
-                ddds =
-                    dados.ddds;
-
-            }
-
-            salvar();
-            salvarDDDs();
+            localStorage.setItem(
+                CHAVE_ADV_CONFIG,
+                JSON.stringify(advConfig)
+            );
 
             atualizarTudo();
 
-            alert(
-                "Backup importado com sucesso!"
-            );
+            alert("Backup importado com sucesso!");
 
         }catch{
 
-            alert(
-                "Arquivo de backup inválido."
-            );
+            alert("Arquivo de backup inválido.");
 
         }
-
-        event.target.value = "";
 
     };
 
@@ -3032,137 +3534,98 @@ function importarBackup(event){
    TEMA
 ========================= */
 
-function aplicarTema(){
-
-    const tema =
-        localStorage.getItem(CHAVE_TEMA);
-
-    if(tema === "dark"){
-
-        document.body.classList.add("dark");
-
-        document.getElementById("themeBtn")
-            .textContent = "☀️";
-
-    }else{
-
-        document.body.classList.remove("dark");
-
-        document.getElementById("themeBtn")
-            .textContent = "🌙";
-    }
-}
-
-
 function alternarTema(){
 
-    const dark =
-        document.body.classList.toggle("dark");
+    document.body.classList.toggle("dark");
 
     localStorage.setItem(
         CHAVE_TEMA,
-        dark ? "dark" : "light"
+        document.body.classList.contains("dark")
+            ? "dark"
+            : "light"
     );
+}
 
-    document.getElementById("themeBtn")
-        .textContent =
-        dark ? "☀️" : "🌙";
+function carregarTema(){
+
+    const tema=
+        localStorage.getItem(
+            CHAVE_TEMA
+        );
+
+    if(tema==="dark")
+        document.body.classList.add("dark");
 }
 
 
 /* =========================
-   ATUALIZAR TUDO
+   APAGAR DADOS
 ========================= */
 
-function atualizarTudo(){
+function limparTodosDados(){
 
-    atualizarResumo();
+    if(!confirm(
+        "Tem certeza que deseja apagar todos os contatos?"
+    )) return;
 
-    if(telaAtual === "contatos"){
-        renderizarDDDs();
-    }
+    contatos=[];
 
-    if(telaAtual === "contatosDDD"){
-        renderizarContatosDDD();
-    }
-
-    if(telaAtual === "listaRapida"){
-        renderizarListaRapida();
-    }
-
-    if(telaAtual === "buscar"){
-        renderizarBusca();
-    }
-
-    if(telaAtual === "grupos"){
-        renderizarGrupos();
-    }
-
-    if(telaAtual === "favoritos"){
-        renderizarFavoritos();
-    }
-
-    if(telaAtual === "estatisticas"){
-        atualizarEstatisticas();
-    }
-}
-
-
-/* =========================
-   LOADING
-========================= */
-
-window.addEventListener("load",() => {
-
-    const status =
-        document.getElementById("loadingStatus");
-
-    const mensagens = [
-
-        "Inicializando sistema...",
-
-        "Carregando contatos...",
-
-        "Organizando DDDs...",
-
-        "Preparando painel...",
-
-        "Sistema pronto!"
-
-    ];
-
-    mensagens.forEach((mensagem,index) => {
-
-        setTimeout(() => {
-
-            status.textContent = mensagem;
-
-        },index * 420);
-
-    });
-
-    setTimeout(() => {
-
-        const loading =
-            document.getElementById("loading");
-
-        loading.classList.add("saindo");
-
-        setTimeout(() => {
-
-            loading.style.display = "none";
-
-        },700);
-
-    },2500);
-
-    aplicarTema();
+    salvarContatos();
 
     atualizarTudo();
 
-    atualizarNavegacao();
+    alert("Contatos apagados.");
+}
 
-});
+
+/* =========================
+   ABRIR TODOS
+========================= */
+
+function abrirTodosWhatsApp(){
+
+    if(!contatos.length){
+
+        alert("Nenhum contato cadastrado.");
+
+        return;
+    }
+
+    contatos.forEach((c,i)=>{
+
+        setTimeout(()=>{
+
+            abrirWhatsApp(c.numero);
+
+        },i*700);
+
+    });
+}
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+carregarTema();
+
+carregarSelectDDDs();
+
+atualizarInicio();
+
+atualizarAssinaturaAdvogado();
+
+setTimeout(()=>{
+
+    const loading=
+        document.getElementById(
+            "loading"
+        );
+
+    if(loading)
+        loading.style.display="none";
+
+},2500);
 
 </script>
 
