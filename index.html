@@ -3,2888 +3,2085 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>🍀 BOT DO BM3 🍀</title>
 
 <style>
 :root{
-    --verde:#008c45;
-    --verde2:#00a651;
-    --vermelho:#cd212a;
-    --branco:#ffffff;
-    --preto:#111111;
-    --cinza:#f3f4f6;
-    --cinza2:#6b7280;
-    --painel:#ffffff;
-    --texto:#151515;
-    --borda:#dddddd;
-    --sombra:0 10px 30px rgba(0,0,0,.10);
+  --verde:#009246;
+  --vermelho:#ce2b37;
+  --branco:#ffffff;
+  --fundo:#f4f6f8;
+  --painel:#ffffff;
+  --texto:#171717;
+  --texto2:#666;
+  --borda:#e5e5e5;
+  --sombra:0 8px 25px rgba(0,0,0,.08);
 }
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,Helvetica,sans-serif;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    min-height:100vh;
-    background:linear-gradient(135deg,#008c45,#ffffff,#cd212a);
-    color:var(--texto);
+  min-height:100vh;
+  background:linear-gradient(
+    135deg,
+    #009246 0%,
+    #ffffff 50%,
+    #ce2b37 100%
+  );
+  color:var(--texto);
 }
 
-body.tema-escuro{
-    --painel:#151515;
-    --texto:#ffffff;
-    --cinza:#202020;
-    --cinza2:#bdbdbd;
-    --borda:#333333;
+body.dark{
+  --fundo:#090909;
+  --painel:#111111;
+  --texto:#ffffff;
+  --texto2:#aaaaaa;
+  --borda:#292929;
 
-    background:linear-gradient(135deg,#050505,#071f12,#250606);
+  background:linear-gradient(
+    135deg,
+    #001f0f,
+    #090909,
+    #260509
+  );
 }
 
-/* =========================
-   TELAS
-========================= */
-
-#telaLogin{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
+button,
+input,
+select{
+  font:inherit;
 }
 
-.login-card{
-    width:100%;
-    max-width:430px;
-    background:var(--painel);
-    border-radius:24px;
-    padding:30px;
-    box-shadow:var(--sombra);
+button{
+  cursor:pointer;
 }
 
-.logo-login{
-    text-align:center;
-    font-size:30px;
-    font-weight:bold;
-    margin-bottom:8px;
+#sistema{
+  display:none;
+  min-height:100vh;
 }
 
-.sub-login{
-    text-align:center;
-    color:var(--cinza2);
-    margin-bottom:25px;
+/* TOPO */
+
+.topo{
+  position:relative;
+  padding:25px 18px;
+  text-align:center;
+  background:var(--painel);
+  border-bottom:1px solid var(--borda);
+  box-shadow:var(--sombra);
 }
 
-.login-card h2{
-    margin-bottom:18px;
+.topo h1{
+  font-size:25px;
+  font-weight:900;
+}
+
+.topo p{
+  margin-top:5px;
+  color:var(--texto2);
+}
+
+.conta-area{
+  position:absolute;
+  right:15px;
+  top:15px;
+}
+
+.btn-conta{
+  border:1px solid var(--borda);
+  background:var(--painel);
+  color:var(--texto);
+  padding:10px 13px;
+  border-radius:12px;
+  font-weight:bold;
+}
+
+.dropdown-conta{
+  display:none;
+  position:absolute;
+  right:0;
+  top:48px;
+  width:230px;
+  background:var(--painel);
+  border:1px solid var(--borda);
+  border-radius:15px;
+  padding:14px;
+  box-shadow:var(--sombra);
+  z-index:20;
+  text-align:left;
+}
+
+.dropdown-conta.aberto{
+  display:block;
+}
+
+.conta-titulo{
+  font-weight:bold;
+  margin-bottom:4px;
+}
+
+.conta-info{
+  color:var(--texto2);
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+.conta-badge{
+  display:inline-block;
+  background:var(--verde);
+  color:white;
+  padding:5px 9px;
+  border-radius:8px;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.dropdown-conta button{
+  width:100%;
+  margin-top:7px;
+  padding:10px;
+  border:1px solid var(--borda);
+  border-radius:9px;
+  background:var(--fundo);
+  color:var(--texto);
+}
+
+/* CONTAINER */
+
+.container{
+  width:min(1050px,94%);
+  margin:25px auto;
+}
+
+/* INÍCIO */
+
+.tela{
+  display:none;
+}
+
+.tela.ativa{
+  display:block;
+}
+
+.painel{
+  background:var(--painel);
+  border:1px solid var(--borda);
+  border-radius:20px;
+  padding:22px;
+  box-shadow:var(--sombra);
+  margin-bottom:20px;
+}
+
+.titulo{
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:6px;
+}
+
+.subtitulo{
+  color:var(--texto2);
+  margin-bottom:20px;
+}
+
+/* RESUMO */
+
+.resumo{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.resumo-card{
+  background:var(--fundo);
+  border:1px solid var(--borda);
+  border-radius:15px;
+  padding:18px;
+  text-align:center;
+}
+
+.resumo-card .numero{
+  font-size:28px;
+  font-weight:900;
+  margin:5px 0;
+}
+
+.resumo-card .legenda{
+  color:var(--texto2);
+  font-size:13px;
+}
+
+/* BOTÕES */
+
+.botoes-principais{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.btn{
+  border:none;
+  border-radius:13px;
+  padding:14px;
+  font-weight:bold;
+  background:var(--verde);
+  color:white;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+.btn-sec{
+  background:var(--fundo);
+  color:var(--texto);
+  border:1px solid var(--borda);
+}
+
+.btn-vermelho{
+  background:var(--vermelho);
+  color:white;
+}
+
+/* MENU */
+
+.menu-secao{
+  margin-bottom:24px;
+}
+
+.menu-secao h3{
+  font-size:13px;
+  color:var(--texto2);
+  letter-spacing:1px;
+  margin-bottom:10px;
+}
+
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  padding:15px;
+  background:var(--fundo);
+  border:1px solid var(--borda);
+  border-radius:14px;
+  color:var(--texto);
+  text-align:left;
+}
+
+.menu-item strong{
+  display:block;
+  margin-bottom:3px;
+}
+
+.menu-item small{
+  color:var(--texto2);
+}
+
+.menu-icon{
+  font-size:25px;
+  width:38px;
+  text-align:center;
+}
+
+/* FORMULÁRIOS */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
 
 .campo{
-    margin-bottom:15px;
+  margin-bottom:14px;
 }
 
 .campo label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:7px;
+  display:block;
+  font-weight:bold;
+  margin-bottom:6px;
 }
 
 .campo input,
 .campo select,
 .campo textarea{
-    width:100%;
-    padding:13px;
-    border:1px solid var(--borda);
-    border-radius:12px;
-    background:var(--painel);
-    color:var(--texto);
-    outline:none;
+  width:100%;
+  padding:13px;
+  border-radius:11px;
+  border:1px solid var(--borda);
+  background:var(--fundo);
+  color:var(--texto);
+  outline:none;
 }
 
 .campo textarea{
-    min-height:90px;
-    resize:vertical;
+  min-height:100px;
+  resize:vertical;
 }
 
-.botao{
-    width:100%;
-    border:0;
-    padding:13px 15px;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:bold;
-    margin-top:7px;
-    transition:.2s;
-}
-
-.botao:hover{
-    transform:translateY(-1px);
-}
-
-.botao-verde{
-    background:var(--verde);
-    color:white;
-}
-
-.botao-vermelho{
-    background:var(--vermelho);
-    color:white;
-}
-
-.botao-cinza{
-    background:#e5e7eb;
-    color:#111;
-}
-
-.tema-escuro .botao-cinza{
-    background:#2b2b2b;
-    color:#fff;
-}
-
-.mensagem{
-    margin-top:12px;
-    padding:11px;
-    border-radius:10px;
-    display:none;
-    font-size:14px;
-}
-
-.erro{
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-.sucesso{
-    background:#dcfce7;
-    color:#166534;
-}
-
-/* =========================
-   SISTEMA
-========================= */
-
-#sistema{
-    display:none;
-    min-height:100vh;
-    background:transparent;
-}
-
-.topo{
-    background:var(--painel);
-    border-bottom:3px solid var(--verde);
-    padding:18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.marca{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.bandeira{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background:linear-gradient(
-        90deg,
-        var(--verde) 0 33%,
-        white 33% 66%,
-        var(--vermelho) 66%
-    );
-    border:2px solid #ddd;
-}
-
-.marca h1{
-    font-size:20px;
-}
-
-.marca p{
-    color:var(--cinza2);
-    font-size:13px;
-    margin-top:3px;
-}
-
-.conta-area{
-    position:relative;
-}
-
-.btn-conta{
-    background:var(--cinza);
-    color:var(--texto);
-    border:1px solid var(--borda);
-    padding:10px 14px;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.dropdown-conta{
-    display:none;
-    position:absolute;
-    right:0;
-    top:52px;
-    width:250px;
-    background:var(--painel);
-    border:1px solid var(--borda);
-    border-radius:16px;
-    padding:15px;
-    box-shadow:var(--sombra);
-}
-
-.dropdown-conta.aberto{
-    display:block;
-}
-
-.conta-nome{
-    font-weight:bold;
-    font-size:16px;
-}
-
-.conta-user{
-    color:var(--cinza2);
-    margin:4px 0 10px;
-}
-
-.badge{
-    display:inline-block;
-    padding:6px 9px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    background:#dcfce7;
-    color:#166534;
-}
-
-.conteudo{
-    width:100%;
-    max-width:1200px;
-    margin:auto;
-    padding:22px;
-}
-
-.tela{
-    display:none;
-    background:var(--painel);
-    background-image:none;
-    border-radius:22px;
-    padding:22px;
-    box-shadow:var(--sombra);
-}
-
-.tela.ativa{
-    display:block;
-}
-
-/* =========================
-   INÍCIO
-========================= */
-
-.inicio-cabecalho{
-    margin-bottom:20px;
-}
-
-.inicio-cabecalho h2{
-    font-size:26px;
-}
-
-.inicio-cabecalho p{
-    color:var(--cinza2);
-    margin-top:5px;
-}
-
-.resumo{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin:20px 0;
-}
-
-.resumo-card{
-    background:var(--cinza);
-    border:1px solid var(--borda);
-    padding:17px;
-    border-radius:16px;
-}
-
-.resumo-card strong{
-    display:block;
-    font-size:25px;
-    margin-top:7px;
-}
-
-.acoes-inicio{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
-
-/* =========================
-   MENU
-========================= */
-
-.menu-titulo{
-    margin-bottom:20px;
-}
-
-.menu-titulo h2{
-    font-size:26px;
-}
-
-.menu-titulo p{
-    color:var(--cinza2);
-    margin-top:5px;
-}
-
-.menu-secao{
-    margin-bottom:25px;
-}
-
-.menu-secao-titulo{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    border-left:5px solid var(--verde);
-    padding-left:10px;
-    margin-bottom:12px;
-}
-
-.menu-secao-titulo h3{
-    font-size:15px;
-}
-
-.menu-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
-
-.menu-card{
-    background:var(--cinza);
-    border:1px solid var(--borda);
-    border-radius:16px;
-    padding:17px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.menu-card:hover{
-    transform:translateY(-2px);
-    border-color:var(--verde);
-}
-
-.menu-card .icone{
-    font-size:26px;
-    margin-bottom:8px;
-}
-
-.menu-card h4{
-    font-size:16px;
-    margin-bottom:5px;
-}
-
-.menu-card p{
-    font-size:13px;
-    color:var(--cinza2);
-    line-height:1.4;
-}
-
-/* =========================
-   LISTAS
-========================= */
+/* CONTATOS */
 
 .lista{
-    margin-top:15px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-.item{
-    border:1px solid var(--borda);
-    background:var(--cinza);
-    border-radius:15px;
-    padding:15px;
-    margin-bottom:12px;
+.contato{
+  background:var(--fundo);
+  border:1px solid var(--borda);
+  border-radius:15px;
+  padding:16px;
 }
 
-.item-topo{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
+.contato-topo{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
 }
 
-.item h3{
-    margin-bottom:5px;
+.contato-nome{
+  font-size:18px;
+  font-weight:900;
 }
 
-.item p{
-    color:var(--cinza2);
-    font-size:14px;
-    margin:4px 0;
+.contato-info{
+  color:var(--texto2);
+  font-size:14px;
+  margin-top:5px;
 }
 
 .status{
-    display:inline-block;
-    padding:6px 9px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.status-on{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.status-analise{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-.status-caiu{
-    background:#fee2e2;
-    color:#991b1b;
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:bold;
+  margin-top:10px;
 }
 
 .status-select{
-    width:100%;
-    padding:9px;
-    border-radius:10px;
-    border:1px solid var(--borda);
-    background:var(--painel);
-    color:var(--texto);
-    margin-top:8px;
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border-radius:9px;
+  border:1px solid var(--borda);
+  background:var(--painel);
+  color:var(--texto);
 }
 
-.item-botoes{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:12px;
+.contato-acoes{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+  flex-wrap:wrap;
 }
 
-.item-botoes button{
-    border:0;
-    border-radius:9px;
-    padding:8px 10px;
-    cursor:pointer;
-    font-weight:bold;
+.contato-acoes button{
+  padding:9px 11px;
+  border:none;
+  border-radius:9px;
+  font-weight:bold;
 }
 
-/* =========================
-   CONFIGURAÇÕES
-========================= */
+/* CONFIGURAÇÕES */
 
 .config-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
 
 .config-card{
-    background:var(--cinza);
-    border:1px solid var(--borda);
-    border-radius:16px;
-    padding:17px;
+  background:var(--fundo);
+  border:1px solid var(--borda);
+  border-radius:15px;
+  padding:18px;
 }
 
 .config-card h3{
-    margin-bottom:8px;
+  margin-bottom:7px;
 }
 
 .config-card p{
-    color:var(--cinza2);
-    font-size:13px;
-    line-height:1.4;
-    margin-bottom:12px;
+  color:var(--texto2);
+  font-size:13px;
+  margin-bottom:12px;
 }
 
 .config-card button{
-    width:100%;
+  width:100%;
+  padding:10px;
+  border:1px solid var(--borda);
+  background:var(--painel);
+  color:var(--texto);
+  border-radius:9px;
 }
 
-/* =========================
-   ADMIN
-========================= */
+/* MENSAGEM */
 
-.admin-box{
-    background:var(--cinza);
-    border:1px solid var(--borda);
-    border-radius:16px;
-    padding:18px;
-    margin-bottom:15px;
+.mensagem{
+  margin-top:12px;
+  padding:10px;
+  border-radius:9px;
+  display:none;
 }
 
-.admin-box h3{
-    margin-bottom:10px;
-}
+/* MOBILE */
 
-.admin-grid{
-    display:grid;
+@media(max-width:700px){
+
+  .conta-area{
+    position:static;
+    margin-top:15px;
+  }
+
+  .dropdown-conta{
+    right:50%;
+    transform:translateX(50%);
+    top:100%;
+  }
+
+  .resumo{
     grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
+  }
 
-/* =========================
-   LOADING
-========================= */
+  .botoes-principais,
+  .menu-grid,
+  .form-grid,
+  .config-grid{
+    grid-template-columns:1fr;
+  }
 
-#loading{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,#020202,#071f12,#150202);
-    color:white;
-    text-align:center;
-}
-
-.loader{
-    width:45px;
-    height:45px;
-    border:5px solid rgba(255,255,255,.25);
-    border-top-color:#00a651;
-    border-radius:50%;
-    animation:girar 1s linear infinite;
-    margin:15px auto;
-}
-
-@keyframes girar{
-    to{transform:rotate(360deg);}
-}
-
-/* =========================
-   RESPONSIVO
-========================= */
-
-@media(max-width:750px){
-
-    .topo{
-        padding:13px;
-    }
-
-    .marca h1{
-        font-size:17px;
-    }
-
-    .bandeira{
-        width:36px;
-        height:36px;
-    }
-
-    .conteudo{
-        padding:12px;
-    }
-
-    .tela{
-        padding:16px;
-        border-radius:17px;
-    }
-
-    .resumo{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .acoes-inicio,
-    .menu-grid,
-    .config-grid,
-    .admin-grid{
-        grid-template-columns:1fr;
-    }
-
-    .btn-conta{
-        font-size:12px;
-        padding:8px;
-    }
+  .topo h1{
+    font-size:22px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     LOGIN
-========================= -->
-
-<div id="telaLogin">
-
-    <div class="login-card">
-
-        <div class="logo-login">🍀 BOT DO BM3 🍀</div>
-        <div class="sub-login">Acesso ao sistema</div>
-
-        <h2>🔐 Entrar</h2>
-
-        <div class="campo">
-            <label>👤 Usuário</label>
-            <input id="loginUsuario" type="text" autocomplete="username">
-        </div>
-
-        <div class="campo">
-            <label>🔑 Senha</label>
-            <input id="loginSenha" type="password" autocomplete="current-password">
-        </div>
-
-        <button class="botao botao-verde" onclick="entrar()">
-            🔓 Entrar no BOT
-        </button>
-
-        <button class="botao botao-cinza" onclick="recuperarUsuario()">
-            👤 Esqueci meu usuário
-        </button>
-
-        <div id="mensagemLogin" class="mensagem"></div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     SISTEMA
-========================= -->
-
 <div id="sistema">
 
-    <header class="topo">
+<header class="topo">
 
-        <div class="marca">
-            <div class="bandeira"></div>
+  <h1>🍀 BOT DO BM3 🍀</h1>
+  <p>Organizador de contatos</p>
 
-            <div>
-                <h1>🍀 BOT DO BM3 🍀</h1>
-                <p>Organizador e painel de administração</p>
-            </div>
-        </div>
+  <div class="conta-area">
 
-        <div class="conta-area">
+    <button class="btn-conta" onclick="abrirConta()">
+      👤 Sua conta
+    </button>
 
-            <button class="btn-conta" onclick="abrirConta()">
-                👤 Sua conta
-            </button>
+    <div id="dropdownConta" class="dropdown-conta">
 
-            <div id="dropdownConta" class="dropdown-conta">
+      <div class="conta-titulo">
+        BOT DO BM3
+      </div>
 
-                <div class="conta-nome" id="contaNome"></div>
-                <div class="conta-user" id="contaUsuario"></div>
+      <div class="conta-info">
+        Sistema local
+      </div>
 
-                <span class="badge" id="contaTipo"></span>
+      <span class="conta-badge">
+        👑 Administrador
+      </span>
 
-                <button
-                    class="botao botao-cinza"
-                    onclick="abrirTela('configuracao')">
-                    ⚙️ Configurações
-                </button>
+      <button onclick="abrirTela('configuracoes')">
+        ⚙️ Configurações
+      </button>
 
-                <button
-                    class="botao botao-vermelho"
-                    onclick="sair()">
-                    🚪 Sair da conta
-                </button>
+      <button onclick="abrirConta()">
+        ✖️ Fechar
+      </button>
 
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <main class="conteudo">
-
-        <!-- =========================
-             INÍCIO
-        ========================= -->
-
-        <section id="inicio" class="tela ativa">
-
-            <div class="inicio-cabecalho">
-                <h2>🏠 Início</h2>
-                <p>Bem-vindo ao painel do BOT DO BM3.</p>
-            </div>
-
-            <div class="resumo">
-
-                <div class="resumo-card">
-                    👥 Total de contatos
-                    <strong id="totalContatos">0</strong>
-                </div>
-
-                <div class="resumo-card">
-                    🟢 ZAP ON
-                    <strong id="totalOn">0</strong>
-                </div>
-
-                <div class="resumo-card">
-                    ⚠️ Em análise
-                    <strong id="totalAnalise">0</strong>
-                </div>
-
-                <div class="resumo-card">
-                    🔴 ZAP CAIU
-                    <strong id="totalCaiu">0</strong>
-                </div>
-
-            </div>
-
-
-            <div class="acoes-inicio">
-
-                <button class="botao botao-verde"
-                    onclick="abrirTela('menu')">
-                    ☰ Abrir Menu
-                </button>
-
-                <button class="botao botao-cinza"
-                    onclick="abrirTela('adicionar')">
-                    ➕ Adicionar contato
-                </button>
-
-                <button class="botao botao-cinza"
-                    onclick="abrirTela('contatos')">
-                    👥 Ver contatos
-                </button>
-
-                <button class="botao botao-cinza"
-                    onclick="abrirTela('configuracao')">
-                    ⚙️ Configurações
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             MENU PROFISSIONAL
-        ========================= -->
-
-        <section id="menu" class="tela">
-
-            <div class="menu-titulo">
-                <h2>☰ Menu principal</h2>
-                <p>Controle todas as funções do BOT DO BM3.</p>
-            </div>
-
-
-            <!-- CONTATOS -->
-
-            <div class="menu-secao">
-
-                <div class="menu-secao-titulo">
-                    <h3>👥 CONTATOS</h3>
-                </div>
-
-                <div class="menu-grid">
-
-                    <div class="menu-card"
-                        onclick="abrirTela('adicionar')">
-
-                        <div class="icone">➕</div>
-                        <h4>Adicionar contato</h4>
-                        <p>
-                            Cadastre nome, WhatsApp, grupo e observação.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('contatos')">
-
-                        <div class="icone">👥</div>
-                        <h4>Todos os contatos</h4>
-                        <p>
-                            Visualize e gerencie sua lista completa.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('buscar')">
-
-                        <div class="icone">🔎</div>
-                        <h4>Buscar contato</h4>
-                        <p>
-                            Pesquise por nome, número ou grupo.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- MONITORAMENTO -->
-
-            <div class="menu-secao">
-
-                <div class="menu-secao-titulo">
-                    <h3>📊 MONITORAMENTO</h3>
-                </div>
-
-                <div class="menu-grid">
-
-                    <div class="menu-card"
-                        onclick="filtrarStatus('on')">
-
-                        <div class="icone">🟢</div>
-                        <h4>ZAP ON</h4>
-                        <p>
-                            Veja somente os números marcados como ativos.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="filtrarStatus('analise')">
-
-                        <div class="icone">⚠️</div>
-                        <h4>Em análise</h4>
-                        <p>
-                            Números que ainda precisam ser verificados.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="filtrarStatus('caiu')">
-
-                        <div class="icone">🔴</div>
-                        <h4>ZAP CAIU</h4>
-                        <p>
-                            Veja os números marcados como indisponíveis.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('estatisticas')">
-
-                        <div class="icone">📈</div>
-                        <h4>Estatísticas</h4>
-                        <p>
-                            Resumo geral dos seus contatos.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ORGANIZAÇÃO -->
-
-            <div class="menu-secao">
-
-                <div class="menu-secao-titulo">
-                    <h3>🏷️ ORGANIZAÇÃO</h3>
-                </div>
-
-                <div class="menu-grid">
-
-                    <div class="menu-card"
-                        onclick="abrirTela('grupos')">
-
-                        <div class="icone">🏷️</div>
-                        <h4>Grupos</h4>
-                        <p>
-                            Organize seus contatos por grupos.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('categorias')">
-
-                        <div class="icone">📂</div>
-                        <h4>Categorias</h4>
-                        <p>
-                            Separe os contatos por categorias.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('favoritos')">
-
-                        <div class="icone">⭐</div>
-                        <h4>Favoritos</h4>
-                        <p>
-                            Acesse rapidamente seus contatos importantes.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('etiquetas')">
-
-                        <div class="icone">🔖</div>
-                        <h4>Etiquetas</h4>
-                        <p>
-                            Crie etiquetas personalizadas.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ADMIN -->
-
-            <div
-                id="secaoAdmin"
-                class="menu-secao"
-                style="display:none;">
-
-                <div class="menu-secao-titulo">
-                    <h3>👑 ADMINISTRAÇÃO</h3>
-                </div>
-
-                <div class="menu-grid">
-
-                    <div class="menu-card"
-                        onclick="abrirTela('admin')">
-
-                        <div class="icone">👤</div>
-                        <h4>Usuários</h4>
-                        <p>
-                            Veja e gerencie todas as contas criadas.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('criarUsuario')">
-
-                        <div class="icone">➕</div>
-                        <h4>Criar usuário</h4>
-                        <p>
-                            Crie uma nova conta para outra pessoa.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('admin')">
-
-                        <div class="icone">🚫</div>
-                        <h4>Bloquear usuários</h4>
-                        <p>
-                            Controle o acesso das contas.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('admin')">
-
-                        <div class="icone">🗑️</div>
-                        <h4>Gerenciar contas</h4>
-                        <p>
-                            Exclua ou administre contas cadastradas.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- SISTEMA -->
-
-            <div class="menu-secao">
-
-                <div class="menu-secao-titulo">
-                    <h3>⚙️ SISTEMA</h3>
-                </div>
-
-                <div class="menu-grid">
-
-                    <div class="menu-card"
-                        onclick="abrirTela('configuracao')">
-
-                        <div class="icone">⚙️</div>
-                        <h4>Configuração</h4>
-                        <p>
-                            Controle as principais funções do BOT.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('personalizacao')">
-
-                        <div class="icone">🎨</div>
-                        <h4>Personalização</h4>
-                        <p>
-                            Escolha tema e aparência do sistema.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('backup')">
-
-                        <div class="icone">💾</div>
-                        <h4>Backup</h4>
-                        <p>
-                            Exporte seus dados para guardar uma cópia.
-                        </p>
-
-                    </div>
-
-                    <div class="menu-card"
-                        onclick="abrirTela('sobre')">
-
-                        <div class="icone">ℹ️</div>
-                        <h4>Sobre o BOT</h4>
-                        <p>
-                            Informações sobre o sistema.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             ADICIONAR
-        ========================= -->
-
-        <section id="adicionar" class="tela">
-
-            <h2>➕ Adicionar contato</h2>
-            <p style="color:var(--cinza2);margin:7px 0 20px;">
-                Cadastre um novo contato no BOT.
-            </p>
-
-            <div class="campo">
-                <label>👤 Nome</label>
-                <input id="nomeContato">
-            </div>
-
-            <div class="campo">
-                <label>📱 WhatsApp</label>
-                <input id="numeroContato" placeholder="5513999999999">
-            </div>
-
-            <div class="campo">
-                <label>🏷️ Grupo</label>
-                <input id="grupoContato">
-            </div>
-
-            <div class="campo">
-                <label>📝 Observação</label>
-                <textarea id="observacaoContato"></textarea>
-            </div>
-
-            <button class="botao botao-verde"
-                onclick="adicionarContato()">
-                💾 Salvar contato
-            </button>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar ao menu
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             CONTATOS
-        ========================= -->
-
-        <section id="contatos" class="tela">
-
-            <h2>👥 Todos os contatos</h2>
-
-            <div id="listaContatos" class="lista"></div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             BUSCAR
-        ========================= -->
-
-        <section id="buscar" class="tela">
-
-            <h2>🔎 Buscar contato</h2>
-
-            <div class="campo" style="margin-top:15px;">
-                <input
-                    id="campoBusca"
-                    placeholder="Nome, número ou grupo..."
-                    oninput="buscarContatos()">
-            </div>
-
-            <div id="resultadoBusca" class="lista"></div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             ESTATÍSTICAS
-        ========================= -->
-
-        <section id="estatisticas" class="tela">
-
-            <h2>📈 Estatísticas</h2>
-
-            <div class="resumo" style="margin-top:20px;">
-
-                <div class="resumo-card">
-                    👥 Contatos
-                    <strong id="estatTotal">0</strong>
-                </div>
-
-                <div class="resumo-card">
-                    🟢 Ativos
-                    <strong id="estatOn">0</strong>
-                </div>
-
-                <div class="resumo-card">
-                    ⚠️ Análise
-                    <strong id="estatAnalise">0</strong>
-                </div>
-
-                <div class="resumo-card">
-                    🔴 Caíram
-                    <strong id="estatCaiu">0</strong>
-                </div>
-
-            </div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             GRUPOS
-        ========================= -->
-
-        <section id="grupos" class="tela">
-
-            <h2>🏷️ Grupos</h2>
-
-            <div id="listaGrupos" class="lista"></div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             CATEGORIAS
-        ========================= -->
-
-        <section id="categorias" class="tela">
-
-            <h2>📂 Categorias</h2>
-
-            <div class="config-card" style="margin-top:15px;">
-                <h3>📂 Organização</h3>
-                <p>
-                    Use os grupos e etiquetas para separar seus contatos.
-                </p>
-
-                <button class="botao botao-verde"
-                    onclick="abrirTela('grupos')">
-                    🏷️ Gerenciar grupos
-                </button>
-
-                <button class="botao botao-cinza"
-                    onclick="abrirTela('etiquetas')">
-                    🔖 Gerenciar etiquetas
-                </button>
-            </div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             FAVORITOS
-        ========================= -->
-
-        <section id="favoritos" class="tela">
-
-            <h2>⭐ Favoritos</h2>
-
-            <div class="config-card" style="margin-top:15px;">
-                <h3>⭐ Seus contatos importantes</h3>
-                <p>
-                    A função de favoritos está preparada para expansão.
-                </p>
-            </div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             ETIQUETAS
-        ========================= -->
-
-        <section id="etiquetas" class="tela">
-
-            <h2>🔖 Etiquetas</h2>
-
-            <div class="config-card" style="margin-top:15px;">
-                <h3>🔖 Etiquetas personalizadas</h3>
-                <p>
-                    Organize seus contatos usando etiquetas.
-                </p>
-            </div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             CONFIGURAÇÃO
-        ========================= -->
-
-        <section id="configuracao" class="tela">
-
-            <h2>⚙️ Configuração</h2>
-
-            <p style="color:var(--cinza2);margin:7px 0 20px;">
-                Configure o comportamento do BOT DO BM3.
-            </p>
-
-            <div class="config-grid">
-
-                <div class="config-card">
-                    <h3>👤 Conta</h3>
-                    <p>
-                        Gerencie informações da sua conta.
-                    </p>
-
-                    <button class="botao botao-cinza"
-                        onclick="abrirConta()">
-                        👤 Sua conta
-                    </button>
-
-                    <button class="botao botao-cinza"
-                        onclick="alert('Função de alteração de senha preparada para a próxima etapa.')">
-                        🔑 Alterar senha
-                    </button>
-                </div>
-
-
-                <div class="config-card">
-                    <h3>🎨 Aparência</h3>
-                    <p>
-                        Escolha como o BOT será exibido.
-                    </p>
-
-                    <button class="botao botao-verde"
-                        onclick="alternarTema()">
-                        🌙 Alternar tema
-                    </button>
-
-                    <button class="botao botao-cinza"
-                        onclick="abrirTela('personalizacao')">
-                        🎨 Personalização
-                    </button>
-                </div>
-
-
-                <div class="config-card">
-                    <h3>👥 Contatos</h3>
-                    <p>
-                        Configure a organização da sua lista.
-                    </p>
-
-                    <button class="botao botao-cinza"
-                        onclick="alert('Os contatos novos começam automaticamente como ZAP EM ANÁLISE.')">
-                        ⚠️ Status automático
-                    </button>
-
-                    <button class="botao botao-cinza"
-                        onclick="confirmarExclusao=true; alert('A confirmação de exclusão está ativada.')">
-                        🗑️ Confirmar exclusões
-                    </button>
-                </div>
-
-
-                <div class="config-card">
-                    <h3>📊 Monitoramento</h3>
-                    <p>
-                        Controle informações de atualização dos números.
-                    </p>
-
-                    <button class="botao botao-cinza"
-                        onclick="abrirTela('estatisticas')">
-                        📈 Estatísticas
-                    </button>
-
-                    <button class="botao botao-cinza"
-                        onclick="alert('Toda alteração de status registra automaticamente data e hora.')">
-                        🕐 Últimas atualizações
-                    </button>
-                </div>
-
-
-                <div class="config-card">
-                    <h3>🏷️ Organização</h3>
-                    <p>
-                        Organize seus contatos de várias maneiras.
-                    </p>
-
-                    <button class="botao botao-cinza"
-                        onclick="abrirTela('grupos')">
-                        🏷️ Grupos
-                    </button>
-
-                    <button class="botao botao-cinza"
-                        onclick="abrirTela('etiquetas')">
-                        🔖 Etiquetas
-                    </button>
-                </div>
-
-
-                <div class="config-card">
-                    <h3>💾 Dados</h3>
-                    <p>
-                        Faça cópias e restaure seus contatos.
-                    </p>
-
-                    <button class="botao botao-verde"
-                        onclick="exportarBackup()">
-                        📤 Exportar backup
-                    </button>
-
-                    <button class="botao botao-cinza"
-                        onclick="abrirTela('backup')">
-                        💾 Backup
-                    </button>
-                </div>
-
-
-                <div class="config-card">
-                    <h3>🔐 Segurança</h3>
-                    <p>
-                        Controle sua sessão e acesso ao sistema.
-                    </p>
-
-                    <button class="botao botao-cinza"
-                        onclick="sair()">
-                        🚪 Sair da conta
-                    </button>
-                </div>
-
-
-                <div class="config-card">
-                    <h3>🖥️ Sistema</h3>
-                    <p>
-                        Informações e manutenção do BOT.
-                    </p>
-
-                    <button class="botao botao-cinza"
-                        onclick="location.reload()">
-                        🔄 Atualizar sistema
-                    </button>
-
-                    <button class="botao botao-cinza"
-                        onclick="abrirTela('sobre')">
-                        ℹ️ Sobre o BOT
-                    </button>
-                </div>
-
-            </div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar ao menu
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             PERSONALIZAÇÃO
-        ========================= -->
-
-        <section id="personalizacao" class="tela">
-
-            <h2>🎨 Personalização</h2>
-
-            <div class="config-grid" style="margin-top:20px;">
-
-                <div class="config-card">
-                    <h3>🇮🇹 Tema claro</h3>
-                    <p>
-                        Visual claro com as cores inspiradas na Itália.
-                    </p>
-
-                    <button class="botao botao-verde"
-                        onclick="temaClaro()">
-                        ☀️ Ativar tema claro
-                    </button>
-                </div>
-
-                <div class="config-card">
-                    <h3>🌙 Tema escuro</h3>
-                    <p>
-                        Visual escuro com verde, preto e vermelho.
-                    </p>
-
-                    <button class="botao botao-verde"
-                        onclick="temaEscuro()">
-                        🌙 Ativar tema escuro
-                    </button>
-                </div>
-
-            </div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             BACKUP
-        ========================= -->
-
-        <section id="backup" class="tela">
-
-            <h2>💾 Backup</h2>
-
-            <div class="config-card" style="margin-top:20px;">
-
-                <h3>📤 Exportar dados</h3>
-
-                <p>
-                    Crie um arquivo com seus contatos para guardar uma cópia.
-                </p>
-
-                <button class="botao botao-verde"
-                    onclick="exportarBackup()">
-                    📤 Fazer backup
-                </button>
-
-            </div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             SOBRE
-        ========================= -->
-
-        <section id="sobre" class="tela">
-
-            <h2>ℹ️ Sobre o BOT</h2>
-
-            <div class="config-card" style="margin-top:20px;">
-
-                <h3>🍀 BOT DO BM3</h3>
-
-                <p>
-                    Sistema para organização de contatos,
-                    grupos, status e administração de usuários.
-                </p>
-
-                <p>
-                    Versão atual: <strong>BM3 1.0</strong>
-                </p>
-
-            </div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             CRIAR USUÁRIO
-        ========================= -->
-
-        <section id="criarUsuario" class="tela">
-
-            <h2>➕ Criar usuário</h2>
-
-            <p style="color:var(--cinza2);margin:7px 0 20px;">
-                Somente o administrador pode criar novas contas.
-            </p>
-
-            <div class="campo">
-                <label>👤 Nome</label>
-                <input id="novoNome">
-            </div>
-
-            <div class="campo">
-                <label>🆔 Usuário</label>
-                <input id="novoUsuario">
-            </div>
-
-            <div class="campo">
-                <label>🔑 Senha</label>
-                <input id="novaSenha" type="password">
-            </div>
-
-            <button class="botao botao-verde"
-                onclick="criarUsuario()">
-                👤 Criar conta
-            </button>
-
-            <div id="mensagemUsuario" class="mensagem"></div>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('admin')">
-                ↩️ Voltar
-            </button>
-
-        </section>
-
-
-        <!-- =========================
-             ADMIN
-        ========================= -->
-
-        <section id="admin" class="tela">
-
-            <h2>👑 Administração</h2>
-
-            <p style="color:var(--cinza2);margin:7px 0 20px;">
-                Área exclusiva do administrador.
-            </p>
-
-            <div class="admin-box">
-
-                <h3>📊 Contas cadastradas</h3>
-
-                <div id="listaUsuarios"></div>
-
-            </div>
-
-            <button class="botao botao-verde"
-                onclick="abrirTela('criarUsuario')">
-                ➕ Criar usuário
-            </button>
-
-            <button class="botao botao-cinza"
-                onclick="abrirTela('menu')">
-                ↩️ Voltar ao menu
-            </button>
-
-        </section>
-
-    </main>
-
-</div>
-
-
-<!-- LOADING -->
-
-<div id="loading">
-
-    <div>
-        <h2>🍀 BOT DO BM3 🍀</h2>
-        <div class="loader"></div>
-        <p>Carregando sistema...</p>
     </div>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+<!-- INÍCIO -->
+
+<section id="inicio" class="tela ativa">
+
+  <div class="painel">
+
+    <div class="titulo">
+      🏠 Início
+    </div>
+
+    <div class="subtitulo">
+      Painel principal do BOT DO BM3
+    </div>
+
+    <div class="resumo">
+
+      <div class="resumo-card">
+        <div>👥</div>
+        <div class="numero" id="totalContatos">0</div>
+        <div class="legenda">Total de contatos</div>
+      </div>
+
+      <div class="resumo-card">
+        <div>🟢</div>
+        <div class="numero" id="totalOn">0</div>
+        <div class="legenda">ZAP ON</div>
+      </div>
+
+      <div class="resumo-card">
+        <div>🟡</div>
+        <div class="numero" id="totalAnalise">0</div>
+        <div class="legenda">Em análise</div>
+      </div>
+
+      <div class="resumo-card">
+        <div>🔴</div>
+        <div class="numero" id="totalCaiu">0</div>
+        <div class="legenda">ZAP CAIU</div>
+      </div>
+
+    </div>
+
+    <div class="botoes-principais">
+
+      <button class="btn" onclick="abrirTela('menu')">
+        ☰ Abrir Menu
+      </button>
+
+      <button class="btn" onclick="abrirTela('adicionar')">
+        ➕ Adicionar contato
+      </button>
+
+      <button class="btn btn-sec" onclick="abrirTela('contatos')">
+        👥 Todos os contatos
+      </button>
+
+      <button class="btn btn-sec" onclick="abrirTela('configuracoes')">
+        ⚙️ Configurações
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MENU -->
+
+<section id="menu" class="tela">
+
+  <div class="painel">
+
+    <div class="titulo">☰ Menu do BOT</div>
+
+    <div class="subtitulo">
+      Todas as ferramentas organizadas por categoria
+    </div>
+
+
+    <div class="menu-secao">
+
+      <h3>👥 CONTATOS</h3>
+
+      <div class="menu-grid">
+
+        <button class="menu-item" onclick="abrirTela('adicionar')">
+          <span class="menu-icon">➕</span>
+          <span>
+            <strong>Adicionar contato</strong>
+            <small>Cadastrar novo número</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="abrirTela('contatos')">
+          <span class="menu-icon">👥</span>
+          <span>
+            <strong>Todos os contatos</strong>
+            <small>Visualizar e gerenciar</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="abrirTela('buscar')">
+          <span class="menu-icon">🔎</span>
+          <span>
+            <strong>Buscar contato</strong>
+            <small>Pesquisar por nome ou número</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="abrirTela('favoritos')">
+          <span class="menu-icon">⭐</span>
+          <span>
+            <strong>Favoritos</strong>
+            <small>Contatos importantes</small>
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="menu-secao">
+
+      <h3>📊 MONITORAMENTO</h3>
+
+      <div class="menu-grid">
+
+        <button class="menu-item" onclick="filtrarStatus('ON')">
+          <span class="menu-icon">🟢</span>
+          <span>
+            <strong>ZAP ON</strong>
+            <small>Contatos ativos</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="filtrarStatus('ANALISE')">
+          <span class="menu-icon">⚠️</span>
+          <span>
+            <strong>ZAP EM ANÁLISE</strong>
+            <small>Aguardando verificação</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="filtrarStatus('CAIU')">
+          <span class="menu-icon">🔴</span>
+          <span>
+            <strong>ZAP CAIU</strong>
+            <small>Números indisponíveis</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="mostrarEstatisticas()">
+          <span class="menu-icon">📈</span>
+          <span>
+            <strong>Estatísticas</strong>
+            <small>Resumo do sistema</small>
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="menu-secao">
+
+      <h3>🏷️ ORGANIZAÇÃO</h3>
+
+      <div class="menu-grid">
+
+        <button class="menu-item" onclick="mostrarGrupos()">
+          <span class="menu-icon">🏷️</span>
+          <span>
+            <strong>Grupos</strong>
+            <small>Organizar contatos</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="mostrarCategorias()">
+          <span class="menu-icon">📂</span>
+          <span>
+            <strong>Categorias</strong>
+            <small>Separar informações</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="abrirTela('favoritos')">
+          <span class="menu-icon">⭐</span>
+          <span>
+            <strong>Favoritos</strong>
+            <small>Acesso rápido</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="mostrarTags()">
+          <span class="menu-icon">🔖</span>
+          <span>
+            <strong>Etiquetas</strong>
+            <small>Identificação rápida</small>
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="menu-secao">
+
+      <h3>👑 ADMINISTRAÇÃO</h3>
+
+      <div class="menu-grid">
+
+        <button class="menu-item" onclick="mostrarAdministracao()">
+          <span class="menu-icon">👑</span>
+          <span>
+            <strong>Administração</strong>
+            <small>Controle do sistema</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="mostrarUsuarios()">
+          <span class="menu-icon">👤</span>
+          <span>
+            <strong>Usuários</strong>
+            <small>Gerenciamento de acesso</small>
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="menu-secao">
+
+      <h3>⚙️ SISTEMA</h3>
+
+      <div class="menu-grid">
+
+        <button class="menu-item" onclick="abrirTela('configuracoes')">
+          <span class="menu-icon">⚙️</span>
+          <span>
+            <strong>Configurações</strong>
+            <small>Configurar o BOT</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="abrirTela('personalizacao')">
+          <span class="menu-icon">🎨</span>
+          <span>
+            <strong>Personalização</strong>
+            <small>Tema e aparência</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="abrirTela('backup')">
+          <span class="menu-icon">💾</span>
+          <span>
+            <strong>Backup</strong>
+            <small>Salvar seus dados</small>
+          </span>
+        </button>
+
+        <button class="menu-item" onclick="abrirTela('sobre')">
+          <span class="menu-icon">ℹ️</span>
+          <span>
+            <strong>Sobre o BOT</strong>
+            <small>Informações do sistema</small>
+          </span>
+        </button>
+
+      </div>
+
+    </div>
+
+    <button class="btn btn-sec" onclick="abrirTela('inicio')">
+      ← Voltar para o início
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ADICIONAR -->
+
+<section id="adicionar" class="tela">
+
+  <div class="painel">
+
+    <div class="titulo">➕ Adicionar contato</div>
+
+    <div class="subtitulo">
+      Cadastre um novo contato no BOT.
+    </div>
+
+    <div class="form-grid">
+
+      <div class="campo">
+        <label>Nome</label>
+        <input id="nome" placeholder="Nome do contato">
+      </div>
+
+      <div class="campo">
+        <label>WhatsApp</label>
+        <input id="telefone" placeholder="Ex: 5513999999999">
+      </div>
+
+      <div class="campo">
+        <label>Grupo</label>
+        <input id="grupo" placeholder="Ex: BM3">
+      </div>
+
+      <div class="campo">
+        <label>Categoria</label>
+        <input id="categoria" placeholder="Ex: Trabalho">
+      </div>
+
+    </div>
+
+    <div class="campo">
+
+      <label>Observação</label>
+
+      <textarea
+        id="observacao"
+        placeholder="Digite uma observação..."
+      ></textarea>
+
+    </div>
+
+    <button class="btn" onclick="adicionarContato()">
+      💾 Salvar contato
+    </button>
+
+    <div id="mensagemAdicionar" class="mensagem"></div>
+
+    <br>
+
+    <button class="btn btn-sec" onclick="abrirTela('menu')">
+      ← Voltar
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- CONTATOS -->
+
+<section id="contatos" class="tela">
+
+  <div class="painel">
+
+    <div class="titulo">👥 Todos os contatos</div>
+
+    <div class="subtitulo">
+      Gerencie todos os números cadastrados.
+    </div>
+
+    <div id="listaContatos" class="lista"></div>
+
+    <br>
+
+    <button class="btn btn-sec" onclick="abrirTela('menu')">
+      ← Voltar
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- BUSCAR -->
+
+<section id="buscar" class="tela">
+
+  <div class="painel">
+
+    <div class="titulo">🔎 Buscar contato</div>
+
+    <div class="campo">
+
+      <input
+        id="campoBusca"
+        placeholder="Digite nome, número, grupo ou categoria..."
+        oninput="buscarContato()"
+      >
+
+    </div>
+
+    <div id="resultadoBusca" class="lista"></div>
+
+    <br>
+
+    <button class="btn btn-sec" onclick="abrirTela('menu')">
+      ← Voltar
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- FAVORITOS -->
+
+<section id="favoritos" class="tela">
+
+  <div class="painel">
+
+    <div class="titulo">⭐ Favoritos</div>
+
+    <div class="subtitulo">
+      Seus contatos marcados como favoritos.
+    </div>
+
+    <div id="listaFavoritos" class="lista"></div>
+
+    <br>
+
+    <button class="btn btn-sec" onclick="abrirTela('menu')">
+      ← Voltar
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- CONFIGURAÇÕES -->
+
+<section id="configuracoes" class="tela">
+
+  <div class="painel">
+
+    <div class="titulo">⚙️ Configurações</div>
+
+    <div class="subtitulo">
+      Configure o funcionamento do BOT DO BM3.
+    </div>
+
+    <div class="config-grid">
+
+      <div class="config-card">
+        <h3>👤 Conta</h3>
+        <p>Informações da conta do sistema.</p>
+        <button onclick="alert('BOT DO BM3\\nAdministrador local')">
+          Ver informações
+        </button>
+      </div>
+
+      <div class="config-card">
+        <h3>🎨 Aparência</h3>
+        <p>Escolha o tema do BOT.</p>
+        <button onclick="abrirTela('personalizacao')">
+          Personalizar
+        </button>
+      </div>
+
+      <div class="config-card">
+        <h3>👥 Contatos</h3>
+        <p>Status automático e organização dos contatos.</p>
+        <button onclick="alert('Status automático ativado.')">
+          Configurar contatos
+        </button>
+      </div>
+
+      <div class="config-card">
+        <h3>📊 Monitoramento</h3>
+        <p>Acompanhe os status dos números.</p>
+        <button onclick="mostrarEstatisticas()">
+          Ver estatísticas
+        </button>
+      </div>
+
+      <div class="config-card">
+        <h3>🏷️ Organização</h3>
+        <p>Grupos, categorias e etiquetas.</p>
+        <button onclick="mostrarGrupos()">
+          Organizar
+        </button>
+      </div>
+
+      <div class="config-card">
+        <h3>💾 Dados</h3>
+        <p>Exporte uma cópia dos seus dados.</p>
+        <button onclick="exportarBackup()">
+          Exportar backup
+        </button>
+      </div>
+
+      <div class="config-card">
+        <h3>🔐 Segurança</h3>
+        <p>Ferramentas de proteção do sistema.</p>
+        <button onclick="alert('Sistema protegido localmente neste dispositivo.')">
+          Ver segurança
+        </button>
+      </div>
+
+      <div class="config-card">
+        <h3>🖥️ Sistema</h3>
+        <p>Informações e manutenção.</p>
+        <button onclick="location.reload()">
+          🔄 Recarregar BOT
+        </button>
+      </div>
+
+    </div>
+
+    <br>
+
+    <button class="btn btn-sec" onclick="abrirTela('menu')">
+      ← Voltar
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PERSONALIZAÇÃO -->
+
+<section id="personalizacao" class="tela">
+
+  <div class="painel">
+
+    <div class="titulo">🎨 Personalização</div>
+
+    <div class="subtitulo">
+      Escolha a aparência do BOT.
+    </div>
+
+    <button class="btn" onclick="alternarTema()">
+      🌓 Alternar tema claro / escuro
+    </button>
+
+    <br><br>
+
+    <button class="btn btn-sec" onclick="abrirTela('configuracoes')">
+      ← Voltar
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- BACKUP -->
+
+<section id="backup" class="tela">
+
+  <div class="painel">
+
+    <div class="titulo">💾 Backup</div>
+
+    <div class="subtitulo">
+      Salve uma cópia dos seus contatos.
+    </div>
+
+    <button class="btn" onclick="exportarBackup()">
+      📥 Exportar backup
+    </button>
+
+    <br><br>
+
+    <button class="btn btn-sec" onclick="abrirTela('menu')">
+      ← Voltar
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- SOBRE -->
+
+<section id="sobre" class="tela">
+
+  <div class="painel">
+
+    <div class="titulo">ℹ️ Sobre o BOT</div>
+
+    <div class="subtitulo">
+      Informações do sistema.
+    </div>
+
+    <p>
+      🍀 <strong>BOT DO BM3</strong>
+    </p>
+
+    <br>
+
+    <p style="color:var(--texto2)">
+      Organizador de contatos com gerenciamento de
+      números, grupos, categorias, status e backups.
+    </p>
+
+    <br>
+
+    <p style="color:var(--texto2)">
+      Versão: 1.0
+    </p>
+
+    <br>
+
+    <button class="btn btn-sec" onclick="abrirTela('menu')">
+      ← Voltar
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- RESULTADO -->
+
+<section id="resultado" class="tela">
+
+  <div class="painel">
+
+    <div id="resultadoConteudo"></div>
+
+    <br>
+
+    <button class="btn btn-sec" onclick="abrirTela('menu')">
+      ← Voltar
+    </button>
+
+  </div>
+
+</section>
+
+</main>
 
 </div>
 
 
 <script>
 
-/* =========================
-   CHAVES
-========================= */
-
-const CHAVE_ADMIN = "botBM3Administrador";
-const CHAVE_SESSAO = "botBM3Sessao";
 const CHAVE_CONTATOS = "botBM3Contatos";
-const CHAVE_USUARIOS = "botBM3Usuarios";
 const CHAVE_TEMA = "temaBotBM3";
 
-
 let contatos =
-    JSON.parse(localStorage.getItem(CHAVE_CONTATOS)) || [];
-
-let usuarios =
-    JSON.parse(localStorage.getItem(CHAVE_USUARIOS)) || [];
-
-let sessao =
-    JSON.parse(localStorage.getItem(CHAVE_SESSAO)) || null;
+  JSON.parse(localStorage.getItem(CHAVE_CONTATOS)) || [];
 
 
-/* =========================
-   INICIALIZAÇÃO
-========================= */
+/* INICIAR */
 
-window.addEventListener("load",function(){
+document.addEventListener("DOMContentLoaded",function(){
 
-    carregarTema();
+  aplicarTema();
+  atualizarResumo();
+  renderizarContatos();
 
-    const admin =
-        JSON.parse(localStorage.getItem(CHAVE_ADMIN));
-
-    if(!admin){
-
-        mostrarMensagem(
-            "mensagemLogin",
-            "Administrador não configurado neste navegador.",
-            "erro"
-        );
-
-        return;
-    }
-
-    document.getElementById("telaLogin").style.display="flex";
 });
 
 
-/* =========================
-   LOGIN
-========================= */
-
-function entrar(){
-
-    const usuario =
-        document.getElementById("loginUsuario").value.trim();
-
-    const senha =
-        document.getElementById("loginSenha").value;
-
-    const admin =
-        JSON.parse(localStorage.getItem(CHAVE_ADMIN));
-
-    if(!admin){
-
-        mostrarMensagem(
-            "mensagemLogin",
-            "Administrador não configurado neste navegador.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    /* ADMIN */
-
-    if(
-        usuario === admin.usuario &&
-        senha === admin.senha
-    ){
-
-        sessao = {
-            tipo:"administrador",
-            nome:admin.nome,
-            usuario:admin.usuario
-        };
-
-        localStorage.setItem(
-            CHAVE_SESSAO,
-            JSON.stringify(sessao)
-        );
-
-        iniciarSistema();
-
-        return;
-    }
-
-
-    /* USUÁRIOS */
-
-    const conta = usuarios.find(
-        u =>
-        u.usuario === usuario &&
-        u.senha === senha
-    );
-
-    if(!conta){
-
-        mostrarMensagem(
-            "mensagemLogin",
-            "Usuário ou senha incorretos.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    if(conta.status === "bloqueado"){
-
-        mostrarMensagem(
-            "mensagemLogin",
-            "Esta conta está bloqueada pelo administrador.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    conta.online = true;
-    conta.ultimoAcesso = new Date().toLocaleString("pt-BR");
-
-    salvarUsuarios();
-
-    sessao = {
-        tipo:"usuario",
-        nome:conta.nome,
-        usuario:conta.usuario,
-        id:conta.id
-    };
-
-    localStorage.setItem(
-        CHAVE_SESSAO,
-        JSON.stringify(sessao)
-    );
-
-    iniciarSistema();
-}
-
-
-/* =========================
-   SISTEMA
-========================= */
-
-function iniciarSistema(){
-
-    document.getElementById("telaLogin").style.display="none";
-
-    document.getElementById("sistema").style.display="block";
-
-    atualizarConta();
-
-    atualizarResumo();
-
-    atualizarListaContatos();
-
-    atualizarAdmin();
-
-    atualizarEstatisticas();
-
-    atualizarGrupos();
-
-    abrirTela("inicio");
-}
-
-
-/* =========================
-   CONTA
-========================= */
-
-function abrirConta(){
-
-    const box =
-        document.getElementById("dropdownConta");
-
-    box.classList.toggle("aberto");
-
-    atualizarConta();
-}
-
-
-function atualizarConta(){
-
-    if(!sessao) return;
-
-    document.getElementById("contaNome").textContent =
-        sessao.nome;
-
-    document.getElementById("contaUsuario").textContent =
-        "@" + sessao.usuario;
-
-    const tipo =
-        document.getElementById("contaTipo");
-
-    const secao =
-        document.getElementById("secaoAdmin");
-
-
-    if(sessao.tipo === "administrador"){
-
-        tipo.textContent="👑 Administrador";
-
-        secao.style.display="block";
-
-    }else{
-
-        tipo.textContent="👤 Usuário";
-
-        secao.style.display="none";
-    }
-}
-
-
-/* =========================
-   TELAS
-========================= */
+/* NAVEGAÇÃO */
 
 function abrirTela(id){
 
-    document
-        .querySelectorAll(".tela")
-        .forEach(t => t.classList.remove("ativa"));
+  document.querySelectorAll(".tela").forEach(function(tela){
+    tela.classList.remove("ativa");
+  });
 
-    const tela =
-        document.getElementById(id);
+  const tela = document.getElementById(id);
 
-    if(tela){
+  if(tela){
+    tela.classList.add("ativa");
+  }
 
-        tela.classList.add("ativa");
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-    }
+  fecharConta();
 
-    document
-        .getElementById("dropdownConta")
-        .classList.remove("aberto");
+  if(id === "contatos"){
+    renderizarContatos();
+  }
 
-    if(id === "contatos"){
-        atualizarListaContatos();
-    }
+  if(id === "favoritos"){
+    renderizarFavoritos();
+  }
 
-    if(id === "estatisticas"){
-        atualizarEstatisticas();
-    }
-
-    if(id === "grupos"){
-        atualizarGrupos();
-    }
-
-    if(id === "admin"){
-        atualizarAdmin();
-    }
+  if(id === "buscar"){
+    document.getElementById("campoBusca").value="";
+    document.getElementById("resultadoBusca").innerHTML="";
+  }
 }
 
 
-/* =========================
-   CONTATOS
-========================= */
+/* CONTA */
+
+function abrirConta(){
+
+  document
+    .getElementById("dropdownConta")
+    .classList.toggle("aberto");
+
+}
+
+function fecharConta(){
+
+  document
+    .getElementById("dropdownConta")
+    .classList.remove("aberto");
+
+}
+
+
+/* ADICIONAR */
 
 function adicionarContato(){
 
-    const nome =
-        document.getElementById("nomeContato").value.trim();
+  const nome =
+    document.getElementById("nome").value.trim();
 
-    const numero =
-        document.getElementById("numeroContato").value.trim();
+  const telefone =
+    document.getElementById("telefone").value.trim();
 
-    const grupo =
-        document.getElementById("grupoContato").value.trim();
+  const grupo =
+    document.getElementById("grupo").value.trim();
 
-    const observacao =
-        document.getElementById("observacaoContato").value.trim();
+  const categoria =
+    document.getElementById("categoria").value.trim();
 
-
-    if(!nome || !numero){
-
-        alert("Preencha o nome e o WhatsApp.");
-
-        return;
-    }
+  const observacao =
+    document.getElementById("observacao").value.trim();
 
 
-    contatos.push({
+  if(!nome || !telefone){
 
-        id:Date.now(),
+    mostrarMensagem(
+      "mensagemAdicionar",
+      "Preencha pelo menos o nome e o WhatsApp.",
+      "erro"
+    );
 
-        nome:nome,
-
-        numero:numero,
-
-        grupo:grupo || "Sem grupo",
-
-        observacao:observacao,
-
-        status:"analise",
-
-        ultimaAtualizacao:
-            new Date().toLocaleString("pt-BR")
-
-    });
+    return;
+  }
 
 
-    salvarContatos();
+  contatos.push({
 
-    document.getElementById("nomeContato").value="";
-    document.getElementById("numeroContato").value="";
-    document.getElementById("grupoContato").value="";
-    document.getElementById("observacaoContato").value="";
+    nome: nome,
+    telefone: telefone,
+    grupo: grupo || "Sem grupo",
+    categoria: categoria || "Sem categoria",
+    observacao: observacao,
+    status: "ANALISE",
+    favorito: false,
+    ultimaAtualizacao: dataAtual()
+
+  });
 
 
-    alert("Contato adicionado com sucesso!");
+  salvarContatos();
 
-    atualizarResumo();
+  document.getElementById("nome").value="";
+  document.getElementById("telefone").value="";
+  document.getElementById("grupo").value="";
+  document.getElementById("categoria").value="";
+  document.getElementById("observacao").value="";
 
-    abrirTela("contatos");
+
+  mostrarMensagem(
+    "mensagemAdicionar",
+    "✅ Contato adicionado com sucesso!",
+    "ok"
+  );
+
 }
 
+
+/* SALVAR */
 
 function salvarContatos(){
 
-    localStorage.setItem(
-        CHAVE_CONTATOS,
-        JSON.stringify(contatos)
-    );
+  localStorage.setItem(
+    CHAVE_CONTATOS,
+    JSON.stringify(contatos)
+  );
+
+  atualizarResumo();
+
 }
 
 
-/* =========================
-   LISTA
-========================= */
+/* DATA */
 
-function atualizarListaContatos(lista=contatos){
+function dataAtual(){
 
-    const area =
-        document.getElementById("listaContatos");
-
-    area.innerHTML="";
-
-
-    if(lista.length === 0){
-
-        area.innerHTML =
-            "<p style='color:var(--cinza2)'>Nenhum contato encontrado.</p>";
-
-        return;
+  return new Date().toLocaleString(
+    "pt-BR",
+    {
+      dateStyle:"short",
+      timeStyle:"short"
     }
+  );
 
-
-    lista.forEach((contato,index)=>{
-
-        const div =
-            document.createElement("div");
-
-        div.className="item";
-
-        let classe="status-analise";
-        let texto="⚠️ ZAP EM ANÁLISE";
-
-        if(contato.status==="on"){
-
-            classe="status-on";
-            texto="🟢 ZAP ON";
-
-        }
-
-        if(contato.status==="caiu"){
-
-            classe="status-caiu";
-            texto="🔴 ZAP CAIU";
-        }
-
-
-        div.innerHTML=`
-
-            <div class="item-topo">
-
-                <div>
-
-                    <h3>👤 ${escapar(contato.nome)}</h3>
-
-                    <p>📱 ${escapar(contato.numero)}</p>
-
-                    <p>🏷️ ${escapar(contato.grupo)}</p>
-
-                </div>
-
-                <span class="status ${classe}">
-                    ${texto}
-                </span>
-
-            </div>
-
-            ${
-                contato.observacao
-                ?
-                `<p>📝 ${escapar(contato.observacao)}</p>`
-                :
-                ""
-            }
-
-            <p>
-                🕐 Última atualização:
-                ${escapar(contato.ultimaAtualizacao)}
-            </p>
-
-
-            <select
-                class="status-select"
-                onchange="alterarStatus(${contato.id},this.value)"
-            >
-
-                <option value="analise"
-                    ${contato.status==="analise"?"selected":""}>
-                    ⚠️ ZAP EM ANÁLISE
-                </option>
-
-                <option value="on"
-                    ${contato.status==="on"?"selected":""}>
-                    🟢 ZAP ON
-                </option>
-
-                <option value="caiu"
-                    ${contato.status==="caiu"?"selected":""}>
-                    🔴 ZAP CAIU
-                </option>
-
-            </select>
-
-
-            <div class="item-botoes">
-
-                <button
-                    style="background:#25D366;color:white;"
-                    onclick="abrirWhatsApp('${escapar(contato.numero)}')">
-                    🟢 Abrir WhatsApp
-                </button>
-
-                <button
-                    style="background:var(--vermelho);color:white;"
-                    onclick="excluirContato(${contato.id})">
-                    🗑️ Excluir
-                </button>
-
-            </div>
-
-        `;
-
-        area.appendChild(div);
-    });
 }
 
 
-/* =========================
-   STATUS
-========================= */
+/* CONTATOS */
 
-function alterarStatus(id,status){
+function renderizarContatos(lista = contatos){
 
-    const contato =
-        contatos.find(c => c.id === id);
+  const container =
+    document.getElementById("listaContatos");
 
-    if(!contato) return;
+  if(!lista.length){
 
-    contato.status=status;
+    container.innerHTML =
+      "<p style='color:var(--texto2)'>Nenhum contato cadastrado.</p>";
 
-    contato.ultimaAtualizacao =
-        new Date().toLocaleString("pt-BR");
+    return;
+  }
 
-    salvarContatos();
 
-    atualizarListaContatos();
+  container.innerHTML =
+    lista.map(function(c,index){
 
-    atualizarResumo();
+      return criarCardContato(c,index);
 
-    atualizarEstatisticas();
+    }).join("");
+
 }
 
 
-/* =========================
-   WHATSAPP
-========================= */
+/* CARD */
+
+function criarCardContato(c,index){
+
+  let statusTexto="⚠️ ZAP EM ANÁLISE";
+
+  if(c.status==="ON"){
+    statusTexto="🟢 ZAP ON";
+  }
+
+  if(c.status==="CAIU"){
+    statusTexto="🔴 ZAP CAIU";
+  }
+
+
+  return `
+
+    <div class="contato">
+
+      <div class="contato-topo">
+
+        <div>
+
+          <div class="contato-nome">
+            ${escapar(c.nome)}
+          </div>
+
+          <div class="contato-info">
+            📱 ${escapar(c.telefone)}
+          </div>
+
+          <div class="contato-info">
+            🏷️ ${escapar(c.grupo)}
+          </div>
+
+          <div class="contato-info">
+            📂 ${escapar(c.categoria)}
+          </div>
+
+        </div>
+
+        <div>
+          ${c.favorito ? "⭐" : ""}
+        </div>
+
+      </div>
+
+      <div class="status">
+        ${statusTexto}
+      </div>
+
+      <select
+        class="status-select"
+        onchange="alterarStatus(${index},this.value)"
+      >
+
+        <option value="ANALISE"
+          ${c.status==="ANALISE" ? "selected" : ""}>
+          ⚠️ ZAP EM ANÁLISE
+        </option>
+
+        <option value="ON"
+          ${c.status==="ON" ? "selected" : ""}>
+          🟢 ZAP ON
+        </option>
+
+        <option value="CAIU"
+          ${c.status==="CAIU" ? "selected" : ""}>
+          🔴 ZAP CAIU
+        </option>
+
+      </select>
+
+      <div class="contato-info">
+        🕐 Última atualização:
+        ${escapar(c.ultimaAtualizacao || "-")}
+      </div>
+
+      ${
+        c.observacao
+        ?
+        `<div class="contato-info">
+          📝 ${escapar(c.observacao)}
+        </div>`
+        :
+        ""
+      }
+
+      <div class="contato-acoes">
+
+        <button
+          style="background:#25D366;color:white"
+          onclick="abrirWhatsApp('${escaparJS(c.telefone)}')"
+        >
+          🟢 Abrir WhatsApp
+        </button>
+
+        <button
+          style="background:var(--painel);color:var(--texto);border:1px solid var(--borda)"
+          onclick="alternarFavorito(${index})"
+        >
+          ${c.favorito ? "⭐ Remover favorito" : "☆ Favoritar"}
+        </button>
+
+        <button
+          style="background:var(--vermelho);color:white"
+          onclick="excluirContato(${index})"
+        >
+          🗑️ Excluir
+        </button>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+/* STATUS */
+
+function alterarStatus(index,status){
+
+  contatos[index].status=status;
+  contatos[index].ultimaAtualizacao=dataAtual();
+
+  salvarContatos();
+  renderizarContatos();
+
+}
+
+
+/* WHATSAPP */
 
 function abrirWhatsApp(numero){
 
-    let limpo =
-        numero.replace(/\D/g,"");
+  const limpo =
+    numero.replace(/\D/g,"");
 
-    window.open(
-        "https://wa.me/" + limpo,
-        "_blank"
-    );
+  if(!limpo){
+    return;
+  }
+
+  window.open(
+    "https://wa.me/" + limpo,
+    "_blank"
+  );
+
 }
 
 
-/* =========================
-   EXCLUIR
-========================= */
+/* EXCLUIR */
 
-let confirmarExclusao=true;
+function excluirContato(index){
 
-function excluirContato(id){
+  if(!confirm("Deseja realmente excluir este contato?")){
+    return;
+  }
 
-    if(confirmarExclusao){
+  contatos.splice(index,1);
 
-        const ok =
-            confirm("Deseja realmente excluir este contato?");
+  salvarContatos();
+  renderizarContatos();
 
-        if(!ok) return;
-    }
-
-    contatos =
-        contatos.filter(c => c.id !== id);
-
-    salvarContatos();
-
-    atualizarListaContatos();
-
-    atualizarResumo();
-
-    atualizarEstatisticas();
 }
 
 
-/* =========================
-   RESUMO
-========================= */
+/* FAVORITO */
 
-function atualizarResumo(){
+function alternarFavorito(index){
 
-    const total=contatos.length;
+  contatos[index].favorito =
+    !contatos[index].favorito;
 
-    const on=
-        contatos.filter(c=>c.status==="on").length;
+  salvarContatos();
+  renderizarContatos();
 
-    const analise=
-        contatos.filter(c=>c.status==="analise").length;
-
-    const caiu=
-        contatos.filter(c=>c.status==="caiu").length;
-
-
-    document.getElementById("totalContatos").textContent=total;
-    document.getElementById("totalOn").textContent=on;
-    document.getElementById("totalAnalise").textContent=analise;
-    document.getElementById("totalCaiu").textContent=caiu;
 }
 
 
-/* =========================
-   BUSCA
-========================= */
+/* FAVORITOS */
 
-function buscarContatos(){
+function renderizarFavoritos(){
 
-    const termo =
-        document
-        .getElementById("campoBusca")
-        .value
-        .toLowerCase()
-        .trim();
+  const favoritos =
+    contatos.filter(c => c.favorito);
 
+  const container =
+    document.getElementById("listaFavoritos");
 
-    const resultado =
-        contatos.filter(c =>
+  if(!favoritos.length){
 
-            c.nome.toLowerCase().includes(termo) ||
+    container.innerHTML =
+      "<p style='color:var(--texto2)'>Nenhum favorito ainda.</p>";
 
-            c.numero.toLowerCase().includes(termo) ||
-
-            c.grupo.toLowerCase().includes(termo)
-
-        );
+    return;
+  }
 
 
-    atualizarListaBusca(resultado);
+  container.innerHTML =
+    favoritos.map(function(c){
+
+      const index =
+        contatos.indexOf(c);
+
+      return criarCardContato(c,index);
+
+    }).join("");
+
 }
 
 
-function atualizarListaBusca(lista){
+/* BUSCA */
 
-    const area =
-        document.getElementById("resultadoBusca");
+function buscarContato(){
 
-    area.innerHTML="";
-
-
-    if(lista.length===0){
-
-        area.innerHTML=
-            "<p style='color:var(--cinza2)'>Nenhum contato encontrado.</p>";
-
-        return;
-    }
+  const texto =
+    document
+      .getElementById("campoBusca")
+      .value
+      .toLowerCase()
+      .trim();
 
 
-    lista.forEach(c=>{
+  if(!texto){
 
-        const div=
-            document.createElement("div");
+    document.getElementById("resultadoBusca").innerHTML="";
+    return;
 
-        div.className="item";
+  }
 
-        div.innerHTML=`
 
-            <h3>👤 ${escapar(c.nome)}</h3>
+  const resultados =
+    contatos.filter(function(c){
 
-            <p>📱 ${escapar(c.numero)}</p>
+      return (
 
-            <p>🏷️ ${escapar(c.grupo)}</p>
+        c.nome.toLowerCase().includes(texto) ||
 
-            <p>🕐 ${escapar(c.ultimaAtualizacao)}</p>
+        c.telefone.toLowerCase().includes(texto) ||
 
-            <button
-                class="botao botao-verde"
-                onclick="abrirWhatsApp('${escapar(c.numero)}')">
-                🟢 Abrir WhatsApp
-            </button>
+        c.grupo.toLowerCase().includes(texto) ||
 
-        `;
+        c.categoria.toLowerCase().includes(texto)
 
-        area.appendChild(div);
+      );
+
     });
+
+
+  const container =
+    document.getElementById("resultadoBusca");
+
+
+  if(!resultados.length){
+
+    container.innerHTML =
+      "<p style='color:var(--texto2)'>Nenhum contato encontrado.</p>";
+
+    return;
+  }
+
+
+  container.innerHTML =
+    resultados.map(function(c){
+
+      const index =
+        contatos.indexOf(c);
+
+      return criarCardContato(c,index);
+
+    }).join("");
+
 }
 
 
-/* =========================
-   FILTRO
-========================= */
+/* FILTRAR STATUS */
 
 function filtrarStatus(status){
 
-    const lista =
-        contatos.filter(c => c.status === status);
+  const filtrados =
+    contatos.filter(c => c.status === status);
 
-    abrirTela("contatos");
+  abrirTela("resultado");
 
-    atualizarListaContatos(lista);
+
+  document.getElementById("resultadoConteudo").innerHTML = `
+
+    <div class="titulo">
+      ${
+        status==="ON"
+        ?
+        "🟢 ZAP ON"
+        :
+        status==="CAIU"
+        ?
+        "🔴 ZAP CAIU"
+        :
+        "⚠️ ZAP EM ANÁLISE"
+      }
+    </div>
+
+    <div class="subtitulo">
+      ${filtrados.length} contato(s) encontrado(s).
+    </div>
+
+    <div class="lista">
+      ${
+        filtrados.length
+        ?
+        filtrados.map(c => {
+
+          const index=contatos.indexOf(c);
+
+          return criarCardContato(c,index);
+
+        }).join("")
+        :
+        "<p style='color:var(--texto2)'>Nenhum contato nesta categoria.</p>"
+      }
+    </div>
+
+  `;
+
 }
 
 
-/* =========================
-   ESTATÍSTICAS
-========================= */
+/* ESTATÍSTICAS */
 
-function atualizarEstatisticas(){
+function mostrarEstatisticas(){
 
-    document.getElementById("estatTotal").textContent =
-        contatos.length;
+  const total=contatos.length;
 
-    document.getElementById("estatOn").textContent =
-        contatos.filter(c=>c.status==="on").length;
+  const on=
+    contatos.filter(c=>c.status==="ON").length;
 
-    document.getElementById("estatAnalise").textContent =
-        contatos.filter(c=>c.status==="analise").length;
+  const analise=
+    contatos.filter(c=>c.status==="ANALISE").length;
 
-    document.getElementById("estatCaiu").textContent =
-        contatos.filter(c=>c.status==="caiu").length;
+  const caiu=
+    contatos.filter(c=>c.status==="CAIU").length;
+
+  abrirTela("resultado");
+
+
+  document.getElementById("resultadoConteudo").innerHTML=`
+
+    <div class="titulo">📈 Estatísticas</div>
+
+    <div class="subtitulo">
+      Resumo geral dos contatos.
+    </div>
+
+    <div class="resumo">
+
+      <div class="resumo-card">
+        <div>👥</div>
+        <div class="numero">${total}</div>
+        <div class="legenda">Total</div>
+      </div>
+
+      <div class="resumo-card">
+        <div>🟢</div>
+        <div class="numero">${on}</div>
+        <div class="legenda">ZAP ON</div>
+      </div>
+
+      <div class="resumo-card">
+        <div>🟡</div>
+        <div class="numero">${analise}</div>
+        <div class="legenda">Análise</div>
+      </div>
+
+      <div class="resumo-card">
+        <div>🔴</div>
+        <div class="numero">${caiu}</div>
+        <div class="legenda">CAIU</div>
+      </div>
+
+    </div>
+
+  `;
+
 }
 
 
-/* =========================
-   GRUPOS
-========================= */
+/* GRUPOS */
 
-function atualizarGrupos(){
+function mostrarGrupos(){
 
-    const area =
-        document.getElementById("listaGrupos");
+  const grupos={};
 
-    const grupos =
-        [...new Set(
-            contatos.map(c=>c.grupo || "Sem grupo")
-        )];
+  contatos.forEach(function(c){
+
+    const grupo =
+      c.grupo || "Sem grupo";
+
+    grupos[grupo] =
+      (grupos[grupo] || 0)+1;
+
+  });
 
 
-    area.innerHTML="";
+  const lista =
+    Object.keys(grupos);
 
 
-    if(grupos.length===0){
+  abrirTela("resultado");
 
-        area.innerHTML=
-            "<p style='color:var(--cinza2)'>Nenhum grupo cadastrado.</p>";
 
-        return;
+  document.getElementById("resultadoConteudo").innerHTML=`
+
+    <div class="titulo">🏷️ Grupos</div>
+
+    <div class="subtitulo">
+      Grupos utilizados pelos contatos.
+    </div>
+
+    ${
+      lista.length
+      ?
+      lista.map(g => `
+        <div class="config-card" style="margin-bottom:10px">
+          <strong>🏷️ ${escapar(g)}</strong>
+          <p>${grupos[g]} contato(s)</p>
+        </div>
+      `).join("")
+      :
+      "<p style='color:var(--texto2)'>Nenhum grupo cadastrado.</p>"
     }
 
+  `;
 
-    grupos.forEach(grupo=>{
-
-        const quantidade =
-            contatos.filter(c=>c.grupo===grupo).length;
-
-        const div =
-            document.createElement("div");
-
-        div.className="item";
-
-        div.innerHTML=`
-
-            <h3>🏷️ ${escapar(grupo)}</h3>
-
-            <p>
-                👥 ${quantidade}
-                contato(s)
-            </p>
-
-        `;
-
-        area.appendChild(div);
-    });
 }
 
 
-/* =========================
-   USUÁRIOS
-========================= */
+/* CATEGORIAS */
 
-function salvarUsuarios(){
+function mostrarCategorias(){
 
-    localStorage.setItem(
-        CHAVE_USUARIOS,
-        JSON.stringify(usuarios)
-    );
-}
+  const categorias={};
+
+  contatos.forEach(function(c){
+
+    const categoria =
+      c.categoria || "Sem categoria";
+
+    categorias[categoria] =
+      (categorias[categoria] || 0)+1;
+
+  });
 
 
-function criarUsuario(){
+  abrirTela("resultado");
 
-    if(!sessao || sessao.tipo!=="administrador"){
 
-        alert("Somente o administrador pode criar usuários.");
+  document.getElementById("resultadoConteudo").innerHTML=`
 
-        return;
+    <div class="titulo">📂 Categorias</div>
+
+    <div class="subtitulo">
+      Categorias dos contatos.
+    </div>
+
+    ${
+      Object.keys(categorias).length
+      ?
+      Object.keys(categorias).map(c => `
+
+        <div class="config-card" style="margin-bottom:10px">
+
+          <strong>
+            📂 ${escapar(c)}
+          </strong>
+
+          <p>
+            ${categorias[c]} contato(s)
+          </p>
+
+        </div>
+
+      `).join("")
+      :
+      "<p style='color:var(--texto2)'>Nenhuma categoria cadastrada.</p>"
     }
 
+  `;
 
-    const nome =
-        document.getElementById("novoNome").value.trim();
-
-    const login =
-        document.getElementById("novoUsuario").value.trim();
-
-    const senha =
-        document.getElementById("novaSenha").value;
-
-
-    if(!nome || !login || !senha){
-
-        mostrarMensagem(
-            "mensagemUsuario",
-            "Preencha todos os campos.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    const admin =
-        JSON.parse(localStorage.getItem(CHAVE_ADMIN));
-
-
-    if(login === admin.usuario){
-
-        mostrarMensagem(
-            "mensagemUsuario",
-            "Esse usuário pertence ao administrador.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    if(
-        usuarios.some(
-            u => u.usuario === login
-        )
-    ){
-
-        mostrarMensagem(
-            "mensagemUsuario",
-            "Esse usuário já existe.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    usuarios.push({
-
-        id:Date.now(),
-
-        nome:nome,
-
-        usuario:login,
-
-        senha:senha,
-
-        status:"ativo",
-
-        online:false,
-
-        criadoEm:
-            new Date().toLocaleString("pt-BR"),
-
-        ultimoAcesso:"Nunca entrou"
-
-    });
-
-
-    salvarUsuarios();
-
-
-    document.getElementById("novoNome").value="";
-    document.getElementById("novoUsuario").value="";
-    document.getElementById("novaSenha").value="";
-
-
-    mostrarMensagem(
-        "mensagemUsuario",
-        "Usuário criado com sucesso!",
-        "sucesso"
-    );
-
-    atualizarAdmin();
 }
 
 
-function atualizarAdmin(){
+/* TAGS */
 
-    const area =
-        document.getElementById("listaUsuarios");
+function mostrarTags(){
 
-    if(!area) return;
+  abrirTela("resultado");
 
-    area.innerHTML="";
+  document.getElementById("resultadoConteudo").innerHTML=`
 
+    <div class="titulo">🔖 Etiquetas</div>
 
-    if(!sessao || sessao.tipo!=="administrador"){
+    <div class="subtitulo">
+      Sistema de etiquetas está preparado para futuras expansões.
+    </div>
 
-        return;
-    }
+    <div class="config-card">
 
+      <h3>🔖 Organização</h3>
 
-    const admin =
-        JSON.parse(localStorage.getItem(CHAVE_ADMIN));
+      <p>
+        Você poderá usar etiquetas personalizadas
+        para identificar rapidamente seus contatos.
+      </p>
 
+    </div>
 
-    /* ADMIN */
+  `;
 
-    const adminDiv =
-        document.createElement("div");
-
-    adminDiv.className="item";
-
-    adminDiv.innerHTML=`
-
-        <h3>👑 ${escapar(admin.nome)}</h3>
-
-        <p>🆔 @${escapar(admin.usuario)}</p>
-
-        <p>🟢 Administrador principal</p>
-
-        <span class="status status-on">
-            👑 ADMIN
-        </span>
-
-    `;
-
-    area.appendChild(adminDiv);
-
-
-    /* USUÁRIOS */
-
-    usuarios.forEach((u,index)=>{
-
-        const div =
-            document.createElement("div");
-
-        div.className="item";
-
-
-        const bloqueado =
-            u.status==="bloqueado";
-
-
-        div.innerHTML=`
-
-            <div class="item-topo">
-
-                <div>
-
-                    <h3>
-                        👤 ${escapar(u.nome)}
-                    </h3>
-
-                    <p>
-                        🆔 @${escapar(u.usuario)}
-                    </p>
-
-                </div>
-
-                <span class="status ${
-                    bloqueado
-                    ? "status-caiu"
-                    : "status-on"
-                }">
-
-                    ${
-                        bloqueado
-                        ? "🚫 BLOQUEADO"
-                        : "🟢 ATIVO"
-                    }
-
-                </span>
-
-            </div>
-
-
-            <p>
-                📅 Criado em:
-                ${escapar(u.criadoEm)}
-            </p>
-
-            <p>
-                🕐 Último acesso:
-                ${escapar(u.ultimoAcesso)}
-            </p>
-
-            <p>
-                ${
-                    u.online
-                    ? "🟢 Online"
-                    : "⚪ Offline"
-                }
-            </p>
-
-
-            <div class="item-botoes">
-
-                <button
-                    style="background:${
-                        bloqueado
-                        ? "#008c45"
-                        : "#cd212a"
-                    };color:white;"
-                    onclick="alternarBloqueio(${index})">
-
-                    ${
-                        bloqueado
-                        ? "🔓 Desbloquear"
-                        : "🚫 Bloquear"
-                    }
-
-                </button>
-
-
-                <button
-                    style="background:#555;color:white;"
-                    onclick="excluirUsuario(${index})">
-
-                    🗑️ Excluir
-
-                </button>
-
-            </div>
-
-        `;
-
-        area.appendChild(div);
-    });
 }
 
 
-function alternarBloqueio(index){
+/* ADMINISTRAÇÃO */
 
-    if(!sessao || sessao.tipo!=="administrador") return;
+function mostrarAdministracao(){
 
-    usuarios[index].status =
-        usuarios[index].status === "bloqueado"
-        ? "ativo"
-        : "bloqueado";
+  abrirTela("resultado");
 
-    usuarios[index].online=false;
+  document.getElementById("resultadoConteudo").innerHTML=`
 
-    salvarUsuarios();
+    <div class="titulo">👑 Administração</div>
 
-    atualizarAdmin();
+    <div class="subtitulo">
+      Área administrativa do BOT DO BM3.
+    </div>
+
+    <div class="config-card">
+
+      <h3>🖥️ Sistema local</h3>
+
+      <p>
+        Atualmente o BOT está funcionando localmente
+        neste navegador.
+      </p>
+
+    </div>
+
+    <br>
+
+    <div class="config-card">
+
+      <h3>💾 Dados</h3>
+
+      <p>
+        Os contatos ficam salvos no armazenamento
+        deste navegador.
+      </p>
+
+    </div>
+
+  `;
+
 }
 
 
-function excluirUsuario(index){
+function mostrarUsuarios(){
 
-    if(!sessao || sessao.tipo!=="administrador") return;
+  mostrarAdministracao();
 
-    const ok =
-        confirm(
-            "Deseja realmente excluir esta conta?"
-        );
-
-    if(!ok) return;
-
-    usuarios.splice(index,1);
-
-    salvarUsuarios();
-
-    atualizarAdmin();
 }
 
 
-/* =========================
-   TEMA
-========================= */
-
-function carregarTema(){
-
-    const tema =
-        localStorage.getItem(CHAVE_TEMA);
-
-    if(tema==="escuro"){
-
-        document.body.classList.add("tema-escuro");
-
-    }else{
-
-        document.body.classList.remove("tema-escuro");
-    }
-}
-
-
-function temaEscuro(){
-
-    document.body.classList.add("tema-escuro");
-
-    localStorage.setItem(
-        CHAVE_TEMA,
-        "escuro"
-    );
-}
-
-
-function temaClaro(){
-
-    document.body.classList.remove("tema-escuro");
-
-    localStorage.setItem(
-        CHAVE_TEMA,
-        "claro"
-    );
-}
-
-
-function alternarTema(){
-
-    if(
-        document.body.classList.contains("tema-escuro")
-    ){
-
-        temaClaro();
-
-    }else{
-
-        temaEscuro();
-    }
-}
-
-
-/* =========================
-   BACKUP
-========================= */
+/* BACKUP */
 
 function exportarBackup(){
 
-    const dados={
-        contatos:contatos,
-        usuarios:usuarios,
-        dataBackup:new Date().toLocaleString("pt-BR")
-    };
+  const dados={
+
+    sistema:"BOT DO BM3",
+
+    exportadoEm:dataAtual(),
+
+    contatos:contatos
+
+  };
 
 
-    const blob =
-        new Blob(
-            [JSON.stringify(dados,null,2)],
-            {type:"application/json"}
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-
-    const a =
-        document.createElement("a");
-
-    a.href=url;
-
-    a.download=
-        "backup-bot-bm3.json";
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-}
-
-
-/* =========================
-   RECUPERAR USUÁRIO
-========================= */
-
-function recuperarUsuario(){
-
-    const admin =
-        JSON.parse(
-            localStorage.getItem(CHAVE_ADMIN)
-        );
-
-    if(!admin){
-
-        mostrarMensagem(
-            "mensagemLogin",
-            "Administrador não configurado neste navegador.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    alert(
-        "Seu usuário administrador é:\n\n@" +
-        admin.usuario
+  const blob =
+    new Blob(
+      [JSON.stringify(dados,null,2)],
+      {type:"application/json"}
     );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const a =
+    document.createElement("a");
+
+  a.href=url;
+
+  a.download=
+    "backup-bot-bm3.json";
+
+  a.click();
+
+  URL.revokeObjectURL(url);
+
 }
 
 
-/* =========================
-   SAIR
-========================= */
+/* TEMA */
 
-function sair(){
+function alternarTema(){
 
-    if(sessao){
+  document.body.classList.toggle("dark");
 
-        const usuario =
-            usuarios.find(
-                u => u.usuario === sessao.usuario
-            );
+  const tema =
+    document.body.classList.contains("dark")
+    ?
+    "dark"
+    :
+    "light";
 
-        if(usuario){
+  localStorage.setItem(
+    CHAVE_TEMA,
+    tema
+  );
 
-            usuario.online=false;
-
-            salvarUsuarios();
-        }
-    }
-
-
-    sessao=null;
-
-    localStorage.removeItem(CHAVE_SESSAO);
-
-    location.reload();
 }
 
 
-/* =========================
-   MENSAGENS
-========================= */
+function aplicarTema(){
+
+  const tema =
+    localStorage.getItem(CHAVE_TEMA);
+
+  if(tema==="dark"){
+
+    document.body.classList.add("dark");
+
+  }
+
+}
+
+
+/* RESUMO */
+
+function atualizarResumo(){
+
+  const total=contatos.length;
+
+  const on=
+    contatos.filter(c=>c.status==="ON").length;
+
+  const analise=
+    contatos.filter(c=>c.status==="ANALISE").length;
+
+  const caiu=
+    contatos.filter(c=>c.status==="CAIU").length;
+
+
+  document.getElementById("totalContatos").textContent=total;
+
+  document.getElementById("totalOn").textContent=on;
+
+  document.getElementById("totalAnalise").textContent=analise;
+
+  document.getElementById("totalCaiu").textContent=caiu;
+
+}
+
+
+/* MENSAGENS */
 
 function mostrarMensagem(id,texto,tipo){
 
-    const el =
-        document.getElementById(id);
+  const elemento =
+    document.getElementById(id);
 
-    if(!el) return;
+  elemento.style.display="block";
 
-    el.textContent=texto;
+  elemento.textContent=texto;
 
-    el.className=
-        "mensagem " + tipo;
+  elemento.style.background =
+    tipo==="erro"
+    ?
+    "#ffd9d9"
+    :
+    "#d9ffe7";
 
-    el.style.display="block";
+  elemento.style.color =
+    tipo==="erro"
+    ?
+    "#8b0000"
+    :
+    "#006b2e";
+
+
+  setTimeout(function(){
+
+    elemento.style.display="none";
+
+  },3000);
+
 }
 
 
-/* =========================
-   SEGURANÇA DE TEXTO
-========================= */
+/* SEGURANÇA DO TEXTO */
 
 function escapar(texto){
 
-    return String(texto ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+  return String(texto ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
 }
 
 
-/* =========================
-   ATALHO ENTER LOGIN
-========================= */
+function escaparJS(texto){
 
-document.addEventListener(
-    "keydown",
-    function(event){
+  return String(texto ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/"/g,'\\"');
 
-        if(
-            event.key==="Enter" &&
-            document
-            .getElementById("telaLogin")
-            .style.display !== "none"
-        ){
-
-            entrar();
-        }
-    }
-);
+}
 
 </script>
 
