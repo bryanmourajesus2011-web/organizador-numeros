@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🍀BOT DO BM3🍀</title>
+  <title>🍀 BOT DO BM3 🍀</title>
 
   <style>
     body {
@@ -11,70 +11,103 @@
       background: linear-gradient(135deg, #008C45, #FFFFFF, #CD212A);
       margin: 0;
       padding: 20px;
+      min-height: 100vh;
     }
-.topo {
-  text-align: center;
-  padding: 25px 15px;
-  margin-bottom: 20px;
-  border-radius: 18px;
-  background: linear-gradient(90deg, #008C45 0%, #FFFFFF 50%, #CD212A 100%);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
 
-.topo h1 {
-  margin: 10px 0 5px;
-  font-size: 28px;
-}
-
-.topo p {
-  margin: 0;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-.bandeira {
-  .menu {
-  background: white;
-  padding: 15px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-}
-
-.menu button {
-  background: linear-gradient(90deg, #008C45, #CD212A);
-  color: white;
-  font-weight: bold;
-  border: none;
-  margin-bottom: 8px;
-}
-
-.menu button:last-child {
-  margin-bottom: 0;
-}
-  width: 100%;
-  height: 6px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #008C45 33%, #FFFFFF 33%, #FFFFFF 66%, #CD212A 66%);
-}
     .container {
       max-width: 700px;
       margin: auto;
     }
 
-    h1 {
+    .topo {
       text-align: center;
+      padding: 25px 15px;
+      margin-bottom: 20px;
+      border-radius: 18px;
+      background: linear-gradient(90deg, #008C45, #FFFFFF, #CD212A);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     }
 
-    .card {
+    .bandeira {
+      width: 100%;
+      height: 6px;
+      border-radius: 10px;
+      background: linear-gradient(
+        90deg,
+        #008C45 33%,
+        #FFFFFF 33%,
+        #FFFFFF 66%,
+        #CD212A 66%
+      );
+    }
+
+    .topo h1 {
+      margin: 12px 0 5px;
+      font-size: 28px;
+    }
+
+    .topo p {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .inicio {
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .inicio button {
+      background: linear-gradient(90deg, #008C45, #CD212A);
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 15px;
+      border-radius: 12px;
+      width: 100%;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .menu {
+      display: none;
+      background: white;
+      padding: 15px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .menu button {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #008C45, #CD212A);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .menu button:last-child {
+      margin-bottom: 0;
+    }
+
+    .tela {
+      display: none;
       background: white;
       padding: 20px;
-      border-radius: 15px;
+      border-radius: 18px;
       margin-bottom: 20px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     }
 
-    input, textarea, button {
+    input,
+    textarea {
       width: 100%;
       box-sizing: border-box;
       padding: 12px;
@@ -85,15 +118,21 @@
       font-size: 16px;
     }
 
-    button {
-      background: #111;
-      color: white;
+    .acao {
+      width: 100%;
+      padding: 12px;
       border: none;
+      border-radius: 9px;
+      background: #008C45;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
     }
 
-    button:hover {
-      opacity: 0.85;
+    .voltar {
+      background: #555;
+      margin-top: 10px;
     }
 
     .contato {
@@ -103,31 +142,79 @@
       margin-top: 10px;
     }
 
+    .whatsapp {
+      background: #008C45;
+      margin-top: 12px;
+    }
+
     .excluir {
-      background: #d62828;
+      background: #CD212A;
+      margin-top: 8px;
+    }
+
+    .grupo-item {
+      padding: 12px;
+      border-radius: 10px;
+      background: #f2f2f2;
+      margin-bottom: 8px;
+      font-weight: bold;
     }
   </style>
 </head>
 
 <body>
 
-<div class="topo">
-  <div class="bandeira"></div>
-  <h1>🍀BOT DO BM3🍀</h1>
-  <p>Organizador de contatos</p>
-</div>
-<div class="menu">
-  <button onclick="mostrarTela('inicio')">🏠 Início</button>
-  <button>➕ Adicionar contato</button>
-  <button>🔎 Pesquisar</button>
-  <button>📋 Meus contatos</button>
-  <button>🏷️ Grupos</button>
-  <button>⚙️ Configurações</button>
-</div>
-  <h1>🍀BOT DO BM3🍀</h1>
+<div class="container">
 
-  <div class="card">
-    <h2>Adicionar contato</h2>
+  <div class="topo">
+    <div class="bandeira"></div>
+    <h1>🍀 BOT DO BM3 🍀</h1>
+    <p>Organizador de contatos</p>
+  </div>
+
+  <!-- TELA INICIAL -->
+  <div class="inicio" id="inicio">
+    <h2>🏠 Início</h2>
+    <p>Bem-vindo ao BOT DO BM3</p>
+
+    <button onclick="abrirMenu()">
+      ☰ Abrir Menu
+    </button>
+  </div>
+
+  <!-- MENU -->
+  <div class="menu" id="menu">
+
+    <button onclick="abrirTela('adicionar')">
+      ➕ Adicionar contato
+    </button>
+
+    <button onclick="abrirTela('pesquisar')">
+      🔎 Pesquisar contatos
+    </button>
+
+    <button onclick="abrirTela('contatos')">
+      📋 Meus contatos
+    </button>
+
+    <button onclick="abrirTela('grupos')">
+      🏷️ Grupos / Etiquetas
+    </button>
+
+    <button onclick="abrirTela('configuracoes')">
+      ⚙️ Configurações
+    </button>
+
+    <button onclick="voltarInicio()">
+      🏠 Voltar ao início
+    </button>
+
+  </div>
+
+  <!-- ADICIONAR CONTATO -->
+  <div class="tela" id="adicionar">
+
+    <h2>➕ Adicionar contato</h2>
 
     <input id="nome" placeholder="Nome">
 
@@ -137,41 +224,83 @@
 
     <textarea id="observacao" placeholder="Observação"></textarea>
 
-    <button onclick="adicionarContato()">
-      ➕ Adicionar número
+    <button class="acao" onclick="adicionarContato()">
+      💾 Salvar contato
     </button>
+
+    <button class="acao voltar" onclick="voltarMenu()">
+      ↩️ Voltar ao menu
+    </button>
+
   </div>
 
-  <div class="card">
+  <!-- PESQUISAR -->
+  <div class="tela" id="pesquisar">
 
-    <h2>🔎 Pesquisar</h2>
+    <h2>🔎 Pesquisar contatos</h2>
 
     <input
       id="pesquisa"
-      placeholder="Digite nome ou número..."
+      placeholder="Digite nome, número ou grupo..."
       oninput="mostrarContatos()"
     >
 
+    <div id="resultadoPesquisa"></div>
+
+    <button class="acao voltar" onclick="voltarMenu()">
+      ↩️ Voltar ao menu
+    </button>
+
   </div>
 
-  <div class="card">
+  <!-- CONTATOS -->
+  <div class="tela" id="contatos">
 
     <h2>📋 Meus contatos</h2>
 
     <div id="lista"></div>
+
+    <button class="acao voltar" onclick="voltarMenu()">
+      ↩️ Voltar ao menu
+    </button>
+
+  </div>
+
+  <!-- GRUPOS -->
+  <div class="tela" id="grupos">
+
+    <h2>🏷️ Grupos / Etiquetas</h2>
+
+    <div id="listaGrupos"></div>
+
+    <button class="acao voltar" onclick="voltarMenu()">
+      ↩️ Voltar ao menu
+    </button>
+
+  </div>
+
+  <!-- CONFIGURAÇÕES -->
+  <div class="tela" id="configuracoes">
+
+    <h2>⚙️ Configurações</h2>
+
+    <p><strong>🍀 BOT DO BM3 🍀</strong></p>
+    <p>Organizador de contatos</p>
+
+    <button class="acao" onclick="limparContatos()">
+      🗑️ Apagar todos os contatos
+    </button>
+
+    <button class="acao voltar" onclick="voltarMenu()">
+      ↩️ Voltar ao menu
+    </button>
 
   </div>
 
 </div>
 
 <script>
-function mostrarTela(tela) {
-  if (tela === "inicio") {
-    alert("🏠 Bem-vindo ao BOT DO BM3!");
-  }
-}
-}
-}
+
 let contatos = JSON.parse(
   localStorage.getItem("contatos") || "[]"
 );
@@ -183,13 +312,77 @@ function salvar() {
   );
 }
 
+function abrirMenu() {
+
+  document.getElementById("inicio").style.display = "none";
+
+  document.getElementById("menu").style.display = "block";
+
+}
+
+function voltarInicio() {
+
+  esconderTelas();
+
+  document.getElementById("menu").style.display = "none";
+
+  document.getElementById("inicio").style.display = "block";
+
+}
+
+function abrirTela(tela) {
+
+  document.getElementById("menu").style.display = "none";
+
+  esconderTelas();
+
+  document.getElementById(tela).style.display = "block";
+
+  if (tela === "contatos") {
+    mostrarContatos();
+  }
+
+  if (tela === "pesquisar") {
+    mostrarContatos();
+  }
+
+  if (tela === "grupos") {
+    mostrarGrupos();
+  }
+
+}
+
+function voltarMenu() {
+
+  esconderTelas();
+
+  document.getElementById("menu").style.display = "block";
+
+}
+
+function esconderTelas() {
+
+  const telas = document.querySelectorAll(".tela");
+
+  telas.forEach(function(tela) {
+    tela.style.display = "none";
+  });
+
+}
+
 function adicionarContato() {
 
-  const nome = document.getElementById("nome").value;
-  const numero = document.getElementById("numero").value;
-  const grupo = document.getElementById("grupo").value;
+  const nome =
+    document.getElementById("nome").value.trim();
+
+  const numero =
+    document.getElementById("numero").value.trim();
+
+  const grupo =
+    document.getElementById("grupo").value.trim();
+
   const observacao =
-    document.getElementById("observacao").value;
+    document.getElementById("observacao").value.trim();
 
   if (!nome || !numero) {
     alert("Digite pelo menos o nome e o número.");
@@ -197,10 +390,10 @@ function adicionarContato() {
   }
 
   contatos.push({
-    nome,
-    numero,
-    grupo,
-    observacao
+    nome: nome,
+    numero: numero,
+    grupo: grupo,
+    observacao: observacao
   });
 
   salvar();
@@ -210,9 +403,10 @@ function adicionarContato() {
   document.getElementById("grupo").value = "";
   document.getElementById("observacao").value = "";
 
+  alert("✅ Contato salvo com sucesso!");
+
   mostrarContatos();
 
-  alert("Contato adicionado!");
 }
 
 function excluirContato(index) {
@@ -224,52 +418,150 @@ function excluirContato(index) {
     salvar();
 
     mostrarContatos();
+
+    mostrarGrupos();
+
   }
+
 }
 
 function mostrarContatos() {
 
-  const lista = document.getElementById("lista");
+  const lista =
+    document.getElementById("lista");
+
+  const resultado =
+    document.getElementById("resultadoPesquisa");
+
+  const pesquisaElemento =
+    document.getElementById("pesquisa");
 
   const pesquisa =
-    document.getElementById("pesquisa").value.toLowerCase();
+    pesquisaElemento
+      ? pesquisaElemento.value.toLowerCase()
+      : "";
 
-  lista.innerHTML = "";
+  let html = "";
 
-  contatos.forEach((contato, index) => {
+  contatos.forEach(function(contato, index) {
 
     const texto =
       `${contato.nome} ${contato.numero} ${contato.grupo}`
       .toLowerCase();
 
-    if (!texto.includes(pesquisa)) return;
+    if (!texto.includes(pesquisa)) {
+      return;
+    }
 
-    const div = document.createElement("div");
+    html += `
+      <div class="contato">
 
-    div.className = "contato";
+        <strong>👤 ${contato.nome}</strong><br><br>
 
-    div.innerHTML = `
-      <strong>👤 ${contato.nome}</strong><br>
-      📱 ${contato.numero}<br>
-      🏷️ ${contato.grupo || "Sem grupo"}<br>
-      📝 ${contato.observacao || "Sem observação"}
+        📱 ${contato.numero}<br>
 
-      <button onclick="window.open('https://wa.me/${contato.numero.replace(/\D/g,'')}', '_blank')">
-        💬 Abrir WhatsApp
-      </button>
+        🏷️ ${contato.grupo || "Sem grupo"}<br>
 
-      <button class="excluir"
-        onclick="excluirContato(${index})">
-        🗑️ Excluir
-      </button>
+        📝 ${contato.observacao || "Sem observação"}
+
+        <button
+          class="acao whatsapp"
+          onclick="abrirWhatsApp('${contato.numero}')">
+          💬 Abrir WhatsApp
+        </button>
+
+        <button
+          class="acao excluir"
+          onclick="excluirContato(${index})">
+          🗑️ Excluir
+        </button>
+
+      </div>
     `;
 
-    lista.appendChild(div);
-
   });
+
+  if (lista) {
+    lista.innerHTML =
+      html || "<p>Nenhum contato encontrado.</p>";
+  }
+
+  if (resultado) {
+    resultado.innerHTML = html;
+  }
+
 }
 
-mostrarContatos();
+function abrirWhatsApp(numero) {
+
+  const numeroLimpo =
+    numero.replace(/\D/g, "");
+
+  window.open(
+    "https://wa.me/" + numeroLimpo,
+    "_blank"
+  );
+
+}
+
+function mostrarGrupos() {
+
+  const lista =
+    document.getElementById("listaGrupos");
+
+  const grupos = {};
+
+  contatos.forEach(function(contato) {
+
+    const grupo =
+      contato.grupo || "Sem grupo";
+
+    if (!grupos[grupo]) {
+      grupos[grupo] = 0;
+    }
+
+    grupos[grupo]++;
+
+  });
+
+  let html = "";
+
+  Object.keys(grupos).forEach(function(grupo) {
+
+    html += `
+      <div class="grupo-item">
+        🏷️ ${grupo} — ${grupos[grupo]} contato(s)
+      </div>
+    `;
+
+  });
+
+  lista.innerHTML =
+    html || "<p>Nenhum grupo cadastrado.</p>";
+
+}
+
+function limparContatos() {
+
+  if (
+    confirm(
+      "Tem certeza que deseja apagar TODOS os contatos?"
+    )
+  ) {
+
+    contatos = [];
+
+    salvar();
+
+    mostrarContatos();
+
+    mostrarGrupos();
+
+    alert("🗑️ Todos os contatos foram apagados.");
+
+  }
+
+}
 
 </script>
 
