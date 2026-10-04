@@ -506,7 +506,8 @@ select{
 }
 
 input:focus,
-textarea:focus{
+textarea:focus,
+select:focus{
     border-color:var(--verde);
     box-shadow:0 0 0 3px rgba(0,140,69,.1);
 }
@@ -823,12 +824,56 @@ textarea{
 .calculator-help{
     background:rgba(0,140,69,.07);
     border:1px solid rgba(0,140,69,.12);
-    color:var(--verde);
-    padding:13px;
-    border-radius:15px;
+    color:var(--texto);
+    padding:15px;
+    border-radius:17px;
     font-size:12px;
+    line-height:1.55;
+    margin-bottom:18px;
+}
+
+.calculator-help-title{
+    color:var(--verde);
+    font-size:14px;
+    font-weight:950;
+    margin-bottom:10px;
+}
+
+.calculator-help-row{
+    display:flex;
+    gap:9px;
+    align-items:flex-start;
+    margin-top:8px;
+}
+
+.calculator-help-icon{
+    min-width:24px;
+    font-size:16px;
+}
+
+.calculator-help-row b{
+    color:var(--verde);
+}
+
+.calculator-example{
+    margin-top:13px;
+    padding:12px;
+    border-radius:13px;
+    background:var(--card);
+    border:1px solid var(--borda);
+}
+
+.calculator-example-title{
+    color:var(--verde);
+    font-weight:950;
+    margin-bottom:6px;
+}
+
+.calculator-note{
+    margin-top:11px;
+    font-size:11px;
+    color:var(--cinza);
     line-height:1.5;
-    margin-bottom:17px;
 }
 
 .calc-result{
@@ -970,6 +1015,7 @@ textarea{
 }
 
 @media(max-width:430px){
+
     .loading-box,
     .welcome-box{
         width:calc(100% - 30px);
@@ -995,9 +1041,14 @@ textarea{
     .menu-heading h1{
         font-size:24px;
     }
+
+    .calculator-help{
+        padding:13px;
+    }
 }
 
 @media(prefers-reduced-motion:reduce){
+
     *,
     *::before,
     *::after{
@@ -1012,6 +1063,7 @@ textarea{
 
 <div id="loading">
     <div class="loading-box">
+
         <div class="italy-line">
             <span></span><span></span><span></span>
         </div>
@@ -1027,25 +1079,34 @@ textarea{
         <div class="loading-sub">Carregando seu painel...</div>
         <div class="loader"></div>
         <div class="loading-status">Preparando tudo para você...</div>
+
     </div>
 </div>
 
 <div id="welcome">
+
     <div class="welcome-box">
+
         <div class="welcome-logo">🍀</div>
         <div class="welcome-title">Bem-vindo ao</div>
         <div class="welcome-brand">BOT DO BM3</div>
+
         <div class="welcome-line">
             <span></span><span></span><span></span>
         </div>
+
     </div>
+
 </div>
 
 <div class="app">
 
 <header class="header">
+
     <div class="header-top">
+
         <div class="brand">
+
             <img
                 class="brand-logo"
                 src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
@@ -1057,13 +1118,16 @@ textarea{
                 <div class="brand-title">🍀 BOT DO BM3 🍀</div>
                 <div class="brand-sub">Painel premium</div>
             </div>
+
         </div>
 
         <button class="theme-toggle" onclick="alternarTema()">
             <span id="themeIcon">☀️</span>
             <span id="themeText">Claro</span>
         </button>
+
     </div>
+
 </header>
 
 <!-- INÍCIO -->
@@ -1071,46 +1135,45 @@ textarea{
 <section id="inicio" class="screen active">
 
     <div class="menu-heading">
+
         <h1>🍀 MENU PRINCIPAL 🍀</h1>
+
         <p>Seu painel do BOT DO BM3</p>
+
         <div class="menu-tricolor">
             <span></span><span></span><span></span>
         </div>
+
     </div>
 
     <div class="premium-label">PAINEL PRINCIPAL</div>
 
     <div class="menu-grid">
 
-        <!-- 1 -->
         <button class="menu-card" onclick="navegar('whatsapp')">
             <div class="menu-icon">💬</div>
             <div class="menu-title">WhatsApp</div>
             <div class="menu-desc">Ferramentas e organização</div>
         </button>
 
-        <!-- 2 -->
         <button class="menu-card" onclick="navegar('calculadora')">
             <div class="menu-icon">🧮</div>
             <div class="menu-title">Calculadora</div>
             <div class="menu-desc">Calcule porcentagem e divisão</div>
         </button>
 
-        <!-- 3 -->
         <button class="menu-card" onclick="navegar('advogado')">
             <div class="menu-icon">⚖️</div>
             <div class="menu-title">Advogado</div>
             <div class="menu-desc">Respostas e atendimento</div>
         </button>
 
-        <!-- 4 -->
         <button class="menu-card" onclick="navegar('celulares')">
             <div class="menu-icon">📱</div>
             <div class="menu-title">Celulares</div>
             <div class="menu-desc">Números por aparelho</div>
         </button>
 
-        <!-- 5 -->
         <button class="menu-card" onclick="navegar('chips')">
             <div class="menu-icon">💳</div>
             <div class="menu-title">Chips</div>
@@ -1136,14 +1199,18 @@ textarea{
         </button>
 
         <button class="menu-card menu-wide" onclick="navegar('config')">
+
             <div class="menu-icon">⚙️</div>
+
             <div>
                 <div class="menu-title">Configurações</div>
                 <div class="menu-desc">Temas, backup e informações</div>
             </div>
+
         </button>
 
     </div>
+
 </section>
 
 <!-- CALCULADORA -->
@@ -1153,27 +1220,179 @@ textarea{
     <button class="back" onclick="voltar()">← Voltar</button>
 
     <div class="page-title">🧮 Calculadora</div>
+
     <div class="page-sub">
-        Faça o cálculo de porcentagem e divida o valor restante entre as pessoas.
+        Informe o valor, escolha a porcentagem e selecione entre quantas pessoas dividir.
     </div>
 
     <div class="calculator-card">
 
+        <!-- COMO FUNCIONA -->
+
         <div class="calculator-help">
-            <b>Exemplo:</b><br>
-            20k - 25% / 3<br><br>
-            Ou escreva:<br>
-            20k menos 25% dividido em 3
+
+            <div class="calculator-help-title">
+                📖 COMO FUNCIONA
+            </div>
+
+            <div class="calculator-help-row">
+                <div class="calculator-help-icon">💰</div>
+                <div>
+                    <b>Valor:</b> coloque o valor que deseja calcular.
+                    <br>
+                    Exemplos: <b>20k</b>, <b>20.000</b> ou <b>17,699</b>.
+                </div>
+            </div>
+
+            <div class="calculator-help-row">
+                <div class="calculator-help-icon">🔢</div>
+                <div>
+                    <b>20k</b> significa <b>R$ 20.000,00</b>.
+                    <br>
+                    <b>20.000</b> também significa <b>R$ 20.000,00</b>.
+                    <br>
+                    <b>17,699</b> será entendido pelo BOT como <b>R$ 17.699,00</b>.
+                </div>
+            </div>
+
+            <div class="calculator-help-row">
+                <div class="calculator-help-icon">📉</div>
+                <div>
+                    <b>Porcentagem:</b> escolha quanto será retirado do valor.
+                    <br>
+                    Exemplo: <b>25%</b> de R$ 20.000,00 = <b>R$ 5.000,00</b>.
+                </div>
+            </div>
+
+            <div class="calculator-help-row">
+                <div class="calculator-help-icon">👥</div>
+                <div>
+                    <b>Divisão:</b> escolha entre quantas pessoas o valor restante será dividido.
+                    <br>
+                    Você pode dividir entre <b>1 e até 20 pessoas</b>.
+                </div>
+            </div>
+
+            <div class="calculator-example">
+
+                <div class="calculator-example-title">
+                    🍀 EXEMPLO COMPLETO
+                </div>
+
+                <div>
+                    Valor: <b>20k</b>
+                </div>
+
+                <div>
+                    Porcentagem: <b>25%</b>
+                </div>
+
+                <div>
+                    Dividir entre: <b>3 pessoas</b>
+                </div>
+
+                <br>
+
+                <div>
+                    R$ 20.000,00 − 25% = <b>R$ 15.000,00</b>
+                </div>
+
+                <div>
+                    R$ 15.000,00 ÷ 3 = <b>R$ 5.000,00</b>
+                </div>
+
+                <br>
+
+                <div>
+                    🍀 <b>Cada pessoa recebe R$ 5.000,00</b>
+                </div>
+
+            </div>
+
+            <div class="calculator-note">
+                💡 Você não precisa escrever a conta inteira.
+                Basta preencher os campos abaixo e escolher as opções.
+            </div>
+
         </div>
 
+        <!-- VALOR -->
+
         <div class="field">
-            <label>CÁLCULO</label>
+
+            <label>💰 VALOR</label>
+
             <input
-                id="calcExpressao"
+                id="calcValor"
                 type="text"
-                placeholder="Ex.: 20k - 25% / 3"
+                inputmode="decimal"
+                placeholder="Ex.: 20k ou 20.000"
                 autocomplete="off"
             >
+
+        </div>
+
+        <!-- PORCENTAGEM -->
+
+        <div class="field">
+
+            <label>📉 PORCENTAGEM</label>
+
+            <select id="calcPorcentagem">
+
+                <option value="0">0%</option>
+                <option value="5">5%</option>
+                <option value="10">10%</option>
+                <option value="15">15%</option>
+                <option value="20">20%</option>
+                <option value="25" selected>25%</option>
+                <option value="30">30%</option>
+                <option value="35">35%</option>
+                <option value="40">40%</option>
+                <option value="45">45%</option>
+                <option value="50">50%</option>
+                <option value="60">60%</option>
+                <option value="70">70%</option>
+                <option value="75">75%</option>
+                <option value="80">80%</option>
+                <option value="90">90%</option>
+                <option value="100">100%</option>
+
+            </select>
+
+        </div>
+
+        <!-- PESSOAS -->
+
+        <div class="field">
+
+            <label>👥 DIVIDIR ENTRE</label>
+
+            <select id="calcPessoas">
+
+                <option value="1">1 pessoa</option>
+                <option value="2">2 pessoas</option>
+                <option value="3">3 pessoas</option>
+                <option value="4">4 pessoas</option>
+                <option value="5">5 pessoas</option>
+                <option value="6">6 pessoas</option>
+                <option value="7">7 pessoas</option>
+                <option value="8">8 pessoas</option>
+                <option value="9">9 pessoas</option>
+                <option value="10">10 pessoas</option>
+                <option value="11">11 pessoas</option>
+                <option value="12">12 pessoas</option>
+                <option value="13">13 pessoas</option>
+                <option value="14">14 pessoas</option>
+                <option value="15">15 pessoas</option>
+                <option value="16">16 pessoas</option>
+                <option value="17">17 pessoas</option>
+                <option value="18">18 pessoas</option>
+                <option value="19">19 pessoas</option>
+                <option value="20">20 pessoas — máximo</option>
+
+            </select>
+
         </div>
 
         <button class="primary" onclick="calcularBM3()">
@@ -1181,8 +1400,11 @@ textarea{
         </button>
 
         <div id="calcGerando" class="calc-generating">
+
             <div class="mini-loader"></div>
+
             🤖 Gerando...
+
         </div>
 
         <div id="calcResultado" class="calc-result"></div>
@@ -1245,6 +1467,7 @@ textarea{
         </button>
 
     </div>
+
 </section>
 
 <!-- ADVOGADO -->
@@ -1254,6 +1477,7 @@ textarea{
     <button class="back" onclick="voltar()">← Voltar</button>
 
     <div class="page-title">⚖️ Advogado</div>
+
     <div class="page-sub">
         Gere respostas profissionais a partir da pergunta do cliente.
     </div>
@@ -1261,8 +1485,14 @@ textarea{
     <div class="ai-box">
 
         <div class="field">
+
             <label>PERGUNTA DO CLIENTE</label>
-            <textarea id="perguntaCliente" placeholder="Cole aqui a pergunta que o cliente enviou..."></textarea>
+
+            <textarea
+                id="perguntaCliente"
+                placeholder="Cole aqui a pergunta que o cliente enviou..."
+            ></textarea>
+
         </div>
 
         <button class="primary" onclick="gerarResposta()">
@@ -1270,18 +1500,31 @@ textarea{
         </button>
 
         <div id="gerando" class="generating">
+
             <div class="mini-loader"></div>
+
             Gerando resposta...
+
         </div>
 
         <div id="respostaBox" class="answer-box">
+
             <div class="answer-label">RESPOSTA GERADA</div>
+
             <div id="respostaTexto"></div>
+
         </div>
 
         <div id="responseTools" class="response-tools">
-            <button class="secondary" onclick="copiarResposta()">📋 Copiar</button>
-            <button class="primary" onclick="abrirWhatsAppResposta()">💬 WhatsApp</button>
+
+            <button class="secondary" onclick="copiarResposta()">
+                📋 Copiar
+            </button>
+
+            <button class="primary" onclick="abrirWhatsAppResposta()">
+                💬 WhatsApp
+            </button>
+
         </div>
 
     </div>
@@ -1318,7 +1561,14 @@ textarea{
     <div style="height:13px"></div>
 
     <div class="field">
-        <input id="buscarContato" type="text" placeholder="🔎 Buscar nome ou número..." oninput="renderContatos()">
+
+        <input
+            id="buscarContato"
+            type="text"
+            placeholder="🔎 Buscar nome ou número..."
+            oninput="renderContatos()"
+        >
+
     </div>
 
     <div id="listaContatos"></div>
@@ -1339,43 +1589,92 @@ textarea{
     <div class="card">
 
         <div class="field">
+
             <label>NOME</label>
-            <input id="contatoNome" type="text" placeholder="Nome do contato">
+
+            <input
+                id="contatoNome"
+                type="text"
+                placeholder="Nome do contato"
+            >
+
         </div>
 
         <div class="field">
+
             <label>DDD</label>
-            <input id="contatoDDD" type="tel" inputmode="numeric" maxlength="2" placeholder="13"
-                   oninput="somenteNumeros(this);detectarRegiaoContato()">
-            <div id="regiaoContato" class="auto-region">📍 Digite o DDD para identificar a região</div>
+
+            <input
+                id="contatoDDD"
+                type="tel"
+                inputmode="numeric"
+                maxlength="2"
+                placeholder="13"
+                oninput="somenteNumeros(this);detectarRegiaoContato()"
+            >
+
+            <div id="regiaoContato" class="auto-region">
+                📍 Digite o DDD para identificar a região
+            </div>
+
         </div>
 
         <div class="field">
+
             <label>TELEFONE</label>
-            <input id="contatoNumero" type="tel" inputmode="numeric" placeholder="Somente números"
-                   oninput="somenteNumeros(this)">
+
+            <input
+                id="contatoNumero"
+                type="tel"
+                inputmode="numeric"
+                placeholder="Somente números"
+                oninput="somenteNumeros(this)"
+            >
+
         </div>
 
         <div class="field">
+
             <label>STATUS</label>
 
             <div class="status-select">
-                <button id="statusON" class="status-option status-on" onclick="selecionarStatus('ON')">🟢 ON</button>
-                <button id="statusANALISE" class="status-option status-analysis" onclick="selecionarStatus('ANÁLISE')">🟡 ANÁLISE</button>
-                <button id="statusOFF" class="status-option status-off" onclick="selecionarStatus('OFF')">🔴 OFF</button>
+
+                <button id="statusON" class="status-option status-on" onclick="selecionarStatus('ON')">
+                    🟢 ON
+                </button>
+
+                <button id="statusANALISE" class="status-option status-analysis" onclick="selecionarStatus('ANÁLISE')">
+                    🟡 ANÁLISE
+                </button>
+
+                <button id="statusOFF" class="status-option status-off" onclick="selecionarStatus('OFF')">
+                    🔴 OFF
+                </button>
+
             </div>
 
             <input type="hidden" id="contatoStatus" value="ON">
+
         </div>
 
         <div class="field">
+
             <label>OBSERVAÇÃO</label>
-            <input id="contatoObs" type="text" placeholder="Opcional">
+
+            <input
+                id="contatoObs"
+                type="text"
+                placeholder="Opcional"
+            >
+
         </div>
 
-        <button class="primary" onclick="salvarContato()">💾 SALVAR CONTATO</button>
+        <button class="primary" onclick="salvarContato()">
+            💾 SALVAR CONTATO
+        </button>
 
     </div>
+
 </section>
 
 <!-- RESUMO -->
@@ -1388,6 +1687,7 @@ textarea{
     <div class="page-sub">Os números aparecem com a cor de cada status.</div>
 
     <div class="stats-grid">
+
         <div class="stat stat-on">
             <div class="stat-number" id="totalON">0</div>
             <div class="stat-label">🟢 ON</div>
@@ -1407,6 +1707,7 @@ textarea{
             <div class="stat-number" id="totalContatos">0</div>
             <div class="stat-label">📱 TOTAL DE CONTATOS</div>
         </div>
+
     </div>
 
 </section>
@@ -1454,7 +1755,9 @@ textarea{
 
     <div style="height:14px"></div>
 
-    <button class="primary" onclick="abrirNovoChip()">➕ ADICIONAR CHIP</button>
+    <button class="primary" onclick="abrirNovoChip()">
+        ➕ ADICIONAR CHIP
+    </button>
 
     <div id="listaChips"></div>
 
@@ -1474,43 +1777,84 @@ textarea{
     <div class="card">
 
         <div class="field">
+
             <label>OPERADORA</label>
 
             <div class="operator-choice">
-                <button id="opPagueMenos" class="operator-btn" onclick="selecionarOperadora('PAGUE MENOS')">🟢 PAGUE MENOS</button>
-                <button id="opVivo" class="operator-btn" onclick="selecionarOperadora('VIVO')">🟣 VIVO</button>
+
+                <button id="opPagueMenos" class="operator-btn" onclick="selecionarOperadora('PAGUE MENOS')">
+                    🟢 PAGUE MENOS
+                </button>
+
+                <button id="opVivo" class="operator-btn" onclick="selecionarOperadora('VIVO')">
+                    🟣 VIVO
+                </button>
+
             </div>
 
             <input type="hidden" id="chipOperadora" value="PAGUE MENOS">
+
         </div>
 
         <div class="field">
+
             <label>DDD</label>
-            <input id="chipDDD" type="tel" inputmode="numeric" maxlength="2" placeholder="13"
-                   oninput="somenteNumeros(this);detectarRegiaoChip()">
-            <div id="regiaoChip" class="auto-region">📍 Digite o DDD para identificar a região</div>
+
+            <input
+                id="chipDDD"
+                type="tel"
+                inputmode="numeric"
+                maxlength="2"
+                placeholder="13"
+                oninput="somenteNumeros(this);detectarRegiaoChip()"
+            >
+
+            <div id="regiaoChip" class="auto-region">
+                📍 Digite o DDD para identificar a região
+            </div>
+
         </div>
 
         <div class="field">
+
             <label>TELEFONE</label>
-            <input id="chipNumero" type="tel" inputmode="numeric" placeholder="Somente números"
-                   oninput="somenteNumeros(this)">
+
+            <input
+                id="chipNumero"
+                type="tel"
+                inputmode="numeric"
+                placeholder="Somente números"
+                oninput="somenteNumeros(this)"
+            >
+
         </div>
 
         <div class="field">
+
             <label>RECARGA</label>
 
             <div class="recharge-choice">
-                <button id="recargaSim" class="recharge-btn" onclick="selecionarRecarga(true)">🟢 COM RECARGA</button>
-                <button id="recargaNao" class="recharge-btn" onclick="selecionarRecarga(false)">🔴 SEM RECARGA</button>
+
+                <button id="recargaSim" class="recharge-btn" onclick="selecionarRecarga(true)">
+                    🟢 COM RECARGA
+                </button>
+
+                <button id="recargaNao" class="recharge-btn" onclick="selecionarRecarga(false)">
+                    🔴 SEM RECARGA
+                </button>
+
             </div>
 
             <input type="hidden" id="chipRecarga" value="true">
+
         </div>
 
-        <button class="primary" onclick="salvarChip()">💾 SALVAR CHIP</button>
+        <button class="primary" onclick="salvarChip()">
+            💾 SALVAR CHIP
+        </button>
 
     </div>
+
 </section>
 
 <!-- CELULARES -->
@@ -1522,7 +1866,9 @@ textarea{
     <div class="page-title">📱 Celulares</div>
     <div class="page-sub">Veja em qual aparelho está cada número.</div>
 
-    <button class="primary" onclick="abrirNovoCelular()">➕ ADICIONAR CELULAR</button>
+    <button class="primary" onclick="abrirNovoCelular()">
+        ➕ ADICIONAR CELULAR
+    </button>
 
     <div style="height:14px"></div>
 
@@ -1544,54 +1890,110 @@ textarea{
     <div class="card">
 
         <div class="field">
+
             <label>NOME DO CELULAR</label>
-            <input id="celularNome" type="text" placeholder="Ex.: iPhone 14 Pro">
+
+            <input
+                id="celularNome"
+                type="text"
+                placeholder="Ex.: iPhone 14 Pro"
+            >
+
         </div>
 
         <div class="field">
+
             <label>📞 NÚMERO DO CELULAR</label>
-            <input id="celularNumero" type="tel" inputmode="numeric" placeholder="Somente números"
-                   oninput="somenteNumeros(this)">
+
+            <input
+                id="celularNumero"
+                type="tel"
+                inputmode="numeric"
+                placeholder="Somente números"
+                oninput="somenteNumeros(this)"
+            >
+
         </div>
 
         <div class="field">
+
             <label>💬 NÚMERO DO WHATSAPP</label>
-            <input id="celularWhatsapp" type="tel" inputmode="numeric" placeholder="Somente números"
-                   oninput="somenteNumeros(this)">
+
+            <input
+                id="celularWhatsapp"
+                type="tel"
+                inputmode="numeric"
+                placeholder="Somente números"
+                oninput="somenteNumeros(this)"
+            >
+
         </div>
 
         <div class="field">
+
             <label>DDD</label>
-            <input id="celularDDD" type="tel" inputmode="numeric" maxlength="2" placeholder="13"
-                   oninput="somenteNumeros(this);detectarRegiaoCelular()">
-            <div id="regiaoCelular" class="auto-region">📍 Digite o DDD para identificar a região</div>
+
+            <input
+                id="celularDDD"
+                type="tel"
+                inputmode="numeric"
+                maxlength="2"
+                placeholder="13"
+                oninput="somenteNumeros(this);detectarRegiaoCelular()"
+            >
+
+            <div id="regiaoCelular" class="auto-region">
+                📍 Digite o DDD para identificar a região
+            </div>
+
         </div>
 
         <div class="field">
+
             <label>OPERADORA</label>
 
             <div class="operator-choice">
-                <button id="celOpPagueMenos" class="operator-btn" onclick="selecionarOperadoraCelular('PAGUE MENOS')">🟢 PAGUE MENOS</button>
-                <button id="celOpVivo" class="operator-btn" onclick="selecionarOperadoraCelular('VIVO')">🟣 VIVO</button>
+
+                <button id="celOpPagueMenos" class="operator-btn" onclick="selecionarOperadoraCelular('PAGUE MENOS')">
+                    🟢 PAGUE MENOS
+                </button>
+
+                <button id="celOpVivo" class="operator-btn" onclick="selecionarOperadoraCelular('VIVO')">
+                    🟣 VIVO
+                </button>
+
             </div>
 
             <input type="hidden" id="celularOperadora" value="PAGUE MENOS">
+
         </div>
 
         <div class="field">
+
             <label>RECARGA</label>
 
             <div class="recharge-choice">
-                <button id="celRecSim" class="recharge-btn" onclick="selecionarRecargaCelular(true)">🟢 COM RECARGA</button>
-                <button id="celRecNao" class="recharge-btn" onclick="selecionarRecargaCelular(false)">🔴 SEM RECARGA</button>
+
+                <button id="celRecSim" class="recharge-btn" onclick="selecionarRecargaCelular(true)">
+                    🟢 COM RECARGA
+                </button>
+
+                <button id="celRecNao" class="recharge-btn" onclick="selecionarRecargaCelular(false)">
+                    🔴 SEM RECARGA
+                </button>
+
             </div>
 
             <input type="hidden" id="celularRecarga" value="true">
+
         </div>
 
-        <button class="primary" onclick="salvarCelular()">💾 SALVAR CELULAR</button>
+        <button class="primary" onclick="salvarCelular()">
+            💾 SALVAR CELULAR
+        </button>
 
     </div>
+
 </section>
 
 <!-- CONFIG -->
@@ -1604,9 +2006,11 @@ textarea{
     <div class="page-sub">Personalize o BOT DO BM3.</div>
 
     <div class="card">
+
         <div class="card-title">🎨 Meus Temas</div>
 
         <div class="theme-card">
+
             <button id="themeLight" class="theme-choice" onclick="definirTema('light')">
                 ☀️<br><br>Claro
             </button>
@@ -1614,10 +2018,13 @@ textarea{
             <button id="themeDark" class="theme-choice" onclick="definirTema('dark')">
                 🌙<br><br>Escuro
             </button>
+
         </div>
+
     </div>
 
     <div class="card">
+
         <div class="card-title">💾 Backup</div>
 
         <div class="card-sub">
@@ -1627,130 +2034,257 @@ textarea{
         <div style="height:12px"></div>
 
         <div class="button-row">
-            <button class="secondary" onclick="exportarBackup()">📤 Exportar</button>
-            <button class="secondary" onclick="document.getElementById('importFile').click()">📥 Importar</button>
+
+            <button class="secondary" onclick="exportarBackup()">
+                📤 Exportar
+            </button>
+
+            <button class="secondary" onclick="document.getElementById('importFile').click()">
+                📥 Importar
+            </button>
+
         </div>
 
-        <input id="importFile" type="file" accept=".json" class="hidden" onchange="importarBackup(event)">
+        <input
+            id="importFile"
+            type="file"
+            accept=".json"
+            class="hidden"
+            onchange="importarBackup(event)"
+        >
+
     </div>
 
     <div class="card">
+
         <div class="card-title">ℹ️ Sobre</div>
 
         <div class="card-sub">
             🍀 BOT DO BM3 🍀<br>
             Painel pessoal para organização de contatos, chips, celulares e atendimento.
         </div>
+
     </div>
 
 </section>
 
 <!-- DEMAIS TELAS -->
 
-<section id="novoContato" class="screen"></section>
-
 <section id="grupos" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">👥 Grupos</div>
-    <div class="page-sub">Área reservada para organização dos seus grupos.</div>
-    <div class="card">
-        <div class="card-title">👥 Grupos do WhatsApp</div>
-        <div class="card-sub">Você poderá organizar seus grupos nesta área.</div>
+
+    <div class="page-sub">
+        Área reservada para organização dos seus grupos.
     </div>
+
+    <div class="card">
+
+        <div class="card-title">👥 Grupos do WhatsApp</div>
+
+        <div class="card-sub">
+            Você poderá organizar seus grupos nesta área.
+        </div>
+
+    </div>
+
 </section>
 
 <section id="fixados" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">📌 Fixados</div>
-    <div class="page-sub">Acesso rápido aos contatos fixados.</div>
+
+    <div class="page-sub">
+        Acesso rápido aos contatos fixados.
+    </div>
+
     <div id="listaFixados"></div>
+
 </section>
 
 <section id="recentes" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">🕘 Recentes</div>
-    <div class="page-sub">Contatos atualizados recentemente.</div>
+
+    <div class="page-sub">
+        Contatos atualizados recentemente.
+    </div>
+
     <div id="listaRecentes"></div>
+
 </section>
 
 <section id="envio" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">📤 Envio rápido</div>
-    <div class="page-sub">Digite um número para abrir diretamente no WhatsApp.</div>
+
+    <div class="page-sub">
+        Digite um número para abrir diretamente no WhatsApp.
+    </div>
 
     <div class="card">
+
         <div class="field">
+
             <label>NÚMERO</label>
-            <input id="envioNumero" type="tel" inputmode="numeric" placeholder="DDD + número"
-                   oninput="somenteNumeros(this)">
+
+            <input
+                id="envioNumero"
+                type="tel"
+                inputmode="numeric"
+                placeholder="DDD + número"
+                oninput="somenteNumeros(this)"
+            >
+
         </div>
 
-        <button class="primary" onclick="abrirEnvioRapido()">💬 ABRIR WHATSAPP</button>
+        <button class="primary" onclick="abrirEnvioRapido()">
+            💬 ABRIR WHATSAPP
+        </button>
+
     </div>
+
 </section>
 
 <section id="links" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">🔗 Links</div>
-    <div class="page-sub">Área para seus links úteis.</div>
+
+    <div class="page-sub">
+        Área para seus links úteis.
+    </div>
 
     <div class="card">
+
         <div class="card-title">🔗 Link do WhatsApp</div>
-        <div class="card-sub">Use o Envio rápido para abrir uma conversa.</div>
+
+        <div class="card-sub">
+            Use o Envio rápido para abrir uma conversa.
+        </div>
+
     </div>
+
 </section>
 
 <section id="analisar" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">🧠 Analisar pergunta</div>
-    <div class="page-sub">Identifique automaticamente o assunto da pergunta.</div>
+
+    <div class="page-sub">
+        Identifique automaticamente o assunto da pergunta.
+    </div>
 
     <div class="card">
-        <textarea id="perguntaAnalise" placeholder="Cole a pergunta do cliente..."></textarea>
+
+        <textarea
+            id="perguntaAnalise"
+            placeholder="Cole a pergunta do cliente..."
+        ></textarea>
+
         <div style="height:10px"></div>
-        <button class="primary" onclick="analisarPergunta()">🧠 ANALISAR</button>
+
+        <button class="primary" onclick="analisarPergunta()">
+            🧠 ANALISAR
+        </button>
+
         <div id="resultadoAnalise" class="answer-box"></div>
+
     </div>
+
 </section>
 
 <section id="liberacao" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">💰 Liberação</div>
-    <div class="page-sub">Atalhos relacionados a informações de liberação.</div>
-    <div class="card">
-        <div class="card-title">💰 Atendimento sobre liberação</div>
-        <div class="card-sub">Use o Gerar Resposta para adaptar a resposta.</div>
+
+    <div class="page-sub">
+        Atalhos relacionados a informações de liberação.
     </div>
+
+    <div class="card">
+
+        <div class="card-title">💰 Atendimento sobre liberação</div>
+
+        <div class="card-sub">
+            Use o Gerar Resposta para adaptar a resposta.
+        </div>
+
+    </div>
+
 </section>
 
 <section id="andamento" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">📂 Andamento</div>
-    <div class="page-sub">Organize respostas relacionadas ao andamento.</div>
+
+    <div class="page-sub">
+        Organize respostas relacionadas ao andamento.
+    </div>
+
 </section>
 
 <section id="prazos" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">⏳ Prazos</div>
-    <div class="page-sub">Respostas relacionadas a prazos.</div>
+
+    <div class="page-sub">
+        Respostas relacionadas a prazos.
+    </div>
+
 </section>
 
 <section id="valores" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">💵 Valores</div>
-    <div class="page-sub">Respostas relacionadas a valores.</div>
+
+    <div class="page-sub">
+        Respostas relacionadas a valores.
+    </div>
+
 </section>
 
 <section id="documentacao" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">📄 Documentação</div>
-    <div class="page-sub">Respostas relacionadas a documentos.</div>
+
+    <div class="page-sub">
+        Respostas relacionadas a documentos.
+    </div>
+
 </section>
 
 <section id="favoritasRespostas" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">⭐ Respostas favoritas</div>
-    <div class="page-sub">Área para guardar respostas frequentes.</div>
+
+    <div class="page-sub">
+        Área para guardar respostas frequentes.
+    </div>
+
 </section>
 
 <section id="montarMensagem" class="screen">
@@ -1758,37 +2292,68 @@ textarea{
     <button class="back" onclick="voltar()">← Voltar</button>
 
     <div class="page-title">📝 Montar mensagem</div>
-    <div class="page-sub">Para iniciar uma conversa com o cliente.</div>
+
+    <div class="page-sub">
+        Para iniciar uma conversa com o cliente.
+    </div>
 
     <div class="card">
 
         <div class="field">
+
             <label>NOME</label>
-            <input id="msgNome" placeholder="Nome da pessoa">
+
+            <input
+                id="msgNome"
+                placeholder="Nome da pessoa"
+            >
+
         </div>
 
         <div class="field">
+
             <label>NOTÍCIA</label>
-            <textarea id="msgNoticia" placeholder="Escreva a notícia que deseja comunicar..."></textarea>
+
+            <textarea
+                id="msgNoticia"
+                placeholder="Escreva a notícia que deseja comunicar..."
+            ></textarea>
+
         </div>
 
         <div class="field">
+
             <label>VALOR — OPCIONAL</label>
-            <input id="msgValor" placeholder="Ex.: R$ 10.000,00">
+
+            <input
+                id="msgValor"
+                placeholder="Ex.: R$ 10.000,00"
+            >
+
         </div>
 
-        <button class="primary" onclick="montarMensagem()">📝 MONTAR MENSAGEM</button>
+        <button class="primary" onclick="montarMensagem()">
+            📝 MONTAR MENSAGEM
+        </button>
 
         <div id="mensagemMontada" class="answer-box"></div>
 
     </div>
+
 </section>
 
 <section id="historico" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
+
     <div class="page-title">📋 Histórico</div>
-    <div class="page-sub">Perguntas e respostas geradas nesta sessão.</div>
+
+    <div class="page-sub">
+        Perguntas e respostas geradas nesta sessão.
+    </div>
+
     <div id="historicoLista"></div>
+
 </section>
 
 </div>
@@ -1796,6 +2361,7 @@ textarea{
 <div id="toast"></div>
 
 <script>
+
 /* =========================================================
    DDD
 ========================================================= */
@@ -1837,10 +2403,12 @@ let telaAtual="inicio";
 let telaAnterior="inicio";
 
 function salvarDados(){
+
     localStorage.setItem("botBM3Contatos",JSON.stringify(contatos));
     localStorage.setItem("botBM3Chips",JSON.stringify(chips));
     localStorage.setItem("botBM3Celulares",JSON.stringify(celulares));
     localStorage.setItem("botBM3Historico",JSON.stringify(historico));
+
 }
 
 /* =========================================================
@@ -1848,6 +2416,7 @@ function salvarDados(){
 ========================================================= */
 
 function aplicarTema(tema){
+
     document.body.classList.toggle("dark",tema==="dark");
 
     const icon=document.getElementById("themeIcon");
@@ -1862,16 +2431,27 @@ function aplicarTema(tema){
     document.getElementById("themeDark")?.classList.toggle("active",tema==="dark");
 
     localStorage.setItem("temaBotBM3",tema);
+
 }
 
 function alternarTema(){
+
     const atual=localStorage.getItem("temaBotBM3")||"light";
+
     aplicarTema(atual==="dark"?"light":"dark");
+
 }
 
 function definirTema(tema){
+
     aplicarTema(tema);
-    mostrarToast(tema==="dark"?"🌙 Tema escuro ativado":"☀️ Tema claro ativado");
+
+    mostrarToast(
+        tema==="dark"
+        ?"🌙 Tema escuro ativado"
+        :"☀️ Tema claro ativado"
+    );
+
 }
 
 /* =========================================================
@@ -1885,16 +2465,25 @@ function navegar(id){
     telaAnterior=telaAtual;
     telaAtual=id;
 
-    document.querySelectorAll(".screen").forEach(el=>el.classList.remove("active"));
+    document
+        .querySelectorAll(".screen")
+        .forEach(el=>el.classList.remove("active"));
 
     const tela=document.getElementById(id);
 
     if(tela){
+
         tela.classList.add("active");
-        window.scrollTo({top:0,behavior:"instant"});
+
+        window.scrollTo({
+            top:0,
+            behavior:"instant"
+        });
+
     }
 
     atualizarTudo();
+
 }
 
 function voltar(){
@@ -1916,28 +2505,51 @@ function voltar(){
         return;
     }
 
-    if(
-        ["calculadora","advogado","contatos","resumo","favoritos","chips","celulares","config"]
-        .includes(telaAtual)
-    ){
+    if([
+        "calculadora",
+        "advogado",
+        "contatos",
+        "resumo",
+        "favoritos",
+        "chips",
+        "celulares",
+        "config"
+    ].includes(telaAtual)){
+
         navegar("inicio");
         return;
     }
 
-    if(["grupos","fixados","recentes","envio","links"].includes(telaAtual)){
+    if([
+        "grupos",
+        "fixados",
+        "recentes",
+        "envio",
+        "links"
+    ].includes(telaAtual)){
+
         navegar("whatsapp");
         return;
     }
 
     if([
-        "analisar","liberacao","andamento","prazos","valores",
-        "documentacao","favoritasRespostas","montarMensagem","historico"
+        "analisar",
+        "liberacao",
+        "andamento",
+        "prazos",
+        "valores",
+        "documentacao",
+        "favoritasRespostas",
+        "montarMensagem",
+        "historico"
     ].includes(telaAtual)){
+
         navegar("advogado");
         return;
     }
 
     navegar("inicio");
+
 }
 
 /* =========================================================
@@ -1945,16 +2557,20 @@ function voltar(){
 ========================================================= */
 
 function somenteNumeros(el){
+
     el.value=el.value.replace(/\D/g,"");
+
 }
 
 function escaparHTML(texto){
+
     return String(texto||"")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
         .replace(/'/g,"&#039;");
+
 }
 
 function mostrarToast(msg){
@@ -1962,6 +2578,7 @@ function mostrarToast(msg){
     const toast=document.getElementById("toast");
 
     toast.textContent=msg;
+
     toast.classList.add("show");
 
     clearTimeout(window.toastTimer);
@@ -1969,6 +2586,7 @@ function mostrarToast(msg){
     window.toastTimer=setTimeout(()=>{
         toast.classList.remove("show");
     },2200);
+
 }
 
 function formatarTelefone(ddd,numero){
@@ -1983,10 +2601,13 @@ function formatarTelefone(ddd,numero){
         return `(${d}) ${n.slice(0,4)}-${n.slice(4)}`;
 
     return `(${d}) ${n}`;
+
 }
 
 function obterRegiao(ddd){
+
     return ddds[String(ddd).replace(/\D/g,"")]||"";
+
 }
 
 function atualizarRegiao(campoDDD,campoRegiao){
@@ -1996,20 +2617,35 @@ function atualizarRegiao(campoDDD,campoRegiao){
     const regiao=obterRegiao(ddd);
 
     if(regiao){
+
         box.textContent="📍 "+regiao;
         box.classList.remove("invalid-region");
+
     }else if(ddd.length===2){
+
         box.textContent="⚠️ DDD não cadastrado";
         box.classList.add("invalid-region");
+
     }else{
+
         box.textContent="📍 Digite o DDD para identificar a região";
         box.classList.remove("invalid-region");
+
     }
+
 }
 
-function detectarRegiaoContato(){atualizarRegiao("contatoDDD","regiaoContato")}
-function detectarRegiaoChip(){atualizarRegiao("chipDDD","regiaoChip")}
-function detectarRegiaoCelular(){atualizarRegiao("celularDDD","regiaoCelular")}
+function detectarRegiaoContato(){
+    atualizarRegiao("contatoDDD","regiaoContato");
+}
+
+function detectarRegiaoChip(){
+    atualizarRegiao("chipDDD","regiaoChip");
+}
+
+function detectarRegiaoCelular(){
+    atualizarRegiao("celularDDD","regiaoCelular");
+}
 
 /* =========================================================
    CALCULADORA
@@ -2018,117 +2654,117 @@ function detectarRegiaoCelular(){atualizarRegiao("celularDDD","regiaoCelular")}
 function converterValor(valor){
 
     let v=String(valor||"")
+        .trim()
         .toLowerCase()
         .replace(/\s/g,"")
         .replace(/r\$/g,"");
 
+    if(!v)return null;
+
     let multiplicador=1;
 
     if(v.endsWith("k")){
+
         multiplicador=1000;
         v=v.slice(0,-1);
+
+        v=v.replace(",", ".");
+
+        const numero=parseFloat(v);
+
+        return Number.isFinite(numero)
+            ?numero*multiplicador
+            :null;
     }
 
-    v=v.replace(/\./g,"").replace(",", ".");
+    /*
+       Formatos aceitos:
+
+       20.000       = 20.000
+       17,699       = 17.699
+       17,5         = 17,50
+       17.699,50    = 17.699,50
+       20,50        = 20,50
+    */
+
+    if(v.includes(".")&&v.includes(",")){
+
+        v=v.replace(/\./g,"").replace(",", ".");
+
+    }else if(v.includes(",")){
+
+        const partes=v.split(",");
+
+        if(partes.length===2 && partes[1].length===3){
+
+            v=partes[0]+partes[1];
+
+        }else{
+
+            v=v.replace(",", ".");
+
+        }
+
+    }else if(v.includes(".")){
+
+        const partes=v.split(".");
+
+        if(partes.length===2 && partes[1].length===3){
+
+            v=partes[0]+partes[1];
+
+        }
+
+    }
 
     const numero=parseFloat(v);
 
-    return Number.isFinite(numero)?numero*multiplicador:null;
-}
+    return Number.isFinite(numero)?numero* multiplicador:null;
 
-function extrairDivisor(texto){
-
-    const t=texto.toLowerCase();
-
-    let m=t.match(/\/\s*(\d+(?:[.,]\d+)?)/);
-    if(m)return converterValor(m[1]);
-
-    m=t.match(/dividid[oa]\s+(?:em|por|entre)\s+(\d+(?:[.,]\d+)?)/i);
-    if(m)return converterValor(m[1]);
-
-    m=t.match(/para\s+(\d+(?:[.,]\d+)?)/i);
-    if(m)return converterValor(m[1]);
-
-    return null;
 }
 
 function calcularBM3(){
 
-    const entrada=document.getElementById("calcExpressao").value.trim();
+    const valorTexto=document.getElementById("calcValor").value.trim();
+    const porcentagem=Number(document.getElementById("calcPorcentagem").value);
+    const pessoas=Number(document.getElementById("calcPessoas").value);
+
     const gerando=document.getElementById("calcGerando");
     const resultado=document.getElementById("calcResultado");
 
-    if(!entrada){
-        mostrarToast("Digite o cálculo.");
+    if(!valorTexto){
+
+        mostrarToast("Digite o valor. Ex.: 20k");
+
         return;
     }
 
-    /*
-       Aceita:
-       20k - 25% / 3
-       20k menos 25% dividido em 3
-       20000 - 25% / 3
-    */
-
-    const texto=entrada.toLowerCase();
-
-    const percentMatch=texto.match(/(\d+(?:[.,]\d+)?)\s*%/);
-
-    if(!percentMatch){
-        mostrarToast("Informe a porcentagem. Ex.: 20k - 25% / 3");
-        return;
-    }
-
-    const porcentagem=parseFloat(percentMatch[1].replace(",","."));
-
-    if(porcentagem<0||porcentagem>100){
-        mostrarToast("A porcentagem precisa estar entre 0% e 100%.");
-        return;
-    }
-
-    let antes=texto.split("%")[0];
-
-    /*
-       Pega o primeiro valor antes do percentual.
-       Exemplos:
-       20k - 25%
-       20000 menos 25%
-    */
-
-    const valorMatch=antes.match(/(\d+(?:[.,]\d+)?)\s*k?/);
-
-    if(!valorMatch){
-        mostrarToast("Não consegui identificar o valor.");
-        return;
-    }
-
-    const valorInformado=converterValor(valorMatch[0]);
+    const valorInformado=converterValor(valorTexto);
 
     if(valorInformado===null||valorInformado<=0){
-        mostrarToast("Informe um valor válido.");
+
+        mostrarToast("Digite um valor válido. Ex.: 20k");
+
         return;
     }
 
-    let divisor=extrairDivisor(texto);
+    if(!Number.isFinite(porcentagem)||porcentagem<0||porcentagem>100){
 
-    if(!divisor){
+        mostrarToast("Escolha uma porcentagem válida.");
 
-        const resposta=prompt("Dividir o valor restante entre quantas pessoas?");
-
-        if(resposta===null)return;
-
-        divisor=converterValor(resposta);
-
+        return;
     }
 
-    if(!divisor||divisor<=0){
-        mostrarToast("Informe uma quantidade válida de pessoas.");
+    if(!Number.isFinite(pessoas)||pessoas<1||pessoas>20){
+
+        mostrarToast("Escolha entre 1 e 20 pessoas.");
+
         return;
     }
 
     const desconto=valorInformado*(porcentagem/100);
     const restante=valorInformado-desconto;
-    const cada=restante/divisor;
+    const cada=restante/pessoas;
 
     const moeda=new Intl.NumberFormat("pt-BR",{
         style:"currency",
@@ -2136,6 +2772,7 @@ function calcularBM3(){
     });
 
     resultado.innerHTML="";
+
     gerando.classList.add("show");
 
     setTimeout(()=>{
@@ -2143,30 +2780,52 @@ function calcularBM3(){
         gerando.classList.remove("show");
 
         resultado.innerHTML=`
+
             <div class="calc-bot">
 
                 <div class="calc-bot-header">
                     🤖 BOT DO BM3
                 </div>
 
-                <div>💰 Valor informado: <b>${moeda.format(valorInformado)}</b></div>
+                <div>
+                    💰 Valor informado:
+                    <b>${moeda.format(valorInformado)}</b>
+                </div>
 
-                <div>📉 ${porcentagem}%: <b>${moeda.format(desconto)}</b></div>
+                <div>
+                    📉 ${porcentagem}%:
+                    <b>${moeda.format(desconto)}</b>
+                </div>
 
-                <div>💵 Valor restante: <b>${moeda.format(restante)}</b></div>
+                <div>
+                    💵 Valor restante:
+                    <b>${moeda.format(restante)}</b>
+                </div>
 
-                <div>👥 Dividido entre: <b>${divisor}</b></div>
+                <div>
+                    👥 Dividido entre:
+                    <b>${pessoas} ${pessoas===1?"pessoa":"pessoas"}</b>
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div>
+                    🧮 ${moeda.format(restante)} ÷ ${pessoas}
+                </div>
 
                 <div class="calc-divider"></div>
 
                 <div class="calc-summary">
-                    RESUMO : 🍀 Valor pra cada: ${moeda.format(cada)}
+                    RESUMO : 🍀 Valor pra cada:
+                    ${moeda.format(cada)}
                 </div>
 
             </div>
+
         `;
 
     },1000);
+
 }
 
 /* =========================================================
@@ -2188,16 +2847,24 @@ function abrirNovoContato(){
     detectarRegiaoContato();
 
     navegar("novoContato");
+
 }
 
 function selecionarStatus(status){
 
     statusSelecionado=status;
+
     document.getElementById("contatoStatus").value=status;
 
-    document.getElementById("statusON").classList.toggle("selected",status==="ON");
-    document.getElementById("statusANALISE").classList.toggle("selected",status==="ANÁLISE");
-    document.getElementById("statusOFF").classList.toggle("selected",status==="OFF");
+    document.getElementById("statusON")
+        .classList.toggle("selected",status==="ON");
+
+    document.getElementById("statusANALISE")
+        .classList.toggle("selected",status==="ANÁLISE");
+
+    document.getElementById("statusOFF")
+        .classList.toggle("selected",status==="OFF");
+
 }
 
 function salvarContato(){
@@ -2208,12 +2875,20 @@ function salvarContato(){
     const obs=document.getElementById("contatoObs").value.trim();
     const index=Number(document.getElementById("contatoIndex").value);
 
-    if(!nome)return mostrarToast("Digite o nome do contato.");
-    if(ddd.length!==2)return mostrarToast("O DDD precisa ter 2 números.");
-    if(!obterRegiao(ddd))return mostrarToast("Digite um DDD válido.");
-    if(!numero)return mostrarToast("Digite o telefone.");
+    if(!nome)
+        return mostrarToast("Digite o nome do contato.");
+
+    if(ddd.length!==2)
+        return mostrarToast("O DDD precisa ter 2 números.");
+
+    if(!obterRegiao(ddd))
+        return mostrarToast("Digite um DDD válido.");
+
+    if(!numero)
+        return mostrarToast("Digite o telefone.");
 
     const contato={
+
         nome,
         ddd,
         numero,
@@ -2223,18 +2898,27 @@ function salvarContato(){
         favorito:index>=0?!!contatos[index]?.favorito:false,
         fixado:index>=0?!!contatos[index]?.fixado:false,
         ultimaAtualizacao:new Date().toISOString()
+
     };
 
     if(index>=0){
+
         contatos[index]=contato;
+
         mostrarToast("Contato atualizado.");
+
     }else{
+
         contatos.push(contato);
+
         mostrarToast("Contato salvo.");
+
     }
 
     salvarDados();
+
     navegar("contatos");
+
 }
 
 function editarContato(index){
@@ -2249,9 +2933,11 @@ function editarContato(index){
     document.getElementById("contatoObs").value=c.observacao||"";
 
     selecionarStatus(c.status||"ON");
+
     detectarRegiaoContato();
 
     navegar("novoContato");
+
 }
 
 function excluirContato(index){
@@ -2259,48 +2945,73 @@ function excluirContato(index){
     if(!confirm("Excluir este contato?"))return;
 
     contatos.splice(index,1);
+
     salvarDados();
     atualizarTudo();
 
     mostrarToast("Contato excluído.");
+
 }
 
 function alternarFavorito(index){
 
     contatos[index].favorito=!contatos[index].favorito;
+
     salvarDados();
     atualizarTudo();
 
-    mostrarToast(contatos[index].favorito?"⭐ Adicionado aos favoritos.":"Removido dos favoritos.");
+    mostrarToast(
+        contatos[index].favorito
+        ?"⭐ Adicionado aos favoritos."
+        :"Removido dos favoritos."
+    );
+
 }
 
 function alternarFixado(index){
 
     contatos[index].fixado=!contatos[index].fixado;
+
     salvarDados();
     atualizarTudo();
 
-    mostrarToast(contatos[index].fixado?"📌 Contato fixado.":"Contato desafixado.");
+    mostrarToast(
+        contatos[index].fixado
+        ?"📌 Contato fixado."
+        :"Contato desafixado."
+    );
+
 }
 
 function statusClasse(status){
+
     if(status==="ON")return"status-on";
+
     if(status==="ANÁLISE")return"status-analysis";
+
     return"status-off";
+
 }
 
 function statusEmoji(status){
+
     if(status==="ON")return"🟢";
+
     if(status==="ANÁLISE")return"🟡";
+
     return"🔴";
+
 }
 
 function renderContatos(){
 
     const box=document.getElementById("listaContatos");
+
     if(!box)return;
 
-    const busca=(document.getElementById("buscarContato")?.value||"").toLowerCase();
+    const busca=(
+        document.getElementById("buscarContato")?.value||""
+    ).toLowerCase();
 
     const lista=contatos
         .map((c,i)=>({...c,index:i}))
@@ -2312,7 +3023,14 @@ function renderContatos(){
         .sort((a,b)=>String(a.nome).localeCompare(String(b.nome)));
 
     if(!lista.length){
-        box.innerHTML=`<div class="empty">👥<br><br>Nenhum contato encontrado.</div>`;
+
+        box.innerHTML=`
+            <div class="empty">
+                👥<br><br>
+                Nenhum contato encontrado.
+            </div>
+        `;
+
         return;
     }
 
@@ -2323,22 +3041,46 @@ function renderContatos(){
             <div class="list-top">
 
                 <div>
-                    <div class="list-name">${escaparHTML(c.nome)}</div>
-                    <div class="list-number">📞 ${formatarTelefone(c.ddd,c.numero)}</div>
-                    <div class="list-meta">📍 ${escaparHTML(c.regiao||obterRegiao(c.ddd))}</div>
+
+                    <div class="list-name">
+                        ${escaparHTML(c.nome)}
+                    </div>
+
+                    <div class="list-number">
+                        📞 ${formatarTelefone(c.ddd,c.numero)}
+                    </div>
+
+                    <div class="list-meta">
+                        📍 ${escaparHTML(c.regiao||obterRegiao(c.ddd))}
+                    </div>
+
                 </div>
 
-                <div class="${statusClasse(c.status)}" style="font-weight:950;font-size:12px">
-                    ${statusEmoji(c.status)} ${escaparHTML(c.status)}
+                <div
+                    class="${statusClasse(c.status)}"
+                    style="font-weight:950;font-size:12px"
+                >
+                    ${statusEmoji(c.status)}
+                    ${escaparHTML(c.status)}
                 </div>
 
             </div>
 
-            ${c.observacao?`<div class="list-meta">📝 ${escaparHTML(c.observacao)}</div>`:""}
+            ${
+                c.observacao
+                ?`
+                    <div class="list-meta">
+                        📝 ${escaparHTML(c.observacao)}
+                    </div>
+                `
+                :""
+            }
 
             <div class="list-actions">
 
-                <button class="small-btn" onclick="editarContato(${c.index})">✏️ Editar</button>
+                <button class="small-btn" onclick="editarContato(${c.index})">
+                    ✏️ Editar
+                </button>
 
                 <button class="small-btn" onclick="alternarFavorito(${c.index})">
                     ${c.favorito?"⭐ Favorito":"☆ Favoritar"}
@@ -2352,23 +3094,29 @@ function renderContatos(){
                     💬 WhatsApp
                 </button>
 
-                <button class="small-btn" onclick="excluirContato(${c.index})">🗑️</button>
+                <button class="small-btn" onclick="excluirContato(${c.index})">
+                    🗑️
+                </button>
 
             </div>
 
         </div>
 
     `).join("");
+
 }
 
 function abrirWhatsAppContato(index){
 
     const c=contatos[index];
+
     const numero=`${c.ddd}${c.numero}`.replace(/\D/g,"");
 
-    if(!numero)return mostrarToast("Número inválido.");
+    if(!numero)
+        return mostrarToast("Número inválido.");
 
     window.open(`https://wa.me/55${numero}`,"_blank");
+
 }
 
 /* =========================================================
@@ -2377,81 +3125,164 @@ function abrirWhatsAppContato(index){
 
 function atualizarResumo(){
 
-    document.getElementById("totalON").textContent=contatos.filter(c=>c.status==="ON").length;
-    document.getElementById("totalAnalise").textContent=contatos.filter(c=>c.status==="ANÁLISE").length;
-    document.getElementById("totalOFF").textContent=contatos.filter(c=>c.status==="OFF").length;
-    document.getElementById("totalContatos").textContent=contatos.length;
+    document.getElementById("totalON").textContent=
+        contatos.filter(c=>c.status==="ON").length;
+
+    document.getElementById("totalAnalise").textContent=
+        contatos.filter(c=>c.status==="ANÁLISE").length;
+
+    document.getElementById("totalOFF").textContent=
+        contatos.filter(c=>c.status==="OFF").length;
+
+    document.getElementById("totalContatos").textContent=
+        contatos.length;
+
 }
 
 function renderFavoritos(){
 
     const box=document.getElementById("listaFavoritos");
+
     if(!box)return;
 
-    const lista=contatos.map((c,i)=>({...c,index:i})).filter(c=>c.favorito);
+    const lista=contatos
+        .map((c,i)=>({...c,index:i}))
+        .filter(c=>c.favorito);
 
     if(!lista.length){
-        box.innerHTML=`<div class="empty">⭐ Nenhum favorito.</div>`;
+
+        box.innerHTML=`
+            <div class="empty">
+                ⭐ Nenhum favorito.
+            </div>
+        `;
+
         return;
     }
 
     box.innerHTML=lista.map(c=>`
+
         <div class="list-item">
-            <div class="list-name">${escaparHTML(c.nome)}</div>
-            <div class="list-number">📞 ${formatarTelefone(c.ddd,c.numero)}</div>
-            <div class="list-meta">📍 ${escaparHTML(c.regiao||"")}</div>
-            <div class="list-actions">
-                <button class="small-btn" onclick="abrirWhatsAppContato(${c.index})">💬 WhatsApp</button>
-                <button class="small-btn" onclick="editarContato(${c.index})">✏️ Editar</button>
+
+            <div class="list-name">
+                ${escaparHTML(c.nome)}
             </div>
+
+            <div class="list-number">
+                📞 ${formatarTelefone(c.ddd,c.numero)}
+            </div>
+
+            <div class="list-meta">
+                📍 ${escaparHTML(c.regiao||"")}
+            </div>
+
+            <div class="list-actions">
+
+                <button class="small-btn" onclick="abrirWhatsAppContato(${c.index})">
+                    💬 WhatsApp
+                </button>
+
+                <button class="small-btn" onclick="editarContato(${c.index})">
+                    ✏️ Editar
+                </button>
+
+            </div>
+
         </div>
+
     `).join("");
+
 }
 
 function renderFixados(){
 
     const box=document.getElementById("listaFixados");
+
     if(!box)return;
 
-    const lista=contatos.map((c,i)=>({...c,index:i})).filter(c=>c.fixado);
+    const lista=contatos
+        .map((c,i)=>({...c,index:i}))
+        .filter(c=>c.fixado);
 
     if(!lista.length){
-        box.innerHTML=`<div class="empty">📌 Nenhum contato fixado.</div>`;
+
+        box.innerHTML=`
+            <div class="empty">
+                📌 Nenhum contato fixado.
+            </div>
+        `;
+
         return;
     }
 
     box.innerHTML=lista.map(c=>`
+
         <div class="list-item">
-            <div class="list-name">${escaparHTML(c.nome)}</div>
-            <div class="list-number">📞 ${formatarTelefone(c.ddd,c.numero)}</div>
+
+            <div class="list-name">
+                ${escaparHTML(c.nome)}
+            </div>
+
+            <div class="list-number">
+                📞 ${formatarTelefone(c.ddd,c.numero)}
+            </div>
+
         </div>
+
     `).join("");
+
 }
 
 function renderRecentes(){
 
     const box=document.getElementById("listaRecentes");
+
     if(!box)return;
 
     const lista=contatos
         .map((c,i)=>({...c,index:i}))
-        .sort((a,b)=>new Date(b.ultimaAtualizacao)-new Date(a.ultimaAtualizacao))
+        .sort(
+            (a,b)=>
+            new Date(b.ultimaAtualizacao)-
+            new Date(a.ultimaAtualizacao)
+        )
         .slice(0,15);
 
     if(!lista.length){
-        box.innerHTML=`<div class="empty">🕘 Nenhum contato recente.</div>`;
+
+        box.innerHTML=`
+            <div class="empty">
+                🕘 Nenhum contato recente.
+            </div>
+        `;
+
         return;
     }
 
     box.innerHTML=lista.map(c=>`
+
         <div class="list-item">
-            <div class="list-name">${escaparHTML(c.nome)}</div>
-            <div class="list-number">📞 ${formatarTelefone(c.ddd,c.numero)}</div>
-            <div class="${statusClasse(c.status)}" style="font-size:12px;font-weight:900;margin-top:7px">
-                ${statusEmoji(c.status)} ${escaparHTML(c.status)}
+
+            <div class="list-name">
+                ${escaparHTML(c.nome)}
             </div>
+
+            <div class="list-number">
+                📞 ${formatarTelefone(c.ddd,c.numero)}
+            </div>
+
+            <div
+                class="${statusClasse(c.status)}"
+                style="font-size:12px;font-weight:900;margin-top:7px"
+            >
+                ${statusEmoji(c.status)}
+                ${escaparHTML(c.status)}
+            </div>
+
         </div>
+
     `).join("");
+
 }
 
 /* =========================================================
@@ -2469,27 +3300,43 @@ function abrirNovoChip(){
 
     selecionarOperadora("PAGUE MENOS");
     selecionarRecarga(true);
+
     detectarRegiaoChip();
 
     navegar("novoChip");
+
 }
 
 function selecionarOperadora(op){
 
     operadoraSelecionada=op;
+
     document.getElementById("chipOperadora").value=op;
 
-    document.getElementById("opPagueMenos").classList.toggle("selected",op==="PAGUE MENOS");
-    document.getElementById("opVivo").classList.toggle("selected",op==="VIVO");
+    document
+        .getElementById("opPagueMenos")
+        .classList.toggle("selected",op==="PAGUE MENOS");
+
+    document
+        .getElementById("opVivo")
+        .classList.toggle("selected",op==="VIVO");
+
 }
 
 function selecionarRecarga(valor){
 
     recargaSelecionada=valor;
+
     document.getElementById("chipRecarga").value=String(valor);
 
-    document.getElementById("recargaSim").classList.toggle("selected",valor===true);
-    document.getElementById("recargaNao").classList.toggle("selected",valor===false);
+    document
+        .getElementById("recargaSim")
+        .classList.toggle("selected",valor===true);
+
+    document
+        .getElementById("recargaNao")
+        .classList.toggle("selected",valor===false);
+
 }
 
 function salvarChip(){
@@ -2498,9 +3345,14 @@ function salvarChip(){
     const numero=document.getElementById("chipNumero").value;
     const index=Number(document.getElementById("chipIndex").value);
 
-    if(ddd.length!==2)return mostrarToast("O DDD precisa ter 2 números.");
-    if(!obterRegiao(ddd))return mostrarToast("Digite um DDD válido.");
-    if(!numero)return mostrarToast("Digite o número do chip.");
+    if(ddd.length!==2)
+        return mostrarToast("O DDD precisa ter 2 números.");
+
+    if(!obterRegiao(ddd))
+        return mostrarToast("Digite um DDD válido.");
+
+    if(!numero)
+        return mostrarToast("Digite o número do chip.");
 
     const chip={
         operadora:operadoraSelecionada,
@@ -2512,15 +3364,23 @@ function salvarChip(){
     };
 
     if(index>=0){
+
         chips[index]=chip;
+
         mostrarToast("Chip atualizado.");
+
     }else{
+
         chips.push(chip);
+
         mostrarToast("Chip salvo.");
+
     }
 
     salvarDados();
+
     navegar("chips");
+
 }
 
 function editarChip(index){
@@ -2533,9 +3393,11 @@ function editarChip(index){
 
     selecionarOperadora(c.operadora||"PAGUE MENOS");
     selecionarRecarga(!!c.recarga);
+
     detectarRegiaoChip();
 
     navegar("novoChip");
+
 }
 
 function excluirChip(index){
@@ -2543,15 +3405,18 @@ function excluirChip(index){
     if(!confirm("Excluir este chip?"))return;
 
     chips.splice(index,1);
+
     salvarDados();
     atualizarTudo();
 
     mostrarToast("Chip excluído.");
+
 }
 
 function renderChips(){
 
     const box=document.getElementById("listaChips");
+
     if(!box)return;
 
     const com=chips.filter(c=>c.recarga).length;
@@ -2562,15 +3427,24 @@ function renderChips(){
     document.getElementById("chipsTotal").textContent=chips.length;
 
     if(!chips.length){
-        box.innerHTML=`<div class="empty">📶<br><br>Nenhum chip cadastrado.</div>`;
+
+        box.innerHTML=`
+            <div class="empty">
+                📶<br><br>
+                Nenhum chip cadastrado.
+            </div>
+        `;
+
         return;
     }
 
     box.innerHTML=chips.map((c,index)=>`
+
         <div class="chip-card">
 
             <div class="chip-operator">
-                ${c.operadora==="VIVO"?"🟣":"🟢"} ${escaparHTML(c.operadora)}
+                ${c.operadora==="VIVO"?"🟣":"🟢"}
+                ${escaparHTML(c.operadora)}
             </div>
 
             <div class="chip-number">
@@ -2586,12 +3460,21 @@ function renderChips(){
             </div>
 
             <div class="list-actions">
-                <button class="small-btn" onclick="editarChip(${index})">✏️ Editar</button>
-                <button class="small-btn" onclick="excluirChip(${index})">🗑️ Excluir</button>
+
+                <button class="small-btn" onclick="editarChip(${index})">
+                    ✏️ Editar
+                </button>
+
+                <button class="small-btn" onclick="excluirChip(${index})">
+                    🗑️ Excluir
+                </button>
+
             </div>
 
         </div>
+
     `).join("");
+
 }
 
 /* =========================================================
@@ -2611,27 +3494,43 @@ function abrirNovoCelular(){
 
     selecionarOperadoraCelular("PAGUE MENOS");
     selecionarRecargaCelular(true);
+
     detectarRegiaoCelular();
 
     navegar("novoCelular");
+
 }
 
 function selecionarOperadoraCelular(op){
 
     operadoraCelularSelecionada=op;
+
     document.getElementById("celularOperadora").value=op;
 
-    document.getElementById("celOpPagueMenos").classList.toggle("selected",op==="PAGUE MENOS");
-    document.getElementById("celOpVivo").classList.toggle("selected",op==="VIVO");
+    document
+        .getElementById("celOpPagueMenos")
+        .classList.toggle("selected",op==="PAGUE MENOS");
+
+    document
+        .getElementById("celOpVivo")
+        .classList.toggle("selected",op==="VIVO");
+
 }
 
 function selecionarRecargaCelular(valor){
 
     recargaCelularSelecionada=valor;
+
     document.getElementById("celularRecarga").value=String(valor);
 
-    document.getElementById("celRecSim").classList.toggle("selected",valor===true);
-    document.getElementById("celRecNao").classList.toggle("selected",valor===false);
+    document
+        .getElementById("celRecSim")
+        .classList.toggle("selected",valor===true);
+
+    document
+        .getElementById("celRecNao")
+        .classList.toggle("selected",valor===false);
+
 }
 
 function salvarCelular(){
@@ -2642,13 +3541,23 @@ function salvarCelular(){
     const ddd=document.getElementById("celularDDD").value;
     const index=Number(document.getElementById("celularIndex").value);
 
-    if(!nome)return mostrarToast("Digite o nome do celular.");
-    if(ddd.length!==2||!obterRegiao(ddd))return mostrarToast("Digite um DDD válido de 2 números.");
-    if(!numero)return mostrarToast("Digite o número do celular.");
-    if(!whatsapp)return mostrarToast("Digite o número do WhatsApp.");
+    if(!nome)
+        return mostrarToast("Digite o nome do celular.");
+
+    if(ddd.length!==2||!obterRegiao(ddd))
+        return mostrarToast("Digite um DDD válido de 2 números.");
+
+    if(!numero)
+        return mostrarToast("Digite o número do celular.");
+
+    if(!whatsapp)
+        return mostrarToast("Digite o número do WhatsApp.");
 
     const celular={
-        nome,numero,whatsapp,ddd,
+        nome,
+        numero,
+        whatsapp,
+        ddd,
         regiao:obterRegiao(ddd),
         operadora:operadoraCelularSelecionada,
         recarga:recargaCelularSelecionada,
@@ -2656,15 +3565,23 @@ function salvarCelular(){
     };
 
     if(index>=0){
+
         celulares[index]=celular;
+
         mostrarToast("Celular atualizado.");
+
     }else{
+
         celulares.push(celular);
+
         mostrarToast("Celular salvo.");
+
     }
 
     salvarDados();
+
     navegar("celulares");
+
 }
 
 function editarCelular(index){
@@ -2679,9 +3596,11 @@ function editarCelular(index){
 
     selecionarOperadoraCelular(c.operadora||"PAGUE MENOS");
     selecionarRecargaCelular(!!c.recarga);
+
     detectarRegiaoCelular();
 
     navegar("novoCelular");
+
 }
 
 function excluirCelular(index){
@@ -2689,19 +3608,29 @@ function excluirCelular(index){
     if(!confirm("Excluir este celular?"))return;
 
     celulares.splice(index,1);
+
     salvarDados();
     atualizarTudo();
 
     mostrarToast("Celular excluído.");
+
 }
 
 function renderCelulares(){
 
     const box=document.getElementById("listaCelulares");
+
     if(!box)return;
 
     if(!celulares.length){
-        box.innerHTML=`<div class="empty">📱<br><br>Nenhum celular cadastrado.</div>`;
+
+        box.innerHTML=`
+            <div class="empty">
+                📱<br><br>
+                Nenhum celular cadastrado.
+            </div>
+        `;
+
         return;
     }
 
@@ -2714,40 +3643,71 @@ function renderCelulares(){
             </div>
 
             <div class="phone-line">
+
                 <b>📞 NÚMERO DO CELULAR</b>
+
                 ${formatarTelefone(c.ddd,c.numero)}
+
             </div>
 
             <div class="phone-line">
+
                 <b>💬 NÚMERO DO WHATSAPP</b>
+
                 ${formatarTelefone(c.ddd,c.whatsapp)}
+
             </div>
 
             <div class="phone-meta">
-                <span class="tag">${c.operadora==="VIVO"?"🟣":"🟢"} ${escaparHTML(c.operadora)}</span>
-                <span class="tag">${c.recarga?"🟢 Com recarga":"🔴 Sem recarga"}</span>
-                <span class="tag">📍 ${escaparHTML(c.regiao||"")}</span>
+
+                <span class="tag">
+                    ${c.operadora==="VIVO"?"🟣":"🟢"}
+                    ${escaparHTML(c.operadora)}
+                </span>
+
+                <span class="tag">
+                    ${c.recarga?"🟢 Com recarga":"🔴 Sem recarga"}
+                </span>
+
+                <span class="tag">
+                    📍 ${escaparHTML(c.regiao||"")}
+                </span>
+
             </div>
 
             <div class="list-actions">
-                <button class="small-btn" onclick="editarCelular(${index})">✏️ Editar</button>
-                <button class="small-btn" onclick="abrirWhatsAppCelular(${index})">💬 WhatsApp</button>
-                <button class="small-btn" onclick="excluirCelular(${index})">🗑️ Excluir</button>
+
+                <button class="small-btn" onclick="editarCelular(${index})">
+                    ✏️ Editar
+                </button>
+
+                <button class="small-btn" onclick="abrirWhatsAppCelular(${index})">
+                    💬 WhatsApp
+                </button>
+
+                <button class="small-btn" onclick="excluirCelular(${index})">
+                    🗑️ Excluir
+                </button>
+
             </div>
 
         </div>
 
     `).join("");
+
 }
 
 function abrirWhatsAppCelular(index){
 
     const c=celulares[index];
+
     const numero=`${c.ddd}${c.whatsapp}`.replace(/\D/g,"");
 
-    if(!numero)return mostrarToast("Número de WhatsApp inválido.");
+    if(!numero)
+        return mostrarToast("Número de WhatsApp inválido.");
 
     window.open(`https://wa.me/55${numero}`,"_blank");
+
 }
 
 /* =========================================================
@@ -2758,10 +3718,15 @@ let ultimaResposta="";
 
 function gerarResposta(){
 
-    const pergunta=document.getElementById("perguntaCliente").value.trim();
+    const pergunta=document
+        .getElementById("perguntaCliente")
+        .value
+        .trim();
 
     if(!pergunta){
+
         mostrarToast("Cole a pergunta do cliente.");
+
         return;
     }
 
@@ -2777,9 +3742,11 @@ function gerarResposta(){
 
         ultimaResposta=criarRespostaHumana(pergunta);
 
-        document.getElementById("respostaTexto").textContent=ultimaResposta;
+        document.getElementById("respostaTexto").textContent=
+            ultimaResposta;
 
         gerando.classList.remove("show");
+
         respostaBox.classList.add("show");
         tools.classList.add("show");
 
@@ -2794,10 +3761,13 @@ function gerarResposta(){
         salvarDados();
 
     },1000);
+
 }
 
 function contem(texto,palavras){
+
     return palavras.some(p=>texto.includes(p));
+
 }
 
 function criarRespostaHumana(pergunta){
@@ -2807,37 +3777,113 @@ function criarRespostaHumana(pergunta){
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g,"");
 
-    if(contem(p,["vai liberar hoje","libera hoje","recebo hoje","receber hoje","sai hoje","fica pronto hoje"]))
+    if(contem(p,[
+        "vai liberar hoje",
+        "libera hoje",
+        "recebo hoje",
+        "receber hoje",
+        "sai hoje",
+        "fica pronto hoje"
+    ]))
+
         return "Sim, senhora. Se a senhora me encaminhar tudo certinho, eu faço a conferência e vou protocolar o que for necessário ainda hoje para dar andamento à liberação. Assim que eu tiver a confirmação da próxima etapa, aviso a senhora.";
 
-    if(contem(p,["o que falta","falta alguma coisa","faltando","preciso mandar","documento preciso","documentos preciso"]))
+    if(contem(p,[
+        "o que falta",
+        "falta alguma coisa",
+        "faltando",
+        "preciso mandar",
+        "documento preciso",
+        "documentos preciso"
+    ]))
+
         return "Certo, senhora. Vou conferir essa parte para a senhora. Se estiver faltando alguma documentação ou informação, eu te aviso exatamente o que precisa ser encaminhado para conseguirmos dar continuidade.";
 
-    if(contem(p,["quanto vou receber","qual o valor","valor vou receber","quanto eu recebo","valor liberado"]))
+    if(contem(p,[
+        "quanto vou receber",
+        "qual o valor",
+        "valor vou receber",
+        "quanto eu recebo",
+        "valor liberado"
+    ]))
+
         return "Estou conferindo essa informação para passar o valor corretamente, senhora. Prefiro confirmar os dados antes de te informar para não passar nenhuma informação equivocada.";
 
-    if(contem(p,["quando vou receber","quando recebo","quando cai","que dia recebo","previsao de pagamento","previsão de pagamento"]))
+    if(contem(p,[
+        "quando vou receber",
+        "quando recebo",
+        "quando cai",
+        "que dia recebo",
+        "previsao de pagamento",
+        "previsão de pagamento"
+    ]))
+
         return "Estou acompanhando essa etapa, senhora. Assim que houver uma confirmação sobre a previsão de pagamento, eu aviso a senhora certinho.";
 
-    if(contem(p,["ja foi protocolado","já foi protocolado","protocolou","foi protocolado","protocolo"]))
+    if(contem(p,[
+        "ja foi protocolado",
+        "já foi protocolado",
+        "protocolou",
+        "foi protocolado",
+        "protocolo"
+    ]))
+
         return "Estou acompanhando essa parte, senhora. Assim que eu tiver a confirmação do protocolo e da próxima etapa, te aviso certinho por aqui.";
 
-    if(contem(p,["tem novidade","alguma novidade","novidade do processo","como esta","como está o processo","tem alguma atualizacao","tem alguma atualização"]))
+    if(contem(p,[
+        "tem novidade",
+        "alguma novidade",
+        "novidade do processo",
+        "como esta",
+        "como está o processo",
+        "tem alguma atualizacao",
+        "tem alguma atualização"
+    ]))
+
         return "Estou acompanhando, senhora. Assim que houver uma atualização confirmada, eu te aviso por aqui. Não quero te passar uma informação antes de ter a confirmação correta.";
 
-    if(contem(p,["por que nao caiu","por que não caiu","nao caiu","não caiu","ainda nao recebi","ainda não recebi","nao recebi"]))
+    if(contem(p,[
+        "por que nao caiu",
+        "por que não caiu",
+        "nao caiu",
+        "não caiu",
+        "ainda nao recebi",
+        "ainda não recebi",
+        "nao recebi"
+    ]))
+
         return "Estou verificando essa etapa, senhora. O fato de ainda não ter aparecido não significa necessariamente que houve algum problema. Vou conferir a situação e te retorno assim que tiver uma informação confirmada.";
 
-    if(contem(p,["posso mandar agora","posso enviar agora","mando agora","enviar os documentos"]))
+    if(contem(p,[
+        "posso mandar agora",
+        "posso enviar agora",
+        "mando agora",
+        "enviar os documentos"
+    ]))
+
         return "Pode sim, senhora. Me encaminhando tudo corretamente, eu faço a conferência e dou andamento por aqui. Se faltar alguma coisa, eu te aviso.";
 
-    if(contem(p,["precisa pagar","tenho que pagar","tem taxa","tem alguma taxa","pagamento para liberar"]))
+    if(contem(p,[
+        "precisa pagar",
+        "tenho que pagar",
+        "tem taxa",
+        "tem alguma taxa",
+        "pagamento para liberar"
+    ]))
+
         return "Senhora, antes de qualquer pagamento, confirme comigo a informação e a autenticidade da solicitação. Não faça nenhum pagamento ou envie dados sensíveis sem essa confirmação.";
 
-    if(contem(p,["demora","quanto tempo","prazo","vai demorar"]))
+    if(contem(p,[
+        "demora",
+        "quanto tempo",
+        "prazo",
+        "vai demorar"
+    ]))
+
         return "Entendo, senhora. O prazo depende da etapa em que o procedimento estiver. Estou acompanhando por aqui e, assim que houver uma previsão confirmada, te informo.";
 
     return "Certo, senhora. Vou verificar essa informação com atenção e te passar uma resposta correta. Assim que eu tiver a confirmação da situação, te aviso por aqui.";
+
 }
 
 function copiarResposta(){
@@ -2847,6 +3893,7 @@ function copiarResposta(){
     navigator.clipboard.writeText(ultimaResposta)
         .then(()=>mostrarToast("📋 Resposta copiada."))
         .catch(()=>mostrarToast("Não foi possível copiar automaticamente."));
+
 }
 
 function abrirWhatsAppResposta(){
@@ -2858,7 +3905,9 @@ function abrirWhatsAppResposta(){
     const limpo=numero.replace(/\D/g,"");
 
     if(limpo.length<10){
+
         mostrarToast("Número inválido.");
+
         return;
     }
 
@@ -2866,6 +3915,7 @@ function abrirWhatsAppResposta(){
         `https://wa.me/55${limpo}?text=${encodeURIComponent(ultimaResposta)}`,
         "_blank"
     );
+
 }
 
 /* =========================================================
@@ -2874,25 +3924,72 @@ function abrirWhatsAppResposta(){
 
 function analisarPergunta(){
 
-    const pergunta=document.getElementById("perguntaAnalise").value.trim();
+    const pergunta=document
+        .getElementById("perguntaAnalise")
+        .value
+        .trim();
+
     const box=document.getElementById("resultadoAnalise");
 
     if(!pergunta){
+
         mostrarToast("Digite a pergunta.");
+
         return;
     }
 
     const p=pergunta.toLowerCase();
+
     let assunto="Atendimento geral";
 
-    if(contem(p,["valor","quanto vou receber","quanto recebo"])) assunto="💵 Valores";
-    else if(contem(p,["liberar","liberação","receber hoje","cai hoje"])) assunto="💰 Liberação";
-    else if(contem(p,["prazo","quando","quanto tempo","demora"])) assunto="⏳ Prazos";
-    else if(contem(p,["documento","documentação","mandar","enviar"])) assunto="📄 Documentação";
-    else if(contem(p,["protocolo","protocolado","andamento","novidade"])) assunto="📂 Andamento";
+    if(contem(p,[
+        "valor",
+        "quanto vou receber",
+        "quanto recebo"
+    ]))
+        assunto="💵 Valores";
 
-    box.innerHTML=`<div class="answer-label">ASSUNTO IDENTIFICADO</div>${assunto}`;
+    else if(contem(p,[
+        "liberar",
+        "liberação",
+        "receber hoje",
+        "cai hoje"
+    ]))
+        assunto="💰 Liberação";
+
+    else if(contem(p,[
+        "prazo",
+        "quando",
+        "quanto tempo",
+        "demora"
+    ]))
+        assunto="⏳ Prazos";
+
+    else if(contem(p,[
+        "documento",
+        "documentação",
+        "mandar",
+        "enviar"
+    ]))
+        assunto="📄 Documentação";
+
+    else if(contem(p,[
+        "protocolo",
+        "protocolado",
+        "andamento",
+        "novidade"
+    ]))
+        assunto="📂 Andamento";
+
+    box.innerHTML=`
+        <div class="answer-label">
+            ASSUNTO IDENTIFICADO
+        </div>
+        ${assunto}
+    `;
+
     box.classList.add("show");
+
 }
 
 function montarMensagem(){
@@ -2902,63 +3999,106 @@ function montarMensagem(){
     const valor=document.getElementById("msgValor").value.trim();
 
     if(!noticia){
+
         mostrarToast("Digite a notícia.");
+
         return;
     }
 
-    let texto=`Boa notícia, ${nome||"senhor(a)"}. ${noticia}`;
+    let texto=
+        `Boa notícia, ${nome||"senhor(a)"}. ${noticia}`;
 
-    if(valor)texto+=` O valor informado é de ${valor}.`;
+    if(valor)
+        texto+=` O valor informado é de ${valor}.`;
 
-    texto+=" Vou acompanhar as próximas etapas e te aviso assim que houver uma confirmação.";
+    texto+=
+        " Vou acompanhar as próximas etapas e te aviso assim que houver uma confirmação.";
 
     const box=document.getElementById("mensagemMontada");
+
     box.textContent=texto;
+
     box.classList.add("show");
+
 }
 
 function abrirEnvioRapido(){
 
-    const numero=document.getElementById("envioNumero").value.replace(/\D/g,"");
+    const numero=document
+        .getElementById("envioNumero")
+        .value
+        .replace(/\D/g,"");
 
     if(numero.length<10){
+
         mostrarToast("Digite DDD + número.");
+
         return;
     }
 
     window.open(`https://wa.me/55${numero}`,"_blank");
+
 }
 
 function renderHistorico(){
 
     const box=document.getElementById("historicoLista");
+
     if(!box)return;
 
     if(!historico.length){
-        box.innerHTML=`<div class="empty">📋 Nenhum histórico ainda.</div>`;
+
+        box.innerHTML=`
+            <div class="empty">
+                📋 Nenhum histórico ainda.
+            </div>
+        `;
+
         return;
     }
 
     box.innerHTML=historico.map((h,i)=>`
+
         <div class="list-item">
-            <div class="list-name">Pergunta</div>
-            <div class="list-meta">${escaparHTML(h.pergunta)}</div>
+
+            <div class="list-name">
+                Pergunta
+            </div>
+
+            <div class="list-meta">
+                ${escaparHTML(h.pergunta)}
+            </div>
 
             <div style="height:10px"></div>
 
-            <div class="list-name">Resposta</div>
-            <div class="list-meta">${escaparHTML(h.resposta)}</div>
+            <div class="list-name">
+                Resposta
+            </div>
+
+            <div class="list-meta">
+                ${escaparHTML(h.resposta)}
+            </div>
 
             <div class="list-actions">
-                <button class="small-btn" onclick="copiarHistorico(${i})">📋 Copiar</button>
+
+                <button class="small-btn" onclick="copiarHistorico(${i})">
+                    📋 Copiar
+                </button>
+
             </div>
+
         </div>
+
     `).join("");
+
 }
 
 function copiarHistorico(index){
-    navigator.clipboard.writeText(historico[index].resposta)
+
+    navigator.clipboard
+        .writeText(historico[index].resposta)
         .then(()=>mostrarToast("📋 Copiado."));
+
 }
 
 function exportarBackup(){
@@ -2977,15 +4117,18 @@ function exportarBackup(){
     );
 
     const url=URL.createObjectURL(blob);
+
     const a=document.createElement("a");
 
     a.href=url;
     a.download="backup-bot-bm3.json";
+
     a.click();
 
     URL.revokeObjectURL(url);
 
     mostrarToast("💾 Backup exportado.");
+
 }
 
 function importarBackup(event){
@@ -3002,10 +4145,17 @@ function importarBackup(event){
 
             const dados=JSON.parse(e.target.result);
 
-            if(Array.isArray(dados.contatos))contatos=dados.contatos;
-            if(Array.isArray(dados.chips))chips=dados.chips;
-            if(Array.isArray(dados.celulares))celulares=dados.celulares;
-            if(Array.isArray(dados.historico))historico=dados.historico;
+            if(Array.isArray(dados.contatos))
+                contatos=dados.contatos;
+
+            if(Array.isArray(dados.chips))
+                chips=dados.chips;
+
+            if(Array.isArray(dados.celulares))
+                celulares=dados.celulares;
+
+            if(Array.isArray(dados.historico))
+                historico=dados.historico;
 
             salvarDados();
             atualizarTudo();
@@ -3017,10 +4167,13 @@ function importarBackup(event){
             mostrarToast("Arquivo de backup inválido.");
 
         }
+
     };
 
     reader.readAsText(file);
+
     event.target.value="";
+
 }
 
 /* =========================================================
@@ -3038,7 +4191,10 @@ function atualizarTudo(){
     renderCelulares();
     renderHistorico();
 
-    aplicarTema(localStorage.getItem("temaBotBM3")||"light");
+    aplicarTema(
+        localStorage.getItem("temaBotBM3")||"light"
+    );
+
 }
 
 /* =========================================================
@@ -3052,22 +4208,39 @@ function somBotao(){
     try{
 
         if(!audioContext){
-            const AudioCtx=window.AudioContext||window.webkitAudioContext;
+
+            const AudioCtx=
+                window.AudioContext||
+                window.webkitAudioContext;
+
             if(!AudioCtx)return;
+
             audioContext=new AudioCtx();
+
         }
 
         if(audioContext.state==="suspended"){
             audioContext.resume();
         }
 
-        const oscillator=audioContext.createOscillator();
-        const gain=audioContext.createGain();
+        const oscillator=
+            audioContext.createOscillator();
+
+        const gain=
+            audioContext.createGain();
 
         oscillator.type="sine";
-        oscillator.frequency.setValueAtTime(1250,audioContext.currentTime);
 
-        gain.gain.setValueAtTime(.055,audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(
+            1250,
+            audioContext.currentTime
+        );
+
+        gain.gain.setValueAtTime(
+            .055,
+            audioContext.currentTime
+        );
+
         gain.gain.exponentialRampToValueAtTime(
             .001,
             audioContext.currentTime+.045
@@ -3077,9 +4250,13 @@ function somBotao(){
         gain.connect(audioContext.destination);
 
         oscillator.start();
-        oscillator.stop(audioContext.currentTime+.045);
+
+        oscillator.stop(
+            audioContext.currentTime+.045
+        );
 
     }catch(e){}
+
 }
 
 document.addEventListener("pointerdown",event=>{
@@ -3098,14 +4275,21 @@ document.addEventListener("pointerdown",event=>{
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-    const tema=localStorage.getItem("temaBotBM3")||"light";
+    const tema=
+        localStorage.getItem("temaBotBM3")||"light";
 
     aplicarTema(tema);
+
     atualizarTudo();
 
-    const loading=document.getElementById("loading");
-    const welcome=document.getElementById("welcome");
-    const app=document.querySelector(".app");
+    const loading=
+        document.getElementById("loading");
+
+    const welcome=
+        document.getElementById("welcome");
+
+    const app=
+        document.querySelector(".app");
 
     setTimeout(()=>{
 
@@ -3126,7 +4310,9 @@ document.addEventListener("DOMContentLoaded",()=>{
                 app.classList.add("ready");
 
                 setTimeout(()=>{
+
                     welcome.style.display="none";
+
                 },700);
 
             },1600);
@@ -3136,6 +4322,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     },1400);
 
 });
+
 </script>
 
 </body>
