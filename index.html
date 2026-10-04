@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -200,13 +201,30 @@
       margin-bottom: 12px;
     }
 
-    .status-botoes {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .alterar-status {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 9px;
+      background: #555;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
     }
 
-    .status-botoes button {
+    .status-opcoes {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .status-opcoes.aberto {
+      display: flex;
+    }
+
+    .status-opcoes button {
       width: 100%;
       padding: 11px;
       border: none;
@@ -251,127 +269,58 @@
 
 <body>
 
-  <!-- CARREGAMENTO -->
-
   <div id="carregando">
     <div class="carregando-box">
       <h1>🍀 BOT DO BM3 🍀</h1>
-
       <div class="spinner"></div>
-
       <strong>⏳ Carregando...</strong>
     </div>
   </div>
 
-
   <div class="container">
 
-    <!-- TOPO -->
-
     <div class="topo">
-
       <div class="bandeira"></div>
-
       <h1>🍀 BOT DO BM3 🍀</h1>
-
       <p>Organizador de contatos</p>
-
     </div>
-
-
-    <!-- INÍCIO -->
 
     <div class="inicio" id="inicio">
-
       <h2>🏠 Início</h2>
-
       <p>Bem-vindo ao BOT DO BM3</p>
-
-      <button onclick="abrirMenu()">
-        ☰ Abrir Menu
-      </button>
-
+      <button onclick="abrirMenu()">☰ Abrir Menu</button>
     </div>
-
-
-    <!-- MENU -->
 
     <div class="menu" id="menu">
-
-      <button onclick="abrirTela('adicionar')">
-        ➕ Adicionar contato
-      </button>
-
-      <button onclick="abrirTela('pesquisar')">
-        🔎 Pesquisar contatos
-      </button>
-
-      <button onclick="abrirTela('contatos')">
-        📋 Meus contatos
-      </button>
-
-      <button onclick="abrirTela('grupos')">
-        🏷️ Grupos / Etiquetas
-      </button>
-
-      <button onclick="abrirTela('configuracoes')">
-        ⚙️ Configurações
-      </button>
-
-      <button onclick="voltarInicio()">
-        🏠 Voltar ao início
-      </button>
-
+      <button onclick="abrirTela('adicionar')">➕ Adicionar contato</button>
+      <button onclick="abrirTela('pesquisar')">🔎 Pesquisar contatos</button>
+      <button onclick="abrirTela('contatos')">📋 Meus contatos</button>
+      <button onclick="abrirTela('grupos')">🏷️ Grupos / Etiquetas</button>
+      <button onclick="abrirTela('configuracoes')">⚙️ Configurações</button>
+      <button onclick="voltarInicio()">🏠 Voltar ao início</button>
     </div>
 
-
-    <!-- ADICIONAR -->
-
     <div class="tela" id="adicionar">
-
       <h2>➕ Adicionar contato</h2>
 
-      <input
-        id="nome"
-        placeholder="Nome"
-      >
+      <input id="nome" placeholder="Nome">
 
-      <input
-        id="numero"
-        placeholder="Número do WhatsApp"
-      >
+      <input id="numero" placeholder="Número do WhatsApp">
 
-      <input
-        id="grupo"
-        placeholder="Grupo / Etiqueta"
-      >
+      <input id="grupo" placeholder="Grupo / Etiqueta">
 
-      <textarea
-        id="observacao"
-        placeholder="Observação"
-      ></textarea>
+      <textarea id="observacao" placeholder="Observação"></textarea>
 
-      <button
-        class="acao"
-        onclick="adicionarContato()"
-      >
+      <button class="acao" onclick="adicionarContato()">
         💾 Salvar contato
       </button>
 
-      <button
-        class="acao voltar"
-        onclick="voltarMenu()"
-      >
+      <button class="acao voltar" onclick="voltarMenu()">
         ↩️ Voltar ao menu
       </button>
-
     </div>
 
-
-    <!-- PESQUISAR -->
-
     <div class="tela" id="pesquisar">
-
       <h2>🔎 Pesquisar contatos</h2>
 
       <input
@@ -382,140 +331,85 @@
 
       <div id="resultadoPesquisa"></div>
 
-      <button
-        class="acao voltar"
-        onclick="voltarMenu()"
-      >
+      <button class="acao voltar" onclick="voltarMenu()">
         ↩️ Voltar ao menu
       </button>
-
     </div>
 
-
-    <!-- CONTATOS -->
-
     <div class="tela" id="contatos">
-
       <h2>📋 Meus contatos</h2>
 
       <div id="lista"></div>
 
-      <button
-        class="acao voltar"
-        onclick="voltarMenu()"
-      >
+      <button class="acao voltar" onclick="voltarMenu()">
         ↩️ Voltar ao menu
       </button>
-
     </div>
 
-
-    <!-- GRUPOS -->
-
     <div class="tela" id="grupos">
-
       <h2>🏷️ Grupos / Etiquetas</h2>
 
       <div id="listaGrupos"></div>
 
-      <button
-        class="acao voltar"
-        onclick="voltarMenu()"
-      >
+      <button class="acao voltar" onclick="voltarMenu()">
         ↩️ Voltar ao menu
       </button>
-
     </div>
 
-
-    <!-- CONFIGURAÇÕES -->
-
     <div class="tela" id="configuracoes">
-
       <h2>⚙️ Configurações</h2>
 
-      <p>
-        <strong>🍀 BOT DO BM3 🍀</strong>
-      </p>
+      <p><strong>🍀 BOT DO BM3 🍀</strong></p>
 
       <p>Organizador de contatos</p>
 
-      <button
-        class="acao"
-        onclick="limparContatos()"
-      >
+      <button class="acao" onclick="limparContatos()">
         🗑️ Apagar todos os contatos
       </button>
 
-      <button
-        class="acao voltar"
-        onclick="voltarMenu()"
-      >
+      <button class="acao voltar" onclick="voltarMenu()">
         ↩️ Voltar ao menu
       </button>
-
     </div>
 
   </div>
 
-
   <script>
-
-    /* CONTATOS */
 
     let contatos = JSON.parse(
       localStorage.getItem("contatos") || "[]"
     );
 
-
-    /* CARREGAMENTO */
-
     setTimeout(function() {
-
       document.getElementById("carregando").style.display = "none";
-
     }, 2000);
 
 
-    /* SALVAR */
-
     function salvar() {
-
       localStorage.setItem(
         "contatos",
         JSON.stringify(contatos)
       );
-
     }
 
 
-    /* MENU */
-
     function abrirMenu() {
-
       document.getElementById("inicio").style.display = "none";
 
       esconderTelas();
 
       document.getElementById("menu").style.display = "block";
-
     }
 
 
-    /* INÍCIO */
-
     function voltarInicio() {
-
       esconderTelas();
 
       document.getElementById("menu").style.display = "none";
 
       document.getElementById("inicio").style.display = "block";
-
     }
 
-
-    /* ABRIR TELA */
 
     function abrirTela(tela) {
 
@@ -527,40 +421,28 @@
 
 
       if (tela === "contatos") {
-
         mostrarContatos();
-
       }
 
 
       if (tela === "pesquisar") {
-
         mostrarContatos();
-
       }
 
 
       if (tela === "grupos") {
-
         mostrarGrupos();
-
       }
-
     }
 
-
-    /* VOLTAR MENU */
 
     function voltarMenu() {
 
       esconderTelas();
 
       document.getElementById("menu").style.display = "block";
-
     }
 
-
-    /* ESCONDER TELAS */
 
     function esconderTelas() {
 
@@ -568,15 +450,10 @@
         document.querySelectorAll(".tela");
 
       telas.forEach(function(tela) {
-
         tela.style.display = "none";
-
       });
-
     }
 
-
-    /* ADICIONAR CONTATO */
 
     function adicionarContato() {
 
@@ -600,7 +477,6 @@
         );
 
         return;
-
       }
 
 
@@ -618,7 +494,6 @@
 
         ultimaAtualizacao:
           new Date().toLocaleString("pt-BR")
-
       });
 
 
@@ -640,11 +515,8 @@
 
 
       mostrarContatos();
-
     }
 
-
-    /* ALTERAR STATUS */
 
     function alterarStatus(index, novoStatus) {
 
@@ -656,11 +528,26 @@
       salvar();
 
       mostrarContatos();
-
     }
 
 
-    /* EXCLUIR CONTATO */
+    function abrirOpcoesStatus(index) {
+
+      const opcoes =
+        document.getElementById(
+          "statusOpcoes" + index
+        );
+
+      if (opcoes.classList.contains("aberto")) {
+
+        opcoes.classList.remove("aberto");
+
+      } else {
+
+        opcoes.classList.add("aberto");
+      }
+    }
+
 
     function excluirContato(index) {
 
@@ -677,13 +564,9 @@
         mostrarContatos();
 
         mostrarGrupos();
-
       }
-
     }
 
-
-    /* MOSTRAR CONTATOS */
 
     function mostrarContatos() {
 
@@ -707,134 +590,125 @@
       let html = "";
 
 
-      contatos.forEach(
-        function(contato, index) {
+      contatos.forEach(function(contato, index) {
 
-          const texto =
-            `${contato.nome} ${contato.numero} ${contato.grupo}`
-            .toLowerCase();
-
-
-          if (!texto.includes(pesquisa)) {
-
-            return;
-
-          }
+        const texto =
+          `${contato.nome} ${contato.numero} ${contato.grupo}`
+          .toLowerCase();
 
 
-          const statusAtual =
-            contato.status ||
-            "⚠️ ZAP EM ANÁLISE";
+        if (!texto.includes(pesquisa)) {
+          return;
+        }
 
 
-          const ultimaAtualizacao =
-            contato.ultimaAtualizacao ||
-            "Não registrada";
+        const statusAtual =
+          contato.status ||
+          "⚠️ ZAP EM ANÁLISE";
 
 
-          html += `
-
-            <div class="contato">
-
-              <strong>
-                👤 ${contato.nome}
-              </strong>
-
-              <br><br>
-
-              📱 Número:
-              ${contato.numero}
-
-              <br><br>
-
-              🏷️ Grupo:
-              ${contato.grupo || "Sem grupo"}
-
-              <br><br>
-
-              📝 Observação:
-              ${contato.observacao || "Sem observação"}
+        const ultimaAtualizacao =
+          contato.ultimaAtualizacao ||
+          "Não registrada";
 
 
-              <div class="status-box">
+        html += `
 
-                <div class="status-atual">
+          <div class="contato">
 
-                  ${statusAtual}
+            <strong>
+              👤 ${contato.nome}
+            </strong>
 
-                </div>
+            <br><br>
 
+            📱 Número:
+            ${contato.numero}
 
-                <div class="status-botoes">
+            <br><br>
 
-                  <button
-                    class="status-analise"
-                    onclick="alterarStatus(
-                      ${index},
-                      '⚠️ ZAP EM ANÁLISE'
-                    )"
-                  >
-                    ⚠️ ZAP EM ANÁLISE
-                  </button>
+            🏷️ Grupo:
+            ${contato.grupo || "Sem grupo"}
 
+            <br><br>
 
-                  <button
-                    class="status-on"
-                    onclick="alterarStatus(
-                      ${index},
-                      '✅ ZAP ON'
-                    )"
-                  >
-                    ✅ ZAP ON
-                  </button>
+            📝 Observação:
+            ${contato.observacao || "Sem observação"}
 
 
-                  <button
-                    class="status-caiu"
-                    onclick="alterarStatus(
-                      ${index},
-                      '❌ ZAP CAIU'
-                    )"
-                  >
-                    ❌ ZAP CAIU
-                  </button>
+            <div class="status-box">
 
-                </div>
-
-
-                <br>
-
-                📅 Última atualização:
-                ${ultimaAtualizacao}
-
+              <div class="status-atual">
+                ${statusAtual}
               </div>
 
 
               <button
-                class="acao whatsapp"
-                onclick="abrirWhatsApp(
-                  '${contato.numero}'
-                )"
+                class="alterar-status"
+                onclick="abrirOpcoesStatus(${index})"
               >
-                💬 Abrir WhatsApp
+                🔽 Alterar status
               </button>
 
 
-              <button
-                class="acao excluir"
-                onclick="excluirContato(
-                  ${index}
-                )"
+              <div
+                class="status-opcoes"
+                id="statusOpcoes${index}"
               >
-                🗑️ Excluir
-              </button>
+
+                <button
+                  class="status-analise"
+                  onclick="alterarStatus(${index}, '⚠️ ZAP EM ANÁLISE')"
+                >
+                  ⚠️ ZAP EM ANÁLISE
+                </button>
+
+
+                <button
+                  class="status-on"
+                  onclick="alterarStatus(${index}, '✅ ZAP ON')"
+                >
+                  ✅ ZAP ON
+                </button>
+
+
+                <button
+                  class="status-caiu"
+                  onclick="alterarStatus(${index}, '❌ ZAP CAIU')"
+                >
+                  ❌ ZAP CAIU
+                </button>
+
+              </div>
+
+
+              <br>
+
+              📅 Última atualização:
+              ${ultimaAtualizacao}
 
             </div>
 
-          `;
 
-        }
-      );
+            <button
+              class="acao whatsapp"
+              onclick="abrirWhatsApp('${contato.numero}')"
+            >
+              💬 Abrir WhatsApp
+            </button>
+
+
+            <button
+              class="acao excluir"
+              onclick="excluirContato(${index})"
+            >
+              🗑️ Excluir
+            </button>
+
+          </div>
+
+        `;
+      });
 
 
       const mensagem =
@@ -842,39 +716,31 @@
 
 
       if (lista) {
-
         lista.innerHTML =
           html || mensagem;
-
       }
 
 
       if (resultado) {
-
         resultado.innerHTML =
           html || mensagem;
-
       }
-
     }
 
-
-    /* WHATSAPP */
 
     function abrirWhatsApp(numero) {
 
       const numeroLimpo =
         numero.replace(/\D/g, "");
 
+
       window.open(
-        "https://wa.me/" + numeroLimpo,
+        "https://wa.me/" +
+        numeroLimpo,
         "_blank"
       );
-
     }
 
-
-    /* GRUPOS */
 
     function mostrarGrupos() {
 
@@ -883,28 +749,24 @@
           "listaGrupos"
         );
 
+
       const grupos = {};
 
 
-      contatos.forEach(
-        function(contato) {
+      contatos.forEach(function(contato) {
 
-          const grupo =
-            contato.grupo ||
-            "Sem grupo";
-
-
-          if (!grupos[grupo]) {
-
-            grupos[grupo] = 0;
-
-          }
+        const grupo =
+          contato.grupo ||
+          "Sem grupo";
 
 
-          grupos[grupo]++;
-
+        if (!grupos[grupo]) {
+          grupos[grupo] = 0;
         }
-      );
+
+
+        grupos[grupo]++;
+      });
 
 
       let html = "";
@@ -925,7 +787,6 @@
             </div>
 
           `;
-
         }
       );
 
@@ -933,11 +794,8 @@
       lista.innerHTML =
         html ||
         "<p>Nenhum grupo cadastrado.</p>";
-
     }
 
-
-    /* APAGAR TODOS */
 
     function limparContatos() {
 
@@ -958,12 +816,11 @@
         alert(
           "🗑️ Todos os contatos foram apagados."
         );
-
       }
-
     }
 
   </script>
 
 </body>
 </html>
+```
