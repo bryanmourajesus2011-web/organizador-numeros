@@ -628,8 +628,11 @@ function mostrarContatos() {
         </div>
 
         <button
-          class="acao whatsapp"
-          data-whatsapp="${contato.numero}"
+  class="botao-alterar"
+  onclick="document.getElementById('status-${index}').style.display='block'"
+>
+  🔽 Alterar status
+</button>
         >
           💬 Abrir WhatsApp
         </button>
