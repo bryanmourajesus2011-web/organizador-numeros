@@ -377,7 +377,8 @@ body.dark .header{
 .advisor-btn:active,
 .small-btn:active,
 .primary:active,
-.secondary:active{
+.secondary:active,
+.calc-option:active{
     transform:scale(.97);
 }
 
@@ -876,6 +877,60 @@ textarea{
     line-height:1.5;
 }
 
+.calc-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-bottom:18px;
+}
+
+.calc-option{
+    min-height:82px;
+    padding:12px;
+    border-radius:15px;
+    background:var(--card);
+    color:var(--texto);
+    border:1px solid var(--borda);
+    text-align:left;
+    font-size:12px;
+    font-weight:900;
+    transition:.18s;
+}
+
+.calc-option.selected{
+    border-color:var(--verde);
+    outline:3px solid rgba(0,140,69,.12);
+    background:rgba(0,140,69,.06);
+}
+
+.calc-option-icon{
+    font-size:23px;
+    margin-bottom:7px;
+}
+
+.calc-option-title{
+    font-size:12px;
+    line-height:1.25;
+}
+
+.calc-fields{
+    display:none;
+}
+
+.calc-fields.show{
+    display:block;
+}
+
+.calc-type-title{
+    margin:2px 0 13px;
+    padding:11px 12px;
+    border-radius:13px;
+    background:rgba(0,140,69,.08);
+    color:var(--verde);
+    font-size:13px;
+    font-weight:950;
+}
+
 .calc-result{
     margin-top:15px;
 }
@@ -1045,6 +1100,23 @@ textarea{
     .calculator-help{
         padding:13px;
     }
+
+    .calc-options{
+        grid-template-columns:1fr;
+    }
+
+    .calc-option{
+        min-height:70px;
+        display:flex;
+        align-items:center;
+        gap:12px;
+    }
+
+    .calc-option-icon{
+        margin:0;
+        min-width:32px;
+        text-align:center;
+    }
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -1159,7 +1231,7 @@ textarea{
         <button class="menu-card" onclick="navegar('calculadora')">
             <div class="menu-icon">🧮</div>
             <div class="menu-title">Calculadora</div>
-            <div class="menu-desc">Calcule porcentagem e divisão</div>
+            <div class="menu-desc">Vários tipos de cálculo</div>
         </button>
 
         <button class="menu-card" onclick="navegar('advogado')">
@@ -1222,76 +1294,51 @@ textarea{
     <div class="page-title">🧮 Calculadora</div>
 
     <div class="page-sub">
-        Informe o valor, escolha a porcentagem e selecione entre quantas pessoas dividir.
+        Primeiro escolha o tipo de cálculo. Depois preencha somente os campos necessários.
     </div>
 
     <div class="calculator-card">
 
-        <!-- COMO FUNCIONA -->
-
         <div class="calculator-help">
 
             <div class="calculator-help-title">
-                📖 COMO FUNCIONA
+                📖 COMO USAR
             </div>
 
             <div class="calculator-help-row">
                 <div class="calculator-help-icon">💰</div>
                 <div>
-                    <b>Valor:</b> coloque o valor que deseja calcular.
+                    <b>Valores:</b> você pode escrever de várias formas.
                     <br>
-                    Exemplos: <b>20k</b>, <b>20.000</b> ou <b>17,699</b>.
-                </div>
-            </div>
-
-            <div class="calculator-help-row">
-                <div class="calculator-help-icon">🔢</div>
-                <div>
-                    <b>20k</b> significa <b>R$ 20.000,00</b>.
+                    <b>20k</b> = R$ 20.000,00
                     <br>
-                    <b>20.000</b> também significa <b>R$ 20.000,00</b>.
+                    <b>20.000</b> = R$ 20.000,00
                     <br>
-                    <b>17,699</b> será entendido pelo BOT como <b>R$ 17.699,00</b>.
+                    <b>17,699</b> = R$ 17.699,00
+                    <br>
+                    <b>17,5</b> = R$ 17,50
                 </div>
             </div>
 
             <div class="calculator-help-row">
                 <div class="calculator-help-icon">📉</div>
                 <div>
-                    <b>Porcentagem:</b> escolha quanto será retirado do valor.
-                    <br>
-                    Exemplo: <b>25%</b> de R$ 20.000,00 = <b>R$ 5.000,00</b>.
+                    <b>Porcentagem:</b> use, por exemplo, <b>25</b> para representar 25%.
                 </div>
             </div>
 
             <div class="calculator-help-row">
                 <div class="calculator-help-icon">👥</div>
                 <div>
-                    <b>Divisão:</b> escolha entre quantas pessoas o valor restante será dividido.
-                    <br>
-                    Você pode dividir entre <b>1 e até 20 pessoas</b>.
+                    <b>Pessoas:</b> na opção de divisão, informe entre quantas pessoas deseja dividir.
                 </div>
             </div>
 
             <div class="calculator-example">
 
                 <div class="calculator-example-title">
-                    🍀 EXEMPLO COMPLETO
+                    🍀 EXEMPLO
                 </div>
-
-                <div>
-                    Valor: <b>20k</b>
-                </div>
-
-                <div>
-                    Porcentagem: <b>25%</b>
-                </div>
-
-                <div>
-                    Dividir entre: <b>3 pessoas</b>
-                </div>
-
-                <br>
 
                 <div>
                     R$ 20.000,00 − 25% = <b>R$ 15.000,00</b>
@@ -1304,94 +1351,545 @@ textarea{
                 <br>
 
                 <div>
-                    🍀 <b>Cada pessoa recebe R$ 5.000,00</b>
+                    🍀 <b>RESUMO : R$ 5.000,00 pra cada</b>
                 </div>
 
             </div>
 
             <div class="calculator-note">
-                💡 Você não precisa escrever a conta inteira.
-                Basta preencher os campos abaixo e escolher as opções.
+                💡 O BOT adapta os campos conforme o tipo de cálculo escolhido.
             </div>
 
         </div>
 
-        <!-- VALOR -->
-
         <div class="field">
 
-            <label>💰 VALOR</label>
+            <label>🧮 ESCOLHA O TIPO DE CÁLCULO</label>
 
-            <input
-                id="calcValor"
-                type="text"
-                inputmode="decimal"
-                placeholder="Ex.: 20k ou 20.000"
-                autocomplete="off"
-            >
+            <div class="calc-options">
+
+                <button
+                    id="calcOptPorcentagemDivisao"
+                    class="calc-option selected"
+                    onclick="selecionarTipoCalculo('porcentagemDivisao')"
+                >
+                    <div class="calc-option-icon">💰</div>
+                    <div class="calc-option-title">
+                        Porcentagem + divisão
+                    </div>
+                </button>
+
+                <button
+                    id="calcOptAdicionarPorcentagem"
+                    class="calc-option"
+                    onclick="selecionarTipoCalculo('adicionarPorcentagem')"
+                >
+                    <div class="calc-option-icon">📈</div>
+                    <div class="calc-option-title">
+                        Adicionar porcentagem
+                    </div>
+                </button>
+
+                <button
+                    id="calcOptDescontarPorcentagem"
+                    class="calc-option"
+                    onclick="selecionarTipoCalculo('descontarPorcentagem')"
+                >
+                    <div class="calc-option-icon">📉</div>
+                    <div class="calc-option-title">
+                        Descontar porcentagem
+                    </div>
+                </button>
+
+                <button
+                    id="calcOptDividir"
+                    class="calc-option"
+                    onclick="selecionarTipoCalculo('dividir')"
+                >
+                    <div class="calc-option-icon">👥</div>
+                    <div class="calc-option-title">
+                        Dividir valor
+                    </div>
+                </button>
+
+                <button
+                    id="calcOptMultiplicar"
+                    class="calc-option"
+                    onclick="selecionarTipoCalculo('multiplicar')"
+                >
+                    <div class="calc-option-icon">✖️</div>
+                    <div class="calc-option-title">
+                        Multiplicar valor
+                    </div>
+                </button>
+
+                <button
+                    id="calcOptSomar"
+                    class="calc-option"
+                    onclick="selecionarTipoCalculo('somar')"
+                >
+                    <div class="calc-option-icon">➕</div>
+                    <div class="calc-option-title">
+                        Somar valores
+                    </div>
+                </button>
+
+                <button
+                    id="calcOptSubtrair"
+                    class="calc-option"
+                    onclick="selecionarTipoCalculo('subtrair')"
+                >
+                    <div class="calc-option-icon">➖</div>
+                    <div class="calc-option-title">
+                        Subtrair valores
+                    </div>
+                </button>
+
+                <button
+                    id="calcOptDescobrirPorcentagem"
+                    class="calc-option"
+                    onclick="selecionarTipoCalculo('descobrirPorcentagem')"
+                >
+                    <div class="calc-option-icon">📊</div>
+                    <div class="calc-option-title">
+                        Descobrir porcentagem
+                    </div>
+                </button>
+
+                <button
+                    id="calcOptRegraTres"
+                    class="calc-option"
+                    onclick="selecionarTipoCalculo('regraTres')"
+                >
+                    <div class="calc-option-icon">🔢</div>
+                    <div class="calc-option-title">
+                        Regra de três
+                    </div>
+                </button>
+
+            </div>
 
         </div>
 
-        <!-- PORCENTAGEM -->
+        <!-- PORCENTAGEM + DIVISÃO -->
 
-        <div class="field">
+        <div id="calcCamposPorcentagemDivisao" class="calc-fields show">
 
-            <label>📉 PORCENTAGEM</label>
+            <div class="calc-type-title">
+                💰 Porcentagem + divisão
+            </div>
 
-            <select id="calcPorcentagem">
+            <div class="field">
 
-                <option value="0">0%</option>
-                <option value="5">5%</option>
-                <option value="10">10%</option>
-                <option value="15">15%</option>
-                <option value="20">20%</option>
-                <option value="25" selected>25%</option>
-                <option value="30">30%</option>
-                <option value="35">35%</option>
-                <option value="40">40%</option>
-                <option value="45">45%</option>
-                <option value="50">50%</option>
-                <option value="60">60%</option>
-                <option value="70">70%</option>
-                <option value="75">75%</option>
-                <option value="80">80%</option>
-                <option value="90">90%</option>
-                <option value="100">100%</option>
+                <label>💰 VALOR</label>
 
-            </select>
+                <input
+                    id="calcValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k ou 20.000"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>📉 PORCENTAGEM</label>
+
+                <select id="calcPorcentagem">
+
+                    <option value="0">0%</option>
+                    <option value="5">5%</option>
+                    <option value="10">10%</option>
+                    <option value="15">15%</option>
+                    <option value="20">20%</option>
+                    <option value="25" selected>25%</option>
+                    <option value="30">30%</option>
+                    <option value="35">35%</option>
+                    <option value="40">40%</option>
+                    <option value="45">45%</option>
+                    <option value="50">50%</option>
+                    <option value="60">60%</option>
+                    <option value="70">70%</option>
+                    <option value="75">75%</option>
+                    <option value="80">80%</option>
+                    <option value="90">90%</option>
+                    <option value="100">100%</option>
+
+                </select>
+
+            </div>
+
+            <div class="field">
+
+                <label>👥 DIVIDIR ENTRE</label>
+
+                <select id="calcPessoas">
+
+                    <option value="1">1 pessoa</option>
+                    <option value="2">2 pessoas</option>
+                    <option value="3" selected>3 pessoas</option>
+                    <option value="4">4 pessoas</option>
+                    <option value="5">5 pessoas</option>
+                    <option value="6">6 pessoas</option>
+                    <option value="7">7 pessoas</option>
+                    <option value="8">8 pessoas</option>
+                    <option value="9">9 pessoas</option>
+                    <option value="10">10 pessoas</option>
+                    <option value="11">11 pessoas</option>
+                    <option value="12">12 pessoas</option>
+                    <option value="13">13 pessoas</option>
+                    <option value="14">14 pessoas</option>
+                    <option value="15">15 pessoas</option>
+                    <option value="16">16 pessoas</option>
+                    <option value="17">17 pessoas</option>
+                    <option value="18">18 pessoas</option>
+                    <option value="19">19 pessoas</option>
+                    <option value="20">20 pessoas — máximo</option>
+
+                </select>
+
+            </div>
 
         </div>
 
-        <!-- PESSOAS -->
+        <!-- ADICIONAR PORCENTAGEM -->
 
-        <div class="field">
+        <div id="calcCamposAdicionarPorcentagem" class="calc-fields">
 
-            <label>👥 DIVIDIR ENTRE</label>
+            <div class="calc-type-title">
+                📈 Adicionar porcentagem
+            </div>
 
-            <select id="calcPessoas">
+            <div class="field">
 
-                <option value="1">1 pessoa</option>
-                <option value="2">2 pessoas</option>
-                <option value="3">3 pessoas</option>
-                <option value="4">4 pessoas</option>
-                <option value="5">5 pessoas</option>
-                <option value="6">6 pessoas</option>
-                <option value="7">7 pessoas</option>
-                <option value="8">8 pessoas</option>
-                <option value="9">9 pessoas</option>
-                <option value="10">10 pessoas</option>
-                <option value="11">11 pessoas</option>
-                <option value="12">12 pessoas</option>
-                <option value="13">13 pessoas</option>
-                <option value="14">14 pessoas</option>
-                <option value="15">15 pessoas</option>
-                <option value="16">16 pessoas</option>
-                <option value="17">17 pessoas</option>
-                <option value="18">18 pessoas</option>
-                <option value="19">19 pessoas</option>
-                <option value="20">20 pessoas — máximo</option>
+                <label>💰 VALOR</label>
 
-            </select>
+                <input
+                    id="calcAdicionarValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>📈 PORCENTAGEM PARA ADICIONAR</label>
+
+                <input
+                    id="calcAdicionarPorcentagem"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 25"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- DESCONTAR PORCENTAGEM -->
+
+        <div id="calcCamposDescontarPorcentagem" class="calc-fields">
+
+            <div class="calc-type-title">
+                📉 Descontar porcentagem
+            </div>
+
+            <div class="field">
+
+                <label>💰 VALOR</label>
+
+                <input
+                    id="calcDescontarValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>📉 PORCENTAGEM PARA DESCONTAR</label>
+
+                <input
+                    id="calcDescontarPorcentagem"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="Ex.: 25"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- DIVIDIR -->
+
+        <div id="calcCamposDividir" class="calc-fields">
+
+            <div class="calc-type-title">
+                👥 Dividir valor
+            </div>
+
+            <div class="field">
+
+                <label>💰 VALOR</label>
+
+                <input
+                    id="calcDividirValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>👥 QUANTAS PESSOAS</label>
+
+                <select id="calcDividirPessoas">
+
+                    <option value="1">1 pessoa</option>
+                    <option value="2">2 pessoas</option>
+                    <option value="3" selected>3 pessoas</option>
+                    <option value="4">4 pessoas</option>
+                    <option value="5">5 pessoas</option>
+                    <option value="6">6 pessoas</option>
+                    <option value="7">7 pessoas</option>
+                    <option value="8">8 pessoas</option>
+                    <option value="9">9 pessoas</option>
+                    <option value="10">10 pessoas</option>
+                    <option value="11">11 pessoas</option>
+                    <option value="12">12 pessoas</option>
+                    <option value="13">13 pessoas</option>
+                    <option value="14">14 pessoas</option>
+                    <option value="15">15 pessoas</option>
+                    <option value="16">16 pessoas</option>
+                    <option value="17">17 pessoas</option>
+                    <option value="18">18 pessoas</option>
+                    <option value="19">19 pessoas</option>
+                    <option value="20">20 pessoas — máximo</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- MULTIPLICAR -->
+
+        <div id="calcCamposMultiplicar" class="calc-fields">
+
+            <div class="calc-type-title">
+                ✖️ Multiplicar valor
+            </div>
+
+            <div class="field">
+
+                <label>💰 VALOR</label>
+
+                <input
+                    id="calcMultiplicarValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>✖️ MULTIPLICAR POR</label>
+
+                <input
+                    id="calcMultiplicarNumero"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 3"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- SOMAR -->
+
+        <div id="calcCamposSomar" class="calc-fields">
+
+            <div class="calc-type-title">
+                ➕ Somar valores
+            </div>
+
+            <div class="field">
+
+                <label>💰 PRIMEIRO VALOR</label>
+
+                <input
+                    id="calcSomarValor1"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>💰 SEGUNDO VALOR</label>
+
+                <input
+                    id="calcSomarValor2"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 5.000"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- SUBTRAIR -->
+
+        <div id="calcCamposSubtrair" class="calc-fields">
+
+            <div class="calc-type-title">
+                ➖ Subtrair valores
+            </div>
+
+            <div class="field">
+
+                <label>💰 VALOR INICIAL</label>
+
+                <input
+                    id="calcSubtrairValor1"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>💰 VALOR A SUBTRAIR</label>
+
+                <input
+                    id="calcSubtrairValor2"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 5.000"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- DESCOBRIR PORCENTAGEM -->
+
+        <div id="calcCamposDescobrirPorcentagem" class="calc-fields">
+
+            <div class="calc-type-title">
+                📊 Descobrir porcentagem
+            </div>
+
+            <div class="field">
+
+                <label>💰 VALOR TOTAL</label>
+
+                <input
+                    id="calcPorcentagemTotal"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>💰 VALOR DA PARTE</label>
+
+                <input
+                    id="calcPorcentagemParte"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 5.000"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- REGRA DE TRÊS -->
+
+        <div id="calcCamposRegraTres" class="calc-fields">
+
+            <div class="calc-type-title">
+                🔢 Regra de três
+            </div>
+
+            <div class="field">
+
+                <label>🔢 VALOR A</label>
+
+                <input
+                    id="calcRegraA"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 10"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>🔢 VALOR B</label>
+
+                <input
+                    id="calcRegraB"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>🔢 VALOR C</label>
+
+                <input
+                    id="calcRegraC"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 5"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="calculator-note">
+                💡 O BOT calcula: <b>A está para B assim como C está para X.</b>
+            </div>
 
         </div>
 
@@ -2651,6 +3149,8 @@ function detectarRegiaoCelular(){
    CALCULADORA
 ========================================================= */
 
+let tipoCalculoSelecionado="porcentagemDivisao";
+
 function converterValor(valor){
 
     let v=String(valor||"")
@@ -2719,67 +3219,211 @@ function converterValor(valor){
 
     const numero=parseFloat(v);
 
-    return Number.isFinite(numero)?numero* multiplicador:null;
+    return Number.isFinite(numero)?numero:null;
+
+}
+
+function converterNumero(valor){
+
+    let v=String(valor||"")
+        .trim()
+        .toLowerCase()
+        .replace(/\s/g,"")
+        .replace(/r\$/g,"");
+
+    if(!v)return null;
+
+    if(v.endsWith("%"))
+        v=v.slice(0,-1);
+
+    if(v.endsWith("k")){
+
+        v=v.slice(0,-1).replace(",", ".");
+
+        const n=parseFloat(v);
+
+        return Number.isFinite(n)?n*1000:null;
+
+    }
+
+    if(v.includes(".")&&v.includes(",")){
+
+        v=v.replace(/\./g,"").replace(",", ".");
+
+    }else if(v.includes(",")){
+
+        const partes=v.split(",");
+
+        if(partes.length===2 && partes[1].length===3){
+
+            v=partes[0]+partes[1];
+
+        }else{
+
+            v=v.replace(",", ".");
+
+        }
+
+    }else if(v.includes(".")){
+
+        const partes=v.split(".");
+
+        if(partes.length===2 && partes[1].length===3){
+
+            v=partes[0]+partes[1];
+
+        }
+
+    }
+
+    const n=parseFloat(v);
+
+    return Number.isFinite(n)?n:null;
+
+}
+
+function moeda(valor){
+
+    return new Intl.NumberFormat("pt-BR",{
+        style:"currency",
+        currency:"BRL"
+    }).format(valor);
+
+}
+
+function numeroFormatado(valor){
+
+    return new Intl.NumberFormat("pt-BR",{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    }).format(valor);
+
+}
+
+function selecionarTipoCalculo(tipo){
+
+    tipoCalculoSelecionado=tipo;
+
+    document
+        .querySelectorAll(".calc-option")
+        .forEach(btn=>btn.classList.remove("selected"));
+
+    const mapa={
+        porcentagemDivisao:"calcOptPorcentagemDivisao",
+        adicionarPorcentagem:"calcOptAdicionarPorcentagem",
+        descontarPorcentagem:"calcOptDescontarPorcentagem",
+        dividir:"calcOptDividir",
+        multiplicar:"calcOptMultiplicar",
+        somar:"calcOptSomar",
+        subtrair:"calcOptSubtrair",
+        descobrirPorcentagem:"calcOptDescobrirPorcentagem",
+        regraTres:"calcOptRegraTres"
+    };
+
+    document
+        .getElementById(mapa[tipo])
+        ?.classList.add("selected");
+
+    document
+        .querySelectorAll(".calc-fields")
+        .forEach(el=>el.classList.remove("show"));
+
+    const campos=document.getElementById(
+        "calcCampos"+
+        tipo.charAt(0).toUpperCase()+
+        tipo.slice(1)
+    );
+
+    if(campos)
+        campos.classList.add("show");
+
+    const resultado=document.getElementById("calcResultado");
+
+    if(resultado)
+        resultado.innerHTML="";
+
+}
+
+function validarValor(id,mensagem){
+
+    const campo=document.getElementById(id);
+
+    const valor=converterValor(campo?.value);
+
+    if(valor===null||!Number.isFinite(valor)){
+
+        mostrarToast(mensagem);
+
+        campo?.focus();
+
+        return null;
+
+    }
+
+    return valor;
+
+}
+
+function validarNumero(id,mensagem){
+
+    const campo=document.getElementById(id);
+
+    const valor=converterNumero(campo?.value);
+
+    if(valor===null||!Number.isFinite(valor)){
+
+        mostrarToast(mensagem);
+
+        campo?.focus();
+
+        return null;
+
+    }
+
+    return valor;
 
 }
 
 function calcularBM3(){
 
-    const valorTexto=document.getElementById("calcValor").value.trim();
-    const porcentagem=Number(document.getElementById("calcPorcentagem").value);
-    const pessoas=Number(document.getElementById("calcPessoas").value);
-
     const gerando=document.getElementById("calcGerando");
     const resultado=document.getElementById("calcResultado");
 
-    if(!valorTexto){
+    let conteudo="";
 
-        mostrarToast("Digite o valor. Ex.: 20k");
+    /* =====================================================
+       PORCENTAGEM + DIVISÃO
+    ===================================================== */
 
-        return;
-    }
+    if(tipoCalculoSelecionado==="porcentagemDivisao"){
 
-    const valorInformado=converterValor(valorTexto);
+        const valorTexto=document.getElementById("calcValor").value.trim();
+        const porcentagem=Number(
+            document.getElementById("calcPorcentagem").value
+        );
+        const pessoas=Number(
+            document.getElementById("calcPessoas").value
+        );
 
-    if(valorInformado===null||valorInformado<=0){
+        const valorInformado=converterValor(valorTexto);
 
-        mostrarToast("Digite um valor válido. Ex.: 20k");
+        if(!valorTexto)
+            return mostrarToast("Digite o valor. Ex.: 20k");
 
-        return;
-    }
+        if(valorInformado===null||valorInformado<=0)
+            return mostrarToast("Digite um valor válido. Ex.: 20k");
 
-    if(!Number.isFinite(porcentagem)||porcentagem<0||porcentagem>100){
+        if(!Number.isFinite(porcentagem)||porcentagem<0||porcentagem>100)
+            return mostrarToast("Escolha uma porcentagem válida.");
 
-        mostrarToast("Escolha uma porcentagem válida.");
+        if(!Number.isFinite(pessoas)||pessoas<1||pessoas>20)
+            return mostrarToast("Escolha entre 1 e 20 pessoas.");
 
-        return;
-    }
+        const desconto=valorInformado*(porcentagem/100);
+        const restante=valorInformado-desconto;
+        const cada=restante/pessoas;
 
-    if(!Number.isFinite(pessoas)||pessoas<1||pessoas>20){
-
-        mostrarToast("Escolha entre 1 e 20 pessoas.");
-
-        return;
-    }
-
-    const desconto=valorInformado*(porcentagem/100);
-    const restante=valorInformado-desconto;
-    const cada=restante/pessoas;
-
-    const moeda=new Intl.NumberFormat("pt-BR",{
-        style:"currency",
-        currency:"BRL"
-    });
-
-    resultado.innerHTML="";
-
-    gerando.classList.add("show");
-
-    setTimeout(()=>{
-
-        gerando.classList.remove("show");
-
-        resultado.innerHTML=`
+        conteudo=`
 
             <div class="calc-bot">
 
@@ -2789,40 +3433,565 @@ function calcularBM3(){
 
                 <div>
                     💰 Valor informado:
-                    <b>${moeda.format(valorInformado)}</b>
+                    <b>${moeda(valorInformado)}</b>
                 </div>
 
                 <div>
-                    📉 ${porcentagem}%:
-                    <b>${moeda.format(desconto)}</b>
+                    📉 Porcentagem:
+                    <b>${numeroFormatado(porcentagem)}%</b>
+                </div>
+
+                <div>
+                    💸 Desconto:
+                    <b>${moeda(desconto)}</b>
                 </div>
 
                 <div>
                     💵 Valor restante:
-                    <b>${moeda.format(restante)}</b>
-                </div>
-
-                <div>
-                    👥 Dividido entre:
-                    <b>${pessoas} ${pessoas===1?"pessoa":"pessoas"}</b>
+                    <b>${moeda(restante)}</b>
                 </div>
 
                 <div class="calc-divider"></div>
 
                 <div>
-                    🧮 ${moeda.format(restante)} ÷ ${pessoas}
+                    👥 Pessoas:
+                    <b>${pessoas}</b>
+                </div>
+
+                <div>
+                    🧮 ${moeda(restante)} ÷ ${pessoas}
                 </div>
 
                 <div class="calc-divider"></div>
 
                 <div class="calc-summary">
-                    RESUMO : 🍀 Valor pra cada:
-                    ${moeda.format(cada)}
+                    RESUMO : 🍀 ${moeda(cada)} pra cada
                 </div>
 
             </div>
 
         `;
+
+    }
+
+    /* =====================================================
+       ADICIONAR PORCENTAGEM
+    ===================================================== */
+
+    else if(tipoCalculoSelecionado==="adicionarPorcentagem"){
+
+        const valor=validarValor(
+            "calcAdicionarValor",
+            "Digite um valor válido. Ex.: 20k"
+        );
+
+        if(valor===null)return;
+
+        const porcentagem=Number(
+            document.getElementById("calcAdicionarPorcentagem").value
+        );
+
+        if(!Number.isFinite(porcentagem)||porcentagem<0){
+
+            mostrarToast("Digite uma porcentagem válida.");
+
+            return;
+        }
+
+        const adicional=valor*(porcentagem/100);
+        const resultadoFinal=valor+adicional;
+
+        conteudo=`
+
+            <div class="calc-bot">
+
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
+
+                <div>
+                    💰 Valor informado:
+                    <b>${moeda(valor)}</b>
+                </div>
+
+                <div>
+                    📈 Porcentagem adicionada:
+                    <b>${numeroFormatado(porcentagem)}%</b>
+                </div>
+
+                <div>
+                    ➕ Acréscimo:
+                    <b>${moeda(adicional)}</b>
+                </div>
+
+                <div>
+                    💵 Novo valor:
+                    <b>${moeda(resultadoFinal)}</b>
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div class="calc-summary">
+                    RESUMO : 🍀 ${moeda(resultadoFinal)}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    /* =====================================================
+       DESCONTAR PORCENTAGEM
+    ===================================================== */
+
+    else if(tipoCalculoSelecionado==="descontarPorcentagem"){
+
+        const valor=validarValor(
+            "calcDescontarValor",
+            "Digite um valor válido. Ex.: 20k"
+        );
+
+        if(valor===null)return;
+
+        const porcentagem=Number(
+            document.getElementById("calcDescontarPorcentagem").value
+        );
+
+        if(
+            !Number.isFinite(porcentagem)||
+            porcentagem<0||
+            porcentagem>100
+        ){
+
+            mostrarToast("Digite uma porcentagem entre 0% e 100%.");
+
+            return;
+        }
+
+        const desconto=valor*(porcentagem/100);
+        const restante=valor-desconto;
+
+        conteudo=`
+
+            <div class="calc-bot">
+
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
+
+                <div>
+                    💰 Valor informado:
+                    <b>${moeda(valor)}</b>
+                </div>
+
+                <div>
+                    📉 Porcentagem:
+                    <b>${numeroFormatado(porcentagem)}%</b>
+                </div>
+
+                <div>
+                    💸 Desconto:
+                    <b>${moeda(desconto)}</b>
+                </div>
+
+                <div>
+                    💵 Valor restante:
+                    <b>${moeda(restante)}</b>
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div class="calc-summary">
+                    RESUMO : 🍀 ${moeda(restante)}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    /* =====================================================
+       DIVIDIR
+    ===================================================== */
+
+    else if(tipoCalculoSelecionado==="dividir"){
+
+        const valor=validarValor(
+            "calcDividirValor",
+            "Digite um valor válido. Ex.: 20k"
+        );
+
+        if(valor===null)return;
+
+        const pessoas=Number(
+            document.getElementById("calcDividirPessoas").value
+        );
+
+        if(!Number.isFinite(pessoas)||pessoas<1||pessoas>20){
+
+            mostrarToast("Escolha entre 1 e 20 pessoas.");
+
+            return;
+        }
+
+        const cada=valor/pessoas;
+
+        conteudo=`
+
+            <div class="calc-bot">
+
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
+
+                <div>
+                    💰 Valor:
+                    <b>${moeda(valor)}</b>
+                </div>
+
+                <div>
+                    👥 Pessoas:
+                    <b>${pessoas}</b>
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div>
+                    🧮 ${moeda(valor)} ÷ ${pessoas}
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div class="calc-summary">
+                    RESUMO : 🍀 ${moeda(cada)} pra cada
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    /* =====================================================
+       MULTIPLICAR
+    ===================================================== */
+
+    else if(tipoCalculoSelecionado==="multiplicar"){
+
+        const valor=validarValor(
+            "calcMultiplicarValor",
+            "Digite um valor válido. Ex.: 20k"
+        );
+
+        if(valor===null)return;
+
+        const multiplicador=validarNumero(
+            "calcMultiplicarNumero",
+            "Digite por quanto deseja multiplicar."
+        );
+
+        if(multiplicador===null)return;
+
+        const resultadoFinal=valor*multiplicador;
+
+        conteudo=`
+
+            <div class="calc-bot">
+
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
+
+                <div>
+                    💰 Valor:
+                    <b>${moeda(valor)}</b>
+                </div>
+
+                <div>
+                    ✖️ Multiplicador:
+                    <b>${numeroFormatado(multiplicador)}</b>
+                </div>
+
+                <div>
+                    🧮 ${moeda(valor)} × ${numeroFormatado(multiplicador)}
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div class="calc-summary">
+                    RESUMO : 🍀 ${moeda(resultadoFinal)}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    /* =====================================================
+       SOMAR
+    ===================================================== */
+
+    else if(tipoCalculoSelecionado==="somar"){
+
+        const valor1=validarValor(
+            "calcSomarValor1",
+            "Digite o primeiro valor."
+        );
+
+        if(valor1===null)return;
+
+        const valor2=validarValor(
+            "calcSomarValor2",
+            "Digite o segundo valor."
+        );
+
+        if(valor2===null)return;
+
+        const resultadoFinal=valor1+valor2;
+
+        conteudo=`
+
+            <div class="calc-bot">
+
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
+
+                <div>
+                    💰 Primeiro valor:
+                    <b>${moeda(valor1)}</b>
+                </div>
+
+                <div>
+                    💰 Segundo valor:
+                    <b>${moeda(valor2)}</b>
+                </div>
+
+                <div>
+                    🧮 ${moeda(valor1)} + ${moeda(valor2)}
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div class="calc-summary">
+                    RESUMO : 🍀 ${moeda(resultadoFinal)}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    /* =====================================================
+       SUBTRAIR
+    ===================================================== */
+
+    else if(tipoCalculoSelecionado==="subtrair"){
+
+        const valor1=validarValor(
+            "calcSubtrairValor1",
+            "Digite o valor inicial."
+        );
+
+        if(valor1===null)return;
+
+        const valor2=validarValor(
+            "calcSubtrairValor2",
+            "Digite o valor a subtrair."
+        );
+
+        if(valor2===null)return;
+
+        const resultadoFinal=valor1-valor2;
+
+        conteudo=`
+
+            <div class="calc-bot">
+
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
+
+                <div>
+                    💰 Valor inicial:
+                    <b>${moeda(valor1)}</b>
+                </div>
+
+                <div>
+                    💰 Valor subtraído:
+                    <b>${moeda(valor2)}</b>
+                </div>
+
+                <div>
+                    🧮 ${moeda(valor1)} − ${moeda(valor2)}
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div class="calc-summary">
+                    RESUMO : 🍀 ${moeda(resultadoFinal)}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    /* =====================================================
+       DESCOBRIR PORCENTAGEM
+    ===================================================== */
+
+    else if(tipoCalculoSelecionado==="descobrirPorcentagem"){
+
+        const total=validarValor(
+            "calcPorcentagemTotal",
+            "Digite o valor total."
+        );
+
+        if(total===null)return;
+
+        const parte=validarValor(
+            "calcPorcentagemParte",
+            "Digite o valor da parte."
+        );
+
+        if(parte===null)return;
+
+        if(total===0){
+
+            mostrarToast("O valor total não pode ser zero.");
+
+            return;
+        }
+
+        const porcentagem=(parte/total)*100;
+
+        conteudo=`
+
+            <div class="calc-bot">
+
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
+
+                <div>
+                    💰 Valor total:
+                    <b>${moeda(total)}</b>
+                </div>
+
+                <div>
+                    💵 Valor da parte:
+                    <b>${moeda(parte)}</b>
+                </div>
+
+                <div>
+                    📊 ${moeda(parte)} representa quanto de ${moeda(total)}?
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div class="calc-summary">
+                    RESUMO : 🍀 ${numeroFormatado(porcentagem)}%
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    /* =====================================================
+       REGRA DE TRÊS
+    ===================================================== */
+
+    else if(tipoCalculoSelecionado==="regraTres"){
+
+        const a=validarNumero(
+            "calcRegraA",
+            "Digite o valor A."
+        );
+
+        if(a===null)return;
+
+        const b=validarNumero(
+            "calcRegraB",
+            "Digite o valor B."
+        );
+
+        if(b===null)return;
+
+        const c=validarNumero(
+            "calcRegraC",
+            "Digite o valor C."
+        );
+
+        if(c===null)return;
+
+        if(a===0){
+
+            mostrarToast("O valor A não pode ser zero.");
+
+            return;
+        }
+
+        const x=(b*c)/a;
+
+        conteudo=`
+
+            <div class="calc-bot">
+
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
+
+                <div>
+                    🔢 A:
+                    <b>${numeroFormatado(a)}</b>
+                </div>
+
+                <div>
+                    🔢 B:
+                    <b>${numeroFormatado(b)}</b>
+                </div>
+
+                <div>
+                    🔢 C:
+                    <b>${numeroFormatado(c)}</b>
+                </div>
+
+                <div>
+                    🧮 ${numeroFormatado(a)} está para ${numeroFormatado(b)}
+                    assim como ${numeroFormatado(c)} está para X
+                </div>
+
+                <div class="calc-divider"></div>
+
+                <div class="calc-summary">
+                    RESUMO : 🍀 ${numeroFormatado(x)}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    if(!conteudo)return;
+
+    resultado.innerHTML="";
+
+    gerando.classList.add("show");
+
+    setTimeout(()=>{
+
+        gerando.classList.remove("show");
+
+        resultado.innerHTML=conteudo;
 
     },1000);
 
@@ -4279,6 +5448,8 @@ document.addEventListener("DOMContentLoaded",()=>{
         localStorage.getItem("temaBotBM3")||"light";
 
     aplicarTema(tema);
+
+    selecionarTipoCalculo("porcentagemDivisao");
 
     atualizarTudo();
 
