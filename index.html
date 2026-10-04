@@ -24,70 +24,81 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
     background:var(--fundo);
     color:var(--texto);
     min-height:100vh;
 }
 
 /* =========================
-   TELA DE CARREGAMENTO
+   TELA DE ABERTURA
 ========================= */
 
 #loading{
     position:fixed;
     inset:0;
-    z-index:99999;
-    background:linear-gradient(135deg,#008c45,#ffffff,#cd212a);
+    z-index:9999;
     display:flex;
-    justify-content:center;
     align-items:center;
-    overflow:hidden;
+    justify-content:center;
+    background:
+        linear-gradient(145deg,
+        #008c45 0%,
+        #ffffff 48%,
+        #cd212a 100%);
+    transition:opacity .7s ease,visibility .7s ease;
+}
+
+#loading.saindo{
+    opacity:0;
+    visibility:hidden;
 }
 
 .loading-box{
     width:90%;
-    max-width:380px;
+    max-width:390px;
     text-align:center;
-    animation:entradaLogo 1s ease;
+    color:white;
+    animation:entradaPremium 1s ease both;
 }
 
 .loading-logo{
-    width:190px;
-    max-width:70vw;
-    height:190px;
+    width:170px;
+    height:170px;
     object-fit:contain;
-    background:#fff;
-    border-radius:35px;
-    padding:15px;
-    box-shadow:0 20px 60px rgba(0,0,0,.25);
-    animation:pulsar 1.5s ease-in-out infinite;
+    display:block;
+    margin:0 auto 20px;
+    border-radius:28px;
+    animation:
+        logoPulso 1.8s ease-in-out infinite,
+        logoEntrada 1.2s ease both;
+    filter:drop-shadow(0 15px 25px rgba(0,0,0,.25));
 }
 
 .loading-title{
-    margin-top:20px;
-    color:#fff;
-    font-size:24px;
+    font-size:27px;
     font-weight:900;
-    text-shadow:0 3px 10px rgba(0,0,0,.3);
+    letter-spacing:.5px;
+    text-shadow:0 3px 10px rgba(0,0,0,.25);
 }
 
-.loading-text{
-    margin-top:8px;
-    color:#fff;
-    font-size:14px;
-    font-weight:bold;
+.loading-status{
+    margin-top:10px;
+    font-size:15px;
+    font-weight:700;
+    opacity:.95;
+    animation:statusEntrada 1.5s ease both;
 }
 
 .loading-bar{
-    width:190px;
+    width:220px;
     height:5px;
+    margin:24px auto 0;
     background:rgba(255,255,255,.35);
     border-radius:20px;
-    margin:22px auto 0;
     overflow:hidden;
 }
 
@@ -95,61 +106,54 @@ body{
     display:block;
     width:0;
     height:100%;
-    background:#fff;
+    background:white;
     border-radius:20px;
-    animation:carregar 2s linear forwards;
+    animation:carregamento 2s ease forwards;
 }
 
-#loading.saindo{
-    animation:saidaTela .7s ease forwards;
-}
-
-#loading.saindo .loading-box{
-    animation:logoSaindo .7s ease forwards;
-}
-
-@keyframes entradaLogo{
+@keyframes entradaPremium{
     from{
         opacity:0;
-        transform:scale(.65);
+        transform:translateY(25px) scale(.96);
     }
     to{
         opacity:1;
-        transform:scale(1);
+        transform:translateY(0) scale(1);
     }
 }
 
-@keyframes pulsar{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.04)}
-}
-
-@keyframes carregar{
-    from{width:0}
-    to{width:100%}
-}
-
-@keyframes logoSaindo{
-    0%{
+@keyframes logoEntrada{
+    from{
+        opacity:0;
+        transform:translateY(35px) scale(.7);
+    }
+    to{
         opacity:1;
         transform:translateY(0) scale(1);
     }
-    100%{
-        opacity:0;
-        transform:translateY(-170px) scale(.75);
+}
+
+@keyframes logoPulso{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.045);
     }
 }
 
-@keyframes saidaTela{
-    0%{
-        opacity:1;
-        backdrop-filter:blur(0);
-    }
-    100%{
+@keyframes statusEntrada{
+    from{
         opacity:0;
-        visibility:hidden;
-        backdrop-filter:blur(8px);
     }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes carregamento{
+    from{width:0;}
+    to{width:100%;}
 }
 
 /* =========================
@@ -157,32 +161,25 @@ body{
 ========================= */
 
 .topo{
-    background:var(--card);
-    padding:20px 16px 18px;
+    background:
+        linear-gradient(135deg,
+        var(--verde) 0%,
+        var(--verde2) 45%,
+        var(--vermelho) 100%);
+    color:white;
+    padding:22px 18px;
     text-align:center;
-    border-bottom:1px solid var(--borda);
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
-}
-
-.bandeira{
-    width:100%;
-    height:5px;
-    border-radius:20px;
-    margin-bottom:14px;
-    background:linear-gradient(
-        to right,
-        var(--verde) 0 33%,
-        #fff 33% 66%,
-        var(--vermelho) 66% 100%
-    );
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
 }
 
 .logo-topo{
-    width:70px;
-    height:70px;
+    width:82px;
+    height:82px;
     object-fit:contain;
+    display:block;
+    margin:0 auto 8px;
     border-radius:18px;
-    margin-bottom:8px;
+    filter:drop-shadow(0 5px 10px rgba(0,0,0,.20));
 }
 
 .topo h1{
@@ -192,64 +189,165 @@ body{
 
 .topo p{
     margin-top:5px;
-    color:var(--cinza);
-    font-size:13px;
+    font-size:14px;
+    opacity:.92;
 }
 
 /* =========================
-   CONTAINER
+   MENU
 ========================= */
 
-.container{
-    width:94%;
+.menu-area{
     max-width:900px;
-    margin:20px auto 40px;
+    margin:18px auto 0;
+    padding:0 15px;
 }
+
+.menu-btn{
+    width:100%;
+    border:none;
+    border-radius:15px;
+    padding:15px;
+    background:white;
+    color:var(--texto);
+    font-size:16px;
+    font-weight:800;
+    box-shadow:var(--sombra);
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.menu-btn:active{
+    transform:scale(.98);
+}
+
+.menu{
+    display:none;
+    margin-top:12px;
+}
+
+.menu.aberto{
+    display:block;
+}
+
+/* =========================
+   CARDS DO MENU
+========================= */
+
+.menu-card{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:18px;
+    padding:17px;
+    margin-bottom:11px;
+    box-shadow:var(--sombra);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease;
+    opacity:0;
+    transform:translateY(18px);
+}
+
+.menu.aberto .menu-card{
+    animation:cardEntrada .5s ease forwards;
+}
+
+.menu.aberto .menu-card:nth-child(1){animation-delay:.04s;}
+.menu.aberto .menu-card:nth-child(2){animation-delay:.09s;}
+.menu.aberto .menu-card:nth-child(3){animation-delay:.14s;}
+.menu.aberto .menu-card:nth-child(4){animation-delay:.19s;}
+.menu.aberto .menu-card:nth-child(5){animation-delay:.24s;}
+.menu.aberto .menu-card:nth-child(6){animation-delay:.29s;}
+.menu.aberto .menu-card:nth-child(7){animation-delay:.34s;}
+.menu.aberto .menu-card:nth-child(8){animation-delay:.39s;}
+.menu.aberto .menu-card:nth-child(9){animation-delay:.44s;}
+.menu.aberto .menu-card:nth-child(10){animation-delay:.49s;}
+
+@keyframes cardEntrada{
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.menu-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 35px rgba(0,0,0,.13);
+}
+
+.menu-icon{
+    width:45px;
+    height:45px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    background:linear-gradient(135deg,#008c45,#00a651);
+    color:white;
+    flex-shrink:0;
+}
+
+.menu-info strong{
+    display:block;
+    font-size:16px;
+}
+
+.menu-info span{
+    display:block;
+    color:var(--cinza);
+    font-size:12px;
+    margin-top:3px;
+}
+
+/* =========================
+   TELAS
+========================= */
 
 .tela{
     display:none;
-    animation:entrarTela .35s ease;
+    max-width:900px;
+    margin:20px auto;
+    padding:0 15px 40px;
 }
 
 .tela.ativa{
     display:block;
+    animation:telaEntrada .35s ease both;
 }
 
-@keyframes entrarTela{
+@keyframes telaEntrada{
     from{
         opacity:0;
-        transform:translateY(12px) scale(.98);
+        transform:translateY(10px);
     }
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:translateY(0);
     }
 }
 
-/* =========================
-   DELAY DE TRANSIÇÃO
-========================= */
-
-.transicao{
-    opacity:0!important;
-    transform:translateY(8px) scale(.98)!important;
-    transition:.25s ease;
+.tela.transicao{
+    opacity:0;
 }
 
-/* =========================
-   TITULOS
-========================= */
-
-.titulo{
-    font-size:25px;
+.titulo-tela{
+    font-size:23px;
     font-weight:900;
-    margin-bottom:6px;
+    margin-bottom:15px;
 }
 
 .subtitulo{
     color:var(--cinza);
-    margin-bottom:20px;
-    font-size:14px;
+    margin-bottom:18px;
 }
 
 /* =========================
@@ -259,19 +357,75 @@ body{
 .card{
     background:var(--card);
     border:1px solid var(--borda);
-    border-radius:20px;
+    border-radius:18px;
     padding:18px;
     margin-bottom:14px;
     box-shadow:var(--sombra);
 }
 
 .card h3{
-    margin-bottom:7px;
+    margin-bottom:8px;
 }
 
-.card p{
-    color:var(--cinza);
-    font-size:14px;
+/* =========================
+   FORMULÁRIOS
+========================= */
+
+label{
+    display:block;
+    font-weight:800;
+    margin:12px 0 7px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    border:1px solid var(--borda);
+    border-radius:12px;
+    padding:13px;
+    font-size:15px;
+    outline:none;
+    background:white;
+    color:var(--texto);
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--verde);
+    box-shadow:0 0 0 3px rgba(0,140,69,.10);
+}
+
+.btn{
+    width:100%;
+    border:none;
+    border-radius:13px;
+    padding:14px;
+    margin-top:14px;
+    background:var(--verde);
+    color:white;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.btn:active{
+    transform:scale(.98);
+}
+
+.btn.vermelho{
+    background:var(--vermelho);
+}
+
+.btn.secundario{
+    background:#17221d;
 }
 
 /* =========================
@@ -282,240 +436,139 @@ body{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
-    margin:20px 0;
+    margin-bottom:18px;
 }
 
 .resumo-card{
-    background:var(--card);
-    border-radius:20px;
-    padding:18px;
-    box-shadow:var(--sombra);
+    background:white;
     border:1px solid var(--borda);
+    border-radius:17px;
+    padding:16px;
+    box-shadow:var(--sombra);
 }
 
-.resumo-card strong{
-    display:block;
+.resumo-card .numero{
     font-size:27px;
-    margin-bottom:4px;
+    font-weight:900;
 }
 
-.resumo-card span{
+.resumo-card .texto{
     color:var(--cinza);
-    font-size:13px;
+    font-size:12px;
+    margin-top:4px;
 }
 
 /* =========================
-   BOTOES
+   CONTATO
 ========================= */
 
-button,
-.btn{
-    width:100%;
-    border:0;
-    border-radius:15px;
-    padding:15px;
-    font-size:15px;
+.contato{
+    background:white;
+    border:1px solid var(--borda);
+    border-radius:18px;
+    padding:17px;
+    margin-bottom:13px;
+    box-shadow:var(--sombra);
+}
+
+.contato-topo{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:flex-start;
+}
+
+.contato h3{
+    font-size:18px;
+}
+
+.numero{
+    color:var(--cinza);
+    margin-top:4px;
+}
+
+.info{
+    margin-top:11px;
+    font-size:13px;
+    color:var(--cinza);
+}
+
+.acoes{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:13px;
+}
+
+.acoes button{
+    border:none;
+    border-radius:11px;
+    padding:11px;
     font-weight:800;
     cursor:pointer;
-    background:linear-gradient(135deg,var(--verde),var(--verde2));
-    color:#fff;
-    box-shadow:0 8px 20px rgba(0,140,69,.22);
-    transition:.2s;
-    margin-top:8px;
 }
 
-button:hover,
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-secundario{
-    background:#eef2f0;
-    color:var(--texto);
-    box-shadow:none;
-}
-
-.btn-vermelho{
-    background:linear-gradient(135deg,#b91521,#e02b35);
-}
-
-.btn-whatsapp{
+.whatsapp{
     background:#25D366;
+    color:white;
+}
+
+.excluir{
+    background:#ffe9e9;
+    color:#b40000;
+}
+
+.status-select{
+    margin-top:10px;
+}
+
+.favorito{
+    font-size:22px;
+    cursor:pointer;
 }
 
 /* =========================
-   FORMULARIOS
+   ESTATÍSTICAS
 ========================= */
 
-label{
-    display:block;
-    margin:12px 0 6px;
-    font-size:13px;
-    font-weight:800;
-}
-
-input,
-textarea,
-select{
-    width:100%;
-    padding:14px;
-    border:1px solid var(--borda);
-    border-radius:13px;
-    background:var(--card);
-    color:var(--texto);
-    outline:none;
-    font-size:14px;
-}
-
-textarea{
-    resize:vertical;
-    min-height:90px;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:var(--verde);
-}
-
-/* =========================
-   MENU PREMIUM
-========================= */
-
-.menu-titulo{
-    margin:25px 0 10px;
-    font-size:12px;
-    font-weight:900;
-    letter-spacing:1px;
-    color:var(--cinza);
-}
-
-.menu-grid{
+.stats-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
 }
 
-.menu-item{
+.stat{
+    padding:18px;
+    border-radius:17px;
+    background:white;
     border:1px solid var(--borda);
-    background:var(--card);
-    border-radius:20px;
-    padding:18px 14px;
-    min-height:115px;
     box-shadow:var(--sombra);
-    cursor:pointer;
-    transition:.25s;
-    text-align:left;
 }
 
-.menu-item:hover{
-    transform:translateY(-4px);
-}
-
-.menu-icon{
-    width:44px;
-    height:44px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:14px;
-    background:linear-gradient(135deg,#008c45,#00a651);
-    color:#fff;
-    font-size:21px;
-    margin-bottom:12px;
-}
-
-.menu-item h3{
-    font-size:15px;
-    margin-bottom:5px;
-}
-
-.menu-item p{
-    font-size:11px;
-    color:var(--cinza);
-}
-
-/* =========================
-   CONTATOS
-========================= */
-
-.contato{
-    position:relative;
-}
-
-.contato-nome{
-    font-size:18px;
-    font-weight:900;
-    margin-bottom:5px;
-}
-
-.contato-numero{
-    color:var(--cinza);
-    font-size:13px;
-}
-
-.contato-info{
-    margin-top:12px;
-    padding-top:12px;
-    border-top:1px solid var(--borda);
-}
-
-.status-select{
-    margin-top:8px;
-    font-weight:700;
-}
-
-.status{
-    display:inline-block;
-    margin-top:10px;
-    padding:7px 10px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:900;
-}
-
-/* =========================
-   FAVORITO
-========================= */
-
-.favorito{
-    float:right;
-    border:0;
-    background:none;
-    box-shadow:none;
-    color:#f5b400;
-    width:auto;
-    padding:0;
-    margin:0;
+.stat strong{
+    display:block;
     font-size:25px;
 }
 
-/* =========================
-   GRUPOS / ETIQUETAS
-========================= */
-
-.lista-simples{
-    display:grid;
-    gap:10px;
-}
-
-.item-simples{
-    padding:15px;
-    border-radius:15px;
-    background:var(--card);
-    border:1px solid var(--borda);
-    box-shadow:0 5px 15px rgba(0,0,0,.06);
-}
-
-/* =========================
-   RODAPE
-========================= */
-
-.rodape{
-    text-align:center;
+.stat span{
     color:var(--cinza);
-    font-size:11px;
-    padding:20px 0;
+    font-size:12px;
+}
+
+/* =========================
+   GRUPOS
+========================= */
+
+.grupo-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    background:white;
+    border:1px solid var(--borda);
+    border-radius:14px;
+    margin-bottom:10px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
 }
 
 /* =========================
@@ -523,33 +576,44 @@ select:focus{
 ========================= */
 
 body.dark{
-    --fundo:#0d1210;
-    --texto:#f1f5f3;
-    --cinza:#9da9a3;
-    --card:#151c18;
+    --fundo:#101513;
+    --texto:#f2f5f3;
+    --cinza:#a8b1ac;
+    --card:#18201c;
     --borda:#29332e;
 }
 
-body.dark .btn-secundario{
-    background:#222c27;
-    color:#fff;
+body.dark input,
+body.dark textarea,
+body.dark select{
+    background:#111714;
+    color:white;
+}
+
+body.dark .menu-btn{
+    background:#18201c;
+    color:white;
+}
+
+body.dark .excluir{
+    background:#381d1d;
 }
 
 /* =========================
    RESPONSIVO
 ========================= */
 
-@media(max-width:500px){
-    .menu-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
+@media(min-width:700px){
     .resumo{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:repeat(4,1fr);
     }
 
-    .topo h1{
-        font-size:22px;
+    .acoes{
+        flex-direction:row;
+    }
+
+    .acoes button{
+        flex:1;
     }
 }
 </style>
@@ -558,7 +622,7 @@ body.dark .btn-secundario{
 <body>
 
 <!-- =========================
-     CARREGAMENTO
+     ABERTURA PREMIUM
 ========================= -->
 
 <div id="loading">
@@ -574,8 +638,8 @@ body.dark .btn-secundario{
             🍀 BOT DO BM3 🍀
         </div>
 
-        <div class="loading-text">
-            Carregando...
+        <div class="loading-status">
+            Sistema iniciado
         </div>
 
         <div class="loading-bar">
@@ -591,8 +655,6 @@ body.dark .btn-secundario{
 
 <header class="topo">
 
-    <div class="bandeira"></div>
-
     <img
         class="logo-topo"
         src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
@@ -604,172 +666,149 @@ body.dark .btn-secundario{
 
 </header>
 
-<div class="container">
+<!-- =========================
+     MENU
+========================= -->
+
+<div class="menu-area">
+
+    <button class="menu-btn" onclick="abrirMenu()">
+        ☰ Abrir Menu
+    </button>
+
+    <div class="menu" id="menu">
+
+        <div class="menu-card" onclick="trocarTela('inicio')">
+            <div class="menu-icon">🏠</div>
+            <div class="menu-info">
+                <strong>Início</strong>
+                <span>Resumo do sistema</span>
+            </div>
+        </div>
+
+        <div class="menu-card" onclick="trocarTela('adicionar')">
+            <div class="menu-icon">➕</div>
+            <div class="menu-info">
+                <strong>Adicionar contato</strong>
+                <span>Cadastrar novo número</span>
+            </div>
+        </div>
+
+        <div class="menu-card" onclick="trocarTela('buscar')">
+            <div class="menu-icon">🔎</div>
+            <div class="menu-info">
+                <strong>Buscar</strong>
+                <span>Pesquisar contatos</span>
+            </div>
+        </div>
+
+        <div class="menu-card" onclick="trocarTela('contatos')">
+            <div class="menu-icon">👥</div>
+            <div class="menu-info">
+                <strong>Contatos</strong>
+                <span>Ver todos os números</span>
+            </div>
+        </div>
+
+        <div class="menu-card" onclick="trocarTela('grupos')">
+            <div class="menu-icon">🏷️</div>
+            <div class="menu-info">
+                <strong>Grupos</strong>
+                <span>Organizar por grupos</span>
+            </div>
+        </div>
+
+        <div class="menu-card" onclick="trocarTela('estatisticas')">
+            <div class="menu-icon">📊</div>
+            <div class="menu-info">
+                <strong>Estatísticas</strong>
+                <span>Visualizar números e status</span>
+            </div>
+        </div>
+
+        <div class="menu-card" onclick="trocarTela('favoritos')">
+            <div class="menu-icon">⭐</div>
+            <div class="menu-info">
+                <strong>Favoritos</strong>
+                <span>Contatos favoritos</span>
+            </div>
+        </div>
+
+        <div class="menu-card" onclick="trocarTela('backup')">
+            <div class="menu-icon">💾</div>
+            <div class="menu-info">
+                <strong>Backup</strong>
+                <span>Salvar e importar dados</span>
+            </div>
+        </div>
+
+        <div class="menu-card" onclick="trocarTela('configuracao')">
+            <div class="menu-icon">⚙️</div>
+            <div class="menu-info">
+                <strong>Configuração</strong>
+                <span>Personalizar o sistema</span>
+            </div>
+        </div>
+
+        <div class="menu-card" onclick="trocarTela('sobre')">
+            <div class="menu-icon">ℹ️</div>
+            <div class="menu-info">
+                <strong>Sobre o BOT</strong>
+                <span>Informações do sistema</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 <!-- =========================
      INÍCIO
 ========================= -->
 
-<section id="inicio" class="tela ativa">
+<section class="tela ativa" id="inicio">
 
-    <div class="titulo">Bem-vindo</div>
+    <div class="titulo-tela">
+        🏠 Início
+    </div>
+
     <div class="subtitulo">
-        Controle seus contatos de forma rápida e organizada.
+        Visão geral do seu organizador.
     </div>
 
     <div class="resumo">
 
         <div class="resumo-card">
-            <strong id="totalContatos">0</strong>
-            <span>👥 Total de contatos</span>
+            <div class="numero" id="totalContatos">0</div>
+            <div class="texto">👥 Total contatos</div>
         </div>
 
         <div class="resumo-card">
-            <strong id="totalOn">0</strong>
-            <span>🟢 ZAP ON</span>
+            <div class="numero" id="totalOn">0</div>
+            <div class="texto">🟢 ZAP ON</div>
         </div>
 
         <div class="resumo-card">
-            <strong id="totalAnalise">0</strong>
-            <span>🟡 Em análise</span>
+            <div class="numero" id="totalAnalise">0</div>
+            <div class="texto">🟡 Em análise</div>
         </div>
 
         <div class="resumo-card">
-            <strong id="totalCaiu">0</strong>
-            <span>🔴 ZAP CAIU</span>
+            <div class="numero" id="totalCaiu">0</div>
+            <div class="texto">🔴 ZAP CAIU</div>
         </div>
 
     </div>
 
-    <button onclick="trocarTela('menu')">
-        ☰ Abrir Menu
-    </button>
+    <div class="card">
+        <h3>🍀 BOT DO BM3</h3>
+        <p class="subtitulo">
+            Sistema de organização e gerenciamento dos seus contatos.
+        </p>
 
-</section>
-
-<!-- =========================
-     MENU
-========================= -->
-
-<section id="menu" class="tela">
-
-    <div class="titulo">Menu</div>
-    <div class="subtitulo">
-        Escolha uma opção.
-    </div>
-
-    <div class="menu-titulo">CONTATOS</div>
-
-    <div class="menu-grid">
-
-        <div class="menu-item" onclick="trocarTela('adicionar')">
-            <div class="menu-icon">➕</div>
-            <h3>Novo contato</h3>
-            <p>Adicionar contato</p>
-        </div>
-
-        <div class="menu-item" onclick="trocarTela('contatos')">
-            <div class="menu-icon">👥</div>
-            <h3>Meus contatos</h3>
-            <p>Ver todos</p>
-        </div>
-
-        <div class="menu-item" onclick="trocarTela('buscar')">
-            <div class="menu-icon">🔎</div>
-            <h3>Pesquisar</h3>
-            <p>Encontrar contato</p>
-        </div>
-
-        <div class="menu-item" onclick="trocarTela('favoritos')">
-            <div class="menu-icon">⭐</div>
-            <h3>Favoritos</h3>
-            <p>Contatos favoritos</p>
-        </div>
-
-    </div>
-
-    <div class="menu-titulo">MONITORAMENTO</div>
-
-    <div class="menu-grid">
-
-        <div class="menu-item" onclick="filtrarStatus('ON')">
-            <div class="menu-icon">🟢</div>
-            <h3>ZAP ON</h3>
-            <p>Contatos ativos</p>
-        </div>
-
-        <div class="menu-item" onclick="filtrarStatus('ANALISE')">
-            <div class="menu-icon">🟡</div>
-            <h3>Em análise</h3>
-            <p>Verificação pendente</p>
-        </div>
-
-        <div class="menu-item" onclick="filtrarStatus('CAIU')">
-            <div class="menu-icon">🔴</div>
-            <h3>ZAP CAIU</h3>
-            <p>Contatos inativos</p>
-        </div>
-
-        <div class="menu-item" onclick="trocarTela('estatisticas')">
-            <div class="menu-icon">📊</div>
-            <h3>Estatísticas</h3>
-            <p>Painel geral</p>
-        </div>
-
-    </div>
-
-    <div class="menu-titulo">ORGANIZAÇÃO</div>
-
-    <div class="menu-grid">
-
-        <div class="menu-item" onclick="trocarTela('grupos')">
-            <div class="menu-icon">👨‍👩‍👧‍👦</div>
-            <h3>Grupos</h3>
-            <p>Organizar grupos</p>
-        </div>
-
-        <div class="menu-item" onclick="trocarTela('etiquetas')">
-            <div class="menu-icon">🏷️</div>
-            <h3>Etiquetas</h3>
-            <p>Organizar contatos</p>
-        </div>
-
-        <div class="menu-item" onclick="trocarTela('favoritos')">
-            <div class="menu-icon">⭐</div>
-            <h3>Favoritos</h3>
-            <p>Acesso rápido</p>
-        </div>
-
-    </div>
-
-    <div class="menu-titulo">SISTEMA</div>
-
-    <div class="menu-grid">
-
-        <div class="menu-item" onclick="trocarTela('configuracoes')">
-            <div class="menu-icon">⚙️</div>
-            <h3>Configurações</h3>
-            <p>Configurações gerais</p>
-        </div>
-
-        <div class="menu-item" onclick="trocarTela('personalizacao')">
-            <div class="menu-icon">🎨</div>
-            <h3>Personalização</h3>
-            <p>Aparência do bot</p>
-        </div>
-
-        <div class="menu-item" onclick="trocarTela('backup')">
-            <div class="menu-icon">💾</div>
-            <h3>Backup</h3>
-            <p>Salvar contatos</p>
-        </div>
-
-        <div class="menu-item" onclick="trocarTela('sobre')">
-            <div class="menu-icon">ℹ️</div>
-            <h3>Sobre o BOT</h3>
-            <p>Informações</p>
-        </div>
-
+        <button class="btn" onclick="trocarTela('adicionar')">
+            ➕ Adicionar contato
+        </button>
     </div>
 
 </section>
@@ -778,51 +817,29 @@ body.dark .btn-secundario{
      ADICIONAR
 ========================= -->
 
-<section id="adicionar" class="tela">
+<section class="tela" id="adicionar">
 
-    <div class="titulo">Novo contato</div>
-    <div class="subtitulo">Cadastre um novo número.</div>
+    <div class="titulo-tela">➕ Adicionar contato</div>
 
     <div class="card">
 
         <label>Nome</label>
-        <input id="nome" placeholder="Nome do contato">
+        <input id="nome" placeholder="Digite o nome">
 
         <label>WhatsApp</label>
-        <input id="numero" placeholder="5513999999999" inputmode="tel">
+        <input id="numero" type="tel" placeholder="Ex: 5513999999999">
 
         <label>Grupo</label>
-        <input id="grupo" placeholder="Ex.: Trabalho">
+        <input id="grupo" placeholder="Ex: Clientes">
 
         <label>Observação</label>
-        <textarea id="observacao" placeholder="Observações"></textarea>
+        <textarea id="observacao" placeholder="Digite uma observação"></textarea>
 
-        <button onclick="adicionarContato()">
-            ➕ Adicionar contato
-        </button>
-
-        <button class="btn-secundario" onclick="trocarTela('menu')">
-            ← Voltar
+        <button class="btn" onclick="adicionarContato()">
+            💾 Salvar contato
         </button>
 
     </div>
-
-</section>
-
-<!-- =========================
-     CONTATOS
-========================= -->
-
-<section id="contatos" class="tela">
-
-    <div class="titulo">Meus contatos</div>
-    <div class="subtitulo">Todos os contatos cadastrados.</div>
-
-    <div id="listaContatos"></div>
-
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
 
 </section>
 
@@ -830,91 +847,33 @@ body.dark .btn-secundario{
      BUSCAR
 ========================= -->
 
-<section id="buscar" class="tela">
+<section class="tela" id="buscar">
 
-    <div class="titulo">Pesquisar</div>
-    <div class="subtitulo">Procure por nome, número ou grupo.</div>
+    <div class="titulo-tela">🔎 Buscar</div>
 
-    <input
-        id="campoBusca"
-        placeholder="🔎 Digite para pesquisar..."
-        oninput="pesquisar()"
-    >
+    <div class="card">
 
-    <div id="resultadoBusca" style="margin-top:15px"></div>
+        <input
+            id="campoBusca"
+            placeholder="Nome, número, grupo ou status..."
+            oninput="buscarContatos()"
+        >
 
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
+    </div>
+
+    <div id="resultadoBusca"></div>
 
 </section>
 
 <!-- =========================
-     FAVORITOS
+     CONTATOS
 ========================= -->
 
-<section id="favoritos" class="tela">
+<section class="tela" id="contatos">
 
-    <div class="titulo">Favoritos</div>
-    <div class="subtitulo">Seus contatos favoritos.</div>
+    <div class="titulo-tela">👥 Contatos</div>
 
-    <div id="listaFavoritos"></div>
-
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
-
-</section>
-
-<!-- =========================
-     RESULTADO STATUS
-========================= -->
-
-<section id="resultado" class="tela">
-
-    <div class="titulo" id="tituloResultado">Resultado</div>
-    <div class="subtitulo">Contatos encontrados.</div>
-
-    <div id="listaResultado"></div>
-
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
-
-</section>
-
-<!-- =========================
-     ESTATISTICAS
-========================= -->
-
-<section id="estatisticas" class="tela">
-
-    <div class="titulo">Estatísticas</div>
-    <div class="subtitulo">Resumo dos seus contatos.</div>
-
-    <div class="card">
-        <h3>👥 Total</h3>
-        <p id="estatTotal">0</p>
-    </div>
-
-    <div class="card">
-        <h3>🟢 ZAP ON</h3>
-        <p id="estatOn">0</p>
-    </div>
-
-    <div class="card">
-        <h3>⚠️ Em análise</h3>
-        <p id="estatAnalise">0</p>
-    </div>
-
-    <div class="card">
-        <h3>🔴 ZAP CAIU</h3>
-        <p id="estatCaiu">0</p>
-    </div>
-
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
+    <div id="listaContatos"></div>
 
 </section>
 
@@ -922,98 +881,57 @@ body.dark .btn-secundario{
      GRUPOS
 ========================= -->
 
-<section id="grupos" class="tela">
+<section class="tela" id="grupos">
 
-    <div class="titulo">Grupos</div>
-    <div class="subtitulo">Grupos encontrados nos seus contatos.</div>
+    <div class="titulo-tela">🏷️ Grupos</div>
 
-    <div id="listaGrupos" class="lista-simples"></div>
-
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
+    <div id="listaGrupos"></div>
 
 </section>
 
 <!-- =========================
-     ETIQUETAS
+     ESTATÍSTICAS
 ========================= -->
 
-<section id="etiquetas" class="tela">
+<section class="tela" id="estatisticas">
 
-    <div class="titulo">Etiquetas</div>
-    <div class="subtitulo">Organize seus contatos.</div>
+    <div class="titulo-tela">📊 Estatísticas</div>
 
-    <div class="card">
-        <h3>🏷️ Sistema de etiquetas</h3>
-        <p>
-            As etiquetas podem ser organizadas através dos grupos cadastrados.
-        </p>
+    <div class="stats-grid">
+
+        <div class="stat">
+            <strong id="statTotal">0</strong>
+            <span>👥 Total</span>
+        </div>
+
+        <div class="stat">
+            <strong id="statOn">0</strong>
+            <span>🟢 ZAP ON</span>
+        </div>
+
+        <div class="stat">
+            <strong id="statAnalise">0</strong>
+            <span>⚠️ Em análise</span>
+        </div>
+
+        <div class="stat">
+            <strong id="statCaiu">0</strong>
+            <span>🔴 ZAP CAIU</span>
+        </div>
+
     </div>
-
-    <div id="listaEtiquetas" class="lista-simples"></div>
-
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
 
 </section>
 
 <!-- =========================
-     CONFIGURAÇÕES
+     FAVORITOS
 ========================= -->
 
-<section id="configuracoes" class="tela">
+<section class="tela" id="favoritos">
 
-    <div class="titulo">Configurações</div>
-    <div class="subtitulo">Configurações gerais do BOT.</div>
+    <div class="titulo-tela">⭐ Favoritos</div>
 
-    <div class="card">
-        <h3>⚙️ Sistema</h3>
-        <p>BOT DO BM3 — versão atual.</p>
-    </div>
-
-    <button onclick="trocarTela('personalizacao')">
-        🎨 Personalização
-    </button>
-
-    <button onclick="trocarTela('backup')">
-        💾 Backup
-    </button>
-
-    <button onclick="trocarTela('sobre')">
-        ℹ️ Sobre o BOT
-    </button>
-
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
-
-</section>
-
-<!-- =========================
-     PERSONALIZAÇÃO
-========================= -->
-
-<section id="personalizacao" class="tela">
-
-    <div class="titulo">Personalização</div>
-    <div class="subtitulo">Escolha a aparência do BOT.</div>
-
-    <div class="card">
-
-        <h3>🌙 Tema</h3>
-        <p>Alterne entre modo claro e escuro.</p>
-
-        <button onclick="alternarTema()">
-            🌙 Alternar tema
-        </button>
-
-    </div>
-
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
+    <div id="listaFavoritos"></div>
 
 </section>
 
@@ -1021,41 +939,74 @@ body.dark .btn-secundario{
      BACKUP
 ========================= -->
 
-<section id="backup" class="tela">
+<section class="tela" id="backup">
 
-    <div class="titulo">Backup</div>
-    <div class="subtitulo">Salve seus contatos em um arquivo.</div>
+    <div class="titulo-tela">💾 Backup</div>
 
     <div class="card">
 
-        <h3>💾 Exportar contatos</h3>
+        <h3>Exportar dados</h3>
 
-        <p>
-            Crie um arquivo de backup com todos os seus contatos.
+        <p class="subtitulo">
+            Salve todos os seus contatos em um arquivo.
         </p>
 
-        <button onclick="exportarBackup()">
-            📥 Fazer backup
+        <button class="btn" onclick="exportarBackup()">
+            📤 Exportar backup
         </button>
 
     </div>
 
     <div class="card">
 
-        <h3>📤 Importar contatos</h3>
+        <h3>Importar dados</h3>
+
+        <p class="subtitulo">
+            Restaure um backup salvo anteriormente.
+        </p>
 
         <input
             type="file"
-            id="arquivoImportacao"
+            id="arquivoBackup"
             accept=".json"
-            onchange="importarBackup(event)"
         >
+
+        <button class="btn" onclick="importarBackup()">
+            📥 Importar backup
+        </button>
 
     </div>
 
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
+</section>
+
+<!-- =========================
+     CONFIGURAÇÃO
+========================= -->
+
+<section class="tela" id="configuracao">
+
+    <div class="titulo-tela">⚙️ Configuração</div>
+
+    <div class="card">
+
+        <h3>🎨 Personalização</h3>
+
+        <button class="btn" onclick="alternarTema()">
+            🌙 Alternar tema
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h3>🕐 Atualizações</h3>
+
+        <p class="subtitulo">
+            O status dos contatos registra automaticamente
+            a data e horário da última alteração.
+        </p>
+
+    </div>
 
 </section>
 
@@ -1063,53 +1014,47 @@ body.dark .btn-secundario{
      SOBRE
 ========================= -->
 
-<section id="sobre" class="tela">
+<section class="tela" id="sobre">
 
-    <div class="titulo">Sobre o BOT</div>
-    <div class="subtitulo">Informações do sistema.</div>
+    <div class="titulo-tela">ℹ️ Sobre o BOT</div>
 
     <div class="card">
 
-        <img
-            src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
-            alt="Logo BM3"
-            style="width:110px;height:110px;object-fit:contain;display:block;margin:0 auto 15px;border-radius:20px"
-        >
+        <h3>🍀 BOT DO BM3 🍀</h3>
 
-        <h3 style="text-align:center">
-            🍀 BOT DO BM3 🍀
-        </h3>
+        <p class="subtitulo">
+            Organizador de contatos desenvolvido para facilitar
+            o gerenciamento de números, grupos e status.
+        </p>
 
-        <p style="text-align:center;margin-top:8px">
-            Organizador de contatos
+        <p class="subtitulo">
+            🇮🇹 Sistema com identidade visual inspirada nas cores
+            da Itália.
+        </p>
+
+        <p class="subtitulo">
+            Versão atual: <strong>Premium</strong>
         </p>
 
     </div>
 
-    <button class="btn-secundario" onclick="trocarTela('menu')">
-        ← Voltar
-    </button>
-
 </section>
-
-<div class="rodape">
-    🍀 BOT DO BM3 🍀
-</div>
-
-</div>
 
 <script>
 
 /* =========================
-   CONFIGURAÇÕES
+   CONFIGURAÇÃO
 ========================= */
 
 const CHAVE_CONTATOS = "botBM3Contatos";
 const CHAVE_TEMA = "temaBotBM3";
 
-let contatos = JSON.parse(
-    localStorage.getItem(CHAVE_CONTATOS)
-) || [];
+let contatos =
+    JSON.parse(localStorage.getItem(CHAVE_CONTATOS)) || [];
+
+let telaAtual = "inicio";
+let bloqueioTela = false;
+
 
 /* =========================
    CARREGAMENTO
@@ -1119,7 +1064,8 @@ window.addEventListener("load", () => {
 
     setTimeout(() => {
 
-        const loading = document.getElementById("loading");
+        const loading =
+            document.getElementById("loading");
 
         loading.classList.add("saindo");
 
@@ -1134,12 +1080,24 @@ window.addEventListener("load", () => {
 
 });
 
+
 /* =========================
-   TROCAR TELA COM DELAY
+   MENU
 ========================= */
 
-let telaAtual = "inicio";
-let bloqueioTela = false;
+function abrirMenu(){
+
+    const menu =
+        document.getElementById("menu");
+
+    menu.classList.toggle("aberto");
+
+}
+
+
+/* =========================
+   TROCAR TELA
+========================= */
 
 function trocarTela(id){
 
@@ -1149,8 +1107,11 @@ function trocarTela(id){
 
     bloqueioTela = true;
 
-    const atual = document.getElementById(telaAtual);
-    const nova = document.getElementById(id);
+    const atual =
+        document.getElementById(telaAtual);
+
+    const nova =
+        document.getElementById(id);
 
     if(!nova){
         bloqueioTela = false;
@@ -1163,10 +1124,14 @@ function trocarTela(id){
 
     setTimeout(() => {
 
-        document.querySelectorAll(".tela").forEach(tela => {
-            tela.classList.remove("ativa");
-            tela.classList.remove("transicao");
-        });
+        document
+            .querySelectorAll(".tela")
+            .forEach(tela => {
+
+                tela.classList.remove("ativa");
+                tela.classList.remove("transicao");
+
+            });
 
         nova.classList.add("ativa");
 
@@ -1174,12 +1139,18 @@ function trocarTela(id){
 
         atualizarTela(id);
 
+        document
+            .getElementById("menu")
+            .classList.remove("aberto");
+
         setTimeout(() => {
             bloqueioTela = false;
-        }, 120);
+        },120);
 
-    }, 280);
+    },280);
+
 }
+
 
 /* =========================
    ATUALIZAR TELA
@@ -1191,6 +1162,10 @@ function atualizarTela(id){
         renderizarContatos();
     }
 
+    if(id === "grupos"){
+        renderizarGrupos();
+    }
+
     if(id === "favoritos"){
         renderizarFavoritos();
     }
@@ -1199,34 +1174,50 @@ function atualizarTela(id){
         atualizarEstatisticas();
     }
 
-    if(id === "grupos"){
-        renderizarGrupos();
-    }
-
-    if(id === "etiquetas"){
-        renderizarEtiquetas();
-    }
 }
 
+
 /* =========================
-   ADICIONAR CONTATO
+   SALVAR
+========================= */
+
+function salvar(){
+
+    localStorage.setItem(
+        CHAVE_CONTATOS,
+        JSON.stringify(contatos)
+    );
+
+}
+
+
+/* =========================
+   ADICIONAR
 ========================= */
 
 function adicionarContato(){
 
-    const nome = document.getElementById("nome").value.trim();
-    const numero = document.getElementById("numero").value.trim();
-    const grupo = document.getElementById("grupo").value.trim();
-    const observacao = document.getElementById("observacao").value.trim();
+    const nome =
+        document.getElementById("nome").value.trim();
+
+    const numero =
+        document.getElementById("numero").value.trim();
+
+    const grupo =
+        document.getElementById("grupo").value.trim();
+
+    const observacao =
+        document.getElementById("observacao").value.trim();
 
     if(!nome || !numero){
 
-        alert("Preencha o nome e o número.");
+        alert("Preencha o nome e o WhatsApp.");
 
         return;
     }
 
-    const agora = new Date();
+    const agora =
+        new Date();
 
     contatos.push({
 
@@ -1253,178 +1244,10 @@ function adicionarContato(){
 
     atualizarTudo();
 
-    alert("Contato adicionado!");
-
-    trocarTela("contatos");
-}
-
-/* =========================
-   SALVAR
-========================= */
-
-function salvar(){
-
-    localStorage.setItem(
-        CHAVE_CONTATOS,
-        JSON.stringify(contatos)
-    );
+    alert("Contato adicionado com sucesso!");
 
 }
 
-/* =========================
-   RENDER CONTATOS
-========================= */
-
-function renderizarContatos(){
-
-    const lista =
-        document.getElementById("listaContatos");
-
-    if(!contatos.length){
-
-        lista.innerHTML = `
-            <div class="card">
-                <h3>📭 Nenhum contato</h3>
-                <p>Você ainda não cadastrou contatos.</p>
-            </div>
-        `;
-
-        return;
-    }
-
-    lista.innerHTML = contatos.map((c,index) =>
-        criarCardContato(c,index)
-    ).join("");
-
-}
-
-/* =========================
-   CARD CONTATO
-========================= */
-
-function criarCardContato(c,index){
-
-    let statusTexto = "";
-    let statusClasse = "";
-
-    if(c.status === "ON"){
-        statusTexto = "🟢 ZAP ON";
-        statusClasse = "background:#dff7e8;color:#087b38;";
-    }
-
-    if(c.status === "ANALISE"){
-        statusTexto = "⚠️ ZAP EM ANÁLISE";
-        statusClasse = "background:#fff3cd;color:#856404;";
-    }
-
-    if(c.status === "CAIU"){
-        statusTexto = "🔴 ZAP CAIU";
-        statusClasse = "background:#ffdfe2;color:#a31320;";
-    }
-
-    return `
-
-    <div class="card contato">
-
-        <button
-            class="favorito"
-            onclick="alternarFavorito(${index})"
-        >
-            ${c.favorito ? "★" : "☆"}
-        </button>
-
-        <div class="contato-nome">
-            ${escapar(c.nome)}
-        </div>
-
-        <div class="contato-numero">
-            📱 ${escapar(c.numero)}
-        </div>
-
-        ${
-            c.grupo
-            ?
-            `<div class="contato-info">
-                🏷️ ${escapar(c.grupo)}
-            </div>`
-            :
-            ""
-        }
-
-        ${
-            c.observacao
-            ?
-            `<div class="contato-info">
-                📝 ${escapar(c.observacao)}
-            </div>`
-            :
-            ""
-        }
-
-        <div>
-            <span
-                class="status"
-                style="${statusClasse}"
-            >
-                ${statusTexto}
-            </span>
-        </div>
-
-        <label>🔽 Alterar status</label>
-
-        <select
-            class="status-select"
-            onchange="alterarStatus(${index},this.value)"
-        >
-
-            <option
-                value="ANALISE"
-                ${c.status === "ANALISE" ? "selected" : ""}
-            >
-                ⚠️ ZAP EM ANÁLISE
-            </option>
-
-            <option
-                value="ON"
-                ${c.status === "ON" ? "selected" : ""}
-            >
-                🟢 ZAP ON
-            </option>
-
-            <option
-                value="CAIU"
-                ${c.status === "CAIU" ? "selected" : ""}
-            >
-                🔴 ZAP CAIU
-            </option>
-
-        </select>
-
-        <div class="contato-info">
-            🕐 Última atualização:
-            ${escapar(c.ultimaAtualizacao || "-")}
-        </div>
-
-        <button
-            class="btn-whatsapp"
-            onclick="abrirWhatsApp(${index})"
-        >
-            <span style="font-size:19px">●</span>
-            Abrir WhatsApp
-        </button>
-
-        <button
-            class="btn-vermelho"
-            onclick="excluirContato(${index})"
-        >
-            🗑️ Excluir
-        </button>
-
-    </div>
-
-    `;
-
-}
 
 /* =========================
    STATUS
@@ -1447,6 +1270,7 @@ function alterarStatus(index,status){
 
 }
 
+
 /* =========================
    WHATSAPP
 ========================= */
@@ -1464,6 +1288,23 @@ function abrirWhatsApp(index){
     );
 
 }
+
+
+/* =========================
+   FAVORITO
+========================= */
+
+function alternarFavorito(index){
+
+    contatos[index].favorito =
+        !contatos[index].favorito;
+
+    salvar();
+
+    atualizarTudo();
+
+}
+
 
 /* =========================
    EXCLUIR
@@ -1483,45 +1324,21 @@ function excluirContato(index){
 
 }
 
+
 /* =========================
-   FAVORITOS
+   RENDER CONTATOS
 ========================= */
 
-function alternarFavorito(index){
-
-    contatos[index].favorito =
-        !contatos[index].favorito;
-
-    salvar();
-
-    atualizarTudo();
-
-    if(telaAtual === "contatos"){
-        renderizarContatos();
-    }
-
-    if(telaAtual === "favoritos"){
-        renderizarFavoritos();
-    }
-
-}
-
-function renderizarFavoritos(){
+function renderizarContatos(){
 
     const lista =
-        document.getElementById("listaFavoritos");
+        document.getElementById("listaContatos");
 
-    const favoritos =
-        contatos
-        .map((c,i)=>({c,i}))
-        .filter(x=>x.c.favorito);
-
-    if(!favoritos.length){
+    if(contatos.length === 0){
 
         lista.innerHTML = `
             <div class="card">
-                <h3>⭐ Nenhum favorito</h3>
-                <p>Marque contatos como favoritos.</p>
+                <p>Nenhum contato cadastrado.</p>
             </div>
         `;
 
@@ -1529,17 +1346,107 @@ function renderizarFavoritos(){
     }
 
     lista.innerHTML =
-        favoritos
-        .map(x=>criarCardContato(x.c,x.i))
-        .join("");
+        contatos.map((c,index) => `
+
+        <div class="contato">
+
+            <div class="contato-topo">
+
+                <div>
+
+                    <h3>${escapar(c.nome)}</h3>
+
+                    <div class="numero">
+                        📱 ${escapar(c.numero)}
+                    </div>
+
+                </div>
+
+                <div
+                    class="favorito"
+                    onclick="alternarFavorito(${index})"
+                >
+                    ${c.favorito ? "⭐" : "☆"}
+                </div>
+
+            </div>
+
+            ${
+                c.grupo
+                ? `<div class="info">🏷️ ${escapar(c.grupo)}</div>`
+                : ""
+            }
+
+            ${
+                c.observacao
+                ? `<div class="info">📝 ${escapar(c.observacao)}</div>`
+                : ""
+            }
+
+            <div class="info">
+                🕐 Atualizado: ${escapar(c.ultimaAtualizacao || "-")}
+            </div>
+
+            <label>🔽 Alterar status</label>
+
+            <select
+                class="status-select"
+                onchange="alterarStatus(${index},this.value)"
+            >
+
+                <option
+                    value="ANALISE"
+                    ${c.status === "ANALISE" ? "selected" : ""}
+                >
+                    ⚠️ ZAP EM ANÁLISE
+                </option>
+
+                <option
+                    value="ON"
+                    ${c.status === "ON" ? "selected" : ""}
+                >
+                    🟢 ZAP ON
+                </option>
+
+                <option
+                    value="CAIU"
+                    ${c.status === "CAIU" ? "selected" : ""}
+                >
+                    🔴 ZAP CAIU
+                </option>
+
+            </select>
+
+            <div class="acoes">
+
+                <button
+                    class="whatsapp"
+                    onclick="abrirWhatsApp(${index})"
+                >
+                    🟢 Abrir WhatsApp
+                </button>
+
+                <button
+                    class="excluir"
+                    onclick="excluirContato(${index})"
+                >
+                    🗑️ Excluir
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
 
 }
 
+
 /* =========================
-   PESQUISA
+   BUSCA
 ========================= */
 
-function pesquisar(){
+function buscarContatos(){
 
     const termo =
         document
@@ -1559,16 +1466,15 @@ function pesquisar(){
     }
 
     const encontrados =
-        contatos
-        .map((c,i)=>({c,i}))
-        .filter(x => {
+        contatos.filter(c => {
 
             const texto = (
 
-                x.c.nome + " " +
-                x.c.numero + " " +
-                x.c.grupo + " " +
-                x.c.observacao
+                c.nome + " " +
+                c.numero + " " +
+                c.grupo + " " +
+                c.observacao + " " +
+                c.status
 
             ).toLowerCase();
 
@@ -1576,12 +1482,11 @@ function pesquisar(){
 
         });
 
-    if(!encontrados.length){
+    if(encontrados.length === 0){
 
         resultado.innerHTML = `
             <div class="card">
-                <h3>🔎 Nenhum resultado</h3>
-                <p>Nenhum contato encontrado.</p>
+                Nenhum contato encontrado.
             </div>
         `;
 
@@ -1589,90 +1494,32 @@ function pesquisar(){
     }
 
     resultado.innerHTML =
-        encontrados
-        .map(x=>criarCardContato(x.c,x.i))
-        .join("");
+        encontrados.map(c => `
 
-}
+            <div class="contato">
 
-/* =========================
-   FILTRO STATUS
-========================= */
+                <h3>${escapar(c.nome)}</h3>
 
-function filtrarStatus(status){
+                <div class="numero">
+                    📱 ${escapar(c.numero)}
+                </div>
 
-    const resultado =
-        document.getElementById("listaResultado");
+                <div class="info">
+                    ${
+                        c.status === "ON"
+                        ? "🟢 ZAP ON"
+                        : c.status === "CAIU"
+                        ? "🔴 ZAP CAIU"
+                        : "⚠️ ZAP EM ANÁLISE"
+                    }
+                </div>
 
-    const titulo =
-        document.getElementById("tituloResultado");
-
-    let texto = "";
-
-    if(status === "ON"){
-        texto = "🟢 ZAP ON";
-    }
-
-    if(status === "ANALISE"){
-        texto = "⚠️ ZAP EM ANÁLISE";
-    }
-
-    if(status === "CAIU"){
-        texto = "🔴 ZAP CAIU";
-    }
-
-    titulo.innerText = texto;
-
-    const encontrados =
-        contatos
-        .map((c,i)=>({c,i}))
-        .filter(x=>x.c.status === status);
-
-    if(!encontrados.length){
-
-        resultado.innerHTML = `
-            <div class="card">
-                <h3>Nenhum contato</h3>
-                <p>Nenhum contato está nesta categoria.</p>
             </div>
-        `;
 
-    }else{
-
-        resultado.innerHTML =
-            encontrados
-            .map(x=>criarCardContato(x.c,x.i))
-            .join("");
-
-    }
-
-    trocarTela("resultado");
+        `).join("");
 
 }
 
-/* =========================
-   ESTATISTICAS
-========================= */
-
-function atualizarEstatisticas(){
-
-    const total = contatos.length;
-
-    const on =
-        contatos.filter(c=>c.status==="ON").length;
-
-    const analise =
-        contatos.filter(c=>c.status==="ANALISE").length;
-
-    const caiu =
-        contatos.filter(c=>c.status==="CAIU").length;
-
-    document.getElementById("estatTotal").innerText = total;
-    document.getElementById("estatOn").innerText = on;
-    document.getElementById("estatAnalise").innerText = analise;
-    document.getElementById("estatCaiu").innerText = caiu;
-
-}
 
 /* =========================
    GRUPOS
@@ -1683,19 +1530,26 @@ function renderizarGrupos(){
     const lista =
         document.getElementById("listaGrupos");
 
-    const grupos = [...new Set(
+    const grupos = {};
 
-        contatos
-        .map(c=>c.grupo)
-        .filter(Boolean)
+    contatos.forEach(c => {
 
-    )];
+        const nome =
+            c.grupo || "Sem grupo";
 
-    if(!grupos.length){
+        grupos[nome] =
+            (grupos[nome] || 0) + 1;
+
+    });
+
+    const nomes =
+        Object.keys(grupos);
+
+    if(nomes.length === 0){
 
         lista.innerHTML = `
-            <div class="item-simples">
-                📭 Nenhum grupo cadastrado.
+            <div class="card">
+                Nenhum grupo cadastrado.
             </div>
         `;
 
@@ -1703,42 +1557,42 @@ function renderizarGrupos(){
     }
 
     lista.innerHTML =
-        grupos
-        .map(g=>`
+        nomes.map(grupo => `
 
-            <div class="item-simples">
-                🏷️ <strong>
-                    ${escapar(g)}
+            <div class="grupo-item">
+
+                <strong>
+                    🏷️ ${escapar(grupo)}
                 </strong>
+
+                <span>
+                    ${grupos[grupo]} contato(s)
+                </span>
+
             </div>
 
-        `)
-        .join("");
+        `).join("");
 
 }
+
 
 /* =========================
-   ETIQUETAS
+   FAVORITOS
 ========================= */
 
-function renderizarEtiquetas(){
+function renderizarFavoritos(){
 
     const lista =
-        document.getElementById("listaEtiquetas");
+        document.getElementById("listaFavoritos");
 
-    const grupos = [...new Set(
+    const favoritos =
+        contatos.filter(c => c.favorito);
 
-        contatos
-        .map(c=>c.grupo)
-        .filter(Boolean)
-
-    )];
-
-    if(!grupos.length){
+    if(favoritos.length === 0){
 
         lista.innerHTML = `
-            <div class="item-simples">
-                Nenhuma etiqueta disponível.
+            <div class="card">
+                Nenhum favorito ainda.
             </div>
         `;
 
@@ -1746,17 +1600,52 @@ function renderizarEtiquetas(){
     }
 
     lista.innerHTML =
-        grupos
-        .map(g=>`
+        favoritos.map(c => `
 
-            <div class="item-simples">
-                🏷️ ${escapar(g)}
+            <div class="contato">
+
+                <h3>⭐ ${escapar(c.nome)}</h3>
+
+                <div class="numero">
+                    📱 ${escapar(c.numero)}
+                </div>
+
+                <div class="info">
+                    ${escapar(c.grupo || "Sem grupo")}
+                </div>
+
             </div>
 
-        `)
-        .join("");
+        `).join("");
 
 }
+
+
+/* =========================
+   ESTATÍSTICAS
+========================= */
+
+function atualizarEstatisticas(){
+
+    const total =
+        contatos.length;
+
+    const on =
+        contatos.filter(c => c.status === "ON").length;
+
+    const analise =
+        contatos.filter(c => c.status === "ANALISE").length;
+
+    const caiu =
+        contatos.filter(c => c.status === "CAIU").length;
+
+    document.getElementById("statTotal").textContent = total;
+    document.getElementById("statOn").textContent = on;
+    document.getElementById("statAnalise").textContent = analise;
+    document.getElementById("statCaiu").textContent = caiu;
+
+}
+
 
 /* =========================
    RESUMO
@@ -1764,23 +1653,50 @@ function renderizarEtiquetas(){
 
 function atualizarResumo(){
 
-    const total = contatos.length;
+    const total =
+        contatos.length;
 
     const on =
-        contatos.filter(c=>c.status==="ON").length;
+        contatos.filter(c => c.status === "ON").length;
 
     const analise =
-        contatos.filter(c=>c.status==="ANALISE").length;
+        contatos.filter(c => c.status === "ANALISE").length;
 
     const caiu =
-        contatos.filter(c=>c.status==="CAIU").length;
+        contatos.filter(c => c.status === "CAIU").length;
 
-    document.getElementById("totalContatos").innerText = total;
-    document.getElementById("totalOn").innerText = on;
-    document.getElementById("totalAnalise").innerText = analise;
-    document.getElementById("totalCaiu").innerText = caiu;
+    document.getElementById("totalContatos").textContent = total;
+    document.getElementById("totalOn").textContent = on;
+    document.getElementById("totalAnalise").textContent = analise;
+    document.getElementById("totalCaiu").textContent = caiu;
 
 }
+
+
+/* =========================
+   ATUALIZAR TUDO
+========================= */
+
+function atualizarTudo(){
+
+    atualizarResumo();
+
+    atualizarEstatisticas();
+
+    if(telaAtual === "contatos"){
+        renderizarContatos();
+    }
+
+    if(telaAtual === "grupos"){
+        renderizarGrupos();
+    }
+
+    if(telaAtual === "favoritos"){
+        renderizarFavoritos();
+    }
+
+}
+
 
 /* =========================
    BACKUP
@@ -1804,7 +1720,9 @@ function exportarBackup(){
         document.createElement("a");
 
     a.href = url;
-    a.download = "backup-bot-bm3.json";
+
+    a.download =
+        "backup-bot-bm3.json";
 
     a.click();
 
@@ -1812,16 +1730,23 @@ function exportarBackup(){
 
 }
 
+
 /* =========================
-   IMPORTAR
+   IMPORTAR BACKUP
 ========================= */
 
-function importarBackup(event){
+function importarBackup(){
 
     const arquivo =
-        event.target.files[0];
+        document.getElementById("arquivoBackup")
+        .files[0];
 
-    if(!arquivo) return;
+    if(!arquivo){
+
+        alert("Selecione um arquivo de backup.");
+
+        return;
+    }
 
     const leitor =
         new FileReader();
@@ -1835,7 +1760,7 @@ function importarBackup(event){
 
             if(!Array.isArray(dados)){
 
-                alert("Arquivo inválido.");
+                alert("Backup inválido.");
 
                 return;
             }
@@ -1846,11 +1771,15 @@ function importarBackup(event){
 
             atualizarTudo();
 
-            alert("Backup importado com sucesso!");
+            alert(
+                "Backup importado com sucesso!"
+            );
 
         }catch{
 
-            alert("Não foi possível importar o backup.");
+            alert(
+                "Não foi possível importar este backup."
+            );
 
         }
 
@@ -1859,6 +1788,7 @@ function importarBackup(event){
     leitor.readAsText(arquivo);
 
 }
+
 
 /* =========================
    TEMA
@@ -1877,58 +1807,31 @@ function alternarTema(){
 
 }
 
+
 function aplicarTema(){
 
-    if(
-        localStorage.getItem(CHAVE_TEMA)
-        === "dark"
-    ){
+    const tema =
+        localStorage.getItem(CHAVE_TEMA);
 
+    if(tema === "dark"){
         document.body.classList.add("dark");
-
     }
 
 }
 
+
 /* =========================
-   ESCAPAR TEXTO
+   SEGURANÇA DE TEXTO
 ========================= */
 
 function escapar(texto){
 
-    return String(texto || "")
+    return String(texto ?? "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
         .replace(/'/g,"&#039;");
-
-}
-
-/* =========================
-   ATUALIZAR TUDO
-========================= */
-
-function atualizarTudo(){
-
-    atualizarResumo();
-    atualizarEstatisticas();
-
-    if(telaAtual === "contatos"){
-        renderizarContatos();
-    }
-
-    if(telaAtual === "favoritos"){
-        renderizarFavoritos();
-    }
-
-    if(telaAtual === "grupos"){
-        renderizarGrupos();
-    }
-
-    if(telaAtual === "etiquetas"){
-        renderizarEtiquetas();
-    }
 
 }
 
