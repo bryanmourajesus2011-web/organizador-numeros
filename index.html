@@ -12,9 +12,9 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
+  font-family: Arial, sans-serif;
   min-height: 100vh;
   background: linear-gradient(135deg, #008C45, #FFFFFF, #CD212A);
 }
@@ -30,12 +30,13 @@ body {
 }
 
 .carregando-box {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
   width: 90%;
   max-width: 350px;
+  padding: 30px;
+  text-align: center;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.2);
 }
 
 .spinner {
@@ -61,9 +62,9 @@ body {
 }
 
 .topo {
-  text-align: center;
   padding: 25px 15px;
   margin-bottom: 20px;
+  text-align: center;
   border-radius: 18px;
   background: linear-gradient(90deg, #008C45, #FFFFFF, #CD212A);
   box-shadow: 0 5px 15px rgba(0,0,0,.15);
@@ -115,24 +116,19 @@ body {
 }
 
 button {
-  cursor: pointer;
-}
-
-.inicio button,
-.menu button,
-.acao {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
   border: none;
   border-radius: 10px;
-  color: white;
-  font-size: 16px;
+  cursor: pointer;
   font-weight: bold;
 }
 
 .inicio button,
 .menu button {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 16px;
   background: linear-gradient(90deg, #008C45, #CD212A);
 }
 
@@ -147,6 +143,11 @@ textarea {
 }
 
 .acao {
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  color: white;
+  font-size: 16px;
   background: #008C45;
 }
 
@@ -155,15 +156,15 @@ textarea {
 }
 
 .contato {
-  margin-top: 12px;
   padding: 15px;
+  margin-top: 12px;
   border: 1px solid #ddd;
   border-radius: 12px;
 }
 
 .status-box {
-  margin-top: 15px;
   padding: 12px;
+  margin-top: 15px;
   border-radius: 10px;
   background: #f5f5f5;
 }
@@ -176,13 +177,10 @@ textarea {
 
 .botao-alterar {
   width: 100%;
-  padding: 11px;
-  border: none;
-  border-radius: 9px;
-  background: #555;
+  padding: 12px;
   color: white;
   font-size: 15px;
-  font-weight: bold;
+  background: #555;
 }
 
 .opcoes-status {
@@ -190,30 +188,24 @@ textarea {
   margin-top: 10px;
 }
 
-.opcoes-status.mostrar {
-  display: block;
-}
-
 .opcoes-status button {
+  display: block;
   width: 100%;
-  padding: 11px;
+  padding: 12px;
   margin-top: 8px;
-  border: none;
-  border-radius: 9px;
   color: white;
   font-size: 15px;
-  font-weight: bold;
 }
 
-.analise {
+.status-analise {
   background: #d99a00;
 }
 
-.on {
+.status-on {
   background: #008C45;
 }
 
-.caiu {
+.status-caiu {
   background: #CD212A;
 }
 
@@ -256,32 +248,35 @@ textarea {
   <div class="inicio" id="inicio">
     <h2>🏠 Início</h2>
     <p>Bem-vindo ao BOT DO BM3</p>
-    <button onclick="abrirMenu()">☰ Abrir Menu</button>
+
+    <button id="botaoMenu">
+      ☰ Abrir Menu
+    </button>
   </div>
 
   <div class="menu" id="menu">
 
-    <button onclick="abrirTela('adicionar')">
+    <button data-tela="adicionar">
       ➕ Adicionar contato
     </button>
 
-    <button onclick="abrirTela('pesquisar')">
+    <button data-tela="pesquisar">
       🔎 Pesquisar contatos
     </button>
 
-    <button onclick="abrirTela('contatos')">
+    <button data-tela="contatos">
       📋 Meus contatos
     </button>
 
-    <button onclick="abrirTela('grupos')">
+    <button data-tela="grupos">
       🏷️ Grupos / Etiquetas
     </button>
 
-    <button onclick="abrirTela('configuracoes')">
+    <button data-tela="configuracoes">
       ⚙️ Configurações
     </button>
 
-    <button onclick="voltarInicio()">
+    <button id="botaoInicio">
       🏠 Voltar ao início
     </button>
 
@@ -299,11 +294,11 @@ textarea {
 
     <textarea id="observacao" placeholder="Observação"></textarea>
 
-    <button class="acao" onclick="adicionarContato()">
+    <button class="acao" id="salvarContato">
       💾 Salvar contato
     </button>
 
-    <button class="acao voltar" onclick="voltarMenu()">
+    <button class="acao voltar" data-voltar>
       ↩️ Voltar ao menu
     </button>
 
@@ -316,12 +311,11 @@ textarea {
     <input
       id="pesquisa"
       placeholder="Digite nome, número ou grupo..."
-      oninput="mostrarContatos()"
     >
 
     <div id="resultadoPesquisa"></div>
 
-    <button class="acao voltar" onclick="voltarMenu()">
+    <button class="acao voltar" data-voltar>
       ↩️ Voltar ao menu
     </button>
 
@@ -333,7 +327,7 @@ textarea {
 
     <div id="lista"></div>
 
-    <button class="acao voltar" onclick="voltarMenu()">
+    <button class="acao voltar" data-voltar>
       ↩️ Voltar ao menu
     </button>
 
@@ -345,7 +339,7 @@ textarea {
 
     <div id="listaGrupos"></div>
 
-    <button class="acao voltar" onclick="voltarMenu()">
+    <button class="acao voltar" data-voltar>
       ↩️ Voltar ao menu
     </button>
 
@@ -359,11 +353,11 @@ textarea {
 
     <p>Organizador de contatos</p>
 
-    <button class="acao" onclick="limparContatos()">
+    <button class="acao" id="limparContatos">
       🗑️ Apagar todos os contatos
     </button>
 
-    <button class="acao voltar" onclick="voltarMenu()">
+    <button class="acao voltar" data-voltar>
       ↩️ Voltar ao menu
     </button>
 
@@ -373,9 +367,15 @@ textarea {
 
 <script>
 
-let contatos = JSON.parse(
-  localStorage.getItem("contatos") || "[]"
-);
+let contatos = [];
+
+try {
+  contatos = JSON.parse(
+    localStorage.getItem("contatos") || "[]"
+  );
+} catch (erro) {
+  contatos = [];
+}
 
 setTimeout(function() {
   document.getElementById("carregando").style.display = "none";
@@ -390,56 +390,84 @@ function salvar() {
 }
 
 
-function abrirMenu() {
+function esconderTudo() {
+
   document.getElementById("inicio").style.display = "none";
-  esconderTelas();
+
+  document.getElementById("menu").style.display = "none";
+
+  document.querySelectorAll(".tela").forEach(function(tela) {
+    tela.style.display = "none";
+  });
+}
+
+
+function mostrarMenu() {
+
+  esconderTudo();
+
   document.getElementById("menu").style.display = "block";
 }
 
 
-function voltarInicio() {
-  esconderTelas();
-  document.getElementById("menu").style.display = "none";
+function mostrarInicio() {
+
+  esconderTudo();
+
   document.getElementById("inicio").style.display = "block";
 }
 
 
-function abrirTela(tela) {
-
-  document.getElementById("menu").style.display = "none";
-
-  esconderTelas();
-
-  document.getElementById(tela).style.display = "block";
-
-  if (tela === "contatos") {
-    mostrarContatos();
-  }
-
-  if (tela === "pesquisar") {
-    mostrarContatos();
-  }
-
-  if (tela === "grupos") {
-    mostrarGrupos();
-  }
-}
+document.getElementById("botaoMenu").addEventListener(
+  "click",
+  mostrarMenu
+);
 
 
-function voltarMenu() {
-  esconderTelas();
-  document.getElementById("menu").style.display = "block";
-}
+document.getElementById("botaoInicio").addEventListener(
+  "click",
+  mostrarInicio
+);
 
 
-function esconderTelas() {
+document.querySelectorAll("[data-tela]").forEach(function(botao) {
 
-  document
-    .querySelectorAll(".tela")
-    .forEach(function(tela) {
-      tela.style.display = "none";
-    });
-}
+  botao.addEventListener("click", function() {
+
+    const tela = botao.dataset.tela;
+
+    esconderTudo();
+
+    document.getElementById(tela).style.display = "block";
+
+    if (tela === "contatos") {
+      mostrarContatos();
+    }
+
+    if (tela === "pesquisar") {
+      mostrarContatos();
+    }
+
+    if (tela === "grupos") {
+      mostrarGrupos();
+    }
+
+  });
+
+});
+
+
+document.querySelectorAll("[data-voltar]").forEach(function(botao) {
+
+  botao.addEventListener("click", mostrarMenu);
+
+});
+
+
+document.getElementById("salvarContato").addEventListener(
+  "click",
+  adicionarContato
+);
 
 
 function adicionarContato() {
@@ -457,7 +485,11 @@ function adicionarContato() {
     document.getElementById("observacao").value.trim();
 
   if (!nome || !numero) {
-    alert("Digite pelo menos o nome e o número.");
+
+    alert(
+      "Digite pelo menos o nome e o número."
+    );
+
     return;
   }
 
@@ -475,6 +507,7 @@ function adicionarContato() {
 
     ultimaAtualizacao:
       new Date().toLocaleString("pt-BR")
+
   });
 
   salvar();
@@ -490,67 +523,12 @@ function adicionarContato() {
 }
 
 
-function alterarStatus(index, status) {
-
-  contatos[index].status = status;
-
-  contatos[index].ultimaAtualizacao =
-    new Date().toLocaleString("pt-BR");
-
-  salvar();
-
-  mostrarContatos();
-}
-
-function abrirOpcoesStatus(index) {
-  const opcoes = document.getElementById("opcoesStatus" + index);
-
-  if (opcoes.style.display === "block") {
-    opcoes.style.display = "none";
-  } else {
-    opcoes.style.display = "block";
-  }
-}
-
-  const elemento =
-    document.getElementById(
-      "opcoesStatus" + index
-    );
-
-  elemento.classList.toggle("mostrar");
-}
-oi
-
-function excluirContato(index) {
-
-  if (confirm("Deseja excluir este contato?")) {
-
-    contatos.splice(index, 1);
-
-    salvar();
-
-    mostrarContatos();
-
-    mostrarGrupos();
-  }
-}
-
-
 function mostrarContatos() {
 
-  const lista =
-    document.getElementById("lista");
-
-  const resultado =
-    document.getElementById("resultadoPesquisa");
-
-  const pesquisaElemento =
-    document.getElementById("pesquisa");
-
   const pesquisa =
-    pesquisaElemento
-      ? pesquisaElemento.value.toLowerCase()
-      : "";
+    (
+      document.getElementById("pesquisa")?.value || ""
+    ).toLowerCase();
 
   let html = "";
 
@@ -581,9 +559,7 @@ function mostrarContatos() {
 
       <div class="contato">
 
-        <strong>
-          👤 ${contato.nome}
-        </strong>
+        <strong>👤 ${contato.nome}</strong>
 
         <br><br>
 
@@ -608,33 +584,36 @@ function mostrarContatos() {
 
           <button
             class="botao-alterar"
-            onclick="abrirOpcoesStatus(${index})"
+            data-abrir-status="${index}"
           >
             🔽 Alterar status
           </button>
 
           <div
-            id="opcoesStatus${index}"
             class="opcoes-status"
+            id="status-${index}"
           >
 
             <button
-              class="analise"
-              onclick="alterarStatus(${index}, '⚠️ ZAP EM ANÁLISE')"
+              class="status-analise"
+              data-status-index="${index}"
+              data-status="⚠️ ZAP EM ANÁLISE"
             >
               ⚠️ ZAP EM ANÁLISE
             </button>
 
             <button
-              class="on"
-              onclick="alterarStatus(${index}, '✅ ZAP ON')"
+              class="status-on"
+              data-status-index="${index}"
+              data-status="✅ ZAP ON"
             >
               ✅ ZAP ON
             </button>
 
             <button
-              class="caiu"
-              onclick="alterarStatus(${index}, '❌ ZAP CAIU')"
+              class="status-caiu"
+              data-status-index="${index}"
+              data-status="❌ ZAP CAIU"
             >
               ❌ ZAP CAIU
             </button>
@@ -650,14 +629,14 @@ function mostrarContatos() {
 
         <button
           class="acao whatsapp"
-          onclick="abrirWhatsApp('${contato.numero}')"
+          data-whatsapp="${contato.numero}"
         >
           💬 Abrir WhatsApp
         </button>
 
         <button
           class="acao excluir"
-          onclick="excluirContato(${index})"
+          data-excluir="${index}"
         >
           🗑️ Excluir
         </button>
@@ -667,31 +646,124 @@ function mostrarContatos() {
     `;
   });
 
-  const mensagem =
-    "<p>Nenhum contato encontrado.</p>";
+  const resultado =
+    html || "<p>Nenhum contato encontrado.</p>";
 
-  if (lista) {
-    lista.innerHTML =
-      html || mensagem;
-  }
+  document.getElementById("lista").innerHTML = resultado;
 
-  if (resultado) {
-    resultado.innerHTML =
-      html || mensagem;
-  }
+  document.getElementById("resultadoPesquisa").innerHTML = resultado;
+
+  ativarBotoesContatos();
 }
 
 
-function abrirWhatsApp(numero) {
+function ativarBotoesContatos() {
 
-  const numeroLimpo =
-    numero.replace(/\D/g, "");
+  document.querySelectorAll("[data-abrir-status]").forEach(
+    function(botao) {
 
-  window.open(
-    "https://wa.me/" + numeroLimpo,
-    "_blank"
+      botao.addEventListener("click", function() {
+
+        const index =
+          botao.dataset.abrirStatus;
+
+        const opcoes =
+          document.getElementById(
+            "status-" + index
+          );
+
+        if (opcoes.style.display === "block") {
+
+          opcoes.style.display = "none";
+
+        } else {
+
+          opcoes.style.display = "block";
+        }
+
+      });
+
+    }
   );
+
+
+  document.querySelectorAll("[data-status-index]").forEach(
+    function(botao) {
+
+      botao.addEventListener("click", function() {
+
+        const index =
+          Number(botao.dataset.statusIndex);
+
+        const novoStatus =
+          botao.dataset.status;
+
+        contatos[index].status = novoStatus;
+
+        contatos[index].ultimaAtualizacao =
+          new Date().toLocaleString("pt-BR");
+
+        salvar();
+
+        mostrarContatos();
+
+      });
+
+    }
+  );
+
+
+  document.querySelectorAll("[data-excluir]").forEach(
+    function(botao) {
+
+      botao.addEventListener("click", function() {
+
+        const index =
+          Number(botao.dataset.excluir);
+
+        if (confirm("Deseja excluir este contato?")) {
+
+          contatos.splice(index, 1);
+
+          salvar();
+
+          mostrarContatos();
+
+          mostrarGrupos();
+
+        }
+
+      });
+
+    }
+  );
+
+
+  document.querySelectorAll("[data-whatsapp]").forEach(
+    function(botao) {
+
+      botao.addEventListener("click", function() {
+
+        const numero =
+          botao.dataset.whatsapp.replace(/\D/g, "");
+
+        window.open(
+          "https://wa.me/" + numero,
+          "_blank"
+        );
+
+      });
+
+    }
+  );
+
 }
+
+
+document.getElementById("pesquisa").addEventListener(
+  "input",
+  mostrarContatos
+);
 
 
 function mostrarGrupos() {
@@ -711,6 +783,7 @@ function mostrarGrupos() {
     }
 
     grupos[grupo]++;
+
   });
 
   let html = "";
@@ -718,10 +791,12 @@ function mostrarGrupos() {
   Object.keys(grupos).forEach(function(grupo) {
 
     html += `
+
       <div class="grupo-item">
         🏷️ ${grupo} —
         ${grupos[grupo]} contato(s)
       </div>
+
     `;
 
   });
@@ -732,29 +807,35 @@ function mostrarGrupos() {
 }
 
 
-function limparContatos() {
+document.getElementById("limparContatos").addEventListener(
+  "click",
+  function() {
 
-  if (
-    confirm(
-      "Tem certeza que deseja apagar TODOS os contatos?"
-    )
-  ) {
+    if (
+      confirm(
+        "Tem certeza que deseja apagar TODOS os contatos?"
+      )
+    ) {
 
-    contatos = [];
+      contatos = [];
 
-    salvar();
+      salvar();
 
-    mostrarContatos();
+      mostrarContatos();
 
-    mostrarGrupos();
+      mostrarGrupos();
 
-    alert(
-      "🗑️ Todos os contatos foram apagados."
-    );
+      alert(
+        "🗑️ Todos os contatos foram apagados."
+      );
+
+    }
+
   }
-}
+);
 
 </script>
 
 </body>
-</html/>
+</html>
+
