@@ -165,7 +165,9 @@
 </div>
 
 <script>
-
+function mostrarTela(tela) {
+  alert("Você selecionou: " + tela);
+}
 let contatos = JSON.parse(
   localStorage.getItem("contatos") || "[]"
 );
