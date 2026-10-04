@@ -390,10 +390,13 @@ function adicionarContato() {
   }
 
   contatos.push({
-    nome: nome,
-    numero: numero,
-    grupo: grupo,
-    observacao: observacao
+  nome: nome,
+  numero: numero,
+  grupo: grupo,
+  observacao: observacao,
+  status: "⚠️ ZAP EM ANÁLISE",
+  ultimaAtualizacao: new Date().toLocaleString("pt-BR")
+});
   });
 
   salvar();
