@@ -166,7 +166,10 @@
 
 <script>
 function mostrarTela(tela) {
-  alert("Você selecionou: " + tela);
+  if (tela === "inicio") {
+    alert("🏠 Bem-vindo ao BOT DO BM3!");
+  }
+}
 }
 let contatos = JSON.parse(
   localStorage.getItem("contatos") || "[]"
