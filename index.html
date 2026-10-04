@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#008c45">
-
 <title>🍀 BOT DO BM3 🍀</title>
 
 <style>
@@ -12,12 +11,12 @@
     --verde:#008c45;
     --verde2:#00a651;
     --vermelho:#cd212a;
-    --branco:#ffffff;
+    --branco:#fff;
     --fundo:#f3f6f4;
     --texto:#17221d;
     --cinza:#68736d;
     --borda:#dfe6e2;
-    --card:#ffffff;
+    --card:#fff;
     --sombra:0 14px 35px rgba(0,0,0,.09);
     --raio:20px;
 }
@@ -34,7 +33,6 @@ body{
     background:var(--fundo);
     color:var(--texto);
     min-height:100vh;
-    transition:.25s;
 }
 
 body.dark{
@@ -46,34 +44,17 @@ body.dark{
     --sombra:0 14px 35px rgba(0,0,0,.38);
 }
 
-button,
-input,
-textarea,
-select{
-    font:inherit;
-}
-
-button{
-    border:0;
-    cursor:pointer;
-}
-
-/* =========================
-   APP / TRANSIÇÃO
-========================= */
+button,input,textarea,select{font:inherit}
+button{border:0;cursor:pointer}
 
 .app{
     max-width:700px;
     margin:auto;
     min-height:100vh;
     padding-bottom:35px;
-
     opacity:0;
     transform:translateY(15px);
-
-    transition:
-        opacity .7s ease,
-        transform .7s cubic-bezier(.22,1,.36,1);
+    transition:.7s ease;
 }
 
 .app.ready{
@@ -81,187 +62,113 @@ button{
     transform:translateY(0);
 }
 
-/* =========================
-   LOADING PREMIUM
-========================= */
+/* LOADING */
 
 #loading{
     position:fixed;
     inset:0;
     background:
-        radial-gradient(
-            circle at 50% 35%,
-            rgba(0,140,69,.09),
-            transparent 38%
-        ),
+        radial-gradient(circle at 50% 35%,rgba(0,140,69,.09),transparent 38%),
         var(--fundo);
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     z-index:9999;
+    transition:.65s ease;
+}
 
-    opacity:1;
-    visibility:visible;
-
-    transition:
-        opacity .65s ease,
-        visibility .65s ease;
+.loading-box,
+.welcome-box{
+    width:88%;
+    max-width:390px;
+    text-align:center;
+    background:var(--card);
+    border-radius:28px;
+    box-shadow:0 25px 70px rgba(0,0,0,.12);
 }
 
 .loading-box{
-    width:88%;
-    max-width:390px;
-
-    text-align:center;
-
     padding:0 25px 32px;
-
-    border-radius:28px;
-
-    background:var(--card);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.12),
-        0 0 0 1px rgba(0,140,69,.05);
-
     overflow:hidden;
+    animation:entrada .8s ease both;
+}
 
-    animation:
-        loadingBoxEntrada
-        .8s
-        cubic-bezier(.22,1,.36,1)
-        both;
+.italy-line,
+.welcome-line{
+    display:flex;
+    overflow:hidden;
 }
 
 .italy-line{
-    display:flex;
-    width:100%;
     height:6px;
     margin-bottom:30px;
 }
 
-.italy-line span{
+.italy-line span,
+.welcome-line span{
     flex:1;
 }
 
-.italy-line span:nth-child(1){
-    background:#008c45;
-}
+.italy-line span:nth-child(1),
+.welcome-line span:nth-child(1){background:#008c45}
 
-.italy-line span:nth-child(2){
-    background:#ffffff;
-}
+.italy-line span:nth-child(2),
+.welcome-line span:nth-child(2){background:#fff}
 
-.italy-line span:nth-child(3){
-    background:#cd212a;
-}
+.italy-line span:nth-child(3),
+.welcome-line span:nth-child(3){background:#cd212a}
 
 .loading-logo{
     width:150px;
     height:150px;
-
     object-fit:contain;
     border-radius:25px;
-
     margin-bottom:20px;
-
-    animation:
-        logoEntrada
-        .9s
-        cubic-bezier(.22,1,.36,1)
-        .1s
-        both;
+    animation:logoEntrada .9s ease both;
 }
 
 .loading-title{
     font-size:22px;
     font-weight:950;
-    letter-spacing:-.4px;
-
-    animation:
-        textEntrada
-        .7s
-        ease
-        .25s
-        both;
 }
 
 .loading-sub{
     color:var(--cinza);
     margin-top:7px;
-
-    animation:
-        textEntrada
-        .7s
-        ease
-        .35s
-        both;
 }
 
 .loader{
     width:48px;
     height:48px;
-
     border:4px solid var(--borda);
     border-top-color:var(--verde);
     border-right-color:var(--vermelho);
-
     border-radius:50%;
-
     margin:25px auto 0;
-
-    animation:
-        spin
-        .8s
-        linear
-        infinite;
+    animation:spin .8s linear infinite;
 }
 
 .loading-status{
     margin-top:12px;
-
     font-size:11px;
     font-weight:900;
-
     color:var(--cinza);
-
-    animation:
-        pulseStatus
-        1.2s
-        ease-in-out
-        infinite;
+    animation:pulse 1.2s infinite;
 }
-
-/* =========================
-   TELA DE BOAS-VINDAS
-========================= */
 
 #welcome{
     position:fixed;
     inset:0;
-
     z-index:9998;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     background:
-        radial-gradient(
-            circle at 50% 35%,
-            rgba(0,140,69,.09),
-            transparent 38%
-        ),
+        radial-gradient(circle at 50% 35%,rgba(0,140,69,.09),transparent 38%),
         var(--fundo);
-
     opacity:0;
     visibility:hidden;
-
-    transition:
-        opacity .65s ease,
-        visibility .65s ease;
+    transition:.65s ease;
 }
 
 #welcome.show{
@@ -275,214 +182,49 @@ button{
 }
 
 .welcome-box{
-    width:88%;
-    max-width:390px;
-
-    text-align:center;
-
     padding:38px 25px;
-
-    border-radius:28px;
-
-    background:var(--card);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.12),
-        0 0 0 1px rgba(0,140,69,.05);
-
-    transform:
-        translateY(25px)
-        scale(.94);
-
-    transition:
-        transform .65s
-        cubic-bezier(.22,1,.36,1);
+    transform:translateY(25px) scale(.94);
+    transition:.65s ease;
 }
 
 #welcome.show .welcome-box{
-    transform:
-        translateY(0)
-        scale(1);
+    transform:translateY(0) scale(1);
 }
 
 .welcome-logo{
     font-size:68px;
     line-height:1;
-
     margin-bottom:20px;
-
-    animation:
-        welcomeLogo
-        .9s
-        cubic-bezier(.22,1,.36,1)
-        both;
 }
 
 .welcome-title{
     font-size:21px;
     font-weight:700;
-
-    color:var(--texto);
-
-    animation:
-        textEntrada
-        .7s
-        ease
-        .1s
-        both;
 }
 
 .welcome-brand{
     margin-top:5px;
-
     font-size:29px;
     font-weight:950;
-
-    letter-spacing:-.8px;
-
     color:var(--verde);
-
-    animation:
-        textEntrada
-        .7s
-        ease
-        .2s
-        both;
 }
 
 .welcome-line{
-    display:flex;
-
     width:130px;
     height:5px;
-
     margin:22px auto 0;
-
     border-radius:10px;
-
-    overflow:hidden;
-
-    animation:
-        textEntrada
-        .7s
-        ease
-        .3s
-        both;
 }
 
-.welcome-line span{
-    flex:1;
-}
-
-.welcome-line span:nth-child(1){
-    background:#008c45;
-}
-
-.welcome-line span:nth-child(2){
-    background:#ffffff;
-}
-
-.welcome-line span:nth-child(3){
-    background:#cd212a;
-}
-
-@keyframes loadingBoxEntrada{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(20px)
-            scale(.94);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-@keyframes logoEntrada{
-
-    from{
-        opacity:0;
-        transform:
-            scale(.72)
-            rotate(-8deg);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            scale(1)
-            rotate(0);
-    }
-}
-
-@keyframes textEntrada{
-
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes welcomeLogo{
-
-    from{
-        opacity:0;
-        transform:
-            scale(.5)
-            rotate(-15deg);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            scale(1)
-            rotate(0);
-    }
-}
-
-@keyframes pulseStatus{
-
-    0%,100%{
-        opacity:.45;
-    }
-
-    50%{
-        opacity:1;
-    }
-}
-
-@keyframes spin{
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header{
     position:sticky;
     top:0;
     z-index:50;
-
     padding:15px 16px 12px;
-
     background:rgba(243,246,244,.93);
-
     backdrop-filter:blur(18px);
-
     border-bottom:1px solid var(--borda);
 }
 
@@ -501,56 +243,37 @@ body.dark .header{
     display:flex;
     align-items:center;
     gap:10px;
-    min-width:0;
 }
 
 .brand-logo{
     width:45px;
     height:45px;
-
     object-fit:contain;
     border-radius:12px;
-}
-
-.brand-text{
-    min-width:0;
 }
 
 .brand-title{
     font-size:17px;
     font-weight:900;
-    white-space:nowrap;
 }
 
 .brand-sub{
     font-size:11px;
     color:var(--cinza);
-    margin-top:2px;
 }
 
 .theme-toggle{
     display:flex;
     align-items:center;
     gap:5px;
-
     background:var(--card);
-
+    color:var(--texto);
     border:1px solid var(--borda);
-
     border-radius:14px;
-
     padding:8px 11px;
-
-    box-shadow:0 5px 16px rgba(0,0,0,.05);
 }
 
-.theme-toggle span{
-    font-size:17px;
-}
-
-/* =========================
-   TELAS
-========================= */
+/* TELAS */
 
 .screen{
     display:none;
@@ -559,37 +282,16 @@ body.dark .header{
 
 .screen.active{
     display:block;
-
-    animation:
-        screenEntrada
-        .45s
-        ease
-        both;
-}
-
-@keyframes screenEntrada{
-
-    from{
-        opacity:0;
-        transform:translateX(12px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
+    animation:screenEntrada .45s ease both;
 }
 
 .back{
     display:inline-flex;
     align-items:center;
     gap:6px;
-
     color:var(--verde);
     background:transparent;
-
     font-weight:800;
-
     padding:4px 0 16px;
 }
 
@@ -606,9 +308,42 @@ body.dark .header{
     line-height:1.45;
 }
 
-/* =========================
-   MENU PREMIUM
-========================= */
+/* MENU */
+
+.menu-heading{
+    text-align:center;
+    margin-bottom:22px;
+}
+
+.menu-heading h1{
+    font-size:27px;
+    font-weight:950;
+    color:var(--verde);
+    letter-spacing:-.8px;
+}
+
+.menu-heading p{
+    color:var(--cinza);
+    font-size:12px;
+    margin-top:6px;
+}
+
+.menu-tricolor{
+    width:140px;
+    height:5px;
+    display:flex;
+    margin:12px auto 0;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.menu-tricolor span{
+    flex:1;
+}
+
+.menu-tricolor span:nth-child(1){background:#008c45}
+.menu-tricolor span:nth-child(2){background:#fff}
+.menu-tricolor span:nth-child(3){background:#cd212a}
 
 .premium-label{
     font-size:12px;
@@ -626,41 +361,34 @@ body.dark .header{
 
 .menu-card{
     min-height:128px;
-
     padding:20px;
-
     border-radius:22px;
-
     background:var(--card);
+    color:var(--texto);
     border:1px solid var(--borda);
-
     box-shadow:var(--sombra);
-
     text-align:left;
-
     position:relative;
     overflow:hidden;
-
     transition:.18s;
 }
 
-.menu-card:active{
+.menu-card:active,
+.advisor-btn:active,
+.small-btn:active,
+.primary:active,
+.secondary:active{
     transform:scale(.97);
 }
 
 .menu-card::after{
     content:"";
-
     position:absolute;
-
     width:70px;
     height:70px;
-
     border-radius:50%;
-
     right:-30px;
     bottom:-30px;
-
     background:rgba(0,140,69,.07);
 }
 
@@ -684,7 +412,6 @@ body.dark .header{
 .menu-wide{
     grid-column:1/-1;
     min-height:88px;
-
     display:flex;
     align-items:center;
     gap:16px;
@@ -694,51 +421,31 @@ body.dark .header{
     margin:0;
 }
 
-/* =========================
-   BOTÕES
-========================= */
+/* BOTÕES */
 
 .primary{
     width:100%;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--verde),
-            var(--verde2)
-        );
-
-    color:white;
-
+    background:linear-gradient(135deg,var(--verde),var(--verde2));
+    color:#fff;
     padding:14px 17px;
-
     border-radius:15px;
-
     font-weight:900;
-
-    box-shadow:
-        0 9px 22px
-        rgba(0,140,69,.2);
+    box-shadow:0 9px 22px rgba(0,140,69,.2);
 }
 
 .secondary{
     width:100%;
-
     background:var(--card);
     color:var(--texto);
-
     border:1px solid var(--borda);
-
     padding:13px 17px;
-
     border-radius:15px;
-
     font-weight:800;
 }
 
 .danger{
     background:var(--vermelho);
-    color:white;
+    color:#fff;
 }
 
 .button-row{
@@ -752,21 +459,15 @@ body.dark .header{
     width:auto;
 }
 
-/* =========================
-   CARDS
-========================= */
+/* CARDS / FORM */
 
-.card{
+.card,
+.ai-box{
     background:var(--card);
-
     border:1px solid var(--borda);
-
     border-radius:var(--raio);
-
     padding:18px;
-
     box-shadow:var(--sombra);
-
     margin-bottom:14px;
 }
 
@@ -781,20 +482,14 @@ body.dark .header{
     line-height:1.45;
 }
 
-/* =========================
-   FORM
-========================= */
-
 .field{
     margin-bottom:15px;
 }
 
 label{
     display:block;
-
     font-size:12px;
     font-weight:900;
-
     margin-bottom:7px;
 }
 
@@ -802,29 +497,18 @@ input,
 textarea,
 select{
     width:100%;
-
     border:1px solid var(--borda);
-
     background:var(--fundo);
     color:var(--texto);
-
     border-radius:14px;
-
     padding:13px 14px;
-
     outline:none;
-
-    transition:.2s;
 }
 
 input:focus,
-textarea:focus,
-select:focus{
+textarea:focus{
     border-color:var(--verde);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(0,140,69,.10);
+    box-shadow:0 0 0 3px rgba(0,140,69,.1);
 }
 
 textarea{
@@ -834,15 +518,10 @@ textarea{
 
 .auto-region{
     margin-top:7px;
-
     padding:10px 12px;
-
     background:rgba(0,140,69,.08);
-
     border-radius:12px;
-
     color:var(--verde);
-
     font-size:13px;
     font-weight:800;
 }
@@ -852,9 +531,7 @@ textarea{
     color:var(--vermelho);
 }
 
-/* =========================
-   STATUS
-========================= */
+/* STATUS */
 
 .status-select{
     display:grid;
@@ -862,41 +539,31 @@ textarea{
     gap:8px;
 }
 
-.status-option{
+.status-option,
+.operator-btn,
+.recharge-btn{
     padding:11px 5px;
-
     border-radius:13px;
-
     border:1px solid var(--borda);
-
     background:var(--card);
-
+    color:var(--texto);
     text-align:center;
-
     font-size:12px;
     font-weight:900;
 }
 
-.status-option.selected{
+.status-option.selected,
+.operator-btn.selected,
+.recharge-btn.selected{
     outline:3px solid rgba(0,140,69,.15);
     border-color:var(--verde);
 }
 
-.status-on{
-    color:#159447;
-}
+.status-on{color:#159447}
+.status-analysis{color:#d39b00}
+.status-off{color:var(--vermelho)}
 
-.status-analysis{
-    color:#d39b00;
-}
-
-.status-off{
-    color:var(--vermelho);
-}
-
-/* =========================
-   RESUMO
-========================= */
+/* RESUMO */
 
 .stats-grid{
     display:grid;
@@ -906,13 +573,9 @@ textarea{
 
 .stat{
     background:var(--card);
-
     border:1px solid var(--borda);
-
     border-radius:19px;
-
     padding:18px;
-
     box-shadow:var(--sombra);
 }
 
@@ -923,45 +586,33 @@ textarea{
 
 .stat-label{
     margin-top:4px;
-
     font-size:12px;
     font-weight:900;
 }
 
 .stat-on .stat-number,
-.stat-on .stat-label{
-    color:#159447;
-}
+.stat-on .stat-label{color:#159447}
 
 .stat-analysis .stat-number,
-.stat-analysis .stat-label{
-    color:#d39b00;
-}
+.stat-analysis .stat-label{color:#d39b00}
 
 .stat-off .stat-number,
-.stat-off .stat-label{
-    color:var(--vermelho);
-}
+.stat-off .stat-label{color:var(--vermelho)}
 
 .stat-total{
     grid-column:1/-1;
 }
 
-/* =========================
-   LISTAS
-========================= */
+/* LISTAS */
 
-.list-item{
+.list-item,
+.chip-card,
+.phone-card{
     background:var(--card);
-
     border:1px solid var(--borda);
-
-    border-radius:17px;
-
+    border-radius:18px;
     padding:15px;
-
     margin-bottom:10px;
-
     box-shadow:0 7px 20px rgba(0,0,0,.05);
 }
 
@@ -969,7 +620,6 @@ textarea{
     display:flex;
     align-items:flex-start;
     justify-content:space-between;
-
     gap:10px;
 }
 
@@ -979,208 +629,123 @@ textarea{
 
 .list-number{
     margin-top:5px;
-
     font-size:13px;
-
     color:var(--cinza);
 }
 
 .list-meta{
     margin-top:8px;
-
     font-size:12px;
-
     color:var(--cinza);
 }
 
 .list-actions{
     display:flex;
-
     gap:7px;
-
     margin-top:12px;
-
     flex-wrap:wrap;
 }
 
 .small-btn{
     background:var(--fundo);
-
     border:1px solid var(--borda);
-
     color:var(--texto);
-
     padding:8px 10px;
-
     border-radius:10px;
-
     font-size:11px;
     font-weight:900;
 }
 
 .empty{
     text-align:center;
-
     padding:30px 15px;
-
     color:var(--cinza);
 }
 
-/* =========================
-   ADVOGADO
-========================= */
-
-.ai-box{
-    border:1px solid var(--borda);
-
-    background:var(--card);
-
-    border-radius:22px;
-
-    padding:17px;
-
-    box-shadow:var(--sombra);
-}
+/* ADVOGADO */
 
 .generating{
     display:none;
-
     text-align:center;
-
     padding:25px 10px;
-
     color:var(--verde);
-
     font-weight:900;
 }
 
-.generating.show{
-    display:block;
-}
+.generating.show{display:block}
 
 .mini-loader{
     width:28px;
     height:28px;
-
     border:3px solid var(--borda);
-
     border-top-color:var(--verde);
     border-right-color:var(--vermelho);
-
     border-radius:50%;
-
     animation:spin .7s linear infinite;
-
     margin:0 auto 10px;
 }
 
 .answer-box{
     display:none;
-
     margin-top:15px;
-
     padding:16px;
-
     border-radius:17px;
-
     background:var(--fundo);
-
     border:1px solid var(--borda);
-
     line-height:1.6;
-
     white-space:pre-wrap;
 }
 
-.answer-box.show{
-    display:block;
-}
+.answer-box.show{display:block}
 
 .answer-label{
     font-size:11px;
-
     color:var(--verde);
-
     font-weight:950;
-
     letter-spacing:1px;
-
     margin-bottom:8px;
 }
 
 .response-tools{
     display:none;
-
     grid-template-columns:1fr 1fr;
-
     gap:8px;
-
     margin-top:10px;
 }
 
-.response-tools.show{
-    display:grid;
-}
+.response-tools.show{display:grid}
 
 .advisor-grid{
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:10px;
-
     margin-bottom:15px;
 }
 
 .advisor-btn{
     padding:16px 10px;
-
     border-radius:16px;
-
     background:var(--card);
-
     border:1px solid var(--borda);
-
     color:var(--texto);
-
     font-weight:900;
-
     box-shadow:0 7px 20px rgba(0,0,0,.05);
 }
 
-.advisor-btn:active{
-    transform:scale(.97);
-}
-
-/* =========================
-   CHIP / 4G
-========================= */
+/* CHIPS */
 
 .operator-title{
     font-size:13px;
-
     font-weight:950;
-
     margin:19px 0 9px;
-
-    display:flex;
-    align-items:center;
-
-    gap:7px;
 }
 
-.chip-card{
-    background:var(--card);
-
-    border:1px solid var(--borda);
-
-    border-radius:18px;
-
-    padding:15px;
-
-    margin-bottom:10px;
-
-    box-shadow:0 7px 20px rgba(0,0,0,.05);
+.operator-choice,
+.recharge-choice,
+.theme-card{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
 }
 
 .chip-operator{
@@ -1191,103 +756,25 @@ textarea{
 .chip-number{
     font-size:16px;
     font-weight:900;
-
     margin-top:6px;
 }
 
 .chip-region{
     font-size:12px;
-
     color:var(--cinza);
-
     margin-top:5px;
 }
 
 .chip-status{
     margin-top:9px;
-
     font-size:12px;
-
     font-weight:950;
 }
 
-.recharge-on{
-    color:#159447;
-}
+.recharge-on{color:#159447}
+.recharge-off{color:var(--vermelho)}
 
-.recharge-off{
-    color:var(--vermelho);
-}
-
-.operator-choice{
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:9px;
-}
-
-.operator-btn{
-    padding:13px;
-
-    border-radius:13px;
-
-    border:1px solid var(--borda);
-
-    background:var(--card);
-
-    font-weight:900;
-}
-
-.operator-btn.selected{
-    border-color:var(--verde);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(0,140,69,.09);
-}
-
-.recharge-choice{
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:9px;
-}
-
-.recharge-btn{
-    padding:13px;
-
-    border-radius:13px;
-
-    border:1px solid var(--borda);
-
-    background:var(--card);
-
-    font-weight:900;
-}
-
-.recharge-btn.selected{
-    border-color:var(--verde);
-}
-
-/* =========================
-   CELULARES
-========================= */
-
-.phone-card{
-    background:var(--card);
-
-    border:1px solid var(--borda);
-
-    border-radius:20px;
-
-    padding:17px;
-
-    margin-bottom:12px;
-
-    box-shadow:var(--sombra);
-}
+/* CELULARES */
 
 .phone-name{
     font-size:17px;
@@ -1301,209 +788,199 @@ textarea{
 
 .phone-line b{
     display:block;
-
     font-size:11px;
-
     color:var(--cinza);
-
     margin-bottom:3px;
 }
 
 .phone-meta{
     margin-top:12px;
-
     display:flex;
     flex-wrap:wrap;
-
     gap:7px;
 }
 
 .tag{
     display:inline-flex;
-
     padding:7px 9px;
-
     border-radius:10px;
-
     background:var(--fundo);
-
     border:1px solid var(--borda);
-
     font-size:11px;
-
     font-weight:900;
 }
 
-/* =========================
-   TEMA
-========================= */
+/* CALCULADORA */
 
-.theme-card{
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:12px;
+.calculator-card{
+    background:var(--card);
+    border:1px solid var(--borda);
+    border-radius:24px;
+    padding:18px;
+    box-shadow:var(--sombra);
 }
+
+.calculator-help{
+    background:rgba(0,140,69,.07);
+    border:1px solid rgba(0,140,69,.12);
+    color:var(--verde);
+    padding:13px;
+    border-radius:15px;
+    font-size:12px;
+    line-height:1.5;
+    margin-bottom:17px;
+}
+
+.calc-result{
+    margin-top:15px;
+}
+
+.calc-generating{
+    display:none;
+    text-align:center;
+    padding:25px 10px;
+    color:var(--verde);
+    font-weight:950;
+}
+
+.calc-generating.show{
+    display:block;
+}
+
+.calc-bot{
+    background:var(--fundo);
+    border:1px solid var(--borda);
+    border-radius:20px;
+    padding:18px;
+    line-height:1.75;
+    animation:entrada .45s ease both;
+}
+
+.calc-bot-header{
+    font-weight:950;
+    color:var(--verde);
+    margin-bottom:12px;
+}
+
+.calc-divider{
+    height:1px;
+    background:var(--borda);
+    margin:13px 0;
+}
+
+.calc-summary{
+    font-size:17px;
+    font-weight:950;
+    color:var(--verde);
+}
+
+/* TEMA / DDD */
 
 .theme-choice{
     min-height:120px;
-
     border:2px solid var(--borda);
-
     border-radius:18px;
-
     background:var(--card);
-
+    color:var(--texto);
     padding:18px;
-
     text-align:center;
-
     font-weight:950;
 }
 
 .theme-choice.active{
     border-color:var(--verde);
-
-    box-shadow:
-        0 0 0 4px
-        rgba(0,140,69,.09);
+    box-shadow:0 0 0 4px rgba(0,140,69,.09);
 }
-
-/* =========================
-   DDD
-========================= */
 
 .ddd-grid{
     display:grid;
-
     grid-template-columns:1fr 1fr;
-
     gap:9px;
 }
 
 .ddd-item{
     padding:13px;
-
     background:var(--card);
-
     border:1px solid var(--borda);
-
     border-radius:14px;
 }
 
 .ddd-code{
     color:var(--verde);
-
     font-size:17px;
-
     font-weight:950;
 }
 
 .ddd-region{
     font-size:11px;
-
     color:var(--cinza);
-
     margin-top:4px;
-
-    line-height:1.3;
 }
 
-/* =========================
-   TOAST
-========================= */
+/* TOAST */
 
 #toast{
     position:fixed;
-
     left:50%;
     bottom:22px;
-
-    transform:
-        translateX(-50%)
-        translateY(20px);
-
+    transform:translateX(-50%) translateY(20px);
     background:#17221d;
-
     color:white;
-
     padding:12px 17px;
-
     border-radius:13px;
-
     font-size:13px;
-
     font-weight:800;
-
     opacity:0;
-
     pointer-events:none;
-
     transition:.25s;
-
     z-index:10000;
-
     max-width:90%;
-
     text-align:center;
 }
 
 #toast.show{
     opacity:1;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
+    transform:translateX(-50%) translateY(0);
 }
 
-.hidden{
-    display:none!important;
+.hidden{display:none!important}
+
+@keyframes entrada{
+    from{opacity:0;transform:translateY(20px) scale(.95)}
+    to{opacity:1;transform:translateY(0) scale(1)}
 }
 
-/* =========================
-   MOBILE
-========================= */
+@keyframes logoEntrada{
+    from{opacity:0;transform:scale(.7) rotate(-8deg)}
+    to{opacity:1;transform:scale(1) rotate(0)}
+}
+
+@keyframes screenEntrada{
+    from{opacity:0;transform:translateX(12px)}
+    to{opacity:1;transform:translateX(0)}
+}
+
+@keyframes pulse{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
 
 @media(max-width:430px){
-
     .loading-box,
     .welcome-box{
         width:calc(100% - 30px);
-
         padding-left:20px;
         padding-right:20px;
-
         border-radius:24px;
     }
 
     .loading-logo{
         width:130px;
         height:130px;
-    }
-
-    .loading-title{
-        font-size:20px;
-    }
-
-    .loading-sub{
-        font-size:13px;
-    }
-
-    .welcome-logo{
-        font-size:58px;
-    }
-
-    .welcome-title{
-        font-size:19px;
-    }
-
-    .welcome-brand{
-        font-size:25px;
-    }
-
-    .welcome-line{
-        width:110px;
     }
 
     .menu-card{
@@ -1514,15 +991,17 @@ textarea{
     .page-title{
         font-size:24px;
     }
+
+    .menu-heading h1{
+        font-size:24px;
+    }
 }
 
 @media(prefers-reduced-motion:reduce){
-
     *,
     *::before,
     *::after{
         animation-duration:.01ms!important;
-        animation-iteration-count:1!important;
         transition-duration:.01ms!important;
     }
 }
@@ -1531,18 +1010,10 @@ textarea{
 
 <body>
 
-<!-- =========================
-     LOADING PREMIUM
-========================= -->
-
 <div id="loading">
-
     <div class="loading-box">
-
         <div class="italy-line">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
 
         <img
@@ -1552,59 +1023,28 @@ textarea{
             onerror="this.style.display='none'"
         >
 
-        <div class="loading-title">
-            🍀 BOT DO BM3 🍀
-        </div>
-
-        <div class="loading-sub">
-            Carregando seu painel...
-        </div>
-
+        <div class="loading-title">🍀 BOT DO BM3 🍀</div>
+        <div class="loading-sub">Carregando seu painel...</div>
         <div class="loader"></div>
-
-        <div class="loading-status">
-            Preparando tudo para você...
-        </div>
-
+        <div class="loading-status">Preparando tudo para você...</div>
     </div>
-
 </div>
 
-<!-- =========================
-     BOAS-VINDAS
-========================= -->
-
 <div id="welcome">
-
     <div class="welcome-box">
-
-        <div class="welcome-logo">
-            🍀
-        </div>
-
-        <div class="welcome-title">
-            Bem-vindo ao
-        </div>
-
-        <div class="welcome-brand">
-            BOT DO BM3
-        </div>
-
+        <div class="welcome-logo">🍀</div>
+        <div class="welcome-title">Bem-vindo ao</div>
+        <div class="welcome-brand">BOT DO BM3</div>
         <div class="welcome-line">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
-
     </div>
-
 </div>
 
 <div class="app">
 
 <header class="header">
     <div class="header-top">
-
         <div class="brand">
             <img
                 class="brand-logo"
@@ -1613,39 +1053,68 @@ textarea{
                 onerror="this.style.display='none'"
             >
 
-            <div class="brand-text">
+            <div>
                 <div class="brand-title">🍀 BOT DO BM3 🍀</div>
                 <div class="brand-sub">Painel premium</div>
             </div>
         </div>
 
-        <button class="theme-toggle" onclick="alternarTema()" title="Mudar tema">
+        <button class="theme-toggle" onclick="alternarTema()">
             <span id="themeIcon">☀️</span>
             <span id="themeText">Claro</span>
         </button>
-
     </div>
 </header>
 
-<!-- =========================
-     INÍCIO
-========================= -->
+<!-- INÍCIO -->
 
 <section id="inicio" class="screen active">
 
-    <div class="page-title">Menu Premium</div>
-    <div class="page-sub">
-        Organize contatos, chips, celulares e seu atendimento em um só lugar.
+    <div class="menu-heading">
+        <h1>🍀 MENU PRINCIPAL 🍀</h1>
+        <p>Seu painel do BOT DO BM3</p>
+        <div class="menu-tricolor">
+            <span></span><span></span><span></span>
+        </div>
     </div>
 
     <div class="premium-label">PAINEL PRINCIPAL</div>
 
     <div class="menu-grid">
 
+        <!-- 1 -->
         <button class="menu-card" onclick="navegar('whatsapp')">
-            <div class="menu-icon">📱</div>
+            <div class="menu-icon">💬</div>
             <div class="menu-title">WhatsApp</div>
             <div class="menu-desc">Ferramentas e organização</div>
+        </button>
+
+        <!-- 2 -->
+        <button class="menu-card" onclick="navegar('calculadora')">
+            <div class="menu-icon">🧮</div>
+            <div class="menu-title">Calculadora</div>
+            <div class="menu-desc">Calcule porcentagem e divisão</div>
+        </button>
+
+        <!-- 3 -->
+        <button class="menu-card" onclick="navegar('advogado')">
+            <div class="menu-icon">⚖️</div>
+            <div class="menu-title">Advogado</div>
+            <div class="menu-desc">Respostas e atendimento</div>
+        </button>
+
+        <!-- 4 -->
+        <button class="menu-card" onclick="navegar('celulares')">
+            <div class="menu-icon">📱</div>
+            <div class="menu-title">Celulares</div>
+            <div class="menu-desc">Números por aparelho</div>
+        </button>
+
+        <!-- 5 -->
+        <button class="menu-card" onclick="navegar('chips')">
+            <div class="menu-icon">💳</div>
+            <div class="menu-title">Chips</div>
+            <div class="menu-desc">Controle de recargas</div>
         </button>
 
         <button class="menu-card" onclick="navegar('contatos')">
@@ -1666,47 +1135,72 @@ textarea{
             <div class="menu-desc">Acesso rápido</div>
         </button>
 
-        <button class="menu-card" onclick="navegar('chips')">
-            <div class="menu-icon">📶</div>
-            <div class="menu-title">4G / Chips</div>
-            <div class="menu-desc">Controle de recargas</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('celulares')">
-            <div class="menu-icon">📱</div>
-            <div class="menu-title">Celulares</div>
-            <div class="menu-desc">Números por aparelho</div>
-        </button>
-
         <button class="menu-card menu-wide" onclick="navegar('config')">
             <div class="menu-icon">⚙️</div>
             <div>
                 <div class="menu-title">Configurações</div>
-                <div class="menu-desc">Meus temas, backup e informações</div>
+                <div class="menu-desc">Temas, backup e informações</div>
             </div>
         </button>
 
     </div>
 </section>
 
-<!-- =========================
-     WHATSAPP
-========================= -->
+<!-- CALCULADORA -->
+
+<section id="calculadora" class="screen">
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+    <div class="page-title">🧮 Calculadora</div>
+    <div class="page-sub">
+        Faça o cálculo de porcentagem e divida o valor restante entre as pessoas.
+    </div>
+
+    <div class="calculator-card">
+
+        <div class="calculator-help">
+            <b>Exemplo:</b><br>
+            20k - 25% / 3<br><br>
+            Ou escreva:<br>
+            20k menos 25% dividido em 3
+        </div>
+
+        <div class="field">
+            <label>CÁLCULO</label>
+            <input
+                id="calcExpressao"
+                type="text"
+                placeholder="Ex.: 20k - 25% / 3"
+                autocomplete="off"
+            >
+        </div>
+
+        <button class="primary" onclick="calcularBM3()">
+            🧮 CALCULAR
+        </button>
+
+        <div id="calcGerando" class="calc-generating">
+            <div class="mini-loader"></div>
+            🤖 Gerando...
+        </div>
+
+        <div id="calcResultado" class="calc-result"></div>
+
+    </div>
+
+</section>
+
+<!-- WHATSAPP -->
 
 <section id="whatsapp" class="screen">
 
     <button class="back" onclick="voltar()">← Voltar</button>
 
-    <div class="page-title">📱 WhatsApp</div>
+    <div class="page-title">💬 WhatsApp</div>
     <div class="page-sub">Ferramentas para organizar seu WhatsApp.</div>
 
     <div class="menu-grid">
-
-        <button class="menu-card" onclick="navegar('advogado')">
-            <div class="menu-icon">⚖️</div>
-            <div class="menu-title">Advogado</div>
-            <div class="menu-desc">Respostas e atendimento</div>
-        </button>
 
         <button class="menu-card" onclick="navegar('contatos')">
             <div class="menu-icon">👥</div>
@@ -1753,9 +1247,7 @@ textarea{
     </div>
 </section>
 
-<!-- =========================
-     ADVOGADO
-========================= -->
+<!-- ADVOGADO -->
 
 <section id="advogado" class="screen">
 
@@ -1770,11 +1262,7 @@ textarea{
 
         <div class="field">
             <label>PERGUNTA DO CLIENTE</label>
-
-            <textarea
-                id="perguntaCliente"
-                placeholder="Cole aqui a pergunta que o cliente enviou..."
-            ></textarea>
+            <textarea id="perguntaCliente" placeholder="Cole aqui a pergunta que o cliente enviou..."></textarea>
         </div>
 
         <button class="primary" onclick="gerarResposta()">
@@ -1802,49 +1290,21 @@ textarea{
 
     <div class="advisor-grid">
 
-        <button class="advisor-btn" onclick="navegar('analisar')">
-            🧠<br>ANALISAR PERGUNTA
-        </button>
-
-        <button class="advisor-btn" onclick="navegar('liberacao')">
-            💰<br>LIBERAÇÃO
-        </button>
-
-        <button class="advisor-btn" onclick="navegar('andamento')">
-            📂<br>ANDAMENTO
-        </button>
-
-        <button class="advisor-btn" onclick="navegar('prazos')">
-            ⏳<br>PRAZOS
-        </button>
-
-        <button class="advisor-btn" onclick="navegar('valores')">
-            💵<br>VALORES
-        </button>
-
-        <button class="advisor-btn" onclick="navegar('documentacao')">
-            📄<br>DOCUMENTAÇÃO
-        </button>
-
-        <button class="advisor-btn" onclick="navegar('favoritasRespostas')">
-            ⭐<br>FAVORITAS
-        </button>
-
-        <button class="advisor-btn" onclick="navegar('montarMensagem')">
-            📝<br>MONTAR MENSAGEM
-        </button>
-
-        <button class="advisor-btn" onclick="navegar('historico')">
-            📋<br>HISTÓRICO
-        </button>
+        <button class="advisor-btn" onclick="navegar('analisar')">🧠<br>ANALISAR PERGUNTA</button>
+        <button class="advisor-btn" onclick="navegar('liberacao')">💰<br>LIBERAÇÃO</button>
+        <button class="advisor-btn" onclick="navegar('andamento')">📂<br>ANDAMENTO</button>
+        <button class="advisor-btn" onclick="navegar('prazos')">⏳<br>PRAZOS</button>
+        <button class="advisor-btn" onclick="navegar('valores')">💵<br>VALORES</button>
+        <button class="advisor-btn" onclick="navegar('documentacao')">📄<br>DOCUMENTAÇÃO</button>
+        <button class="advisor-btn" onclick="navegar('favoritasRespostas')">⭐<br>FAVORITAS</button>
+        <button class="advisor-btn" onclick="navegar('montarMensagem')">📝<br>MONTAR MENSAGEM</button>
+        <button class="advisor-btn" onclick="navegar('historico')">📋<br>HISTÓRICO</button>
 
     </div>
 
 </section>
 
-<!-- =========================
-     CONTATOS
-========================= -->
+<!-- CONTATOS -->
 
 <section id="contatos" class="screen">
 
@@ -1853,28 +1313,19 @@ textarea{
     <div class="page-title">👥 Contatos</div>
     <div class="page-sub">Organize seus números sem precisar informar grupo.</div>
 
-    <button class="primary" onclick="abrirNovoContato()">
-        ➕ NOVO CONTATO
-    </button>
+    <button class="primary" onclick="abrirNovoContato()">➕ NOVO CONTATO</button>
 
     <div style="height:13px"></div>
 
     <div class="field">
-        <input
-            id="buscarContato"
-            type="text"
-            placeholder="🔎 Buscar nome ou número..."
-            oninput="renderContatos()"
-        >
+        <input id="buscarContato" type="text" placeholder="🔎 Buscar nome ou número..." oninput="renderContatos()">
     </div>
 
     <div id="listaContatos"></div>
 
 </section>
 
-<!-- =========================
-     NOVO CONTATO
-========================= -->
+<!-- NOVO CONTATO -->
 
 <section id="novoContato" class="screen">
 
@@ -1894,59 +1345,24 @@ textarea{
 
         <div class="field">
             <label>DDD</label>
-            <input
-                id="contatoDDD"
-                type="tel"
-                inputmode="numeric"
-                maxlength="2"
-                placeholder="13"
-                oninput="somenteNumeros(this); detectarRegiaoContato()"
-            >
-            <div id="regiaoContato" class="auto-region">
-                📍 Digite o DDD para identificar a região
-            </div>
+            <input id="contatoDDD" type="tel" inputmode="numeric" maxlength="2" placeholder="13"
+                   oninput="somenteNumeros(this);detectarRegiaoContato()">
+            <div id="regiaoContato" class="auto-region">📍 Digite o DDD para identificar a região</div>
         </div>
 
         <div class="field">
             <label>TELEFONE</label>
-            <input
-                id="contatoNumero"
-                type="tel"
-                inputmode="numeric"
-                placeholder="Somente números"
-                oninput="somenteNumeros(this)"
-            >
+            <input id="contatoNumero" type="tel" inputmode="numeric" placeholder="Somente números"
+                   oninput="somenteNumeros(this)">
         </div>
 
         <div class="field">
             <label>STATUS</label>
 
             <div class="status-select">
-
-                <button
-                    id="statusON"
-                    class="status-option status-on"
-                    onclick="selecionarStatus('ON')"
-                >
-                    🟢 ON
-                </button>
-
-                <button
-                    id="statusANALISE"
-                    class="status-option status-analysis"
-                    onclick="selecionarStatus('ANÁLISE')"
-                >
-                    🟡 ANÁLISE
-                </button>
-
-                <button
-                    id="statusOFF"
-                    class="status-option status-off"
-                    onclick="selecionarStatus('OFF')"
-                >
-                    🔴 OFF
-                </button>
-
+                <button id="statusON" class="status-option status-on" onclick="selecionarStatus('ON')">🟢 ON</button>
+                <button id="statusANALISE" class="status-option status-analysis" onclick="selecionarStatus('ANÁLISE')">🟡 ANÁLISE</button>
+                <button id="statusOFF" class="status-option status-off" onclick="selecionarStatus('OFF')">🔴 OFF</button>
             </div>
 
             <input type="hidden" id="contatoStatus" value="ON">
@@ -1957,17 +1373,12 @@ textarea{
             <input id="contatoObs" type="text" placeholder="Opcional">
         </div>
 
-        <button class="primary" onclick="salvarContato()">
-            💾 SALVAR CONTATO
-        </button>
+        <button class="primary" onclick="salvarContato()">💾 SALVAR CONTATO</button>
 
     </div>
-
 </section>
 
-<!-- =========================
-     RESUMO
-========================= -->
+<!-- RESUMO -->
 
 <section id="resumo" class="screen">
 
@@ -1977,7 +1388,6 @@ textarea{
     <div class="page-sub">Os números aparecem com a cor de cada status.</div>
 
     <div class="stats-grid">
-
         <div class="stat stat-on">
             <div class="stat-number" id="totalON">0</div>
             <div class="stat-label">🟢 ON</div>
@@ -1997,14 +1407,11 @@ textarea{
             <div class="stat-number" id="totalContatos">0</div>
             <div class="stat-label">📱 TOTAL DE CONTATOS</div>
         </div>
-
     </div>
 
 </section>
 
-<!-- =========================
-     FAVORITOS
-========================= -->
+<!-- FAVORITOS -->
 
 <section id="favoritos" class="screen">
 
@@ -2017,19 +1424,14 @@ textarea{
 
 </section>
 
-<!-- =========================
-     4G / CHIPS
-========================= -->
+<!-- CHIPS -->
 
 <section id="chips" class="screen">
 
     <button class="back" onclick="voltar()">← Voltar</button>
 
-    <div class="page-title">📶 4G / Chips</div>
-
-    <div class="page-sub">
-        Controle de chips para saber quais ainda possuem recarga e quais precisam de recarga.
-    </div>
+    <div class="page-title">💳 Chips</div>
+    <div class="page-sub">Controle de chips e recargas.</div>
 
     <div class="stats-grid">
 
@@ -2052,17 +1454,13 @@ textarea{
 
     <div style="height:14px"></div>
 
-    <button class="primary" onclick="abrirNovoChip()">
-        ➕ ADICIONAR CHIP
-    </button>
+    <button class="primary" onclick="abrirNovoChip()">➕ ADICIONAR CHIP</button>
 
     <div id="listaChips"></div>
 
 </section>
 
-<!-- =========================
-     NOVO CHIP
-========================= -->
+<!-- NOVO CHIP -->
 
 <section id="novoChip" class="screen">
 
@@ -2079,23 +1477,8 @@ textarea{
             <label>OPERADORA</label>
 
             <div class="operator-choice">
-
-                <button
-                    id="opPagueMenos"
-                    class="operator-btn"
-                    onclick="selecionarOperadora('PAGUE MENOS')"
-                >
-                    🟢 PAGUE MENOS
-                </button>
-
-                <button
-                    id="opVivo"
-                    class="operator-btn"
-                    onclick="selecionarOperadora('VIVO')"
-                >
-                    🟣 VIVO
-                </button>
-
+                <button id="opPagueMenos" class="operator-btn" onclick="selecionarOperadora('PAGUE MENOS')">🟢 PAGUE MENOS</button>
+                <button id="opVivo" class="operator-btn" onclick="selecionarOperadora('VIVO')">🟣 VIVO</button>
             </div>
 
             <input type="hidden" id="chipOperadora" value="PAGUE MENOS">
@@ -2103,84 +1486,43 @@ textarea{
 
         <div class="field">
             <label>DDD</label>
-
-            <input
-                id="chipDDD"
-                type="tel"
-                inputmode="numeric"
-                maxlength="2"
-                placeholder="13"
-                oninput="somenteNumeros(this); detectarRegiaoChip()"
-            >
-
-            <div id="regiaoChip" class="auto-region">
-                📍 Digite o DDD para identificar a região
-            </div>
+            <input id="chipDDD" type="tel" inputmode="numeric" maxlength="2" placeholder="13"
+                   oninput="somenteNumeros(this);detectarRegiaoChip()">
+            <div id="regiaoChip" class="auto-region">📍 Digite o DDD para identificar a região</div>
         </div>
 
         <div class="field">
             <label>TELEFONE</label>
-
-            <input
-                id="chipNumero"
-                type="tel"
-                inputmode="numeric"
-                placeholder="Somente números"
-                oninput="somenteNumeros(this)"
-            >
+            <input id="chipNumero" type="tel" inputmode="numeric" placeholder="Somente números"
+                   oninput="somenteNumeros(this)">
         </div>
 
         <div class="field">
             <label>RECARGA</label>
 
             <div class="recharge-choice">
-
-                <button
-                    id="recargaSim"
-                    class="recharge-btn"
-                    onclick="selecionarRecarga(true)"
-                >
-                    🟢 COM RECARGA
-                </button>
-
-                <button
-                    id="recargaNao"
-                    class="recharge-btn"
-                    onclick="selecionarRecarga(false)"
-                >
-                    🔴 SEM RECARGA
-                </button>
-
+                <button id="recargaSim" class="recharge-btn" onclick="selecionarRecarga(true)">🟢 COM RECARGA</button>
+                <button id="recargaNao" class="recharge-btn" onclick="selecionarRecarga(false)">🔴 SEM RECARGA</button>
             </div>
 
             <input type="hidden" id="chipRecarga" value="true">
         </div>
 
-        <button class="primary" onclick="salvarChip()">
-            💾 SALVAR CHIP
-        </button>
+        <button class="primary" onclick="salvarChip()">💾 SALVAR CHIP</button>
 
     </div>
-
 </section>
 
-<!-- =========================
-     CELULARES
-========================= -->
+<!-- CELULARES -->
 
 <section id="celulares" class="screen">
 
     <button class="back" onclick="voltar()">← Voltar</button>
 
     <div class="page-title">📱 Celulares</div>
+    <div class="page-sub">Veja em qual aparelho está cada número.</div>
 
-    <div class="page-sub">
-        Veja em qual aparelho está cada número e mantenha o número do celular e o WhatsApp separados.
-    </div>
-
-    <button class="primary" onclick="abrirNovoCelular()">
-        ➕ ADICIONAR CELULAR
-    </button>
+    <button class="primary" onclick="abrirNovoCelular()">➕ ADICIONAR CELULAR</button>
 
     <div style="height:14px"></div>
 
@@ -2188,9 +1530,7 @@ textarea{
 
 </section>
 
-<!-- =========================
-     NOVO CELULAR
-========================= -->
+<!-- NOVO CELULAR -->
 
 <section id="novoCelular" class="screen">
 
@@ -2210,63 +1550,29 @@ textarea{
 
         <div class="field">
             <label>📞 NÚMERO DO CELULAR</label>
-            <input
-                id="celularNumero"
-                type="tel"
-                inputmode="numeric"
-                placeholder="Somente números"
-                oninput="somenteNumeros(this)"
-            >
+            <input id="celularNumero" type="tel" inputmode="numeric" placeholder="Somente números"
+                   oninput="somenteNumeros(this)">
         </div>
 
         <div class="field">
             <label>💬 NÚMERO DO WHATSAPP</label>
-            <input
-                id="celularWhatsapp"
-                type="tel"
-                inputmode="numeric"
-                placeholder="Somente números"
-                oninput="somenteNumeros(this)"
-            >
+            <input id="celularWhatsapp" type="tel" inputmode="numeric" placeholder="Somente números"
+                   oninput="somenteNumeros(this)">
         </div>
 
         <div class="field">
             <label>DDD</label>
-            <input
-                id="celularDDD"
-                type="tel"
-                inputmode="numeric"
-                maxlength="2"
-                placeholder="13"
-                oninput="somenteNumeros(this); detectarRegiaoCelular()"
-            >
-
-            <div id="regiaoCelular" class="auto-region">
-                📍 Digite o DDD para identificar a região
-            </div>
+            <input id="celularDDD" type="tel" inputmode="numeric" maxlength="2" placeholder="13"
+                   oninput="somenteNumeros(this);detectarRegiaoCelular()">
+            <div id="regiaoCelular" class="auto-region">📍 Digite o DDD para identificar a região</div>
         </div>
 
         <div class="field">
             <label>OPERADORA</label>
 
             <div class="operator-choice">
-
-                <button
-                    id="celOpPagueMenos"
-                    class="operator-btn"
-                    onclick="selecionarOperadoraCelular('PAGUE MENOS')"
-                >
-                    🟢 PAGUE MENOS
-                </button>
-
-                <button
-                    id="celOpVivo"
-                    class="operator-btn"
-                    onclick="selecionarOperadoraCelular('VIVO')"
-                >
-                    🟣 VIVO
-                </button>
-
+                <button id="celOpPagueMenos" class="operator-btn" onclick="selecionarOperadoraCelular('PAGUE MENOS')">🟢 PAGUE MENOS</button>
+                <button id="celOpVivo" class="operator-btn" onclick="selecionarOperadoraCelular('VIVO')">🟣 VIVO</button>
             </div>
 
             <input type="hidden" id="celularOperadora" value="PAGUE MENOS">
@@ -2276,39 +1582,19 @@ textarea{
             <label>RECARGA</label>
 
             <div class="recharge-choice">
-
-                <button
-                    id="celRecSim"
-                    class="recharge-btn"
-                    onclick="selecionarRecargaCelular(true)"
-                >
-                    🟢 COM RECARGA
-                </button>
-
-                <button
-                    id="celRecNao"
-                    class="recharge-btn"
-                    onclick="selecionarRecargaCelular(false)"
-                >
-                    🔴 SEM RECARGA
-                </button>
-
+                <button id="celRecSim" class="recharge-btn" onclick="selecionarRecargaCelular(true)">🟢 COM RECARGA</button>
+                <button id="celRecNao" class="recharge-btn" onclick="selecionarRecargaCelular(false)">🔴 SEM RECARGA</button>
             </div>
 
             <input type="hidden" id="celularRecarga" value="true">
         </div>
 
-        <button class="primary" onclick="salvarCelular()">
-            💾 SALVAR CELULAR
-        </button>
+        <button class="primary" onclick="salvarCelular()">💾 SALVAR CELULAR</button>
 
     </div>
-
 </section>
 
-<!-- =========================
-     CONFIG
-========================= -->
+<!-- CONFIG -->
 
 <section id="config" class="screen">
 
@@ -2318,35 +1604,20 @@ textarea{
     <div class="page-sub">Personalize o BOT DO BM3.</div>
 
     <div class="card">
-
         <div class="card-title">🎨 Meus Temas</div>
 
         <div class="theme-card">
-
-            <button
-                id="themeLight"
-                class="theme-choice"
-                onclick="definirTema('light')"
-            >
-                ☀️<br><br>
-                Claro
+            <button id="themeLight" class="theme-choice" onclick="definirTema('light')">
+                ☀️<br><br>Claro
             </button>
 
-            <button
-                id="themeDark"
-                class="theme-choice"
-                onclick="definirTema('dark')"
-            >
-                🌙<br><br>
-                Escuro
+            <button id="themeDark" class="theme-choice" onclick="definirTema('dark')">
+                🌙<br><br>Escuro
             </button>
-
         </div>
-
     </div>
 
     <div class="card">
-
         <div class="card-title">💾 Backup</div>
 
         <div class="card-sub">
@@ -2356,41 +1627,27 @@ textarea{
         <div style="height:12px"></div>
 
         <div class="button-row">
-            <button class="secondary" onclick="exportarBackup()">
-                📤 Exportar
-            </button>
-
-            <button class="secondary" onclick="document.getElementById('importFile').click()">
-                📥 Importar
-            </button>
+            <button class="secondary" onclick="exportarBackup()">📤 Exportar</button>
+            <button class="secondary" onclick="document.getElementById('importFile').click()">📥 Importar</button>
         </div>
 
-        <input
-            id="importFile"
-            type="file"
-            accept=".json"
-            class="hidden"
-            onchange="importarBackup(event)"
-        >
-
+        <input id="importFile" type="file" accept=".json" class="hidden" onchange="importarBackup(event)">
     </div>
 
     <div class="card">
-
         <div class="card-title">ℹ️ Sobre</div>
 
         <div class="card-sub">
             🍀 BOT DO BM3 🍀<br>
             Painel pessoal para organização de contatos, chips, celulares e atendimento.
         </div>
-
     </div>
 
 </section>
 
-<!-- =========================
-     DEMAIS TELAS
-========================= -->
+<!-- DEMAIS TELAS -->
+
+<section id="novoContato" class="screen"></section>
 
 <section id="grupos" class="screen">
     <button class="back" onclick="voltar()">← Voltar</button>
@@ -2424,12 +1681,11 @@ textarea{
     <div class="card">
         <div class="field">
             <label>NÚMERO</label>
-            <input id="envioNumero" type="tel" inputmode="numeric" placeholder="DDD + número" oninput="somenteNumeros(this)">
+            <input id="envioNumero" type="tel" inputmode="numeric" placeholder="DDD + número"
+                   oninput="somenteNumeros(this)">
         </div>
 
-        <button class="primary" onclick="abrirEnvioRapido()">
-            💬 ABRIR WHATSAPP
-        </button>
+        <button class="primary" onclick="abrirEnvioRapido()">💬 ABRIR WHATSAPP</button>
     </div>
 </section>
 
@@ -2463,9 +1719,7 @@ textarea{
     <div class="page-sub">Atalhos relacionados a informações de liberação.</div>
     <div class="card">
         <div class="card-title">💰 Atendimento sobre liberação</div>
-        <div class="card-sub">
-            Use o Gerar Resposta para adaptar a resposta à pergunta específica do cliente.
-        </div>
+        <div class="card-sub">Use o Gerar Resposta para adaptar a resposta.</div>
     </div>
 </section>
 
@@ -2473,40 +1727,34 @@ textarea{
     <button class="back" onclick="voltar()">← Voltar</button>
     <div class="page-title">📂 Andamento</div>
     <div class="page-sub">Organize respostas relacionadas ao andamento.</div>
-    <div class="card">
-        <div class="card-title">📂 Andamento</div>
-        <div class="card-sub">Cole a pergunta no Gerar Resposta para receber uma resposta adequada.</div>
-    </div>
 </section>
 
 <section id="prazos" class="screen">
     <button class="back" onclick="voltar()">← Voltar</button>
     <div class="page-title">⏳ Prazos</div>
-    <div class="page-sub">Respostas relacionadas a prazos e próximas etapas.</div>
+    <div class="page-sub">Respostas relacionadas a prazos.</div>
 </section>
 
 <section id="valores" class="screen">
     <button class="back" onclick="voltar()">← Voltar</button>
     <div class="page-title">💵 Valores</div>
-    <div class="page-sub">Respostas relacionadas a valores informados no atendimento.</div>
+    <div class="page-sub">Respostas relacionadas a valores.</div>
 </section>
 
 <section id="documentacao" class="screen">
     <button class="back" onclick="voltar()">← Voltar</button>
     <div class="page-title">📄 Documentação</div>
-    <div class="page-sub">Respostas relacionadas a documentos e informações necessárias.</div>
+    <div class="page-sub">Respostas relacionadas a documentos.</div>
 </section>
 
 <section id="favoritasRespostas" class="screen">
     <button class="back" onclick="voltar()">← Voltar</button>
     <div class="page-title">⭐ Respostas favoritas</div>
-    <div class="page-sub">Área para guardar respostas que você usa com frequência.</div>
-    <div class="card">
-        <div class="card-sub">As respostas favoritas poderão ser adicionadas durante os atendimentos.</div>
-    </div>
+    <div class="page-sub">Área para guardar respostas frequentes.</div>
 </section>
 
 <section id="montarMensagem" class="screen">
+
     <button class="back" onclick="voltar()">← Voltar</button>
 
     <div class="page-title">📝 Montar mensagem</div>
@@ -2529,9 +1777,7 @@ textarea{
             <input id="msgValor" placeholder="Ex.: R$ 10.000,00">
         </div>
 
-        <button class="primary" onclick="montarMensagem()">
-            📝 MONTAR MENSAGEM
-        </button>
+        <button class="primary" onclick="montarMensagem()">📝 MONTAR MENSAGEM</button>
 
         <div id="mensagemMontada" class="answer-box"></div>
 
@@ -2551,106 +1797,50 @@ textarea{
 
 <script>
 /* =========================================================
-   DDDs DO BRASIL
+   DDD
 ========================================================= */
 
-const ddds = {
-    "11":"São Paulo – SP",
-    "12":"Vale do Paraíba / Litoral Norte – SP",
-    "13":"Santos / Baixada Santista – SP",
-    "14":"Bauru / região – SP",
-    "15":"Sorocaba / região – SP",
-    "16":"Ribeirão Preto / região – SP",
-    "17":"São José do Rio Preto / região – SP",
-    "18":"Presidente Prudente / região – SP",
-    "19":"Campinas / região – SP",
-
-    "21":"Rio de Janeiro / região – RJ",
-    "22":"Norte Fluminense / região – RJ",
-    "24":"Sul Fluminense / região – RJ",
-
-    "27":"Espírito Santo – ES",
-    "28":"Sul do Espírito Santo – ES",
-
-    "31":"Belo Horizonte / região – MG",
-    "32":"Juiz de Fora / região – MG",
-    "33":"Governador Valadares / região – MG",
-    "34":"Uberlândia / região – MG",
-    "35":"Poços de Caldas / região – MG",
-    "37":"Divinópolis / região – MG",
-    "38":"Montes Claros / região – MG",
-
-    "41":"Curitiba / região – PR",
-    "42":"Ponta Grossa / região – PR",
-    "43":"Londrina / região – PR",
-    "44":"Maringá / região – PR",
-    "45":"Foz do Iguaçu / região – PR",
-    "46":"Francisco Beltrão / região – PR",
-
-    "47":"Joinville / região – SC",
-    "48":"Florianópolis / região – SC",
-    "49":"Chapecó / região – SC",
-
-    "51":"Porto Alegre / região – RS",
-    "53":"Pelotas / região – RS",
-    "54":"Caxias do Sul / região – RS",
-    "55":"Santa Maria / região – RS",
-
-    "61":"Brasília / DF",
-    "62":"Goiânia / região – GO",
-    "63":"Tocantins – TO",
-    "64":"Rio Verde / região – GO",
-    "65":"Cuiabá / região – MT",
-    "66":"Rondonópolis / região – MT",
-    "67":"Campo Grande / região – MS",
-    "68":"Acre – AC",
-    "69":"Rondônia – RO",
-
-    "71":"Salvador / região – BA",
-    "73":"Ilhéus / região – BA",
-    "74":"Juazeiro / região – BA",
-    "75":"Feira de Santana / região – BA",
-    "77":"Barreiras / região – BA",
-    "79":"Sergipe – SE",
-
-    "81":"Recife / região – PE",
-    "82":"Alagoas – AL",
-    "83":"Paraíba – PB",
-    "84":"Rio Grande do Norte – RN",
-    "85":"Fortaleza / região – CE",
-    "86":"Teresina / região – PI",
-    "87":"Petrolina / região – PE",
-    "88":"Ceará – CE",
-    "89":"Piauí – PI",
-
-    "91":"Belém / região – PA",
-    "92":"Manaus / região – AM",
-    "93":"Santarém / região – PA",
-    "94":"Marabá / região – PA",
-    "95":"Roraima – RR",
-    "96":"Amapá – AP",
-    "97":"Amazonas – AM",
-    "98":"São Luís / região – MA",
-    "99":"Maranhão – MA"
+const ddds={
+"11":"São Paulo – SP","12":"Vale do Paraíba / Litoral Norte – SP","13":"Santos / Baixada Santista – SP",
+"14":"Bauru / região – SP","15":"Sorocaba / região – SP","16":"Ribeirão Preto / região – SP",
+"17":"São José do Rio Preto / região – SP","18":"Presidente Prudente / região – SP","19":"Campinas / região – SP",
+"21":"Rio de Janeiro / região – RJ","22":"Norte Fluminense / região – RJ","24":"Sul Fluminense / região – RJ",
+"27":"Espírito Santo – ES","28":"Sul do Espírito Santo – ES",
+"31":"Belo Horizonte / região – MG","32":"Juiz de Fora / região – MG","33":"Governador Valadares / região – MG",
+"34":"Uberlândia / região – MG","35":"Poços de Caldas / região – MG","37":"Divinópolis / região – MG",
+"38":"Montes Claros / região – MG","41":"Curitiba / região – PR","42":"Ponta Grossa / região – PR",
+"43":"Londrina / região – PR","44":"Maringá / região – PR","45":"Foz do Iguaçu / região – PR",
+"46":"Francisco Beltrão / região – PR","47":"Joinville / região – SC","48":"Florianópolis / região – SC",
+"49":"Chapecó / região – SC","51":"Porto Alegre / região – RS","53":"Pelotas / região – RS",
+"54":"Caxias do Sul / região – RS","55":"Santa Maria / região – RS","61":"Brasília / DF",
+"62":"Goiânia / região – GO","63":"Tocantins – TO","64":"Rio Verde / região – GO","65":"Cuiabá / região – MT",
+"66":"Rondonópolis / região – MT","67":"Campo Grande / região – MS","68":"Acre – AC","69":"Rondônia – RO",
+"71":"Salvador / região – BA","73":"Ilhéus / região – BA","74":"Juazeiro / região – BA",
+"75":"Feira de Santana / região – BA","77":"Barreiras / região – BA","79":"Sergipe – SE",
+"81":"Recife / região – PE","82":"Alagoas – AL","83":"Paraíba – PB","84":"Rio Grande do Norte – RN",
+"85":"Fortaleza / região – CE","86":"Teresina / região – PI","87":"Petrolina / região – PE",
+"88":"Ceará – CE","89":"Piauí – PI","91":"Belém / região – PA","92":"Manaus / região – AM",
+"93":"Santarém / região – PA","94":"Marabá / região – PA","95":"Roraima – RR","96":"Amapá – AP",
+"97":"Amazonas – AM","98":"São Luís / região – MA","99":"Maranhão – MA"
 };
 
 /* =========================================================
    DADOS
 ========================================================= */
 
-let contatos = JSON.parse(localStorage.getItem("botBM3Contatos") || "[]");
-let chips = JSON.parse(localStorage.getItem("botBM3Chips") || "[]");
-let celulares = JSON.parse(localStorage.getItem("botBM3Celulares") || "[]");
-let historico = JSON.parse(localStorage.getItem("botBM3Historico") || "[]");
+let contatos=JSON.parse(localStorage.getItem("botBM3Contatos")||"[]");
+let chips=JSON.parse(localStorage.getItem("botBM3Chips")||"[]");
+let celulares=JSON.parse(localStorage.getItem("botBM3Celulares")||"[]");
+let historico=JSON.parse(localStorage.getItem("botBM3Historico")||"[]");
 
-let telaAtual = "inicio";
-let telaAnterior = "inicio";
+let telaAtual="inicio";
+let telaAnterior="inicio";
 
 function salvarDados(){
-    localStorage.setItem("botBM3Contatos", JSON.stringify(contatos));
-    localStorage.setItem("botBM3Chips", JSON.stringify(chips));
-    localStorage.setItem("botBM3Celulares", JSON.stringify(celulares));
-    localStorage.setItem("botBM3Historico", JSON.stringify(historico));
+    localStorage.setItem("botBM3Contatos",JSON.stringify(contatos));
+    localStorage.setItem("botBM3Chips",JSON.stringify(chips));
+    localStorage.setItem("botBM3Celulares",JSON.stringify(celulares));
+    localStorage.setItem("botBM3Historico",JSON.stringify(historico));
 }
 
 /* =========================================================
@@ -2658,33 +1848,30 @@ function salvarDados(){
 ========================================================= */
 
 function aplicarTema(tema){
-    document.body.classList.toggle("dark", tema === "dark");
+    document.body.classList.toggle("dark",tema==="dark");
 
-    const icon = document.getElementById("themeIcon");
-    const text = document.getElementById("themeText");
+    const icon=document.getElementById("themeIcon");
+    const text=document.getElementById("themeText");
 
-    if(tema === "dark"){
-        icon.textContent = "🌙";
-        text.textContent = "Escuro";
-    }else{
-        icon.textContent = "☀️";
-        text.textContent = "Claro";
+    if(icon){
+        icon.textContent=tema==="dark"?"🌙":"☀️";
+        text.textContent=tema==="dark"?"Escuro":"Claro";
     }
 
-    document.getElementById("themeLight")?.classList.toggle("active", tema !== "dark");
-    document.getElementById("themeDark")?.classList.toggle("active", tema === "dark");
+    document.getElementById("themeLight")?.classList.toggle("active",tema!=="dark");
+    document.getElementById("themeDark")?.classList.toggle("active",tema==="dark");
 
-    localStorage.setItem("temaBotBM3", tema);
+    localStorage.setItem("temaBotBM3",tema);
 }
 
 function alternarTema(){
-    const atual = localStorage.getItem("temaBotBM3") || "light";
-    aplicarTema(atual === "dark" ? "light" : "dark");
+    const atual=localStorage.getItem("temaBotBM3")||"light";
+    aplicarTema(atual==="dark"?"light":"dark");
 }
 
 function definirTema(tema){
     aplicarTema(tema);
-    mostrarToast(tema === "dark" ? "🌙 Tema escuro ativado" : "☀️ Tema claro ativado");
+    mostrarToast(tema==="dark"?"🌙 Tema escuro ativado":"☀️ Tema claro ativado");
 }
 
 /* =========================================================
@@ -2693,16 +1880,14 @@ function definirTema(tema){
 
 function navegar(id){
 
-    if(id === telaAtual) return;
+    if(id===telaAtual)return;
 
-    telaAnterior = telaAtual;
-    telaAtual = id;
+    telaAnterior=telaAtual;
+    telaAtual=id;
 
-    document.querySelectorAll(".screen").forEach(el=>{
-        el.classList.remove("active");
-    });
+    document.querySelectorAll(".screen").forEach(el=>el.classList.remove("active"));
 
-    const tela = document.getElementById(id);
+    const tela=document.getElementById(id);
 
     if(tela){
         tela.classList.add("active");
@@ -2713,52 +1898,41 @@ function navegar(id){
 }
 
 function voltar(){
-    if(telaAtual === "inicio"){
-        return;
-    }
 
-    if(telaAtual === "novoContato"){
+    if(telaAtual==="inicio")return;
+
+    if(telaAtual==="novoContato"){
         navegar("contatos");
         return;
     }
 
-    if(telaAtual === "novoChip"){
+    if(telaAtual==="novoChip"){
         navegar("chips");
         return;
     }
 
-    if(telaAtual === "novoCelular"){
+    if(telaAtual==="novoCelular"){
         navegar("celulares");
         return;
     }
 
     if(
-        ["advogado","contatos","resumo","favoritos","chips","celulares","config"].includes(telaAtual)
+        ["calculadora","advogado","contatos","resumo","favoritos","chips","celulares","config"]
+        .includes(telaAtual)
     ){
         navegar("inicio");
         return;
     }
 
-    if(
-        ["grupos","fixados","recentes","envio","links"].includes(telaAtual)
-    ){
+    if(["grupos","fixados","recentes","envio","links"].includes(telaAtual)){
         navegar("whatsapp");
         return;
     }
 
-    if(
-        [
-            "analisar",
-            "liberacao",
-            "andamento",
-            "prazos",
-            "valores",
-            "documentacao",
-            "favoritasRespostas",
-            "montarMensagem",
-            "historico"
-        ].includes(telaAtual)
-    ){
+    if([
+        "analisar","liberacao","andamento","prazos","valores",
+        "documentacao","favoritasRespostas","montarMensagem","historico"
+    ].includes(telaAtual)){
         navegar("advogado");
         return;
     }
@@ -2771,11 +1945,11 @@ function voltar(){
 ========================================================= */
 
 function somenteNumeros(el){
-    el.value = el.value.replace(/\D/g,"");
+    el.value=el.value.replace(/\D/g,"");
 }
 
 function escaparHTML(texto){
-    return String(texto || "")
+    return String(texto||"")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -2784,84 +1958,231 @@ function escaparHTML(texto){
 }
 
 function mostrarToast(msg){
-    const toast = document.getElementById("toast");
-    toast.textContent = msg;
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=msg;
     toast.classList.add("show");
 
     clearTimeout(window.toastTimer);
 
-    window.toastTimer = setTimeout(()=>{
+    window.toastTimer=setTimeout(()=>{
         toast.classList.remove("show");
     },2200);
 }
 
-function formatarTelefone(ddd, numero){
-    const d = String(ddd || "").replace(/\D/g,"");
-    const n = String(numero || "").replace(/\D/g,"");
+function formatarTelefone(ddd,numero){
 
-    if(d.length === 2 && n.length === 9){
+    const d=String(ddd||"").replace(/\D/g,"");
+    const n=String(numero||"").replace(/\D/g,"");
+
+    if(d.length===2&&n.length===9)
         return `(${d}) ${n.slice(0,5)}-${n.slice(5)}`;
-    }
 
-    if(d.length === 2 && n.length === 8){
+    if(d.length===2&&n.length===8)
         return `(${d}) ${n.slice(0,4)}-${n.slice(4)}`;
-    }
 
     return `(${d}) ${n}`;
 }
 
-/* =========================================================
-   REGIÃO DDD
-========================================================= */
-
 function obterRegiao(ddd){
-    return ddds[String(ddd).replace(/\D/g,"")] || "";
+    return ddds[String(ddd).replace(/\D/g,"")]||"";
 }
 
 function atualizarRegiao(campoDDD,campoRegiao){
-    const ddd = document.getElementById(campoDDD).value;
-    const box = document.getElementById(campoRegiao);
-    const regiao = obterRegiao(ddd);
+
+    const ddd=document.getElementById(campoDDD).value;
+    const box=document.getElementById(campoRegiao);
+    const regiao=obterRegiao(ddd);
 
     if(regiao){
-        box.textContent = "📍 " + regiao;
+        box.textContent="📍 "+regiao;
         box.classList.remove("invalid-region");
-    }else if(ddd.length === 2){
-        box.textContent = "⚠️ DDD não cadastrado";
+    }else if(ddd.length===2){
+        box.textContent="⚠️ DDD não cadastrado";
         box.classList.add("invalid-region");
     }else{
-        box.textContent = "📍 Digite o DDD para identificar a região";
+        box.textContent="📍 Digite o DDD para identificar a região";
         box.classList.remove("invalid-region");
     }
 }
 
-function detectarRegiaoContato(){
-    atualizarRegiao("contatoDDD","regiaoContato");
+function detectarRegiaoContato(){atualizarRegiao("contatoDDD","regiaoContato")}
+function detectarRegiaoChip(){atualizarRegiao("chipDDD","regiaoChip")}
+function detectarRegiaoCelular(){atualizarRegiao("celularDDD","regiaoCelular")}
+
+/* =========================================================
+   CALCULADORA
+========================================================= */
+
+function converterValor(valor){
+
+    let v=String(valor||"")
+        .toLowerCase()
+        .replace(/\s/g,"")
+        .replace(/r\$/g,"");
+
+    let multiplicador=1;
+
+    if(v.endsWith("k")){
+        multiplicador=1000;
+        v=v.slice(0,-1);
+    }
+
+    v=v.replace(/\./g,"").replace(",", ".");
+
+    const numero=parseFloat(v);
+
+    return Number.isFinite(numero)?numero*multiplicador:null;
 }
 
-function detectarRegiaoChip(){
-    atualizarRegiao("chipDDD","regiaoChip");
+function extrairDivisor(texto){
+
+    const t=texto.toLowerCase();
+
+    let m=t.match(/\/\s*(\d+(?:[.,]\d+)?)/);
+    if(m)return converterValor(m[1]);
+
+    m=t.match(/dividid[oa]\s+(?:em|por|entre)\s+(\d+(?:[.,]\d+)?)/i);
+    if(m)return converterValor(m[1]);
+
+    m=t.match(/para\s+(\d+(?:[.,]\d+)?)/i);
+    if(m)return converterValor(m[1]);
+
+    return null;
 }
 
-function detectarRegiaoCelular(){
-    atualizarRegiao("celularDDD","regiaoCelular");
+function calcularBM3(){
+
+    const entrada=document.getElementById("calcExpressao").value.trim();
+    const gerando=document.getElementById("calcGerando");
+    const resultado=document.getElementById("calcResultado");
+
+    if(!entrada){
+        mostrarToast("Digite o cálculo.");
+        return;
+    }
+
+    /*
+       Aceita:
+       20k - 25% / 3
+       20k menos 25% dividido em 3
+       20000 - 25% / 3
+    */
+
+    const texto=entrada.toLowerCase();
+
+    const percentMatch=texto.match(/(\d+(?:[.,]\d+)?)\s*%/);
+
+    if(!percentMatch){
+        mostrarToast("Informe a porcentagem. Ex.: 20k - 25% / 3");
+        return;
+    }
+
+    const porcentagem=parseFloat(percentMatch[1].replace(",","."));
+
+    if(porcentagem<0||porcentagem>100){
+        mostrarToast("A porcentagem precisa estar entre 0% e 100%.");
+        return;
+    }
+
+    let antes=texto.split("%")[0];
+
+    /*
+       Pega o primeiro valor antes do percentual.
+       Exemplos:
+       20k - 25%
+       20000 menos 25%
+    */
+
+    const valorMatch=antes.match(/(\d+(?:[.,]\d+)?)\s*k?/);
+
+    if(!valorMatch){
+        mostrarToast("Não consegui identificar o valor.");
+        return;
+    }
+
+    const valorInformado=converterValor(valorMatch[0]);
+
+    if(valorInformado===null||valorInformado<=0){
+        mostrarToast("Informe um valor válido.");
+        return;
+    }
+
+    let divisor=extrairDivisor(texto);
+
+    if(!divisor){
+
+        const resposta=prompt("Dividir o valor restante entre quantas pessoas?");
+
+        if(resposta===null)return;
+
+        divisor=converterValor(resposta);
+
+    }
+
+    if(!divisor||divisor<=0){
+        mostrarToast("Informe uma quantidade válida de pessoas.");
+        return;
+    }
+
+    const desconto=valorInformado*(porcentagem/100);
+    const restante=valorInformado-desconto;
+    const cada=restante/divisor;
+
+    const moeda=new Intl.NumberFormat("pt-BR",{
+        style:"currency",
+        currency:"BRL"
+    });
+
+    resultado.innerHTML="";
+    gerando.classList.add("show");
+
+    setTimeout(()=>{
+
+        gerando.classList.remove("show");
+
+        resultado.innerHTML=`
+            <div class="calc-bot">
+
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
+
+                <div>💰 Valor informado: <b>${moeda.format(valorInformado)}</b></div>
+
+                <div>📉 ${porcentagem}%: <b>${moeda.format(desconto)}</b></div>
+
+                <div>💵 Valor restante: <b>${moeda.format(restante)}</b></div>
+
+                <div>👥 Dividido entre: <b>${divisor}</b></div>
+
+                <div class="calc-divider"></div>
+
+                <div class="calc-summary">
+                    RESUMO : 🍀 Valor pra cada: ${moeda.format(cada)}
+                </div>
+
+            </div>
+        `;
+
+    },1000);
 }
 
 /* =========================================================
    CONTATOS
 ========================================================= */
 
-let statusSelecionado = "ON";
+let statusSelecionado="ON";
 
 function abrirNovoContato(){
 
-    document.getElementById("tituloContato").textContent = "👤 Novo contato";
-    document.getElementById("contatoIndex").value = "-1";
-
-    document.getElementById("contatoNome").value = "";
-    document.getElementById("contatoDDD").value = "";
-    document.getElementById("contatoNumero").value = "";
-    document.getElementById("contatoObs").value = "";
+    document.getElementById("tituloContato").textContent="👤 Novo contato";
+    document.getElementById("contatoIndex").value="-1";
+    document.getElementById("contatoNome").value="";
+    document.getElementById("contatoDDD").value="";
+    document.getElementById("contatoNumero").value="";
+    document.getElementById("contatoObs").value="";
 
     selecionarStatus("ON");
     detectarRegiaoContato();
@@ -2871,8 +2192,8 @@ function abrirNovoContato(){
 
 function selecionarStatus(status){
 
-    statusSelecionado = status;
-    document.getElementById("contatoStatus").value = status;
+    statusSelecionado=status;
+    document.getElementById("contatoStatus").value=status;
 
     document.getElementById("statusON").classList.toggle("selected",status==="ON");
     document.getElementById("statusANALISE").classList.toggle("selected",status==="ANÁLISE");
@@ -2881,46 +2202,31 @@ function selecionarStatus(status){
 
 function salvarContato(){
 
-    const nome = document.getElementById("contatoNome").value.trim();
-    const ddd = document.getElementById("contatoDDD").value;
-    const numero = document.getElementById("contatoNumero").value;
-    const obs = document.getElementById("contatoObs").value.trim();
-    const index = Number(document.getElementById("contatoIndex").value);
+    const nome=document.getElementById("contatoNome").value.trim();
+    const ddd=document.getElementById("contatoDDD").value;
+    const numero=document.getElementById("contatoNumero").value;
+    const obs=document.getElementById("contatoObs").value.trim();
+    const index=Number(document.getElementById("contatoIndex").value);
 
-    if(!nome){
-        mostrarToast("Digite o nome do contato.");
-        return;
-    }
+    if(!nome)return mostrarToast("Digite o nome do contato.");
+    if(ddd.length!==2)return mostrarToast("O DDD precisa ter 2 números.");
+    if(!obterRegiao(ddd))return mostrarToast("Digite um DDD válido.");
+    if(!numero)return mostrarToast("Digite o telefone.");
 
-    if(ddd.length !== 2){
-        mostrarToast("O DDD precisa ter 2 números.");
-        return;
-    }
-
-    if(!obterRegiao(ddd)){
-        mostrarToast("Digite um DDD válido.");
-        return;
-    }
-
-    if(!numero){
-        mostrarToast("Digite o telefone.");
-        return;
-    }
-
-    const contato = {
+    const contato={
         nome,
         ddd,
         numero,
         regiao:obterRegiao(ddd),
         observacao:obs,
         status:statusSelecionado,
-        favorito:index >= 0 ? !!contatos[index]?.favorito : false,
-        fixado:index >= 0 ? !!contatos[index]?.fixado : false,
+        favorito:index>=0?!!contatos[index]?.favorito:false,
+        fixado:index>=0?!!contatos[index]?.fixado:false,
         ultimaAtualizacao:new Date().toISOString()
     };
 
-    if(index >= 0){
-        contatos[index] = contato;
+    if(index>=0){
+        contatos[index]=contato;
         mostrarToast("Contato atualizado.");
     }else{
         contatos.push(contato);
@@ -2933,17 +2239,16 @@ function salvarContato(){
 
 function editarContato(index){
 
-    const c = contatos[index];
+    const c=contatos[index];
 
-    document.getElementById("tituloContato").textContent = "✏️ Editar contato";
-    document.getElementById("contatoIndex").value = index;
+    document.getElementById("tituloContato").textContent="✏️ Editar contato";
+    document.getElementById("contatoIndex").value=index;
+    document.getElementById("contatoNome").value=c.nome||"";
+    document.getElementById("contatoDDD").value=c.ddd||"";
+    document.getElementById("contatoNumero").value=c.numero||"";
+    document.getElementById("contatoObs").value=c.observacao||"";
 
-    document.getElementById("contatoNome").value = c.nome || "";
-    document.getElementById("contatoDDD").value = c.ddd || "";
-    document.getElementById("contatoNumero").value = c.numero || "";
-    document.getElementById("contatoObs").value = c.observacao || "";
-
-    selecionarStatus(c.status || "ON");
+    selecionarStatus(c.status||"ON");
     detectarRegiaoContato();
 
     navegar("novoContato");
@@ -2951,106 +2256,76 @@ function editarContato(index){
 
 function excluirContato(index){
 
-    if(!confirm("Excluir este contato?")) return;
+    if(!confirm("Excluir este contato?"))return;
 
     contatos.splice(index,1);
     salvarDados();
-    renderContatos();
-    atualizarResumo();
+    atualizarTudo();
 
     mostrarToast("Contato excluído.");
 }
 
 function alternarFavorito(index){
 
-    contatos[index].favorito = !contatos[index].favorito;
+    contatos[index].favorito=!contatos[index].favorito;
     salvarDados();
+    atualizarTudo();
 
-    renderContatos();
-    renderFavoritos();
-
-    mostrarToast(
-        contatos[index].favorito
-        ? "⭐ Adicionado aos favoritos."
-        : "Removido dos favoritos."
-    );
+    mostrarToast(contatos[index].favorito?"⭐ Adicionado aos favoritos.":"Removido dos favoritos.");
 }
 
 function alternarFixado(index){
 
-    contatos[index].fixado = !contatos[index].fixado;
+    contatos[index].fixado=!contatos[index].fixado;
     salvarDados();
+    atualizarTudo();
 
-    renderContatos();
-    renderFixados();
-
-    mostrarToast(
-        contatos[index].fixado
-        ? "📌 Contato fixado."
-        : "Contato desafixado."
-    );
+    mostrarToast(contatos[index].fixado?"📌 Contato fixado.":"Contato desafixado.");
 }
 
 function statusClasse(status){
-
-    if(status === "ON") return "status-on";
-    if(status === "ANÁLISE") return "status-analysis";
-    return "status-off";
+    if(status==="ON")return"status-on";
+    if(status==="ANÁLISE")return"status-analysis";
+    return"status-off";
 }
 
 function statusEmoji(status){
-
-    if(status === "ON") return "🟢";
-    if(status === "ANÁLISE") return "🟡";
-    return "🔴";
+    if(status==="ON")return"🟢";
+    if(status==="ANÁLISE")return"🟡";
+    return"🔴";
 }
 
 function renderContatos(){
 
-    const box = document.getElementById("listaContatos");
-    if(!box) return;
+    const box=document.getElementById("listaContatos");
+    if(!box)return;
 
-    const busca = (document.getElementById("buscarContato")?.value || "").toLowerCase();
+    const busca=(document.getElementById("buscarContato")?.value||"").toLowerCase();
 
-    const lista = contatos
+    const lista=contatos
         .map((c,i)=>({...c,index:i}))
-        .filter(c=>{
-            return (
-                c.nome.toLowerCase().includes(busca) ||
-                c.numero.includes(busca) ||
-                c.ddd.includes(busca)
-            );
-        })
-        .sort((a,b)=>a.nome.localeCompare(b.nome));
+        .filter(c=>
+            String(c.nome||"").toLowerCase().includes(busca)||
+            String(c.numero||"").includes(busca)||
+            String(c.ddd||"").includes(busca)
+        )
+        .sort((a,b)=>String(a.nome).localeCompare(String(b.nome)));
 
     if(!lista.length){
-        box.innerHTML = `
-            <div class="empty">
-                👥<br><br>
-                Nenhum contato encontrado.
-            </div>
-        `;
+        box.innerHTML=`<div class="empty">👥<br><br>Nenhum contato encontrado.</div>`;
         return;
     }
 
-    box.innerHTML = lista.map(c=>`
+    box.innerHTML=lista.map(c=>`
 
         <div class="list-item">
 
             <div class="list-top">
 
                 <div>
-                    <div class="list-name">
-                        ${escaparHTML(c.nome)}
-                    </div>
-
-                    <div class="list-number">
-                        📞 ${formatarTelefone(c.ddd,c.numero)}
-                    </div>
-
-                    <div class="list-meta">
-                        📍 ${escaparHTML(c.regiao || obterRegiao(c.ddd))}
-                    </div>
+                    <div class="list-name">${escaparHTML(c.nome)}</div>
+                    <div class="list-number">📞 ${formatarTelefone(c.ddd,c.numero)}</div>
+                    <div class="list-meta">📍 ${escaparHTML(c.regiao||obterRegiao(c.ddd))}</div>
                 </div>
 
                 <div class="${statusClasse(c.status)}" style="font-weight:950;font-size:12px">
@@ -3059,33 +2334,25 @@ function renderContatos(){
 
             </div>
 
-            ${
-                c.observacao
-                ? `<div class="list-meta">📝 ${escaparHTML(c.observacao)}</div>`
-                : ""
-            }
+            ${c.observacao?`<div class="list-meta">📝 ${escaparHTML(c.observacao)}</div>`:""}
 
             <div class="list-actions">
 
-                <button class="small-btn" onclick="editarContato(${c.index})">
-                    ✏️ Editar
-                </button>
+                <button class="small-btn" onclick="editarContato(${c.index})">✏️ Editar</button>
 
                 <button class="small-btn" onclick="alternarFavorito(${c.index})">
-                    ${c.favorito ? "⭐ Favorito" : "☆ Favoritar"}
+                    ${c.favorito?"⭐ Favorito":"☆ Favoritar"}
                 </button>
 
                 <button class="small-btn" onclick="alternarFixado(${c.index})">
-                    ${c.fixado ? "📌 Fixado" : "📍 Fixar"}
+                    ${c.fixado?"📌 Fixado":"📍 Fixar"}
                 </button>
 
                 <button class="small-btn" onclick="abrirWhatsAppContato(${c.index})">
                     💬 WhatsApp
                 </button>
 
-                <button class="small-btn" onclick="excluirContato(${c.index})">
-                    🗑️
-                </button>
+                <button class="small-btn" onclick="excluirContato(${c.index})">🗑️</button>
 
             </div>
 
@@ -3096,65 +2363,46 @@ function renderContatos(){
 
 function abrirWhatsAppContato(index){
 
-    const c = contatos[index];
-    const numero = `${c.ddd}${c.numero}`.replace(/\D/g,"");
+    const c=contatos[index];
+    const numero=`${c.ddd}${c.numero}`.replace(/\D/g,"");
 
-    if(!numero){
-        mostrarToast("Número inválido.");
-        return;
-    }
+    if(!numero)return mostrarToast("Número inválido.");
 
     window.open(`https://wa.me/55${numero}`,"_blank");
 }
 
 /* =========================================================
-   RESUMO
+   RESUMO / FAVORITOS
 ========================================================= */
 
 function atualizarResumo(){
 
-    const on = contatos.filter(c=>c.status==="ON").length;
-    const analise = contatos.filter(c=>c.status==="ANÁLISE").length;
-    const off = contatos.filter(c=>c.status==="OFF").length;
-
-    document.getElementById("totalON").textContent = on;
-    document.getElementById("totalAnalise").textContent = analise;
-    document.getElementById("totalOFF").textContent = off;
-    document.getElementById("totalContatos").textContent = contatos.length;
+    document.getElementById("totalON").textContent=contatos.filter(c=>c.status==="ON").length;
+    document.getElementById("totalAnalise").textContent=contatos.filter(c=>c.status==="ANÁLISE").length;
+    document.getElementById("totalOFF").textContent=contatos.filter(c=>c.status==="OFF").length;
+    document.getElementById("totalContatos").textContent=contatos.length;
 }
-
-/* =========================================================
-   FAVORITOS / FIXADOS / RECENTES
-========================================================= */
 
 function renderFavoritos(){
 
-    const box = document.getElementById("listaFavoritos");
-    if(!box) return;
+    const box=document.getElementById("listaFavoritos");
+    if(!box)return;
 
-    const lista = contatos
-        .map((c,i)=>({...c,index:i}))
-        .filter(c=>c.favorito);
+    const lista=contatos.map((c,i)=>({...c,index:i})).filter(c=>c.favorito);
 
     if(!lista.length){
-        box.innerHTML = `<div class="empty">⭐ Nenhum favorito.</div>`;
+        box.innerHTML=`<div class="empty">⭐ Nenhum favorito.</div>`;
         return;
     }
 
-    box.innerHTML = lista.map(c=>`
+    box.innerHTML=lista.map(c=>`
         <div class="list-item">
             <div class="list-name">${escaparHTML(c.nome)}</div>
             <div class="list-number">📞 ${formatarTelefone(c.ddd,c.numero)}</div>
-            <div class="list-meta">📍 ${escaparHTML(c.regiao || "")}</div>
-
+            <div class="list-meta">📍 ${escaparHTML(c.regiao||"")}</div>
             <div class="list-actions">
-                <button class="small-btn" onclick="abrirWhatsAppContato(${c.index})">
-                    💬 WhatsApp
-                </button>
-
-                <button class="small-btn" onclick="editarContato(${c.index})">
-                    ✏️ Editar
-                </button>
+                <button class="small-btn" onclick="abrirWhatsAppContato(${c.index})">💬 WhatsApp</button>
+                <button class="small-btn" onclick="editarContato(${c.index})">✏️ Editar</button>
             </div>
         </div>
     `).join("");
@@ -3162,19 +2410,17 @@ function renderFavoritos(){
 
 function renderFixados(){
 
-    const box = document.getElementById("listaFixados");
-    if(!box) return;
+    const box=document.getElementById("listaFixados");
+    if(!box)return;
 
-    const lista = contatos
-        .map((c,i)=>({...c,index:i}))
-        .filter(c=>c.fixado);
+    const lista=contatos.map((c,i)=>({...c,index:i})).filter(c=>c.fixado);
 
     if(!lista.length){
-        box.innerHTML = `<div class="empty">📌 Nenhum contato fixado.</div>`;
+        box.innerHTML=`<div class="empty">📌 Nenhum contato fixado.</div>`;
         return;
     }
 
-    box.innerHTML = lista.map(c=>`
+    box.innerHTML=lista.map(c=>`
         <div class="list-item">
             <div class="list-name">${escaparHTML(c.nome)}</div>
             <div class="list-number">📞 ${formatarTelefone(c.ddd,c.numero)}</div>
@@ -3184,20 +2430,20 @@ function renderFixados(){
 
 function renderRecentes(){
 
-    const box = document.getElementById("listaRecentes");
-    if(!box) return;
+    const box=document.getElementById("listaRecentes");
+    if(!box)return;
 
-    const lista = contatos
+    const lista=contatos
         .map((c,i)=>({...c,index:i}))
         .sort((a,b)=>new Date(b.ultimaAtualizacao)-new Date(a.ultimaAtualizacao))
         .slice(0,15);
 
     if(!lista.length){
-        box.innerHTML = `<div class="empty">🕘 Nenhum contato recente.</div>`;
+        box.innerHTML=`<div class="empty">🕘 Nenhum contato recente.</div>`;
         return;
     }
 
-    box.innerHTML = lista.map(c=>`
+    box.innerHTML=lista.map(c=>`
         <div class="list-item">
             <div class="list-name">${escaparHTML(c.nome)}</div>
             <div class="list-number">📞 ${formatarTelefone(c.ddd,c.numero)}</div>
@@ -3212,18 +2458,17 @@ function renderRecentes(){
    CHIPS
 ========================================================= */
 
-let operadoraSelecionada = "PAGUE MENOS";
-let recargaSelecionada = true;
+let operadoraSelecionada="PAGUE MENOS";
+let recargaSelecionada=true;
 
 function abrirNovoChip(){
 
-    document.getElementById("chipIndex").value = "-1";
-    document.getElementById("chipDDD").value = "";
-    document.getElementById("chipNumero").value = "";
+    document.getElementById("chipIndex").value="-1";
+    document.getElementById("chipDDD").value="";
+    document.getElementById("chipNumero").value="";
 
     selecionarOperadora("PAGUE MENOS");
     selecionarRecarga(true);
-
     detectarRegiaoChip();
 
     navegar("novoChip");
@@ -3231,50 +2476,33 @@ function abrirNovoChip(){
 
 function selecionarOperadora(op){
 
-    operadoraSelecionada = op;
-    document.getElementById("chipOperadora").value = op;
+    operadoraSelecionada=op;
+    document.getElementById("chipOperadora").value=op;
 
-    document.getElementById("opPagueMenos")
-        .classList.toggle("selected",op==="PAGUE MENOS");
-
-    document.getElementById("opVivo")
-        .classList.toggle("selected",op==="VIVO");
+    document.getElementById("opPagueMenos").classList.toggle("selected",op==="PAGUE MENOS");
+    document.getElementById("opVivo").classList.toggle("selected",op==="VIVO");
 }
 
 function selecionarRecarga(valor){
 
-    recargaSelecionada = valor;
-    document.getElementById("chipRecarga").value = String(valor);
+    recargaSelecionada=valor;
+    document.getElementById("chipRecarga").value=String(valor);
 
-    document.getElementById("recargaSim")
-        .classList.toggle("selected",valor===true);
-
-    document.getElementById("recargaNao")
-        .classList.toggle("selected",valor===false);
+    document.getElementById("recargaSim").classList.toggle("selected",valor===true);
+    document.getElementById("recargaNao").classList.toggle("selected",valor===false);
 }
 
 function salvarChip(){
 
-    const ddd = document.getElementById("chipDDD").value;
-    const numero = document.getElementById("chipNumero").value;
-    const index = Number(document.getElementById("chipIndex").value);
+    const ddd=document.getElementById("chipDDD").value;
+    const numero=document.getElementById("chipNumero").value;
+    const index=Number(document.getElementById("chipIndex").value);
 
-    if(ddd.length !== 2){
-        mostrarToast("O DDD precisa ter 2 números.");
-        return;
-    }
+    if(ddd.length!==2)return mostrarToast("O DDD precisa ter 2 números.");
+    if(!obterRegiao(ddd))return mostrarToast("Digite um DDD válido.");
+    if(!numero)return mostrarToast("Digite o número do chip.");
 
-    if(!obterRegiao(ddd)){
-        mostrarToast("Digite um DDD válido.");
-        return;
-    }
-
-    if(!numero){
-        mostrarToast("Digite o número do chip.");
-        return;
-    }
-
-    const chip = {
+    const chip={
         operadora:operadoraSelecionada,
         ddd,
         numero,
@@ -3283,8 +2511,8 @@ function salvarChip(){
         atualizado:new Date().toISOString()
     };
 
-    if(index >= 0){
-        chips[index] = chip;
+    if(index>=0){
+        chips[index]=chip;
         mostrarToast("Chip atualizado.");
     }else{
         chips.push(chip);
@@ -3297,13 +2525,13 @@ function salvarChip(){
 
 function editarChip(index){
 
-    const c = chips[index];
+    const c=chips[index];
 
-    document.getElementById("chipIndex").value = index;
-    document.getElementById("chipDDD").value = c.ddd;
-    document.getElementById("chipNumero").value = c.numero;
+    document.getElementById("chipIndex").value=index;
+    document.getElementById("chipDDD").value=c.ddd;
+    document.getElementById("chipNumero").value=c.numero;
 
-    selecionarOperadora(c.operadora || "PAGUE MENOS");
+    selecionarOperadora(c.operadora||"PAGUE MENOS");
     selecionarRecarga(!!c.recarga);
     detectarRegiaoChip();
 
@@ -3312,109 +2540,74 @@ function editarChip(index){
 
 function excluirChip(index){
 
-    if(!confirm("Excluir este chip?")) return;
+    if(!confirm("Excluir este chip?"))return;
 
     chips.splice(index,1);
     salvarDados();
-    renderChips();
+    atualizarTudo();
 
     mostrarToast("Chip excluído.");
 }
 
 function renderChips(){
 
-    const box = document.getElementById("listaChips");
-    if(!box) return;
+    const box=document.getElementById("listaChips");
+    if(!box)return;
 
-    const com = chips.filter(c=>c.recarga).length;
-    const sem = chips.filter(c=>!c.recarga).length;
+    const com=chips.filter(c=>c.recarga).length;
+    const sem=chips.filter(c=>!c.recarga).length;
 
-    document.getElementById("chipsComRecarga").textContent = com;
-    document.getElementById("chipsSemRecarga").textContent = sem;
-    document.getElementById("chipsTotal").textContent = chips.length;
-
-    const pague = chips.filter(c=>c.operadora==="PAGUE MENOS");
-    const vivo = chips.filter(c=>c.operadora==="VIVO");
-
-    function grupo(titulo,lista,emoji){
-
-        if(!lista.length) return "";
-
-        return `
-            <div class="operator-title">
-                ${emoji} ${titulo}
-            </div>
-
-            ${lista.map(c=>{
-
-                const index = chips.indexOf(c);
-
-                return `
-                    <div class="chip-card">
-
-                        <div class="chip-operator">
-                            ${escaparHTML(c.operadora)}
-                        </div>
-
-                        <div class="chip-number">
-                            📱 ${formatarTelefone(c.ddd,c.numero)}
-                        </div>
-
-                        <div class="chip-region">
-                            📍 ${escaparHTML(c.regiao || obterRegiao(c.ddd))}
-                        </div>
-
-                        <div class="chip-status ${c.recarga ? "recharge-on":"recharge-off"}">
-                            ${c.recarga ? "🟢 Com recarga":"🔴 Sem recarga"}
-                        </div>
-
-                        <div class="list-actions">
-                            <button class="small-btn" onclick="editarChip(${index})">
-                                ✏️ Editar
-                            </button>
-
-                            <button class="small-btn" onclick="excluirChip(${index})">
-                                🗑️ Excluir
-                            </button>
-                        </div>
-
-                    </div>
-                `;
-
-            }).join("")}
-        `;
-    }
+    document.getElementById("chipsComRecarga").textContent=com;
+    document.getElementById("chipsSemRecarga").textContent=sem;
+    document.getElementById("chipsTotal").textContent=chips.length;
 
     if(!chips.length){
-        box.innerHTML = `
-            <div class="empty">
-                📶<br><br>
-                Nenhum chip cadastrado.
-            </div>
-        `;
+        box.innerHTML=`<div class="empty">📶<br><br>Nenhum chip cadastrado.</div>`;
         return;
     }
 
-    box.innerHTML =
-        grupo("PAGUE MENOS",pague,"🟢") +
-        grupo("VIVO",vivo,"🟣");
+    box.innerHTML=chips.map((c,index)=>`
+        <div class="chip-card">
+
+            <div class="chip-operator">
+                ${c.operadora==="VIVO"?"🟣":"🟢"} ${escaparHTML(c.operadora)}
+            </div>
+
+            <div class="chip-number">
+                📱 ${formatarTelefone(c.ddd,c.numero)}
+            </div>
+
+            <div class="chip-region">
+                📍 ${escaparHTML(c.regiao||obterRegiao(c.ddd))}
+            </div>
+
+            <div class="chip-status ${c.recarga?"recharge-on":"recharge-off"}">
+                ${c.recarga?"🟢 Com recarga":"🔴 Sem recarga"}
+            </div>
+
+            <div class="list-actions">
+                <button class="small-btn" onclick="editarChip(${index})">✏️ Editar</button>
+                <button class="small-btn" onclick="excluirChip(${index})">🗑️ Excluir</button>
+            </div>
+
+        </div>
+    `).join("");
 }
 
 /* =========================================================
    CELULARES
 ========================================================= */
 
-let operadoraCelularSelecionada = "PAGUE MENOS";
-let recargaCelularSelecionada = true;
+let operadoraCelularSelecionada="PAGUE MENOS";
+let recargaCelularSelecionada=true;
 
 function abrirNovoCelular(){
 
-    document.getElementById("celularIndex").value = "-1";
-
-    document.getElementById("celularNome").value = "";
-    document.getElementById("celularNumero").value = "";
-    document.getElementById("celularWhatsapp").value = "";
-    document.getElementById("celularDDD").value = "";
+    document.getElementById("celularIndex").value="-1";
+    document.getElementById("celularNome").value="";
+    document.getElementById("celularNumero").value="";
+    document.getElementById("celularWhatsapp").value="";
+    document.getElementById("celularDDD").value="";
 
     selecionarOperadoraCelular("PAGUE MENOS");
     selecionarRecargaCelular(true);
@@ -3425,69 +2618,45 @@ function abrirNovoCelular(){
 
 function selecionarOperadoraCelular(op){
 
-    operadoraCelularSelecionada = op;
-    document.getElementById("celularOperadora").value = op;
+    operadoraCelularSelecionada=op;
+    document.getElementById("celularOperadora").value=op;
 
-    document.getElementById("celOpPagueMenos")
-        .classList.toggle("selected",op==="PAGUE MENOS");
-
-    document.getElementById("celOpVivo")
-        .classList.toggle("selected",op==="VIVO");
+    document.getElementById("celOpPagueMenos").classList.toggle("selected",op==="PAGUE MENOS");
+    document.getElementById("celOpVivo").classList.toggle("selected",op==="VIVO");
 }
 
 function selecionarRecargaCelular(valor){
 
-    recargaCelularSelecionada = valor;
-    document.getElementById("celularRecarga").value = String(valor);
+    recargaCelularSelecionada=valor;
+    document.getElementById("celularRecarga").value=String(valor);
 
-    document.getElementById("celRecSim")
-        .classList.toggle("selected",valor===true);
-
-    document.getElementById("celRecNao")
-        .classList.toggle("selected",valor===false);
+    document.getElementById("celRecSim").classList.toggle("selected",valor===true);
+    document.getElementById("celRecNao").classList.toggle("selected",valor===false);
 }
 
 function salvarCelular(){
 
-    const nome = document.getElementById("celularNome").value.trim();
-    const numero = document.getElementById("celularNumero").value;
-    const whatsapp = document.getElementById("celularWhatsapp").value;
-    const ddd = document.getElementById("celularDDD").value;
-    const index = Number(document.getElementById("celularIndex").value);
+    const nome=document.getElementById("celularNome").value.trim();
+    const numero=document.getElementById("celularNumero").value;
+    const whatsapp=document.getElementById("celularWhatsapp").value;
+    const ddd=document.getElementById("celularDDD").value;
+    const index=Number(document.getElementById("celularIndex").value);
 
-    if(!nome){
-        mostrarToast("Digite o nome do celular.");
-        return;
-    }
+    if(!nome)return mostrarToast("Digite o nome do celular.");
+    if(ddd.length!==2||!obterRegiao(ddd))return mostrarToast("Digite um DDD válido de 2 números.");
+    if(!numero)return mostrarToast("Digite o número do celular.");
+    if(!whatsapp)return mostrarToast("Digite o número do WhatsApp.");
 
-    if(ddd.length !== 2 || !obterRegiao(ddd)){
-        mostrarToast("Digite um DDD válido de 2 números.");
-        return;
-    }
-
-    if(!numero){
-        mostrarToast("Digite o número do celular.");
-        return;
-    }
-
-    if(!whatsapp){
-        mostrarToast("Digite o número do WhatsApp.");
-        return;
-    }
-
-    const celular = {
-        nome,
-        numero,
-        whatsapp,
-        ddd,
+    const celular={
+        nome,numero,whatsapp,ddd,
         regiao:obterRegiao(ddd),
         operadora:operadoraCelularSelecionada,
         recarga:recargaCelularSelecionada,
         atualizado:new Date().toISOString()
     };
 
-    if(index >= 0){
-        celulares[index] = celular;
+    if(index>=0){
+        celulares[index]=celular;
         mostrarToast("Celular atualizado.");
     }else{
         celulares.push(celular);
@@ -3500,15 +2669,15 @@ function salvarCelular(){
 
 function editarCelular(index){
 
-    const c = celulares[index];
+    const c=celulares[index];
 
-    document.getElementById("celularIndex").value = index;
-    document.getElementById("celularNome").value = c.nome || "";
-    document.getElementById("celularNumero").value = c.numero || "";
-    document.getElementById("celularWhatsapp").value = c.whatsapp || "";
-    document.getElementById("celularDDD").value = c.ddd || "";
+    document.getElementById("celularIndex").value=index;
+    document.getElementById("celularNome").value=c.nome||"";
+    document.getElementById("celularNumero").value=c.numero||"";
+    document.getElementById("celularWhatsapp").value=c.whatsapp||"";
+    document.getElementById("celularDDD").value=c.ddd||"";
 
-    selecionarOperadoraCelular(c.operadora || "PAGUE MENOS");
+    selecionarOperadoraCelular(c.operadora||"PAGUE MENOS");
     selecionarRecargaCelular(!!c.recarga);
     detectarRegiaoCelular();
 
@@ -3517,31 +2686,26 @@ function editarCelular(index){
 
 function excluirCelular(index){
 
-    if(!confirm("Excluir este celular?")) return;
+    if(!confirm("Excluir este celular?"))return;
 
     celulares.splice(index,1);
     salvarDados();
-    renderCelulares();
+    atualizarTudo();
 
     mostrarToast("Celular excluído.");
 }
 
 function renderCelulares(){
 
-    const box = document.getElementById("listaCelulares");
-    if(!box) return;
+    const box=document.getElementById("listaCelulares");
+    if(!box)return;
 
     if(!celulares.length){
-        box.innerHTML = `
-            <div class="empty">
-                📱<br><br>
-                Nenhum celular cadastrado.
-            </div>
-        `;
+        box.innerHTML=`<div class="empty">📱<br><br>Nenhum celular cadastrado.</div>`;
         return;
     }
 
-    box.innerHTML = celulares.map((c,index)=>`
+    box.innerHTML=celulares.map((c,index)=>`
 
         <div class="phone-card">
 
@@ -3560,36 +2724,15 @@ function renderCelulares(){
             </div>
 
             <div class="phone-meta">
-
-                <span class="tag">
-                    ${c.operadora === "VIVO" ? "🟣" : "🟢"}
-                    ${escaparHTML(c.operadora)}
-                </span>
-
-                <span class="tag">
-                    ${c.recarga ? "🟢 Com recarga":"🔴 Sem recarga"}
-                </span>
-
-                <span class="tag">
-                    📍 ${escaparHTML(c.regiao || obterRegiao(c.ddd))}
-                </span>
-
+                <span class="tag">${c.operadora==="VIVO"?"🟣":"🟢"} ${escaparHTML(c.operadora)}</span>
+                <span class="tag">${c.recarga?"🟢 Com recarga":"🔴 Sem recarga"}</span>
+                <span class="tag">📍 ${escaparHTML(c.regiao||"")}</span>
             </div>
 
             <div class="list-actions">
-
-                <button class="small-btn" onclick="editarCelular(${index})">
-                    ✏️ Editar
-                </button>
-
-                <button class="small-btn" onclick="abrirWhatsAppCelular(${index})">
-                    💬 WhatsApp
-                </button>
-
-                <button class="small-btn" onclick="excluirCelular(${index})">
-                    🗑️ Excluir
-                </button>
-
+                <button class="small-btn" onclick="editarCelular(${index})">✏️ Editar</button>
+                <button class="small-btn" onclick="abrirWhatsAppCelular(${index})">💬 WhatsApp</button>
+                <button class="small-btn" onclick="excluirCelular(${index})">🗑️ Excluir</button>
             </div>
 
         </div>
@@ -3599,35 +2742,32 @@ function renderCelulares(){
 
 function abrirWhatsAppCelular(index){
 
-    const c = celulares[index];
-    const numero = `${c.ddd}${c.whatsapp}`.replace(/\D/g,"");
+    const c=celulares[index];
+    const numero=`${c.ddd}${c.whatsapp}`.replace(/\D/g,"");
 
-    if(!numero){
-        mostrarToast("Número de WhatsApp inválido.");
-        return;
-    }
+    if(!numero)return mostrarToast("Número de WhatsApp inválido.");
 
     window.open(`https://wa.me/55${numero}`,"_blank");
 }
 
 /* =========================================================
-   GERADOR DE RESPOSTAS
+   ADVOGADO
 ========================================================= */
 
-let ultimaResposta = "";
+let ultimaResposta="";
 
 function gerarResposta(){
 
-    const pergunta = document.getElementById("perguntaCliente").value.trim();
+    const pergunta=document.getElementById("perguntaCliente").value.trim();
 
     if(!pergunta){
         mostrarToast("Cole a pergunta do cliente.");
         return;
     }
 
-    const gerando = document.getElementById("gerando");
-    const respostaBox = document.getElementById("respostaBox");
-    const tools = document.getElementById("responseTools");
+    const gerando=document.getElementById("gerando");
+    const respostaBox=document.getElementById("respostaBox");
+    const tools=document.getElementById("responseTools");
 
     respostaBox.classList.remove("show");
     tools.classList.remove("show");
@@ -3635,9 +2775,9 @@ function gerarResposta(){
 
     setTimeout(()=>{
 
-        ultimaResposta = criarRespostaHumana(pergunta);
+        ultimaResposta=criarRespostaHumana(pergunta);
 
-        document.getElementById("respostaTexto").textContent = ultimaResposta;
+        document.getElementById("respostaTexto").textContent=ultimaResposta;
 
         gerando.classList.remove("show");
         respostaBox.classList.add("show");
@@ -3649,7 +2789,7 @@ function gerarResposta(){
             data:new Date().toISOString()
         });
 
-        historico = historico.slice(0,50);
+        historico=historico.slice(0,50);
 
         salvarDados();
 
@@ -3657,165 +2797,67 @@ function gerarResposta(){
 }
 
 function contem(texto,palavras){
-
     return palavras.some(p=>texto.includes(p));
 }
 
 function criarRespostaHumana(pergunta){
 
-    const p = pergunta
+    const p=pergunta
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g,"");
 
-    if(contem(p,[
-        "vai liberar hoje",
-        "libera hoje",
-        "recebo hoje",
-        "receber hoje",
-        "sai hoje",
-        "fica pronto hoje"
-    ])){
+    if(contem(p,["vai liberar hoje","libera hoje","recebo hoje","receber hoje","sai hoje","fica pronto hoje"]))
         return "Sim, senhora. Se a senhora me encaminhar tudo certinho, eu faço a conferência e vou protocolar o que for necessário ainda hoje para dar andamento à liberação. Assim que eu tiver a confirmação da próxima etapa, aviso a senhora.";
-    }
 
-    if(contem(p,[
-        "o que falta",
-        "falta alguma coisa",
-        "faltando",
-        "preciso mandar",
-        "documento preciso",
-        "documentos preciso"
-    ])){
+    if(contem(p,["o que falta","falta alguma coisa","faltando","preciso mandar","documento preciso","documentos preciso"]))
         return "Certo, senhora. Vou conferir essa parte para a senhora. Se estiver faltando alguma documentação ou informação, eu te aviso exatamente o que precisa ser encaminhado para conseguirmos dar continuidade.";
-    }
 
-    if(contem(p,[
-        "quanto vou receber",
-        "qual o valor",
-        "valor vou receber",
-        "quanto eu recebo",
-        "valor liberado"
-    ])){
+    if(contem(p,["quanto vou receber","qual o valor","valor vou receber","quanto eu recebo","valor liberado"]))
         return "Estou conferindo essa informação para passar o valor corretamente, senhora. Prefiro confirmar os dados antes de te informar para não passar nenhuma informação equivocada.";
-    }
 
-    if(contem(p,[
-        "quando vou receber",
-        "quando recebo",
-        "quando cai",
-        "que dia recebo",
-        "previsao de pagamento",
-        "previsão de pagamento"
-    ])){
+    if(contem(p,["quando vou receber","quando recebo","quando cai","que dia recebo","previsao de pagamento","previsão de pagamento"]))
         return "Estou acompanhando essa etapa, senhora. Assim que houver uma confirmação sobre a previsão de pagamento, eu aviso a senhora certinho.";
-    }
 
-    if(contem(p,[
-        "ja foi protocolado",
-        "já foi protocolado",
-        "protocolou",
-        "foi protocolado",
-        "protocolo"
-    ])){
+    if(contem(p,["ja foi protocolado","já foi protocolado","protocolou","foi protocolado","protocolo"]))
         return "Estou acompanhando essa parte, senhora. Assim que eu tiver a confirmação do protocolo e da próxima etapa, te aviso certinho por aqui.";
-    }
 
-    if(contem(p,[
-        "tem novidade",
-        "alguma novidade",
-        "novidade do processo",
-        "como esta",
-        "como está o processo",
-        "tem alguma atualizacao",
-        "tem alguma atualização"
-    ])){
+    if(contem(p,["tem novidade","alguma novidade","novidade do processo","como esta","como está o processo","tem alguma atualizacao","tem alguma atualização"]))
         return "Estou acompanhando, senhora. Assim que houver uma atualização confirmada, eu te aviso por aqui. Não quero te passar uma informação antes de ter a confirmação correta.";
-    }
 
-    if(contem(p,[
-        "por que nao caiu",
-        "por que não caiu",
-        "nao caiu",
-        "não caiu",
-        "ainda nao recebi",
-        "ainda não recebi",
-        "nao recebi"
-    ])){
+    if(contem(p,["por que nao caiu","por que não caiu","nao caiu","não caiu","ainda nao recebi","ainda não recebi","nao recebi"]))
         return "Estou verificando essa etapa, senhora. O fato de ainda não ter aparecido não significa necessariamente que houve algum problema. Vou conferir a situação e te retorno assim que tiver uma informação confirmada.";
-    }
 
-    if(contem(p,[
-        "posso mandar agora",
-        "posso enviar agora",
-        "mando agora",
-        "enviar os documentos"
-    ])){
+    if(contem(p,["posso mandar agora","posso enviar agora","mando agora","enviar os documentos"]))
         return "Pode sim, senhora. Me encaminhando tudo corretamente, eu faço a conferência e dou andamento por aqui. Se faltar alguma coisa, eu te aviso.";
-    }
 
-    if(contem(p,[
-        "precisa pagar",
-        "tenho que pagar",
-        "tem taxa",
-        "tem alguma taxa",
-        "pagamento para liberar"
-    ])){
+    if(contem(p,["precisa pagar","tenho que pagar","tem taxa","tem alguma taxa","pagamento para liberar"]))
         return "Senhora, antes de qualquer pagamento, confirme comigo a informação e a autenticidade da solicitação. Não faça nenhum pagamento ou envie dados sensíveis sem essa confirmação.";
-    }
 
-    if(contem(p,[
-        "demora",
-        "quanto tempo",
-        "prazo",
-        "vai demorar"
-    ])){
+    if(contem(p,["demora","quanto tempo","prazo","vai demorar"]))
         return "Entendo, senhora. O prazo depende da etapa em que o procedimento estiver. Estou acompanhando por aqui e, assim que houver uma previsão confirmada, te informo.";
-    }
-
-    if(contem(p,[
-        "deu certo",
-        "conseguiu",
-        "conseguiu resolver",
-        "vai dar certo"
-    ])){
-        return "Estou acompanhando essa parte, senhora. Assim que eu tiver a confirmação definitiva, te aviso certinho para não te passar uma informação antes da hora.";
-    }
-
-    if(contem(p,[
-        "boa noticia",
-        "ótima notícia",
-        "otima noticia",
-        "noticia boa"
-    ])){
-        return "Sim, senhora. Estou acompanhando essa etapa e, assim que estiver tudo confirmado, eu te passo a informação completa e explico os próximos passos.";
-    }
 
     return "Certo, senhora. Vou verificar essa informação com atenção e te passar uma resposta correta. Assim que eu tiver a confirmação da situação, te aviso por aqui.";
 }
 
 function copiarResposta(){
 
-    if(!ultimaResposta) return;
+    if(!ultimaResposta)return;
 
     navigator.clipboard.writeText(ultimaResposta)
-        .then(()=>{
-            mostrarToast("📋 Resposta copiada.");
-        })
-        .catch(()=>{
-            mostrarToast("Não foi possível copiar automaticamente.");
-        });
+        .then(()=>mostrarToast("📋 Resposta copiada."))
+        .catch(()=>mostrarToast("Não foi possível copiar automaticamente."));
 }
 
 function abrirWhatsAppResposta(){
 
-    const numero = prompt("Digite o número do WhatsApp com DDD:");
+    const numero=prompt("Digite o número do WhatsApp com DDD:");
 
-    if(!numero) return;
+    if(!numero)return;
 
-    const limpo = numero.replace(/\D/g,"");
+    const limpo=numero.replace(/\D/g,"");
 
-    if(limpo.length < 10){
+    if(limpo.length<10){
         mostrarToast("Número inválido.");
         return;
     }
@@ -3827,80 +2869,59 @@ function abrirWhatsAppResposta(){
 }
 
 /* =========================================================
-   ANALISAR PERGUNTA
+   OUTRAS FUNÇÕES
 ========================================================= */
 
 function analisarPergunta(){
 
-    const pergunta = document.getElementById("perguntaAnalise").value.trim();
-    const box = document.getElementById("resultadoAnalise");
+    const pergunta=document.getElementById("perguntaAnalise").value.trim();
+    const box=document.getElementById("resultadoAnalise");
 
     if(!pergunta){
         mostrarToast("Digite a pergunta.");
         return;
     }
 
-    const p = pergunta.toLowerCase();
+    const p=pergunta.toLowerCase();
+    let assunto="Atendimento geral";
 
-    let assunto = "Atendimento geral";
+    if(contem(p,["valor","quanto vou receber","quanto recebo"])) assunto="💵 Valores";
+    else if(contem(p,["liberar","liberação","receber hoje","cai hoje"])) assunto="💰 Liberação";
+    else if(contem(p,["prazo","quando","quanto tempo","demora"])) assunto="⏳ Prazos";
+    else if(contem(p,["documento","documentação","mandar","enviar"])) assunto="📄 Documentação";
+    else if(contem(p,["protocolo","protocolado","andamento","novidade"])) assunto="📂 Andamento";
 
-    if(contem(p,["valor","quanto vou receber","quanto recebo"])){
-        assunto = "💵 Valores";
-    }else if(contem(p,["liberar","liberação","receber hoje","cai hoje"])){
-        assunto = "💰 Liberação";
-    }else if(contem(p,["prazo","quando","quanto tempo","demora"])){
-        assunto = "⏳ Prazos";
-    }else if(contem(p,["documento","documentação","mandar","enviar"])){
-        assunto = "📄 Documentação";
-    }else if(contem(p,["protocolo","protocolado","andamento","novidade"])){
-        assunto = "📂 Andamento";
-    }
-
-    box.innerHTML = `
-        <div class="answer-label">ASSUNTO IDENTIFICADO</div>
-        ${assunto}
-    `;
-
+    box.innerHTML=`<div class="answer-label">ASSUNTO IDENTIFICADO</div>${assunto}`;
     box.classList.add("show");
 }
 
-/* =========================================================
-   MONTAR MENSAGEM
-========================================================= */
-
 function montarMensagem(){
 
-    const nome = document.getElementById("msgNome").value.trim();
-    const noticia = document.getElementById("msgNoticia").value.trim();
-    const valor = document.getElementById("msgValor").value.trim();
+    const nome=document.getElementById("msgNome").value.trim();
+    const noticia=document.getElementById("msgNoticia").value.trim();
+    const valor=document.getElementById("msgValor").value.trim();
 
     if(!noticia){
         mostrarToast("Digite a notícia.");
         return;
     }
 
-    let texto = `Boa notícia, ${nome || "senhor(a)"}. ${noticia}`;
+    let texto=`Boa notícia, ${nome||"senhor(a)"}. ${noticia}`;
 
-    if(valor){
-        texto += ` O valor informado é de ${valor}.`;
-    }
+    if(valor)texto+=` O valor informado é de ${valor}.`;
 
-    texto += " Vou acompanhar as próximas etapas e te aviso assim que houver uma confirmação.";
+    texto+=" Vou acompanhar as próximas etapas e te aviso assim que houver uma confirmação.";
 
-    const box = document.getElementById("mensagemMontada");
-    box.textContent = texto;
+    const box=document.getElementById("mensagemMontada");
+    box.textContent=texto;
     box.classList.add("show");
 }
 
-/* =========================================================
-   ENVIO RÁPIDO
-========================================================= */
-
 function abrirEnvioRapido(){
 
-    const numero = document.getElementById("envioNumero").value.replace(/\D/g,"");
+    const numero=document.getElementById("envioNumero").value.replace(/\D/g,"");
 
-    if(numero.length < 10){
+    if(numero.length<10){
         mostrarToast("Digite DDD + número.");
         return;
     }
@@ -3908,64 +2929,41 @@ function abrirEnvioRapido(){
     window.open(`https://wa.me/55${numero}`,"_blank");
 }
 
-/* =========================================================
-   HISTÓRICO
-========================================================= */
-
 function renderHistorico(){
 
-    const box = document.getElementById("historicoLista");
-    if(!box) return;
+    const box=document.getElementById("historicoLista");
+    if(!box)return;
 
     if(!historico.length){
-        box.innerHTML = `<div class="empty">📋 Nenhum histórico ainda.</div>`;
+        box.innerHTML=`<div class="empty">📋 Nenhum histórico ainda.</div>`;
         return;
     }
 
-    box.innerHTML = historico.map((h,i)=>`
+    box.innerHTML=historico.map((h,i)=>`
         <div class="list-item">
-
-            <div class="list-name">
-                Pergunta
-            </div>
-
-            <div class="list-meta">
-                ${escaparHTML(h.pergunta)}
-            </div>
+            <div class="list-name">Pergunta</div>
+            <div class="list-meta">${escaparHTML(h.pergunta)}</div>
 
             <div style="height:10px"></div>
 
-            <div class="list-name">
-                Resposta
-            </div>
-
-            <div class="list-meta">
-                ${escaparHTML(h.resposta)}
-            </div>
+            <div class="list-name">Resposta</div>
+            <div class="list-meta">${escaparHTML(h.resposta)}</div>
 
             <div class="list-actions">
-                <button class="small-btn" onclick="copiarHistorico(${i})">
-                    📋 Copiar
-                </button>
+                <button class="small-btn" onclick="copiarHistorico(${i})">📋 Copiar</button>
             </div>
-
         </div>
     `).join("");
 }
 
 function copiarHistorico(index){
-
     navigator.clipboard.writeText(historico[index].resposta)
         .then(()=>mostrarToast("📋 Copiado."));
 }
 
-/* =========================================================
-   BACKUP
-========================================================= */
-
 function exportarBackup(){
 
-    const dados = {
+    const dados={
         contatos,
         chips,
         celulares,
@@ -3973,16 +2971,16 @@ function exportarBackup(){
         data:new Date().toISOString()
     };
 
-    const blob = new Blob(
+    const blob=new Blob(
         [JSON.stringify(dados,null,2)],
         {type:"application/json"}
     );
 
-    const url = URL.createObjectURL(blob);
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "backup-bot-bm3.json";
+    a.href=url;
+    a.download="backup-bot-bm3.json";
     a.click();
 
     URL.revokeObjectURL(url);
@@ -3992,33 +2990,22 @@ function exportarBackup(){
 
 function importarBackup(event){
 
-    const file = event.target.files[0];
+    const file=event.target.files[0];
 
-    if(!file) return;
+    if(!file)return;
 
-    const reader = new FileReader();
+    const reader=new FileReader();
 
-    reader.onload = e=>{
+    reader.onload=e=>{
 
         try{
 
-            const dados = JSON.parse(e.target.result);
+            const dados=JSON.parse(e.target.result);
 
-            if(Array.isArray(dados.contatos)){
-                contatos = dados.contatos;
-            }
-
-            if(Array.isArray(dados.chips)){
-                chips = dados.chips;
-            }
-
-            if(Array.isArray(dados.celulares)){
-                celulares = dados.celulares;
-            }
-
-            if(Array.isArray(dados.historico)){
-                historico = dados.historico;
-            }
+            if(Array.isArray(dados.contatos))contatos=dados.contatos;
+            if(Array.isArray(dados.chips))chips=dados.chips;
+            if(Array.isArray(dados.celulares))celulares=dados.celulares;
+            if(Array.isArray(dados.historico))historico=dados.historico;
 
             salvarDados();
             atualizarTudo();
@@ -4030,12 +3017,10 @@ function importarBackup(event){
             mostrarToast("Arquivo de backup inválido.");
 
         }
-
     };
 
     reader.readAsText(file);
-
-    event.target.value = "";
+    event.target.value="";
 }
 
 /* =========================================================
@@ -4045,81 +3030,103 @@ function importarBackup(event){
 function atualizarTudo(){
 
     atualizarResumo();
-
     renderContatos();
     renderFavoritos();
     renderFixados();
     renderRecentes();
-
     renderChips();
     renderCelulares();
-
     renderHistorico();
 
-    const tema = localStorage.getItem("temaBotBM3") || "light";
-    aplicarTema(tema);
+    aplicarTema(localStorage.getItem("temaBotBM3")||"light");
 }
 
 /* =========================================================
-   INICIALIZAÇÃO PREMIUM
+   SOM SUAVE DOS BOTÕES
+========================================================= */
+
+let audioContext=null;
+
+function somBotao(){
+
+    try{
+
+        if(!audioContext){
+            const AudioCtx=window.AudioContext||window.webkitAudioContext;
+            if(!AudioCtx)return;
+            audioContext=new AudioCtx();
+        }
+
+        if(audioContext.state==="suspended"){
+            audioContext.resume();
+        }
+
+        const oscillator=audioContext.createOscillator();
+        const gain=audioContext.createGain();
+
+        oscillator.type="sine";
+        oscillator.frequency.setValueAtTime(1250,audioContext.currentTime);
+
+        gain.gain.setValueAtTime(.055,audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            audioContext.currentTime+.045
+        );
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime+.045);
+
+    }catch(e){}
+}
+
+document.addEventListener("pointerdown",event=>{
+
+    const botao=event.target.closest("button");
+
+    if(!botao)return;
+
+    somBotao();
+
+},{passive:true});
+
+/* =========================================================
+   INICIALIZAÇÃO
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-    const tema = localStorage.getItem("temaBotBM3") || "light";
+    const tema=localStorage.getItem("temaBotBM3")||"light";
 
     aplicarTema(tema);
     atualizarTudo();
 
-    const loading = document.getElementById("loading");
-    const welcome = document.getElementById("welcome");
-    const app = document.querySelector(".app");
-
-    /*
-       1. Mostra o loading por um pequeno período.
-    */
+    const loading=document.getElementById("loading");
+    const welcome=document.getElementById("welcome");
+    const app=document.querySelector(".app");
 
     setTimeout(()=>{
 
-        loading.style.opacity = "0";
-        loading.style.visibility = "hidden";
-
-        /*
-           2. Depois do fade do loading,
-              entra a tela de boas-vindas.
-        */
+        loading.style.opacity="0";
+        loading.style.visibility="hidden";
 
         setTimeout(()=>{
 
-            loading.style.display = "none";
+            loading.style.display="none";
 
             welcome.classList.add("show");
-
-            /*
-               3. Mantém a mensagem de boas-vindas
-                  visível por um momento.
-            */
 
             setTimeout(()=>{
 
                 welcome.classList.remove("show");
                 welcome.classList.add("hide");
 
-                /*
-                   4. Painel principal aparece suavemente.
-                */
-
                 app.classList.add("ready");
 
-                /*
-                   5. Remove completamente a tela
-                      de boas-vindas depois da transição.
-                */
-
                 setTimeout(()=>{
-
-                    welcome.style.display = "none";
-
+                    welcome.style.display="none";
                 },700);
 
             },1600);
