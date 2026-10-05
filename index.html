@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#008c45">
+
 <title>🍀 BOT DO BM3 🍀</title>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 <style>
 :root{
@@ -2163,7 +2167,6 @@ textarea{
 
 </section>
 
-<!-- CONTATOS -->
 <!-- CONTATOS -->
 
 <section id="contatos" class="screen">
@@ -5612,7 +5615,347 @@ document.addEventListener("DOMContentLoaded",()=>{
     },1400);
 
 });
+/* =========================================================
+   📄 GERAR PDF - BOT DO BM3
+========================================================= */
 
+let pdfModeloArquivo = null;
+let pdfGeradoBytes = null;
+let pdfPreviewUrl = null;
+
+function selecionarPDFModelo(input) {
+    const arquivo = input.files && input.files[0];
+    const status = document.getElementById("pdfModeloStatus");
+
+    if (!arquivo) {
+        pdfModeloArquivo = null;
+        status.textContent = "📁 Nenhum PDF selecionado";
+        return;
+    }
+
+    if (arquivo.type !== "application/pdf") {
+        input.value = "";
+        pdfModeloArquivo = null;
+        status.textContent = "⚠️ Selecione um arquivo PDF.";
+        mostrarToast("O arquivo precisa ser PDF.");
+        return;
+    }
+
+    pdfModeloArquivo = arquivo;
+    pdfGeradoBytes = null;
+
+    status.textContent = "✅ Modelo selecionado: " + arquivo.name;
+
+    mostrarToast("PDF modelo selecionado.");
+}
+
+function obterDadosPDF() {
+    return {
+        nomePessoa: document.getElementById("pdfNomePessoa").value.trim(),
+        nomeAdvogado: document.getElementById("pdfNomeAdvogado").value.trim(),
+        valorProcesso: document.getElementById("pdfValorProcesso").value.trim(),
+        numeroProcesso: document.getElementById("pdfNumeroProcesso").value.trim(),
+        data: document.getElementById("pdfData").value,
+        outrosDados: document.getElementById("pdfOutrosDados").value.trim()
+    };
+}
+
+function formatarDataPDF(data) {
+    if (!data) return "";
+
+    const partes = data.split("-");
+
+    if (partes.length !== 3) return data;
+
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
+
+function normalizarCampoPDF(texto) {
+    return String(texto || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "");
+}
+
+function descobrirValorCampoPDF(nomeCampo, dados) {
+
+    const campo = normalizarCampoPDF(nomeCampo);
+
+    if (
+        campo.includes("nome") ||
+        campo.includes("pessoa") ||
+        campo.includes("cliente") ||
+        campo.includes("requerente") ||
+        campo.includes("autor") ||
+        campo.includes("parte")
+    ) {
+        return dados.nomePessoa;
+    }
+
+    if (
+        campo.includes("advogado") ||
+        campo.includes("responsavel")
+    ) {
+        return dados.nomeAdvogado;
+    }
+
+    if (
+        campo.includes("valor") ||
+        campo.includes("quantia")
+    ) {
+        return dados.valorProcesso;
+    }
+
+    if (
+        campo.includes("processo") ||
+        campo.includes("numeroprocesso") ||
+        campo.includes("numprocesso")
+    ) {
+        return dados.numeroProcesso;
+    }
+
+    if (campo.includes("data")) {
+        return formatarDataPDF(dados.data);
+    }
+
+    if (
+        campo.includes("outro") ||
+        campo.includes("observacao") ||
+        campo.includes("observacoes") ||
+        campo.includes("informacao") ||
+        campo.includes("informacoes") ||
+        campo.includes("descricao")
+    ) {
+        return dados.outrosDados;
+    }
+
+    return null;
+}
+
+async function preencherCamposPDF(pdfDoc, dados) {
+
+    try {
+
+        const form = pdfDoc.getForm();
+        const campos = form.getFields();
+
+        let preenchidos = 0;
+
+        campos.forEach(campo => {
+
+            const nome = campo.getName();
+
+            const valor = descobrirValorCampoPDF(
+                nome,
+                dados
+            );
+
+            if (valor === null || valor === "") {
+                return;
+            }
+
+            try {
+
+                if (typeof campo.setText === "function") {
+
+                    campo.setText(String(valor));
+
+                    preenchidos++;
+                }
+
+            } catch (e) {}
+        });
+
+        try {
+            form.updateFieldAppearances();
+        } catch (e) {}
+
+        return preenchidos;
+
+    } catch (e) {
+
+        return 0;
+    }
+}
+
+async function gerarPDFBM3() {
+
+    if (!pdfModeloArquivo) {
+
+        mostrarToast("Selecione primeiro um PDF modelo.");
+
+        return;
+    }
+
+    if (typeof PDFLib === "undefined") {
+
+        mostrarToast("Biblioteca PDF não carregada.");
+
+        return;
+    }
+
+    const dados = obterDadosPDF();
+
+    try {
+
+        mostrarToast("Preparando PDF...");
+
+        const bytes =
+            await pdfModeloArquivo.arrayBuffer();
+
+        const pdfDoc =
+            await PDFLib.PDFDocument.load(bytes);
+
+        const preenchidos =
+            await preencherCamposPDF(
+                pdfDoc,
+                dados
+            );
+
+        pdfGeradoBytes =
+            await pdfDoc.save();
+
+        mostrarPreviewPDF(pdfGeradoBytes);
+
+        if (preenchidos > 0) {
+
+            mostrarToast(
+                `PDF gerado. ${preenchidos} campo(s) preenchido(s).`
+            );
+
+        } else {
+
+            mostrarToast(
+                "PDF carregado. Este modelo não possui campos preenchíveis reconhecidos."
+            );
+        }
+
+    } catch (erro) {
+
+        console.error("Erro ao gerar PDF:", erro);
+
+        mostrarToast(
+            "Não foi possível processar este PDF."
+        );
+    }
+}
+
+async function visualizarAlteracoesPDF() {
+
+    if (!pdfModeloArquivo) {
+
+        mostrarToast(
+            "Selecione primeiro um PDF modelo."
+        );
+
+        return;
+    }
+
+    await gerarPDFBM3();
+}
+
+function mostrarPreviewPDF(bytes) {
+
+    const box =
+        document.getElementById("pdfPreviewBox");
+
+    const iframe =
+        document.getElementById("pdfPreview");
+
+    if (pdfPreviewUrl) {
+        URL.revokeObjectURL(pdfPreviewUrl);
+    }
+
+    const blob =
+        new Blob(
+            [bytes],
+            { type: "application/pdf" }
+        );
+
+    pdfPreviewUrl =
+        URL.createObjectURL(blob);
+
+    iframe.src =
+        pdfPreviewUrl;
+
+    box.style.display =
+        "block";
+
+    setTimeout(() => {
+
+        box.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }, 100);
+}
+
+async function baixarPDFBM3() {
+
+    if (!pdfGeradoBytes) {
+
+        if (pdfModeloArquivo) {
+
+            await gerarPDFBM3();
+
+        } else {
+
+            mostrarToast(
+                "Gere o PDF primeiro."
+            );
+
+            return;
+        }
+    }
+
+    if (!pdfGeradoBytes) return;
+
+    const nome =
+        document
+            .getElementById("pdfNomePessoa")
+            .value
+            .trim();
+
+    const nomeSeguro =
+        (nome || "documento")
+            .replace(/[\\/:*?"<>|]/g, "")
+            .replace(/\s+/g, "_");
+
+    const blob =
+        new Blob(
+            [pdfGeradoBytes],
+            { type: "application/pdf" }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        `${nomeSeguro}_documento.pdf`;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    setTimeout(() => {
+
+        URL.revokeObjectURL(url);
+
+    }, 1500);
+
+    mostrarToast(
+        "⬇️ PDF pronto para salvar."
+    );
+}
 </script>
 
 </body>
