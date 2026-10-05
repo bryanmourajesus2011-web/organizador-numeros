@@ -2044,7 +2044,126 @@ textarea{
     </div>
 
 </section>
+<!-- GERAR PDF -->
+<section id="gerarPDF" class="screen">
 
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+    <div class="page-title">📄 Gerar PDF</div>
+
+    <div class="page-sub">
+        Preencha os dados e gere uma nova versão do seu PDF modelo.
+    </div>
+
+    <div class="card">
+
+        <div class="field">
+            <label>📁 SELECIONAR PDF MODELO</label>
+
+            <input
+                id="pdfModelo"
+                type="file"
+                accept="application/pdf"
+                onchange="selecionarPDFModelo(this)"
+            >
+
+            <div
+                id="pdfModeloStatus"
+                style="
+                    margin-top:8px;
+                    padding:10px;
+                    border-radius:12px;
+                    background:rgba(0,140,69,.08);
+                    color:var(--verde);
+                    font-size:13px;
+                    font-weight:800;
+                "
+            >
+                📁 Nenhum PDF selecionado
+            </div>
+        </div>
+
+        <div class="field">
+            <label>👤 NOME DA PESSOA</label>
+            <input id="pdfNomePessoa" type="text" placeholder="Nome completo">
+        </div>
+
+        <div class="field">
+            <label>⚖️ NOME DO ADVOGADO</label>
+            <input id="pdfNomeAdvogado" type="text" placeholder="Nome do advogado">
+        </div>
+
+        <div class="field">
+            <label>💰 VALOR DO PROCESSO</label>
+            <input id="pdfValorProcesso" type="text" placeholder="Ex.: R$ 50.000,00">
+        </div>
+
+        <div class="field">
+            <label>🔢 NÚMERO DO PROCESSO</label>
+            <input id="pdfNumeroProcesso" type="text" placeholder="Número do processo">
+        </div>
+
+        <div class="field">
+            <label>📅 DATA</label>
+            <input id="pdfData" type="date">
+        </div>
+
+        <div class="field">
+            <label>✏️ OUTROS DADOS</label>
+            <textarea
+                id="pdfOutrosDados"
+                placeholder="Digite outras informações..."
+            ></textarea>
+        </div>
+
+        <button class="secondary" onclick="visualizarAlteracoesPDF()">
+            👁️ VISUALIZAR ALTERAÇÕES
+        </button>
+
+        <div style="height:10px"></div>
+
+        <button class="primary" onclick="gerarPDFBM3()">
+            📄 GERAR PDF
+        </button>
+
+        <div style="height:10px"></div>
+
+        <button class="secondary" onclick="baixarPDFBM3()">
+            ⬇️ BAIXAR PDF
+        </button>
+
+    </div>
+
+    <div
+        id="pdfPreviewBox"
+        class="card"
+        style="display:none; margin-top:16px;"
+    >
+
+        <div class="card-title">👁️ VISUALIZAÇÃO</div>
+
+        <div class="card-sub">
+            Confira o documento antes de enviar.
+        </div>
+
+        <div style="height:10px"></div>
+
+        <iframe
+            id="pdfPreview"
+            style="
+                width:100%;
+                height:600px;
+                border:1px solid var(--borda);
+                border-radius:14px;
+                background:#fff;
+            "
+        ></iframe>
+
+    </div>
+
+</section>
+
+<!-- CONTATOS -->
 <!-- CONTATOS -->
 
 <section id="contatos" class="screen">
