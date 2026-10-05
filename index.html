@@ -2035,19 +2035,52 @@ textarea{
 
     <div class="advisor-grid">
 
-        <button class="advisor-btn" onclick="navegar('analisar')">🧠<br>ANALISAR PERGUNTA</button>
-        <button class="advisor-btn" onclick="navegar('liberacao')">💰<br>LIBERAÇÃO</button>
-        <button class="advisor-btn" onclick="navegar('andamento')">📂<br>ANDAMENTO</button>
-        <button class="advisor-btn" onclick="navegar('prazos')">⏳<br>PRAZOS</button>
-        <button class="advisor-btn" onclick="navegar('valores')">💵<br>VALORES</button>
-        <button class="advisor-btn" onclick="navegar('documentacao')">📄<br>DOCUMENTAÇÃO</button>
-        <button class="advisor-btn" onclick="navegar('favoritasRespostas')">⭐<br>FAVORITAS</button>
-        <button class="advisor-btn" onclick="navegar('montarMensagem')">📝<br>MONTAR MENSAGEM</button>
-        <button class="advisor-btn" onclick="navegar('historico')">📋<br>HISTÓRICO</button>
+        <button class="advisor-btn" onclick="navegar('analisar')">
+            🧠<br>ANALISAR PERGUNTA
+        </button>
+
+        <button class="advisor-btn" onclick="navegar('liberacao')">
+            💰<br>LIBERAÇÃO
+        </button>
+
+        <button class="advisor-btn" onclick="navegar('andamento')">
+            📂<br>ANDAMENTO
+        </button>
+
+        <button class="advisor-btn" onclick="navegar('prazos')">
+            ⏳<br>PRAZOS
+        </button>
+
+        <button class="advisor-btn" onclick="navegar('valores')">
+            💵<br>VALORES
+        </button>
+
+        <button class="advisor-btn" onclick="navegar('documentacao')">
+            📄<br>DOCUMENTAÇÃO
+        </button>
+
+        <button class="advisor-btn" onclick="navegar('favoritasRespostas')">
+            ⭐<br>FAVORITAS
+        </button>
+
+        <button class="advisor-btn" onclick="navegar('montarMensagem')">
+            📝<br>MONTAR MENSAGEM
+        </button>
+
+        <button class="advisor-btn" onclick="navegar('historico')">
+            📋<br>HISTÓRICO
+        </button>
+
+        <!-- GERAR PDF -->
+        <button class="advisor-btn" onclick="navegar('gerarPDF')">
+            📄<br>GERAR PDF
+        </button>
 
     </div>
 
 </section>
+
+
 <!-- GERAR PDF -->
 <section id="gerarPDF" class="screen">
 
@@ -2061,7 +2094,9 @@ textarea{
 
     <div class="card">
 
+        <!-- PDF MODELO -->
         <div class="field">
+
             <label>📁 SELECIONAR PDF MODELO</label>
 
             <input
@@ -2085,66 +2120,137 @@ textarea{
             >
                 📁 Nenhum PDF selecionado
             </div>
+
         </div>
 
+
+        <!-- NOME DA PESSOA -->
         <div class="field">
+
             <label>👤 NOME DA PESSOA</label>
-            <input id="pdfNomePessoa" type="text" placeholder="Nome completo">
+
+            <input
+                id="pdfNomePessoa"
+                type="text"
+                placeholder="Nome completo"
+            >
+
         </div>
 
+
+        <!-- NOME DO ADVOGADO -->
         <div class="field">
+
             <label>⚖️ NOME DO ADVOGADO</label>
-            <input id="pdfNomeAdvogado" type="text" placeholder="Nome do advogado">
+
+            <input
+                id="pdfNomeAdvogado"
+                type="text"
+                placeholder="Nome do advogado"
+            >
+
         </div>
 
+
+        <!-- VALOR -->
         <div class="field">
+
             <label>💰 VALOR DO PROCESSO</label>
-            <input id="pdfValorProcesso" type="text" placeholder="Ex.: R$ 50.000,00">
+
+            <input
+                id="pdfValorProcesso"
+                type="text"
+                placeholder="Ex.: R$ 50.000,00"
+            >
+
         </div>
 
+
+        <!-- NÚMERO DO PROCESSO -->
         <div class="field">
+
             <label>🔢 NÚMERO DO PROCESSO</label>
-            <input id="pdfNumeroProcesso" type="text" placeholder="Número do processo">
+
+            <input
+                id="pdfNumeroProcesso"
+                type="text"
+                placeholder="Número do processo"
+            >
+
         </div>
 
+
+        <!-- DATA -->
         <div class="field">
+
             <label>📅 DATA</label>
-            <input id="pdfData" type="date">
+
+            <input
+                id="pdfData"
+                type="date"
+            >
+
         </div>
 
+
+        <!-- OUTROS DADOS -->
         <div class="field">
+
             <label>✏️ OUTROS DADOS</label>
+
             <textarea
                 id="pdfOutrosDados"
                 placeholder="Digite outras informações..."
             ></textarea>
+
         </div>
 
-        <button class="secondary" onclick="visualizarAlteracoesPDF()">
+
+        <!-- VISUALIZAR -->
+        <button
+            class="secondary"
+            onclick="visualizarAlteracoesPDF()"
+        >
             👁️ VISUALIZAR ALTERAÇÕES
         </button>
 
+
         <div style="height:10px"></div>
 
-        <button class="primary" onclick="gerarPDFBM3()">
+
+        <!-- GERAR -->
+        <button
+            class="primary"
+            onclick="gerarPDFBM3()"
+        >
             📄 GERAR PDF
         </button>
 
+
         <div style="height:10px"></div>
 
-        <button class="secondary" onclick="baixarPDFBM3()">
+
+        <!-- BAIXAR -->
+        <button
+            class="secondary"
+            onclick="baixarPDFBM3()"
+        >
             ⬇️ BAIXAR PDF
         </button>
 
     </div>
 
+
+    <!-- PREVISUALIZAÇÃO -->
     <div
         id="pdfPreviewBox"
         class="card"
         style="display:none; margin-top:16px;"
     >
 
-        <div class="card-title">👁️ VISUALIZAÇÃO</div>
+        <div class="card-title">
+            👁️ VISUALIZAÇÃO
+        </div>
 
         <div class="card-sub">
             Confira o documento antes de enviar.
