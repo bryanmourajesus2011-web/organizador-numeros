@@ -2038,7 +2038,9 @@ textarea{
 </style>
 
 
-<!-- ADVOGADO -->
+<!-- ========================================================= -->
+<!-- ⚖️ ADVOGADO -->
+<!-- ========================================================= -->
 
 <section id="advogado" class="screen">
 
@@ -2051,13 +2053,22 @@ textarea{
     </div>
 
 
-    <!-- ===================================== -->
-    <!-- GERAR RESPOSTA — EM MANUTENÇÃO -->
-    <!-- ===================================== -->
+    <!-- ===================================================== -->
+    <!-- 🤖 GERAR RESPOSTA — EM MANUTENÇÃO -->
+    <!-- ===================================================== -->
 
-    <div class="ai-box advisor-main-maintenance">
+    <div class="ai-box" style="opacity:.70;">
 
-        <div class="maintenance-title">
+        <div style="
+            text-align:center;
+            margin-bottom:15px;
+            padding:10px;
+            border-radius:10px;
+            background:rgba(163,106,0,.10);
+            color:#a36a00;
+            font-weight:900;
+            font-size:12px;
+        ">
             🔧 GERAR RESPOSTA — EM MANUTENÇÃO
         </div>
 
@@ -2075,9 +2086,9 @@ textarea{
         <button
             class="primary"
             disabled
-            style="opacity:.6;cursor:not-allowed;"
+            style="opacity:.55;cursor:not-allowed;"
         >
-            🤖 GERAR RESPOSTA — EM MANUTENÇÃO
+            🤖 GERAR RESPOSTA
         </button>
 
     </div>
@@ -2086,16 +2097,17 @@ textarea{
     <div style="height:16px"></div>
 
 
-    <!-- ===================================== -->
-    <!-- OPÇÕES DO ADVOGADO -->
-    <!-- ===================================== -->
+    <!-- ===================================================== -->
+    <!-- MENU DO ADVOGADO -->
+    <!-- GERAR PDF É O PRIMEIRO E ÚNICO DISPONÍVEL -->
+    <!-- ===================================================== -->
 
     <div class="advisor-grid">
 
 
-        <!-- ================================= -->
+        <!-- ================================================= -->
         <!-- 📄 GERAR PDF — DISPONÍVEL -->
-        <!-- ================================= -->
+        <!-- ================================================= -->
 
         <button
             class="advisor-btn advisor-pdf"
@@ -2107,9 +2119,9 @@ textarea{
         </button>
 
 
-        <!-- ================================= -->
-        <!-- 🔧 EM MANUTENÇÃO -->
-        <!-- ================================= -->
+        <!-- ================================================= -->
+        <!-- 🔧 ANALISAR PERGUNTA — MANUTENÇÃO -->
+        <!-- ================================================= -->
 
         <button
             class="advisor-btn advisor-maintenance"
@@ -2121,6 +2133,10 @@ textarea{
         </button>
 
 
+        <!-- ================================================= -->
+        <!-- 🔧 LIBERAÇÃO — MANUTENÇÃO -->
+        <!-- ================================================= -->
+
         <button
             class="advisor-btn advisor-maintenance"
             onclick="opcaoAdvogadoManutencao('LIBERAÇÃO')"
@@ -2130,6 +2146,10 @@ textarea{
             <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
+
+        <!-- ================================================= -->
+        <!-- 🔧 ANDAMENTO — MANUTENÇÃO -->
+        <!-- ================================================= -->
 
         <button
             class="advisor-btn advisor-maintenance"
@@ -2141,6 +2161,10 @@ textarea{
         </button>
 
 
+        <!-- ================================================= -->
+        <!-- 🔧 PRAZOS — MANUTENÇÃO -->
+        <!-- ================================================= -->
+
         <button
             class="advisor-btn advisor-maintenance"
             onclick="opcaoAdvogadoManutencao('PRAZOS')"
@@ -2150,6 +2174,10 @@ textarea{
             <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
+
+        <!-- ================================================= -->
+        <!-- 🔧 VALORES — MANUTENÇÃO -->
+        <!-- ================================================= -->
 
         <button
             class="advisor-btn advisor-maintenance"
@@ -2161,6 +2189,10 @@ textarea{
         </button>
 
 
+        <!-- ================================================= -->
+        <!-- 🔧 DOCUMENTAÇÃO — MANUTENÇÃO -->
+        <!-- ================================================= -->
+
         <button
             class="advisor-btn advisor-maintenance"
             onclick="opcaoAdvogadoManutencao('DOCUMENTAÇÃO')"
@@ -2170,6 +2202,10 @@ textarea{
             <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
+
+        <!-- ================================================= -->
+        <!-- 🔧 FAVORITAS — MANUTENÇÃO -->
+        <!-- ================================================= -->
 
         <button
             class="advisor-btn advisor-maintenance"
@@ -2181,6 +2217,10 @@ textarea{
         </button>
 
 
+        <!-- ================================================= -->
+        <!-- 🔧 MONTAR MENSAGEM — MANUTENÇÃO -->
+        <!-- ================================================= -->
+
         <button
             class="advisor-btn advisor-maintenance"
             onclick="opcaoAdvogadoManutencao('MONTAR MENSAGEM')"
@@ -2190,6 +2230,10 @@ textarea{
             <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
+
+        <!-- ================================================= -->
+        <!-- 🔧 HISTÓRICO — MANUTENÇÃO -->
+        <!-- ================================================= -->
 
         <button
             class="advisor-btn advisor-maintenance"
@@ -2206,25 +2250,347 @@ textarea{
 
 
 <!-- ========================================================= -->
-<!-- ⚖️ ADVOGADO — FIM -->
+<!-- 📄 GERAR PDF -->
 <!-- ========================================================= -->
 
+<section id="gerarPDF" class="screen">
+
+    <button class="back" onclick="voltar()">← Voltar</button>
+
+    <div class="page-title">📄 Gerar PDF</div>
+
+    <div class="page-sub">
+        Crie um documento de rascunho preenchendo os dados abaixo.
+    </div>
+
+
+    <div class="pdf-builder">
+
+
+        <!-- AVISO -->
+
+        <div class="pdf-warning">
+
+            ⚠️ <b>RASCUNHO / SEM VALIDADE OFICIAL.</b><br>
+
+            O PDF gerado é um novo documento para conferência e organização.
+            Ele não reproduz selos, assinaturas, brasões ou outros elementos
+            de autenticação de documentos oficiais.
+
+            A marca <b>CÓPIA NÃO ORIGINAL</b> será inserida no documento gerado.
+
+        </div>
+
+
+        <!-- MODELO -->
+
+        <div class="field">
+
+            <label>📁 PDF MODELO (APENAS REFERÊNCIA)</label>
+
+            <input
+                id="pdfModelo"
+                type="file"
+                accept="application/pdf"
+                onchange="selecionarModeloPDF(event)"
+            >
+
+            <div
+                id="pdfModeloNome"
+                class="pdf-model-name"
+            >
+                Nenhum modelo selecionado.
+            </div>
+
+        </div>
+
+
+        <!-- NOME -->
+
+        <div class="field">
+
+            <label>NOME</label>
+
+            <input
+                id="pdfNome"
+                type="text"
+                placeholder="Nome completo"
+            >
+
+        </div>
+
+
+        <!-- ADVOGADO -->
+
+        <div class="field">
+
+            <label>ADVOGADO</label>
+
+            <input
+                id="pdfAdvogado"
+                type="text"
+                placeholder="Nome do advogado"
+            >
+
+        </div>
+
+
+        <!-- VALOR -->
+
+        <div class="field">
+
+            <label>VALOR</label>
+
+            <input
+                id="pdfValor"
+                type="text"
+                placeholder="Ex.: R$ 100.000,00"
+            >
+
+        </div>
+
+
+        <!-- PROCESSO -->
+
+        <div class="field">
+
+            <label>PROCESSO</label>
+
+            <input
+                id="pdfProcesso"
+                type="text"
+                placeholder="Número do processo"
+            >
+
+        </div>
+
+
+        <!-- DATA -->
+
+        <div class="field">
+
+            <label>DATA</label>
+
+            <input
+                id="pdfData"
+                type="date"
+            >
+
+        </div>
+
+
+        <!-- OUTROS DADOS -->
+
+        <div class="field">
+
+            <label>OUTROS DADOS</label>
+
+            <textarea
+                id="pdfOutros"
+                placeholder="Informações adicionais..."
+                style="min-height:110px"
+            ></textarea>
+
+        </div>
+
+
+        <!-- AÇÕES -->
+
+        <div class="pdf-actions">
+
+            <button
+                class="secondary"
+                onclick="visualizarPDF()"
+            >
+                👁️ VISUALIZAR
+            </button>
+
+            <button
+                class="primary"
+                onclick="gerarPDFSeguro()"
+            >
+                📄 GERAR PDF
+            </button>
+
+        </div>
+
+
+        <!-- PRÉ-VISUALIZAÇÃO -->
+
+        <div
+            id="pdfPreview"
+            class="pdf-preview"
+        >
+
+            <div class="pdf-preview-watermark">
+                CÓPIA NÃO ORIGINAL
+            </div>
+
+            <h3>
+                DOCUMENTO DE RASCUNHO
+            </h3>
+
+            <div class="pdf-subtitle">
+                Sem validade oficial • criado pelo BOT DO BM3
+            </div>
+
+
+            <div class="pdf-preview-row">
+
+                <b>Nome</b>
+
+                <span id="previewNome">
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="pdf-preview-row">
+
+                <b>Advogado</b>
+
+                <span id="previewAdvogado">
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="pdf-preview-row">
+
+                <b>Valor</b>
+
+                <span id="previewValor">
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="pdf-preview-row">
+
+                <b>Processo</b>
+
+                <span id="previewProcesso">
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="pdf-preview-row">
+
+                <b>Data</b>
+
+                <span id="previewData">
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="pdf-preview-row">
+
+                <b>Outros dados</b>
+
+                <span id="previewOutros">
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="pdf-preview-footer">
+
+                CÓPIA NÃO ORIGINAL • SEM VALIDADE OFICIAL
+
+            </div>
+
+        </div>
+
+
+        <!-- DOWNLOAD -->
+
+        <div
+            id="pdfDownloadBox"
+            style="display:none;margin-top:10px"
+        >
+
+            <button
+                class="primary"
+                onclick="baixarPDFGerado()"
+            >
+                ⬇️ BAIXAR PDF
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================= -->
+<!-- CSS ESPECÍFICO DO NOVO MENU DO ADVOGADO -->
+<!-- ========================================================= -->
+
+<style>
+
+.advisor-btn{
+    position:relative;
+}
+
+.advisor-maintenance{
+    opacity:.72;
+    filter:saturate(.65);
+    cursor:pointer;
+}
+
+.advisor-maintenance small,
+.advisor-pdf small{
+    display:block;
+    margin-top:7px;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.4px;
+}
+
+.advisor-maintenance small{
+    color:#a36a00;
+}
+
+.advisor-pdf{
+    border:2px solid #168a45;
+    box-shadow:0 8px 20px rgba(22,138,69,.16);
+}
+
+.advisor-pdf small{
+    color:#168a45;
+}
+
+.advisor-maintenance:active{
+    transform:scale(.97);
+}
+
+</style>
+
+
+<!-- ========================================================= -->
+<!-- FUNÇÃO DAS OPÇÕES EM MANUTENÇÃO -->
+<!-- ========================================================= -->
 
 <script>
-
-/* ========================================= */
-/* OPÇÕES DO ADVOGADO EM MANUTENÇÃO */
-/* ========================================= */
 
 function opcaoAdvogadoManutencao(nome){
 
     if(typeof mostrarToast === "function"){
 
-        mostrarToast(`🔧 ${nome} está em manutenção.`);
+        mostrarToast("🔧 " + nome + " está em manutenção.");
 
     }else{
 
-        alert(`🔧 ${nome} está em manutenção.`);
+        alert("🔧 " + nome + " está em manutenção.");
 
     }
 
