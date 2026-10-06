@@ -1973,293 +1973,247 @@ textarea{
 </section>
 
 <!-- ADVOGADO -->
-
 <section id="advogado" class="screen">
-
     <button class="back" onclick="voltar()">← Voltar</button>
-
     <div class="page-title">⚖️ Advogado</div>
-
     <div class="page-sub">
         Gere respostas profissionais a partir da pergunta do cliente.
     </div>
-
     <div class="ai-box">
-
         <div class="field">
-
             <label>PERGUNTA DO CLIENTE</label>
-
             <textarea
                 id="perguntaCliente"
                 placeholder="Cole aqui a pergunta que o cliente enviou..."
             ></textarea>
-
         </div>
-
         <button class="primary" onclick="gerarResposta()">
             🤖 GERAR RESPOSTA
         </button>
-
         <div id="gerando" class="generating">
-
             <div class="mini-loader"></div>
-
             Gerando resposta...
-
         </div>
-
         <div id="respostaBox" class="answer-box">
-
-            <div class="answer-label">RESPOSTA GERADA</div>
-
+            <div class="answer-label">
+                RESPOSTA GERADA
+            </div>
             <div id="respostaTexto"></div>
-
         </div>
-
         <div id="responseTools" class="response-tools">
-
             <button class="secondary" onclick="copiarResposta()">
                 📋 Copiar
             </button>
-
             <button class="primary" onclick="abrirWhatsAppResposta()">
                 💬 WhatsApp
             </button>
-
         </div>
-
     </div>
-
     <div style="height:16px"></div>
-
     <div class="advisor-grid">
-
-        <button class="advisor-btn" onclick="navegar('analisar')">
+        <button class="advisor-btn"
+                onclick="navegar('analisar')">
             🧠<br>ANALISAR PERGUNTA
         </button>
-
-        <button class="advisor-btn" onclick="navegar('liberacao')">
+        <button class="advisor-btn"
+                onclick="navegar('liberacao')">
             💰<br>LIBERAÇÃO
         </button>
-
-        <button class="advisor-btn" onclick="navegar('andamento')">
+        <button class="advisor-btn"
+                onclick="navegar('andamento')">
             📂<br>ANDAMENTO
         </button>
-
-        <button class="advisor-btn" onclick="navegar('prazos')">
+        <button class="advisor-btn"
+                onclick="navegar('prazos')">
             ⏳<br>PRAZOS
         </button>
-
-        <button class="advisor-btn" onclick="navegar('valores')">
+        <button class="advisor-btn"
+                onclick="navegar('valores')">
             💵<br>VALORES
         </button>
-
-        <button class="advisor-btn" onclick="navegar('documentacao')">
+        <button class="advisor-btn"
+                onclick="navegar('documentacao')">
             📄<br>DOCUMENTAÇÃO
         </button>
-
-        <button class="advisor-btn" onclick="navegar('favoritasRespostas')">
+        <button class="advisor-btn"
+                onclick="navegar('favoritasRespostas')">
             ⭐<br>FAVORITAS
         </button>
-
-        <button class="advisor-btn" onclick="navegar('montarMensagem')">
+        <button class="advisor-btn"
+                onclick="navegar('montarMensagem')">
             📝<br>MONTAR MENSAGEM
         </button>
-
-        <button class="advisor-btn" onclick="navegar('historico')">
+        <button class="advisor-btn"
+                onclick="navegar('historico')">
             📋<br>HISTÓRICO
         </button>
-
-        <button class="advisor-btn" onclick="navegar('gerarPDF')">
+        <!-- NOVA OPÇÃO -->
+        <button class="advisor-btn"
+                onclick="navegar('gerarPDF')">
             📄<br>GERAR PDF
         </button>
-
     </div>
-
 </section>
-
-
 <!-- GERAR PDF -->
-
 <section id="gerarPDF" class="screen">
-
-    <button class="back" onclick="voltar()">← Voltar</button>
-
-    <div class="page-title">📄 Gerar PDF</div>
-
-    <div class="page-sub">
-        Preencha os dados e gere uma nova versão do seu PDF modelo.
+    <button class="back" onclick="voltar()">
+        ← Voltar
+    </button>
+    <div class="page-title">
+        📄 Gerar PDF
     </div>
-
-    <div class="card">
-
+    <div class="page-sub">
+        Crie um documento de rascunho preenchendo os dados abaixo.
+    </div>
+    <div class="pdf-builder">
+        <div class="pdf-warning">
+            ⚠️ <b>RASCUNHO / SEM VALIDADE OFICIAL.</b><br>
+            O PDF gerado é um novo documento para
+            conferência e organização.
+            A marca
+            <b>CÓPIA NÃO ORIGINAL</b>
+            será inserida no documento gerado.
+        </div>
         <div class="field">
-
-            <label>📁 SELECIONAR PDF MODELO</label>
-
+            <label>
+                📁 PDF MODELO (APENAS REFERÊNCIA)
+            </label>
             <input
                 id="pdfModelo"
                 type="file"
                 accept="application/pdf"
-                onchange="selecionarPDFModelo(this)"
+                onchange="selecionarModeloPDF(event)"
             >
-
             <div
-                id="pdfModeloStatus"
-                style="
-                    margin-top:8px;
-                    padding:10px;
-                    border-radius:12px;
-                    background:rgba(0,140,69,.08);
-                    color:var(--verde);
-                    font-size:13px;
-                    font-weight:800;
-                "
-            >
-                📁 Nenhum PDF selecionado
+                id="pdfModeloNome"
+                class="pdf-model-name">
+                Nenhum modelo selecionado.
             </div>
-
         </div>
-
-
         <div class="field">
-
-            <label>👤 NOME DA PESSOA</label>
-
+            <label>NOME</label>
             <input
-                id="pdfNomePessoa"
+                id="pdfNome"
                 type="text"
                 placeholder="Nome completo"
             >
-
         </div>
-
-
         <div class="field">
-
-            <label>⚖️ NOME DO ADVOGADO</label>
-
+            <label>ADVOGADO</label>
             <input
-                id="pdfNomeAdvogado"
+                id="pdfAdvogado"
                 type="text"
                 placeholder="Nome do advogado"
             >
-
         </div>
-
-
         <div class="field">
-
-            <label>💰 VALOR DO PROCESSO</label>
-
+            <label>VALOR</label>
             <input
-                id="pdfValorProcesso"
+                id="pdfValor"
                 type="text"
-                placeholder="Ex.: R$ 50.000,00"
+                placeholder="Ex.: R$ 100.000,00"
             >
-
         </div>
-
-
         <div class="field">
-
-            <label>🔢 NÚMERO DO PROCESSO</label>
-
+            <label>PROCESSO</label>
             <input
-                id="pdfNumeroProcesso"
+                id="pdfProcesso"
                 type="text"
                 placeholder="Número do processo"
             >
-
         </div>
-
-
         <div class="field">
-
-            <label>📅 DATA</label>
-
+            <label>DATA</label>
             <input
                 id="pdfData"
                 type="date"
             >
-
         </div>
-
-
         <div class="field">
-
-            <label>✏️ OUTROS DADOS</label>
-
+            <label>OUTROS DADOS</label>
             <textarea
-                id="pdfOutrosDados"
-                placeholder="Digite outras informações..."
+                id="pdfOutros"
+                placeholder="Informações adicionais..."
+                style="min-height:110px"
             ></textarea>
-
         </div>
-
-
-        <button
-            class="secondary"
-            onclick="visualizarAlteracoesPDF()"
-        >
-            👁️ VISUALIZAR ALTERAÇÕES
-        </button>
-
-
-        <div style="height:10px"></div>
-
-
-        <button
-            class="primary"
-            onclick="gerarPDFBM3()"
-        >
-            📄 GERAR PDF
-        </button>
-
-
-        <div style="height:10px"></div>
-
-
-        <button
-            class="secondary"
-            onclick="baixarPDFBM3()"
-        >
-            ⬇️ BAIXAR PDF
-        </button>
-
-    </div>
-
-
-    <div
-        id="pdfPreviewBox"
-        class="card"
-        style="display:none; margin-top:16px;"
-    >
-
-        <div class="card-title">
-            👁️ VISUALIZAÇÃO
+        <div class="pdf-actions">
+            <button
+                class="secondary"
+                onclick="visualizarPDF()">
+                👁️ VISUALIZAR
+            </button>
+            <button
+                class="primary"
+                onclick="gerarPDFSeguro()">
+                📄 GERAR PDF
+            </button>
         </div>
-
-        <div class="card-sub">
-            Confira o documento antes de enviar.
-        </div>
-
-        <div style="height:10px"></div>
-
-        <iframe
+        <!-- PRÉVIA -->
+        <div
             id="pdfPreview"
-            style="
-                width:100%;
-                height:600px;
-                border:1px solid var(--borda);
-                border-radius:14px;
-                background:#fff;
-            "
-        ></iframe>
-
+            class="pdf-preview">
+            <div class="pdf-preview-watermark">
+                CÓPIA NÃO ORIGINAL
+            </div>
+            <h3>
+                DOCUMENTO DE RASCUNHO
+            </h3>
+            <div class="pdf-subtitle">
+                Sem validade oficial
+            </div>
+            <div class="pdf-preview-row">
+                <b>Nome</b>
+                <span id="previewNome">
+                    —
+                </span>
+            </div>
+            <div class="pdf-preview-row">
+                <b>Advogado</b>
+                <span id="previewAdvogado">
+                    —
+                </span>
+            </div>
+            <div class="pdf-preview-row">
+                <b>Valor</b>
+                <span id="previewValor">
+                    —
+                </span>
+            </div>
+            <div class="pdf-preview-row">
+                <b>Processo</b>
+                <span id="previewProcesso">
+                    —
+                </span>
+            </div>
+            <div class="pdf-preview-row">
+                <b>Data</b>
+                <span id="previewData">
+                    —
+                </span>
+            </div>
+            <div class="pdf-preview-row">
+                <b>Outros dados</b>
+                <span id="previewOutros">
+                    —
+                </span>
+            </div>
+            <div class="pdf-preview-footer">
+                CÓPIA NÃO ORIGINAL
+                • SEM VALIDADE OFICIAL
+            </div>
+        </div>
+        <!-- DOWNLOAD -->
+        <div
+            id="pdfDownloadBox"
+            style="display:none;margin-top:10px">
+            <button
+                class="primary"
+                onclick="baixarPDFGerado()">
+                ⬇️ BAIXAR PDF
+            </button>
+        </div>
     </div>
-
 </section>
 
 <!-- CONTATOS -->
