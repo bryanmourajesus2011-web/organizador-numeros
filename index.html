@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#008c45">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050805">
 <title>🍀 BOT DO BM3 🍀</title>
-
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 <style>
 :root{
-    --verde:#008c45;
-    --verde2:#00a651;
-    --vermelho:#cd212a;
-    --branco:#fff;
-    --fundo:#f3f6f4;
-    --texto:#17221d;
-    --cinza:#68736d;
-    --borda:#dfe6e2;
-    --card:#fff;
-    --sombra:0 14px 35px rgba(0,0,0,.09);
-    --raio:20px;
+    --bg:#030603;
+    --bg2:#071007;
+    --card:#091109;
+    --card2:#0d170d;
+    --green:#00ff66;
+    --green2:#00c94f;
+    --green3:#39ff88;
+    --text:#effff4;
+    --muted:#8aa18f;
+    --border:rgba(0,255,102,.20);
+    --glow:0 0 12px rgba(0,255,102,.45),0 0 30px rgba(0,255,102,.12);
+    --danger:#ff4050;
+    --yellow:#ffe45c;
 }
 
 *{
@@ -32,239 +30,140 @@
     -webkit-tap-highlight-color:transparent;
 }
 
-body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    background:var(--fundo);
-    color:var(--texto);
-    min-height:100vh;
+html,body{
+    min-height:100%;
+    background:var(--bg);
 }
 
-body.dark{
-    --fundo:#070b09;
-    --texto:#f2f5f3;
-    --cinza:#a9b3ad;
-    --borda:#202a25;
-    --card:#101613;
-    --sombra:0 14px 35px rgba(0,0,0,.38);
+body{
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(0,255,102,.09),transparent 32%),
+        linear-gradient(rgba(0,255,102,.018) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,255,102,.018) 1px,transparent 1px);
+    background-size:auto,35px 35px,35px 35px;
+    z-index:-1;
 }
 
 button,input,textarea,select{
-    font:inherit
+    font:inherit;
 }
 
 button{
-    border:0;
-    cursor:pointer
+    cursor:pointer;
 }
-
-.app{
-    max-width:700px;
-    margin:auto;
-    min-height:100vh;
-    padding-bottom:35px;
-    opacity:0;
-    transform:translateY(15px);
-    transition:.7s ease;
-}
-
-.app.ready{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* LOADING */
 
 #loading{
     position:fixed;
     inset:0;
-    background:
-        radial-gradient(circle at 50% 35%,rgba(0,140,69,.09),transparent 38%),
-        var(--fundo);
+    z-index:99999;
     display:flex;
     align-items:center;
     justify-content:center;
-    z-index:9999;
-    transition:.65s ease;
+    background:#020402;
+    transition:.5s ease;
 }
 
-.loading-box,
-.welcome-box{
-    width:88%;
-    max-width:390px;
-    text-align:center;
-    background:var(--card);
-    border-radius:28px;
-    box-shadow:0 25px 70px rgba(0,0,0,.12);
+#loading.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
 }
 
 .loading-box{
-    padding:0 25px 32px;
-    overflow:hidden;
-    animation:entrada .8s ease both;
-}
-
-.italy-line,
-.welcome-line{
-    display:flex;
-    overflow:hidden;
-}
-
-.italy-line{
-    height:6px;
-    margin-bottom:30px;
-}
-
-.italy-line span,
-.welcome-line span{
-    flex:1;
-}
-
-.italy-line span:nth-child(1),
-.welcome-line span:nth-child(1){
-    background:#008c45
-}
-
-.italy-line span:nth-child(2),
-.welcome-line span:nth-child(2){
-    background:#fff
-}
-
-.italy-line span:nth-child(3),
-.welcome-line span:nth-child(3){
-    background:#cd212a
+    width:min(390px,90%);
+    padding:34px 24px;
+    text-align:center;
+    background:#071007;
+    border:1px solid var(--border);
+    border-radius:25px;
+    box-shadow:var(--glow);
 }
 
 .loading-logo{
-    width:150px;
-    height:150px;
-    object-fit:contain;
-    border-radius:25px;
-    margin-bottom:20px;
-    animation:logoEntrada .9s ease both;
+    font-size:65px;
+    animation:pulse 1.3s infinite;
 }
 
 .loading-title{
-    font-size:22px;
-    font-weight:950;
+    margin-top:15px;
+    color:var(--green);
+    font-size:25px;
+    font-weight:1000;
+    text-shadow:var(--glow);
 }
 
 .loading-sub{
-    color:var(--cinza);
     margin-top:7px;
+    color:var(--muted);
 }
 
 .loader{
-    width:48px;
-    height:48px;
-    border:4px solid var(--borda);
-    border-top-color:var(--verde);
-    border-right-color:var(--vermelho);
+    width:42px;
+    height:42px;
+    margin:24px auto 0;
+    border:3px solid rgba(0,255,102,.12);
+    border-top-color:var(--green);
+    border-right-color:var(--green3);
     border-radius:50%;
-    margin:25px auto 0;
-    animation:spin .8s linear infinite;
+    animation:spin .7s linear infinite;
 }
 
 .loading-status{
     margin-top:12px;
+    color:var(--green);
     font-size:11px;
     font-weight:900;
-    color:var(--cinza);
-    animation:pulse 1.2s infinite;
+    letter-spacing:1px;
 }
 
-#welcome{
-    position:fixed;
-    inset:0;
-    z-index:9998;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-        radial-gradient(circle at 50% 35%,rgba(0,140,69,.09),transparent 38%),
-        var(--fundo);
-    opacity:0;
-    visibility:hidden;
-    transition:.65s ease;
+@keyframes spin{
+    to{transform:rotate(360deg)}
 }
 
-#welcome.show{
-    opacity:1;
-    visibility:visible;
+@keyframes pulse{
+    50%{transform:scale(1.06);opacity:.75}
 }
 
-#welcome.hide{
-    opacity:0;
-    visibility:hidden;
+@keyframes up{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
-.welcome-box{
-    padding:38px 25px;
-    transform:translateY(25px) scale(.94);
-    transition:.65s ease;
-}
-
-#welcome.show .welcome-box{
-    transform:translateY(0) scale(1);
-}
-
-.welcome-logo{
-    font-size:68px;
-    line-height:1;
-    margin-bottom:20px;
-}
-
-.welcome-title{
-    font-size:21px;
-    font-weight:700;
-}
-
-.welcome-brand{
-    margin-top:5px;
-    font-size:29px;
-    font-weight:950;
-    color:var(--verde);
-}
-
-.welcome-line{
-    width:130px;
-    height:5px;
-    margin:22px auto 0;
-    border-radius:10px;
-}
-
-.welcome-sub{
-    margin-top:18px;
-    color:var(--cinza);
-    font-size:13px;
-}
-
-.welcome-btn{
-    margin-top:25px;
+.app{
     width:100%;
-    padding:14px;
-    border-radius:15px;
-    background:var(--verde);
-    color:white;
-    font-weight:900;
+    max-width:760px;
+    min-height:100vh;
+    margin:auto;
+    padding-bottom:35px;
+    opacity:0;
+    transition:.45s ease;
 }
 
-/* TOPO */
+.app.ready{
+    opacity:1;
+}
 
-.topbar{
+.header{
     position:sticky;
     top:0;
     z-index:100;
-    padding:12px 15px;
-    background:rgba(243,246,244,.92);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid var(--borda);
+    padding:13px 15px 11px;
+    background:rgba(3,6,3,.91);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(18px);
 }
 
-body.dark .topbar{
-    background:rgba(7,11,9,.92);
-}
-
-.topbar-inner{
+.header-top{
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -275,115 +174,109 @@ body.dark .topbar{
     display:flex;
     align-items:center;
     gap:10px;
-    min-width:0;
 }
 
 .brand-logo{
-    width:42px;
-    height:42px;
+    width:44px;
+    height:44px;
+    display:grid;
+    place-items:center;
+    border:1px solid var(--border);
     border-radius:13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,#008c45,#00b85a);
-    color:#fff;
-    font-size:22px;
-    box-shadow:0 7px 20px rgba(0,140,69,.25);
+    background:#071007;
+    box-shadow:var(--glow);
+    font-size:25px;
 }
 
-.brand-text{
-    min-width:0;
-}
-
-.brand-title{
-    font-size:14px;
-    font-weight:950;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+.brand-name{
+    color:var(--green);
+    font-size:17px;
+    font-weight:1000;
+    text-shadow:0 0 10px rgba(0,255,102,.55);
 }
 
 .brand-sub{
-    color:var(--cinza);
-    font-size:10px;
     margin-top:2px;
+    color:var(--muted);
+    font-size:10px;
 }
 
-.top-actions{
+.header-actions{
     display:flex;
     gap:7px;
 }
 
 .icon-btn{
-    width:39px;
-    height:39px;
+    width:40px;
+    height:40px;
+    border:1px solid var(--border);
     border-radius:12px;
-    background:var(--card);
-    border:1px solid var(--borda);
-    color:var(--texto);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 6px 15px rgba(0,0,0,.05);
+    color:var(--green);
+    background:#071007;
+    box-shadow:0 0 10px rgba(0,255,102,.08);
 }
 
-.icon-btn:active{
-    transform:scale(.94);
+.icon-btn:active,
+.menu-card:active,
+.action-btn:active{
+    transform:scale(.97);
 }
 
-.date-box{
-    margin-top:10px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    color:var(--cinza);
+.clock{
+    margin-top:9px;
+    color:#526b58;
     font-size:10px;
-    font-weight:700;
+    text-align:right;
+    font-weight:800;
 }
 
-.date-box strong{
-    color:var(--texto);
+.navbar{
+    position:sticky;
+    top:78px;
+    z-index:90;
+    overflow-x:auto;
+    padding:8px 12px;
+    background:rgba(3,6,3,.86);
+    border-bottom:1px solid rgba(0,255,102,.08);
+    backdrop-filter:blur(15px);
 }
 
-/* NAVEGAÇÃO */
+.navbar::-webkit-scrollbar{
+    display:none;
+}
 
-.nav{
+.nav-list{
     display:flex;
     gap:7px;
-    overflow-x:auto;
-    padding:11px 15px 5px;
-    scrollbar-width:none;
-}
-
-.nav::-webkit-scrollbar{
-    display:none;
+    min-width:max-content;
 }
 
 .nav-btn{
-    flex:0 0 auto;
-    padding:9px 13px;
-    border-radius:12px;
-    background:var(--card);
-    color:var(--cinza);
-    border:1px solid var(--borda);
+    padding:8px 12px;
+    border:1px solid rgba(0,255,102,.13);
+    border-radius:10px;
+    color:#78917e;
+    background:#071007;
     font-size:11px;
-    font-weight:850;
-    transition:.2s;
+    font-weight:900;
+    white-space:nowrap;
 }
 
-.nav-btn.active{
-    background:var(--verde);
-    color:#fff;
-    border-color:var(--verde);
-    box-shadow:0 7px 18px rgba(0,140,69,.2);
+.nav-btn.active,
+.nav-btn:hover{
+    color:#001b09;
+    background:var(--green);
+    border-color:var(--green);
+    box-shadow:var(--glow);
 }
 
-/* TELAS */
+main{
+    padding:16px;
+}
 
 .screen{
     display:none;
-    padding:14px 15px 0;
-    animation:screenIn .35s ease;
+    animation:up .3s ease;
 }
 
 .screen.active{
@@ -391,646 +284,403 @@ body.dark .topbar{
 }
 
 .menu-heading{
+    padding:17px 4px 20px;
     text-align:center;
-    padding:13px 0 17px;
 }
 
 .menu-heading h1{
-    font-size:22px;
-    font-weight:950;
-    letter-spacing:-.5px;
+    color:var(--green);
+    font-size:26px;
+    font-weight:1000;
+    text-shadow:
+        0 0 7px rgba(0,255,102,.8),
+        0 0 25px rgba(0,255,102,.35);
 }
 
 .menu-heading p{
-    margin-top:6px;
-    color:var(--cinza);
+    margin-top:7px;
+    color:var(--muted);
     font-size:12px;
 }
 
 .menu-tricolor{
-    width:120px;
+    width:115px;
     height:4px;
     display:flex;
-    margin:14px auto 0;
-    border-radius:10px;
+    margin:16px auto 0;
     overflow:hidden;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,255,102,.15);
 }
 
 .menu-tricolor span{
     flex:1;
 }
 
-.menu-tricolor span:nth-child(1){
-    background:#008c45;
-}
-
-.menu-tricolor span:nth-child(2){
-    background:#fff;
-}
-
-.menu-tricolor span:nth-child(3){
-    background:#cd212a;
-}
+.menu-tricolor span:nth-child(1){background:#00ff66}
+.menu-tricolor span:nth-child(2){background:#fff}
+.menu-tricolor span:nth-child(3){background:#ff3045}
 
 .premium-label{
+    margin:5px 0 10px;
+    color:var(--green);
     font-size:10px;
-    font-weight:950;
-    color:var(--verde);
-    letter-spacing:1.4px;
-    margin-bottom:9px;
+    font-weight:1000;
+    letter-spacing:2px;
 }
 
 .menu-grid{
     display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:11px;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
 }
 
 .menu-card{
-    min-height:122px;
-    padding:16px;
+    min-height:145px;
+    padding:18px 13px;
     text-align:left;
+    color:var(--text);
+    background:
+        linear-gradient(145deg,rgba(0,255,102,.055),transparent 55%),
+        var(--card);
+    border:1px solid var(--border);
     border-radius:19px;
-    background:var(--card);
-    border:1px solid var(--borda);
-    box-shadow:var(--sombra);
-    color:var(--texto);
-    transition:.22s ease;
-    position:relative;
-    overflow:hidden;
-}
-
-.menu-card::before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:0;
-    width:4px;
-    height:100%;
-    background:linear-gradient(180deg,var(--verde),#00d36b);
-    opacity:.9;
+    box-shadow:0 0 0 rgba(0,255,102,0);
+    transition:.2s ease;
 }
 
 .menu-card:hover{
     transform:translateY(-3px);
-    border-color:rgba(0,140,69,.35);
-    box-shadow:0 17px 35px rgba(0,140,69,.12);
+    border-color:rgba(0,255,102,.55);
+    box-shadow:var(--glow);
 }
 
-.menu-card:active{
-    transform:scale(.97);
+.menu-card.menu-wide{
+    grid-column:1/-1;
+    min-height:92px;
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
 .menu-icon{
-    width:43px;
-    height:43px;
-    border-radius:14px;
-    background:rgba(0,140,69,.10);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
+    font-size:31px;
     margin-bottom:12px;
-}
-
-.menu-title{
-    font-size:14px;
-    font-weight:950;
-}
-
-.menu-desc{
-    margin-top:4px;
-    font-size:10px;
-    line-height:1.35;
-    color:var(--cinza);
-}
-
-.menu-wide{
-    grid-column:1/-1;
-    min-height:82px;
-    display:flex;
-    align-items:center;
-    gap:14px;
+    filter:drop-shadow(0 0 7px rgba(0,255,102,.25));
 }
 
 .menu-wide .menu-icon{
     margin:0;
-    flex:0 0 43px;
 }
 
-/* CABEÇALHOS DAS TELAS */
+.menu-title{
+    color:var(--green);
+    font-size:15px;
+    font-weight:1000;
+}
 
-.page-head{
+.menu-desc{
+    margin-top:5px;
+    color:#718477;
+    font-size:10px;
+    line-height:1.4;
+}
+
+.section-head{
     display:flex;
     align-items:center;
+    justify-content:space-between;
     gap:10px;
-    margin-bottom:15px;
+    margin:5px 0 15px;
 }
 
-.back-btn{
-    width:39px;
-    height:39px;
-    flex:0 0 39px;
-    border-radius:12px;
-    background:var(--card);
-    border:1px solid var(--borda);
-    color:var(--texto);
+.section-head h2{
+    color:var(--green);
+    font-size:22px;
+    font-weight:1000;
+    text-shadow:0 0 12px rgba(0,255,102,.3);
 }
 
-.page-title{
-    font-size:19px;
-    font-weight:950;
-}
-
-.page-sub{
-    margin-top:3px;
+.section-head p{
+    color:var(--muted);
     font-size:10px;
-    color:var(--cinza);
 }
-
-/* CARDS GERAIS */
 
 .panel{
+    padding:16px;
+    margin-bottom:12px;
     background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:19px;
-    padding:15px;
-    box-shadow:var(--sombra);
+    border:1px solid var(--border);
+    border-radius:17px;
+    box-shadow:0 8px 30px rgba(0,0,0,.22);
+}
+
+.field{
     margin-bottom:12px;
 }
 
-.panel-title{
-    font-size:14px;
-    font-weight:950;
-    margin-bottom:10px;
-}
-
-.panel-desc{
-    color:var(--cinza);
-    font-size:11px;
-    line-height:1.5;
-}
-
-.form-group{
-    margin-bottom:12px;
-}
-
-.form-label{
+.field label{
     display:block;
+    margin-bottom:6px;
+    color:#8ea795;
     font-size:10px;
     font-weight:900;
-    margin-bottom:6px;
-    color:var(--cinza);
+    text-transform:uppercase;
+    letter-spacing:.7px;
 }
 
-.input,
-.textarea,
-.select{
+input,textarea,select{
     width:100%;
-    border:1px solid var(--borda);
-    background:var(--fundo);
-    color:var(--texto);
-    border-radius:12px;
-    padding:11px 12px;
+    padding:12px 13px;
     outline:none;
+    color:var(--text);
+    background:#040904;
+    border:1px solid rgba(0,255,102,.15);
+    border-radius:11px;
 }
 
-.textarea{
-    min-height:100px;
+input:focus,textarea:focus,select:focus{
+    border-color:var(--green);
+    box-shadow:0 0 12px rgba(0,255,102,.14);
+}
+
+textarea{
+    min-height:110px;
     resize:vertical;
 }
 
-.input:focus,
-.textarea:focus,
-.select:focus{
-    border-color:var(--verde);
-    box-shadow:0 0 0 3px rgba(0,140,69,.08);
-}
-
-.primary-btn{
-    width:100%;
-    padding:12px 14px;
-    border-radius:13px;
-    background:var(--verde);
-    color:#fff;
-    font-weight:900;
-    box-shadow:0 8px 18px rgba(0,140,69,.18);
-}
-
-.secondary-btn{
-    padding:11px 14px;
-    border-radius:12px;
-    background:var(--fundo);
-    color:var(--texto);
-    border:1px solid var(--borda);
-    font-weight:850;
-}
-
-.danger-btn{
-    padding:11px 14px;
-    border-radius:12px;
-    background:#fff1f1;
-    color:#c62828;
-    border:1px solid #ffd4d4;
-    font-weight:850;
-}
-
-body.dark .danger-btn{
-    background:#281314;
-    border-color:#4c2527;
-}
-
-/* GRID DE FERRAMENTAS */
-
-.tools-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-}
-
-.tool-card{
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:17px;
-    padding:14px;
-    min-height:105px;
-    box-shadow:0 8px 22px rgba(0,0,0,.05);
-}
-
-.tool-icon{
-    font-size:22px;
-    margin-bottom:9px;
-}
-
-.tool-title{
-    font-size:12px;
-    font-weight:950;
-}
-
-.tool-desc{
-    margin-top:4px;
-    color:var(--cinza);
-    font-size:9px;
-    line-height:1.35;
-}
-
-/* RESUMO */
-
-.stats-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:10px;
-}
-
-.stat-card{
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:17px;
-    padding:15px;
-    box-shadow:var(--sombra);
-}
-
-.stat-icon{
-    font-size:22px;
-}
-
-.stat-value{
-    margin-top:9px;
-    font-size:24px;
-    font-weight:950;
-}
-
-.stat-label{
-    margin-top:2px;
-    font-size:10px;
-    color:var(--cinza);
-}
-
-/* LISTAS */
-
-.list{
+.action-row{
     display:flex;
-    flex-direction:column;
+    flex-wrap:wrap;
     gap:8px;
 }
 
-.list-item{
+.action-btn{
+    padding:11px 14px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    color:#001b09;
+    background:var(--green);
+    font-weight:1000;
+}
+
+.action-btn.secondary{
+    color:var(--green);
+    background:#071007;
+}
+
+.action-btn.danger{
+    color:#fff;
+    background:#3b0a10;
+    border-color:rgba(255,64,80,.4);
+}
+
+.calc-options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:7px;
+}
+
+.calc-option{
+    padding:11px 8px;
+    color:#77917d;
+    background:#050a05;
+    border:1px solid rgba(0,255,102,.12);
+    border-radius:10px;
+    font-size:10px;
+    font-weight:900;
+}
+
+.calc-option.active{
+    color:#001b09;
+    background:var(--green);
+    box-shadow:var(--glow);
+}
+
+.result{
+    margin-top:12px;
+    padding:15px;
+    color:var(--green);
+    background:#020802;
+    border:1px solid rgba(0,255,102,.35);
+    border-radius:13px;
+    font-size:18px;
+    font-weight:1000;
+    text-align:center;
+    white-space:pre-wrap;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.stat{
+    padding:14px 8px;
+    text-align:center;
+    background:#061006;
+    border:1px solid var(--border);
+    border-radius:13px;
+}
+
+.stat-number{
+    color:var(--green);
+    font-size:23px;
+    font-weight:1000;
+}
+
+.stat-label{
+    margin-top:3px;
+    color:#718477;
+    font-size:9px;
+}
+
+.item{
     display:flex;
     align-items:center;
     gap:11px;
-    padding:12px;
-    border-radius:14px;
-    background:var(--fundo);
-    border:1px solid var(--borda);
+    padding:13px 4px;
+    border-bottom:1px solid rgba(0,255,102,.08);
 }
 
-.list-avatar{
+.item:last-child{
+    border-bottom:0;
+}
+
+.item-icon{
     width:39px;
     height:39px;
-    flex:0 0 39px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(0,140,69,.11);
-    font-size:18px;
+    display:grid;
+    place-items:center;
+    flex:none;
+    border-radius:11px;
+    background:#061006;
+    border:1px solid var(--border);
 }
 
-.list-content{
+.item-main{
     flex:1;
     min-width:0;
 }
 
-.list-title{
-    font-size:12px;
+.item-name{
+    color:#eaffef;
+    font-size:13px;
     font-weight:900;
 }
 
-.list-sub{
+.item-sub{
     margin-top:3px;
-    color:var(--cinza);
-    font-size:9px;
+    color:#718477;
+    font-size:10px;
 }
 
-.list-action{
+.item-actions{
+    display:flex;
+    gap:5px;
+}
+
+.small-btn{
     width:34px;
     height:34px;
-    border-radius:10px;
-    background:var(--card);
-    border:1px solid var(--borda);
+    color:var(--green);
+    background:#061006;
+    border:1px solid var(--border);
+    border-radius:9px;
 }
 
-/* CONFIG */
-
-.setting{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    padding:13px 0;
-    border-bottom:1px solid var(--borda);
-}
-
-.setting:last-child{
-    border-bottom:0;
-}
-
-.setting-info{
-    min-width:0;
-}
-
-.setting-title{
+.empty{
+    padding:28px 10px;
+    text-align:center;
+    color:#637568;
     font-size:12px;
-    font-weight:900;
 }
 
-.setting-desc{
-    margin-top:3px;
-    color:var(--cinza);
-    font-size:9px;
-    line-height:1.4;
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,.78);
+    backdrop-filter:blur(8px);
 }
 
-.toggle{
-    width:47px;
-    height:27px;
-    flex:0 0 47px;
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(440px,100%);
+    max-height:90vh;
+    overflow:auto;
+    padding:19px;
+    background:#071007;
+    border:1px solid rgba(0,255,102,.35);
     border-radius:20px;
-    background:#cbd3ce;
-    padding:3px;
-    transition:.2s;
+    box-shadow:var(--glow);
 }
 
-.toggle span{
-    display:block;
-    width:21px;
-    height:21px;
-    border-radius:50%;
-    background:white;
-    box-shadow:0 2px 6px rgba(0,0,0,.15);
-    transition:.2s;
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
 }
 
-.toggle.on{
-    background:var(--verde);
+.modal-head h3{
+    color:var(--green);
 }
 
-.toggle.on span{
-    transform:translateX(20px);
+.close{
+    width:35px;
+    height:35px;
+    border-radius:9px;
+    color:#fff;
+    background:#26080c;
 }
-
-/* ALERTAS */
 
 .toast{
     position:fixed;
     left:50%;
     bottom:20px;
-    z-index:99999;
-    transform:translate(-50%,20px);
-    opacity:0;
-    visibility:hidden;
-    min-width:220px;
+    z-index:999999;
     max-width:90%;
-    padding:12px 15px;
-    border-radius:14px;
-    background:#17221d;
-    color:#fff;
-    box-shadow:0 15px 35px rgba(0,0,0,.25);
-    font-size:11px;
-    font-weight:800;
-    text-align:center;
-    transition:.3s;
+    padding:12px 16px;
+    color:#001b09;
+    background:var(--green);
+    border-radius:12px;
+    font-size:12px;
+    font-weight:1000;
+    box-shadow:var(--glow);
+    transform:translate(-50%,120px);
+    transition:.3s ease;
 }
 
 .toast.show{
     transform:translate(-50%,0);
-    opacity:1;
-    visibility:visible;
 }
 
-.toast.success{
-    background:var(--verde);
+.footer{
+    padding:25px 10px;
+    color:#415345;
+    text-align:center;
+    font-size:9px;
 }
 
-.toast.error{
-    background:#c62828;
+@media(max-width:520px){
+    main{padding:12px}
+    .menu-grid{gap:8px}
+    .menu-card{min-height:135px}
+    .menu-heading h1{font-size:22px}
 }
 
-/* MODAL */
-
-.modal{
-    position:fixed;
-    inset:0;
-    z-index:9000;
-    background:rgba(0,0,0,.52);
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-    opacity:0;
-    visibility:hidden;
-    transition:.3s;
-    padding:15px;
-}
-
-.modal.show{
-    opacity:1;
-    visibility:visible;
-}
-
-.modal-box{
-    width:100%;
-    max-width:700px;
-    max-height:90vh;
-    overflow:auto;
-    background:var(--card);
-    color:var(--texto);
-    border-radius:23px 23px 17px 17px;
-    padding:18px;
-    transform:translateY(30px);
-    transition:.3s;
-}
-
-.modal.show .modal-box{
-    transform:translateY(0);
-}
-
-.modal-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:15px;
-}
-
-.modal-title{
-    font-size:16px;
-    font-weight:950;
-}
-
-.modal-close{
-    width:35px;
-    height:35px;
-    border-radius:10px;
-    background:var(--fundo);
-    color:var(--texto);
-}
-
-/* ANIMAÇÕES */
-
-@keyframes entrada{
-    from{
-        opacity:0;
-        transform:translateY(20px) scale(.96);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
-
-@keyframes logoEntrada{
-    from{
-        opacity:0;
-        transform:scale(.7) rotate(-8deg);
-    }
-    to{
-        opacity:1;
-        transform:scale(1) rotate(0);
-    }
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-@keyframes pulse{
-    0%,100%{
-        opacity:.45;
-    }
-    50%{
-        opacity:1;
-    }
-}
-
-@keyframes screenIn{
-    from{
-        opacity:0;
-        transform:translateY(7px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* RESPONSIVO */
-
-@media(min-width:700px){
-
-    .app{
-        max-width:1100px;
-    }
-
-    .menu-grid{
-        grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-
-    .menu-wide{
-        grid-column:auto;
-    }
-
-    .tools-grid{
-        grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-
-    .stats-grid{
-        grid-template-columns:repeat(4,minmax(0,1fr));
-    }
-
-    .screen{
-        padding-left:25px;
-        padding-right:25px;
-    }
-
-}
-
-@media(max-width:430px){
-
-    .menu-heading h1{
-        font-size:20px;
-    }
-
-    .menu-grid{
-        gap:9px;
-    }
-
-    .menu-card{
-        min-height:116px;
-        padding:14px;
-    }
-
-    .menu-title{
-        font-size:13px;
-    }
-
-    .menu-desc{
-        font-size:9px;
-    }
-
-}
-
-@media(max-width:340px){
-
-    .menu-grid{
-        grid-template-columns:1fr;
-    }
-
-    .menu-wide{
-        grid-column:auto;
-    }
-
+@media(max-width:360px){
+    .menu-grid{grid-template-columns:1fr}
+    .menu-card.menu-wide{grid-column:auto}
 }
 </style>
 </head>
@@ -1038,3901 +688,1566 @@ body.dark .danger-btn{
 <body>
 
 <div id="loading">
-
     <div class="loading-box">
-
-        <div class="italy-line">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
         <div class="loading-logo">🍀</div>
-
-        <div class="loading-title">
-            BOT DO BM3
-        </div>
-
-        <div class="loading-sub">
-            Preparando seu painel...
-        </div>
-
+        <div class="loading-title">BOT DO BM3</div>
+        <div class="loading-sub">Inicializando painel...</div>
         <div class="loader"></div>
-
-        <div class="loading-status">
-            CARREGANDO SISTEMA
-        </div>
-
+        <div class="loading-status">CARREGANDO SISTEMA</div>
     </div>
-
-</div>
-
-<div id="welcome">
-
-    <div class="welcome-box">
-
-        <div class="welcome-logo">
-            🍀
-        </div>
-
-        <div class="welcome-title">
-            Bem-vindo ao
-        </div>
-
-        <div class="welcome-brand">
-            BOT DO BM3
-        </div>
-
-        <div class="welcome-line">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <div class="welcome-sub">
-            Seu painel completo de ferramentas
-        </div>
-
-        <button class="welcome-btn" onclick="entrarNoSistema()">
-            ENTRAR NO PAINEL
-        </button>
-
-    </div>
-
 </div>
 
 <div class="app" id="app">
 
-    <header class="topbar">
-
-        <div class="topbar-inner">
-
-            <div class="brand">
-
-                <div class="brand-logo">
-                    🍀
-                </div>
-
-                <div class="brand-text">
-
-                    <div class="brand-title">
-                        BOT DO BM3
-                    </div>
-
-                    <div class="brand-sub">
-                        Painel de ferramentas
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="top-actions">
-
-                <button class="icon-btn"
-                        onclick="alternarTema()"
-                        title="Alterar tema"
-                        id="themeBtn">
-                    ☀️
-                </button>
-
-                <button class="icon-btn"
-                        onclick="abrirNotificacoes()"
-                        title="Notificações">
-                    🔔
-                </button>
-
-            </div>
-
-        </div>
-
-        <div class="date-box">
-
-            <span id="dataAtual">
-                Carregando data...
-            </span>
-
-            <strong id="horaAtual">
-                00:00:00
-            </strong>
-
-        </div>
-
-    </header>
-
-    <nav class="nav">
-
-        <button class="nav-btn active"
-                data-screen="inicio"
-                onclick="navegar('inicio')">
-            🏠 Início
-        </button>
-
-        <button class="nav-btn"
-                data-screen="whatsapp"
-                onclick="navegar('whatsapp')">
-            💬 WhatsApp
-        </button>
-
-        <button class="nav-btn"
-                data-screen="calculadora"
-                onclick="navegar('calculadora')">
-            🧮 Calculadora
-        </button>
-
-        <button class="nav-btn"
-                data-screen="advogado"
-                onclick="navegar('advogado')">
-            ⚖️ Advogado
-        </button>
-
-        <button class="nav-btn"
-                data-screen="celulares"
-                onclick="navegar('celulares')">
-            📱 Celulares
-        </button>
-
-        <button class="nav-btn"
-                data-screen="chips"
-                onclick="navegar('chips')">
-            💳 Chips
-        </button>
-
-        <button class="nav-btn"
-                data-screen="contatos"
-                onclick="navegar('contatos')">
-            👥 Contatos
-        </button>
-
-        <button class="nav-btn"
-                data-screen="resumo"
-                onclick="navegar('resumo')">
-            📊 Resumo
-        </button>
-
-        <button class="nav-btn"
-                data-screen="favoritos"
-                onclick="navegar('favoritos')">
-            ⭐ Favoritos
-        </button>
-
-        <button class="nav-btn"
-                data-screen="config"
-                onclick="navegar('config')">
-            ⚙️ Config
-        </button>
-
-    </nav>
-
-    <!-- INÍCIO -->
-
-    <section id="inicio" class="screen active">
-
-        <div class="menu-heading">
-
-            <h1>
-                🍀 MENU PRINCIPAL 🍀
-            </h1>
-
-            <p>
-                Seu painel do BOT DO BM3
-            </p>
-
-            <div class="menu-tricolor">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-        </div>
-
-        <div class="premium-label">
-            PAINEL PRINCIPAL
-        </div>
-
-        <div class="menu-grid">
-
-            <button class="menu-card"
-                    onclick="navegar('whatsapp')">
-
-                <div class="menu-icon">
-                    💬
-                </div>
-
-                <div class="menu-title">
-                    WhatsApp
-                </div>
-
-                <div class="menu-desc">
-                    Ferramentas e organização
-                </div>
-
-            </button>
-
-            <button class="menu-card"
-                    onclick="navegar('calculadora')">
-
-                <div class="menu-icon">
-                    🧮
-                </div>
-
-                <div class="menu-title">
-                    Calculadora
-                </div>
-
-                <div class="menu-desc">
-                    Vários tipos de cálculo
-                </div>
-
-            </button>
-
-            <button class="menu-card"
-                    onclick="navegar('advogado')">
-
-                <div class="menu-icon">
-                    ⚖️
-                </div>
-
-                <div class="menu-title">
-                    Advogado
-                </div>
-
-                <div class="menu-desc">
-                    Respostas e atendimento
-                </div>
-
-            </button>
-
-            <button class="menu-card"
-                    onclick="navegar('celulares')">
-
-                <div class="menu-icon">
-                    📱
-                </div>
-
-                <div class="menu-title">
-                    Celulares
-                </div>
-
-                <div class="menu-desc">
-                    Números por aparelho
-                </div>
-
-            </button>
-
-            <button class="menu-card"
-                    onclick="navegar('chips')">
-
-                <div class="menu-icon">
-                    💳
-                </div>
-
-                <div class="menu-title">
-                    Chips
-                </div>
-
-                <div class="menu-desc">
-                    Controle de recargas
-                </div>
-
-            </button>
-
-            <button class="menu-card"
-                    onclick="navegar('contatos')">
-
-                <div class="menu-icon">
-                    👥
-                </div>
-
-                <div class="menu-title">
-                    Contatos
-                </div>
-
-                <div class="menu-desc">
-                    Seus números organizados
-                </div>
-
-            </button>
-
-            <button class="menu-card"
-                    onclick="navegar('resumo')">
-
-                <div class="menu-icon">
-                    📊
-                </div>
-
-                <div class="menu-title">
-                    Resumo
-                </div>
-
-                <div class="menu-desc">
-                    Visão geral dos contatos
-                </div>
-
-            </button>
-
-            <button class="menu-card"
-                    onclick="navegar('favoritos')">
-
-                <div class="menu-icon">
-                    ⭐
-                </div>
-
-                <div class="menu-title">
-                    Favoritos
-                </div>
-
-                <div class="menu-desc">
-                    Acesso rápido
-                </div>
-
-            </button>
-
-            <button class="menu-card menu-wide"
-                    onclick="navegar('config')">
-
-                <div class="menu-icon">
-                    ⚙️
-                </div>
-
-                <div>
-
-                    <div class="menu-title">
-                        Configurações
-                    </div>
-
-                    <div class="menu-desc">
-                        Temas, backup e informações
-                    </div>
-
-                </div>
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- FIM DO MENU PRINCIPAL -->
-        <!-- WHATSAPP -->
-
-    <section id="whatsapp" class="screen">
-
-        <div class="page-head">
-
-            <button class="back-btn" onclick="navegar('inicio')">
-                ←
-            </button>
-
+<header class="header">
+    <div class="header-top">
+        <div class="brand">
+            <div class="brand-logo">🍀</div>
             <div>
-                <div class="page-title">
-                    💬 WhatsApp
-                </div>
-
-                <div class="page-sub">
-                    Ferramentas e organização
-                </div>
+                <div class="brand-name">BOT DO BM3</div>
+                <div class="brand-sub">PAINEL PRINCIPAL • ONLINE</div>
             </div>
-
         </div>
 
-        <div class="panel">
-
-            <div class="panel-title">
-                📱 Ferramentas do WhatsApp
-            </div>
-
-            <div class="panel-desc">
-                Organize números, mensagens e contatos
-                de forma rápida.
-            </div>
-
+        <div class="header-actions">
+            <button class="icon-btn" onclick="alternarTema()" title="Tema">☀️</button>
+            <button class="icon-btn" onclick="mostrarNotificacao()" title="Notificação">🔔</button>
         </div>
+    </div>
 
-        <div class="tools-grid">
+    <div class="clock" id="clock">--/--/---- • --:--:--</div>
+</header>
 
-            <button class="tool-card"
-                    onclick="abrirWhatsApp()">
+<nav class="navbar">
+    <div class="nav-list">
+        <button class="nav-btn active" data-tela="inicio">🏠 Início</button>
+        <button class="nav-btn" data-tela="whatsapp">💬 WhatsApp</button>
+        <button class="nav-btn" data-tela="calculadora">🧮 Cálculo</button>
+        <button class="nav-btn" data-tela="advogado">⚖️ Advogado</button>
+        <button class="nav-btn" data-tela="contatos">👥 Contatos</button>
+        <button class="nav-btn" data-tela="chips">💳 Chips</button>
+        <button class="nav-btn" data-tela="celulares">📱 Celulares</button>
+        <button class="nav-btn" data-tela="resumo">📊 Resumo</button>
+        <button class="nav-btn" data-tela="favoritos">⭐ Favoritos</button>
+        <button class="nav-btn" data-tela="config">⚙️ Config</button>
+    </div>
+</nav>
 
-                <div class="tool-icon">
-                    💬
-                </div>
+<main>
 
-                <div class="tool-title">
-                    Abrir WhatsApp
-                </div>
+<section id="inicio" class="screen active">
 
-                <div class="tool-desc">
-                    Acesse uma conversa rapidamente.
-                </div>
+    <div class="menu-heading">
+        <h1>🍀 MENU PRINCIPAL 🍀</h1>
+        <p>Seu painel do BOT DO BM3</p>
 
-            </button>
-
-            <button class="tool-card"
-                    onclick="navegar('contatos')">
-
-                <div class="tool-icon">
-                    👥
-                </div>
-
-                <div class="tool-title">
-                    Contatos
-                </div>
-
-                <div class="tool-desc">
-                    Consulte seus contatos.
-                </div>
-
-            </button>
-
-            <button class="tool-card"
-                    onclick="navegar('favoritos')">
-
-                <div class="tool-icon">
-                    ⭐
-                </div>
-
-                <div class="tool-title">
-                    Favoritos
-                </div>
-
-                <div class="tool-desc">
-                    Acesse seus números favoritos.
-                </div>
-
-            </button>
-
+        <div class="menu-tricolor">
+            <span></span><span></span><span></span>
         </div>
+    </div>
 
-        <div class="panel">
+    <div class="premium-label">PAINEL PRINCIPAL</div>
 
-            <div class="panel-title">
-                🔗 Abrir número
-            </div>
+    <div class="menu-grid">
 
-            <div class="form-group">
+        <button class="menu-card" onclick="navegar('whatsapp')">
+            <div class="menu-icon">💬</div>
+            <div class="menu-title">WhatsApp</div>
+            <div class="menu-desc">Ferramentas e organização</div>
+        </button>
 
-                <label class="form-label">
-                    Número do WhatsApp
-                </label>
+        <button class="menu-card" onclick="navegar('calculadora')">
+            <div class="menu-icon">🧮</div>
+            <div class="menu-title">Calculadora</div>
+            <div class="menu-desc">Vários tipos de cálculo</div>
+        </button>
 
-                <input
-                    id="whatsappNumero"
-                    class="input"
-                    type="tel"
-                    placeholder="Ex.: 5511999999999"
-                >
+        <button class="menu-card" onclick="navegar('advogado')">
+            <div class="menu-icon">⚖️</div>
+            <div class="menu-title">Advogado</div>
+            <div class="menu-desc">Respostas e atendimento</div>
+        </button>
 
-            </div>
+        <button class="menu-card" onclick="navegar('celulares')">
+            <div class="menu-icon">📱</div>
+            <div class="menu-title">Celulares</div>
+            <div class="menu-desc">Números por aparelho</div>
+        </button>
 
-            <button
-                class="primary-btn"
-                onclick="abrirNumeroWhatsApp()">
+        <button class="menu-card" onclick="navegar('chips')">
+            <div class="menu-icon">💳</div>
+            <div class="menu-title">Chips</div>
+            <div class="menu-desc">Controle de recargas</div>
+        </button>
 
-                ABRIR CONVERSA
+        <button class="menu-card" onclick="navegar('contatos')">
+            <div class="menu-icon">👥</div>
+            <div class="menu-title">Contatos</div>
+            <div class="menu-desc">Seus números organizados</div>
+        </button>
 
-            </button>
+        <button class="menu-card" onclick="navegar('resumo')">
+            <div class="menu-icon">📊</div>
+            <div class="menu-title">Resumo</div>
+            <div class="menu-desc">Visão geral dos contatos</div>
+        </button>
 
-        </div>
+        <button class="menu-card" onclick="navegar('favoritos')">
+            <div class="menu-icon">⭐</div>
+            <div class="menu-title">Favoritos</div>
+            <div class="menu-desc">Acesso rápido</div>
+        </button>
 
-    </section>
-
-
-    <!-- CALCULADORA -->
-
-    <section id="calculadora" class="screen">
-
-        <div class="page-head">
-
-            <button class="back-btn"
-                    onclick="navegar('inicio')">
-                ←
-            </button>
-
+        <button class="menu-card menu-wide" onclick="navegar('config')">
+            <div class="menu-icon">⚙️</div>
             <div>
-
-                <div class="page-title">
-                    🧮 Calculadora
-                </div>
-
-                <div class="page-sub">
-                    Vários tipos de cálculo
-                </div>
-
+                <div class="menu-title">Configurações</div>
+                <div class="menu-desc">Temas, backup e informações</div>
             </div>
+        </button>
 
+    </div>
+</section>
+
+
+<section id="whatsapp" class="screen">
+
+    <div class="section-head">
+        <div>
+            <h2>💬 WhatsApp</h2>
+            <p>Ferramentas rápidas</p>
+        </div>
+        <button class="action-btn secondary" onclick="navegar('inicio')">← Voltar</button>
+    </div>
+
+    <div class="panel">
+        <div class="field">
+            <label>Número do WhatsApp</label>
+            <input id="waNumero" placeholder="Ex.: 5511999999999">
         </div>
 
-
-        <div class="panel">
-
-            <div class="panel-title">
-                Calculadora rápida
-            </div>
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Primeiro número
-                </label>
-
-                <input
-                    id="calcA"
-                    class="input"
-                    type="number"
-                    placeholder="Digite um número"
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Operação
-                </label>
-
-                <select
-                    id="calcOperacao"
-                    class="select">
-
-                    <option value="+">
-                        ➕ Adição
-                    </option>
-
-                    <option value="-">
-                        ➖ Subtração
-                    </option>
-
-                    <option value="*">
-                        ✖️ Multiplicação
-                    </option>
-
-                    <option value="/">
-                        ➗ Divisão
-                    </option>
-
-                    <option value="%">
-                        📊 Porcentagem
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Segundo número
-                </label>
-
-                <input
-                    id="calcB"
-                    class="input"
-                    type="number"
-                    placeholder="Digite um número"
-                >
-
-            </div>
-
-            <button
-                class="primary-btn"
-                onclick="calcular()">
-
-                CALCULAR
-
-            </button>
-
+        <div class="field">
+            <label>Mensagem</label>
+            <textarea id="waMensagem" placeholder="Digite sua mensagem..."></textarea>
         </div>
 
+        <div class="action-row">
+            <button class="action-btn" onclick="abrirWhatsApp()">💬 Abrir WhatsApp</button>
+            <button class="action-btn secondary" onclick="copiarMensagem()">📋 Copiar</button>
+        </div>
+    </div>
 
-        <div
-            class="panel"
-            id="resultadoCalculadora"
-            style="display:none">
+    <div class="panel">
+        <div class="field">
+            <label>Link rápido</label>
+            <input id="waLink" readonly>
+        </div>
+        <button class="action-btn" onclick="copiarLink()">🔗 Copiar link</button>
+    </div>
 
-            <div class="panel-title">
-                📊 Resultado
-            </div>
+</section>
 
-            <div
-                id="resultadoCalc"
-                style="
-                    font-size:28px;
-                    font-weight:950;
-                    color:var(--verde);
-                    text-align:center;
-                    padding:15px 0;
-                ">
-                0
-            </div>
 
+<section id="calculadora" class="screen">
+
+    <div class="section-head">
+        <div>
+            <h2>🧮 Calculadora</h2>
+            <p>Cálculos rápidos</p>
+        </div>
+        <button class="action-btn secondary" onclick="navegar('inicio')">← Voltar</button>
+    </div>
+
+    <div class="panel">
+
+        <div class="calc-options">
+            <button class="calc-option active" onclick="setCalc('porcentagem',this)">Porcentagem</button>
+            <button class="calc-option" onclick="setCalc('somar',this)">Somar</button>
+            <button class="calc-option" onclick="setCalc('subtrair',this)">Subtrair</button>
+            <button class="calc-option" onclick="setCalc('multiplicar',this)">Multiplicar</button>
+            <button class="calc-option" onclick="setCalc('dividir',this)">Dividir</button>
+            <button class="calc-option" onclick="setCalc('regra',this)">Regra de 3</button>
         </div>
 
-    </section>
-
-
-    <!-- ADVOGADO -->
-
-    <section id="advogado" class="screen">
-
-        <div class="page-head">
-
-            <button class="back-btn"
-                    onclick="navegar('inicio')">
-                ←
-            </button>
-
-            <div>
-
-                <div class="page-title">
-                    ⚖️ Advogado
-                </div>
-
-                <div class="page-sub">
-                    Respostas e atendimento
-                </div>
-
+        <div id="calcPorcentagem" class="calc-box">
+            <div class="field">
+                <label>Valor</label>
+                <input id="calcValor" type="number" placeholder="1000">
             </div>
-
+            <div class="field">
+                <label>Porcentagem</label>
+                <input id="calcPct" type="number" placeholder="10">
+            </div>
         </div>
 
-
-        <div class="panel">
-
-            <div class="panel-title">
-                ⚖️ Assistente jurídico
+        <div id="calcSomar" class="calc-box" style="display:none">
+            <div class="field">
+                <label>Valor 1</label>
+                <input id="calcA" type="number">
             </div>
-
-            <div class="panel-desc">
-                Escreva sua dúvida ou situação para
-                organizar as informações.
+            <div class="field">
+                <label>Valor 2</label>
+                <input id="calcB" type="number">
             </div>
-
-            <div
-                class="form-group"
-                style="margin-top:15px">
-
-                <label class="form-label">
-                    Sua pergunta
-                </label>
-
-                <textarea
-                    id="perguntaAdvogado"
-                    class="textarea"
-                    placeholder="Digite sua pergunta aqui..."></textarea>
-
-            </div>
-
-            <button
-                class="primary-btn"
-                onclick="responderAdvogado()">
-
-                ANALISAR PERGUNTA
-
-            </button>
-
         </div>
 
-
-        <div
-            class="panel"
-            id="respostaAdvogado"
-            style="display:none">
-
-            <div class="panel-title">
-                💡 Orientação
+        <div id="calcRegra" class="calc-box" style="display:none">
+            <div class="field">
+                <label>A</label>
+                <input id="regraA" type="number">
             </div>
-
-            <div
-                id="textoRespostaAdvogado"
-                class="panel-desc">
+            <div class="field">
+                <label>B</label>
+                <input id="regraB" type="number">
             </div>
-
-            <div
-                style="
-                    margin-top:12px;
-                    padding:10px;
-                    border-radius:12px;
-                    background:rgba(205,33,42,.08);
-                    color:var(--cinza);
-                    font-size:9px;
-                ">
-
-                ⚠️ Esta ferramenta fornece informações
-                gerais e não substitui a orientação de
-                um advogado habilitado.
-
+            <div class="field">
+                <label>C</label>
+                <input id="regraC" type="number">
             </div>
-
         </div>
 
-    </section>
+        <button class="action-btn" onclick="calcular()">⚡ CALCULAR</button>
+
+        <div class="result" id="calcResultado">Resultado aparecerá aqui</div>
+
+    </div>
+
+</section>
 
 
-    <!-- CELULARES -->
+<section id="advogado" class="screen">
 
-    <section id="celulares" class="screen">
+    <div class="section-head">
+        <div>
+            <h2>⚖️ Advogado</h2>
+            <p>Assistente de respostas</p>
+        </div>
+        <button class="action-btn secondary" onclick="navegar('inicio')">← Voltar</button>
+    </div>
 
-        <div class="page-head">
+    <div class="panel">
 
-            <button class="back-btn"
-                    onclick="navegar('inicio')">
-                ←
-            </button>
-
-            <div>
-
-                <div class="page-title">
-                    📱 Celulares
-                </div>
-
-                <div class="page-sub">
-                    Números por aparelho
-                </div>
-
-            </div>
-
+        <div class="field">
+            <label>Pergunta / situação</label>
+            <textarea id="perguntaAdvogado" placeholder="Digite a situação do cliente..."></textarea>
         </div>
 
+        <button class="action-btn" onclick="gerarResposta()">🤖 Gerar resposta</button>
 
-        <div class="panel">
+        <div class="result" id="respostaAdvogado">A resposta aparecerá aqui.</div>
 
-            <div class="panel-title">
-                ➕ Adicionar celular
-            </div>
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Nome do aparelho
-                </label>
-
-                <input
-                    id="celularNome"
-                    class="input"
-                    type="text"
-                    placeholder="Ex.: Celular 01"
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Número
-                </label>
-
-                <input
-                    id="celularNumero"
-                    class="input"
-                    type="tel"
-                    placeholder="Digite o número"
-                >
-
-            </div>
-
-            <button
-                class="primary-btn"
-                onclick="adicionarCelular()">
-
-                ADICIONAR CELULAR
-
-            </button>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                📱 Meus celulares
-            </div>
-
-            <div
-                id="listaCelulares"
-                class="list">
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CHIPS -->
-
-    <section id="chips" class="screen">
-
-        <div class="page-head">
-
-            <button class="back-btn"
-                    onclick="navegar('inicio')">
-                ←
-            </button>
-
-            <div>
-
-                <div class="page-title">
-                    💳 Chips
-                </div>
-
-                <div class="page-sub">
-                    Controle de recargas
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                ➕ Cadastrar chip
-            </div>
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Operadora
-                </label>
-
-                <select
-                    id="chipOperadora"
-                    class="select">
-
-                    <option value="">
-                        Selecione
-                    </option>
-
-                    <option value="Claro">
-                        Claro
-                    </option>
-
-                    <option value="TIM">
-                        TIM
-                    </option>
-
-                    <option value="Vivo">
-                        Vivo
-                    </option>
-
-                    <option value="Oi">
-                        Oi
-                    </option>
-
-                    <option value="Outra">
-                        Outra
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Número do chip
-                </label>
-
-                <input
-                    id="chipNumero"
-                    class="input"
-                    type="tel"
-                    placeholder="Digite o número"
-                >
-
-            </div>
-
-            <button
-                class="primary-btn"
-                onclick="adicionarChip()">
-
-                CADASTRAR CHIP
-
-            </button>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                💳 Chips cadastrados
-            </div>
-
-            <div
-                id="listaChips"
-                class="list">
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CONTATOS -->
-
-    <section id="contatos" class="screen">
-
-        <div class="page-head">
-
-            <button class="back-btn"
-                    onclick="navegar('inicio')">
-                ←
-            </button>
-
-            <div>
-
-                <div class="page-title">
-                    👥 Contatos
-                </div>
-
-                <div class="page-sub">
-                    Seus números organizados
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                ➕ Novo contato
-            </div>
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Nome
-                </label>
-
-                <input
-                    id="contatoNome"
-                    class="input"
-                    type="text"
-                    placeholder="Nome do contato"
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label class="form-label">
-                    Número
-                </label>
-
-                <input
-                    id="contatoNumero"
-                    class="input"
-                    type="tel"
-                    placeholder="Número do WhatsApp"
-                >
-
-            </div>
-
-            <button
-                class="primary-btn"
-                onclick="adicionarContato()">
-
-                SALVAR CONTATO
-
-            </button>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                👥 Lista de contatos
-            </div>
-
-            <div
-                id="listaContatos"
-                class="list">
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- RESUMO -->
-
-    <section id="resumo" class="screen">
-
-        <div class="page-head">
-
-            <button class="back-btn"
-                    onclick="navegar('inicio')">
-                ←
-            </button>
-
-            <div>
-
-                <div class="page-title">
-                    📊 Resumo
-                </div>
-
-                <div class="page-sub">
-                    Visão geral do sistema
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="stats-grid">
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    👥
-                </div>
-
-                <div
-                    id="totalContatos"
-                    class="stat-value">
-                    0
-                </div>
-
-                <div class="stat-label">
-                    Contatos
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    📱
-                </div>
-
-                <div
-                    id="totalCelulares"
-                    class="stat-value">
-                    0
-                </div>
-
-                <div class="stat-label">
-                    Celulares
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    💳
-                </div>
-
-                <div
-                    id="totalChips"
-                    class="stat-value">
-                    0
-                </div>
-
-                <div class="stat-label">
-                    Chips
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    ⭐
-                </div>
-
-                <div
-                    id="totalFavoritos"
-                    class="stat-value">
-                    0
-                </div>
-
-                <div class="stat-label">
-                    Favoritos
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="panel"
-            style="margin-top:12px">
-
-            <div class="panel-title">
-                📈 Informações
-            </div>
-
-            <div class="panel-desc">
-
-                Aqui você pode acompanhar uma visão
-                geral dos dados cadastrados no seu
-                BOT DO BM3.
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FAVORITOS -->
-
-    <section id="favoritos" class="screen">
-
-        <div class="page-head">
-
-            <button class="back-btn"
-                    onclick="navegar('inicio')">
-                ←
-            </button>
-
-            <div>
-
-                <div class="page-title">
-                    ⭐ Favoritos
-                </div>
-
-                <div class="page-sub">
-                    Acesso rápido
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                ⭐ Seus favoritos
-            </div>
-
-            <div
-                id="listaFavoritos"
-                class="list">
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CONFIGURAÇÕES -->
-
-    <section id="config" class="screen">
-
-        <div class="page-head">
-
-            <button class="back-btn"
-                    onclick="navegar('inicio')">
-                ←
-            </button>
-
-            <div>
-
-                <div class="page-title">
-                    ⚙️ Configurações
-                </div>
-
-                <div class="page-sub">
-                    Temas, backup e informações
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                🎨 Aparência
-            </div>
-
-            <div class="setting">
-
-                <div class="setting-info">
-
-                    <div class="setting-title">
-                        Modo escuro
-                    </div>
-
-                    <div class="setting-desc">
-                        Ative o tema escuro do painel.
-                    </div>
-
-                </div>
-
-                <button
-                    id="darkToggle"
-                    class="toggle"
-                    onclick="alternarTema()">
-
-                    <span></span>
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                💾 Dados
-            </div>
-
-            <div class="setting">
-
-                <div class="setting-info">
-
-                    <div class="setting-title">
-                        Backup
-                    </div>
-
-                    <div class="setting-desc">
-                        Salve os dados do painel.
-                    </div>
-
-                </div>
-
-                <button
-                    class="secondary-btn"
-                    onclick="fazerBackup()">
-
-                    EXPORTAR
-
-                </button>
-
-            </div>
-
-            <div class="setting">
-
-                <div class="setting-info">
-
-                    <div class="setting-title">
-                        Restaurar
-                    </div>
-
-                    <div class="setting-desc">
-                        Restaure um backup anterior.
-                    </div>
-
-                </div>
-
-                <button
-                    class="secondary-btn"
-                    onclick="document.getElementById('arquivoBackup').click()">
-
-                    IMPORTAR
-
-                </button>
-
-            </div>
-
-            <input
-                id="arquivoBackup"
-                type="file"
-                accept=".json"
-                style="display:none"
-                onchange="restaurarBackup(event)"
-            >
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                🧹 Dados do sistema
-            </div>
-
-            <div class="panel-desc">
-                Use esta opção para limpar os dados
-                armazenados localmente neste navegador.
-            </div>
-
-            <button
-                class="danger-btn"
-                style="margin-top:12px"
-                onclick="limparDados()">
-
-                LIMPAR DADOS
-
-            </button>
-
-        </div>
-
-
-        <div class="panel">
-
-            <div class="panel-title">
-                🍀 BOT DO BM3
-            </div>
-
-            <div class="panel-desc">
-                Painel desenvolvido para organização
-                e gerenciamento das suas ferramentas.
-            </div>
-
-            <div
-                style="
-                    margin-top:12px;
-                    font-size:9px;
-                    color:var(--cinza);
-                ">
-
-                Versão 2.0 • Menu Neon
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- MODAL DE NOTIFICAÇÕES -->
-
-    <div
-        id="modalNotificacoes"
-        class="modal">
-
-        <div class="modal-box">
-
-            <div class="modal-head">
-
-                <div class="modal-title">
-                    🔔 Notificações
-                </div>
-
-                <button
-                    class="modal-close"
-                    onclick="fecharNotificacoes()">
-
-                    ✕
-
-                </button>
-
-            </div>
-
-            <div class="panel-desc">
-
-                Nenhuma notificação nova no momento.
-
-            </div>
-
+        <div class="action-row" style="margin-top:10px">
+            <button class="action-btn secondary" onclick="copiarResposta()">📋 Copiar</button>
+            <button class="action-btn secondary" onclick="enviarRespostaWhatsApp()">💬 WhatsApp</button>
         </div>
 
     </div>
 
-
-    <!-- TOAST -->
-
-    <div
-        id="toast"
-        class="toast">
+    <div class="panel">
+        <b style="color:var(--yellow)">⚠️ Observação</b>
+        <p style="color:var(--muted);font-size:11px;margin-top:7px;line-height:1.5">
+            As respostas são informativas e não substituem orientação jurídica profissional.
+        </p>
     </div>
-        <script>
 
-        /* ================================
-           BANCO DE DADOS LOCAL
-        ================================= */
+</section>
 
-        const STORAGE_KEY = "bot_bm3_dados";
 
-        let dados = {
-            contatos: [],
-            celulares: [],
-            chips: [],
-            favoritos: []
-        };
+<section id="contatos" class="screen">
 
+    <div class="section-head">
+        <div>
+            <h2>👥 Contatos</h2>
+            <p>Seus números organizados</p>
+        </div>
+        <button class="action-btn" onclick="abrirContato()">＋ Novo</button>
+    </div>
 
-        function carregarDados() {
+    <div class="panel">
+        <input id="buscarContato" placeholder="🔎 Buscar contato..." oninput="renderContatos()">
+    </div>
 
-            try {
+    <div class="panel" id="listaContatos"></div>
 
-                const salvo =
-                    localStorage.getItem(STORAGE_KEY);
+</section>
 
-                if (salvo) {
 
-                    const dadosSalvos =
-                        JSON.parse(salvo);
+<section id="chips" class="screen">
 
-                    dados = {
-                        contatos:
-                            Array.isArray(dadosSalvos.contatos)
-                                ? dadosSalvos.contatos
-                                : [],
+    <div class="section-head">
+        <div>
+            <h2>💳 Chips</h2>
+            <p>Controle de chips e recargas</p>
+        </div>
+        <button class="action-btn" onclick="abrirChip()">＋ Novo</button>
+    </div>
 
-                        celulares:
-                            Array.isArray(dadosSalvos.celulares)
-                                ? dadosSalvos.celulares
-                                : [],
+    <div class="panel" id="listaChips"></div>
 
-                        chips:
-                            Array.isArray(dadosSalvos.chips)
-                                ? dadosSalvos.chips
-                                : [],
+</section>
 
-                        favoritos:
-                            Array.isArray(dadosSalvos.favoritos)
-                                ? dadosSalvos.favoritos
-                                : []
-                    };
 
-                }
+<section id="celulares" class="screen">
 
-            } catch (erro) {
+    <div class="section-head">
+        <div>
+            <h2>📱 Celulares</h2>
+            <p>Números por aparelho</p>
+        </div>
+        <button class="action-btn" onclick="abrirCelular()">＋ Novo</button>
+    </div>
 
-                console.error(
-                    "Erro ao carregar dados:",
-                    erro
-                );
+    <div class="panel" id="listaCelulares"></div>
 
-                dados = {
-                    contatos: [],
-                    celulares: [],
-                    chips: [],
-                    favoritos: []
-                };
+</section>
 
-            }
 
-        }
+<section id="resumo" class="screen">
 
+    <div class="section-head">
+        <div>
+            <h2>📊 Resumo</h2>
+            <p>Visão geral</p>
+        </div>
+        <button class="action-btn secondary" onclick="navegar('inicio')">← Voltar</button>
+    </div>
 
-        function salvarDados() {
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-number" id="totalContatos">0</div>
+            <div class="stat-label">CONTATOS</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number" id="totalChips">0</div>
+            <div class="stat-label">CHIPS</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number" id="totalCelulares">0</div>
+            <div class="stat-label">CELULARES</div>
+        </div>
+    </div>
 
-            try {
+    <div class="panel" style="margin-top:12px">
+        <h3 style="color:var(--green)">🍀 BOT DO BM3</h3>
+        <p style="color:var(--muted);font-size:11px;margin-top:8px;line-height:1.6">
+            Painel carregado corretamente. Seus dados ficam armazenados neste navegador.
+        </p>
+    </div>
 
-                localStorage.setItem(
-                    STORAGE_KEY,
-                    JSON.stringify(dados)
-                );
+</section>
 
-            } catch (erro) {
 
-                console.error(
-                    "Erro ao salvar dados:",
-                    erro
-                );
+<section id="favoritos" class="screen">
 
-                mostrarToast(
-                    "Não foi possível salvar os dados."
-                );
+    <div class="section-head">
+        <div>
+            <h2>⭐ Favoritos</h2>
+            <p>Acesso rápido</p>
+        </div>
+        <button class="action-btn secondary" onclick="navegar('inicio')">← Voltar</button>
+    </div>
 
-            }
+    <div class="panel" id="listaFavoritos"></div>
 
-        }
+</section>
 
 
-        /* ================================
-           NAVEGAÇÃO
-        ================================= */
+<section id="config" class="screen">
 
-        function navegar(tela) {
+    <div class="section-head">
+        <div>
+            <h2>⚙️ Configurações</h2>
+            <p>Personalização e dados</p>
+        </div>
+        <button class="action-btn secondary" onclick="navegar('inicio')">← Voltar</button>
+    </div>
 
-            document
-                .querySelectorAll(".screen")
-                .forEach(function(screen) {
+    <div class="panel">
 
-                    screen.classList.remove("active");
+        <h3 style="color:var(--green)">🎨 Aparência</h3>
 
-                });
+        <div class="action-row" style="margin-top:12px">
+            <button class="action-btn" onclick="alternarTema()">☀️ Alternar tema</button>
+            <button class="action-btn secondary" onclick="ativarNeon()">💚 Neon</button>
+        </div>
 
+    </div>
 
-            const destino =
-                document.getElementById(tela);
+    <div class="panel">
 
+        <h3 style="color:var(--green)">💾 Backup</h3>
 
-            if (!destino) {
+        <div class="action-row" style="margin-top:12px">
+            <button class="action-btn" onclick="exportarBackup()">📤 Exportar</button>
+            <button class="action-btn secondary" onclick="document.getElementById('arquivoBackup').click()">📥 Importar</button>
+            <input id="arquivoBackup" type="file" accept=".json" style="display:none" onchange="importarBackup(event)">
+        </div>
 
-                console.warn(
-                    "Tela não encontrada:",
-                    tela
-                );
+    </div>
 
-                return;
+    <div class="panel">
 
-            }
+        <h3 style="color:var(--danger)">⚠️ Zona de risco</h3>
 
+        <button class="action-btn danger" style="margin-top:12px" onclick="limparDados()">
+            🗑️ Apagar todos os dados
+        </button>
 
-            destino.classList.add("active");
+    </div>
 
+</section>
 
-            document
-                .querySelectorAll(
-                    ".nav-item, .menu-card"
-                )
-                .forEach(function(item) {
+<div class="footer">
+    🍀 BOT DO BM3 • PAINEL NEON • VERSÃO 2.0
+</div>
 
-                    item.classList.remove("active");
+</main>
+</div>
 
-                });
 
+<!-- MODAIS -->
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+<div class="modal" id="modalContato">
+    <div class="modal-box">
 
+        <div class="modal-head">
+            <h3>👤 Novo contato</h3>
+            <button class="close" onclick="fecharModais()">×</button>
+        </div>
 
-            if (tela === "resumo") {
+        <div class="field">
+            <label>Nome</label>
+            <input id="contatoNome" placeholder="Nome do contato">
+        </div>
 
-                atualizarResumo();
+        <div class="field">
+            <label>Número</label>
+            <input id="contatoNumero" placeholder="5511999999999">
+        </div>
 
-            }
+        <div class="field">
+            <label>Observação</label>
+            <textarea id="contatoObs" placeholder="Observação..."></textarea>
+        </div>
 
+        <div class="action-row">
+            <button class="action-btn" onclick="salvarContato()">💾 Salvar</button>
+            <button class="action-btn secondary" onclick="fecharModais()">Cancelar</button>
+        </div>
 
-            if (tela === "contatos") {
+    </div>
+</div>
 
-                renderizarContatos();
 
-            }
+<div class="modal" id="modalChip">
+    <div class="modal-box">
 
+        <div class="modal-head">
+            <h3>💳 Novo chip</h3>
+            <button class="close" onclick="fecharModais()">×</button>
+        </div>
 
-            if (tela === "celulares") {
+        <div class="field">
+            <label>Operadora</label>
+            <input id="chipOperadora" placeholder="Claro / Vivo / TIM / etc.">
+        </div>
 
-                renderizarCelulares();
+        <div class="field">
+            <label>Número</label>
+            <input id="chipNumero" placeholder="5511999999999">
+        </div>
 
-            }
+        <div class="field">
+            <label>Valor da recarga</label>
+            <input id="chipRecarga" type="number" placeholder="20">
+        </div>
 
+        <div class="action-row">
+            <button class="action-btn" onclick="salvarChip()">💾 Salvar</button>
+            <button class="action-btn secondary" onclick="fecharModais()">Cancelar</button>
+        </div>
 
-            if (tela === "chips") {
+    </div>
+</div>
 
-                renderizarChips();
 
-            }
+<div class="modal" id="modalCelular">
+    <div class="modal-box">
 
+        <div class="modal-head">
+            <h3>📱 Novo celular</h3>
+            <button class="close" onclick="fecharModais()">×</button>
+        </div>
 
-            if (tela === "favoritos") {
+        <div class="field">
+            <label>Nome / aparelho</label>
+            <input id="celularNome" placeholder="Celular principal">
+        </div>
 
-                renderizarFavoritos();
+        <div class="field">
+            <label>Número</label>
+            <input id="celularNumero" placeholder="5511999999999">
+        </div>
 
-            }
+        <div class="action-row">
+            <button class="action-btn" onclick="salvarCelular()">💾 Salvar</button>
+            <button class="action-btn secondary" onclick="fecharModais()">Cancelar</button>
+        </div>
 
-        }
+    </div>
+</div>
 
 
-        /* ================================
-           TOAST
-        ================================= */
+<div class="toast" id="toast"></div>
 
-        function mostrarToast(mensagem) {
 
-            const toast =
-                document.getElementById("toast");
+<script>
+"use strict";
 
+/* =========================
+   DADOS
+========================= */
 
-            if (!toast) return;
+let dados = {
+    contatos: [],
+    chips: [],
+    celulares: [],
+    favoritos: []
+};
 
+let calcTipo = "porcentagem";
 
-            toast.textContent = mensagem;
 
-            toast.classList.add("show");
+function carregarDados(){
+    try{
+        const salvo = localStorage.getItem("BOT_BM3_DADOS");
 
-
-            clearTimeout(
-                window.toastTimer
-            );
-
-
-            window.toastTimer =
-                setTimeout(function() {
-
-                    toast.classList.remove(
-                        "show"
-                    );
-
-                }, 2800);
-
-        }
-
-
-        /* ================================
-           WHATSAPP
-        ================================= */
-
-        function abrirWhatsApp() {
-
-            window.open(
-                "https://web.whatsapp.com/",
-                "_blank"
-            );
-
-        }
-
-
-        function limparNumero(numero) {
-
-            return String(numero || "")
-                .replace(/\D/g, "");
-
-        }
-
-
-        function abrirNumeroWhatsApp() {
-
-            const campo =
-                document.getElementById(
-                    "whatsappNumero"
-                );
-
-
-            if (!campo) return;
-
-
-            const numero =
-                limparNumero(campo.value);
-
-
-            if (!numero) {
-
-                mostrarToast(
-                    "Digite um número primeiro."
-                );
-
-                campo.focus();
-
-                return;
-
-            }
-
-
-            if (numero.length < 10) {
-
-                mostrarToast(
-                    "Digite um número válido."
-                );
-
-                campo.focus();
-
-                return;
-
-            }
-
-
-            const url =
-                "https://wa.me/" + numero;
-
-
-            window.open(
-                url,
-                "_blank"
-            );
-
-
-            mostrarToast(
-                "Abrindo WhatsApp..."
-            );
-
-        }
-
-
-        /* ================================
-           CALCULADORA
-        ================================= */
-
-        function calcular() {
-
-            const a =
-                parseFloat(
-                    document.getElementById(
-                        "calcA"
-                    ).value
-                );
-
-
-            const b =
-                parseFloat(
-                    document.getElementById(
-                        "calcB"
-                    ).value
-                );
-
-
-            const operacao =
-                document.getElementById(
-                    "calcOperacao"
-                ).value;
-
-
-            if (
-                Number.isNaN(a) ||
-                Number.isNaN(b)
-            ) {
-
-                mostrarToast(
-                    "Preencha os dois números."
-                );
-
-                return;
-
-            }
-
-
-            let resultado;
-
-
-            switch (operacao) {
-
-                case "+":
-
-                    resultado = a + b;
-
-                    break;
-
-
-                case "-":
-
-                    resultado = a - b;
-
-                    break;
-
-
-                case "*":
-
-                    resultado = a * b;
-
-                    break;
-
-
-                case "/":
-
-                    if (b === 0) {
-
-                        mostrarToast(
-                            "Não é possível dividir por zero."
-                        );
-
-                        return;
-
-                    }
-
-                    resultado = a / b;
-
-                    break;
-
-
-                case "%":
-
-                    resultado =
-                        (a * b) / 100;
-
-                    break;
-
-
-                default:
-
-                    resultado = 0;
-
-            }
-
-
-            const resultadoBox =
-                document.getElementById(
-                    "resultadoCalculadora"
-                );
-
-
-            const resultadoTexto =
-                document.getElementById(
-                    "resultadoCalc"
-                );
-
-
-            if (resultadoBox) {
-
-                resultadoBox.style.display =
-                    "block";
-
-            }
-
-
-            if (resultadoTexto) {
-
-                resultadoTexto.textContent =
-                    Number.isInteger(resultado)
-                        ? resultado
-                        : resultado.toFixed(2);
-
-            }
-
-
-            mostrarToast(
-                "Cálculo realizado!"
-            );
-
-        }
-
-
-        /* ================================
-           CONTATOS
-        ================================= */
-
-        function adicionarContato() {
-
-            const nome =
-                document.getElementById(
-                    "contatoNome"
-                ).value.trim();
-
-
-            const numero =
-                limparNumero(
-                    document.getElementById(
-                        "contatoNumero"
-                    ).value
-                );
-
-
-            if (!nome) {
-
-                mostrarToast(
-                    "Digite o nome do contato."
-                );
-
-                return;
-
-            }
-
-
-            if (!numero) {
-
-                mostrarToast(
-                    "Digite o número do contato."
-                );
-
-                return;
-
-            }
-
-
-            const contato = {
-
-                id:
-                    Date.now(),
-
-                nome:
-                    nome,
-
-                numero:
-                    numero,
-
-                favorito:
-                    false,
-
-                criadoEm:
-                    new Date().toISOString()
-
-            };
-
-
-            dados.contatos.push(
-                contato
-            );
-
-
-            salvarDados();
-
-            renderizarContatos();
-
-            atualizarResumo();
-
-
-            document.getElementById(
-                "contatoNome"
-            ).value = "";
-
-
-            document.getElementById(
-                "contatoNumero"
-            ).value = "";
-
-
-            mostrarToast(
-                "Contato salvo com sucesso!"
-            );
-
-        }
-
-
-        function renderizarContatos() {
-
-            const lista =
-                document.getElementById(
-                    "listaContatos"
-                );
-
-
-            if (!lista) return;
-
-
-            if (dados.contatos.length === 0) {
-
-                lista.innerHTML = `
-                    <div class="empty-state">
-                        👥
-                        <br>
-                        Nenhum contato cadastrado.
-                    </div>
-                `;
-
-                return;
-
-            }
-
-
-            lista.innerHTML =
-                dados.contatos
-                    .map(function(contato) {
-
-                        return `
-                            <div class="list-item">
-
-                                <div class="list-avatar">
-                                    ${obterInicial(contato.nome)}
-                                </div>
-
-                                <div class="list-content">
-
-                                    <div class="list-name">
-                                        ${escaparHTML(contato.nome)}
-                                    </div>
-
-                                    <div class="list-info">
-                                        ${escaparHTML(contato.numero)}
-                                    </div>
-
-                                </div>
-
-                                <div class="list-actions">
-
-                                    <button
-                                        class="icon-btn"
-                                        title="WhatsApp"
-                                        onclick="abrirContatoWhatsApp('${contato.numero}')">
-                                        💬
-                                    </button>
-
-                                    <button
-                                        class="icon-btn"
-                                        title="Favoritar"
-                                        onclick="alternarFavorito(${contato.id})">
-                                        ${contato.favorito ? "⭐" : "☆"}
-                                    </button>
-
-                                    <button
-                                        class="icon-btn danger-icon"
-                                        title="Excluir"
-                                        onclick="excluirContato(${contato.id})">
-                                        🗑️
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    })
-                    .join("");
-
-        }
-
-
-        function obterInicial(nome) {
-
-            if (!nome) return "?";
-
-            return nome
-                .trim()
-                .charAt(0)
-                .toUpperCase();
-
-        }
-
-
-        function escaparHTML(valor) {
-
-            return String(valor)
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-
-        }
-
-
-        function abrirContatoWhatsApp(numero) {
-
-            const limpo =
-                limparNumero(numero);
-
-
-            if (!limpo) return;
-
-
-            window.open(
-                "https://wa.me/" + limpo,
-                "_blank"
-            );
-
-        }
-
-
-        function excluirContato(id) {
-
-            const confirmar =
-                confirm(
-                    "Deseja realmente excluir este contato?"
-                );
-
-
-            if (!confirmar) return;
-
-
-            dados.contatos =
-                dados.contatos.filter(
-                    function(contato) {
-
-                        return contato.id !== id;
-
-                    }
-                );
-
-
-            dados.favoritos =
-                dados.favoritos.filter(
-                    function(item) {
-
-                        return item.id !== id;
-
-                    }
-                );
-
-
-            salvarDados();
-
-            renderizarContatos();
-
-            renderizarFavoritos();
-
-            atualizarResumo();
-
-
-            mostrarToast(
-                "Contato excluído."
-            );
-
-        }
-
-
-        /* ================================
-           FAVORITOS
-        ================================= */
-
-        function alternarFavorito(id) {
-
-            const contato =
-                dados.contatos.find(
-                    function(item) {
-
-                        return item.id === id;
-
-                    }
-                );
-
-
-            if (!contato) return;
-
-
-            contato.favorito =
-                !contato.favorito;
-
-
-            if (contato.favorito) {
-
-                if (
-                    !dados.favoritos.some(
-                        function(item) {
-
-                            return item.id === id;
-
-                        }
-                    )
-                ) {
-
-                    dados.favoritos.push(
-                        contato
-                    );
-
-                }
-
-                mostrarToast(
-                    "Adicionado aos favoritos ⭐"
-                );
-
-            } else {
-
-                dados.favoritos =
-                    dados.favoritos.filter(
-                        function(item) {
-
-                            return item.id !== id;
-
-                        }
-                    );
-
-                mostrarToast(
-                    "Removido dos favoritos."
-                );
-
-            }
-
-
-            salvarDados();
-
-            renderizarContatos();
-
-            renderizarFavoritos();
-
-            atualizarResumo();
-
-        }
-
-
-        function renderizarFavoritos() {
-
-            const lista =
-                document.getElementById(
-                    "listaFavoritos"
-                );
-
-
-            if (!lista) return;
-
-
-            const favoritos =
-                dados.contatos.filter(
-                    function(contato) {
-
-                        return contato.favorito;
-
-                    }
-                );
-
-
-            if (favoritos.length === 0) {
-
-                lista.innerHTML = `
-                    <div class="empty-state">
-                        ⭐
-                        <br>
-                        Nenhum favorito ainda.
-                    </div>
-                `;
-
-                return;
-
-            }
-
-
-            lista.innerHTML =
-                favoritos
-                    .map(function(contato) {
-
-                        return `
-                            <div class="list-item">
-
-                                <div class="list-avatar">
-                                    ⭐
-                                </div>
-
-                                <div class="list-content">
-
-                                    <div class="list-name">
-                                        ${escaparHTML(contato.nome)}
-                                    </div>
-
-                                    <div class="list-info">
-                                        ${escaparHTML(contato.numero)}
-                                    </div>
-
-                                </div>
-
-                                <div class="list-actions">
-
-                                    <button
-                                        class="icon-btn"
-                                        onclick="abrirContatoWhatsApp('${contato.numero}')">
-                                        💬
-                                    </button>
-
-                                    <button
-                                        class="icon-btn"
-                                        onclick="alternarFavorito(${contato.id})">
-                                        ⭐
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    })
-                    .join("");
-
-        }
-
-
-        /* ================================
-           CELULARES
-        ================================= */
-
-        function adicionarCelular() {
-
-            const nome =
-                document.getElementById(
-                    "celularNome"
-                ).value.trim();
-
-
-            const numero =
-                limparNumero(
-                    document.getElementById(
-                        "celularNumero"
-                    ).value
-                );
-
-
-            if (!nome || !numero) {
-
-                mostrarToast(
-                    "Preencha nome e número."
-                );
-
-                return;
-
-            }
-
-
-            dados.celulares.push({
-
-                id:
-                    Date.now(),
-
-                nome:
-                    nome,
-
-                numero:
-                    numero
-
-            });
-
-
-            salvarDados();
-
-            renderizarCelulares();
-
-            atualizarResumo();
-
-
-            document.getElementById(
-                "celularNome"
-            ).value = "";
-
-
-            document.getElementById(
-                "celularNumero"
-            ).value = "";
-
-
-            mostrarToast(
-                "Celular cadastrado!"
-            );
-
-        }
-
-
-        function renderizarCelulares() {
-
-            const lista =
-                document.getElementById(
-                    "listaCelulares"
-                );
-
-
-            if (!lista) return;
-
-
-            if (dados.celulares.length === 0) {
-
-                lista.innerHTML = `
-                    <div class="empty-state">
-                        📱
-                        <br>
-                        Nenhum celular cadastrado.
-                    </div>
-                `;
-
-                return;
-
-            }
-
-
-            lista.innerHTML =
-                dados.celulares
-                    .map(function(item) {
-
-                        return `
-                            <div class="list-item">
-
-                                <div class="list-avatar">
-                                    📱
-                                </div>
-
-                                <div class="list-content">
-
-                                    <div class="list-name">
-                                        ${escaparHTML(item.nome)}
-                                    </div>
-
-                                    <div class="list-info">
-                                        ${escaparHTML(item.numero)}
-                                    </div>
-
-                                </div>
-
-                                <div class="list-actions">
-
-                                    <button
-                                        class="icon-btn"
-                                        onclick="abrirContatoWhatsApp('${item.numero}')">
-                                        💬
-                                    </button>
-
-                                    <button
-                                        class="icon-btn danger-icon"
-                                        onclick="excluirCelular(${item.id})">
-                                        🗑️
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    })
-                    .join("");
-
-        }
-
-
-        function excluirCelular(id) {
-
-            if (
-                !confirm(
-                    "Excluir este celular?"
-                )
-            ) return;
-
-
-            dados.celulares =
-                dados.celulares.filter(
-                    function(item) {
-
-                        return item.id !== id;
-
-                    }
-                );
-
-
-            salvarDados();
-
-            renderizarCelulares();
-
-            atualizarResumo();
-
-
-            mostrarToast(
-                "Celular excluído."
-            );
-
-        }
-
-
-        /* ================================
-           CHIPS
-        ================================= */
-
-        function adicionarChip() {
-
-            const operadora =
-                document.getElementById(
-                    "chipOperadora"
-                ).value;
-
-
-            const numero =
-                limparNumero(
-                    document.getElementById(
-                        "chipNumero"
-                    ).value
-                );
-
-
-            if (!operadora) {
-
-                mostrarToast(
-                    "Selecione a operadora."
-                );
-
-                return;
-
-            }
-
-
-            if (!numero) {
-
-                mostrarToast(
-                    "Digite o número do chip."
-                );
-
-                return;
-
-            }
-
-
-            dados.chips.push({
-
-                id:
-                    Date.now(),
-
-                operadora:
-                    operadora,
-
-                numero:
-                    numero
-
-            });
-
-
-            salvarDados();
-
-            renderizarChips();
-
-            atualizarResumo();
-
-
-            document.getElementById(
-                "chipOperadora"
-            ).value = "";
-
-
-            document.getElementById(
-                "chipNumero"
-            ).value = "";
-
-
-            mostrarToast(
-                "Chip cadastrado!"
-            );
-
-        }
-
-
-        function renderizarChips() {
-
-            const lista =
-                document.getElementById(
-                    "listaChips"
-                );
-
-
-            if (!lista) return;
-
-
-            if (dados.chips.length === 0) {
-
-                lista.innerHTML = `
-                    <div class="empty-state">
-                        💳
-                        <br>
-                        Nenhum chip cadastrado.
-                    </div>
-                `;
-
-                return;
-
-            }
-
-
-            lista.innerHTML =
-                dados.chips
-                    .map(function(item) {
-
-                        return `
-                            <div class="list-item">
-
-                                <div class="list-avatar">
-                                    💳
-                                </div>
-
-                                <div class="list-content">
-
-                                    <div class="list-name">
-                                        ${escaparHTML(item.operadora)}
-                                    </div>
-
-                                    <div class="list-info">
-                                        ${escaparHTML(item.numero)}
-                                    </div>
-
-                                </div>
-
-                                <div class="list-actions">
-
-                                    <button
-                                        class="icon-btn danger-icon"
-                                        onclick="excluirChip(${item.id})">
-                                        🗑️
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    })
-                    .join("");
-
-        }
-
-
-        function excluirChip(id) {
-
-            if (
-                !confirm(
-                    "Excluir este chip?"
-                )
-            ) return;
-
-
-            dados.chips =
-                dados.chips.filter(
-                    function(item) {
-
-                        return item.id !== id;
-
-                    }
-                );
-
-
-            salvarDados();
-
-            renderizarChips();
-
-            atualizarResumo();
-
-
-            mostrarToast(
-                "Chip excluído."
-            );
-
-        }
-
-
-        /* ================================
-           RESUMO
-        ================================= */
-
-        function atualizarResumo() {
-
-            const contatos =
-                document.getElementById(
-                    "totalContatos"
-                );
-
-
-            const celulares =
-                document.getElementById(
-                    "totalCelulares"
-                );
-
-
-            const chips =
-                document.getElementById(
-                    "totalChips"
-                );
-
-
-            const favoritos =
-                document.getElementById(
-                    "totalFavoritos"
-                );
-
-
-            if (contatos) {
-
-                contatos.textContent =
-                    dados.contatos.length;
-
-            }
-
-
-            if (celulares) {
-
-                celulares.textContent =
-                    dados.celulares.length;
-
-            }
-
-
-            if (chips) {
-
-                chips.textContent =
-                    dados.chips.length;
-
-            }
-
-
-            if (favoritos) {
-
-                favoritos.textContent =
-                    dados.contatos.filter(
-                        function(item) {
-
-                            return item.favorito;
-
-                        }
-                    ).length;
-
-            }
-
-        }
-
-
-        /* ================================
-           ADVOGADO
-        ================================= */
-
-        function responderAdvogado() {
-
-            const campo =
-                document.getElementById(
-                    "perguntaAdvogado"
-                );
-
-
-            const resposta =
-                document.getElementById(
-                    "respostaAdvogado"
-                );
-
-
-            const texto =
-                document.getElementById(
-                    "textoRespostaAdvogado"
-                );
-
-
-            if (!campo || !resposta || !texto) {
-                return;
-            }
-
-
-            const pergunta =
-                campo.value.trim();
-
-
-            if (!pergunta) {
-
-                mostrarToast(
-                    "Digite uma pergunta."
-                );
-
-                campo.focus();
-
-                return;
-
-            }
-
-
-            texto.innerHTML = `
-                <strong>
-                    Pergunta recebida:
-                </strong>
-
-                <br><br>
-
-                ${escaparHTML(pergunta)}
-
-                <br><br>
-
-                Para uma orientação jurídica
-                específica, analise os fatos,
-                documentos e circunstâncias do caso
-                com um profissional habilitado.
-
-            `;
-
-
-            resposta.style.display =
-                "block";
-
-
-            mostrarToast(
-                "Análise preparada."
-            );
-
-        }
-
-
-        /* ================================
-           TEMA
-        ================================= */
-
-        function alternarTema() {
-
-            document.body.classList.toggle(
-                "light-theme"
-            );
-
-
-            const claro =
-                document.body.classList.contains(
-                    "light-theme"
-                );
-
-
-            localStorage.setItem(
-                "bot_bm3_tema",
-                claro ? "claro" : "escuro"
-            );
-
-
-            atualizarBotaoTema();
-
-
-            mostrarToast(
-                claro
-                    ? "Tema claro ativado."
-                    : "Tema escuro ativado."
-            );
-
-        }
-
-
-        function carregarTema() {
-
-            const tema =
-                localStorage.getItem(
-                    "bot_bm3_tema"
-                );
-
-
-            if (tema === "claro") {
-
-                document.body.classList.add(
-                    "light-theme"
-                );
-
-            }
-
-
-            atualizarBotaoTema();
-
-        }
-
-
-        function atualizarBotaoTema() {
-
-            const botao =
-                document.getElementById(
-                    "darkToggle"
-                );
-
-
-            if (!botao) return;
-
-
-            if (
-                document.body.classList.contains(
-                    "light-theme"
-                )
-            ) {
-
-                botao.classList.add(
-                    "active"
-                );
-
-            } else {
-
-                botao.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-
-
-        /* ================================
-           BACKUP
-        ================================= */
-
-        function fazerBackup() {
-
-            const backup = {
-
-                versao:
-                    "2.0",
-
-                data:
-                    new Date().toISOString(),
-
-                dados:
-                    dados
-
-            };
-
-
-            const conteudo =
-                JSON.stringify(
-                    backup,
-                    null,
-                    2
-                );
-
-
-            const blob =
-                new Blob(
-                    [conteudo],
-                    {
-                        type:
-                            "application/json"
-                    }
-                );
-
-
-            const url =
-                URL.createObjectURL(
-                    blob
-                );
-
-
-            const link =
-                document.createElement(
-                    "a"
-                );
-
-
-            link.href = url;
-
-            link.download =
-                "BOT_DO_BM3_BACKUP.json";
-
-
-            document.body.appendChild(
-                link
-            );
-
-
-            link.click();
-
-
-            link.remove();
-
-
-            URL.revokeObjectURL(
-                url
-            );
-
-
-            mostrarToast(
-                "Backup exportado!"
-            );
-
-        }
-
-
-        function restaurarBackup(event) {
-
-            const arquivo =
-                event.target.files[0];
-
-
-            if (!arquivo) return;
-
-
-            const leitor =
-                new FileReader();
-
-
-            leitor.onload =
-                function(e) {
-
-                    try {
-
-                        const backup =
-                            JSON.parse(
-                                e.target.result
-                            );
-
-
-                        if (
-                            !backup ||
-                            !backup.dados
-                        ) {
-
-                            throw new Error(
-                                "Backup inválido."
-                            );
-
-                        }
-
-
-                        dados = {
-
-                            contatos:
-                                Array.isArray(
-                                    backup.dados.contatos
-                                )
-                                    ? backup.dados.contatos
-                                    : [],
-
-                            celulares:
-                                Array.isArray(
-                                    backup.dados.celulares
-                                )
-                                    ? backup.dados.celulares
-                                    : [],
-
-                            chips:
-                                Array.isArray(
-                                    backup.dados.chips
-                                )
-                                    ? backup.dados.chips
-                                    : [],
-
-                            favoritos:
-                                Array.isArray(
-                                    backup.dados.favoritos
-                                )
-                                    ? backup.dados.favoritos
-                                    : []
-
-                        };
-
-
-                        salvarDados();
-
-
-                        renderizarContatos();
-
-                        renderizarCelulares();
-
-                        renderizarChips();
-
-                        renderizarFavoritos();
-
-                        atualizarResumo();
-
-
-                        mostrarToast(
-                            "Backup restaurado!"
-                        );
-
-
-                    } catch (erro) {
-
-                        console.error(
-                            erro
-                        );
-
-                        mostrarToast(
-                            "Backup inválido."
-                        );
-
-                    }
-
-
-                    event.target.value =
-                        "";
-
-                };
-
-
-            leitor.readAsText(
-                arquivo
-            );
-
-        }
-
-
-        /* ================================
-           LIMPAR DADOS
-        ================================= */
-
-        function limparDados() {
-
-            const confirmar =
-                confirm(
-                    "ATENÇÃO!\n\n" +
-                    "Isso apagará contatos, celulares, " +
-                    "chips e favoritos deste painel.\n\n" +
-                    "Deseja continuar?"
-                );
-
-
-            if (!confirmar) return;
-
+        if(salvo){
+            const obj = JSON.parse(salvo);
 
             dados = {
-
-                contatos: [],
-
-                celulares: [],
-
-                chips: [],
-
-                favoritos: []
-
+                contatos:Array.isArray(obj.contatos) ? obj.contatos : [],
+                chips:Array.isArray(obj.chips) ? obj.chips : [],
+                celulares:Array.isArray(obj.celulares) ? obj.celulares : [],
+                favoritos:Array.isArray(obj.favoritos) ? obj.favoritos : []
             };
+        }
+    }catch(e){
+        console.error(e);
+    }
+}
 
+
+function salvarDados(){
+    localStorage.setItem("BOT_BM3_DADOS",JSON.stringify(dados));
+    atualizarTudo();
+}
+
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
+function navegar(id){
+
+    document.querySelectorAll(".screen").forEach(el=>{
+        el.classList.remove("active");
+    });
+
+    const tela=document.getElementById(id);
+
+    if(tela){
+        tela.classList.add("active");
+    }
+
+    document.querySelectorAll(".nav-btn").forEach(btn=>{
+        btn.classList.toggle(
+            "active",
+            btn.dataset.tela===id
+        );
+    });
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    atualizarTudo();
+}
+
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+        navegar(btn.dataset.tela);
+    });
+});
+
+
+/* =========================
+   TEMA
+========================= */
+
+function alternarTema(){
+
+    document.body.classList.toggle("light");
+
+    if(document.body.classList.contains("light")){
+        document.documentElement.style.setProperty("--bg","#eef5ef");
+        document.documentElement.style.setProperty("--card","#ffffff");
+        document.documentElement.style.setProperty("--text","#102015");
+        document.documentElement.style.setProperty("--muted","#52655a");
+        document.documentElement.style.setProperty("--border","rgba(0,120,55,.20)");
+    }else{
+        document.documentElement.style.setProperty("--bg","#030603");
+        document.documentElement.style.setProperty("--card","#091109");
+        document.documentElement.style.setProperty("--text","#effff4");
+        document.documentElement.style.setProperty("--muted","#8aa18f");
+        document.documentElement.style.setProperty("--border","rgba(0,255,102,.20)");
+    }
+
+    localStorage.setItem(
+        "BOT_BM3_TEMA",
+        document.body.classList.contains("light") ? "light" : "dark"
+    );
+}
+
+
+function ativarNeon(){
+    document.body.classList.remove("light");
+
+    document.documentElement.style.setProperty("--bg","#030603");
+    document.documentElement.style.setProperty("--card","#091109");
+    document.documentElement.style.setProperty("--text","#effff4");
+    document.documentElement.style.setProperty("--muted","#8aa18f");
+    document.documentElement.style.setProperty("--border","rgba(0,255,102,.20)");
+
+    localStorage.setItem("BOT_BM3_TEMA","dark");
+
+    mostrarToast("💚 Modo neon ativado");
+}
+
+
+/* =========================
+   RELÓGIO
+========================= */
+
+function atualizarRelogio(){
+
+    const agora=new Date();
+
+    const data=agora.toLocaleDateString("pt-BR");
+    const hora=agora.toLocaleTimeString("pt-BR");
+
+    const el=document.getElementById("clock");
+
+    if(el){
+        el.textContent=data+" • "+hora;
+    }
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer;
+
+function mostrarToast(msg){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=msg;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer=setTimeout(()=>{
+        toast.classList.remove("show");
+    },2300);
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+function limparNumero(v){
+    return String(v||"").replace(/\D/g,"");
+}
+
+
+function atualizarLinkWhatsApp(){
+
+    const numero=limparNumero(
+        document.getElementById("waNumero")?.value
+    );
+
+    const mensagem=document.getElementById("waMensagem")?.value || "";
+
+    const link=numero
+        ? "https://wa.me/"+numero+"?text="+encodeURIComponent(mensagem)
+        : "";
+
+    const el=document.getElementById("waLink");
+
+    if(el){
+        el.value=link;
+    }
+}
+
+
+document.addEventListener("input",e=>{
+    if(e.target.id==="waNumero" || e.target.id==="waMensagem"){
+        atualizarLinkWhatsApp();
+    }
+});
+
+
+function abrirWhatsApp(){
+
+    const numero=limparNumero(
+        document.getElementById("waNumero").value
+    );
+
+    const mensagem=document.getElementById("waMensagem").value;
+
+    if(!numero){
+        mostrarToast("⚠️ Informe o número");
+        return;
+    }
+
+    const url="https://wa.me/"+numero+
+        "?text="+encodeURIComponent(mensagem);
+
+    window.open(url,"_blank");
+}
+
+
+function copiarMensagem(){
+
+    const texto=document.getElementById("waMensagem").value;
+
+    if(!texto){
+        mostrarToast("⚠️ Digite uma mensagem");
+        return;
+    }
+
+    navigator.clipboard.writeText(texto);
+
+    mostrarToast("📋 Mensagem copiada");
+}
+
+
+function copiarLink(){
+
+    const link=document.getElementById("waLink").value;
+
+    if(!link){
+        mostrarToast("⚠️ Preencha o número");
+        return;
+    }
+
+    navigator.clipboard.writeText(link);
+
+    mostrarToast("🔗 Link copiado");
+}
+
+
+/* =========================
+   CALCULADORA
+========================= */
+
+function setCalc(tipo,botao){
+
+    calcTipo=tipo;
+
+    document.querySelectorAll(".calc-option")
+        .forEach(x=>x.classList.remove("active"));
+
+    botao.classList.add("active");
+
+    document.querySelectorAll(".calc-box")
+        .forEach(x=>x.style.display="none");
+
+    if(tipo==="porcentagem"){
+        document.getElementById("calcPorcentagem").style.display="block";
+    }
+
+    if(["somar","subtrair","multiplicar","dividir"].includes(tipo)){
+        document.getElementById("calcSomar").style.display="block";
+    }
+
+    if(tipo==="regra"){
+        document.getElementById("calcRegra").style.display="block";
+    }
+
+    document.getElementById("calcResultado").textContent=
+        "Resultado aparecerá aqui";
+}
+
+
+function numero(id){
+    return parseFloat(document.getElementById(id)?.value) || 0;
+}
+
+
+function dinheiro(v){
+    return Number(v).toLocaleString("pt-BR",{
+        style:"currency",
+        currency:"BRL"
+    });
+}
+
+
+function calcular(){
+
+    let resultado;
+
+    if(calcTipo==="porcentagem"){
+
+        const valor=numero("calcValor");
+        const pct=numero("calcPct");
+
+        resultado=(valor*pct)/100;
+
+        document.getElementById("calcResultado").textContent=
+            dinheiro(resultado)+"  ("+pct+"%)";
+    }
+
+    else if(calcTipo==="somar"){
+        resultado=numero("calcA")+numero("calcB");
+
+        document.getElementById("calcResultado").textContent=
+            resultado.toLocaleString("pt-BR");
+    }
+
+    else if(calcTipo==="subtrair"){
+        resultado=numero("calcA")-numero("calcB");
+
+        document.getElementById("calcResultado").textContent=
+            resultado.toLocaleString("pt-BR");
+    }
+
+    else if(calcTipo==="multiplicar"){
+        resultado=numero("calcA")*numero("calcB");
+
+        document.getElementById("calcResultado").textContent=
+            resultado.toLocaleString("pt-BR");
+    }
+
+    else if(calcTipo==="dividir"){
+
+        const a=numero("calcA");
+        const b=numero("calcB");
+
+        if(!b){
+            document.getElementById("calcResultado").textContent=
+                "Não é possível dividir por zero.";
+            return;
+        }
+
+        resultado=a/b;
+
+        document.getElementById("calcResultado").textContent=
+            resultado.toLocaleString("pt-BR");
+    }
+
+    else if(calcTipo==="regra"){
+
+        const a=numero("regraA");
+        const b=numero("regraB");
+        const c=numero("regraC");
+
+        if(!a){
+            document.getElementById("calcResultado").textContent=
+                "A não pode ser zero.";
+            return;
+        }
+
+        resultado=(b*c)/a;
+
+        document.getElementById("calcResultado").textContent=
+            resultado.toLocaleString("pt-BR");
+    }
+
+    mostrarToast("🧮 Cálculo concluído");
+}
+
+
+/* =========================
+   ADVOGADO
+========================= */
+
+function gerarResposta(){
+
+    const pergunta=
+        document.getElementById("perguntaAdvogado").value.trim();
+
+    if(!pergunta){
+        mostrarToast("⚠️ Digite a situação");
+        return;
+    }
+
+    let resposta=
+`Olá! Analisei a situação apresentada.
+
+Para orientar corretamente, é importante verificar os documentos, datas, contratos e demais informações relacionadas ao caso.
+
+Com base apenas nas informações fornecidas, recomendo reunir toda a documentação e buscar uma avaliação jurídica profissional antes de tomar qualquer medida.
+
+Situação informada:
+${pergunta}`;
+
+    const p=pergunta.toLowerCase();
+
+    if(p.includes("cobrança") || p.includes("cobranca")){
+        resposta=
+`Olá! Sobre a cobrança informada, é importante verificar a origem da dívida, os documentos que comprovam a obrigação, os valores cobrados e eventual prazo prescricional.
+
+Recomendo guardar comprovantes, contratos, mensagens e demais documentos relacionados ao caso e procurar orientação jurídica para avaliar a medida adequada.
+
+Situação:
+${pergunta}`;
+    }
+
+    if(p.includes("contrato")){
+        resposta=
+`Olá! Em relação ao contrato, é importante analisar todas as cláusulas, obrigações das partes, prazo, forma de rescisão, multas e eventuais condições específicas.
+
+Antes de assinar, rescindir ou aceitar qualquer alteração, o ideal é realizar uma análise jurídica completa do documento.
+
+Situação:
+${pergunta}`;
+    }
+
+    document.getElementById("respostaAdvogado").textContent=resposta;
+
+    mostrarToast("⚖️ Resposta gerada");
+}
+
+
+function copiarResposta(){
+
+    const texto=
+        document.getElementById("respostaAdvogado").textContent;
+
+    navigator.clipboard.writeText(texto);
+
+    mostrarToast("📋 Resposta copiada");
+}
+
+
+function enviarRespostaWhatsApp(){
+
+    const texto=
+        document.getElementById("respostaAdvogado").textContent;
+
+    window.open(
+        "https://wa.me/?text="+encodeURIComponent(texto),
+        "_blank"
+    );
+}
+
+
+/* =========================
+   CONTATOS
+========================= */
+
+function abrirContato(){
+
+    document.getElementById("contatoNome").value="";
+    document.getElementById("contatoNumero").value="";
+    document.getElementById("contatoObs").value="";
+
+    document.getElementById("modalContato")
+        .classList.add("show");
+}
+
+
+function salvarContato(){
+
+    const nome=
+        document.getElementById("contatoNome").value.trim();
+
+    const numero=
+        limparNumero(document.getElementById("contatoNumero").value);
+
+    const obs=
+        document.getElementById("contatoObs").value.trim();
+
+    if(!nome || !numero){
+        mostrarToast("⚠️ Preencha nome e número");
+        return;
+    }
+
+    dados.contatos.push({
+        id:Date.now(),
+        nome,
+        numero,
+        obs,
+        favorito:false
+    });
+
+    salvarDados();
+
+    fecharModais();
+
+    mostrarToast("✅ Contato salvo");
+}
+
+
+function renderContatos(){
+
+    const lista=document.getElementById("listaContatos");
+
+    if(!lista)return;
+
+    const busca=
+        document.getElementById("buscarContato")?.value
+        .toLowerCase() || "";
+
+    const contatos=dados.contatos.filter(c=>
+        c.nome.toLowerCase().includes(busca) ||
+        c.numero.includes(busca)
+    );
+
+    if(!contatos.length){
+        lista.innerHTML=
+            '<div class="empty">👥 Nenhum contato encontrado.</div>';
+        return;
+    }
+
+    lista.innerHTML=contatos.map(c=>`
+        <div class="item">
+            <div class="item-icon">👤</div>
+
+            <div class="item-main">
+                <div class="item-name">${esc(c.nome)}</div>
+                <div class="item-sub">${esc(c.numero)}</div>
+            </div>
+
+            <div class="item-actions">
+                <button class="small-btn"
+                    onclick="toggleFavorito(${c.id})">
+                    ${c.favorito ? "⭐" : "☆"}
+                </button>
+
+                <button class="small-btn"
+                    onclick="whatsContato('${c.numero}')">
+                    💬
+                </button>
+
+                <button class="small-btn"
+                    onclick="excluirContato(${c.id})">
+                    🗑️
+                </button>
+            </div>
+        </div>
+    `).join("");
+}
+
+
+function whatsContato(numero){
+
+    window.open(
+        "https://wa.me/"+limparNumero(numero),
+        "_blank"
+    );
+}
+
+
+function excluirContato(id){
+
+    if(!confirm("Excluir este contato?"))return;
+
+    dados.contatos=
+        dados.contatos.filter(c=>c.id!==id);
+
+    dados.favoritos=
+        dados.favoritos.filter(idFav=>idFav!==id);
+
+    salvarDados();
+
+    mostrarToast("🗑️ Contato excluído");
+}
+
+
+function toggleFavorito(id){
+
+    const c=dados.contatos.find(x=>x.id===id);
+
+    if(!c)return;
+
+    c.favorito=!c.favorito;
+
+    if(c.favorito){
+        if(!dados.favoritos.includes(id)){
+            dados.favoritos.push(id);
+        }
+    }else{
+        dados.favoritos=
+            dados.favoritos.filter(x=>x!==id);
+    }
+
+    salvarDados();
+
+    mostrarToast(
+        c.favorito ? "⭐ Adicionado aos favoritos" :
+        "☆ Removido dos favoritos"
+    );
+}
+
+
+/* =========================
+   CHIPS
+========================= */
+
+function abrirChip(){
+
+    document.getElementById("chipOperadora").value="";
+    document.getElementById("chipNumero").value="";
+    document.getElementById("chipRecarga").value="";
+
+    document.getElementById("modalChip")
+        .classList.add("show");
+}
+
+
+function salvarChip(){
+
+    const operadora=
+        document.getElementById("chipOperadora").value.trim();
+
+    const numero=
+        limparNumero(document.getElementById("chipNumero").value);
+
+    const recarga=
+        document.getElementById("chipRecarga").value;
+
+    if(!operadora || !numero){
+        mostrarToast("⚠️ Preencha operadora e número");
+        return;
+    }
+
+    dados.chips.push({
+        id:Date.now(),
+        operadora,
+        numero,
+        recarga
+    });
+
+    salvarDados();
+
+    fecharModais();
+
+    mostrarToast("✅ Chip salvo");
+}
+
+
+function renderChips(){
+
+    const lista=document.getElementById("listaChips");
+
+    if(!lista)return;
+
+    if(!dados.chips.length){
+        lista.innerHTML=
+            '<div class="empty">💳 Nenhum chip cadastrado.</div>';
+        return;
+    }
+
+    lista.innerHTML=dados.chips.map(c=>`
+        <div class="item">
+            <div class="item-icon">💳</div>
+
+            <div class="item-main">
+                <div class="item-name">${esc(c.operadora)}</div>
+                <div class="item-sub">
+                    ${esc(c.numero)}
+                    ${c.recarga ? " • Recarga: "+dinheiro(c.recarga) : ""}
+                </div>
+            </div>
+
+            <div class="item-actions">
+                <button class="small-btn"
+                    onclick="whatsContato('${c.numero}')">💬</button>
+
+                <button class="small-btn"
+                    onclick="excluirChip(${c.id})">🗑️</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+
+function excluirChip(id){
+
+    if(!confirm("Excluir este chip?"))return;
+
+    dados.chips=dados.chips.filter(c=>c.id!==id);
+
+    salvarDados();
+
+    mostrarToast("🗑️ Chip excluído");
+}
+
+
+/* =========================
+   CELULARES
+========================= */
+
+function abrirCelular(){
+
+    document.getElementById("celularNome").value="";
+    document.getElementById("celularNumero").value="";
+
+    document.getElementById("modalCelular")
+        .classList.add("show");
+}
+
+
+function salvarCelular(){
+
+    const nome=
+        document.getElementById("celularNome").value.trim();
+
+    const numero=
+        limparNumero(document.getElementById("celularNumero").value);
+
+    if(!nome || !numero){
+        mostrarToast("⚠️ Preencha aparelho e número");
+        return;
+    }
+
+    dados.celulares.push({
+        id:Date.now(),
+        nome,
+        numero
+    });
+
+    salvarDados();
+
+    fecharModais();
+
+    mostrarToast("✅ Celular salvo");
+}
+
+
+function renderCelulares(){
+
+    const lista=document.getElementById("listaCelulares");
+
+    if(!lista)return;
+
+    if(!dados.celulares.length){
+        lista.innerHTML=
+            '<div class="empty">📱 Nenhum celular cadastrado.</div>';
+        return;
+    }
+
+    lista.innerHTML=dados.celulares.map(c=>`
+        <div class="item">
+            <div class="item-icon">📱</div>
+
+            <div class="item-main">
+                <div class="item-name">${esc(c.nome)}</div>
+                <div class="item-sub">${esc(c.numero)}</div>
+            </div>
+
+            <div class="item-actions">
+                <button class="small-btn"
+                    onclick="whatsContato('${c.numero}')">💬</button>
+
+                <button class="small-btn"
+                    onclick="excluirCelular(${c.id})">🗑️</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+
+function excluirCelular(id){
+
+    if(!confirm("Excluir este celular?"))return;
+
+    dados.celulares=
+        dados.celulares.filter(c=>c.id!==id);
+
+    salvarDados();
+
+    mostrarToast("🗑️ Celular excluído");
+}
+
+
+/* =========================
+   FAVORITOS
+========================= */
+
+function renderFavoritos(){
+
+    const lista=document.getElementById("listaFavoritos");
+
+    if(!lista)return;
+
+    const favoritos=dados.contatos.filter(c=>
+        dados.favoritos.includes(c.id)
+    );
+
+    if(!favoritos.length){
+        lista.innerHTML=
+            '<div class="empty">⭐ Nenhum favorito.</div>';
+        return;
+    }
+
+    lista.innerHTML=favoritos.map(c=>`
+        <div class="item">
+            <div class="item-icon">⭐</div>
+
+            <div class="item-main">
+                <div class="item-name">${esc(c.nome)}</div>
+                <div class="item-sub">${esc(c.numero)}</div>
+            </div>
+
+            <div class="item-actions">
+                <button class="small-btn"
+                    onclick="whatsContato('${c.numero}')">💬</button>
+
+                <button class="small-btn"
+                    onclick="toggleFavorito(${c.id})">☆</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+
+/* =========================
+   RESUMO
+========================= */
+
+function atualizarResumo(){
+
+    document.getElementById("totalContatos").textContent=
+        dados.contatos.length;
+
+    document.getElementById("totalChips").textContent=
+        dados.chips.length;
+
+    document.getElementById("totalCelulares").textContent=
+        dados.celulares.length;
+}
+
+
+/* =========================
+   MODAIS
+========================= */
+
+function fecharModais(){
+
+    document.querySelectorAll(".modal")
+        .forEach(m=>m.classList.remove("show"));
+}
+
+
+document.querySelectorAll(".modal").forEach(modal=>{
+    modal.addEventListener("click",e=>{
+        if(e.target===modal){
+            fecharModais();
+        }
+    });
+});
+
+
+/* =========================
+   BACKUP
+========================= */
+
+function exportarBackup(){
+
+    const backup={
+        versao:"2.0",
+        data:new Date().toISOString(),
+        dados
+    };
+
+    const blob=new Blob(
+        [JSON.stringify(backup,null,2)],
+        {type:"application/json"}
+    );
+
+    const url=URL.createObjectURL(blob);
+
+    const a=document.createElement("a");
+
+    a.href=url;
+    a.download="BOT-DO-BM3-BACKUP.json";
+
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    URL.revokeObjectURL(url);
+
+    mostrarToast("📤 Backup exportado");
+}
+
+
+function importarBackup(event){
+
+    const file=event.target.files[0];
+
+    if(!file)return;
+
+    const reader=new FileReader();
+
+    reader.onload=e=>{
+
+        try{
+
+            const obj=JSON.parse(e.target.result);
+
+            const novo=obj.dados || obj;
+
+            dados={
+                contatos:Array.isArray(novo.contatos) ? novo.contatos : [],
+                chips:Array.isArray(novo.chips) ? novo.chips : [],
+                celulares:Array.isArray(novo.celulares) ? novo.celulares : [],
+                favoritos:Array.isArray(novo.favoritos) ? novo.favoritos : []
+            };
 
             salvarDados();
 
+            mostrarToast("📥 Backup importado");
 
-            renderizarContatos();
+        }catch(err){
 
-            renderizarCelulares();
+            console.error(err);
 
-            renderizarChips();
-
-            renderizarFavoritos();
-
-            atualizarResumo();
-
-
-            mostrarToast(
-                "Todos os dados foram limpos."
-            );
-
+            mostrarToast("❌ Backup inválido");
         }
 
+        event.target.value="";
+    };
 
-        /* ================================
-           MODAL
-        ================================= */
-
-        function abrirNotificacoes() {
-
-            const modal =
-                document.getElementById(
-                    "modalNotificacoes"
-                );
+    reader.readAsText(file);
+}
 
 
-            if (modal) {
+/* =========================
+   LIMPAR DADOS
+========================= */
 
-                modal.classList.add(
-                    "show"
-                );
+function limparDados(){
 
-            }
+    const ok=confirm(
+        "ATENÇÃO!\n\nIsso apagará contatos, chips e celulares.\n\nDeseja continuar?"
+    );
 
+    if(!ok)return;
+
+    dados={
+        contatos:[],
+        chips:[],
+        celulares:[],
+        favoritos:[]
+    };
+
+    salvarDados();
+
+    mostrarToast("🗑️ Dados apagados");
+}
+
+
+/* =========================
+   NOTIFICAÇÃO
+========================= */
+
+function mostrarNotificacao(){
+
+    mostrarToast("🍀 BOT DO BM3 funcionando normalmente");
+}
+
+
+/* =========================
+   SEGURANÇA HTML
+========================= */
+
+function esc(valor){
+
+    return String(valor ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+/* =========================
+   ATUALIZAÇÃO GERAL
+========================= */
+
+function atualizarTudo(){
+
+    renderContatos();
+    renderChips();
+    renderCelulares();
+    renderFavoritos();
+    atualizarResumo();
+}
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+
+function iniciar(){
+
+    carregarDados();
+
+    const tema=
+        localStorage.getItem("BOT_BM3_TEMA");
+
+    if(tema==="light"){
+        alternarTema();
+    }
+
+    atualizarTudo();
+    atualizarRelogio();
+
+    setInterval(atualizarRelogio,1000);
+
+    atualizarLinkWhatsApp();
+
+    setTimeout(()=>{
+
+        const loading=document.getElementById("loading");
+        const app=document.getElementById("app");
+
+        if(loading){
+            loading.classList.add("hide");
         }
 
-
-        function fecharNotificacoes() {
-
-            const modal =
-                document.getElementById(
-                    "modalNotificacoes"
-                );
-
-
-            if (modal) {
-
-                modal.classList.remove(
-                    "show"
-                );
-
-            }
-
+        if(app){
+            app.classList.add("ready");
         }
 
-
-        /* ================================
-           RELÓGIO
-        ================================= */
-
-        function atualizarRelogio() {
-
-            const agora =
-                new Date();
-
-
-            const hora =
-                agora.toLocaleTimeString(
-                    "pt-BR",
-                    {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        second: "2-digit"
-                    }
-                );
-
-
-            const data =
-                agora.toLocaleDateString(
-                    "pt-BR",
-                    {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric"
-                    }
-                );
-
-
-            const relogio =
-                document.getElementById(
-                    "relogio"
-                );
-
-
-            const dataElemento =
-                document.getElementById(
-                    "dataAtual"
-                );
-
-
-            if (relogio) {
-
-                relogio.textContent =
-                    hora;
-
-            }
-
-
-            if (dataElemento) {
-
-                dataElemento.textContent =
-                    data;
-
-            }
-
-        }
-
-
-        /* ================================
-           INICIALIZAÇÃO
-        ================================= */
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function() {
-
-                carregarDados();
-
-                carregarTema();
-
-                renderizarContatos();
-
-                renderizarCelulares();
-
-                renderizarChips();
-
-                renderizarFavoritos();
-
-                atualizarResumo();
-
-                atualizarRelogio();
-
-
-                setInterval(
-                    atualizarRelogio,
-                    1000
-                );
-
-
-                const modal =
-                    document.getElementById(
-                        "modalNotificacoes"
-                    );
-
-
-                if (modal) {
-
-                    modal.addEventListener(
-                        "click",
-                        function(event) {
-
-                            if (
-                                event.target === modal
-                            ) {
-
-                                fecharNotificacoes();
-
-                            }
-
-                        }
-                    );
-
-                }
-
-
-                console.log(
-                    "BOT DO BM3 iniciado com sucesso."
-                );
-
-            }
-        );
-
-
-    </script>
-        <style>
-
-        /* =========================================
-           ESTADOS DOS ELEMENTOS
-        ========================================= */
-
-        .screen {
-            display: none;
-        }
-
-        .screen.active {
-            display: block;
-            animation: screenIn .25s ease;
-        }
-
-        @keyframes screenIn {
-
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-        }
-
-
-        /* =========================================
-           LISTAS
-        ========================================= */
-
-        .list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 14px;
-        }
-
-        .list-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 13px;
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 14px;
-            background: rgba(255,255,255,.025);
-        }
-
-        .list-avatar {
-            width: 42px;
-            height: 42px;
-            min-width: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background: rgba(0,255,102,.08);
-            color: var(--verde);
-            font-weight: 900;
-            font-size: 17px;
-        }
-
-        .list-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .list-name {
-            font-weight: 800;
-            color: var(--texto);
-            word-break: break-word;
-        }
-
-        .list-info {
-            margin-top: 4px;
-            color: var(--cinza);
-            font-size: 11px;
-            word-break: break-word;
-        }
-
-        .list-actions {
-            display: flex;
-            gap: 5px;
-        }
-
-        .icon-btn {
-            width: 34px;
-            height: 34px;
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 10px;
-            background: rgba(255,255,255,.04);
-            color: #fff;
-            cursor: pointer;
-            transition: .2s;
-        }
-
-        .icon-btn:hover {
-            transform: translateY(-2px);
-            border-color: var(--verde);
-        }
-
-        .danger-icon:hover {
-            border-color: #ff4444;
-        }
-
-        .empty-state {
-            padding: 30px 15px;
-            text-align: center;
-            color: var(--cinza);
-            line-height: 2;
-            border: 1px dashed rgba(255,255,255,.1);
-            border-radius: 14px;
-        }
-
-
-        /* =========================================
-           BOTÕES
-        ========================================= */
-
-        .primary-btn,
-        .secondary-btn,
-        .danger-btn,
-        .back-btn {
-            cursor: pointer;
-            transition: .2s;
-        }
-
-        .primary-btn:hover,
-        .secondary-btn:hover,
-        .danger-btn:hover,
-        .back-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .primary-btn {
-            width: 100%;
-            border: 0;
-            border-radius: 12px;
-            padding: 13px 16px;
-            background: var(--verde);
-            color: #000;
-            font-weight: 950;
-            letter-spacing: .5px;
-        }
-
-        .secondary-btn {
-            border: 1px solid rgba(0,255,102,.3);
-            border-radius: 10px;
-            padding: 9px 13px;
-            background: rgba(0,255,102,.06);
-            color: var(--verde);
-            font-weight: 800;
-        }
-
-        .danger-btn {
-            width: 100%;
-            border: 1px solid rgba(255,50,50,.4);
-            border-radius: 12px;
-            padding: 12px;
-            background: rgba(255,50,50,.08);
-            color: #ff5d5d;
-            font-weight: 900;
-        }
-
-        .back-btn {
-            width: 42px;
-            height: 42px;
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 12px;
-            background: rgba(255,255,255,.04);
-            color: #fff;
-            font-size: 20px;
-        }
-
-
-        /* =========================================
-           FORMULÁRIOS
-        ========================================= */
-
-        .form-group {
-            margin-bottom: 14px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 7px;
-            color: var(--cinza);
-            font-size: 11px;
-            font-weight: 800;
-        }
-
-        .input,
-        .select,
-        .textarea {
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid rgba(255,255,255,.09);
-            border-radius: 12px;
-            outline: none;
-            background: rgba(0,0,0,.25);
-            color: var(--texto);
-            padding: 12px;
-            font-family: inherit;
-        }
-
-        .input:focus,
-        .select:focus,
-        .textarea:focus {
-            border-color: var(--verde);
-            box-shadow: 0 0 0 3px rgba(0,255,102,.07);
-        }
-
-        .textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-
-        /* =========================================
-           CABEÇALHO DAS PÁGINAS
-        ========================================= */
-
-        .page-head {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .page-title {
-            color: var(--texto);
-            font-size: 20px;
-            font-weight: 950;
-        }
-
-        .page-sub {
-            margin-top: 3px;
-            color: var(--cinza);
-            font-size: 11px;
-        }
-
-
-        /* =========================================
-           CONFIGURAÇÕES
-        ========================================= */
-
-        .setting {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(255,255,255,.06);
-        }
-
-        .setting:last-child {
-            border-bottom: 0;
-        }
-
-        .setting-info {
-            flex: 1;
-        }
-
-        .setting-title {
-            color: var(--texto);
-            font-weight: 800;
-        }
-
-        .setting-desc {
-            margin-top: 4px;
-            color: var(--cinza);
-            font-size: 10px;
-            line-height: 1.5;
-        }
-
-
-        /* =========================================
-           TOGGLE
-        ========================================= */
-
-        .toggle {
-            position: relative;
-            width: 48px;
-            height: 26px;
-            border: 0;
-            border-radius: 30px;
-            background: #333;
-            cursor: pointer;
-        }
-
-        .toggle span {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #fff;
-            transition: .2s;
-        }
-
-        .toggle.active {
-            background: var(--verde);
-        }
-
-        .toggle.active span {
-            left: 25px;
-        }
-
-
-        /* =========================================
-           MODAL
-        ========================================= */
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            z-index: 999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(0,0,0,.75);
-            backdrop-filter: blur(8px);
-        }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-box {
-            width: min(460px,100%);
-            border: 1px solid rgba(0,255,102,.18);
-            border-radius: 18px;
-            padding: 18px;
-            background: #101010;
-            box-shadow: 0 20px 60px rgba(0,0,0,.5);
-        }
-
-        .modal-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-
-        .modal-title {
-            font-size: 17px;
-            font-weight: 900;
-            color: var(--texto);
-        }
-
-        .modal-close {
-            width: 32px;
-            height: 32px;
-            border: 0;
-            border-radius: 9px;
-            background: rgba(255,255,255,.06);
-            color: #fff;
-            cursor: pointer;
-        }
-
-
-        /* =========================================
-           TOAST
-        ========================================= */
-
-        .toast {
-            position: fixed;
-            z-index: 2000;
-            left: 50%;
-            bottom: 25px;
-            transform: translate(-50%, 30px);
-            opacity: 0;
-            pointer-events: none;
-            max-width: calc(100% - 30px);
-            padding: 12px 17px;
-            border: 1px solid rgba(0,255,102,.25);
-            border-radius: 12px;
-            background: #111;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            box-shadow: 0 10px 35px rgba(0,0,0,.4);
-            transition: .25s;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
-
-
-        /* =========================================
-           TEMA CLARO
-        ========================================= */
-
-        body.light-theme {
-            --fundo: #f2f4f3;
-            --card: #ffffff;
-            --texto: #111111;
-            --cinza: #606060;
-        }
-
-        body.light-theme .panel,
-        body.light-theme .menu-card,
-        body.light-theme .tool-card,
-        body.light-theme .stat-card {
-            background: #fff;
-            border-color: rgba(0,0,0,.08);
-        }
-
-        body.light-theme .input,
-        body.light-theme .select,
-        body.light-theme .textarea {
-            background: #f7f7f7;
-            color: #111;
-            border-color: rgba(0,0,0,.12);
-        }
-
-        body.light-theme .list-item {
-            background: #fafafa;
-            border-color: rgba(0,0,0,.08);
-        }
-
-        body.light-theme .icon-btn,
-        body.light-theme .back-btn {
-            background: #f5f5f5;
-            color: #111;
-            border-color: rgba(0,0,0,.08);
-        }
-
-        body.light-theme .modal-box {
-            background: #fff;
-        }
-
-
-        /* =========================================
-           RESPONSIVO
-        ========================================= */
-
-        @media (max-width: 700px) {
-
-            .menu-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .menu-card.menu-wide {
-                grid-column: 1 / -1;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .list-item {
-                align-items: flex-start;
-            }
-
-            .list-actions {
-                flex-wrap: wrap;
-            }
-
-        }
-
-
-        @media (max-width: 430px) {
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .menu-card.menu-wide {
-                grid-column: auto;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .page-title {
-                font-size: 18px;
-            }
-
-            .list-item {
-                flex-wrap: wrap;
-            }
-
-            .list-content {
-                min-width: calc(100% - 60px);
-            }
-
-            .list-actions {
-                width: 100%;
-                justify-content: flex-end;
-            }
-
-        }
-
-    </style>
-
-
-    <script>
-
-        /* =========================================
-           INICIALIZAÇÃO FINAL
-        ========================================= */
-
-        document.addEventListener("DOMContentLoaded", function() {
-
-            carregarDados();
-
-            verificarDados();
-
-            carregarTema();
-
-            renderizarContatos();
-
-            renderizarCelulares();
-
-            renderizarChips();
-
-            renderizarFavoritos();
-
-            atualizarResumo();
-
-            atualizarRelogio();
-
-        });
-
-
-        /* =========================================
-           ATUALIZAÇÃO DO RELÓGIO
-        ========================================= */
-
-        setInterval(function() {
-
-            atualizarRelogio();
-
-        }, 1000);
-
-
-        /* =========================================
-           ATUALIZAÇÃO DOS DADOS
-        ========================================= */
-
-        setInterval(function() {
-
-            atualizarResumo();
-
-        }, 5000);
-
-
-        /* =========================================
-           TECLA ESC
-        ========================================= */
-
-        document.addEventListener("keydown", function(event) {
-
-            if (event.key === "Escape") {
-
-                fecharNotificacoes();
-
-            }
-
-        });
-
-
-        /* =========================================
-           FECHAR MODAL
-        ========================================= */
-
-        document.addEventListener("click", function(event) {
-
-            const modal =
-                document.getElementById(
-                    "modalNotificacoes"
-                );
-
-            if (
-                modal &&
-                event.target === modal
-            ) {
-
-                fecharNotificacoes();
-
-            }
-
-        });
-
-
-        /* =========================================
-           SEGURANÇA DO LOCALSTORAGE
-        ========================================= */
-
-        window.addEventListener("error", function(event) {
-
-            console.error(
-                "BOT DO BM3:",
-                event.error || event.message
-            );
-
-        });
-
-
-        /* =========================================
-           MENSAGEM NO CONSOLE
-        ========================================= */
-
-        console.log(
-            "%c BOT DO BM3 ",
-            "background:#00ff66;color:#000;padding:8px;font-weight:bold;border-radius:6px;"
-        );
-
-        console.log(
-            "Painel iniciado com sucesso."
-        );
-
-    </script>
+    },700);
+}
+
+
+/*
+    IMPORTANTE:
+    Esta função é chamada depois que todo o HTML
+    foi carregado. Assim o loading nunca fica preso.
+*/
+
+if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",iniciar);
+}else{
+    iniciar();
+}
+
+</script>
 
 </body>
 </html>
