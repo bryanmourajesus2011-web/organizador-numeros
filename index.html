@@ -2039,366 +2039,8 @@ textarea{
 
 
 <!-- =========================================================
-     ⚖️ ADVOGADO
+     ⚖️ ADVOGADO — NOVA VERSÃO
 ========================================================= -->
-
-<section id="advogado" class="screen">
-
-    <button class="back" onclick="voltar()">← Voltar</button>
-
-    <div class="page-title">⚖️ Advogado</div>
-
-    <div class="page-sub">
-        Gere respostas profissionais e utilize as ferramentas do advogado.
-    </div>
-
-    <div class="advisor-grid">
-
-        <!-- GERAR PDF -->
-        <button class="advisor-btn" onclick="navegar('gerarPDF')">
-            📄<br>
-            GERAR PDF
-        </button>
-
-        <!-- DEMAIS OPÇÕES EM MANUTENÇÃO -->
-
-        <button class="advisor-btn" onclick="mostrarManutencao()">
-            💬<br>
-            CHAT
-        </button>
-
-        <button class="advisor-btn" onclick="mostrarManutencao()">
-            📂<br>
-            ANDAMENTO
-        </button>
-
-        <button class="advisor-btn" onclick="mostrarManutencao()">
-            ⏳<br>
-            PRAZOS
-        </button>
-
-        <button class="advisor-btn" onclick="mostrarManutencao()">
-            💵<br>
-            VALORES
-        </button>
-
-        <button class="advisor-btn" onclick="mostrarManutencao()">
-            📄<br>
-            DOCUMENTAÇÃO
-        </button>
-
-        <button class="advisor-btn" onclick="mostrarManutencao()">
-            ⭐<br>
-            FAVORITAS
-        </button>
-
-        <button class="advisor-btn" onclick="mostrarManutencao()">
-            📝<br>
-            MONTAR MENSAGEM
-        </button>
-
-        <button class="advisor-btn" onclick="mostrarManutencao()">
-            📋<br>
-            HISTÓRICO
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     📄 GERAR PDF
-========================================================= -->
-
-<section id="gerarPDF" class="screen">
-
-    <button class="back" onclick="navegar('advogado')">
-        ← Voltar
-    </button>
-
-    <div class="page-title">
-        📄 Gerar PDF
-    </div>
-
-    <div class="page-sub">
-        Crie um novo documento de rascunho a partir dos dados preenchidos.
-    </div>
-
-
-    <div class="pdf-builder">
-
-        <div class="pdf-warning">
-
-            ⚠️ <b>RASCUNHO / SEM VALIDADE OFICIAL</b>
-
-            <br><br>
-
-            O documento gerado é destinado somente para
-            conferência, organização e preparação.
-
-            <br><br>
-
-            A marca <b>CÓPIA NÃO ORIGINAL</b> será inserida
-            no documento gerado.
-
-        </div>
-
-
-        <!-- MODELO -->
-
-        <div class="field">
-
-            <label>
-                📁 PDF MODELO
-            </label>
-
-            <input
-                id="pdfModelo"
-                type="file"
-                accept="application/pdf"
-                onchange="selecionarModeloPDF(event)"
-            >
-
-            <div
-                id="pdfModeloNome"
-                class="pdf-model-name"
-            >
-                Nenhum modelo selecionado.
-            </div>
-
-        </div>
-
-
-        <!-- NOME -->
-
-        <div class="field">
-
-            <label>NOME</label>
-
-            <input
-                id="pdfNome"
-                type="text"
-                placeholder="Nome completo"
-            >
-
-        </div>
-
-
-        <!-- ADVOGADO -->
-
-        <div class="field">
-
-            <label>ADVOGADO</label>
-
-            <input
-                id="pdfAdvogado"
-                type="text"
-                placeholder="Nome do advogado"
-            >
-
-        </div>
-
-
-        <!-- VALOR -->
-
-        <div class="field">
-
-            <label>VALOR</label>
-
-            <input
-                id="pdfValor"
-                type="text"
-                placeholder="Ex.: R$ 100.000,00"
-            >
-
-        </div>
-
-
-        <!-- PROCESSO -->
-
-        <div class="field">
-
-            <label>PROCESSO</label>
-
-            <input
-                id="pdfProcesso"
-                type="text"
-                placeholder="Número do processo"
-            >
-
-        </div>
-
-
-        <!-- DATA -->
-
-        <div class="field">
-
-            <label>DATA</label>
-
-            <input
-                id="pdfData"
-                type="date"
-            >
-
-        </div>
-
-
-        <!-- OUTROS -->
-
-        <div class="field">
-
-            <label>OUTROS DADOS</label>
-
-            <textarea
-                id="pdfOutros"
-                placeholder="Informações adicionais..."
-                style="min-height:110px"
-            ></textarea>
-
-        </div>
-
-
-        <!-- AÇÕES -->
-
-        <div class="pdf-actions">
-
-            <button
-                class="secondary"
-                onclick="visualizarPDF()"
-            >
-                👁️ VISUALIZAR
-            </button>
-
-            <button
-                class="primary"
-                onclick="gerarPDFSeguro()"
-            >
-                📄 GERAR PDF
-            </button>
-
-        </div>
-
-
-        <!-- PRÉ-VISUALIZAÇÃO -->
-
-        <div
-            id="pdfPreview"
-            class="pdf-preview"
-        >
-
-            <div class="pdf-preview-watermark">
-                CÓPIA NÃO ORIGINAL
-            </div>
-
-            <h3>
-                DOCUMENTO DE RASCUNHO
-            </h3>
-
-            <div class="pdf-subtitle">
-                Sem validade oficial • criado pelo BOT DO BM3
-            </div>
-
-
-            <div class="pdf-preview-row">
-
-                <b>Nome</b>
-
-                <span id="previewNome">
-                    —
-                </span>
-
-            </div>
-
-
-            <div class="pdf-preview-row">
-
-                <b>Advogado</b>
-
-                <span id="previewAdvogado">
-                    —
-                </span>
-
-            </div>
-
-
-            <div class="pdf-preview-row">
-
-                <b>Valor</b>
-
-                <span id="previewValor">
-                    —
-                </span>
-
-            </div>
-
-
-            <div class="pdf-preview-row">
-
-                <b>Processo</b>
-
-                <span id="previewProcesso">
-                    —
-                </span>
-
-            </div>
-
-
-            <div class="pdf-preview-row">
-
-                <b>Data</b>
-
-                <span id="previewData">
-                    —
-                </span>
-
-            </div>
-
-
-            <div class="pdf-preview-row">
-
-                <b>Outros dados</b>
-
-                <span id="previewOutros">
-                    —
-                </span>
-
-            </div>
-
-
-            <div class="pdf-preview-footer">
-                CÓPIA NÃO ORIGINAL • SEM VALIDADE OFICIAL
-            </div>
-
-        </div>
-
-
-        <!-- DOWNLOAD -->
-
-        <div
-            id="pdfDownloadBox"
-            style="display:none;margin-top:10px"
-        >
-
-            <button
-                class="primary"
-                onclick="baixarPDFGerado()"
-            >
-                ⬇️ BAIXAR PDF
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<script>
-
-<!-- =========================
-     ADVOGADO
-========================= -->
 
 <section id="advogado" class="screen">
 
@@ -2424,7 +2066,6 @@ textarea{
         </button>
     </div>
 
-
     <!-- ANALISAR PERGUNTA -->
     <div class="adv-card">
         <div class="adv-icon">🧠</div>
@@ -2438,7 +2079,6 @@ textarea{
             ABRIR
         </button>
     </div>
-
 
     <!-- LIBERAÇÃO -->
     <div class="adv-card">
@@ -2454,7 +2094,6 @@ textarea{
         </button>
     </div>
 
-
     <!-- ANDAMENTO -->
     <div class="adv-card">
         <div class="adv-icon">📂</div>
@@ -2468,7 +2107,6 @@ textarea{
             ABRIR
         </button>
     </div>
-
 
     <!-- PRAZOS -->
     <div class="adv-card">
@@ -2484,7 +2122,6 @@ textarea{
         </button>
     </div>
 
-
     <!-- VALORES -->
     <div class="adv-card">
         <div class="adv-icon">💵</div>
@@ -2498,7 +2135,6 @@ textarea{
             ABRIR
         </button>
     </div>
-
 
     <!-- DOCUMENTAÇÃO -->
     <div class="adv-card">
@@ -2514,7 +2150,6 @@ textarea{
         </button>
     </div>
 
-
     <!-- FAVORITAS -->
     <div class="adv-card">
         <div class="adv-icon">⭐</div>
@@ -2528,7 +2163,6 @@ textarea{
             ABRIR
         </button>
     </div>
-
 
     <!-- MONTAR MENSAGEM -->
     <div class="adv-card">
@@ -2544,7 +2178,6 @@ textarea{
         </button>
     </div>
 
-
     <!-- HISTÓRICO -->
     <div class="adv-card">
         <div class="adv-icon">📋</div>
@@ -2559,29 +2192,33 @@ textarea{
         </button>
     </div>
 
+    <!-- =====================================================
+         📸 EDITAR FOTO
+    ====================================================== -->
 
-    <!-- =========================
-         GERAR PDF
-    ========================= -->
+    <div class="adv-card">
 
-    <div class="adv-card pdf-card">
-
-        <div class="adv-icon">📄</div>
+        <div class="adv-icon">📸</div>
 
         <div class="adv-content">
-            <h3>GERAR PDF</h3>
+
+            <h3>EDITAR FOTO</h3>
 
             <p>
-                Preencha os dados e gere o modelo automaticamente.
+                Preencha os dados e aplique-os sobre a foto modelo.
             </p>
 
             <small>
-                MODELO / SEM VALIDADE OFICIAL
+                MODELO / CÓPIA NÃO ORIGINAL
             </small>
+
         </div>
 
-        <button class="adv-btn" onclick="abrirGerarPDF()">
-            GERAR PDF
+        <button
+            class="adv-btn"
+            onclick="abrirEditarFoto()"
+        >
+            EDITAR FOTO
         </button>
 
     </div>
@@ -2589,40 +2226,71 @@ textarea{
 </section>
 
 
-<!-- =========================
-     TELA GERAR PDF
-========================= -->
+<!-- =========================================================
+     📸 TELA EDITAR FOTO
+========================================================= -->
 
-<section id="gerar-pdf" class="screen">
+<section id="editar-foto" class="screen">
 
-    <button class="back" onclick="voltarAdvogado()">
+    <button
+        class="back"
+        onclick="voltarAdvogado()"
+    >
         ← Voltar
     </button>
 
     <div class="page-title">
-        📄 GERAR PDF
+        📸 EDITAR FOTO
     </div>
 
     <div class="page-sub">
-        Preencha os campos abaixo para gerar o modelo.
+        Envie a foto modelo e preencha os campos abaixo.
     </div>
 
-    <div class="pdf-notice">
-        MODELO / SEM VALIDADE OFICIAL
+    <div class="foto-notice">
+        ⚠️ <b>MODELO / CÓPIA NÃO ORIGINAL</b>
+        <br><br>
+        A imagem gerada será identificada como
+        modelo e não terá validade oficial.
+    </div>
+
+
+    <!-- FOTO MODELO -->
+
+    <div class="foto-field">
+
+        <label>
+            📷 FOTO MODELO
+        </label>
+
+        <input
+            type="file"
+            id="fotoModelo"
+            accept="image/*"
+            onchange="carregarFotoModelo(event)"
+        >
+
+        <div
+            id="fotoModeloNome"
+            class="foto-model-name"
+        >
+            Nenhuma foto selecionada.
+        </div>
+
     </div>
 
 
     <!-- CREDOR -->
 
-    <div class="pdf-field">
+    <div class="foto-field">
 
-        <label for="pdfCredor">
+        <label for="fotoCredor">
             CREDOR:
         </label>
 
         <input
             type="text"
-            id="pdfCredor"
+            id="fotoCredor"
             placeholder="Digite o nome do credor"
             autocomplete="off"
         >
@@ -2632,15 +2300,15 @@ textarea{
 
     <!-- CPF/CNPJ -->
 
-    <div class="pdf-field">
+    <div class="foto-field">
 
-        <label for="pdfCpfCnpj">
+        <label for="fotoCpfCnpj">
             CPF/CNPJ:
         </label>
 
         <input
             type="text"
-            id="pdfCpfCnpj"
+            id="fotoCpfCnpj"
             placeholder="Digite o CPF ou CNPJ"
             autocomplete="off"
         >
@@ -2650,15 +2318,15 @@ textarea{
 
     <!-- ADVOGADO -->
 
-    <div class="pdf-field">
+    <div class="foto-field">
 
-        <label for="pdfAdvogado">
+        <label for="fotoAdvogado">
             ADVOGADO(A):
         </label>
 
         <input
             type="text"
-            id="pdfAdvogado"
+            id="fotoAdvogado"
             placeholder="Digite o nome do advogado"
             autocomplete="off"
         >
@@ -2668,15 +2336,15 @@ textarea{
 
     <!-- PROCESSO -->
 
-    <div class="pdf-field">
+    <div class="foto-field">
 
-        <label for="pdfProcesso">
+        <label for="fotoProcesso">
             PROCESSO N:
         </label>
 
         <input
             type="text"
-            id="pdfProcesso"
+            id="fotoProcesso"
             placeholder="Digite o número do processo"
             autocomplete="off"
         >
@@ -2686,15 +2354,15 @@ textarea{
 
     <!-- CUMPRIMENTO DE SENTENÇA CONTRA -->
 
-    <div class="pdf-field">
+    <div class="foto-field">
 
-        <label for="pdfContra">
+        <label for="fotoContra">
             CUMPRIMENTO DE SENTENÇA CONTRA:
         </label>
 
         <input
             type="text"
-            id="pdfContra"
+            id="fotoContra"
             placeholder="Digite o nome"
             autocomplete="off"
         >
@@ -2704,15 +2372,15 @@ textarea{
 
     <!-- VALOR -->
 
-    <div class="pdf-field">
+    <div class="foto-field">
 
-        <label for="pdfValor">
+        <label for="fotoValor">
             VALOR A RECEBER:
         </label>
 
         <input
             type="text"
-            id="pdfValor"
+            id="fotoValor"
             placeholder="Digite somente o valor"
             inputmode="decimal"
             autocomplete="off"
@@ -2723,7 +2391,7 @@ textarea{
 
     <!-- DATA AUTOMÁTICA -->
 
-    <div class="pdf-field">
+    <div class="foto-field">
 
         <label>
             DATA:
@@ -2731,7 +2399,7 @@ textarea{
 
         <input
             type="text"
-            id="pdfData"
+            id="fotoData"
             readonly
         >
 
@@ -2740,81 +2408,56 @@ textarea{
 
     <!-- BOTÕES -->
 
-    <div class="pdf-actions">
+    <div class="foto-actions">
 
         <button
             type="button"
-            class="pdf-action-btn"
-            onclick="visualizarPDFModelo()"
+            class="foto-action-btn"
+            onclick="visualizarFotoEditada()"
         >
             👁️ VISUALIZAR
         </button>
 
         <button
             type="button"
-            class="pdf-action-btn primary"
-            onclick="gerarPDFModelo()"
+            class="foto-action-btn primary"
+            onclick="gerarFotoEditada()"
         >
-            📄 GERAR PDF
+            📸 GERAR IMAGEM
         </button>
 
     </div>
 
 
-    <!-- VISUALIZAÇÃO -->
+    <!-- PREVISUALIZAÇÃO -->
 
     <div
-        id="pdfPreview"
-        class="pdf-preview"
+        id="fotoPreview"
+        class="foto-preview"
         style="display:none;"
     >
 
-        <div class="pdf-sheet">
+        <canvas
+            id="canvasFoto"
+        ></canvas>
 
-            <div class="pdf-model-label">
-                MODELO / SEM VALIDADE OFICIAL
-            </div>
+    </div>
 
-            <div class="pdf-model-title">
-                MODELO DE DOCUMENTO
-            </div>
 
-            <div class="pdf-model-line">
-                <strong>CREDOR:</strong>
-                <span id="previewCredor"></span>
-            </div>
+    <!-- DOWNLOAD -->
 
-            <div class="pdf-model-line">
-                <strong>CPF/CNPJ:</strong>
-                <span id="previewCpfCnpj"></span>
-            </div>
+    <div
+        id="fotoDownloadBox"
+        style="display:none;margin-top:15px;"
+    >
 
-            <div class="pdf-model-line">
-                <strong>ADVOGADO(A):</strong>
-                <span id="previewAdvogado"></span>
-            </div>
-
-            <div class="pdf-model-line">
-                <strong>PROCESSO N:</strong>
-                <span id="previewProcesso"></span>
-            </div>
-
-            <div class="pdf-model-line">
-                <strong>CUMPRIMENTO DE SENTENÇA CONTRA:</strong>
-                <span id="previewContra"></span>
-            </div>
-
-            <div class="pdf-model-line">
-                <strong>VALOR A RECEBER:</strong>
-                <span id="previewValor"></span>
-            </div>
-
-            <div class="pdf-model-line">
-                <strong>DATA:</strong>
-                <span id="previewData"></span>
-            </div>
-
-        </div>
+        <button
+            type="button"
+            class="foto-action-btn primary"
+            onclick="baixarFotoEditada()"
+        >
+            ⬇️ BAIXAR IMAGEM
+        </button>
 
     </div>
 
@@ -2823,102 +2466,19 @@ textarea{
 
 <style>
 
-/* =========================
-   ADVOGADO
-========================= */
+/* =========================================================
+   EDITAR FOTO
+========================================================= */
 
-.adv-card {
-
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    padding: 16px;
-
-    margin-bottom: 12px;
-
-    border-radius: 16px;
-
-    background: rgba(255,255,255,.08);
-
-    border: 1px solid rgba(255,255,255,.12);
-
-}
-
-.adv-icon {
-
-    font-size: 28px;
-
-    min-width: 42px;
-
-    text-align: center;
-
-}
-
-.adv-content {
-
-    flex: 1;
-
-}
-
-.adv-content h3 {
-
-    margin: 0 0 5px;
-
-    font-size: 15px;
-
-}
-
-.adv-content p {
-
-    margin: 0;
-
-    font-size: 13px;
-
-    opacity: .8;
-
-}
-
-.adv-content small {
-
-    display: block;
-
-    margin-top: 7px;
-
-    font-size: 10px;
-
-    opacity: .65;
-
-}
-
-.adv-btn {
-
-    border: 0;
-
-    border-radius: 10px;
-
-    padding: 10px 13px;
-
-    cursor: pointer;
-
-    font-weight: 700;
-
-}
-
-
-/* =========================
-   GERAR PDF
-========================= */
-
-.pdf-notice {
+.foto-notice {
 
     text-align: center;
 
     margin: 15px 0;
 
-    padding: 10px;
+    padding: 12px;
 
-    border-radius: 10px;
+    border-radius: 12px;
 
     font-size: 12px;
 
@@ -2928,13 +2488,13 @@ textarea{
 
 }
 
-.pdf-field {
+.foto-field {
 
     margin-bottom: 14px;
 
 }
 
-.pdf-field label {
+.foto-field label {
 
     display: block;
 
@@ -2946,7 +2506,7 @@ textarea{
 
 }
 
-.pdf-field input {
+.foto-field input {
 
     width: 100%;
 
@@ -2966,7 +2526,17 @@ textarea{
 
 }
 
-.pdf-actions {
+.foto-model-name {
+
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    opacity: .7;
+
+}
+
+.foto-actions {
 
     display: flex;
 
@@ -2976,7 +2546,7 @@ textarea{
 
 }
 
-.pdf-action-btn {
+.foto-action-btn {
 
     flex: 1;
 
@@ -2992,73 +2562,35 @@ textarea{
 
 }
 
-.pdf-action-btn.primary {
+.foto-action-btn.primary {
 
     font-weight: 900;
 
 }
 
-.pdf-preview {
+.foto-preview {
 
     margin-top: 20px;
 
+    text-align: center;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
 }
 
-.pdf-sheet {
+#canvasFoto {
 
-    background: white;
+    display: block;
 
-    color: #111;
+    max-width: 100%;
 
-    padding: 35px;
+    height: auto;
 
-    min-height: 500px;
+    margin: 0 auto;
 
     border-radius: 8px;
-
-    box-shadow: 0 5px 20px rgba(0,0,0,.2);
-
-}
-
-.pdf-model-label {
-
-    text-align: center;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    margin-bottom: 25px;
-
-}
-
-.pdf-model-title {
-
-    text-align: center;
-
-    font-size: 18px;
-
-    font-weight: 900;
-
-    margin-bottom: 35px;
-
-}
-
-.pdf-model-line {
-
-    padding: 12px 0;
-
-    border-bottom: 1px solid #ddd;
-
-    font-size: 13px;
-
-}
-
-.pdf-model-line strong {
-
-    display: inline-block;
-
-    margin-right: 5px;
 
 }
 
@@ -3067,17 +2599,29 @@ textarea{
 
 <script>
 
-/* =========================
-   ABRIR GERAR PDF
-========================= */
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
 
-function abrirGerarPDF() {
+let imagemModeloFoto = null;
+
+let imagemFinalFoto = null;
+
+
+/* =========================================================
+   ABRIR EDITAR FOTO
+========================================================= */
+
+function abrirEditarFoto() {
 
     document
         .querySelectorAll('.screen')
-        .forEach(el => el.classList.remove('active'));
+        .forEach(el =>
+            el.classList.remove('active')
+        );
 
-    const tela = document.getElementById('gerar-pdf');
+    const tela =
+        document.getElementById('editar-foto');
 
     if (tela) {
 
@@ -3085,22 +2629,25 @@ function abrirGerarPDF() {
 
     }
 
-    atualizarDataPDF();
+    atualizarDataFoto();
 
 }
 
 
-/* =========================
-   VOLTAR PARA ADVOGADO
-========================= */
+/* =========================================================
+   VOLTAR
+========================================================= */
 
 function voltarAdvogado() {
 
     document
         .querySelectorAll('.screen')
-        .forEach(el => el.classList.remove('active'));
+        .forEach(el =>
+            el.classList.remove('active')
+        );
 
-    const advogado = document.getElementById('advogado');
+    const advogado =
+        document.getElementById('advogado');
 
     if (advogado) {
 
@@ -3111,25 +2658,29 @@ function voltarAdvogado() {
 }
 
 
-/* =========================
+/* =========================================================
    DATA AUTOMÁTICA
-========================= */
+========================================================= */
 
-function atualizarDataPDF() {
+function atualizarDataFoto() {
 
-    const campo = document.getElementById('pdfData');
+    const campo =
+        document.getElementById('fotoData');
 
     if (!campo) return;
 
     const agora = new Date();
 
-    const dia = String(agora.getDate()).padStart(2, '0');
+    const dia =
+        String(agora.getDate()).padStart(2, '0');
 
-    const mes = String(
-        agora.getMonth() + 1
-    ).padStart(2, '0');
+    const mes =
+        String(
+            agora.getMonth() + 1
+        ).padStart(2, '0');
 
-    const ano = agora.getFullYear();
+    const ano =
+        agora.getFullYear();
 
     campo.value =
         `${dia}/${mes}/${ano}`;
@@ -3137,255 +2688,364 @@ function atualizarDataPDF() {
 }
 
 
-/* =========================
-   PEGAR DADOS
-========================= */
+/* =========================================================
+   CARREGAR FOTO
+========================================================= */
 
-function obterDadosPDF() {
+function carregarFotoModelo(event) {
+
+    const arquivo =
+        event.target.files?.[0];
+
+    if (!arquivo) return;
+
+    const leitor =
+        new FileReader();
+
+    leitor.onload = function(e) {
+
+        const imagem =
+            new Image();
+
+        imagem.onload = function() {
+
+            imagemModeloFoto = imagem;
+
+            document.getElementById(
+                'fotoModeloNome'
+            ).textContent =
+                arquivo.name;
+
+            visualizarFotoEditada();
+
+        };
+
+        imagem.src =
+            e.target.result;
+
+    };
+
+    leitor.readAsDataURL(arquivo);
+
+}
+
+
+/* =========================================================
+   OBTER DADOS
+========================================================= */
+
+function obterDadosFoto() {
+
+    atualizarDataFoto();
 
     return {
 
         credor:
-            document.getElementById('pdfCredor')?.value.trim() || '',
+            document.getElementById(
+                'fotoCredor'
+            )?.value.trim() || '',
 
         cpfCnpj:
-            document.getElementById('pdfCpfCnpj')?.value.trim() || '',
+            document.getElementById(
+                'fotoCpfCnpj'
+            )?.value.trim() || '',
 
         advogado:
-            document.getElementById('pdfAdvogado')?.value.trim() || '',
+            document.getElementById(
+                'fotoAdvogado'
+            )?.value.trim() || '',
 
         processo:
-            document.getElementById('pdfProcesso')?.value.trim() || '',
+            document.getElementById(
+                'fotoProcesso'
+            )?.value.trim() || '',
 
         contra:
-            document.getElementById('pdfContra')?.value.trim() || '',
+            document.getElementById(
+                'fotoContra'
+            )?.value.trim() || '',
 
         valor:
-            document.getElementById('pdfValor')?.value.trim() || '',
+            document.getElementById(
+                'fotoValor'
+            )?.value.trim() || '',
 
         data:
-            document.getElementById('pdfData')?.value || ''
+            document.getElementById(
+                'fotoData'
+            )?.value || ''
 
     };
 
 }
 
 
-/* =========================
-   VISUALIZAR
-========================= */
+/* =========================================================
+   DESENHAR FOTO
+========================================================= */
 
-function visualizarPDFModelo() {
+function desenharTextoFoto() {
 
-    atualizarDataPDF();
+    if (!imagemModeloFoto) {
 
-    const dados = obterDadosPDF();
+        alert(
+            'Primeiro selecione uma foto modelo.'
+        );
 
-    document.getElementById('previewCredor').textContent =
-        dados.credor;
+        return false;
 
-    document.getElementById('previewCpfCnpj').textContent =
-        dados.cpfCnpj;
+    }
 
-    document.getElementById('previewAdvogado').textContent =
-        dados.advogado;
+    const canvas =
+        document.getElementById('canvasFoto');
 
-    document.getElementById('previewProcesso').textContent =
-        dados.processo;
+    const ctx =
+        canvas.getContext('2d');
 
-    document.getElementById('previewContra').textContent =
-        dados.contra;
+    canvas.width =
+        imagemModeloFoto.naturalWidth ||
+        imagemModeloFoto.width;
 
-    document.getElementById('previewValor').textContent =
-        dados.valor;
+    canvas.height =
+        imagemModeloFoto.naturalHeight ||
+        imagemModeloFoto.height;
 
-    document.getElementById('previewData').textContent =
-        dados.data;
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-    document.getElementById('pdfPreview').style.display =
-        'block';
+    ctx.drawImage(
+        imagemModeloFoto,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    const dados =
+        obterDadosFoto();
+
+
+    /*
+     * Os campos são adicionados sobre a imagem
+     * como MODELO / CÓPIA NÃO ORIGINAL.
+     */
+
+    const margem = canvas.width * 0.05;
+
+    const tamanhoFonte =
+        Math.max(
+            16,
+            Math.round(canvas.width * 0.018)
+        );
+
+    ctx.font =
+        `700 ${tamanhoFonte}px Arial`;
+
+    ctx.textBaseline =
+        'middle';
+
+
+    const linhas = [
+
+        `CREDOR: ${dados.credor}`,
+
+        `CPF/CNPJ: ${dados.cpfCnpj}`,
+
+        `ADVOGADO(A): ${dados.advogado}`,
+
+        `PROCESSO N: ${dados.processo}`,
+
+        `CUMPRIMENTO DE SENTENÇA CONTRA: ${dados.contra}`,
+
+        `VALOR A RECEBER: ${dados.valor}`,
+
+        `DATA: ${dados.data}`
+
+    ];
+
+
+    /*
+     * Área de modelo separada para não
+     * tentar ocultar ou apagar elementos
+     * existentes da foto.
+     */
+
+    const inicioY =
+        canvas.height * 0.72;
+
+    const espacamento =
+        tamanhoFonte * 1.7;
+
+
+    ctx.fillStyle =
+        'rgba(255,255,255,.94)';
+
+    const altura =
+        linhas.length *
+        espacamento +
+        tamanhoFonte * 2;
+
+    ctx.fillRect(
+        0,
+        inicioY - tamanhoFonte,
+        canvas.width,
+        altura
+    );
+
+
+    ctx.fillStyle =
+        '#111';
+
+
+    linhas.forEach(
+        (linha, indice) => {
+
+            ctx.fillText(
+                linha,
+                margem,
+                inicioY +
+                indice * espacamento
+            );
+
+        }
+    );
+
+
+    /*
+     * MARCA OBRIGATÓRIA
+     */
+
+    const marca =
+        'MODELO / CÓPIA NÃO ORIGINAL';
+
+    const tamanhoMarca =
+        Math.max(
+            14,
+            Math.round(canvas.width * 0.015)
+        );
+
+    ctx.font =
+        `900 ${tamanhoMarca}px Arial`;
+
+    ctx.textAlign =
+        'center';
+
+    ctx.textBaseline =
+        'bottom';
+
+    ctx.fillStyle =
+        'rgba(180,0,0,.85)';
+
+    ctx.fillText(
+        marca,
+        canvas.width / 2,
+        canvas.height - margem
+    );
+
+    ctx.textAlign =
+        'left';
+
+    imagemFinalFoto =
+        canvas.toDataURL(
+            'image/png'
+        );
+
+    return true;
 
 }
 
 
-/* =========================
-   GERAR PDF
-========================= */
+/* =========================================================
+   VISUALIZAR
+========================================================= */
 
-function gerarPDFModelo() {
+function visualizarFotoEditada() {
 
-    atualizarDataPDF();
-
-    visualizarPDFModelo();
-
-    const dados = obterDadosPDF();
-
-    const conteudo = `
-        <!DOCTYPE html>
-
-        <html lang="pt-BR">
-
-        <head>
-
-            <meta charset="UTF-8">
-
-            <title>Modelo PDF</title>
-
-            <style>
-
-                body {
-
-                    font-family: Arial, sans-serif;
-
-                    margin: 45px;
-
-                    color: #111;
-
-                }
-
-                .aviso {
-
-                    text-align: center;
-
-                    font-size: 11px;
-
-                    font-weight: bold;
-
-                    margin-bottom: 35px;
-
-                }
-
-                h1 {
-
-                    text-align: center;
-
-                    font-size: 20px;
-
-                    margin-bottom: 40px;
-
-                }
-
-                .linha {
-
-                    padding: 14px 0;
-
-                    border-bottom: 1px solid #ccc;
-
-                    font-size: 13px;
-
-                }
-
-                .rodape {
-
-                    margin-top: 45px;
-
-                    text-align: center;
-
-                    font-size: 10px;
-
-                    color: #555;
-
-                }
-
-            </style>
-
-        </head>
-
-        <body>
-
-            <div class="aviso">
-                MODELO / SEM VALIDADE OFICIAL
-            </div>
-
-            <h1>
-                MODELO DE DOCUMENTO
-            </h1>
-
-            <div class="linha">
-                <strong>CREDOR:</strong>
-                ${escPDF(dados.credor)}
-            </div>
-
-            <div class="linha">
-                <strong>CPF/CNPJ:</strong>
-                ${escPDF(dados.cpfCnpj)}
-            </div>
-
-            <div class="linha">
-                <strong>ADVOGADO(A):</strong>
-                ${escPDF(dados.advogado)}
-            </div>
-
-            <div class="linha">
-                <strong>PROCESSO N:</strong>
-                ${escPDF(dados.processo)}
-            </div>
-
-            <div class="linha">
-                <strong>CUMPRIMENTO DE SENTENÇA CONTRA:</strong>
-                ${escPDF(dados.contra)}
-            </div>
-
-            <div class="linha">
-                <strong>VALOR A RECEBER:</strong>
-                ${escPDF(dados.valor)}
-            </div>
-
-            <div class="linha">
-                <strong>DATA:</strong>
-                ${escPDF(dados.data)}
-            </div>
-
-            <div class="rodape">
-                Documento gerado como modelo de demonstração.
-            </div>
-
-        </body>
-
-        </html>
-    `;
-
-    const janela = window.open('', '_blank');
-
-    if (!janela) {
-
-        alert(
-            'Não foi possível abrir a visualização. Verifique se o navegador bloqueou a janela.'
-        );
+    if (
+        !desenharTextoFoto()
+    ) {
 
         return;
 
     }
 
-    janela.document.open();
+    document.getElementById(
+        'fotoPreview'
+    ).style.display =
+        'block';
 
-    janela.document.write(conteudo);
-
-    janela.document.close();
-
-    setTimeout(() => {
-
-        janela.focus();
-
-        janela.print();
-
-    }, 500);
+    document.getElementById(
+        'fotoDownloadBox'
+    ).style.display =
+        'none';
 
 }
 
 
-/* =========================
-   PROTEGER TEXTO DO PDF
-========================= */
+/* =========================================================
+   GERAR IMAGEM
+========================================================= */
 
-function escPDF(valor) {
+function gerarFotoEditada() {
 
-    return String(valor || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+    if (
+        !desenharTextoFoto()
+    ) {
+
+        return;
+
+    }
+
+    document.getElementById(
+        'fotoPreview'
+    ).style.display =
+        'block';
+
+    document.getElementById(
+        'fotoDownloadBox'
+    ).style.display =
+        'block';
+
+}
+
+
+/* =========================================================
+   BAIXAR
+========================================================= */
+
+function baixarFotoEditada() {
+
+    if (!imagemFinalFoto) {
+
+        if (
+            !desenharTextoFoto()
+        ) {
+
+            return;
+
+        }
+
+    }
+
+    const link =
+        document.createElement('a');
+
+    link.href =
+        imagemFinalFoto;
+
+    link.download =
+        'modelo-copia-nao-original.png';
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
 
 }
 
