@@ -2396,558 +2396,996 @@ textarea{
 
 <script>
 
-/* =========================================================
-   ⚖️ ADVOGADO
-========================================================= */
+<!-- =========================
+     ADVOGADO
+========================= -->
 
-function mostrarManutencao(){
+<section id="advogado" class="screen">
 
-    if(typeof mostrarToast === "function"){
+    <button class="back" onclick="voltar()">← Voltar</button>
 
-        mostrarToast(
-            "🛠️ Esta opção está em manutenção."
-        );
+    <div class="page-title">⚖️ Advogado</div>
 
-    }else{
+    <div class="page-sub">
+        Ferramentas para atendimento e organização.
+    </div>
 
-        alert(
-            "🛠️ Esta opção está em manutenção."
-        );
+    <!-- GERAR RESPOSTA -->
+    <div class="adv-card">
+        <div class="adv-icon">🤖</div>
+
+        <div class="adv-content">
+            <h3>GERAR RESPOSTA</h3>
+            <p>Gere uma resposta profissional para o cliente.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirGerarResposta()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- ANALISAR PERGUNTA -->
+    <div class="adv-card">
+        <div class="adv-icon">🧠</div>
+
+        <div class="adv-content">
+            <h3>ANALISAR PERGUNTA</h3>
+            <p>Analise a pergunta enviada pelo cliente.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirAnalise()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- LIBERAÇÃO -->
+    <div class="adv-card">
+        <div class="adv-icon">💰</div>
+
+        <div class="adv-content">
+            <h3>LIBERAÇÃO</h3>
+            <p>Informações sobre liberação de valores.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirLiberacao()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- ANDAMENTO -->
+    <div class="adv-card">
+        <div class="adv-icon">📂</div>
+
+        <div class="adv-content">
+            <h3>ANDAMENTO</h3>
+            <p>Consulte e organize informações do andamento.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirAndamento()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- PRAZOS -->
+    <div class="adv-card">
+        <div class="adv-icon">⏳</div>
+
+        <div class="adv-content">
+            <h3>PRAZOS</h3>
+            <p>Organize informações relacionadas a prazos.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirPrazos()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- VALORES -->
+    <div class="adv-card">
+        <div class="adv-icon">💵</div>
+
+        <div class="adv-content">
+            <h3>VALORES</h3>
+            <p>Organize informações de valores.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirValores()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- DOCUMENTAÇÃO -->
+    <div class="adv-card">
+        <div class="adv-icon">📄</div>
+
+        <div class="adv-content">
+            <h3>DOCUMENTAÇÃO</h3>
+            <p>Organize documentos e informações.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirDocumentacao()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- FAVORITAS -->
+    <div class="adv-card">
+        <div class="adv-icon">⭐</div>
+
+        <div class="adv-content">
+            <h3>FAVORITAS</h3>
+            <p>Acesse suas opções favoritas.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirFavoritas()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- MONTAR MENSAGEM -->
+    <div class="adv-card">
+        <div class="adv-icon">📝</div>
+
+        <div class="adv-content">
+            <h3>MONTAR MENSAGEM</h3>
+            <p>Monte uma mensagem profissional.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirMontarMensagem()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- HISTÓRICO -->
+    <div class="adv-card">
+        <div class="adv-icon">📋</div>
+
+        <div class="adv-content">
+            <h3>HISTÓRICO</h3>
+            <p>Veja o histórico de informações.</p>
+        </div>
+
+        <button class="adv-btn" onclick="abrirHistorico()">
+            ABRIR
+        </button>
+    </div>
+
+
+    <!-- =========================
+         GERAR PDF
+    ========================= -->
+
+    <div class="adv-card pdf-card">
+
+        <div class="adv-icon">📄</div>
+
+        <div class="adv-content">
+            <h3>GERAR PDF</h3>
+
+            <p>
+                Preencha os dados e gere o modelo automaticamente.
+            </p>
+
+            <small>
+                MODELO / SEM VALIDADE OFICIAL
+            </small>
+        </div>
+
+        <button class="adv-btn" onclick="abrirGerarPDF()">
+            GERAR PDF
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TELA GERAR PDF
+========================= -->
+
+<section id="gerar-pdf" class="screen">
+
+    <button class="back" onclick="voltarAdvogado()">
+        ← Voltar
+    </button>
+
+    <div class="page-title">
+        📄 GERAR PDF
+    </div>
+
+    <div class="page-sub">
+        Preencha os campos abaixo para gerar o modelo.
+    </div>
+
+    <div class="pdf-notice">
+        MODELO / SEM VALIDADE OFICIAL
+    </div>
+
+
+    <!-- CREDOR -->
+
+    <div class="pdf-field">
+
+        <label for="pdfCredor">
+            CREDOR:
+        </label>
+
+        <input
+            type="text"
+            id="pdfCredor"
+            placeholder="Digite o nome do credor"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- CPF/CNPJ -->
+
+    <div class="pdf-field">
+
+        <label for="pdfCpfCnpj">
+            CPF/CNPJ:
+        </label>
+
+        <input
+            type="text"
+            id="pdfCpfCnpj"
+            placeholder="Digite o CPF ou CNPJ"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- ADVOGADO -->
+
+    <div class="pdf-field">
+
+        <label for="pdfAdvogado">
+            ADVOGADO(A):
+        </label>
+
+        <input
+            type="text"
+            id="pdfAdvogado"
+            placeholder="Digite o nome do advogado"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- PROCESSO -->
+
+    <div class="pdf-field">
+
+        <label for="pdfProcesso">
+            PROCESSO N:
+        </label>
+
+        <input
+            type="text"
+            id="pdfProcesso"
+            placeholder="Digite o número do processo"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- CUMPRIMENTO DE SENTENÇA CONTRA -->
+
+    <div class="pdf-field">
+
+        <label for="pdfContra">
+            CUMPRIMENTO DE SENTENÇA CONTRA:
+        </label>
+
+        <input
+            type="text"
+            id="pdfContra"
+            placeholder="Digite o nome"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- VALOR -->
+
+    <div class="pdf-field">
+
+        <label for="pdfValor">
+            VALOR A RECEBER:
+        </label>
+
+        <input
+            type="text"
+            id="pdfValor"
+            placeholder="Digite somente o valor"
+            inputmode="decimal"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <!-- DATA AUTOMÁTICA -->
+
+    <div class="pdf-field">
+
+        <label>
+            DATA:
+        </label>
+
+        <input
+            type="text"
+            id="pdfData"
+            readonly
+        >
+
+    </div>
+
+
+    <!-- BOTÕES -->
+
+    <div class="pdf-actions">
+
+        <button
+            type="button"
+            class="pdf-action-btn"
+            onclick="visualizarPDFModelo()"
+        >
+            👁️ VISUALIZAR
+        </button>
+
+        <button
+            type="button"
+            class="pdf-action-btn primary"
+            onclick="gerarPDFModelo()"
+        >
+            📄 GERAR PDF
+        </button>
+
+    </div>
+
+
+    <!-- VISUALIZAÇÃO -->
+
+    <div
+        id="pdfPreview"
+        class="pdf-preview"
+        style="display:none;"
+    >
+
+        <div class="pdf-sheet">
+
+            <div class="pdf-model-label">
+                MODELO / SEM VALIDADE OFICIAL
+            </div>
+
+            <div class="pdf-model-title">
+                MODELO DE DOCUMENTO
+            </div>
+
+            <div class="pdf-model-line">
+                <strong>CREDOR:</strong>
+                <span id="previewCredor"></span>
+            </div>
+
+            <div class="pdf-model-line">
+                <strong>CPF/CNPJ:</strong>
+                <span id="previewCpfCnpj"></span>
+            </div>
+
+            <div class="pdf-model-line">
+                <strong>ADVOGADO(A):</strong>
+                <span id="previewAdvogado"></span>
+            </div>
+
+            <div class="pdf-model-line">
+                <strong>PROCESSO N:</strong>
+                <span id="previewProcesso"></span>
+            </div>
+
+            <div class="pdf-model-line">
+                <strong>CUMPRIMENTO DE SENTENÇA CONTRA:</strong>
+                <span id="previewContra"></span>
+            </div>
+
+            <div class="pdf-model-line">
+                <strong>VALOR A RECEBER:</strong>
+                <span id="previewValor"></span>
+            </div>
+
+            <div class="pdf-model-line">
+                <strong>DATA:</strong>
+                <span id="previewData"></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<style>
+
+/* =========================
+   ADVOGADO
+========================= */
+
+.adv-card {
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px;
+
+    margin-bottom: 12px;
+
+    border-radius: 16px;
+
+    background: rgba(255,255,255,.08);
+
+    border: 1px solid rgba(255,255,255,.12);
+
+}
+
+.adv-icon {
+
+    font-size: 28px;
+
+    min-width: 42px;
+
+    text-align: center;
+
+}
+
+.adv-content {
+
+    flex: 1;
+
+}
+
+.adv-content h3 {
+
+    margin: 0 0 5px;
+
+    font-size: 15px;
+
+}
+
+.adv-content p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    opacity: .8;
+
+}
+
+.adv-content small {
+
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 10px;
+
+    opacity: .65;
+
+}
+
+.adv-btn {
+
+    border: 0;
+
+    border-radius: 10px;
+
+    padding: 10px 13px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================
+   GERAR PDF
+========================= */
+
+.pdf-notice {
+
+    text-align: center;
+
+    margin: 15px 0;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    background: rgba(255,255,255,.08);
+
+}
+
+.pdf-field {
+
+    margin-bottom: 14px;
+
+}
+
+.pdf-field label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-weight: 700;
+
+    font-size: 13px;
+
+}
+
+.pdf-field input {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    background: rgba(255,255,255,.08);
+
+    color: inherit;
+
+    outline: none;
+
+}
+
+.pdf-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+}
+
+.pdf-action-btn {
+
+    flex: 1;
+
+    padding: 13px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: 800;
+
+}
+
+.pdf-action-btn.primary {
+
+    font-weight: 900;
+
+}
+
+.pdf-preview {
+
+    margin-top: 20px;
+
+}
+
+.pdf-sheet {
+
+    background: white;
+
+    color: #111;
+
+    padding: 35px;
+
+    min-height: 500px;
+
+    border-radius: 8px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.2);
+
+}
+
+.pdf-model-label {
+
+    text-align: center;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    margin-bottom: 25px;
+
+}
+
+.pdf-model-title {
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    margin-bottom: 35px;
+
+}
+
+.pdf-model-line {
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #ddd;
+
+    font-size: 13px;
+
+}
+
+.pdf-model-line strong {
+
+    display: inline-block;
+
+    margin-right: 5px;
+
+}
+
+</style>
+
+
+<script>
+
+/* =========================
+   ABRIR GERAR PDF
+========================= */
+
+function abrirGerarPDF() {
+
+    document
+        .querySelectorAll('.screen')
+        .forEach(el => el.classList.remove('active'));
+
+    const tela = document.getElementById('gerar-pdf');
+
+    if (tela) {
+
+        tela.classList.add('active');
+
+    }
+
+    atualizarDataPDF();
+
+}
+
+
+/* =========================
+   VOLTAR PARA ADVOGADO
+========================= */
+
+function voltarAdvogado() {
+
+    document
+        .querySelectorAll('.screen')
+        .forEach(el => el.classList.remove('active'));
+
+    const advogado = document.getElementById('advogado');
+
+    if (advogado) {
+
+        advogado.classList.add('active');
 
     }
 
 }
 
 
-/* =========================================================
-   📄 GERAR PDF
-========================================================= */
+/* =========================
+   DATA AUTOMÁTICA
+========================= */
 
-let pdfModeloSelecionado = "";
-let pdfGeradoBlob = null;
+function atualizarDataPDF() {
 
+    const campo = document.getElementById('pdfData');
 
-/* ---------------------------------------------------------
-   MODELO
---------------------------------------------------------- */
+    if (!campo) return;
 
-function selecionarModeloPDF(event){
+    const agora = new Date();
 
-    const file =
-        event.target.files &&
-        event.target.files[0];
+    const dia = String(agora.getDate()).padStart(2, '0');
 
-    pdfModeloSelecionado =
-        file ? file.name : "";
+    const mes = String(
+        agora.getMonth() + 1
+    ).padStart(2, '0');
 
-    const box =
-        document.getElementById(
-            "pdfModeloNome"
-        );
+    const ano = agora.getFullYear();
 
-    if(box){
-
-        box.textContent = file
-
-            ? "Modelo selecionado: " +
-              file.name
-
-            : "Nenhum modelo selecionado.";
-
-    }
+    campo.value =
+        `${dia}/${mes}/${ano}`;
 
 }
 
 
-/* ---------------------------------------------------------
+/* =========================
    PEGAR DADOS
---------------------------------------------------------- */
+========================= */
 
-function obterDadosPDF(){
+function obterDadosPDF() {
 
     return {
 
-        nome:
-            (
-                document.getElementById(
-                    "pdfNome"
-                )?.value || ""
-            ).trim(),
+        credor:
+            document.getElementById('pdfCredor')?.value.trim() || '',
+
+        cpfCnpj:
+            document.getElementById('pdfCpfCnpj')?.value.trim() || '',
 
         advogado:
-            (
-                document.getElementById(
-                    "pdfAdvogado"
-                )?.value || ""
-            ).trim(),
-
-        valor:
-            (
-                document.getElementById(
-                    "pdfValor"
-                )?.value || ""
-            ).trim(),
+            document.getElementById('pdfAdvogado')?.value.trim() || '',
 
         processo:
-            (
-                document.getElementById(
-                    "pdfProcesso"
-                )?.value || ""
-            ).trim(),
+            document.getElementById('pdfProcesso')?.value.trim() || '',
+
+        contra:
+            document.getElementById('pdfContra')?.value.trim() || '',
+
+        valor:
+            document.getElementById('pdfValor')?.value.trim() || '',
 
         data:
-            (
-                document.getElementById(
-                    "pdfData"
-                )?.value || ""
-            ).trim(),
-
-        outros:
-            (
-                document.getElementById(
-                    "pdfOutros"
-                )?.value || ""
-            ).trim()
+            document.getElementById('pdfData')?.value || ''
 
     };
 
 }
 
 
-/* ---------------------------------------------------------
-   DATA
---------------------------------------------------------- */
-
-function formatarDataPDF(data){
-
-    if(!data)
-        return "—";
-
-    const partes =
-        data.split("-");
-
-    if(partes.length !== 3)
-        return data;
-
-    return (
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
-        partes[0]
-    );
-
-}
-
-
-/* ---------------------------------------------------------
+/* =========================
    VISUALIZAR
---------------------------------------------------------- */
+========================= */
 
-function visualizarPDF(){
+function visualizarPDFModelo() {
 
-    const d =
-        obterDadosPDF();
+    atualizarDataPDF();
 
+    const dados = obterDadosPDF();
 
-    const nome =
-        document.getElementById(
-            "previewNome"
-        );
+    document.getElementById('previewCredor').textContent =
+        dados.credor;
 
-    const advogado =
-        document.getElementById(
-            "previewAdvogado"
-        );
+    document.getElementById('previewCpfCnpj').textContent =
+        dados.cpfCnpj;
 
-    const valor =
-        document.getElementById(
-            "previewValor"
-        );
+    document.getElementById('previewAdvogado').textContent =
+        dados.advogado;
 
-    const processo =
-        document.getElementById(
-            "previewProcesso"
-        );
+    document.getElementById('previewProcesso').textContent =
+        dados.processo;
 
-    const data =
-        document.getElementById(
-            "previewData"
-        );
+    document.getElementById('previewContra').textContent =
+        dados.contra;
 
-    const outros =
-        document.getElementById(
-            "previewOutros"
-        );
+    document.getElementById('previewValor').textContent =
+        dados.valor;
 
+    document.getElementById('previewData').textContent =
+        dados.data;
 
-    if(nome)
-        nome.textContent =
-            d.nome || "—";
-
-    if(advogado)
-        advogado.textContent =
-            d.advogado || "—";
-
-    if(valor)
-        valor.textContent =
-            d.valor || "—";
-
-    if(processo)
-        processo.textContent =
-            d.processo || "—";
-
-    if(data)
-        data.textContent =
-            formatarDataPDF(d.data);
-
-    if(outros)
-        outros.textContent =
-            d.outros || "—";
-
-
-    const preview =
-        document.getElementById(
-            "pdfPreview"
-        );
-
-    if(preview)
-        preview.classList.add("show");
-
-
-    const downloadBox =
-        document.getElementById(
-            "pdfDownloadBox"
-        );
-
-    if(downloadBox)
-        downloadBox.style.display =
-            "none";
+    document.getElementById('pdfPreview').style.display =
+        'block';
 
 }
 
 
-/* ---------------------------------------------------------
-   GERAR
---------------------------------------------------------- */
+/* =========================
+   GERAR PDF
+========================= */
 
-function gerarPDFSeguro(){
+function gerarPDFModelo() {
 
-    const dados =
-        obterDadosPDF();
+    atualizarDataPDF();
 
+    visualizarPDFModelo();
 
-    if(
-        !dados.nome &&
-        !dados.advogado &&
-        !dados.valor &&
-        !dados.processo &&
-        !dados.data &&
-        !dados.outros
-    ){
+    const dados = obterDadosPDF();
 
-        if(typeof mostrarToast === "function"){
+    const conteudo = `
+        <!DOCTYPE html>
 
-            mostrarToast(
-                "⚠️ Preencha pelo menos um campo."
-            );
+        <html lang="pt-BR">
 
-        }else{
+        <head>
 
-            alert(
-                "Preencha pelo menos um campo."
-            );
+            <meta charset="UTF-8">
 
-        }
+            <title>Modelo PDF</title>
 
-        return;
+            <style>
 
-    }
+                body {
 
+                    font-family: Arial, sans-serif;
 
-    visualizarPDF();
+                    margin: 45px;
 
+                    color: #111;
 
-    /*
-       O PDF gerado é um documento novo
-       de rascunho e não uma reprodução
-       de documento oficial.
-    */
+                }
 
+                .aviso {
 
-    const html = `
+                    text-align: center;
 
-<!DOCTYPE html>
+                    font-size: 11px;
 
-<html lang="pt-BR">
+                    font-weight: bold;
 
-<head>
+                    margin-bottom: 35px;
 
-<meta charset="UTF-8">
+                }
 
-<title>Documento de Rascunho</title>
+                h1 {
 
-<style>
+                    text-align: center;
 
-body{
+                    font-size: 20px;
 
-    font-family:Arial,
-    Helvetica,
-    sans-serif;
+                    margin-bottom: 40px;
 
-    padding:45px;
+                }
 
-    color:#111;
+                .linha {
 
-}
+                    padding: 14px 0;
 
-.header{
+                    border-bottom: 1px solid #ccc;
 
-    text-align:center;
+                    font-size: 13px;
 
-    border-bottom:
-        2px solid #222;
+                }
 
-    padding-bottom:18px;
+                .rodape {
 
-    margin-bottom:30px;
+                    margin-top: 45px;
 
-}
+                    text-align: center;
 
-h1{
+                    font-size: 10px;
 
-    font-size:22px;
+                    color: #555;
 
-}
+                }
 
-.watermark{
+            </style>
 
-    position:fixed;
+        </head>
 
-    top:45%;
+        <body>
 
-    left:10%;
+            <div class="aviso">
+                MODELO / SEM VALIDADE OFICIAL
+            </div>
 
-    font-size:42px;
+            <h1>
+                MODELO DE DOCUMENTO
+            </h1>
 
-    font-weight:bold;
+            <div class="linha">
+                <strong>CREDOR:</strong>
+                ${escPDF(dados.credor)}
+            </div>
 
-    opacity:.12;
+            <div class="linha">
+                <strong>CPF/CNPJ:</strong>
+                ${escPDF(dados.cpfCnpj)}
+            </div>
 
-    transform:rotate(-25deg);
+            <div class="linha">
+                <strong>ADVOGADO(A):</strong>
+                ${escPDF(dados.advogado)}
+            </div>
 
-}
+            <div class="linha">
+                <strong>PROCESSO N:</strong>
+                ${escPDF(dados.processo)}
+            </div>
 
-.info{
+            <div class="linha">
+                <strong>CUMPRIMENTO DE SENTENÇA CONTRA:</strong>
+                ${escPDF(dados.contra)}
+            </div>
 
-    margin-top:15px;
+            <div class="linha">
+                <strong>VALOR A RECEBER:</strong>
+                ${escPDF(dados.valor)}
+            </div>
 
-}
+            <div class="linha">
+                <strong>DATA:</strong>
+                ${escPDF(dados.data)}
+            </div>
 
-.row{
+            <div class="rodape">
+                Documento gerado como modelo de demonstração.
+            </div>
 
-    padding:10px 0;
+        </body>
 
-    border-bottom:
-        1px solid #ddd;
+        </html>
+    `;
 
-}
+    const janela = window.open('', '_blank');
 
-.footer{
-
-    margin-top:60px;
-
-    text-align:center;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-
-<div class="watermark">
-CÓPIA NÃO ORIGINAL
-</div>
-
-
-<div class="header">
-
-<h1>
-DOCUMENTO DE RASCUNHO
-</h1>
-
-<div>
-SEM VALIDADE OFICIAL
-</div>
-
-</div>
-
-
-<div class="info">
-
-<div class="row">
-<b>Nome:</b>
-${escapePDF(dados.nome || "—")}
-</div>
-
-
-<div class="row">
-<b>Advogado:</b>
-${escapePDF(dados.advogado || "—")}
-</div>
-
-
-<div class="row">
-<b>Valor:</b>
-${escapePDF(dados.valor || "—")}
-</div>
-
-
-<div class="row">
-<b>Processo:</b>
-${escapePDF(dados.processo || "—")}
-</div>
-
-
-<div class="row">
-<b>Data:</b>
-${escapePDF(
-    formatarDataPDF(dados.data)
-)}
-</div>
-
-
-<div class="row">
-
-<b>Outros dados:</b>
-
-<br><br>
-
-${escapePDF(
-    dados.outros || "—"
-).replace(/\n/g,"<br>")}
-
-</div>
-
-</div>
-
-
-<div class="footer">
-
-CÓPIA NÃO ORIGINAL • SEM VALIDADE OFICIAL
-
-</div>
-
-
-</body>
-
-</html>
-
-`;
-
-
-    pdfGeradoBlob =
-        new Blob(
-            [html],
-            {
-                type:
-                    "text/html"
-            }
-        );
-
-
-    const box =
-        document.getElementById(
-            "pdfDownloadBox"
-        );
-
-    if(box)
-        box.style.display =
-            "block";
-
-
-    if(typeof mostrarToast === "function"){
-
-        mostrarToast(
-            "✅ Documento de rascunho preparado."
-        );
-
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   PROTEÇÃO DE TEXTO
---------------------------------------------------------- */
-
-function escapePDF(text){
-
-    return String(text)
-
-        .replace(/&/g,"&amp;")
-
-        .replace(/</g,"&lt;")
-
-        .replace(/>/g,"&gt;")
-
-        .replace(/"/g,"&quot;")
-
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* ---------------------------------------------------------
-   BAIXAR
---------------------------------------------------------- */
-
-function baixarPDFGerado(){
-
-    if(!pdfGeradoBlob){
+    if (!janela) {
 
         alert(
-            "Primeiro gere o documento."
+            'Não foi possível abrir a visualização. Verifique se o navegador bloqueou a janela.'
         );
 
         return;
 
     }
 
+    janela.document.open();
 
-    const url =
-        URL.createObjectURL(
-            pdfGeradoBlob
-        );
+    janela.document.write(conteudo);
 
+    janela.document.close();
 
-    const a =
-        document.createElement("a");
+    setTimeout(() => {
 
+        janela.focus();
 
-    a.href = url;
+        janela.print();
 
-    a.download =
-        "documento_rascunho.html";
+    }, 500);
 
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
+}
 
 
-    setTimeout(
-        () => URL.revokeObjectURL(url),
-        1000
-    );
+/* =========================
+   PROTEGER TEXTO DO PDF
+========================= */
+
+function escPDF(valor) {
+
+    return String(valor || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 
 }
 
