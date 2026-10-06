@@ -2038,9 +2038,9 @@ textarea{
 </style>
 
 
-<!-- ========================================================= -->
-<!-- ⚖️ ADVOGADO -->
-<!-- ========================================================= -->
+<!-- =========================================================
+     ⚖️ ADVOGADO
+========================================================= -->
 
 <section id="advogado" class="screen">
 
@@ -2049,199 +2049,57 @@ textarea{
     <div class="page-title">⚖️ Advogado</div>
 
     <div class="page-sub">
-        Ferramentas do advogado.
+        Gere respostas profissionais e utilize as ferramentas do advogado.
     </div>
-
-
-    <!-- ===================================================== -->
-    <!-- 🤖 GERAR RESPOSTA — EM MANUTENÇÃO -->
-    <!-- ===================================================== -->
-
-    <div class="ai-box" style="opacity:.70;">
-
-        <div style="
-            text-align:center;
-            margin-bottom:15px;
-            padding:10px;
-            border-radius:10px;
-            background:rgba(163,106,0,.10);
-            color:#a36a00;
-            font-weight:900;
-            font-size:12px;
-        ">
-            🔧 GERAR RESPOSTA — EM MANUTENÇÃO
-        </div>
-
-        <div class="field">
-
-            <label>PERGUNTA DO CLIENTE</label>
-
-            <textarea
-                disabled
-                placeholder="Esta função está em manutenção."
-            ></textarea>
-
-        </div>
-
-        <button
-            class="primary"
-            disabled
-            style="opacity:.55;cursor:not-allowed;"
-        >
-            🤖 GERAR RESPOSTA
-        </button>
-
-    </div>
-
-
-    <div style="height:16px"></div>
-
-
-    <!-- ===================================================== -->
-    <!-- MENU DO ADVOGADO -->
-    <!-- GERAR PDF É O PRIMEIRO E ÚNICO DISPONÍVEL -->
-    <!-- ===================================================== -->
 
     <div class="advisor-grid">
 
-
-        <!-- ================================================= -->
-        <!-- 📄 GERAR PDF — DISPONÍVEL -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-pdf"
-            onclick="navegar('gerarPDF')"
-        >
+        <!-- GERAR PDF -->
+        <button class="advisor-btn" onclick="navegar('gerarPDF')">
             📄<br>
             GERAR PDF
-            <small>✅ DISPONÍVEL</small>
         </button>
 
+        <!-- DEMAIS OPÇÕES EM MANUTENÇÃO -->
 
-        <!-- ================================================= -->
-        <!-- 🔧 ANALISAR PERGUNTA — MANUTENÇÃO -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-maintenance"
-            onclick="opcaoAdvogadoManutencao('ANALISAR PERGUNTA')"
-        >
-            🧠<br>
-            ANALISAR PERGUNTA
-            <small>🔧 EM MANUTENÇÃO</small>
+        <button class="advisor-btn" onclick="mostrarManutencao()">
+            💬<br>
+            CHAT
         </button>
 
-
-        <!-- ================================================= -->
-        <!-- 🔧 LIBERAÇÃO — MANUTENÇÃO -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-maintenance"
-            onclick="opcaoAdvogadoManutencao('LIBERAÇÃO')"
-        >
-            💰<br>
-            LIBERAÇÃO
-            <small>🔧 EM MANUTENÇÃO</small>
-        </button>
-
-
-        <!-- ================================================= -->
-        <!-- 🔧 ANDAMENTO — MANUTENÇÃO -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-maintenance"
-            onclick="opcaoAdvogadoManutencao('ANDAMENTO')"
-        >
+        <button class="advisor-btn" onclick="mostrarManutencao()">
             📂<br>
             ANDAMENTO
-            <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
-
-        <!-- ================================================= -->
-        <!-- 🔧 PRAZOS — MANUTENÇÃO -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-maintenance"
-            onclick="opcaoAdvogadoManutencao('PRAZOS')"
-        >
+        <button class="advisor-btn" onclick="mostrarManutencao()">
             ⏳<br>
             PRAZOS
-            <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
-
-        <!-- ================================================= -->
-        <!-- 🔧 VALORES — MANUTENÇÃO -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-maintenance"
-            onclick="opcaoAdvogadoManutencao('VALORES')"
-        >
+        <button class="advisor-btn" onclick="mostrarManutencao()">
             💵<br>
             VALORES
-            <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
-
-        <!-- ================================================= -->
-        <!-- 🔧 DOCUMENTAÇÃO — MANUTENÇÃO -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-maintenance"
-            onclick="opcaoAdvogadoManutencao('DOCUMENTAÇÃO')"
-        >
+        <button class="advisor-btn" onclick="mostrarManutencao()">
             📄<br>
             DOCUMENTAÇÃO
-            <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
-
-        <!-- ================================================= -->
-        <!-- 🔧 FAVORITAS — MANUTENÇÃO -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-maintenance"
-            onclick="opcaoAdvogadoManutencao('FAVORITAS')"
-        >
+        <button class="advisor-btn" onclick="mostrarManutencao()">
             ⭐<br>
             FAVORITAS
-            <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
-
-        <!-- ================================================= -->
-        <!-- 🔧 MONTAR MENSAGEM — MANUTENÇÃO -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-maintenance"
-            onclick="opcaoAdvogadoManutencao('MONTAR MENSAGEM')"
-        >
+        <button class="advisor-btn" onclick="mostrarManutencao()">
             📝<br>
             MONTAR MENSAGEM
-            <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
-
-        <!-- ================================================= -->
-        <!-- 🔧 HISTÓRICO — MANUTENÇÃO -->
-        <!-- ================================================= -->
-
-        <button
-            class="advisor-btn advisor-maintenance"
-            onclick="opcaoAdvogadoManutencao('HISTÓRICO')"
-        >
+        <button class="advisor-btn" onclick="mostrarManutencao()">
             📋<br>
             HISTÓRICO
-            <small>🔧 EM MANUTENÇÃO</small>
         </button>
 
     </div>
@@ -2249,35 +2107,40 @@ textarea{
 </section>
 
 
-<!-- ========================================================= -->
-<!-- 📄 GERAR PDF -->
-<!-- ========================================================= -->
+<!-- =========================================================
+     📄 GERAR PDF
+========================================================= -->
 
 <section id="gerarPDF" class="screen">
 
-    <button class="back" onclick="voltar()">← Voltar</button>
+    <button class="back" onclick="navegar('advogado')">
+        ← Voltar
+    </button>
 
-    <div class="page-title">📄 Gerar PDF</div>
+    <div class="page-title">
+        📄 Gerar PDF
+    </div>
 
     <div class="page-sub">
-        Crie um documento de rascunho preenchendo os dados abaixo.
+        Crie um novo documento de rascunho a partir dos dados preenchidos.
     </div>
 
 
     <div class="pdf-builder">
 
-
-        <!-- AVISO -->
-
         <div class="pdf-warning">
 
-            ⚠️ <b>RASCUNHO / SEM VALIDADE OFICIAL.</b><br>
+            ⚠️ <b>RASCUNHO / SEM VALIDADE OFICIAL</b>
 
-            O PDF gerado é um novo documento para conferência e organização.
-            Ele não reproduz selos, assinaturas, brasões ou outros elementos
-            de autenticação de documentos oficiais.
+            <br><br>
 
-            A marca <b>CÓPIA NÃO ORIGINAL</b> será inserida no documento gerado.
+            O documento gerado é destinado somente para
+            conferência, organização e preparação.
+
+            <br><br>
+
+            A marca <b>CÓPIA NÃO ORIGINAL</b> será inserida
+            no documento gerado.
 
         </div>
 
@@ -2286,7 +2149,9 @@ textarea{
 
         <div class="field">
 
-            <label>📁 PDF MODELO (APENAS REFERÊNCIA)</label>
+            <label>
+                📁 PDF MODELO
+            </label>
 
             <input
                 id="pdfModelo"
@@ -2379,7 +2244,7 @@ textarea{
         </div>
 
 
-        <!-- OUTROS DADOS -->
+        <!-- OUTROS -->
 
         <div class="field">
 
@@ -2502,9 +2367,7 @@ textarea{
 
 
             <div class="pdf-preview-footer">
-
                 CÓPIA NÃO ORIGINAL • SEM VALIDADE OFICIAL
-
             </div>
 
         </div>
@@ -2531,68 +2394,560 @@ textarea{
 </section>
 
 
-<!-- ========================================================= -->
-<!-- CSS ESPECÍFICO DO NOVO MENU DO ADVOGADO -->
-<!-- ========================================================= -->
+<script>
+
+/* =========================================================
+   ⚖️ ADVOGADO
+========================================================= */
+
+function mostrarManutencao(){
+
+    if(typeof mostrarToast === "function"){
+
+        mostrarToast(
+            "🛠️ Esta opção está em manutenção."
+        );
+
+    }else{
+
+        alert(
+            "🛠️ Esta opção está em manutenção."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   📄 GERAR PDF
+========================================================= */
+
+let pdfModeloSelecionado = "";
+let pdfGeradoBlob = null;
+
+
+/* ---------------------------------------------------------
+   MODELO
+--------------------------------------------------------- */
+
+function selecionarModeloPDF(event){
+
+    const file =
+        event.target.files &&
+        event.target.files[0];
+
+    pdfModeloSelecionado =
+        file ? file.name : "";
+
+    const box =
+        document.getElementById(
+            "pdfModeloNome"
+        );
+
+    if(box){
+
+        box.textContent = file
+
+            ? "Modelo selecionado: " +
+              file.name
+
+            : "Nenhum modelo selecionado.";
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   PEGAR DADOS
+--------------------------------------------------------- */
+
+function obterDadosPDF(){
+
+    return {
+
+        nome:
+            (
+                document.getElementById(
+                    "pdfNome"
+                )?.value || ""
+            ).trim(),
+
+        advogado:
+            (
+                document.getElementById(
+                    "pdfAdvogado"
+                )?.value || ""
+            ).trim(),
+
+        valor:
+            (
+                document.getElementById(
+                    "pdfValor"
+                )?.value || ""
+            ).trim(),
+
+        processo:
+            (
+                document.getElementById(
+                    "pdfProcesso"
+                )?.value || ""
+            ).trim(),
+
+        data:
+            (
+                document.getElementById(
+                    "pdfData"
+                )?.value || ""
+            ).trim(),
+
+        outros:
+            (
+                document.getElementById(
+                    "pdfOutros"
+                )?.value || ""
+            ).trim()
+
+    };
+
+}
+
+
+/* ---------------------------------------------------------
+   DATA
+--------------------------------------------------------- */
+
+function formatarDataPDF(data){
+
+    if(!data)
+        return "—";
+
+    const partes =
+        data.split("-");
+
+    if(partes.length !== 3)
+        return data;
+
+    return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   VISUALIZAR
+--------------------------------------------------------- */
+
+function visualizarPDF(){
+
+    const d =
+        obterDadosPDF();
+
+
+    const nome =
+        document.getElementById(
+            "previewNome"
+        );
+
+    const advogado =
+        document.getElementById(
+            "previewAdvogado"
+        );
+
+    const valor =
+        document.getElementById(
+            "previewValor"
+        );
+
+    const processo =
+        document.getElementById(
+            "previewProcesso"
+        );
+
+    const data =
+        document.getElementById(
+            "previewData"
+        );
+
+    const outros =
+        document.getElementById(
+            "previewOutros"
+        );
+
+
+    if(nome)
+        nome.textContent =
+            d.nome || "—";
+
+    if(advogado)
+        advogado.textContent =
+            d.advogado || "—";
+
+    if(valor)
+        valor.textContent =
+            d.valor || "—";
+
+    if(processo)
+        processo.textContent =
+            d.processo || "—";
+
+    if(data)
+        data.textContent =
+            formatarDataPDF(d.data);
+
+    if(outros)
+        outros.textContent =
+            d.outros || "—";
+
+
+    const preview =
+        document.getElementById(
+            "pdfPreview"
+        );
+
+    if(preview)
+        preview.classList.add("show");
+
+
+    const downloadBox =
+        document.getElementById(
+            "pdfDownloadBox"
+        );
+
+    if(downloadBox)
+        downloadBox.style.display =
+            "none";
+
+}
+
+
+/* ---------------------------------------------------------
+   GERAR
+--------------------------------------------------------- */
+
+function gerarPDFSeguro(){
+
+    const dados =
+        obterDadosPDF();
+
+
+    if(
+        !dados.nome &&
+        !dados.advogado &&
+        !dados.valor &&
+        !dados.processo &&
+        !dados.data &&
+        !dados.outros
+    ){
+
+        if(typeof mostrarToast === "function"){
+
+            mostrarToast(
+                "⚠️ Preencha pelo menos um campo."
+            );
+
+        }else{
+
+            alert(
+                "Preencha pelo menos um campo."
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    visualizarPDF();
+
+
+    /*
+       O PDF gerado é um documento novo
+       de rascunho e não uma reprodução
+       de documento oficial.
+    */
+
+
+    const html = `
+
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Documento de Rascunho</title>
 
 <style>
 
-.advisor-btn{
-    position:relative;
+body{
+
+    font-family:Arial,
+    Helvetica,
+    sans-serif;
+
+    padding:45px;
+
+    color:#111;
+
 }
 
-.advisor-maintenance{
-    opacity:.72;
-    filter:saturate(.65);
-    cursor:pointer;
+.header{
+
+    text-align:center;
+
+    border-bottom:
+        2px solid #222;
+
+    padding-bottom:18px;
+
+    margin-bottom:30px;
+
 }
 
-.advisor-maintenance small,
-.advisor-pdf small{
-    display:block;
-    margin-top:7px;
-    font-size:9px;
-    font-weight:800;
-    letter-spacing:.4px;
+h1{
+
+    font-size:22px;
+
 }
 
-.advisor-maintenance small{
-    color:#a36a00;
+.watermark{
+
+    position:fixed;
+
+    top:45%;
+
+    left:10%;
+
+    font-size:42px;
+
+    font-weight:bold;
+
+    opacity:.12;
+
+    transform:rotate(-25deg);
+
 }
 
-.advisor-pdf{
-    border:2px solid #168a45;
-    box-shadow:0 8px 20px rgba(22,138,69,.16);
+.info{
+
+    margin-top:15px;
+
 }
 
-.advisor-pdf small{
-    color:#168a45;
+.row{
+
+    padding:10px 0;
+
+    border-bottom:
+        1px solid #ddd;
+
 }
 
-.advisor-maintenance:active{
-    transform:scale(.97);
+.footer{
+
+    margin-top:60px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    font-weight:bold;
+
 }
 
 </style>
 
+</head>
 
-<!-- ========================================================= -->
-<!-- FUNÇÃO DAS OPÇÕES EM MANUTENÇÃO -->
-<!-- ========================================================= -->
+<body>
 
-<script>
 
-function opcaoAdvogadoManutencao(nome){
+<div class="watermark">
+CÓPIA NÃO ORIGINAL
+</div>
+
+
+<div class="header">
+
+<h1>
+DOCUMENTO DE RASCUNHO
+</h1>
+
+<div>
+SEM VALIDADE OFICIAL
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="row">
+<b>Nome:</b>
+${escapePDF(dados.nome || "—")}
+</div>
+
+
+<div class="row">
+<b>Advogado:</b>
+${escapePDF(dados.advogado || "—")}
+</div>
+
+
+<div class="row">
+<b>Valor:</b>
+${escapePDF(dados.valor || "—")}
+</div>
+
+
+<div class="row">
+<b>Processo:</b>
+${escapePDF(dados.processo || "—")}
+</div>
+
+
+<div class="row">
+<b>Data:</b>
+${escapePDF(
+    formatarDataPDF(dados.data)
+)}
+</div>
+
+
+<div class="row">
+
+<b>Outros dados:</b>
+
+<br><br>
+
+${escapePDF(
+    dados.outros || "—"
+).replace(/\n/g,"<br>")}
+
+</div>
+
+</div>
+
+
+<div class="footer">
+
+CÓPIA NÃO ORIGINAL • SEM VALIDADE OFICIAL
+
+</div>
+
+
+</body>
+
+</html>
+
+`;
+
+
+    pdfGeradoBlob =
+        new Blob(
+            [html],
+            {
+                type:
+                    "text/html"
+            }
+        );
+
+
+    const box =
+        document.getElementById(
+            "pdfDownloadBox"
+        );
+
+    if(box)
+        box.style.display =
+            "block";
+
 
     if(typeof mostrarToast === "function"){
 
-        mostrarToast("🔧 " + nome + " está em manutenção.");
-
-    }else{
-
-        alert("🔧 " + nome + " está em manutenção.");
+        mostrarToast(
+            "✅ Documento de rascunho preparado."
+        );
 
     }
+
+}
+
+
+/* ---------------------------------------------------------
+   PROTEÇÃO DE TEXTO
+--------------------------------------------------------- */
+
+function escapePDF(text){
+
+    return String(text)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ---------------------------------------------------------
+   BAIXAR
+--------------------------------------------------------- */
+
+function baixarPDFGerado(){
+
+    if(!pdfGeradoBlob){
+
+        alert(
+            "Primeiro gere o documento."
+        );
+
+        return;
+
+    }
+
+
+    const url =
+        URL.createObjectURL(
+            pdfGeradoBlob
+        );
+
+
+    const a =
+        document.createElement("a");
+
+
+    a.href = url;
+
+    a.download =
+        "documento_rascunho.html";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+
+    setTimeout(
+        () => URL.revokeObjectURL(url),
+        1000
+    );
 
 }
 
