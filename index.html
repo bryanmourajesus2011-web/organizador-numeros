@@ -1972,306 +1972,686 @@ textarea{
 
 </section>
 
-<!-- ADVOGADO -->
+<!-- =========================================================
+     GERADOR DE PDF - ADVOGADO
+     Cole este bloco antes de </body>
+========================================================= -->
 
-<section id="advogado" class="screen">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
-    <button class="back" onclick="voltar()">← Voltar</button>
+<script>
+let pdfModeloArquivo = null;
+let pdfGeradoBytes = null;
+let pdfGeradoURL = null;
 
-    <div class="page-title">⚖️ Advogado</div>
 
-    <div class="page-sub">
-        Gere respostas profissionais a partir da pergunta do cliente.
-    </div>
+/* =========================================================
+   SELECIONAR PDF MODELO
+========================================================= */
 
-    <div class="ai-box">
+function selecionarPDFModelo(input) {
 
-        <div class="field">
+    const status = document.getElementById("pdfModeloStatus");
 
-            <label>PERGUNTA DO CLIENTE</label>
+    if (!input || !input.files || !input.files.length) {
 
-            <textarea
-                id="perguntaCliente"
-                placeholder="Cole aqui a pergunta que o cliente enviou..."
-            ></textarea>
+        pdfModeloArquivo = null;
 
-        </div>
+        if (status) {
+            status.innerHTML = "📁 Nenhum PDF selecionado";
+        }
 
-        <button class="primary" onclick="gerarResposta()">
-            🤖 GERAR RESPOSTA
-        </button>
+        return;
+    }
 
-        <div id="gerando" class="generating">
+    const arquivo = input.files[0];
 
-            <div class="mini-loader"></div>
+    if (arquivo.type !== "application/pdf") {
 
-            Gerando resposta...
+        alert("Selecione um arquivo PDF válido.");
 
-        </div>
+        input.value = "";
+        pdfModeloArquivo = null;
 
-        <div id="respostaBox" class="answer-box">
+        if (status) {
+            status.innerHTML = "📁 Nenhum PDF selecionado";
+        }
 
-            <div class="answer-label">RESPOSTA GERADA</div>
+        return;
+    }
 
-            <div id="respostaTexto"></div>
+    pdfModeloArquivo = arquivo;
 
-        </div>
+    if (status) {
 
-        <div id="responseTools" class="response-tools">
+        status.innerHTML =
+            "✅ PDF selecionado: " +
+            escaparHTML(arquivo.name);
+    }
+}
 
-            <button class="secondary" onclick="copiarResposta()">
-                📋 Copiar
-            </button>
 
-            <button class="primary" onclick="abrirWhatsAppResposta()">
-                💬 WhatsApp
-            </button>
+/* =========================================================
+   ESCAPAR TEXTO
+========================================================= */
 
-        </div>
+function escaparHTML(texto) {
 
-    </div>
+    return String(texto || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
-    <div style="height:16px"></div>
 
-    <div class="advisor-grid">
+/* =========================================================
+   FORMATAR DATA
+========================================================= */
 
-        <button class="advisor-btn" onclick="navegar('analisar')">
-            🧠<br>ANALISAR PERGUNTA
-        </button>
+function formatarDataPDF(data) {
 
-        <button class="advisor-btn" onclick="navegar('liberacao')">
-            💰<br>LIBERAÇÃO
-        </button>
+    if (!data) return "";
 
-        <button class="advisor-btn" onclick="navegar('andamento')">
-            📂<br>ANDAMENTO
-        </button>
+    const partes = data.split("-");
 
-        <button class="advisor-btn" onclick="navegar('prazos')">
-            ⏳<br>PRAZOS
-        </button>
+    if (partes.length !== 3) {
+        return data;
+    }
 
-        <button class="advisor-btn" onclick="navegar('valores')">
-            💵<br>VALORES
-        </button>
+    return partes[2] + "/" + partes[1] + "/" + partes[0];
+}
 
-        <button class="advisor-btn" onclick="navegar('documentacao')">
-            📄<br>DOCUMENTAÇÃO
-        </button>
 
-        <button class="advisor-btn" onclick="navegar('favoritasRespostas')">
-            ⭐<br>FAVORITAS
-        </button>
+/* =========================================================
+   PEGAR DADOS
+========================================================= */
 
-        <button class="advisor-btn" onclick="navegar('montarMensagem')">
-            📝<br>MONTAR MENSAGEM
-        </button>
+function obterDadosPDF() {
 
-        <button class="advisor-btn" onclick="navegar('historico')">
-            📋<br>HISTÓRICO
-        </button>
+    return {
 
-        <!-- GERAR PDF -->
-        <button class="advisor-btn" onclick="navegar('gerarPDF')">
-            📄<br>GERAR PDF
-        </button>
+        nome:
+            document.getElementById("pdfNomePessoa")?.value.trim() || "",
 
-    </div>
+        advogado:
+            document.getElementById("pdfNomeAdvogado")?.value.trim() || "",
 
-</section>
+        valor:
+            document.getElementById("pdfValorProcesso")?.value.trim() || "",
 
+        processo:
+            document.getElementById("pdfNumeroProcesso")?.value.trim() || "",
 
-<!-- GERAR PDF -->
-<section id="gerarPDF" class="screen">
+        data:
+            formatarDataPDF(
+                document.getElementById("pdfData")?.value || ""
+            ),
 
-    <button class="back" onclick="voltar()">← Voltar</button>
+        outros:
+            document.getElementById("pdfOutrosDados")?.value.trim() || ""
+    };
+}
 
-    <div class="page-title">📄 Gerar PDF</div>
 
-    <div class="page-sub">
-        Preencha os dados e gere uma nova versão do seu PDF modelo.
-    </div>
+/* =========================================================
+   VALIDAR
+========================================================= */
 
-    <div class="card">
+function validarPDF() {
 
-        <!-- PDF MODELO -->
-        <div class="field">
+    if (!pdfModeloArquivo) {
 
-            <label>📁 SELECIONAR PDF MODELO</label>
+        alert("📁 Primeiro selecione o PDF modelo.");
+        return false;
+    }
 
-            <input
-                id="pdfModelo"
-                type="file"
-                accept="application/pdf"
-                onchange="selecionarPDFModelo(this)"
-            >
+    return true;
+}
 
-            <div
-                id="pdfModeloStatus"
-                style="
-                    margin-top:8px;
-                    padding:10px;
-                    border-radius:12px;
-                    background:rgba(0,140,69,.08);
-                    color:var(--verde);
-                    font-size:13px;
-                    font-weight:800;
-                "
-            >
-                📁 Nenhum PDF selecionado
-            </div>
 
-        </div>
+/* =========================================================
+   VISUALIZAR
+========================================================= */
 
+async function visualizarAlteracoesPDF() {
 
-        <!-- NOME DA PESSOA -->
-        <div class="field">
+    if (!validarPDF()) return;
 
-            <label>👤 NOME DA PESSOA</label>
+    try {
 
-            <input
-                id="pdfNomePessoa"
-                type="text"
-                placeholder="Nome completo"
-            >
+        await criarPDFBM3(false);
 
-        </div>
+        if (!pdfGeradoBytes) {
+            throw new Error("PDF não foi gerado.");
+        }
 
+        if (pdfGeradoURL) {
+            URL.revokeObjectURL(pdfGeradoURL);
+        }
 
-        <!-- NOME DO ADVOGADO -->
-        <div class="field">
+        const blob = new Blob(
+            [pdfGeradoBytes],
+            { type: "application/pdf" }
+        );
 
-            <label>⚖️ NOME DO ADVOGADO</label>
+        pdfGeradoURL = URL.createObjectURL(blob);
 
-            <input
-                id="pdfNomeAdvogado"
-                type="text"
-                placeholder="Nome do advogado"
-            >
+        const previewBox =
+            document.getElementById("pdfPreviewBox");
 
-        </div>
+        const preview =
+            document.getElementById("pdfPreview");
 
+        if (preview) {
+            preview.src = pdfGeradoURL;
+        }
 
-        <!-- VALOR -->
-        <div class="field">
+        if (previewBox) {
+            previewBox.style.display = "block";
+        }
 
-            <label>💰 VALOR DO PROCESSO</label>
+        setTimeout(() => {
 
-            <input
-                id="pdfValorProcesso"
-                type="text"
-                placeholder="Ex.: R$ 50.000,00"
-            >
+            if (previewBox) {
+                previewBox.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
 
-        </div>
+        }, 100);
 
+    } catch (erro) {
 
-        <!-- NÚMERO DO PROCESSO -->
-        <div class="field">
+        console.error(erro);
 
-            <label>🔢 NÚMERO DO PROCESSO</label>
+        alert(
+            "Não foi possível visualizar o PDF.\n\n" +
+            (erro.message || erro)
+        );
+    }
+}
 
-            <input
-                id="pdfNumeroProcesso"
-                type="text"
-                placeholder="Número do processo"
-            >
 
-        </div>
+/* =========================================================
+   GERAR PDF
+========================================================= */
 
+async function gerarPDFBM3() {
 
-        <!-- DATA -->
-        <div class="field">
+    if (!validarPDF()) return;
 
-            <label>📅 DATA</label>
+    try {
 
-            <input
-                id="pdfData"
-                type="date"
-            >
+        await criarPDFBM3(true);
 
-        </div>
+    } catch (erro) {
 
+        console.error(erro);
 
-        <!-- OUTROS DADOS -->
-        <div class="field">
+        alert(
+            "Erro ao gerar o PDF.\n\n" +
+            (erro.message || erro)
+        );
+    }
+}
 
-            <label>✏️ OUTROS DADOS</label>
 
-            <textarea
-                id="pdfOutrosDados"
-                placeholder="Digite outras informações..."
-            ></textarea>
+/* =========================================================
+   CRIAR NOVO PDF
+========================================================= */
 
-        </div>
+async function criarPDFBM3(mostrarMensagem = true) {
 
+    if (!pdfModeloArquivo) {
+        throw new Error("Nenhum PDF modelo foi selecionado.");
+    }
 
-        <!-- VISUALIZAR -->
-        <button
-            class="secondary"
-            onclick="visualizarAlteracoesPDF()"
-        >
-            👁️ VISUALIZAR ALTERAÇÕES
-        </button>
+    if (
+        typeof PDFLib === "undefined" ||
+        !PDFLib.PDFDocument
+    ) {
 
+        throw new Error(
+            "A biblioteca de PDF não foi carregada."
+        );
+    }
 
-        <div style="height:10px"></div>
+    const dados = obterDadosPDF();
 
+    const arquivoBytes =
+        await pdfModeloArquivo.arrayBuffer();
 
-        <!-- GERAR -->
-        <button
-            class="primary"
-            onclick="gerarPDFBM3()"
-        >
-            📄 GERAR PDF
-        </button>
+    const pdfDoc =
+        await PDFLib.PDFDocument.load(arquivoBytes);
 
+    const paginas =
+        pdfDoc.getPages();
 
-        <div style="height:10px"></div>
+    /*
+       Mantém o PDF modelo e acrescenta os dados
+       no documento novo.
+    */
 
+    const fonte =
+        await pdfDoc.embedFont(
+            PDFLib.StandardFonts.Helvetica
+        );
 
-        <!-- BAIXAR -->
-        <button
-            class="secondary"
-            onclick="baixarPDFBM3()"
-        >
-            ⬇️ BAIXAR PDF
-        </button>
+    const fonteNegrito =
+        await pdfDoc.embedFont(
+            PDFLib.StandardFonts.HelveticaBold
+        );
 
-    </div>
 
+    /*
+       Caixa de informações.
+       É colocada na primeira página para que
+       o documento novo contenha os dados preenchidos.
+    */
 
-    <!-- PREVISUALIZAÇÃO -->
-    <div
-        id="pdfPreviewBox"
-        class="card"
-        style="display:none; margin-top:16px;"
-    >
+    if (paginas.length > 0) {
 
-        <div class="card-title">
-            👁️ VISUALIZAÇÃO
-        </div>
+        const pagina = paginas[0];
 
-        <div class="card-sub">
-            Confira o documento antes de enviar.
-        </div>
+        const tamanho =
+            pagina.getSize();
 
-        <div style="height:10px"></div>
+        const largura =
+            tamanho.width;
 
-        <iframe
-            id="pdfPreview"
-            style="
-                width:100%;
-                height:600px;
-                border:1px solid var(--borda);
-                border-radius:14px;
-                background:#fff;
-            "
-        ></iframe>
+        const altura =
+            tamanho.height;
 
-    </div>
 
-</section>
+        /*
+           Dados preenchidos
+        */
+
+        const linhas = [];
+
+        if (dados.nome) {
+            linhas.push(
+                "Nome: " + dados.nome
+            );
+        }
+
+        if (dados.advogado) {
+            linhas.push(
+                "Advogado: " + dados.advogado
+            );
+        }
+
+        if (dados.valor) {
+            linhas.push(
+                "Valor: " + dados.valor
+            );
+        }
+
+        if (dados.processo) {
+            linhas.push(
+                "Processo: " + dados.processo
+            );
+        }
+
+        if (dados.data) {
+            linhas.push(
+                "Data: " + dados.data
+            );
+        }
+
+        if (dados.outros) {
+            linhas.push(
+                "Outros dados: " + dados.outros
+            );
+        }
+
+
+        /*
+           Só adiciona o bloco se houver
+           alguma informação preenchida.
+        */
+
+        if (linhas.length > 0) {
+
+            const alturaCaixa =
+                30 + (linhas.length * 18);
+
+            const yInicial =
+                Math.max(
+                    40,
+                    altura - alturaCaixa - 20
+                );
+
+
+            /*
+               Fundo branco para facilitar leitura.
+            */
+
+            pagina.drawRectangle({
+
+                x: 25,
+
+                y: yInicial,
+
+                width: largura - 50,
+
+                height: alturaCaixa,
+
+                color: PDFLib.rgb(
+                    1,
+                    1,
+                    1
+                ),
+
+                borderColor:
+                    PDFLib.rgb(
+                        0.75,
+                        0.75,
+                        0.75
+                    ),
+
+                borderWidth: 1
+            });
+
+
+            pagina.drawText(
+                "DADOS DO NOVO DOCUMENTO",
+                {
+
+                    x: 38,
+
+                    y:
+                        yInicial +
+                        alturaCaixa -
+                        22,
+
+                    size: 11,
+
+                    font: fonteNegrito,
+
+                    color:
+                        PDFLib.rgb(
+                            0.10,
+                            0.10,
+                            0.10
+                        )
+                }
+            );
+
+
+            let y =
+                yInicial +
+                alturaCaixa -
+                42;
+
+
+            for (const linha of linhas) {
+
+                pagina.drawText(
+                    limitarTextoPDF(
+                        linha,
+                        105
+                    ),
+                    {
+
+                        x: 38,
+
+                        y: y,
+
+                        size: 9,
+
+                        font: fonte,
+
+                        color:
+                            PDFLib.rgb(
+                                0.12,
+                                0.12,
+                                0.12
+                            )
+                    }
+                );
+
+                y -= 17;
+            }
+        }
+
+
+        /*
+           AVISO DO DOCUMENTO
+        */
+
+        pagina.drawText(
+            "CÓPIA NÃO ORIGINAL",
+            {
+
+                x:
+                    largura / 2 - 60,
+
+                y: 15,
+
+                size: 8,
+
+                font: fonteNegrito,
+
+                color:
+                    PDFLib.rgb(
+                        0.45,
+                        0.45,
+                        0.45
+                    )
+            }
+        );
+    }
+
+
+    /*
+       Salvar novo PDF
+    */
+
+    pdfGeradoBytes =
+        await pdfDoc.save();
+
+
+    /*
+       Criar URL para visualização
+    */
+
+    if (pdfGeradoURL) {
+
+        URL.revokeObjectURL(
+            pdfGeradoURL
+        );
+    }
+
+    const blob =
+        new Blob(
+            [pdfGeradoBytes],
+            {
+                type:
+                    "application/pdf"
+            }
+        );
+
+    pdfGeradoURL =
+        URL.createObjectURL(blob);
+
+
+    /*
+       Atualizar preview
+    */
+
+    const preview =
+        document.getElementById(
+            "pdfPreview"
+        );
+
+    if (preview) {
+        preview.src =
+            pdfGeradoURL;
+    }
+
+
+    /*
+       Mostrar caixa de preview
+    */
+
+    const previewBox =
+        document.getElementById(
+            "pdfPreviewBox"
+        );
+
+    if (previewBox) {
+        previewBox.style.display =
+            "block";
+    }
+
+
+    if (mostrarMensagem) {
+
+        alert(
+            "✅ Novo PDF gerado com sucesso!"
+        );
+    }
+
+    return pdfGeradoBytes;
+}
+
+
+/* =========================================================
+   LIMITAR TEXTO
+========================================================= */
+
+function limitarTextoPDF(
+    texto,
+    limite
+) {
+
+    texto = String(texto || "");
+
+    if (texto.length <= limite) {
+        return texto;
+    }
+
+    return texto.substring(
+        0,
+        limite - 3
+    ) + "...";
+}
+
+
+/* =========================================================
+   BAIXAR PDF
+========================================================= */
+
+async function baixarPDFBM3() {
+
+    try {
+
+        /*
+           Se ainda não existe PDF gerado,
+           gera automaticamente.
+        */
+
+        if (!pdfGeradoBytes) {
+
+            if (!validarPDF()) {
+                return;
+            }
+
+            await criarPDFBM3(false);
+        }
+
+
+        if (!pdfGeradoBytes) {
+
+            alert(
+                "Não existe um PDF para baixar."
+            );
+
+            return;
+        }
+
+
+        const nomePessoa =
+            document
+                .getElementById(
+                    "pdfNomePessoa"
+                )
+                ?.value
+                .trim() || "documento";
+
+
+        /*
+           Limpar caracteres inválidos
+        */
+
+        const nomeArquivo =
+            nomePessoa
+                .replace(
+                    /[\\/:*?"<>|]/g,
+                    ""
+                )
+                .trim() ||
+            "documento";
+
+
+        const blob =
+            new Blob(
+                [pdfGeradoBytes],
+                {
+                    type:
+                        "application/pdf"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+        link.href = url;
+
+        link.download =
+            "NOVO_DOCUMENTO_" +
+            nomeArquivo +
+            ".pdf";
+
+
+        document.body.appendChild(
+            link
+        );
+
+        link.click();
+
+        link.remove();
+
+
+        setTimeout(() => {
+
+            URL.revokeObjectURL(url);
+
+        }, 1000);
+
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert(
+            "Não foi possível baixar o PDF.\n\n" +
+            (erro.message || erro)
+        );
+    }
+}
+</script>
 
 <!-- CONTATOS -->
 
