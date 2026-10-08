@@ -6595,8 +6595,7 @@ function carregarScriptBM3(){
             const salvo=localStorage.getItem(chave);
             el.textContent=salvo!==null?salvo:texto;
         }else{
-            localStorage.removeItem("bm3_script_passo_"+(i+1));
-            el.textContent="";
+            el.textContent=texto;
         }
     });
 }
