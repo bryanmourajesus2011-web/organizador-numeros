@@ -2876,19 +2876,19 @@ body:not(.dark) .calculator-card{
     </div>
 
     <div class="screen-subtitle">
-        Roteiro organizado em 5 passos. Edite os campos antes de copiar.
+        Roteiro organizado em 5 passos.
     </div>
 
     <div class="script-bm3-card-wrap">
         <div class="script-step-card">
             <div class="script-step-title">PASSO 1</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo1"></textarea>
+            <div class="script-step-text" id="scriptBM3Passo1"></div>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(1)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 2</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo2"></textarea>
+            <div class="script-step-text" id="scriptBM3Passo2"></div>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(2)">📋 Copiar passo</button>
         </div>
 
@@ -6545,7 +6545,7 @@ const PASSO_1 = "Olá (nome), bom dia! Tudo bem?";
 
 const PASSO_2 = "Trago ótimas noticias sobre o seu processo!🙌";
 
-const PASSO_3 = "O juiz concedeu como procedente ao nosso favor, a decisão judicial foi totalmente favorável a causa.,O valor acima encontra-se em aberto, disponível para liberação ";
+const PASSO_3 = "O juiz concedeu como procedente ao nosso favor, a decisão judicial foi totalmente favorável a causa./O valor acima encontra-se em aberto, disponível para liberação.";
 
 const PASSO_4 = "Nosso próximo passo será realizar o cadastro de uma instituição financeira em sua titularidade.
 
@@ -6555,7 +6555,8 @@ Pode me encaminhar os seguintes dados para a transferência.
 * Nome do banco:
 * Agência:
 * Número da conta:
-* Tipo de conta (corrente ou poupança, se houver):";
+* Tipo de conta (corrente ou poupança, se houver):
+";
 
 const PASSO_5 = "Certo, já encaminhei a documentação para o Tribunal de Justiça!
 
@@ -6573,22 +6574,32 @@ function carregarScriptBM3(){
         if(!el) return;
         const chave="bm3_script_passo_"+(i+1);
         const salvo=localStorage.getItem(chave);
-        el.value=salvo!==null?salvo:texto;
-        el.oninput=function(){localStorage.setItem(chave,el.value);};
+        const valor=(i<=1 && salvo!==null)?salvo:texto;
+        if(i<=1){
+            el.textContent=valor;
+            el.oninput=null;
+        }else{
+            el.value=valor;
+            el.oninput=function(){localStorage.setItem(chave,el.value);};
+        }
     });
 }
 
 function copiarScriptBM3(numero){
     const el=document.getElementById("scriptBM3Passo"+numero);
-    if(!el || !el.value.trim()){toast("Este passo está vazio.");return;}
-    navigator.clipboard.writeText(el.value).then(()=>toast("Passo "+numero+" copiado!"));
+    if(!el) return;
+    const valor=(typeof el.value === "string") ? el.value : el.textContent;
+    if(!valor.trim()){toast("Este passo está vazio.");return;}
+    navigator.clipboard.writeText(valor).then(()=>toast("Passo "+numero+" copiado!"));
 }
 
 function copiarScriptBM3Todos(){
     const partes=[];
     for(let i=1;i<=5;i++){
         const el=document.getElementById("scriptBM3Passo"+i);
-        if(el && el.value.trim()) partes.push("PASSO "+i+"\n"+el.value.trim());
+        if(!el) continue;
+        const valor=(typeof el.value === "string") ? el.value : el.textContent;
+        if(valor.trim()) partes.push("PASSO "+i+"\n"+valor.trim());
     }
     if(!partes.length){toast("O script está vazio.");return;}
     navigator.clipboard.writeText(partes.join("\n\n")).then(()=>toast("Script BM3 copiado!"));
