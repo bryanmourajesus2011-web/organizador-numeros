@@ -1657,7 +1657,25 @@ body.dark .back:hover{
 .script-bm3-card-wrap{display:grid;gap:16px;margin-top:18px;}
 .script-step-card{padding:18px;border:1px solid rgba(0,0,0,.08);border-radius:20px;background:linear-gradient(145deg,#fff,#f7f7f7);box-shadow:0 10px 28px rgba(0,0,0,.08);}
 .script-step-title{font-size:14px;font-weight:950;letter-spacing:.8px;color:var(--verde);margin-bottom:10px;}
-.script-step-text{min-height:105px;resize:vertical;line-height:1.55;font-size:14px;}
+.script-step-text{
+    min-height:105px;
+    display:block;
+    width:100%;
+    padding:14px;
+    border:1px solid #d9d9d9;
+    border-radius:12px;
+    background:#f7f7f7;
+    color:#161616;
+    white-space:pre-wrap;
+    word-break:break-word;
+    line-height:1.55;
+    font-size:14px;
+}
+body.dark .script-step-text{
+    border-color:#333;
+    background:#0f0f0f;
+    color:#fff;
+}
 .script-copy-btn{margin-top:10px;}
 .script-copy-all{width:100%;min-height:52px;margin-top:2px;font-weight:950;}
 body.dark .script-step-card{background:linear-gradient(145deg,#171717,#101010);border-color:#292929;box-shadow:0 12px 30px rgba(0,0,0,.28);}
@@ -2846,7 +2864,7 @@ body:not(.dark) .calculator-card{
 
         <div
             class="advisor-card script-bm3-card"
-            onclick="abrirTela('scriptBM3'); carregarScriptBM3();"
+            onclick="abrirTela('scriptBM3')"
         >
             <h4>
                 📜 SCRIPT BM3
@@ -3370,6 +3388,10 @@ function abrirTela(id){
 
     if(id === "recentes"){
         renderRecentes();
+    }
+
+    if(id === "scriptBM3"){
+        carregarScriptBM3();
     }
 }
 
@@ -6551,8 +6573,7 @@ const PASSO_3 = "O juiz concedeu como procedente ao nosso favor, a decisão judi
 
 EM SEGUIDA O VALOR DA CAUSA QUE FICA NO FINAL
 
-O valor acima encontra-se em aberto, disponível para liberação.
-";
+O valor acima encontra-se em aberto, disponível para liberação.";
 
 const PASSO_4 = "Nosso próximo passo será realizar o cadastro de uma instituição financeira em sua titularidade.
 
@@ -6562,8 +6583,7 @@ Pode me encaminhar os seguintes dados para a transferência.
 * Nome do banco:
 * Agência:
 * Número da conta:
-* Tipo de conta (corrente ou poupança, se houver):
-";
+* Tipo de conta (corrente ou poupança, se houver):";
 
 const PASSO_5 = "Certo, já encaminhei a documentação para o Tribunal de Justiça!
 
