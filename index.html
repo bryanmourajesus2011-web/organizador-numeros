@@ -12,624 +12,765 @@
     --verde:#008c45;
     --verde2:#00a651;
     --vermelho:#cd212a;
-    --fundo:#f3f6f4;
-    --texto:#17221d;
-    --cinza:#68736d;
-    --borda:#dfe6e2;
-    --card:#ffffff;
-    --sombra:0 14px 35px rgba(0,0,0,.09);
+    --branco:#ffffff;
+    --preto:#090909;
+    --cinza:#f2f2f2;
+    --cinza2:#d9d9d9;
+    --texto:#161616;
+    --sombra:0 12px 35px rgba(0,0,0,.12);
 }
 
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
-    min-height:100%;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    background:var(--fundo);
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at top,#ffffff 0%,#f4f4f4 45%,#e9e9e9 100%);
     color:var(--texto);
+    min-height:100vh;
+    transition:.4s;
 }
 
 body.dark{
-    --fundo:#070b09;
-    --texto:#f2f5f3;
-    --cinza:#a9b3ad;
-    --borda:#202a25;
-    --card:#101613;
-    --sombra:0 14px 35px rgba(0,0,0,.42);
-}
+    --cinza:#111111;
+    --cinza2:#252525;
+    --texto:#ffffff;
 
-button,input,textarea,select{
-    font:inherit;
-}
-
-button{
-    border:0;
-    cursor:pointer;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* =========================================================
-   CARREGAMENTO
-========================================================= */
-
-#loading{
-    position:fixed;
-    inset:0;
-    z-index:99999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     background:
-        radial-gradient(circle at 50% 35%,rgba(0,140,69,.12),transparent 38%),
-        var(--fundo);
-    opacity:1;
-    visibility:visible;
-    transition:opacity .65s ease,visibility .65s ease;
+        radial-gradient(circle at top,#171717 0%,#090909 55%,#000000 100%);
+    color:#fff;
 }
 
-#loading.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-.loading-box{
-    width:88%;
-    max-width:390px;
-    text-align:center;
-    background:var(--card);
-    border-radius:28px;
-    box-shadow:0 25px 70px rgba(0,0,0,.16);
-    overflow:hidden;
-    padding-bottom:30px;
-    animation:entrada .7s ease both;
-}
-
-.italy-line,
-.welcome-line{
-    display:flex;
-    width:100%;
-    height:6px;
-}
-
-.italy-line span,
-.welcome-line span{
-    flex:1;
-}
-
-.italy-line span:nth-child(1),
-.welcome-line span:nth-child(1){
-    background:#008c45;
-}
-
-.italy-line span:nth-child(2),
-.welcome-line span:nth-child(2){
-    background:#fff;
-}
-
-.italy-line span:nth-child(3),
-.welcome-line span:nth-child(3){
-    background:#cd212a;
-}
-
-.loading-logo{
-    width:145px;
-    height:145px;
-    object-fit:contain;
-    border-radius:25px;
-    margin:28px auto 18px;
-    display:block;
-    animation:logoEntrada .8s ease both;
-}
-
-.loading-title{
-    font-size:23px;
-    font-weight:950;
-}
-
-.loading-sub{
-    margin-top:7px;
-    color:var(--cinza);
-}
-
-.loader{
-    width:47px;
-    height:47px;
-    border:4px solid var(--borda);
-    border-top-color:var(--verde);
-    border-right-color:var(--vermelho);
-    border-radius:50%;
-    margin:24px auto 0;
-    animation:spin .8s linear infinite;
-}
-
-.loading-status{
-    margin-top:12px;
-    font-size:11px;
-    font-weight:900;
-    color:var(--cinza);
-    animation:pulse 1.2s infinite;
-}
-
-/* =========================================================
-   BOAS-VINDAS
-========================================================= */
-
-#welcome{
-    position:fixed;
-    inset:0;
-    z-index:9998;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--fundo);
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transition:.65s ease;
-}
-
-#welcome.show{
-    opacity:1;
-    visibility:visible;
-}
-
-#welcome.hide{
-    opacity:0;
-    visibility:hidden;
-}
-
-.welcome-box{
-    width:88%;
-    max-width:390px;
-    text-align:center;
-    padding:40px 25px;
-    background:var(--card);
-    border-radius:28px;
-    box-shadow:0 25px 70px rgba(0,0,0,.16);
-    transform:translateY(25px) scale(.94);
-    transition:.65s ease;
-}
-
-#welcome.show .welcome-box{
-    transform:translateY(0) scale(1);
-}
-
-.welcome-logo{
-    font-size:64px;
-    line-height:1;
-}
-
-.welcome-title{
-    margin-top:20px;
-    font-size:21px;
-    font-weight:700;
-}
-
-.welcome-brand{
-    margin-top:5px;
-    font-size:29px;
-    font-weight:950;
-    color:var(--verde);
-}
-
-.welcome-line{
-    width:140px;
-    margin:22px auto 0;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-/* =========================================================
+/* =========================
    APP
-========================================================= */
+========================= */
 
 .app{
     max-width:700px;
     margin:auto;
     min-height:100vh;
     padding-bottom:35px;
+
     opacity:0;
-    transform:translateY(15px);
-    transition:.7s ease;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(20px) scale(.98);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease,
+        visibility .7s ease;
 }
 
 .app.ready{
     opacity:1;
-    transform:translateY(0);
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateY(0) scale(1);
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+/* =========================
+   LOADING
+========================= */
 
-.header{
+#loading{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(circle at center,#151515 0%,#050505 70%,#000 100%);
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease,
+        transform .7s ease;
+}
+
+#loading.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:scale(1.04);
+}
+
+.loading-box{
+    width:90%;
+    max-width:400px;
+    text-align:center;
+    animation:loadingEntrada 1s ease;
+}
+
+.loading-logo{
+    width:145px;
+    height:145px;
+    object-fit:contain;
+    border-radius:28px;
+    margin-bottom:20px;
+
+    filter:
+        drop-shadow(0 0 10px rgba(0,140,69,.5))
+        drop-shadow(0 0 20px rgba(205,33,42,.25));
+}
+
+.loading-title{
+    color:#fff;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.loading-sub{
+    color:#aaa;
+    margin-top:8px;
+    font-size:14px;
+}
+
+.italy-line{
+    width:170px;
+    height:5px;
+    margin:20px auto;
+    border-radius:50px;
+    background:linear-gradient(
+        90deg,
+        var(--verde) 0 33%,
+        #fff 33% 66%,
+        var(--vermelho) 66% 100%
+    );
+}
+
+.spinner{
+    width:38px;
+    height:38px;
+    margin:18px auto 0;
+    border:4px solid rgba(255,255,255,.15);
+    border-top-color:var(--verde);
+    border-right-color:var(--vermelho);
+    border-radius:50%;
+    animation:girar 1s linear infinite;
+}
+
+@keyframes girar{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes loadingEntrada{
+    from{
+        opacity:0;
+        transform:translateY(25px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+#welcome{
+    position:fixed;
+    inset:0;
+    z-index:9998;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(circle at center,#151515,#050505 70%,#000);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transform:scale(.96);
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease,
+        transform .7s ease;
+}
+
+#welcome.show{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+}
+
+#welcome.hide{
+    opacity:0;
+    visibility:hidden;
+    transform:scale(1.08) translateY(-10px);
+}
+
+.welcome-box{
+    width:90%;
+    max-width:430px;
+    text-align:center;
+    color:white;
+}
+
+.welcome-icon{
+    font-size:65px;
+    margin-bottom:15px;
+    animation:flutuar 2s ease-in-out infinite;
+}
+
+.welcome-small{
+    color:#aaa;
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.welcome-title{
+    font-size:39px;
+    font-weight:900;
+    letter-spacing:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--verde),
+            #fff,
+            var(--vermelho)
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.welcome-sub{
+    margin-top:12px;
+    color:#aaa;
+    font-size:14px;
+}
+
+.welcome-line{
+    width:190px;
+    height:5px;
+    margin:22px auto;
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--verde) 0 33%,
+            #fff 33% 66%,
+            var(--vermelho) 66%
+        );
+}
+
+@keyframes flutuar{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
     position:sticky;
     top:0;
     z-index:100;
-    padding:14px 16px 12px;
-    background:rgba(243,246,244,.94);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--borda);
-}
 
-body.dark .header{
-    background:rgba(7,11,9,.94);
-}
-
-.header-top{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:12px;
+
+    padding:14px 16px;
+
+    background:rgba(255,255,255,.86);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(0,0,0,.08);
 }
 
-.brand{
+body.dark header{
+    background:rgba(8,8,8,.88);
+    border-color:#252525;
+}
+
+.logo-area{
     display:flex;
     align-items:center;
     gap:10px;
 }
 
-.brand-logo{
+.logo-mini{
     width:45px;
     height:45px;
     object-fit:contain;
     border-radius:12px;
 }
 
-.brand-title{
-    font-size:17px;
-    font-weight:950;
+.logo-text{
+    font-weight:900;
+    font-size:16px;
 }
 
-.brand-sub{
+.logo-sub{
     font-size:11px;
-    color:var(--cinza);
+    color:#777;
+    margin-top:2px;
+}
+
+body.dark .logo-sub{
+    color:#aaa;
 }
 
 .theme-toggle{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    background:var(--card);
+    border:none;
+    width:48px;
+    height:48px;
+    border-radius:15px;
+
+    background:var(--cinza);
     color:var(--texto);
-    border:1px solid var(--borda);
-    border-radius:14px;
-    padding:8px 11px;
-    font-weight:800;
+
+    font-size:20px;
+    cursor:pointer;
+
+    box-shadow:var(--sombra);
+    transition:.25s;
 }
 
-/* =========================================================
-   TELAS
-========================================================= */
+.theme-toggle:hover{
+    transform:scale(1.05);
+}
+
+/* =========================
+   SCREENS
+========================= */
 
 .screen{
     display:none;
     padding:20px 16px;
+    animation:screenIn .45s ease;
 }
 
 .screen.active{
     display:block;
-    animation:screenEntrada .4s ease both;
 }
 
-.back{
+@keyframes screenIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.screen-title{
+    font-size:27px;
+    font-weight:900;
+    margin-bottom:6px;
+}
+
+.screen-subtitle{
+    color:#777;
+    margin-bottom:20px;
+    font-size:14px;
+}
+
+body.dark .screen-subtitle{
+    color:#aaa;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+    width:100%;
+    border:none;
+    border-radius:15px;
+    padding:14px 16px;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-primary{
+    background:linear-gradient(
+        135deg,
+        var(--verde),
+        var(--verde2)
+    );
+    color:white;
+    box-shadow:0 8px 22px rgba(0,140,69,.25);
+}
+
+.btn-danger{
+    background:var(--vermelho);
+    color:white;
+}
+
+.btn-dark{
+    background:#111;
+    color:white;
+}
+
+.btn-light{
+    background:var(--cinza);
+    color:var(--texto);
+}
+
+.back-btn{
     display:inline-flex;
     align-items:center;
-    gap:6px;
-    color:var(--verde);
-    background:transparent;
-    font-weight:900;
-    padding:4px 0 16px;
+    gap:7px;
+
+    margin-bottom:18px;
+
+    border:none;
+    background:var(--cinza);
+    color:var(--texto);
+
+    padding:11px 15px;
+    border-radius:13px;
+
+    font-weight:800;
+    cursor:pointer;
 }
 
-.page-title{
-    font-size:27px;
-    font-weight:950;
-    letter-spacing:-.7px;
-}
-
-.page-sub{
-    color:var(--cinza);
-    margin-top:5px;
-    margin-bottom:20px;
-    line-height:1.45;
-}
-
-/* =========================================================
+/* =========================
    MENU
-========================================================= */
+========================= */
 
-.menu-heading{
+.menu-header{
     text-align:center;
-    margin-bottom:22px;
+    margin:18px 0 24px;
 }
 
-.menu-heading h1{
-    font-size:27px;
-    font-weight:950;
-    color:var(--verde);
+.menu-header h1{
+    font-size:32px;
+    font-weight:900;
 }
 
-.menu-heading p{
-    color:var(--cinza);
-    font-size:12px;
+.menu-header p{
+    color:#777;
     margin-top:6px;
 }
 
-.menu-tricolor{
-    width:140px;
-    height:5px;
-    display:flex;
-    margin:12px auto 0;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.menu-tricolor span{
-    flex:1;
-}
-
-.menu-tricolor span:nth-child(1){background:#008c45}
-.menu-tricolor span:nth-child(2){background:#fff}
-.menu-tricolor span:nth-child(3){background:#cd212a}
-
-.premium-label{
-    font-size:12px;
-    color:var(--verde);
-    font-weight:950;
-    letter-spacing:1.5px;
-    margin-bottom:12px;
+body.dark .menu-header p{
+    color:#aaa;
 }
 
 .menu-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,1fr);
     gap:13px;
 }
 
 .menu-card{
-    min-height:125px;
-    padding:19px;
+    min-height:135px;
+
+    padding:20px 15px;
+
     border-radius:22px;
-    background:var(--card);
-    color:var(--texto);
-    border:1px solid var(--borda);
+
+    border:1px solid rgba(0,0,0,.07);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.98),
+            rgba(245,245,245,.98)
+        );
+
     box-shadow:var(--sombra);
-    text-align:left;
-    position:relative;
-    overflow:hidden;
-    transition:.18s;
+
+    cursor:pointer;
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
 }
 
-.menu-card:active{
-    transform:scale(.97);
+body.dark .menu-card{
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #0d0d0d
+        );
+    border-color:#252525;
 }
 
-.menu-card::after{
-    content:"";
-    position:absolute;
-    width:70px;
-    height:70px;
-    right:-30px;
-    bottom:-30px;
-    border-radius:50%;
-    background:rgba(0,140,69,.07);
-}
-
-.menu-wide{
-    grid-column:1/-1;
-    min-height:85px;
-    display:flex;
-    align-items:center;
-    gap:15px;
+.menu-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 35px rgba(0,0,0,.18);
 }
 
 .menu-icon{
-    font-size:29px;
+    width:50px;
+    height:50px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:16px;
+
+    background:linear-gradient(
+        135deg,
+        var(--verde),
+        var(--vermelho)
+    );
+
+    color:white;
+    font-size:25px;
+
     margin-bottom:13px;
 }
 
-.menu-wide .menu-icon{
-    margin:0;
-}
-
-.menu-title{
+.menu-card h3{
     font-size:16px;
-    font-weight:950;
+    margin-bottom:5px;
 }
 
-.menu-desc{
-    font-size:11px;
-    color:var(--cinza);
-    margin-top:5px;
-    line-height:1.35;
+.menu-card p{
+    color:#777;
+    font-size:12px;
 }
 
-/* =========================================================
-   BOTÕES / CARDS
-========================================================= */
-
-.primary{
-    width:100%;
-    background:linear-gradient(135deg,var(--verde),var(--verde2));
-    color:white;
-    padding:14px 17px;
-    border-radius:15px;
-    font-weight:950;
-    box-shadow:0 9px 22px rgba(0,140,69,.2);
+body.dark .menu-card p{
+    color:#aaa;
 }
 
-.secondary{
-    width:100%;
-    background:var(--card);
-    color:var(--texto);
-    border:1px solid var(--borda);
-    padding:13px 17px;
-    border-radius:15px;
-    font-weight:900;
-}
+/* =========================
+   CARDS
+========================= */
 
-.button-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:9px;
-}
-
-.card,
-.calculator-card,
-.ai-box{
-    background:var(--card);
-    border:1px solid var(--borda);
+.card{
+    background:rgba(255,255,255,.9);
+    border:1px solid rgba(0,0,0,.07);
     border-radius:20px;
     padding:18px;
-    box-shadow:var(--sombra);
     margin-bottom:14px;
+    box-shadow:var(--sombra);
+}
+
+body.dark .card{
+    background:#111;
+    border-color:#252525;
 }
 
 .card-title{
-    font-weight:950;
+    font-weight:900;
     margin-bottom:7px;
 }
 
 .card-sub{
-    color:var(--cinza);
+    color:#777;
     font-size:13px;
-    line-height:1.45;
 }
 
-.field{
-    margin-bottom:15px;
+body.dark .card-sub{
+    color:#aaa;
 }
 
-label{
+/* =========================
+   FORM
+========================= */
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group label{
     display:block;
-    font-size:12px;
-    font-weight:950;
+    font-weight:800;
+    font-size:13px;
     margin-bottom:7px;
 }
 
-input,
-textarea,
-select{
+.input,
+.select,
+.textarea{
     width:100%;
-    border:1px solid var(--borda);
-    background:var(--fundo);
+    border:1px solid var(--cinza2);
+    border-radius:13px;
+    padding:13px;
+
+    background:var(--cinza);
     color:var(--texto);
-    border-radius:14px;
-    padding:13px 14px;
+
     outline:none;
+    font-size:14px;
 }
 
-textarea{
-    min-height:145px;
+.textarea{
+    min-height:130px;
     resize:vertical;
 }
 
-input:focus,
-textarea:focus,
-select:focus{
+.input:focus,
+.select:focus,
+.textarea:focus{
     border-color:var(--verde);
 }
 
-/* =========================================================
-   CONTATOS
-========================================================= */
+/* =========================
+   GRID DE AÇÕES
+========================= */
 
-.list-item,
-.phone-card,
-.chip-card{
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:18px;
-    padding:15px;
-    margin-bottom:10px;
-    box-shadow:0 7px 20px rgba(0,0,0,.05);
-}
-
-.list-top{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
+.action-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
     gap:10px;
 }
 
-.list-name{
-    font-weight:950;
+.action-btn{
+    border:none;
+    padding:15px 10px;
+    border-radius:16px;
+
+    background:var(--cinza);
+    color:var(--texto);
+
+    font-weight:800;
+    cursor:pointer;
+
+    transition:.2s;
 }
 
-.list-number{
-    margin-top:5px;
+.action-btn:hover{
+    transform:translateY(-2px);
+    background:var(--verde);
+    color:#fff;
+}
+
+/* =========================
+   CONTATOS
+========================= */
+
+.search-box{
+    margin-bottom:14px;
+}
+
+.contact-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+
+    background:var(--cinza);
+    border-radius:17px;
+    padding:14px;
+    margin-bottom:10px;
+}
+
+.contact-info{
+    min-width:0;
+}
+
+.contact-name{
+    font-weight:900;
+    word-break:break-word;
+}
+
+.contact-number{
+    color:#777;
     font-size:13px;
-    color:var(--cinza);
+    margin-top:3px;
 }
 
-.list-meta{
-    margin-top:8px;
-    font-size:12px;
-    color:var(--cinza);
+body.dark .contact-number{
+    color:#aaa;
 }
 
-.list-actions{
+.contact-actions{
     display:flex;
     gap:7px;
-    margin-top:12px;
-    flex-wrap:wrap;
 }
 
 .small-btn{
-    background:var(--fundo);
-    border:1px solid var(--borda);
-    color:var(--texto);
-    padding:8px 10px;
-    border-radius:10px;
-    font-size:11px;
-    font-weight:900;
+    border:none;
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    cursor:pointer;
+    background:#fff;
+    color:#111;
 }
 
-.status{
-    display:inline-block;
-    padding:6px 8px;
-    border-radius:9px;
-    font-size:10px;
-    font-weight:950;
-}
-
-.status-on{
-    background:rgba(21,148,71,.1);
-    color:#159447;
-}
-
-.status-analysis{
-    background:rgba(211,155,0,.1);
-    color:#b77d00;
-}
-
-.status-off{
-    background:rgba(205,33,42,.1);
-    color:var(--vermelho);
+body.dark .small-btn{
+    background:#222;
+    color:#fff;
 }
 
 .empty{
     text-align:center;
-    padding:35px 15px;
-    color:var(--cinza);
+    color:#777;
+    padding:30px 10px;
 }
 
-/* =========================================================
+body.dark .empty{
+    color:#aaa;
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+    display:inline-flex;
+    padding:5px 9px;
+    border-radius:30px;
+    font-size:11px;
+    font-weight:900;
+    margin-top:7px;
+}
+
+.status-on{
+    background:rgba(0,140,69,.15);
+    color:var(--verde);
+}
+
+.status-analysis{
+    background:rgba(255,180,0,.16);
+    color:#a56a00;
+}
+
+.status-off{
+    background:rgba(205,33,42,.14);
+    color:var(--vermelho);
+}
+
+/* =========================
    RESUMO
-========================================================= */
+========================= */
 
 .stats-grid{
     display:grid;
@@ -638,99 +779,112 @@ select:focus{
 }
 
 .stat{
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:19px;
-    padding:18px;
-    box-shadow:var(--sombra);
+    border-radius:20px;
+    padding:20px;
+    background:var(--cinza);
+    text-align:center;
 }
 
 .stat-number{
     font-size:30px;
-    font-weight:950;
+    font-weight:900;
+    margin-bottom:5px;
 }
 
 .stat-label{
-    margin-top:4px;
     font-size:12px;
-    font-weight:900;
+    color:#777;
 }
 
-.stat-total{
-    grid-column:1/-1;
+body.dark .stat-label{
+    color:#aaa;
 }
 
-.stat-on .stat-number,
-.stat-on .stat-label{color:#159447}
+/* =========================
+   FAVORITOS
+========================= */
 
-.stat-analysis .stat-number,
-.stat-analysis .stat-label{color:#d39b00}
-
-.stat-off .stat-number,
-.stat-off .stat-label{color:var(--vermelho)}
-
-/* =========================================================
-   ADVOGADO
-========================================================= */
-
-.adv-card{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    background:var(--card);
-    border:1px solid var(--borda);
-    border-radius:18px;
+.favorite-item{
     padding:15px;
-    margin-bottom:11px;
-    box-shadow:var(--sombra);
+    border-radius:17px;
+    background:var(--cinza);
+    margin-bottom:10px;
 }
 
-.adv-icon{
-    width:45px;
-    height:45px;
-    flex-shrink:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(0,140,69,.09);
-    border-radius:14px;
-    font-size:23px;
+/* =========================
+   WHATSAPP
+========================= */
+
+.whatsapp-head{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,140,69,.16),
+            rgba(205,33,42,.10)
+        );
+
+    border-radius:22px;
+    padding:20px;
+    margin-bottom:16px;
 }
 
-.adv-content{
-    flex:1;
+.whatsapp-head h2{
+    margin-bottom:5px;
 }
 
-.adv-content h3{
+.whatsapp-head p{
+    color:#777;
     font-size:13px;
-    font-weight:950;
 }
 
-.adv-content p{
-    font-size:11px;
-    color:var(--cinza);
-    margin-top:4px;
+body.dark .whatsapp-head p{
+    color:#aaa;
 }
 
-.adv-btn{
-    padding:10px 11px;
-    border-radius:11px;
-    background:var(--verde);
-    color:white;
-    font-size:10px;
-    font-weight:950;
+/* =========================
+   CALCULADORA
+========================= */
+
+.calc-result{
+    padding:18px;
+    border-radius:17px;
+    background:linear-gradient(
+        135deg,
+        var(--verde),
+        var(--verde2)
+    );
+    color:#fff;
+    margin-top:15px;
+    font-size:22px;
+    font-weight:900;
+    text-align:center;
 }
 
-/* =========================================================
-   RESPOSTA
-========================================================= */
+/* =========================
+   ADVOGADO
+========================= */
+
+.ai-box{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,140,69,.10),
+            rgba(205,33,42,.08)
+        );
+
+    border-radius:22px;
+    padding:18px;
+    margin-bottom:15px;
+}
+
+.ai-box h3{
+    margin-bottom:7px;
+}
 
 .generating{
     display:none;
     text-align:center;
-    padding:25px 10px;
-    color:var(--verde);
-    font-weight:950;
+    padding:22px;
 }
 
 .generating.show{
@@ -738,23 +892,20 @@ select:focus{
 }
 
 .mini-loader{
-    width:28px;
-    height:28px;
-    border:3px solid var(--borda);
+    width:32px;
+    height:32px;
+    border:4px solid rgba(0,0,0,.12);
     border-top-color:var(--verde);
-    border-right-color:var(--vermelho);
     border-radius:50%;
-    animation:spin .7s linear infinite;
+    animation:girar 1s linear infinite;
     margin:0 auto 10px;
 }
 
 .answer-box{
     display:none;
-    margin-top:15px;
-    padding:16px;
+    background:var(--cinza);
     border-radius:17px;
-    background:var(--fundo);
-    border:1px solid var(--borda);
+    padding:16px;
     line-height:1.6;
     white-space:pre-wrap;
 }
@@ -763,265 +914,186 @@ select:focus{
     display:block;
 }
 
-/* =========================================================
-   CALCULADORA
-========================================================= */
-
-.calc-options{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:9px;
-    margin-bottom:18px;
-}
-
-.calc-option{
-    min-height:78px;
-    padding:12px;
-    border-radius:15px;
-    background:var(--card);
-    color:var(--texto);
-    border:1px solid var(--borda);
-    text-align:left;
-    font-size:12px;
-    font-weight:900;
-}
-
-.calc-option.selected{
-    border-color:var(--verde);
-    outline:3px solid rgba(0,140,69,.12);
-    background:rgba(0,140,69,.06);
-}
-
-.calc-option-icon{
-    font-size:22px;
-    margin-bottom:7px;
-}
-
-.calc-fields{
+.response-tools{
     display:none;
-}
-
-.calc-fields.show{
-    display:block;
-}
-
-.calc-type-title{
-    margin:2px 0 13px;
-    padding:11px 12px;
-    border-radius:13px;
-    background:rgba(0,140,69,.08);
-    color:var(--verde);
-    font-size:13px;
-    font-weight:950;
-}
-
-.calc-generating{
-    display:none;
-    text-align:center;
-    padding:22px;
-    color:var(--verde);
-    font-weight:950;
-}
-
-.calc-generating.show{
-    display:block;
-}
-
-.calc-result{
-    margin-top:15px;
-}
-
-.calc-bot{
-    background:var(--fundo);
-    border:1px solid var(--borda);
-    border-radius:18px;
-    padding:17px;
-    line-height:1.7;
-}
-
-.calc-summary{
-    font-size:18px;
-    font-weight:950;
-    color:var(--verde);
-}
-
-/* =========================================================
-   CHIPS / CELULARES
-========================================================= */
-
-.chip-operator{
-    font-weight:950;
-}
-
-.chip-number{
-    margin-top:6px;
-    font-size:16px;
-    font-weight:900;
-}
-
-.chip-region{
-    margin-top:5px;
-    font-size:12px;
-    color:var(--cinza);
-}
-
-.chip-status{
-    margin-top:9px;
-    font-size:12px;
-    font-weight:950;
-}
-
-.phone-name{
-    font-size:17px;
-    font-weight:950;
-}
-
-.phone-line{
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
     margin-top:10px;
-    font-size:13px;
 }
 
-.phone-line b{
-    display:block;
-    font-size:11px;
-    color:var(--cinza);
+.response-tools.show{
+    display:grid;
 }
 
-/* =========================================================
+.advisor-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.advisor-card{
+    padding:16px;
+    border-radius:17px;
+    background:var(--cinza);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.advisor-card:hover{
+    transform:translateY(-3px);
+    background:var(--verde);
+    color:white;
+}
+
+.advisor-card h4{
+    margin-bottom:5px;
+}
+
+.advisor-card p{
+    font-size:12px;
+    color:#777;
+}
+
+.advisor-card:hover p{
+    color:#eee;
+}
+
+body.dark .advisor-card p{
+    color:#aaa;
+}
+
+body.dark .advisor-card:hover p{
+    color:#eee;
+}
+
+/* =========================
+   CHIP / CELULAR
+========================= */
+
+.item-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+
+    padding:15px;
+    border-radius:17px;
+    background:var(--cinza);
+    margin-bottom:10px;
+}
+
+.item-row-info{
+    flex:1;
+}
+
+.item-row-title{
+    font-weight:900;
+}
+
+.item-row-sub{
+    color:#777;
+    font-size:12px;
+    margin-top:3px;
+}
+
+body.dark .item-row-sub{
+    color:#aaa;
+}
+
+/* =========================
    CONFIG
-========================================================= */
+========================= */
 
-.theme-choice{
-    min-height:120px;
-    border:2px solid var(--borda);
-    border-radius:18px;
-    background:var(--card);
-    color:var(--texto);
-    padding:18px;
-    text-align:center;
-    font-weight:950;
+.theme-option{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:16px;
+    border-radius:17px;
+
+    background:var(--cinza);
+    margin-bottom:10px;
+
+    cursor:pointer;
 }
 
-.theme-choice.active{
-    border-color:var(--verde);
-    box-shadow:0 0 0 4px rgba(0,140,69,.09);
+.theme-option.active{
+    outline:2px solid var(--verde);
 }
 
-.theme-choice div:first-child{
-    font-size:30px;
-    margin-bottom:9px;
+.theme-name{
+    font-weight:900;
 }
 
-/* =========================================================
+.theme-desc{
+    color:#777;
+    font-size:12px;
+    margin-top:3px;
+}
+
+body.dark .theme-desc{
+    color:#aaa;
+}
+
+/* =========================
    TOAST
-========================================================= */
+========================= */
 
 #toast{
     position:fixed;
     left:50%;
-    bottom:22px;
-    transform:translateX(-50%) translateY(20px);
-    background:#17221d;
-    color:white;
-    padding:12px 17px;
-    border-radius:13px;
+    bottom:25px;
+    transform:translate(-50%,20px);
+
+    background:#111;
+    color:#fff;
+
+    padding:13px 18px;
+    border-radius:14px;
+
     font-size:13px;
     font-weight:800;
+
     opacity:0;
-    pointer-events:none;
-    transition:.25s;
-    z-index:100000;
-    max-width:90%;
-    text-align:center;
+    visibility:hidden;
+
+    z-index:10000;
+
+    transition:.3s;
 }
 
 #toast.show{
     opacity:1;
-    transform:translateX(-50%) translateY(0);
+    visibility:visible;
+    transform:translate(-50%,0);
 }
 
-/* =========================================================
-   ANIMAÇÕES
-========================================================= */
+/* =========================
+   RESPONSIVO
+========================= */
 
-@keyframes entrada{
-    from{
-        opacity:0;
-        transform:translateY(20px) scale(.95);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
+@media(max-width:480px){
 
-@keyframes logoEntrada{
-    from{
-        opacity:0;
-        transform:scale(.7) rotate(-8deg);
+    .menu-grid{
+        gap:10px;
     }
-    to{
-        opacity:1;
-        transform:scale(1) rotate(0);
-    }
-}
-
-@keyframes screenEntrada{
-    from{
-        opacity:0;
-        transform:translateX(12px);
-    }
-    to{
-        opacity:1;
-        transform:translateX(0);
-    }
-}
-
-@keyframes pulse{
-    0%,100%{opacity:.45}
-    50%{opacity:1}
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-@media(max-width:430px){
 
     .menu-card{
-        min-height:115px;
-        padding:16px;
+        min-height:125px;
+        padding:16px 13px;
     }
 
-    .page-title{
+    .menu-header h1{
+        font-size:28px;
+    }
+
+    .screen-title{
         font-size:24px;
     }
 
-    .menu-heading h1{
-        font-size:24px;
-    }
-
-    .calc-options{
-        grid-template-columns:1fr;
-    }
-
-    .calc-option{
-        min-height:68px;
-        display:flex;
-        align-items:center;
-        gap:12px;
-    }
-
-    .calc-option-icon{
-        margin:0;
-        min-width:30px;
-        text-align:center;
-    }
-
-    .adv-card{
-        align-items:flex-start;
+    .welcome-title{
+        font-size:32px;
     }
 }
 </style>
@@ -1029,626 +1101,415 @@ select:focus{
 
 <body>
 
-<!-- =========================================================
+<!-- =========================
      LOADING
-========================================================= -->
+========================= -->
 
 <div id="loading">
 
     <div class="loading-box">
 
-        <div class="italy-line">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
         <img
             class="loading-logo"
             src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
             alt="BOT DO BM3"
-            onerror="this.style.display='none'"
         >
 
         <div class="loading-title">
             🍀 BOT DO BM3 🍀
         </div>
 
+        <div class="italy-line"></div>
+
         <div class="loading-sub">
-            Preparando seu painel...
+            Preparando seu painel premium...
         </div>
 
-        <div class="loader"></div>
-
-        <div class="loading-status">
-            Carregando...
-        </div>
+        <div class="spinner"></div>
 
     </div>
 
 </div>
 
-<!-- =========================================================
-     BOAS-VINDAS
-========================================================= -->
+<!-- =========================
+     WELCOME
+========================= -->
 
 <div id="welcome">
 
     <div class="welcome-box">
 
-        <div class="welcome-logo">
+        <div class="welcome-icon">
             🍀
         </div>
 
-        <div class="welcome-title">
+        <div class="welcome-small">
             Bem-vindo ao
         </div>
 
-        <div class="welcome-brand">
+        <div class="welcome-title">
             BOT DO BM3
         </div>
 
-        <div class="welcome-line">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="welcome-line"></div>
+
+        <div class="welcome-sub">
+            Seu organizador pessoal está sendo preparado.
         </div>
 
     </div>
 
 </div>
 
-<!-- =========================================================
+<!-- =========================
      APP
-========================================================= -->
+========================= -->
 
 <div class="app">
 
-<header class="header">
+<header>
 
-    <div class="header-top">
+    <div class="logo-area">
 
-        <div class="brand">
-
-            <img
-                class="brand-logo"
-                src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
-                alt="BM3"
-                onerror="this.style.display='none'"
-            >
-
-            <div>
-
-                <div class="brand-title">
-                    🍀 BOT DO BM3 🍀
-                </div>
-
-                <div class="brand-sub">
-                    Painel premium
-                </div>
-
-            </div>
-
-        </div>
-
-        <button
-            class="theme-toggle"
-            onclick="alternarTema()"
-        >
-            <span id="themeIcon">☀️</span>
-            <span id="themeText">Claro</span>
-        </button>
-
-    </div>
-
-</header>
-
-<!-- =========================================================
-     INÍCIO
-========================================================= -->
-
-<section id="inicio" class="screen active">
-
-    <div class="menu-heading">
-
-        <h1>
-            🍀 MENU PRINCIPAL 🍀
-        </h1>
-
-        <p>
-            Seu painel do BOT DO BM3
-        </p>
-
-        <div class="menu-tricolor">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-    </div>
-
-    <div class="premium-label">
-        PAINEL PRINCIPAL
-    </div>
-
-    <div class="menu-grid">
-
-        <button class="menu-card" onclick="navegar('whatsapp')">
-            <div class="menu-icon">💬</div>
-            <div class="menu-title">WhatsApp</div>
-            <div class="menu-desc">Ferramentas e organização</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('calculadora')">
-            <div class="menu-icon">🧮</div>
-            <div class="menu-title">Calculadora</div>
-            <div class="menu-desc">Vários tipos de cálculo</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('advogado')">
-            <div class="menu-icon">⚖️</div>
-            <div class="menu-title">Advogado</div>
-            <div class="menu-desc">Atendimento e respostas</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('celulares')">
-            <div class="menu-icon">📱</div>
-            <div class="menu-title">Celulares</div>
-            <div class="menu-desc">Números por aparelho</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('chips')">
-            <div class="menu-icon">💳</div>
-            <div class="menu-title">Chips</div>
-            <div class="menu-desc">Controle de chips</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('contatos')">
-            <div class="menu-icon">👥</div>
-            <div class="menu-title">Contatos</div>
-            <div class="menu-desc">Seus números organizados</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('resumo')">
-            <div class="menu-icon">📊</div>
-            <div class="menu-title">Resumo</div>
-            <div class="menu-desc">Visão geral dos contatos</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('favoritos')">
-            <div class="menu-icon">⭐</div>
-            <div class="menu-title">Favoritos</div>
-            <div class="menu-desc">Acesso rápido</div>
-        </button>
-
-        <button
-            class="menu-card menu-wide"
-            onclick="navegar('config')"
+        <img
+            class="logo-mini"
+            src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
+            alt="BM3"
         >
 
-            <div class="menu-icon">⚙️</div>
-
-            <div>
-                <div class="menu-title">
-                    Configurações
-                </div>
-
-                <div class="menu-desc">
-                    Temas e informações
-                </div>
+        <div>
+            <div class="logo-text">
+                🍀 BOT DO BM3
             </div>
 
-        </button>
-
-    </div>
-
-</section>
-
-<!-- =========================================================
-     WHATSAPP
-========================================================= -->
-
-<section id="whatsapp" class="screen">
-
-    <button class="back" onclick="voltar()">
-        ← Voltar
-    </button>
-
-    <div class="page-title">
-        💬 WhatsApp
-    </div>
-
-    <div class="page-sub">
-        Ferramentas para organizar seu WhatsApp.
-    </div>
-
-    <div class="menu-grid">
-
-        <button class="menu-card" onclick="navegar('contatos')">
-            <div class="menu-icon">👥</div>
-            <div class="menu-title">Contatos</div>
-            <div class="menu-desc">Números salvos</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('grupos')">
-            <div class="menu-icon">👥</div>
-            <div class="menu-title">Grupos</div>
-            <div class="menu-desc">Organização dos grupos</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('favoritos')">
-            <div class="menu-icon">⭐</div>
-            <div class="menu-title">Favoritos</div>
-            <div class="menu-desc">Contatos favoritos</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('recentes')">
-            <div class="menu-icon">🕘</div>
-            <div class="menu-title">Recentes</div>
-            <div class="menu-desc">Últimos contatos</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('envio')">
-            <div class="menu-icon">📤</div>
-            <div class="menu-title">Envio rápido</div>
-            <div class="menu-desc">Abrir conversa rapidamente</div>
-        </button>
-
-        <button class="menu-card" onclick="navegar('links')">
-            <div class="menu-icon">🔗</div>
-            <div class="menu-title">Links</div>
-            <div class="menu-desc">Links úteis</div>
-        </button>
-
-    </div>
-
-</section>
-
-<!-- =========================================================
-     CALCULADORA
-========================================================= -->
-
-<section id="calculadora" class="screen">
-
-    <button class="back" onclick="voltar()">
-        ← Voltar
-    </button>
-
-    <div class="page-title">
-        🧮 Calculadora
-    </div>
-
-    <div class="page-sub">
-        Escolha o cálculo e preencha os campos.
-    </div>
-
-    <div class="calculator-card">
-
-        <div class="field">
-
-            <label>
-                🧮 TIPO DE CÁLCULO
-            </label>
-
-            <div class="calc-options">
-
-                <button
-                    class="calc-option selected"
-                    id="optPorcentagem"
-                    onclick="selecionarTipoCalculo('porcentagem')"
-                >
-                    <div class="calc-option-icon">💰</div>
-                    Porcentagem + divisão
-                </button>
-
-                <button
-                    class="calc-option"
-                    id="optAdicionar"
-                    onclick="selecionarTipoCalculo('adicionar')"
-                >
-                    <div class="calc-option-icon">📈</div>
-                    Adicionar porcentagem
-                </button>
-
-                <button
-                    class="calc-option"
-                    id="optDescontar"
-                    onclick="selecionarTipoCalculo('descontar')"
-                >
-                    <div class="calc-option-icon">📉</div>
-                    Descontar porcentagem
-                </button>
-
-                <button
-                    class="calc-option"
-                    id="optDividir"
-                    onclick="selecionarTipoCalculo('dividir')"
-                >
-                    <div class="calc-option-icon">👥</div>
-                    Dividir valor
-                </button>
-
-                <button
-                    class="calc-option"
-                    id="optMultiplicar"
-                    onclick="selecionarTipoCalculo('multiplicar')"
-                >
-                    <div class="calc-option-icon">✖️</div>
-                    Multiplicar
-                </button>
-
-                <button
-                    class="calc-option"
-                    id="optSomar"
-                    onclick="selecionarTipoCalculo('somar')"
-                >
-                    <div class="calc-option-icon">➕</div>
-                    Somar
-                </button>
-
-                <button
-                    class="calc-option"
-                    id="optSubtrair"
-                    onclick="selecionarTipoCalculo('subtrair')"
-                >
-                    <div class="calc-option-icon">➖</div>
-                    Subtrair
-                </button>
-
-                <button
-                    class="calc-option"
-                    id="optPorcentagemDescobrir"
-                    onclick="selecionarTipoCalculo('descobrir')"
-                >
-                    <div class="calc-option-icon">📊</div>
-                    Descobrir porcentagem
-                </button>
-
-                <button
-                    class="calc-option"
-                    id="optRegra"
-                    onclick="selecionarTipoCalculo('regra')"
-                >
-                    <div class="calc-option-icon">🔢</div>
-                    Regra de três
-                </button>
-
+            <div class="logo-sub">
+                Organizador premium
             </div>
-
         </div>
 
-        <div id="camposPorcentagem" class="calc-fields show">
-
-            <div class="calc-type-title">
-                💰 Porcentagem + divisão
-            </div>
-
-            <div class="field">
-                <label>VALOR</label>
-                <input id="calcValor" placeholder="Ex.: 20k ou 20.000">
-            </div>
-
-            <div class="field">
-                <label>PORCENTAGEM</label>
-                <input
-                    id="calcPorcentagem"
-                    type="number"
-                    value="25"
-                    placeholder="Ex.: 25"
-                >
-            </div>
-
-            <div class="field">
-                <label>DIVIDIR ENTRE</label>
-                <input
-                    id="calcPessoas"
-                    type="number"
-                    value="3"
-                    min="1"
-                >
-            </div>
-
-        </div>
-
-        <div id="camposAdicionar" class="calc-fields">
-
-            <div class="calc-type-title">
-                📈 Adicionar porcentagem
-            </div>
-
-            <div class="field">
-                <label>VALOR</label>
-                <input id="adicionarValor" placeholder="Ex.: 20k">
-            </div>
-
-            <div class="field">
-                <label>PORCENTAGEM</label>
-                <input id="adicionarPorcentagem" type="number" placeholder="25">
-            </div>
-
-        </div>
-
-        <div id="camposDescontar" class="calc-fields">
-
-            <div class="calc-type-title">
-                📉 Descontar porcentagem
-            </div>
-
-            <div class="field">
-                <label>VALOR</label>
-                <input id="descontarValor" placeholder="Ex.: 20k">
-            </div>
-
-            <div class="field">
-                <label>PORCENTAGEM</label>
-                <input id="descontarPorcentagem" type="number" placeholder="25">
-            </div>
-
-        </div>
-
-        <div id="camposDividir" class="calc-fields">
-
-            <div class="calc-type-title">
-                👥 Dividir valor
-            </div>
-
-            <div class="field">
-                <label>VALOR</label>
-                <input id="dividirValor" placeholder="Ex.: 20k">
-            </div>
-
-            <div class="field">
-                <label>PESSOAS</label>
-                <input id="dividirPessoas" type="number" value="3" min="1">
-            </div>
-
-        </div>
-
-        <div id="camposMultiplicar" class="calc-fields">
-
-            <div class="calc-type-title">
-                ✖️ Multiplicar
-            </div>
-
-            <div class="field">
-                <label>VALOR</label>
-                <input id="multiplicarValor" placeholder="Ex.: 20k">
-            </div>
-
-            <div class="field">
-                <label>MULTIPLICAR POR</label>
-                <input id="multiplicarNumero" type="number" placeholder="3">
-            </div>
-
-        </div>
-
-        <div id="camposSomar" class="calc-fields">
-
-            <div class="calc-type-title">
-                ➕ Somar
-            </div>
-
-            <div class="field">
-                <label>VALOR 1</label>
-                <input id="somarValor1" placeholder="Ex.: 20k">
-            </div>
-
-            <div class="field">
-                <label>VALOR 2</label>
-                <input id="somarValor2" placeholder="Ex.: 5.000">
-            </div>
-
-        </div>
-
-        <div id="camposSubtrair" class="calc-fields">
-
-            <div class="calc-type-title">
-                ➖ Subtrair
-            </div>
-
-            <div class="field">
-                <label>VALOR 1</label>
-                <input id="subtrairValor1" placeholder="Ex.: 20k">
-            </div>
-
-            <div class="field">
-                <label>VALOR 2</label>
-                <input id="subtrairValor2" placeholder="Ex.: 5.000">
-            </div>
-
-        </div>
-
-        <div id="camposDescobrir" class="calc-fields">
-
-            <div class="calc-type-title">
-                📊 Descobrir porcentagem
-            </div>
-
-            <div class="field">
-                <label>VALOR TOTAL</label>
-                <input id="descobrirTotal" placeholder="Ex.: 20k">
-            </div>
-
-            <div class="field">
-                <label>VALOR DA PARTE</label>
-                <input id="descobrirParte" placeholder="Ex.: 5.000">
-            </div>
-
-        </div>
-
-        <div id="camposRegra" class="calc-fields">
-
-            <div class="calc-type-title">
-                🔢 Regra de três
-            </div>
-
-            <div class="field">
-                <label>VALOR A</label>
-                <input id="regraA">
-            </div>
-
-            <div class="field">
-                <label>VALOR B</label>
-                <input id="regraB">
-            </div>
-
-            <div class="field">
-                <label>VALOR C</label>
-                <input id="regraC">
-            </div>
-
-        </div>
-
-        <button
-            class="primary"
-            onclick="calcularBM3()"
-        >
-            🧮 CALCULAR
-        </button>
-
-        <div id="calcGerando" class="calc-generating">
-            <div class="mini-loader"></div>
-            🤖 Gerando resultado...
-        </div>
-
-        <div id="calcResultado" class="calc-result"></div>
-
-    </div>
-
-</section>
-
-<!-- =========================================================
-     CONTATOS
-========================================================= -->
-
-<section id="contatos" class="screen">
-
-    <button class="back" onclick="voltar()">
-        ← Voltar
-    </button>
-
-    <div class="page-title">
-        👥 Contatos
-    </div>
-
-    <div class="page-sub">
-        Organize seus números.
     </div>
 
     <button
-        class="primary"
-        onclick="abrirNovoContato()"
+        class="theme-toggle"
+        onclick="alternarTema()"
+        aria-label="Alternar tema"
     >
-        ➕ NOVO CONTATO
+        🌙
     </button>
 
-    <div style="height:13px"></div>
+</header>
 
-    <div class="field">
+<!-- =========================
+     INÍCIO
+========================= -->
+
+<section id="inicio" class="screen active">
+
+    <div class="menu-header">
+
+        <h1>
+            Menu Premium
+        </h1>
+
+        <p>
+            Escolha uma função para continuar
+        </p>
+
+    </div>
+
+    <div class="menu-grid">
+
+        <div class="menu-card" onclick="abrirTela('whatsapp')">
+
+            <div class="menu-icon">
+                💬
+            </div>
+
+            <h3>
+                WhatsApp
+            </h3>
+
+            <p>
+                Organize e acesse suas conversas
+            </p>
+
+        </div>
+
+        <div class="menu-card" onclick="abrirTela('calculadora')">
+
+            <div class="menu-icon">
+                🧮
+            </div>
+
+            <h3>
+                Calculadora
+            </h3>
+
+            <p>
+                Cálculos rápidos e porcentagens
+            </p>
+
+        </div>
+
+        <div class="menu-card" onclick="abrirTela('advogado')">
+
+            <div class="menu-icon">
+                ⚖️
+            </div>
+
+            <h3>
+                Advogado
+            </h3>
+
+            <p>
+                Auxílio para conversas com clientes
+            </p>
+
+        </div>
+
+        <div class="menu-card" onclick="abrirTela('celulares')">
+
+            <div class="menu-icon">
+                📱
+            </div>
+
+            <h3>
+                Celulares
+            </h3>
+
+            <p>
+                Organize seus aparelhos
+            </p>
+
+        </div>
+
+        <div class="menu-card" onclick="abrirTela('chips')">
+
+            <div class="menu-icon">
+                📶
+            </div>
+
+            <h3>
+                4G / Chips
+            </h3>
+
+            <p>
+                Controle suas linhas e operadoras
+            </p>
+
+        </div>
+
+        <div class="menu-card" onclick="abrirTela('contatos')">
+
+            <div class="menu-icon">
+                👥
+            </div>
+
+            <h3>
+                Contatos
+            </h3>
+
+            <p>
+                Organize seus números
+            </p>
+
+        </div>
+
+        <div class="menu-card" onclick="abrirTela('resumo')">
+
+            <div class="menu-icon">
+                📊
+            </div>
+
+            <h3>
+                Resumo
+            </h3>
+
+            <p>
+                Visualize suas informações
+            </p>
+
+        </div>
+
+        <div class="menu-card" onclick="abrirTela('favoritos')">
+
+            <div class="menu-icon">
+                ⭐
+            </div>
+
+            <h3>
+                Favoritos
+            </h3>
+
+            <p>
+                Acesse seus contatos favoritos
+            </p>
+
+        </div>
+
+        <div class="menu-card" onclick="abrirTela('config')">
+
+            <div class="menu-icon">
+                ⚙️
+            </div>
+
+            <h3>
+                Configurações
+            </h3>
+
+            <p>
+                Personalize seu BOT
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     WHATSAPP
+========================= -->
+
+<section id="whatsapp" class="screen">
+
+    <button class="back-btn" onclick="voltar()">
+        ← Voltar
+    </button>
+
+    <div class="whatsapp-head">
+
+        <h2>
+            💬 WhatsApp
+        </h2>
+
+        <p>
+            Ferramentas para organizar e acessar seus contatos.
+        </p>
+
+    </div>
+
+    <div class="action-grid">
+
+        <button class="action-btn" onclick="abrirTela('contatos')">
+            👥 Contatos
+        </button>
+
+        <button class="action-btn" onclick="abrirTela('grupos')">
+            👨‍👩‍👧 Grupos
+        </button>
+
+        <button class="action-btn" onclick="abrirTela('favoritos')">
+            ⭐ Favoritos
+        </button>
+
+        <button class="action-btn" onclick="abrirTela('recentes')">
+            🕘 Recentes
+        </button>
+
+        <button class="action-btn" onclick="abrirTela('envio')">
+            📤 Enviar mensagem
+        </button>
+
+        <button class="action-btn" onclick="abrirTela('links')">
+            🔗 Links
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     CALCULADORA
+========================= -->
+
+<section id="calculadora" class="screen">
+
+    <button class="back-btn" onclick="voltar()">
+        ← Voltar
+    </button>
+
+    <div class="screen-title">
+        🧮 Calculadora
+    </div>
+
+    <div class="screen-subtitle">
+        Escolha o tipo de cálculo.
+    </div>
+
+    <div class="action-grid">
+
+        <button class="action-btn" onclick="calcular('porcentagem')">
+            % Porcentagem
+        </button>
+
+        <button class="action-btn" onclick="calcular('adicionar')">
+            ➕ Adicionar %
+        </button>
+
+        <button class="action-btn" onclick="calcular('descontar')">
+            ➖ Descontar %
+        </button>
+
+        <button class="action-btn" onclick="calcular('dividir')">
+            ➗ Dividir
+        </button>
+
+        <button class="action-btn" onclick="calcular('multiplicar')">
+            ✖️ Multiplicar
+        </button>
+
+        <button class="action-btn" onclick="calcular('somar')">
+            ➕ Somar
+        </button>
+
+        <button class="action-btn" onclick="calcular('subtrair')">
+            ➖ Subtrair
+        </button>
+
+        <button class="action-btn" onclick="calcular('regra')">
+            📐 Regra de 3
+        </button>
+
+    </div>
+
+    <div id="calcArea" style="margin-top:18px;"></div>
+
+</section>
+
+<!-- =========================
+     CONTATOS
+========================= -->
+
+<section id="contatos" class="screen">
+
+    <button class="back-btn" onclick="voltar()">
+        ← Voltar
+    </button>
+
+    <div class="screen-title">
+        👥 Contatos
+    </div>
+
+    <div class="screen-subtitle">
+        Organize seus números por DDD.
+    </div>
+
+    <button
+        class="btn btn-primary"
+        onclick="abrirTela('novoContato')"
+        style="margin-bottom:15px;"
+    >
+        ＋ Novo contato
+    </button>
+
+    <div class="search-box">
 
         <input
-            id="buscarContato"
-            placeholder="🔎 Buscar nome ou número..."
+            class="input"
+            id="buscaContato"
+            type="search"
+            placeholder="🔎 Buscar contato ou número..."
             oninput="renderContatos()"
         >
 
@@ -1658,163 +1519,177 @@ select:focus{
 
 </section>
 
-<!-- =========================================================
+<!-- =========================
      NOVO CONTATO
-========================================================= -->
+========================= -->
 
 <section id="novoContato" class="screen">
 
-    <button
-        class="back"
-        onclick="navegar('contatos')"
-    >
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div
-        class="page-title"
-        id="tituloContato"
-    >
-        👤 Novo contato
+    <div class="screen-title">
+        ➕ Novo contato
     </div>
 
-    <div class="page-sub">
-        Preencha os dados.
+    <div class="screen-subtitle">
+        Cadastre um número.
     </div>
-
-    <input
-        type="hidden"
-        id="contatoIndex"
-        value="-1"
-    >
 
     <div class="card">
 
-        <div class="field">
-            <label>NOME</label>
-            <input id="contatoNome" placeholder="Nome">
+        <div class="form-group">
+
+            <label>
+                Nome
+            </label>
+
+            <input
+                class="input"
+                id="contatoNome"
+                placeholder="Nome do contato"
+            >
+
         </div>
 
-        <div class="field">
-            <label>DDD</label>
+        <div class="form-group">
+
+            <label>
+                DDD
+            </label>
+
             <input
+                class="input"
                 id="contatoDDD"
                 maxlength="2"
                 inputmode="numeric"
                 placeholder="13"
             >
+
         </div>
 
-        <div class="field">
-            <label>TELEFONE</label>
+        <div class="form-group">
+
+            <label>
+                Número
+            </label>
+
             <input
+                class="input"
                 id="contatoNumero"
                 inputmode="numeric"
-                placeholder="999999999"
+                placeholder="99999-9999"
             >
+
         </div>
 
-        <div class="field">
-            <label>STATUS</label>
+        <div class="form-group">
 
-            <select id="contatoStatus">
+            <label>
+                Status
+            </label>
 
-                <option value="ON">
-                    🟢 ON
+            <select class="select" id="contatoStatus">
+
+                <option value="on">
+                    ✅ ZAP ON
                 </option>
 
-                <option value="ANÁLISE">
-                    🟡 ANÁLISE
+                <option value="analysis">
+                    ⚠️ EM ANÁLISE
                 </option>
 
-                <option value="OFF">
-                    🔴 OFF
+                <option value="off">
+                    ❌ ZAP CAIU
                 </option>
 
             </select>
 
         </div>
 
-        <div class="field">
-            <label>OBSERVAÇÃO</label>
-            <input
+        <div class="form-group">
+
+            <label>
+                Observação
+            </label>
+
+            <textarea
+                class="textarea"
                 id="contatoObs"
-                placeholder="Opcional"
-            >
+                placeholder="Observações..."
+            ></textarea>
+
         </div>
 
         <button
-            class="primary"
+            class="btn btn-primary"
             onclick="salvarContato()"
         >
-            💾 SALVAR CONTATO
+            Salvar contato
         </button>
 
     </div>
 
 </section>
 
-<!-- =========================================================
+<!-- =========================
      RESUMO
-========================================================= -->
+========================= -->
 
 <section id="resumo" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
+    <div class="screen-title">
         📊 Resumo
     </div>
 
-    <div class="page-sub">
-        Visão geral dos contatos.
+    <div class="screen-subtitle">
+        Visão geral dos seus contatos.
     </div>
 
     <div class="stats-grid">
 
-        <div class="stat stat-on">
-            <div
-                class="stat-number"
-                id="totalON"
-            >0</div>
+        <div class="stat">
+            <div class="stat-number" id="totalContatos">
+                0
+            </div>
 
             <div class="stat-label">
-                🟢 ON
+                Contatos
             </div>
         </div>
 
-        <div class="stat stat-analysis">
-            <div
-                class="stat-number"
-                id="totalAnalise"
-            >0</div>
+        <div class="stat">
+            <div class="stat-number" id="totalON">
+                0
+            </div>
 
             <div class="stat-label">
-                🟡 ANÁLISE
+                ZAP ON
             </div>
         </div>
 
-        <div class="stat stat-off">
-            <div
-                class="stat-number"
-                id="totalOFF"
-            >0</div>
+        <div class="stat">
+            <div class="stat-number" id="totalAnalise">
+                0
+            </div>
 
             <div class="stat-label">
-                🔴 OFF
+                Em análise
             </div>
         </div>
 
-        <div class="stat stat-total">
-            <div
-                class="stat-number"
-                id="totalContatos"
-            >0</div>
+        <div class="stat">
+            <div class="stat-number" id="totalOFF">
+                0
+            </div>
 
             <div class="stat-label">
-                📱 TOTAL DE CONTATOS
+                ZAP caiu
             </div>
         </div>
 
@@ -1822,21 +1697,21 @@ select:focus{
 
 </section>
 
-<!-- =========================================================
+<!-- =========================
      FAVORITOS
-========================================================= -->
+========================= -->
 
 <section id="favoritos" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
+    <div class="screen-title">
         ⭐ Favoritos
     </div>
 
-    <div class="page-sub">
+    <div class="screen-subtitle">
         Seus contatos favoritos.
     </div>
 
@@ -1844,427 +1719,458 @@ select:focus{
 
 </section>
 
-<!-- =========================================================
+<!-- =========================
      CELULARES
-========================================================= -->
+========================= -->
 
 <section id="celulares" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
+    <div class="screen-title">
         📱 Celulares
     </div>
 
-    <div class="page-sub">
-        Organize os números por aparelho.
+    <div class="screen-subtitle">
+        Organize seus aparelhos.
+    </div>
+
+    <div class="card">
+
+        <div class="form-group">
+
+            <label>
+                Nome do aparelho
+            </label>
+
+            <input
+                class="input"
+                id="celularNome"
+                placeholder="Ex.: iPhone 14 Pro"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Número / identificação
+            </label>
+
+            <input
+                class="input"
+                id="celularNumero"
+                placeholder="Número ou identificação"
+            >
+
+        </div>
+
+        <button
+            class="btn btn-primary"
+            onclick="salvarCelular()"
+        >
+            Adicionar celular
+        </button>
+
     </div>
 
     <div id="listaCelulares"></div>
 
-    <button
-        class="primary"
-        onclick="adicionarCelular()"
-    >
-        ➕ ADICIONAR CELULAR
-    </button>
-
 </section>
 
-<!-- =========================================================
+<!-- =========================
      CHIPS
-========================================================= -->
+========================= -->
 
 <section id="chips" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
-        💳 Chips
+    <div class="screen-title">
+        📶 4G / Chips
     </div>
 
-    <div class="page-sub">
-        Controle seus chips e operadoras.
+    <div class="screen-subtitle">
+        Organize suas linhas e operadoras.
+    </div>
+
+    <div class="card">
+
+        <div class="form-group">
+
+            <label>
+                Operadora
+            </label>
+
+            <select class="select" id="chipOperadora">
+
+                <option value="Claro">
+                    Claro
+                </option>
+
+                <option value="TIM">
+                    TIM
+                </option>
+
+                <option value="Vivo">
+                    Vivo
+                </option>
+
+                <option value="Oi">
+                    Oi
+                </option>
+
+                <option value="Outra">
+                    Outra
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Número
+            </label>
+
+            <input
+                class="input"
+                id="chipNumero"
+                inputmode="numeric"
+                placeholder="(13) 99999-9999"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Recarga
+            </label>
+
+            <select class="select" id="chipRecarga">
+
+                <option value="Em dia">
+                    ✅ Em dia
+                </option>
+
+                <option value="Pendente">
+                    ⚠️ Pendente
+                </option>
+
+            </select>
+
+        </div>
+
+        <button
+            class="btn btn-primary"
+            onclick="salvarChip()"
+        >
+            Adicionar chip
+        </button>
+
     </div>
 
     <div id="listaChips"></div>
 
-    <button
-        class="primary"
-        onclick="adicionarChip()"
-    >
-        ➕ ADICIONAR CHIP
-    </button>
-
 </section>
 
-<!-- =========================================================
+<!-- =========================
      ADVOGADO
-========================================================= -->
+========================= -->
 
 <section id="advogado" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
+    <div class="screen-title">
         ⚖️ Advogado
     </div>
 
-    <div class="page-sub">
-        Ferramentas para atendimento e conversas.
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">🤖</div>
-
-        <div class="adv-content">
-            <h3>GERAR RESPOSTA</h3>
-            <p>
-                Gere uma resposta profissional.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirGerarResposta()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">🧠</div>
-
-        <div class="adv-content">
-            <h3>ANALISAR PERGUNTA</h3>
-            <p>
-                Analise uma pergunta recebida.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirAnalise()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">💰</div>
-
-        <div class="adv-content">
-            <h3>LIBERAÇÃO</h3>
-            <p>
-                Informações sobre liberação.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirLiberacao()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">📂</div>
-
-        <div class="adv-content">
-            <h3>ANDAMENTO</h3>
-            <p>
-                Organize informações do andamento.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirAndamento()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">⏳</div>
-
-        <div class="adv-content">
-            <h3>PRAZOS</h3>
-            <p>
-                Organize informações de prazos.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirPrazos()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">💵</div>
-
-        <div class="adv-content">
-            <h3>VALORES</h3>
-            <p>
-                Organize informações de valores.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirValores()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">📄</div>
-
-        <div class="adv-content">
-            <h3>DOCUMENTAÇÃO</h3>
-            <p>
-                Organize documentos.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirDocumentacao()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">⭐</div>
-
-        <div class="adv-content">
-            <h3>FAVORITAS</h3>
-            <p>
-                Acesse suas opções favoritas.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirFavoritas()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">📝</div>
-
-        <div class="adv-content">
-            <h3>MONTAR MENSAGEM</h3>
-            <p>
-                Monte uma mensagem profissional.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirMontarMensagem()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-    <div class="adv-card">
-
-        <div class="adv-icon">📋</div>
-
-        <div class="adv-content">
-            <h3>HISTÓRICO</h3>
-            <p>
-                Veja o histórico.
-            </p>
-        </div>
-
-        <button
-            class="adv-btn"
-            onclick="abrirHistorico()"
-        >
-            ABRIR
-        </button>
-
-    </div>
-
-</section>
-
-<!-- =========================================================
-     GERAR RESPOSTA
-========================================================= -->
-
-<section id="gerarResposta" class="screen">
-
-    <button class="back" onclick="voltar()">
-        ← Voltar
-    </button>
-
-    <div class="page-title">
-        🤖 Gerar resposta
-    </div>
-
-    <div class="page-sub">
-        Escreva a pergunta ou mensagem recebida do cliente.
+    <div class="screen-subtitle">
+        Ferramentas para suas conversas com clientes.
     </div>
 
     <div class="ai-box">
 
-        <div class="field">
+        <h3>
+            💬 Conversas com clientes
+        </h3>
+
+        <p class="card-sub">
+            Escreva a pergunta do cliente e gere uma sugestão de resposta.
+        </p>
+
+        <button
+            class="btn btn-primary"
+            onclick="abrirTela('gerarResposta')"
+            style="margin-top:14px;"
+        >
+            Gerar resposta
+        </button>
+
+    </div>
+
+    <div class="advisor-grid">
+
+        <div
+            class="advisor-card"
+            onclick="abrirAdvSub('Analisar conversa')"
+        >
+            <h4>
+                🔎 Analisar conversa
+            </h4>
+
+            <p>
+                Analise uma conversa com o cliente.
+            </p>
+        </div>
+
+        <div
+            class="advisor-card"
+            onclick="abrirAdvSub('Andamento')"
+        >
+            <h4>
+                📂 Andamento
+            </h4>
+
+            <p>
+                Monte uma resposta sobre andamento.
+            </p>
+        </div>
+
+        <div
+            class="advisor-card"
+            onclick="abrirAdvSub('Prazos')"
+        >
+            <h4>
+                ⏱️ Prazos
+            </h4>
+
+            <p>
+                Respostas relacionadas a prazos.
+            </p>
+        </div>
+
+        <div
+            class="advisor-card"
+            onclick="abrirAdvSub('Documentação')"
+        >
+            <h4>
+                📄 Documentação
+            </h4>
+
+            <p>
+                Solicitação de documentos.
+            </p>
+        </div>
+
+        <div
+            class="advisor-card"
+            onclick="abrirAdvSub('Valores')"
+        >
+            <h4>
+                💰 Valores
+            </h4>
+
+            <p>
+                Conversas sobre valores.
+            </p>
+        </div>
+
+        <div
+            class="advisor-card"
+            onclick="abrirAdvSub('Montar mensagem')"
+        >
+            <h4>
+                ✍️ Montar mensagem
+            </h4>
+
+            <p>
+                Crie uma mensagem profissional.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     GERAR RESPOSTA
+========================= -->
+
+<section id="gerarResposta" class="screen">
+
+    <button class="back-btn" onclick="voltar()">
+        ← Voltar
+    </button>
+
+    <div class="screen-title">
+        💬 Gerar resposta
+    </div>
+
+    <div class="screen-subtitle">
+        Digite o que o cliente perguntou.
+    </div>
+
+    <div class="card">
+
+        <div class="form-group">
 
             <label>
-                💬 PERGUNTA DO CLIENTE
+                Pergunta do cliente
             </label>
 
             <textarea
+                class="textarea"
                 id="perguntaCliente"
-                placeholder="Digite aqui a mensagem do cliente..."
+                placeholder="Ex.: Doutor, gostaria de saber como está o andamento do meu processo..."
             ></textarea>
 
         </div>
 
         <button
-            class="primary"
-            onclick="gerarRespostaAdvogado()"
+            class="btn btn-primary"
+            onclick="gerarResposta()"
         >
-            🤖 GERAR RESPOSTA
+            Gerar resposta
         </button>
 
         <div
-            id="gerandoResposta"
+            id="generating"
             class="generating"
         >
 
             <div class="mini-loader"></div>
 
-            Gerando resposta...
+            <strong>
+                Gerando resposta...
+            </strong>
 
         </div>
 
         <div
-            id="respostaGerada"
+            id="answerBox"
             class="answer-box"
         ></div>
+
+        <div
+            id="responseTools"
+            class="response-tools"
+        >
+
+            <button
+                class="btn btn-light"
+                onclick="copiarResposta()"
+            >
+                📋 Copiar
+            </button>
+
+            <button
+                class="btn btn-primary"
+                onclick="abrirWhatsAppResposta()"
+            >
+                💬 WhatsApp
+            </button>
+
+        </div>
 
     </div>
 
 </section>
 
-<!-- =========================================================
-     TELAS GENÉRICAS DO ADVOGADO
-========================================================= -->
+<!-- =========================
+     ADV SUB
+========================= -->
 
 <section id="advSubTela" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
     <div
-        class="page-title"
+        class="screen-title"
         id="advSubTitulo"
     >
-        ⚖️ Advogado
+        ⚖️ Ferramenta
     </div>
 
-    <div
-        class="page-sub"
-        id="advSubDescricao"
-    ></div>
+    <div class="screen-subtitle">
+        Monte sua conversa com o cliente.
+    </div>
 
     <div class="card">
 
-        <div
-            class="card-title"
-            id="advSubMensagem"
-        ></div>
-
-        <div class="field">
-
-            <label>
-                INFORMAÇÕES
-            </label>
-
-            <textarea
-                id="advSubTexto"
-                placeholder="Digite as informações..."
-            ></textarea>
-
-        </div>
+        <textarea
+            class="textarea"
+            id="advSubTexto"
+            placeholder="Digite as informações..."
+        ></textarea>
 
         <button
-            class="primary"
-            onclick="salvarAdvSub()"
+            class="btn btn-primary"
+            onclick="gerarAdvSub()"
+            style="margin-top:12px;"
         >
-            💾 SALVAR
+            Gerar mensagem
         </button>
 
     </div>
 
+    <div
+        id="advSubResultado"
+        class="answer-box"
+    ></div>
+
 </section>
 
-<!-- =========================================================
+<!-- =========================
      GRUPOS
-========================================================= -->
+========================= -->
 
 <section id="grupos" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
-        👥 Grupos
+    <div class="screen-title">
+        👨‍👩‍👧 Grupos
     </div>
 
-    <div class="page-sub">
-        Organize seus grupos do WhatsApp.
+    <div class="screen-subtitle">
+        Organize seus grupos.
     </div>
 
     <div class="card">
 
-        <div class="field">
-            <label>NOME DO GRUPO</label>
-            <input id="nomeGrupo" placeholder="Nome do grupo">
+        <div class="form-group">
+
+            <label>
+                Nome do grupo
+            </label>
+
+            <input
+                class="input"
+                id="grupoNome"
+                placeholder="Nome do grupo"
+            >
+
         </div>
 
         <button
-            class="primary"
-            onclick="adicionarGrupo()"
+            class="btn btn-primary"
+            onclick="salvarGrupo()"
         >
-            ➕ ADICIONAR GRUPO
+            Adicionar grupo
         </button>
 
     </div>
@@ -2273,133 +2179,135 @@ select:focus{
 
 </section>
 
-<!-- =========================================================
+<!-- =========================
      RECENTES
-========================================================= -->
+========================= -->
 
 <section id="recentes" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
+    <div class="screen-title">
         🕘 Recentes
     </div>
 
-    <div class="page-sub">
-        Últimos contatos acessados.
+    <div class="screen-subtitle">
+        Números acessados recentemente.
     </div>
 
     <div id="listaRecentes"></div>
 
 </section>
 
-<!-- =========================================================
+<!-- =========================
      ENVIO
-========================================================= -->
+========================= -->
 
 <section id="envio" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
-        📤 Envio rápido
+    <div class="screen-title">
+        📤 Enviar mensagem
     </div>
 
-    <div class="page-sub">
-        Abra uma conversa rapidamente.
+    <div class="screen-subtitle">
+        Abra uma conversa diretamente no WhatsApp.
     </div>
 
     <div class="card">
 
-        <div class="field">
+        <div class="form-group">
 
             <label>
-                NÚMERO
+                Número
             </label>
 
             <input
-                id="numeroEnvio"
+                class="input"
+                id="envioNumero"
                 inputmode="numeric"
                 placeholder="5513999999999"
             >
 
         </div>
 
-        <div class="field">
+        <div class="form-group">
 
             <label>
-                MENSAGEM
+                Mensagem opcional
             </label>
 
             <textarea
-                id="mensagemEnvio"
-                placeholder="Digite uma mensagem opcional..."
+                class="textarea"
+                id="envioMensagem"
+                placeholder="Digite sua mensagem..."
             ></textarea>
 
         </div>
 
         <button
-            class="primary"
+            class="btn btn-primary"
             onclick="abrirWhatsApp()"
         >
-            💬 ABRIR WHATSAPP
+            💬 Abrir WhatsApp
         </button>
 
     </div>
 
 </section>
 
-<!-- =========================================================
+<!-- =========================
      LINKS
-========================================================= -->
+========================= -->
 
 <section id="links" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
+    <div class="screen-title">
         🔗 Links
     </div>
 
-    <div class="page-sub">
-        Links úteis.
+    <div class="screen-subtitle">
+        Ferramentas rápidas.
     </div>
 
     <div class="card">
 
         <button
-            class="primary"
+            class="btn btn-primary"
             onclick="abrirWhatsApp()"
         >
-            💬 ABRIR WHATSAPP
+            💬 Abrir WhatsApp
         </button>
 
     </div>
 
 </section>
 
-<!-- =========================================================
+<!-- =========================
      CONFIGURAÇÕES
-========================================================= -->
+========================= -->
 
 <section id="config" class="screen">
 
-    <button class="back" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">
         ← Voltar
     </button>
 
-    <div class="page-title">
+    <div class="screen-title">
         ⚙️ Configurações
     </div>
 
-    <div class="page-sub">
-        Personalize seu BOT DO BM3.
+    <div class="screen-subtitle">
+        Personalize a aparência do BOT.
     </div>
 
     <div class="card">
@@ -2408,56 +2316,56 @@ select:focus{
             🎨 Meus Temas
         </div>
 
-        <div class="card-sub">
-            Escolha o tema do aplicativo.
+        <div class="card-sub" style="margin-bottom:15px;">
+            Escolha entre os dois temas disponíveis.
         </div>
 
         <div
-            style="
-                display:grid;
-                grid-template-columns:1fr 1fr;
-                gap:10px;
-                margin-top:15px;
-            "
+            id="temaClaro"
+            class="theme-option"
+            onclick="definirTema('claro')"
         >
 
-            <button
-                id="temaClaro"
-                class="theme-choice active"
-                onclick="definirTema('claro')"
-            >
+            <div>
 
-                <div>☀️</div>
+                <div class="theme-name">
+                    ☀️ Claro
+                </div>
 
-                Claro
+                <div class="theme-desc">
+                    Interface clara e limpa.
+                </div>
 
-            </button>
+            </div>
 
-            <button
-                id="temaEscuro"
-                class="theme-choice"
-                onclick="definirTema('escuro')"
-            >
-
-                <div>🌙</div>
-
-                Escuro
-
-            </button>
+            <span>
+                ✓
+            </span>
 
         </div>
 
-    </div>
+        <div
+            id="temaEscuro"
+            class="theme-option"
+            onclick="definirTema('escuro')"
+        >
 
-    <div class="card">
+            <div>
 
-        <div class="card-title">
-            🍀 BOT DO BM3
-        </div>
+                <div class="theme-name">
+                    🌙 Escuro
+                </div>
 
-        <div class="card-sub">
-            Organizador pessoal de contatos,
-            WhatsApp, calculadora e ferramentas.
+                <div class="theme-desc">
+                    Interface preta premium.
+                </div>
+
+            </div>
+
+            <span>
+                ✓
+            </span>
+
         </div>
 
     </div>
@@ -2468,154 +2376,90 @@ select:focus{
 
 <div id="toast"></div>
 
-<!-- =========================================================
-     JAVASCRIPT PRINCIPAL
-========================================================= -->
-
 <script>
 
-/* =========================================================
+/* =====================================================
    DADOS
-========================================================= */
+===================================================== */
 
-let contatos = JSON.parse(
-    localStorage.getItem('bm3_contatos') || '[]'
-);
+let contatos =
+    JSON.parse(localStorage.getItem("bm3_contatos") || "[]");
 
-let favoritos = JSON.parse(
-    localStorage.getItem('bm3_favoritos') || '[]'
-);
+let favoritos =
+    JSON.parse(localStorage.getItem("bm3_favoritos") || "[]");
 
-let grupos = JSON.parse(
-    localStorage.getItem('bm3_grupos') || '[]'
-);
+let grupos =
+    JSON.parse(localStorage.getItem("bm3_grupos") || "[]");
 
-let celulares = JSON.parse(
-    localStorage.getItem('bm3_celulares') || '[]'
-);
+let celulares =
+    JSON.parse(localStorage.getItem("bm3_celulares") || "[]");
 
-let chips = JSON.parse(
-    localStorage.getItem('bm3_chips') || '[]'
-);
+let chips =
+    JSON.parse(localStorage.getItem("bm3_chips") || "[]");
 
-let historicoTelas = ['inicio'];
+let recentes =
+    JSON.parse(localStorage.getItem("bm3_recentes") || "[]");
 
-let telaAtual = 'inicio';
+let historicoTelas = ["inicio"];
 
-let tipoCalculo = 'porcentagem';
+let telaAtual = "inicio";
+
+let respostaAtual = "";
 
 
-/* =========================================================
-   INICIALIZAÇÃO — CORREÇÃO DO LOADING
-========================================================= */
-
-window.addEventListener('load', function(){
-
-    const loading =
-        document.getElementById('loading');
-
-    const app =
-        document.querySelector('.app');
-
-    const welcome =
-        document.getElementById('welcome');
-
-    /* Mostra o aplicativo */
-    if(app){
-        app.classList.add('ready');
-    }
-
-    /* Tira o loading */
-    setTimeout(function(){
-
-        if(loading){
-            loading.classList.add('hide');
-        }
-
-        /* Mostra boas-vindas */
-        setTimeout(function(){
-
-            if(welcome){
-
-                welcome.classList.add('show');
-
-                setTimeout(function(){
-
-                    welcome.classList.remove('show');
-                    welcome.classList.add('hide');
-
-                    setTimeout(function(){
-
-                        welcome.style.display='none';
-
-                    },700);
-
-                },1300);
-
-            }
-
-        },450);
-
-    },900);
-
-    carregarTema();
-    renderContatos();
-    atualizarResumo();
-    renderFavoritos();
-    renderGrupos();
-    renderCelulares();
-    renderChips();
-
-});
-
-
-/* =========================================================
+/* =====================================================
    NAVEGAÇÃO
-========================================================= */
+===================================================== */
 
-function navegar(id){
+function abrirTela(id){
 
-    const destino =
-        document.getElementById(id);
+    const atual = document.querySelector(".screen.active");
 
-    if(!destino){
-        mostrarToast('Tela não encontrada.');
-        return;
+    if(atual && atual.id !== id){
+        historicoTelas.push(atual.id);
     }
 
-    document
-        .querySelectorAll('.screen')
-        .forEach(function(tela){
-            tela.classList.remove('active');
-        });
-
-    destino.classList.add('active');
-
-    if(telaAtual !== id){
-        historicoTelas.push(id);
-    }
-
-    telaAtual = id;
-
-    window.scrollTo({
-        top:0,
-        behavior:'smooth'
+    document.querySelectorAll(".screen").forEach(function(tela){
+        tela.classList.remove("active");
     });
 
-    if(id === 'resumo'){
+    const destino = document.getElementById(id);
+
+    if(destino){
+        destino.classList.add("active");
+        telaAtual = id;
+        window.scrollTo(0,0);
+    }
+
+    if(id === "contatos"){
+        renderContatos();
+    }
+
+    if(id === "resumo"){
         atualizarResumo();
     }
 
-    if(id === 'favoritos'){
+    if(id === "favoritos"){
         renderFavoritos();
     }
 
+    if(id === "grupos"){
+        renderGrupos();
+    }
+
+    if(id === "celulares"){
+        renderCelulares();
+    }
+
+    if(id === "chips"){
+        renderChips();
+    }
+
+    if(id === "recentes"){
+        renderRecentes();
+    }
 }
 
-
-/* =========================================================
-   VOLTAR
-========================================================= */
 
 function voltar(){
 
@@ -2624,384 +2468,234 @@ function voltar(){
         historicoTelas.pop();
 
         const anterior =
-            historicoTelas[
-                historicoTelas.length - 1
-            ];
+            historicoTelas[historicoTelas.length - 1];
 
-        document
-            .querySelectorAll('.screen')
-            .forEach(function(tela){
-                tela.classList.remove('active');
-            });
+        document.querySelectorAll(".screen").forEach(function(tela){
+            tela.classList.remove("active");
+        });
 
         const tela =
             document.getElementById(anterior);
 
         if(tela){
-            tela.classList.add('active');
+            tela.classList.add("active");
+            telaAtual = anterior;
         }
 
-        telaAtual = anterior;
+        window.scrollTo(0,0);
 
-    }else{
-
-        navegar('inicio');
-
+        return;
     }
 
-    window.scrollTo({
-        top:0,
-        behavior:'smooth'
+    mostrarMenu();
+}
+
+
+function mostrarMenu(){
+
+    const app =
+        document.querySelector(".app");
+
+    if(!app) return;
+
+    app.classList.add("ready");
+
+    document.querySelectorAll(".screen").forEach(function(tela){
+        tela.classList.remove("active");
     });
 
-}
+    const inicio =
+        document.getElementById("inicio");
 
-
-/* =========================================================
-   TEMA
-========================================================= */
-
-function alternarTema(){
-
-    const escuro =
-        document.body.classList.toggle('dark');
-
-    localStorage.setItem(
-        'bm3_tema',
-        escuro ? 'escuro' : 'claro'
-    );
-
-    atualizarBotaoTema();
-    atualizarBotoesTema();
-
-}
-
-
-function definirTema(tema){
-
-    if(tema === 'escuro'){
-
-        document.body.classList.add('dark');
-
-    }else{
-
-        document.body.classList.remove('dark');
-
+    if(inicio){
+        inicio.classList.add("active");
     }
 
-    localStorage.setItem(
-        'bm3_tema',
-        tema
-    );
+    historicoTelas = ["inicio"];
+    telaAtual = "inicio";
 
-    atualizarBotaoTema();
-    atualizarBotoesTema();
-
+    window.scrollTo(0,0);
 }
 
+
+/* =====================================================
+   TEMA
+===================================================== */
 
 function carregarTema(){
 
     const tema =
-        localStorage.getItem('bm3_tema') || 'claro';
+        localStorage.getItem("bm3_tema") || "claro";
 
-    definirTema(tema);
-
+    definirTema(tema, false);
 }
 
 
-function atualizarBotaoTema(){
+function definirTema(tema, salvar = true){
 
-    const escuro =
-        document.body.classList.contains('dark');
-
-    const icon =
-        document.getElementById('themeIcon');
-
-    const text =
-        document.getElementById('themeText');
-
-    if(icon){
-        icon.textContent =
-            escuro ? '🌙' : '☀️';
+    if(tema === "escuro"){
+        document.body.classList.add("dark");
+    }else{
+        document.body.classList.remove("dark");
     }
 
-    if(text){
-        text.textContent =
-            escuro ? 'Escuro' : 'Claro';
+    const botao =
+        document.querySelector(".theme-toggle");
+
+    if(botao){
+        botao.textContent =
+            tema === "escuro" ? "☀️" : "🌙";
     }
-
-}
-
-
-function atualizarBotoesTema(){
 
     const claro =
-        document.getElementById('temaClaro');
+        document.getElementById("temaClaro");
 
     const escuro =
-        document.getElementById('temaEscuro');
+        document.getElementById("temaEscuro");
 
-    if(!claro || !escuro) return;
+    if(claro){
+        claro.classList.toggle(
+            "active",
+            tema === "claro"
+        );
+    }
 
-    const tema =
-        document.body.classList.contains('dark')
-        ? 'escuro'
-        : 'claro';
+    if(escuro){
+        escuro.classList.toggle(
+            "active",
+            tema === "escuro"
+        );
+    }
 
-    claro.classList.toggle(
-        'active',
-        tema === 'claro'
-    );
-
-    escuro.classList.toggle(
-        'active',
-        tema === 'escuro'
-    );
-
+    if(salvar){
+        localStorage.setItem(
+            "bm3_tema",
+            tema
+        );
+    }
 }
 
 
-/* =========================================================
+function alternarTema(){
+
+    const escuro =
+        document.body.classList.contains("dark");
+
+    definirTema(
+        escuro ? "claro" : "escuro"
+    );
+}
+
+
+/* =====================================================
    TOAST
-========================================================= */
+===================================================== */
 
-let toastTimer;
+function toast(mensagem){
 
-function mostrarToast(mensagem){
+    const el =
+        document.getElementById("toast");
 
-    const toast =
-        document.getElementById('toast');
+    if(!el) return;
 
-    if(!toast) return;
+    el.textContent = mensagem;
 
-    toast.textContent = mensagem;
+    el.classList.add("show");
 
-    toast.classList.add('show');
+    clearTimeout(window.toastTimer);
 
-    clearTimeout(toastTimer);
-
-    toastTimer =
+    window.toastTimer =
         setTimeout(function(){
-
-            toast.classList.remove('show');
-
+            el.classList.remove("show");
         },2200);
-
 }
 
 
-/* =========================================================
+/* =====================================================
    CONTATOS
-========================================================= */
-
-function abrirNovoContato(){
-
-    document.getElementById('tituloContato').textContent =
-        '👤 Novo contato';
-
-    document.getElementById('contatoIndex').value = '-1';
-
-    document.getElementById('contatoNome').value = '';
-    document.getElementById('contatoDDD').value = '';
-    document.getElementById('contatoNumero').value = '';
-    document.getElementById('contatoStatus').value = 'ON';
-    document.getElementById('contatoObs').value = '';
-
-    navegar('novoContato');
-
-}
-
+===================================================== */
 
 function salvarContato(){
 
     const nome =
-        document.getElementById('contatoNome').value.trim();
+        document.getElementById("contatoNome").value.trim();
 
     const ddd =
-        document.getElementById('contatoDDD').value.trim();
+        document.getElementById("contatoDDD").value.trim();
 
     const numero =
-        document.getElementById('contatoNumero').value.trim();
+        document.getElementById("contatoNumero").value.trim();
 
     const status =
-        document.getElementById('contatoStatus').value;
+        document.getElementById("contatoStatus").value;
 
     const obs =
-        document.getElementById('contatoObs').value.trim();
+        document.getElementById("contatoObs").value.trim();
 
-    if(!nome){
-        mostrarToast('Digite o nome do contato.');
-        return;
-    }
+    if(!nome || !numero){
 
-    if(!ddd){
-        mostrarToast('Digite o DDD.');
-        return;
-    }
+        toast("Preencha nome e número.");
 
-    if(!numero){
-        mostrarToast('Digite o telefone.');
         return;
     }
 
     const contato = {
 
-        nome,
-        ddd,
-        numero,
-        status,
-        obs,
+        id:Date.now(),
 
-        atualizado:
-            new Date().toLocaleString('pt-BR')
+        nome:nome,
+
+        ddd:ddd,
+
+        numero:numero,
+
+        status:status,
+
+        obs:obs,
+
+        data:new Date().toLocaleString("pt-BR")
 
     };
 
-    const index =
-        Number(
-            document.getElementById('contatoIndex').value
-        );
-
-    if(index >= 0){
-
-        contatos[index] = contato;
-
-        mostrarToast('Contato atualizado.');
-
-    }else{
-
-        contatos.push(contato);
-
-        mostrarToast('Contato salvo.');
-
-    }
+    contatos.push(contato);
 
     localStorage.setItem(
-        'bm3_contatos',
+        "bm3_contatos",
         JSON.stringify(contatos)
     );
 
-    renderContatos();
-    atualizarResumo();
+    document.getElementById("contatoNome").value = "";
+    document.getElementById("contatoDDD").value = "";
+    document.getElementById("contatoNumero").value = "";
+    document.getElementById("contatoObs").value = "";
 
-    navegar('contatos');
-
-}
-
-
-function editarContato(index){
-
-    const contato =
-        contatos[index];
-
-    if(!contato) return;
-
-    document.getElementById('tituloContato').textContent =
-        '✏️ Editar contato';
-
-    document.getElementById('contatoIndex').value =
-        index;
-
-    document.getElementById('contatoNome').value =
-        contato.nome;
-
-    document.getElementById('contatoDDD').value =
-        contato.ddd;
-
-    document.getElementById('contatoNumero').value =
-        contato.numero;
-
-    document.getElementById('contatoStatus').value =
-        contato.status;
-
-    document.getElementById('contatoObs').value =
-        contato.obs || '';
-
-    navegar('novoContato');
-
-}
-
-
-function excluirContato(index){
-
-    if(!confirm('Excluir este contato?')){
-        return;
-    }
-
-    contatos.splice(index,1);
-
-    localStorage.setItem(
-        'bm3_contatos',
-        JSON.stringify(contatos)
-    );
+    toast("Contato salvo!");
 
     renderContatos();
-    atualizarResumo();
 
-    mostrarToast('Contato excluído.');
-
-}
-
-
-function favoritarContato(index){
-
-    const contato =
-        contatos[index];
-
-    if(!contato) return;
-
-    const existe =
-        favoritos.findIndex(function(item){
-            return item.nome === contato.nome &&
-                   item.numero === contato.numero;
-        });
-
-    if(existe >= 0){
-
-        favoritos.splice(existe,1);
-
-        mostrarToast('Removido dos favoritos.');
-
-    }else{
-
-        favoritos.push(contato);
-
-        mostrarToast('Adicionado aos favoritos.');
-
-    }
-
-    localStorage.setItem(
-        'bm3_favoritos',
-        JSON.stringify(favoritos)
-    );
-
-    renderFavoritos();
-    renderContatos();
-
+    voltar();
 }
 
 
 function renderContatos(){
 
     const lista =
-        document.getElementById('listaContatos');
+        document.getElementById("listaContatos");
 
     if(!lista) return;
 
     const busca =
-        (
-            document.getElementById('buscarContato')?.value ||
-            ''
-        ).toLowerCase();
+        (document.getElementById("buscaContato")?.value || "")
+        .toLowerCase()
+        .trim();
 
     const filtrados =
         contatos.filter(function(c){
 
             return (
                 c.nome.toLowerCase().includes(busca) ||
-                c.numero.includes(busca) ||
-                c.ddd.includes(busca)
+                c.numero.toLowerCase().includes(busca) ||
+                String(c.ddd).includes(busca)
             );
 
         });
@@ -3010,179 +2704,171 @@ function renderContatos(){
 
         lista.innerHTML = `
             <div class="empty">
-                📱 Nenhum contato encontrado.
+                Nenhum contato encontrado.
             </div>
         `;
 
         return;
-
     }
 
     lista.innerHTML =
-        filtrados.map(function(contato){
+        filtrados.map(function(c){
 
-            const index =
-                contatos.indexOf(contato);
+            let statusTexto = "⚠️ EM ANÁLISE";
+            let classe = "status-analysis";
+
+            if(c.status === "on"){
+                statusTexto = "✅ ZAP ON";
+                classe = "status-on";
+            }
+
+            if(c.status === "off"){
+                statusTexto = "❌ ZAP CAIU";
+                classe = "status-off";
+            }
+
+            const numeroCompleto =
+                (c.ddd ? "55" + c.ddd : "") +
+                c.numero.replace(/\D/g,"");
 
             const favorito =
-                favoritos.some(function(f){
-                    return f.nome === contato.nome &&
-                           f.numero === contato.numero;
-                });
-
-            let classe = 'status-on';
-            let texto = '🟢 ON';
-
-            if(contato.status === 'ANÁLISE'){
-                classe='status-analysis';
-                texto='🟡 ANÁLISE';
-            }
-
-            if(contato.status === 'OFF'){
-                classe='status-off';
-                texto='🔴 OFF';
-            }
+                favoritos.includes(c.id);
 
             return `
 
-                <div class="list-item">
+                <div class="contact-item">
 
-                    <div class="list-top">
+                    <div class="contact-info">
 
-                        <div>
+                        <div class="contact-name">
+                            ${escapar(c.nome)}
+                        </div>
 
-                            <div class="list-name">
-                                ${escapar(contato.nome)}
-                            </div>
-
-                            <div class="list-number">
-                                +55 ${escapar(contato.ddd)}
-                                ${escapar(contato.numero)}
-                            </div>
-
+                        <div class="contact-number">
+                            ${c.ddd ? "(" + escapar(c.ddd) + ") " : ""}
+                            ${escapar(c.numero)}
                         </div>
 
                         <span class="status ${classe}">
-                            ${texto}
+                            ${statusTexto}
                         </span>
 
                     </div>
 
-                    ${
-                        contato.obs
-                        ? `<div class="list-meta">
-                            ${escapar(contato.obs)}
-                           </div>`
-                        : ''
-                    }
-
-                    <div class="list-meta">
-                        Atualizado: ${escapar(contato.atualizado)}
-                    </div>
-
-                    <div class="list-actions">
+                    <div class="contact-actions">
 
                         <button
                             class="small-btn"
-                            onclick="editarContato(${index})"
+                            onclick="abrirContatoWhatsApp('${numeroCompleto}')"
+                            title="WhatsApp"
                         >
-                            ✏️ Editar
+                            💬
                         </button>
 
                         <button
                             class="small-btn"
-                            onclick="favoritarContato(${index})"
+                            onclick="alternarFavorito(${c.id})"
+                            title="Favorito"
                         >
-                            ${favorito ? '⭐ Favorito' : '☆ Favoritar'}
+                            ${favorito ? "⭐" : "☆"}
                         </button>
 
                         <button
                             class="small-btn"
-                            onclick="abrirConversaContato(${index})"
+                            onclick="excluirContato(${c.id})"
+                            title="Excluir"
                         >
-                            💬 WhatsApp
-                        </button>
-
-                        <button
-                            class="small-btn"
-                            onclick="excluirContato(${index})"
-                        >
-                            🗑️ Excluir
+                            🗑️
                         </button>
 
                     </div>
 
                 </div>
-
             `;
 
-        }).join('');
-
+        }).join("");
 }
 
 
-function abrirConversaContato(index){
+function excluirContato(id){
 
-    const contato =
-        contatos[index];
+    if(!confirm("Excluir este contato?")){
+        return;
+    }
 
-    if(!contato) return;
+    contatos =
+        contatos.filter(function(c){
+            return c.id !== id;
+        });
 
-    const numero =
-        '55' +
-        contato.ddd +
-        contato.numero.replace(/\D/g,'');
+    favoritos =
+        favoritos.filter(function(f){
+            return f !== id;
+        });
 
-    window.open(
-        'https://wa.me/' + numero,
-        '_blank'
+    localStorage.setItem(
+        "bm3_contatos",
+        JSON.stringify(contatos)
     );
 
+    localStorage.setItem(
+        "bm3_favoritos",
+        JSON.stringify(favoritos)
+    );
+
+    renderContatos();
+    renderFavoritos();
+    atualizarResumo();
+
+    toast("Contato excluído.");
 }
 
 
-/* =========================================================
-   RESUMO
-========================================================= */
+function alternarFavorito(id){
 
-function atualizarResumo(){
+    if(favoritos.includes(id)){
 
-    const on =
-        contatos.filter(c => c.status === 'ON').length;
+        favoritos =
+            favoritos.filter(function(f){
+                return f !== id;
+            });
 
-    const analise =
-        contatos.filter(c => c.status === 'ANÁLISE').length;
+        toast("Removido dos favoritos.");
 
-    const off =
-        contatos.filter(c => c.status === 'OFF').length;
+    }else{
 
-    const total =
-        contatos.length;
+        favoritos.push(id);
 
-    document.getElementById('totalON').textContent = on;
-    document.getElementById('totalAnalise').textContent = analise;
-    document.getElementById('totalOFF').textContent = off;
-    document.getElementById('totalContatos').textContent = total;
+        toast("Adicionado aos favoritos.");
+    }
 
+    localStorage.setItem(
+        "bm3_favoritos",
+        JSON.stringify(favoritos)
+    );
+
+    renderContatos();
+    renderFavoritos();
 }
 
-
-/* =========================================================
-   FAVORITOS
-========================================================= */
 
 function renderFavoritos(){
 
     const lista =
-        document.getElementById('listaFavoritos');
+        document.getElementById("listaFavoritos");
 
     if(!lista) return;
 
-    if(!favoritos.length){
+    const dados =
+        contatos.filter(function(c){
+            return favoritos.includes(c.id);
+        });
+
+    if(!dados.length){
 
         lista.innerHTML = `
             <div class="empty">
-                ⭐ Nenhum favorito ainda.
+                Você ainda não possui favoritos.
             </div>
         `;
 
@@ -3190,668 +2876,274 @@ function renderFavoritos(){
     }
 
     lista.innerHTML =
-        favoritos.map(function(c,index){
+        dados.map(function(c){
 
             return `
 
-                <div class="list-item">
+                <div class="favorite-item">
 
-                    <div class="list-name">
+                    <div class="contact-name">
                         ⭐ ${escapar(c.nome)}
                     </div>
 
-                    <div class="list-number">
-                        +55 ${escapar(c.ddd)}
+                    <div class="contact-number">
+                        ${c.ddd ? "(" + escapar(c.ddd) + ") " : ""}
                         ${escapar(c.numero)}
                     </div>
 
-                    <div class="list-actions">
-
-                        <button
-                            class="small-btn"
-                            onclick="abrirWhatsAppNumero('${c.ddd}${c.numero}')"
-                        >
-                            💬 WhatsApp
-                        </button>
-
-                        <button
-                            class="small-btn"
-                            onclick="removerFavorito(${index})"
-                        >
-                            🗑️ Remover
-                        </button>
-
-                    </div>
+                    <button
+                        class="btn btn-primary"
+                        style="margin-top:10px;"
+                        onclick="abrirContatoWhatsApp('${(c.ddd ? "55"+c.ddd : "") + c.numero.replace(/\D/g,"")}')"
+                    >
+                        💬 Abrir WhatsApp
+                    </button>
 
                 </div>
 
             `;
 
-        }).join('');
-
+        }).join("");
 }
 
 
-function removerFavorito(index){
+function atualizarResumo(){
 
-    favoritos.splice(index,1);
+    const total =
+        document.getElementById("totalContatos");
+
+    const on =
+        document.getElementById("totalON");
+
+    const analise =
+        document.getElementById("totalAnalise");
+
+    const off =
+        document.getElementById("totalOFF");
+
+    if(total) total.textContent = contatos.length;
+
+    if(on){
+        on.textContent =
+            contatos.filter(c => c.status === "on").length;
+    }
+
+    if(analise){
+        analise.textContent =
+            contatos.filter(c => c.status === "analysis").length;
+    }
+
+    if(off){
+        off.textContent =
+            contatos.filter(c => c.status === "off").length;
+    }
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function abrirContatoWhatsApp(numero){
+
+    if(!numero){
+        toast("Número inválido.");
+        return;
+    }
+
+    recentes =
+        recentes.filter(function(n){
+            return n !== numero;
+        });
+
+    recentes.unshift(numero);
+
+    recentes =
+        recentes.slice(0,20);
 
     localStorage.setItem(
-        'bm3_favoritos',
-        JSON.stringify(favoritos)
+        "bm3_recentes",
+        JSON.stringify(recentes)
     );
 
-    renderFavoritos();
-    renderContatos();
-
-    mostrarToast('Favorito removido.');
-
+    window.open(
+        "https://wa.me/" + numero,
+        "_blank"
+    );
 }
 
 
-/* =========================================================
-   CALCULADORA
-========================================================= */
+function abrirWhatsApp(){
 
-function selecionarTipoCalculo(tipo){
+    let numero =
+        document
+        .getElementById("envioNumero")
+        .value
+        .replace(/\D/g,"");
 
-    tipoCalculo = tipo;
+    const mensagem =
+        document
+        .getElementById("envioMensagem")
+        .value
+        .trim();
 
-    document
-        .querySelectorAll('.calc-option')
-        .forEach(function(btn){
-            btn.classList.remove('selected');
+    if(!numero){
+
+        toast("Digite um número.");
+
+        return;
+    }
+
+    if(numero.length <= 11){
+        numero = "55" + numero;
+    }
+
+    let url =
+        "https://wa.me/" + numero;
+
+    if(mensagem){
+        url +=
+            "?text=" +
+            encodeURIComponent(mensagem);
+    }
+
+    recentes =
+        recentes.filter(function(n){
+            return n !== numero;
         });
 
-    const mapa = {
+    recentes.unshift(numero);
 
-        porcentagem:'optPorcentagem',
-        adicionar:'optAdicionar',
-        descontar:'optDescontar',
-        dividir:'optDividir',
-        multiplicar:'optMultiplicar',
-        somar:'optSomar',
-        subtrair:'optSubtrair',
-        descobrir:'optPorcentagemDescobrir',
-        regra:'optRegra'
+    recentes =
+        recentes.slice(0,20);
 
-    };
-
-    document
-        .getElementById(mapa[tipo])
-        ?.classList.add('selected');
-
-    document
-        .querySelectorAll('.calc-fields')
-        .forEach(function(el){
-            el.classList.remove('show');
-        });
-
-    const campos = {
-
-        porcentagem:'camposPorcentagem',
-        adicionar:'camposAdicionar',
-        descontar:'camposDescontar',
-        dividir:'camposDividir',
-        multiplicar:'camposMultiplicar',
-        somar:'camposSomar',
-        subtrair:'camposSubtrair',
-        descobrir:'camposDescobrir',
-        regra:'camposRegra'
-
-    };
-
-    document
-        .getElementById(campos[tipo])
-        ?.classList.add('show');
-
-    document.getElementById('calcResultado').innerHTML='';
-
-}
-
-
-function converterValor(valor){
-
-    if(valor === undefined || valor === null){
-        return 0;
-    }
-
-    let texto =
-        String(valor)
-            .trim()
-            .toLowerCase()
-            .replace(/\s/g,'');
-
-    if(!texto) return 0;
-
-    let multiplicador = 1;
-
-    if(texto.endsWith('k')){
-
-        multiplicador=1000;
-        texto=texto.slice(0,-1);
-
-    }
-
-    if(texto.includes(',') && texto.includes('.')){
-
-        texto=texto.replace(/\./g,'');
-        texto=texto.replace(',','.');
-
-    }else if(texto.includes(',')){
-
-        texto=texto.replace(',','.');
-
-    }else{
-
-        const partes=texto.split('.');
-
-        if(partes.length===2 &&
-           partes[1].length===3){
-
-            texto=partes[0]+partes[1];
-
-        }
-
-    }
-
-    const numero =
-        parseFloat(texto);
-
-    return isNaN(numero)
-        ? 0
-        : numero*multiplicador;
-
-}
-
-
-function dinheiro(valor){
-
-    return Number(valor).toLocaleString(
-        'pt-BR',
-        {
-            style:'currency',
-            currency:'BRL'
-        }
+    localStorage.setItem(
+        "bm3_recentes",
+        JSON.stringify(recentes)
     );
 
+    window.open(url,"_blank");
 }
 
 
-function calcularBM3(){
+function abrirWhatsAppResposta(){
 
-    const gerando =
-        document.getElementById('calcGerando');
+    const resposta =
+        respostaAtual;
 
-    const resultado =
-        document.getElementById('calcResultado');
+    if(!resposta){
 
-    resultado.innerHTML='';
+        toast("Nenhuma resposta gerada.");
 
-    gerando.classList.add('show');
+        return;
+    }
+
+    abrirTela("envio");
 
     setTimeout(function(){
 
-        let resposta='';
+        document.getElementById(
+            "envioMensagem"
+        ).value = resposta;
 
-        try{
+    },100);
+}
 
-            if(tipoCalculo === 'porcentagem'){
 
-                const valor =
-                    converterValor(
-                        document.getElementById('calcValor').value
-                    );
+/* =====================================================
+   RECENTES
+===================================================== */
 
-                const porcentagem =
-                    Number(
-                        document.getElementById('calcPorcentagem').value
-                    );
+function renderRecentes(){
 
-                const pessoas =
-                    Number(
-                        document.getElementById('calcPessoas').value
-                    );
+    const lista =
+        document.getElementById("listaRecentes");
 
-                const depois =
-                    valor -
-                    (valor * porcentagem / 100);
+    if(!lista) return;
 
-                const cada =
-                    depois / pessoas;
+    if(!recentes.length){
 
-                resposta =
-                    `Valor inicial: ${dinheiro(valor)}
-Porcentagem: ${porcentagem}%
-Após desconto: ${dinheiro(depois)}
-Divisão: ${pessoas} pessoa(s)
-
-🍀 RESUMO: ${dinheiro(cada)} pra cada`;
-
-            }
-
-            else if(tipoCalculo === 'adicionar'){
-
-                const valor =
-                    converterValor(
-                        document.getElementById('adicionarValor').value
-                    );
-
-                const p =
-                    Number(
-                        document.getElementById('adicionarPorcentagem').value
-                    );
-
-                const resultadoFinal =
-                    valor + valor*p/100;
-
-                resposta =
-                    `${dinheiro(valor)} + ${p}% = ${dinheiro(resultadoFinal)}`;
-
-            }
-
-            else if(tipoCalculo === 'descontar'){
-
-                const valor =
-                    converterValor(
-                        document.getElementById('descontarValor').value
-                    );
-
-                const p =
-                    Number(
-                        document.getElementById('descontarPorcentagem').value
-                    );
-
-                const resultadoFinal =
-                    valor - valor*p/100;
-
-                resposta =
-                    `${dinheiro(valor)} - ${p}% = ${dinheiro(resultadoFinal)}`;
-
-            }
-
-            else if(tipoCalculo === 'dividir'){
-
-                const valor =
-                    converterValor(
-                        document.getElementById('dividirValor').value
-                    );
-
-                const pessoas =
-                    Number(
-                        document.getElementById('dividirPessoas').value
-                    );
-
-                const cada =
-                    valor/pessoas;
-
-                resposta =
-                    `${dinheiro(valor)} ÷ ${pessoas} = ${dinheiro(cada)} pra cada`;
-
-            }
-
-            else if(tipoCalculo === 'multiplicar'){
-
-                const valor =
-                    converterValor(
-                        document.getElementById('multiplicarValor').value
-                    );
-
-                const numero =
-                    Number(
-                        document.getElementById('multiplicarNumero').value
-                    );
-
-                resposta =
-                    `${dinheiro(valor)} × ${numero} = ${dinheiro(valor*numero)}`;
-
-            }
-
-            else if(tipoCalculo === 'somar'){
-
-                const a =
-                    converterValor(
-                        document.getElementById('somarValor1').value
-                    );
-
-                const b =
-                    converterValor(
-                        document.getElementById('somarValor2').value
-                    );
-
-                resposta =
-                    `${dinheiro(a)} + ${dinheiro(b)} = ${dinheiro(a+b)}`;
-
-            }
-
-            else if(tipoCalculo === 'subtrair'){
-
-                const a =
-                    converterValor(
-                        document.getElementById('subtrairValor1').value
-                    );
-
-                const b =
-                    converterValor(
-                        document.getElementById('subtrairValor2').value
-                    );
-
-                resposta =
-                    `${dinheiro(a)} - ${dinheiro(b)} = ${dinheiro(a-b)}`;
-
-            }
-
-            else if(tipoCalculo === 'descobrir'){
-
-                const total =
-                    converterValor(
-                        document.getElementById('descobrirTotal').value
-                    );
-
-                const parte =
-                    converterValor(
-                        document.getElementById('descobrirParte').value
-                    );
-
-                const p =
-                    total
-                    ? parte/total*100
-                    : 0;
-
-                resposta =
-                    `${dinheiro(parte)} representa ${p.toFixed(2)}% de ${dinheiro(total)}`;
-
-            }
-
-            else if(tipoCalculo === 'regra'){
-
-                const a =
-                    converterValor(
-                        document.getElementById('regraA').value
-                    );
-
-                const b =
-                    converterValor(
-                        document.getElementById('regraB').value
-                    );
-
-                const c =
-                    converterValor(
-                        document.getElementById('regraC').value
-                    );
-
-                const x =
-                    a ? (b*c)/a : 0;
-
-                resposta =
-                    `A está para B assim como C está para X.
-
-A = ${a}
-B = ${b}
-C = ${c}
-
-🍀 X = ${x}`;
-
-            }
-
-        }catch(e){
-
-            resposta =
-                'Não foi possível realizar o cálculo.';
-
-        }
-
-        gerando.classList.remove('show');
-
-        resultado.innerHTML = `
-            <div class="calc-bot">
-                <div class="calc-summary">
-                    🍀 RESULTADO
-                </div>
-
-                <div style="margin-top:12px;white-space:pre-line">
-                    ${escapar(resposta)}
-                </div>
+        lista.innerHTML = `
+            <div class="empty">
+                Nenhuma conversa recente.
             </div>
         `;
 
-    },700);
-
-}
-
-
-/* =========================================================
-   ADVOGADO
-========================================================= */
-
-function abrirGerarResposta(){
-
-    navegar('gerarResposta');
-
-}
-
-
-function gerarRespostaAdvogado(){
-
-    const pergunta =
-        document
-            .getElementById('perguntaCliente')
-            .value
-            .trim();
-
-    if(!pergunta){
-
-        mostrarToast(
-            'Digite a pergunta do cliente.'
-        );
-
         return;
     }
 
-    const gerando =
-        document.getElementById('gerandoResposta');
+    lista.innerHTML =
+        recentes.map(function(numero){
 
-    const resposta =
-        document.getElementById('respostaGerada');
+            return `
 
-    resposta.classList.remove('show');
+                <div class="item-row">
 
-    gerando.classList.add('show');
+                    <div class="item-row-info">
 
-    setTimeout(function(){
+                        <div class="item-row-title">
+                            💬 ${escapar(numero)}
+                        </div>
 
-        gerando.classList.remove('show');
+                        <div class="item-row-sub">
+                            Número acessado recentemente
+                        </div>
 
-        const texto =
-`Olá! Recebi sua mensagem e vou verificar as informações com atenção.
+                    </div>
 
-Sobre a sua dúvida, é importante analisar todos os detalhes do caso antes de apresentar uma orientação definitiva.
+                    <button
+                        class="small-btn"
+                        onclick="abrirContatoWhatsApp('${numero}')"
+                    >
+                        💬
+                    </button>
 
-Vou conferir as informações necessárias e, assim que possível, retorno com uma posição mais precisa.
+                </div>
 
-Fico à disposição.`;
+            `;
 
-        resposta.textContent = texto;
-
-        resposta.classList.add('show');
-
-    },1000);
-
+        }).join("");
 }
 
 
-function abrirAnalise(){
-    abrirSubAdvogado(
-        '🧠 Analisar pergunta',
-        'Analise e organize a informação enviada pelo cliente.',
-        'Digite abaixo a pergunta ou situação.'
-    );
-}
-
-
-function abrirLiberacao(){
-    abrirSubAdvogado(
-        '💰 Liberação',
-        'Organize informações relacionadas a liberação.',
-        'Digite as informações da liberação.'
-    );
-}
-
-
-function abrirAndamento(){
-    abrirSubAdvogado(
-        '📂 Andamento',
-        'Organize informações relacionadas ao andamento.',
-        'Digite as informações do andamento.'
-    );
-}
-
-
-function abrirPrazos(){
-    abrirSubAdvogado(
-        '⏳ Prazos',
-        'Organize informações relacionadas a prazos.',
-        'Digite as informações do prazo.'
-    );
-}
-
-
-function abrirValores(){
-    abrirSubAdvogado(
-        '💵 Valores',
-        'Organize informações de valores.',
-        'Digite as informações dos valores.'
-    );
-}
-
-
-function abrirDocumentacao(){
-    abrirSubAdvogado(
-        '📄 Documentação',
-        'Organize informações sobre documentos.',
-        'Digite as informações da documentação.'
-    );
-}
-
-
-function abrirFavoritas(){
-    navegar('favoritos');
-}
-
-
-function abrirMontarMensagem(){
-    abrirSubAdvogado(
-        '📝 Montar mensagem',
-        'Monte uma mensagem profissional para o cliente.',
-        'Digite os pontos que deseja incluir.'
-    );
-}
-
-
-function abrirHistorico(){
-    abrirSubAdvogado(
-        '📋 Histórico',
-        'Organize informações do histórico.',
-        'Digite as informações do histórico.'
-    );
-}
-
-
-function abrirSubAdvogado(
-    titulo,
-    descricao,
-    mensagem
-){
-
-    document.getElementById(
-        'advSubTitulo'
-    ).textContent = titulo;
-
-    document.getElementById(
-        'advSubDescricao'
-    ).textContent = descricao;
-
-    document.getElementById(
-        'advSubMensagem'
-    ).textContent = mensagem;
-
-    document.getElementById(
-        'advSubTexto'
-    ).value='';
-
-    navegar('advSubTela');
-
-}
-
-
-function salvarAdvSub(){
-
-    const texto =
-        document
-            .getElementById('advSubTexto')
-            .value
-            .trim();
-
-    if(!texto){
-
-        mostrarToast(
-            'Digite alguma informação.'
-        );
-
-        return;
-    }
-
-    mostrarToast(
-        'Informação salva nesta sessão.'
-    );
-
-}
-
-
-/* =========================================================
+/* =====================================================
    GRUPOS
-========================================================= */
+===================================================== */
 
-function adicionarGrupo(){
-
-    const campo =
-        document.getElementById('nomeGrupo');
+function salvarGrupo(){
 
     const nome =
-        campo.value.trim();
+        document.getElementById("grupoNome").value.trim();
 
     if(!nome){
 
-        mostrarToast(
-            'Digite o nome do grupo.'
-        );
+        toast("Digite o nome do grupo.");
 
         return;
     }
 
     grupos.push({
-        nome,
-        data:new Date().toLocaleString('pt-BR')
+        id:Date.now(),
+        nome:nome
     });
 
     localStorage.setItem(
-        'bm3_grupos',
+        "bm3_grupos",
         JSON.stringify(grupos)
     );
 
-    campo.value='';
+    document.getElementById("grupoNome").value = "";
 
     renderGrupos();
 
-    mostrarToast('Grupo adicionado.');
-
+    toast("Grupo adicionado.");
 }
 
 
 function renderGrupos(){
 
     const lista =
-        document.getElementById('listaGrupos');
+        document.getElementById("listaGrupos");
 
     if(!lista) return;
 
@@ -3859,7 +3151,7 @@ function renderGrupos(){
 
         lista.innerHTML = `
             <div class="empty">
-                👥 Nenhum grupo cadastrado.
+                Nenhum grupo cadastrado.
             </div>
         `;
 
@@ -3867,89 +3159,94 @@ function renderGrupos(){
     }
 
     lista.innerHTML =
-        grupos.map(function(g,index){
+        grupos.map(function(g){
 
             return `
-                <div class="list-item">
 
-                    <div class="list-name">
-                        👥 ${escapar(g.nome)}
-                    </div>
+                <div class="item-row">
 
-                    <div class="list-meta">
-                        ${escapar(g.data)}
-                    </div>
+                    <div class="item-row-info">
 
-                    <div class="list-actions">
-
-                        <button
-                            class="small-btn"
-                            onclick="excluirGrupo(${index})"
-                        >
-                            🗑️ Excluir
-                        </button>
+                        <div class="item-row-title">
+                            👥 ${escapar(g.nome)}
+                        </div>
 
                     </div>
+
+                    <button
+                        class="small-btn"
+                        onclick="excluirGrupo(${g.id})"
+                    >
+                        🗑️
+                    </button>
 
                 </div>
+
             `;
 
-        }).join('');
-
+        }).join("");
 }
 
 
-function excluirGrupo(index){
+function excluirGrupo(id){
 
-    grupos.splice(index,1);
+    grupos =
+        grupos.filter(function(g){
+            return g.id !== id;
+        });
 
     localStorage.setItem(
-        'bm3_grupos',
+        "bm3_grupos",
         JSON.stringify(grupos)
     );
 
     renderGrupos();
-
 }
 
 
-/* =========================================================
+/* =====================================================
    CELULARES
-========================================================= */
+===================================================== */
 
-function adicionarCelular(){
+function salvarCelular(){
 
     const nome =
-        prompt('Nome do aparelho:');
-
-    if(!nome) return;
+        document.getElementById("celularNome").value.trim();
 
     const numero =
-        prompt('Número principal:') || '';
+        document.getElementById("celularNumero").value.trim();
+
+    if(!nome){
+
+        toast("Digite o nome do aparelho.");
+
+        return;
+    }
 
     celulares.push({
-        nome,
-        numero
+        id:Date.now(),
+        nome:nome,
+        numero:numero
     });
 
     localStorage.setItem(
-        'bm3_celulares',
+        "bm3_celulares",
         JSON.stringify(celulares)
     );
 
+    document.getElementById("celularNome").value = "";
+    document.getElementById("celularNumero").value = "";
+
     renderCelulares();
 
-    mostrarToast(
-        'Celular adicionado.'
-    );
-
+    toast("Celular adicionado.");
 }
 
 
 function renderCelulares(){
 
     const lista =
-        document.getElementById('listaCelulares');
+        document.getElementById("listaCelulares");
 
     if(!lista) return;
 
@@ -3957,7 +3254,7 @@ function renderCelulares(){
 
         lista.innerHTML = `
             <div class="empty">
-                📱 Nenhum aparelho cadastrado.
+                Nenhum celular cadastrado.
             </div>
         `;
 
@@ -3965,92 +3262,101 @@ function renderCelulares(){
     }
 
     lista.innerHTML =
-        celulares.map(function(c,index){
+        celulares.map(function(c){
 
             return `
-                <div class="phone-card">
 
-                    <div class="phone-name">
-                        📱 ${escapar(c.nome)}
-                    </div>
+                <div class="item-row">
 
-                    <div class="phone-line">
-                        <b>NÚMERO</b>
-                        ${escapar(c.numero)}
-                    </div>
+                    <div class="item-row-info">
 
-                    <div class="list-actions">
+                        <div class="item-row-title">
+                            📱 ${escapar(c.nome)}
+                        </div>
 
-                        <button
-                            class="small-btn"
-                            onclick="excluirCelular(${index})"
-                        >
-                            🗑️ Excluir
-                        </button>
+                        <div class="item-row-sub">
+                            ${escapar(c.numero || "Sem identificação")}
+                        </div>
 
                     </div>
+
+                    <button
+                        class="small-btn"
+                        onclick="excluirCelular(${c.id})"
+                    >
+                        🗑️
+                    </button>
 
                 </div>
+
             `;
 
-        }).join('');
-
+        }).join("");
 }
 
 
-function excluirCelular(index){
+function excluirCelular(id){
 
-    celulares.splice(index,1);
+    celulares =
+        celulares.filter(function(c){
+            return c.id !== id;
+        });
 
     localStorage.setItem(
-        'bm3_celulares',
+        "bm3_celulares",
         JSON.stringify(celulares)
     );
 
     renderCelulares();
-
 }
 
 
-/* =========================================================
+/* =====================================================
    CHIPS
-========================================================= */
+===================================================== */
 
-function adicionarChip(){
+function salvarChip(){
 
     const operadora =
-        prompt(
-            'Operadora: Claro, Vivo, TIM ou outra'
-        );
-
-    if(!operadora) return;
+        document.getElementById("chipOperadora").value;
 
     const numero =
-        prompt('Número do chip:') || '';
+        document.getElementById("chipNumero").value.trim();
+
+    const recarga =
+        document.getElementById("chipRecarga").value;
+
+    if(!numero){
+
+        toast("Digite o número.");
+
+        return;
+    }
 
     chips.push({
-        operadora,
-        numero
+        id:Date.now(),
+        operadora:operadora,
+        numero:numero,
+        recarga:recarga
     });
 
     localStorage.setItem(
-        'bm3_chips',
+        "bm3_chips",
         JSON.stringify(chips)
     );
 
+    document.getElementById("chipNumero").value = "";
+
     renderChips();
 
-    mostrarToast(
-        'Chip adicionado.'
-    );
-
+    toast("Chip adicionado.");
 }
 
 
 function renderChips(){
 
     const lista =
-        document.getElementById('listaChips');
+        document.getElementById("listaChips");
 
     if(!lista) return;
 
@@ -4058,7 +3364,7 @@ function renderChips(){
 
         lista.innerHTML = `
             <div class="empty">
-                💳 Nenhum chip cadastrado.
+                Nenhum chip cadastrado.
             </div>
         `;
 
@@ -4066,202 +3372,529 @@ function renderChips(){
     }
 
     lista.innerHTML =
-        chips.map(function(c,index){
+        chips.map(function(c){
 
             return `
-                <div class="chip-card">
 
-                    <div class="chip-operator">
-                        💳 ${escapar(c.operadora)}
-                    </div>
+                <div class="item-row">
 
-                    <div class="chip-number">
-                        ${escapar(c.numero)}
-                    </div>
+                    <div class="item-row-info">
 
-                    <div class="chip-region">
-                        Controle de chip
-                    </div>
+                        <div class="item-row-title">
+                            📶 ${escapar(c.operadora)}
+                        </div>
 
-                    <div class="list-actions">
-
-                        <button
-                            class="small-btn"
-                            onclick="excluirChip(${index})"
-                        >
-                            🗑️ Excluir
-                        </button>
+                        <div class="item-row-sub">
+                            ${escapar(c.numero)}
+                            • ${escapar(c.recarga)}
+                        </div>
 
                     </div>
+
+                    <button
+                        class="small-btn"
+                        onclick="excluirChip(${c.id})"
+                    >
+                        🗑️
+                    </button>
 
                 </div>
+
             `;
 
-        }).join('');
-
+        }).join("");
 }
 
 
-function excluirChip(index){
+function excluirChip(id){
 
-    chips.splice(index,1);
+    chips =
+        chips.filter(function(c){
+            return c.id !== id;
+        });
 
     localStorage.setItem(
-        'bm3_chips',
+        "bm3_chips",
         JSON.stringify(chips)
     );
 
     renderChips();
-
 }
 
 
-/* =========================================================
-   RECENTES
-========================================================= */
+/* =====================================================
+   CALCULADORA
+===================================================== */
 
-function renderRecentes(){
+function calcular(tipo){
 
-    const lista =
-        document.getElementById('listaRecentes');
+    const area =
+        document.getElementById("calcArea");
 
-    if(!lista) return;
+    let titulo = "";
+    let campos = "";
 
-    const recentes =
-        contatos.slice(-10).reverse();
+    if(tipo === "porcentagem"){
 
-    if(!recentes.length){
+        titulo = "Descobrir porcentagem";
 
-        lista.innerHTML = `
-            <div class="empty">
-                🕘 Nenhum contato recente.
+        campos = `
+            <div class="form-group">
+                <label>Valor</label>
+                <input class="input" id="calcA" type="number">
+            </div>
+
+            <div class="form-group">
+                <label>Porcentagem</label>
+                <input class="input" id="calcB" type="number">
             </div>
         `;
-
-        return;
     }
 
-    lista.innerHTML =
-        recentes.map(function(c){
+    else if(tipo === "adicionar"){
 
-            return `
-                <div class="list-item">
+        titulo = "Adicionar porcentagem";
 
-                    <div class="list-name">
-                        ${escapar(c.nome)}
-                    </div>
+        campos = `
+            <div class="form-group">
+                <label>Valor</label>
+                <input class="input" id="calcA" type="number">
+            </div>
 
-                    <div class="list-number">
-                        +55 ${escapar(c.ddd)}
-                        ${escapar(c.numero)}
-                    </div>
+            <div class="form-group">
+                <label>Porcentagem</label>
+                <input class="input" id="calcB" type="number">
+            </div>
+        `;
+    }
 
-                </div>
-            `;
+    else if(tipo === "descontar"){
 
-        }).join('');
+        titulo = "Descontar porcentagem";
 
+        campos = `
+            <div class="form-group">
+                <label>Valor</label>
+                <input class="input" id="calcA" type="number">
+            </div>
+
+            <div class="form-group">
+                <label>Porcentagem</label>
+                <input class="input" id="calcB" type="number">
+            </div>
+        `;
+    }
+
+    else if(tipo === "regra"){
+
+        titulo = "Regra de três";
+
+        campos = `
+            <div class="form-group">
+                <label>A</label>
+                <input class="input" id="calcA" type="number">
+            </div>
+
+            <div class="form-group">
+                <label>B</label>
+                <input class="input" id="calcB" type="number">
+            </div>
+
+            <div class="form-group">
+                <label>C</label>
+                <input class="input" id="calcC" type="number">
+            </div>
+        `;
+    }
+
+    else{
+
+        titulo =
+            tipo === "dividir" ? "Dividir" :
+            tipo === "multiplicar" ? "Multiplicar" :
+            tipo === "somar" ? "Somar" :
+            "Subtrair";
+
+        campos = `
+            <div class="form-group">
+                <label>Primeiro valor</label>
+                <input class="input" id="calcA" type="number">
+            </div>
+
+            <div class="form-group">
+                <label>Segundo valor</label>
+                <input class="input" id="calcB" type="number">
+            </div>
+        `;
+    }
+
+    area.innerHTML = `
+
+        <div class="card">
+
+            <div class="card-title">
+                ${titulo}
+            </div>
+
+            ${campos}
+
+            <button
+                class="btn btn-primary"
+                onclick="executarCalculo('${tipo}')"
+            >
+                Calcular
+            </button>
+
+            <div
+                id="calcResultado"
+                class="calc-result"
+                style="display:none;"
+            ></div>
+
+        </div>
+
+    `;
 }
 
 
-/* =========================================================
-   ENVIO WHATSAPP
-========================================================= */
+function executarCalculo(tipo){
 
-function abrirWhatsApp(){
-
-    let numero =
-        document
-            .getElementById('numeroEnvio')
-            .value
-            .replace(/\D/g,'');
-
-    const mensagem =
-        document
-            .getElementById('mensagemEnvio')
-            .value
-            .trim();
-
-    if(!numero){
-
-        mostrarToast(
-            'Digite o número.'
+    const a =
+        parseFloat(
+            document.getElementById("calcA")?.value
         );
 
+    const b =
+        parseFloat(
+            document.getElementById("calcB")?.value
+        );
+
+    const c =
+        parseFloat(
+            document.getElementById("calcC")?.value
+        );
+
+    if(Number.isNaN(a) || Number.isNaN(b)){
+
+        toast("Preencha os valores.");
+
         return;
     }
 
-    if(!numero.startsWith('55')){
-        numero='55'+numero;
+    let resultado = 0;
+
+    if(tipo === "porcentagem"){
+        resultado = a * b / 100;
     }
 
-    let url =
-        'https://wa.me/' + numero;
-
-    if(mensagem){
-
-        url +=
-            '?text=' +
-            encodeURIComponent(mensagem);
-
+    else if(tipo === "adicionar"){
+        resultado = a + (a * b / 100);
     }
 
-    window.open(
-        url,
-        '_blank'
-    );
+    else if(tipo === "descontar"){
+        resultado = a - (a * b / 100);
+    }
 
+    else if(tipo === "dividir"){
+
+        if(b === 0){
+            toast("Não é possível dividir por zero.");
+            return;
+        }
+
+        resultado = a / b;
+    }
+
+    else if(tipo === "multiplicar"){
+        resultado = a * b;
+    }
+
+    else if(tipo === "somar"){
+        resultado = a + b;
+    }
+
+    else if(tipo === "subtrair"){
+        resultado = a - b;
+    }
+
+    else if(tipo === "regra"){
+
+        if(c === undefined || Number.isNaN(c)){
+            toast("Preencha o terceiro valor.");
+            return;
+        }
+
+        if(b === 0){
+            toast("B não pode ser zero.");
+            return;
+        }
+
+        resultado = (b * c) / a;
+    }
+
+    const box =
+        document.getElementById("calcResultado");
+
+    box.style.display = "block";
+
+    box.textContent =
+        "Resultado: " +
+        Number(resultado.toFixed(4)).toLocaleString("pt-BR");
 }
 
 
-function abrirWhatsAppNumero(numero){
+/* =====================================================
+   ADVOGADO
+===================================================== */
 
-    numero =
-        String(numero)
-        .replace(/\D/g,'');
+function gerarResposta(){
 
-    if(!numero.startsWith('55')){
-        numero='55'+numero;
+    const pergunta =
+        document
+        .getElementById("perguntaCliente")
+        .value
+        .trim();
+
+    if(!pergunta){
+
+        toast("Digite a pergunta do cliente.");
+
+        return;
     }
 
-    window.open(
-        'https://wa.me/' + numero,
-        '_blank'
-    );
+    const generating =
+        document.getElementById("generating");
 
+    const answer =
+        document.getElementById("answerBox");
+
+    const tools =
+        document.getElementById("responseTools");
+
+    generating.classList.add("show");
+
+    answer.classList.remove("show");
+
+    tools.classList.remove("show");
+
+    respostaAtual = "";
+
+    setTimeout(function(){
+
+        const texto =
+`Olá! Entendi a sua dúvida.
+
+Recebi sua mensagem e vou verificar as informações do seu caso para poder lhe orientar da melhor forma possível.
+
+Assim que eu tiver a confirmação das informações necessárias, retorno com uma atualização mais precisa.
+
+Fique tranquilo(a), qualquer novidade entraremos em contato.`;
+
+        respostaAtual = texto;
+
+        generating.classList.remove("show");
+
+        answer.textContent = texto;
+
+        answer.classList.add("show");
+
+        tools.classList.add("show");
+
+    },1000);
 }
 
 
-/* =========================================================
-   SEGURANÇA DE TEXTO
-========================================================= */
+function copiarResposta(){
+
+    if(!respostaAtual){
+        toast("Nenhuma resposta para copiar.");
+        return;
+    }
+
+    navigator.clipboard.writeText(
+        respostaAtual
+    ).then(function(){
+
+        toast("Resposta copiada!");
+
+    }).catch(function(){
+
+        toast("Não foi possível copiar.");
+
+    });
+}
+
+
+function abrirAdvSub(titulo){
+
+    abrirTela("advSubTela");
+
+    document.getElementById(
+        "advSubTitulo"
+    ).textContent =
+        "⚖️ " + titulo;
+
+    document.getElementById(
+        "advSubTexto"
+    ).value = "";
+
+    document.getElementById(
+        "advSubResultado"
+    ).classList.remove("show");
+}
+
+
+function gerarAdvSub(){
+
+    const titulo =
+        document
+        .getElementById("advSubTitulo")
+        .textContent
+        .replace("⚖️ ","");
+
+    const texto =
+        document
+        .getElementById("advSubTexto")
+        .value
+        .trim();
+
+    if(!texto){
+
+        toast("Digite as informações.");
+
+        return;
+    }
+
+    const resultado =
+        document.getElementById(
+            "advSubResultado"
+        );
+
+    let resposta =
+`Olá! Sobre ${titulo.toLowerCase()}, recebi as informações que você me enviou.
+
+Vou verificar os detalhes do seu caso e, após essa conferência, retornarei com as orientações necessárias.
+
+Caso seja necessário algum documento ou informação adicional, avisarei por aqui.`;
+
+    resultado.textContent = resposta;
+
+    resultado.classList.add("show");
+}
+
+
+/* =====================================================
+   UTILITÁRIO
+===================================================== */
 
 function escapar(texto){
 
-    return String(texto ?? '')
-        .replace(/&/g,'&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;')
-        .replace(/"/g,'&quot;')
-        .replace(/'/g,'&#039;');
-
+    return String(texto ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 }
 
 
-/* =========================================================
-   QUANDO ABRIR RECENTES
-========================================================= */
+/* =====================================================
+   INICIALIZAÇÃO
+   IMPORTANTE:
+   O MENU SÓ APARECE DEPOIS DO WELCOME.
+===================================================== */
 
-document.addEventListener(
-    'click',
-    function(){
+window.addEventListener("load", function(){
 
-        if(telaAtual === 'recentes'){
-            renderRecentes();
+    const loading =
+        document.getElementById("loading");
+
+    const welcome =
+        document.getElementById("welcome");
+
+    const app =
+        document.querySelector(".app");
+
+    /* Garante que o app começa escondido */
+    if(app){
+        app.classList.remove("ready");
+    }
+
+    /*
+       PRIMEIRA ETAPA:
+       mostra o loading por aproximadamente 1,2s
+    */
+
+    setTimeout(function(){
+
+        if(loading){
+            loading.classList.add("hide");
         }
 
-    }
-);
+        /*
+           SEGUNDA ETAPA:
+           espera o loading desaparecer
+           antes de mostrar o welcome
+        */
+
+        setTimeout(function(){
+
+            if(!welcome){
+
+                mostrarMenu();
+
+                return;
+            }
+
+            welcome.classList.add("show");
+
+            /*
+               TERCEIRA ETAPA:
+               mantém a tela de boas-vindas
+               antes de liberar o menu
+            */
+
+            setTimeout(function(){
+
+                welcome.classList.remove("show");
+
+                welcome.classList.add("hide");
+
+                /*
+                   QUARTA ETAPA:
+                   somente depois da animação
+                   o menu fica disponível
+                */
+
+                setTimeout(function(){
+
+                    welcome.style.display = "none";
+
+                    mostrarMenu();
+
+                },700);
+
+            },1400);
+
+        },650);
+
+    },1200);
+
+    carregarTema();
+
+    renderContatos();
+
+    atualizarResumo();
+
+    renderFavoritos();
+
+    renderGrupos();
+
+    renderCelulares();
+
+    renderChips();
+
+});
 
 </script>
 
