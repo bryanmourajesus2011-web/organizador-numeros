@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#008c45">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
     try{
@@ -1587,9 +1586,6 @@ body.dark .cellular-count{
     }
 }
 
-
-.auth-gate,.admin-panel{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.78);backdrop-filter:blur(8px)}
-.auth-box{width:min(420px,100%);padding:28px;border-radius:22px;background:#111;color:#fff;box-shadow:0 20px 70px rgba(0,0,0,.45);text-align:center}.auth-logo{font-size:46px;margin-bottom:8px}.auth-box h1{margin-bottom:8px}.auth-box p{opacity:.75;margin-bottom:18px}.auth-field{width:100%;margin:7px 0}.auth-link{background:none;border:0;color:#58d68d;cursor:pointer;margin-top:14px;font-size:14px}.auth-msg{min-height:20px;color:#ff8f8f;font-size:13px;margin-bottom:6px}.admin-box{text-align:left;max-height:85vh;overflow:auto}.admin-box h2,.admin-box p{text-align:center}.admin-user{padding:12px;border:1px solid #333;border-radius:12px;margin:8px 0}.admin-user small{opacity:.7}
 </style>
 <link rel="preload" as="image" href="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png" fetchpriority="high">
 <style>
@@ -1667,9 +1663,52 @@ body.dark .back:hover{
 body.dark .script-step-card{background:linear-gradient(145deg,#171717,#101010);border-color:#292929;box-shadow:0 12px 30px rgba(0,0,0,.28);}
 body.dark .script-step-title{color:#5ee79a;}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+/* =========================
+   AUTENTICAÇÃO BM3
+========================= */
+#authGate{position:fixed;inset:0;z-index:20000;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at top,#171717 0%,#090909 55%,#000 100%);color:#fff;}
+#authGate.hidden{display:none;}
+.auth-box{width:100%;max-width:420px;background:rgba(17,17,17,.96);border:1px solid #292929;border-radius:24px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.auth-logo{width:80px;height:80px;object-fit:contain;border-radius:18px;display:block;margin:0 auto 14px;}
+.auth-title{text-align:center;font-size:28px;font-weight:900;}
+.auth-sub{text-align:center;color:#aaa;font-size:13px;margin:7px 0 20px;}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.auth-tab{border:0;border-radius:12px;padding:11px;background:#242424;color:#aaa;font-weight:800;cursor:pointer;}
+.auth-tab.active{background:#008c45;color:#fff;}
+.auth-field{margin-bottom:12px;}
+.auth-field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;color:#ddd;}
+.auth-field input{width:100%;padding:13px;border-radius:12px;border:1px solid #333;background:#0d0d0d;color:#fff;outline:none;}
+.auth-field input:focus{border-color:#008c45;}
+.auth-btn{width:100%;border:0;border-radius:13px;padding:14px;background:linear-gradient(135deg,#008c45,#00a651);color:#fff;font-weight:900;cursor:pointer;}
+.auth-msg{min-height:18px;margin-top:12px;text-align:center;font-size:12px;color:#ffcf70;}
+.auth-userbar{position:fixed;top:72px;right:14px;z-index:500;display:none;gap:7px;align-items:center;background:#111;color:#fff;padding:8px 10px;border-radius:12px;border:1px solid #292929;font-size:11px;}
+.auth-userbar button{border:0;border-radius:8px;padding:7px 9px;background:#cd212a;color:#fff;font-weight:800;cursor:pointer;}
+body.dark .auth-userbar{display:none;}
+</style>
 </head>
 
 <body>
+<div id="authGate">
+  <div class="auth-box">
+    <img class="auth-logo" src="https://painel-bm3.vercel.app/logo.png" alt="BM3" onerror="this.style.display='none'">
+    <div class="auth-title">🍀 BM3</div>
+    <div class="auth-sub">Entre na sua conta para acessar o painel.</div>
+    <div class="auth-tabs">
+      <button id="tabLogin" class="auth-tab active" type="button" onclick="bm3MostrarAuth('login')">Entrar</button>
+      <button id="tabCadastro" class="auth-tab" type="button" onclick="bm3MostrarAuth('cadastro')">Criar conta</button>
+    </div>
+    <form id="authForm" onsubmit="bm3EnviarAuth(event)">
+      <div class="auth-field"><label>E-mail</label><input id="authEmail" type="email" required autocomplete="email"></div>
+      <div class="auth-field"><label>Senha</label><input id="authPassword" type="password" required minlength="6" autocomplete="current-password"></div>
+      <button id="authSubmit" class="auth-btn" type="submit">Entrar</button>
+      <div id="authMsg" class="auth-msg"></div>
+    </form>
+  </div>
+</div>
+<div id="authUserBar" class="auth-userbar"><span id="authUserEmail"></span><button type="button" onclick="bm3Sair()">Sair</button></div>
 
 <!-- =========================
      LOADING
@@ -1737,30 +1776,6 @@ body.dark .script-step-title{color:#5ee79a;}
 <!-- =========================
      APP
 ========================= -->
-
-
-<div id="authGate" class="auth-gate">
-  <div class="auth-box">
-    <div class="auth-logo">🍀</div>
-    <h1>BOT DO BM3</h1>
-    <p id="authTitle">Entre na sua conta</p>
-    <div id="authMsg" class="auth-msg"></div>
-    <input id="authName" class="input auth-field" placeholder="Nome" style="display:none">
-    <input id="authEmail" class="input auth-field" type="email" placeholder="E-mail" autocomplete="email">
-    <input id="authPassword" class="input auth-field" type="password" placeholder="Senha" autocomplete="current-password">
-    <button id="authSubmit" class="btn btn-primary" onclick="bm3AuthSubmit()">Entrar</button>
-    <button class="auth-link" onclick="bm3ToggleAuth()" id="authToggle">Criar uma conta</button>
-  </div>
-</div>
-
-<div id="adminPanel" class="admin-panel" style="display:none">
-  <div class="auth-box admin-box">
-    <h2>👑 Painel administrativo</h2>
-    <p>Usuários cadastrados</p>
-    <div id="adminUsers">Carregando...</div>
-    <button class="btn" onclick="document.getElementById('adminPanel').style.display='none'">Fechar</button>
-  </div>
-</div>
 
 <div class="app">
 
@@ -3315,11 +3330,6 @@ body:not(.dark) .calculator-card{
 
 </div>
 
-
-<div style="position:fixed;right:14px;bottom:14px;z-index:1000;display:flex;gap:8px;flex-direction:column;align-items:flex-end">
-<button id="bm3AdminBtn" class="btn btn-primary" style="display:none" onclick="bm3OpenAdmin()">👑 Admin</button>
-<button class="btn" onclick="bm3Logout()">🚪 Sair</button>
-</div>
 <div id="toast"></div>
 
 <script>
@@ -3328,23 +3338,12 @@ body:not(.dark) .calculator-card{
    DADOS
 ===================================================== */
 
-let contatos =
-    JSON.parse(localStorage.getItem("bm3_contatos") || "[]");
-
-let favoritos =
-    JSON.parse(localStorage.getItem("bm3_favoritos") || "[]");
-
-let grupos =
-    JSON.parse(localStorage.getItem("bm3_grupos") || "[]");
-
-let celulares =
-    JSON.parse(localStorage.getItem("bm3_celulares") || "[]");
-
-let chips =
-    JSON.parse(localStorage.getItem("bm3_chips") || "[]");
-
-let recentes =
-    JSON.parse(localStorage.getItem("bm3_recentes") || "[]");
+let contatos = [];
+let favoritos = [];
+let grupos = [];
+let celulares = [];
+let chips = [];
+let recentes = [];
 
 let historicoTelas = ["inicio"];
 
@@ -3438,6 +3437,10 @@ function voltar(){
 
 
 function mostrarMenu(){
+
+    if(window.bm3Autenticado === false){
+        return;
+    }
 
     const app =
         document.querySelector(".app");
@@ -6474,6 +6477,10 @@ function escapar(texto){
 
 window.addEventListener("load", function(){
 
+    if(!window.bm3Autenticado){
+        return;
+    }
+
     const loading =
         document.getElementById("loading");
 
@@ -6633,5 +6640,173 @@ function copiarScriptBM3Todos(){
     navigator.clipboard.writeText(partes.join("\n\n")).then(()=>toast("Script BM3 copiado!"));
 }
 </script>
-\n<script>\n/* =====================================================\n   BM3 - AUTENTICAÇÃO / NUVEM\n   Preencha estas duas constantes com os dados PUBLICÁVEIS\n   do seu projeto Supabase. Nunca coloque a secret/service key aqui.\n===================================================== */\nconst BM3_SUPABASE_URL = "COLE_AQUI_SUA_URL_SUPABASE";\nconst BM3_SUPABASE_KEY = "COLE_AQUI_SUA_CHAVE_PUBLICAVEL";\nconst BM3_ADMIN_EMAIL = "COLE_AQUI_SEU_EMAIL_ADMIN";\n\nlet bm3Supabase = null;\nlet bm3AuthCadastro = false;\nlet bm3User = null;\nconst bm3OriginalSetItem = Storage.prototype.setItem;\n\nfunction bm3Configured(){\n  return !BM3_SUPABASE_URL.includes("COLE_AQUI") && !BM3_SUPABASE_KEY.includes("COLE_AQUI");\n}\n\nfunction bm3ShowMsg(msg, ok=false){\n  const el=document.getElementById('authMsg'); if(!el)return;\n  el.textContent=msg; el.style.color=ok?'#72e6a1':'#ff8f8f';\n}\n\nfunction bm3ToggleAuth(){\n  bm3AuthCadastro=!bm3AuthCadastro;\n  document.getElementById('authTitle').textContent=bm3AuthCadastro?'Criar sua conta':'Entre na sua conta';\n  document.getElementById('authName').style.display=bm3AuthCadastro?'block':'none';\n  document.getElementById('authPassword').autocomplete=bm3AuthCadastro?'new-password':'current-password';\n  document.getElementById('authSubmit').textContent=bm3AuthCadastro?'Criar conta':'Entrar';\n  document.getElementById('authToggle').textContent=bm3AuthCadastro?'Já tenho uma conta':'Criar uma conta';\n  bm3ShowMsg('');\n}\n\nasync function bm3AuthSubmit(){\n  if(!bm3Supabase){bm3ShowMsg('A conexão com o banco ainda não foi configurada.');return;}\n  const email=document.getElementById('authEmail').value.trim();\n  const password=document.getElementById('authPassword').value;\n  if(!email || !password){bm3ShowMsg('Preencha e-mail e senha.');return;}\n  if(bm3AuthCadastro){\n    const name=document.getElementById('authName').value.trim();\n    if(!name){bm3ShowMsg('Digite seu nome.');return;}\n    const {data,error}=await bm3Supabase.auth.signUp({email,password,options:{data:{name}}});\n    if(error){bm3ShowMsg(error.message);return;}\n    if(data.session){ await bm3AfterLogin(data.user); }\n    else bm3ShowMsg('Conta criada. Verifique seu e-mail para confirmar o acesso.',true);\n  }else{\n    const {data,error}=await bm3Supabase.auth.signInWithPassword({email,password});\n    if(error){bm3ShowMsg(error.message);return;}\n    await bm3AfterLogin(data.user);\n  }\n}\n\nasync function bm3AfterLogin(user){\n  bm3User=user;\n  document.getElementById('authGate').style.display='none';\n  const app=document.querySelector('.app'); if(app) app.classList.add('ready');\n  await bm3LoadCloudIntoLocal();\n  if(typeof carregarTema==='function') carregarTema();\n  if(typeof mostrarMenu==='function') mostrarMenu();\n  if((user.email||'').toLowerCase()===BM3_ADMIN_EMAIL.toLowerCase()){\n    const adminBtn=document.getElementById('bm3AdminBtn');\n    if(adminBtn) adminBtn.style.display='block';\n  }\n}\n\nasync function bm3LoadCloudIntoLocal(){\n  if(!bm3Supabase || !bm3User) return;\n  const {data,error}=await bm3Supabase.from('user_data').select('data_key,data_value').eq('user_id',bm3User.id);\n  if(error){console.error(error);return;}\n  for(const row of (data||[])){\n    try{ bm3OriginalSetItem.call(localStorage,row.data_key,JSON.stringify(row.data_value)); }catch(e){}\n  }\n}\n\nasync function bm3CloudSet(key,value){\n  if(!bm3Supabase || !bm3User) return;\n  let parsed=value; try{parsed=JSON.parse(value);}catch(e){}\n  const {error}=await bm3Supabase.from('user_data').upsert({user_id:bm3User.id,data_key:key,data_value:parsed},{onConflict:'user_id,data_key'});\n  if(error) console.error('BM3 cloud save:',error);\n}\n\nStorage.prototype.setItem=function(key,value){\n  bm3OriginalSetItem.call(this,key,value);\n  if(this===localStorage && key.startsWith('bm3_') && bm3User) void bm3CloudSet(key,value);\n};\n\nasync function bm3Logout(){\n  if(bm3Supabase) await bm3Supabase.auth.signOut();\n  location.reload();\n}\n\nasync function bm3OpenAdmin(){\n  if(!bm3User || (bm3User.email||'').toLowerCase()!==BM3_ADMIN_EMAIL.toLowerCase()){return;}\n  const panel=document.getElementById('adminPanel'); panel.style.display='flex';\n  const box=document.getElementById('adminUsers'); box.textContent='Carregando...';\n  const {data,error}=await bm3Supabase.from('profiles').select('id,name,email,created_at,role').order('created_at',{ascending:false});\n  if(error){box.textContent='Não foi possível carregar os usuários.';return;}\n  box.innerHTML=(data||[]).map(u=>`<div class="admin-user"><b>${bm3Esc(u.name||'Sem nome')}</b><br>${bm3Esc(u.email||'')}<br><small>${u.role==='admin'?'👑 Administrador':'👤 Usuário'} · ${u.created_at?new Date(u.created_at).toLocaleString('pt-BR'):''}</small></div>`).join('')||'<p>Nenhum usuário.</p>';\n}\nfunction bm3Esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}\n\n(async function bm3BootAuth(){\n  if(!bm3Configured()){\n    document.getElementById('authGate').style.display='flex';\n    bm3ShowMsg('Falta configurar o Supabase no código.');\n    return;\n  }\n  bm3Supabase=window.supabase.createClient(BM3_SUPABASE_URL,BM3_SUPABASE_KEY);\n  const {data}=await bm3Supabase.auth.getSession();\n  if(data.session) await bm3AfterLogin(data.session.user);\n  else document.getElementById('authGate').style.display='flex';\n  bm3Supabase.auth.onAuthStateChange(async (_event,session)=>{\n    if(session && !bm3User) await bm3AfterLogin(session.user);\n  });\n})();\n</script>\n</body>
+
+<script>
+/* =====================================================
+   BM3 — SUPABASE AUTH + DADOS POR USUÁRIO
+===================================================== */
+const BM3_SUPABASE_URL = "https://hgasdxqtqbezrrikceln.supabase.co";
+const BM3_SUPABASE_KEY = "sb_publishable_bci09ic75IgUfvxYxNOdVw_9LfWcsEU";
+const bm3Supabase = window.supabase.createClient(BM3_SUPABASE_URL, BM3_SUPABASE_KEY);
+window.bm3Autenticado = false;
+window.bm3Hydrating = false;
+let bm3Usuario = null;
+let bm3Perfil = null;
+let bm3SyncTimer = null;
+let bm3AuthMode = "login";
+
+function bm3MostrarAuth(mode){
+    bm3AuthMode = mode;
+    document.getElementById("tabLogin").classList.toggle("active",mode === "login");
+    document.getElementById("tabCadastro").classList.toggle("active",mode === "cadastro");
+    document.getElementById("authSubmit").textContent = mode === "login" ? "Entrar" : "Criar conta";
+    document.getElementById("authMsg").textContent = "";
+    document.getElementById("authPassword").autocomplete = mode === "login" ? "current-password" : "new-password";
+}
+
+function bm3Mensagem(msg){
+    const el=document.getElementById("authMsg");
+    if(el) el.textContent=msg || "";
+}
+
+async function bm3EnviarAuth(event){
+    event.preventDefault();
+    const email=document.getElementById("authEmail").value.trim();
+    const password=document.getElementById("authPassword").value;
+    const btn=document.getElementById("authSubmit");
+    btn.disabled=true;
+    bm3Mensagem("Aguarde...");
+    try{
+        if(bm3AuthMode === "login"){
+            const {error}=await bm3Supabase.auth.signInWithPassword({email,password});
+            if(error) throw error;
+            bm3Mensagem("");
+        }else{
+            const {data,error}=await bm3Supabase.auth.signUp({email,password});
+            if(error) throw error;
+            if(data.session){
+                bm3Mensagem("");
+            }else{
+                bm3Mensagem("Conta criada. Verifique seu e-mail para confirmar a conta e depois entre.");
+                bm3MostrarAuth("login");
+            }
+        }
+    }catch(e){
+        bm3Mensagem(e.message || "Não foi possível concluir.");
+    }finally{
+        btn.disabled=false;
+    }
+}
+
+function bm3SetCache(data){
+    const map={
+      bm3_contatos:data.contatos || [],
+      bm3_favoritos:data.favoritos || [],
+      bm3_grupos:data.grupos || [],
+      bm3_celulares:data.celulares || [],
+      bm3_chips:data.chips || [],
+      bm3_recentes:data.recentes || [],
+      bm3_tema:data.tema || "escuro"
+    };
+    window.bm3Hydrating=true;
+    try{
+      Object.entries(map).forEach(([k,v])=>localStorage.setItem(k,typeof v === "string" ? v : JSON.stringify(v)));
+      [1,2,3,4,5].forEach(i=>{
+        const v=data["script_passo_"+i];
+        if(v !== null && v !== undefined) localStorage.setItem("bm3_script_passo_"+i,v);
+        else localStorage.removeItem("bm3_script_passo_"+i);
+      });
+    }finally{window.bm3Hydrating=false;}
+    contatos=map.bm3_contatos; favoritos=map.bm3_favoritos; grupos=map.bm3_grupos; celulares=map.bm3_celulares; chips=map.bm3_chips; recentes=map.bm3_recentes;
+}
+
+async function bm3CarregarDados(){
+    const {data,error}=await bm3Supabase.from("bm3_data").select("*").eq("user_id",bm3Usuario.id).maybeSingle();
+    if(error) throw error;
+    if(data){
+        bm3SetCache(data);
+    }else{
+        bm3SetCache({});
+        await bm3Sincronizar();
+    }
+}
+
+function bm3DadosAtuais(){
+    const script={};
+    for(let i=1;i<=5;i++){
+      const el=document.getElementById("scriptBM3Passo"+i);
+      script["script_passo_"+i]=el ? el.value : (localStorage.getItem("bm3_script_passo_"+i) || null);
+    }
+    const tema=localStorage.getItem("bm3_tema") || (document.body.classList.contains("dark") ? "escuro" : "claro");
+    return {user_id:bm3Usuario.id,contatos,favoritos,grupos,celulares,chips,recentes,...script,tema,updated_at:new Date().toISOString()};
+}
+
+async function bm3Sincronizar(){
+    if(!bm3Usuario || window.bm3Hydrating) return;
+    const payload=bm3DadosAtuais();
+    const {error}=await bm3Supabase.from("bm3_data").upsert(payload,{onConflict:"user_id"});
+    if(error) console.error("BM3 sync:",error);
+}
+
+function bm3ScheduleSync(){
+    clearTimeout(bm3SyncTimer);
+    bm3SyncTimer=setTimeout(()=>bm3Sincronizar(),500);
+}
+
+/* Qualquer alteração feita pelo BM3 aos dados locais também vai para a nuvem. */
+(function(){
+    const originalSet=localStorage.setItem.bind(localStorage);
+    localStorage.setItem=function(key,value){
+        originalSet(key,value);
+        if(window.bm3Autenticado && !window.bm3Hydrating && String(key).startsWith("bm3_")) bm3ScheduleSync();
+    };
+})();
+
+async function bm3Entrou(session){
+    bm3Usuario=session.user;
+    window.bm3Autenticado=true;
+    document.getElementById("authGate").classList.add("hidden");
+    document.getElementById("authUserEmail").textContent=bm3Usuario.email || "";
+    try{
+        const {data:perfil,error:perfilError}=await bm3Supabase.from("profiles").select("id,email,role").eq("id",bm3Usuario.id).single();
+        if(perfilError) throw perfilError;
+        bm3Perfil=perfil;
+        await bm3CarregarDados();
+        carregarTema();
+        prepararBanners();
+        renderContatos(); atualizarResumo(); renderFavoritos(); renderGrupos(); renderCelulares(); renderChips();
+        mostrarMenu();
+    }catch(e){
+        console.error(e);
+        bm3Mensagem("Não foi possível carregar seus dados: "+(e.message||"erro"));
+        await bm3Sair(true);
+    }
+}
+
+async function bm3Sair(silencioso=false){
+    window.bm3Autenticado=false;
+    bm3Usuario=null; bm3Perfil=null;
+    document.querySelector(".app")?.classList.remove("ready");
+    document.getElementById("authUserEmail").textContent="";
+    document.getElementById("authGate").classList.remove("hidden");
+    if(!silencioso) bm3Mensagem("Você saiu da conta.");
+    await bm3Supabase.auth.signOut();
+}
+
+function bm3AplicarPerfilAdmin(){
+    const admin=document.getElementById("menuAdmin");
+    if(admin) admin.style.display=(bm3Perfil && bm3Perfil.role === "admin") ? "block" : "none";
+}
+
+/* Se o usuário já estiver logado, entra direto. */
+bm3Supabase.auth.getSession().then(async ({data})=>{
+    if(data.session) await bm3Entrou(data.session);
+}).catch(console.error);
+
+bm3Supabase.auth.onAuthStateChange(async (event,session)=>{
+    if(session && !window.bm3Autenticado) await bm3Entrou(session);
+    if(!session && window.bm3Autenticado) await bm3Sair(true);
+});
+</script>
+</body>
 </html>
