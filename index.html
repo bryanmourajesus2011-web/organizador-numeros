@@ -2876,7 +2876,7 @@ body:not(.dark) .calculator-card{
     </div>
 
     <div class="screen-subtitle">
-        Roteiro organizado em 5 passos. Edite os campos antes de copiar.
+        Roteiro organizado em 5 passos. Os passos são somente para visualização e cópia.
     </div>
 
     <div class="script-bm3-card-wrap">
@@ -2894,19 +2894,19 @@ body:not(.dark) .calculator-card{
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 3</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo3"></textarea>
+            <div class="script-step-text" id="scriptBM3Passo3"></div>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(3)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 4</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo4"></textarea>
+            <div class="script-step-text" id="scriptBM3Passo4"></div>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(4)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 5</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo5"></textarea>
+            <div class="script-step-text" id="scriptBM3Passo5"></div>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(5)">📋 Copiar passo</button>
         </div>
 
@@ -6562,7 +6562,8 @@ Pode me encaminhar os seguintes dados para a transferência.
 * Nome do banco:
 * Agência:
 * Número da conta:
-* Tipo de conta (corrente ou poupança, se houver):";
+* Tipo de conta (corrente ou poupança, se houver):
+";
 
 const PASSO_5 = "Certo, já encaminhei a documentação para o Tribunal de Justiça!
 
