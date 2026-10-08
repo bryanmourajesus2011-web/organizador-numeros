@@ -1650,6 +1650,19 @@ body.dark .back:hover{
     }
 }
 </style>
+
+<style>
+.script-bm3-card{position:relative;overflow:hidden;}
+.script-bm3-card::after{content:"";position:absolute;inset:auto -35px -55px auto;width:120px;height:120px;border-radius:50%;background:rgba(0,166,81,.08);pointer-events:none;}
+.script-bm3-card-wrap{display:grid;gap:16px;margin-top:18px;}
+.script-step-card{padding:18px;border:1px solid rgba(0,0,0,.08);border-radius:20px;background:linear-gradient(145deg,#fff,#f7f7f7);box-shadow:0 10px 28px rgba(0,0,0,.08);}
+.script-step-title{font-size:14px;font-weight:950;letter-spacing:.8px;color:var(--verde);margin-bottom:10px;}
+.script-step-text{min-height:105px;resize:vertical;line-height:1.55;font-size:14px;}
+.script-copy-btn{margin-top:10px;}
+.script-copy-all{width:100%;min-height:52px;margin-top:2px;font-weight:950;}
+body.dark .script-step-card{background:linear-gradient(145deg,#171717,#101010);border-color:#292929;box-shadow:0 12px 30px rgba(0,0,0,.28);}
+body.dark .script-step-title{color:#5ee79a;}
+</style>
 </head>
 
 <body>
@@ -2831,6 +2844,73 @@ body:not(.dark) .calculator-card{
             </p>
         </div>
 
+        <div
+            class="advisor-card script-bm3-card"
+            onclick="abrirTela('scriptBM3'); carregarScriptBM3();"
+        >
+            <h4>
+                📜 SCRIPT BM3
+            </h4>
+
+            <p>
+                Organize, edite e copie seu roteiro em 5 passos.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     SCRIPT BM3
+========================= -->
+
+<section id="scriptBM3" class="screen">
+
+    <button class="back-btn" onclick="voltar()">
+        ← Voltar
+    </button>
+
+    <div class="screen-title">
+        📜 SCRIPT BM3
+    </div>
+
+    <div class="screen-subtitle">
+        Roteiro organizado em 5 passos. Edite os campos antes de copiar.
+    </div>
+
+    <div class="script-bm3-card-wrap">
+        <div class="script-step-card">
+            <div class="script-step-title">PASSO 1</div>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo1"></textarea>
+            <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(1)">📋 Copiar passo</button>
+        </div>
+
+        <div class="script-step-card">
+            <div class="script-step-title">PASSO 2</div>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo2"></textarea>
+            <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(2)">📋 Copiar passo</button>
+        </div>
+
+        <div class="script-step-card">
+            <div class="script-step-title">PASSO 3</div>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo3"></textarea>
+            <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(3)">📋 Copiar passo</button>
+        </div>
+
+        <div class="script-step-card">
+            <div class="script-step-title">PASSO 4</div>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo4"></textarea>
+            <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(4)">📋 Copiar passo</button>
+        </div>
+
+        <div class="script-step-card">
+            <div class="script-step-title">PASSO 5</div>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo5"></textarea>
+            <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(5)">📋 Copiar passo</button>
+        </div>
+
+        <button class="btn btn-primary script-copy-all" onclick="copiarScriptBM3Todos()">📋 COPIAR SCRIPT COMPLETO</button>
     </div>
 
 </section>
@@ -6455,5 +6535,64 @@ window.addEventListener("load", function(){
 
 </script>
 
+
+<script>
+/* =========================================================
+   SCRIPT BM3 — EDITE OS 5 PASSOS AQUI
+   Troque somente o texto entre as aspas de cada PASSO.
+   ========================================================= */
+const PASSO_1 = "Olá (nome), bom dia! Tudo bem?";
+
+const PASSO_2 = "Trago ótimas noticias sobre o seu processo!🙌";
+
+const PASSO_3 = "O juiz concedeu como procedente ao nosso favor, a decisão judicial foi totalmente favorável a causa.,O valor acima encontra-se em aberto, disponível para liberação ";
+
+const PASSO_4 = "Nosso próximo passo será realizar o cadastro de uma instituição financeira em sua titularidade.
+
+Pode me encaminhar os seguintes dados para a transferência.
+
+* Nome completo:
+* Nome do banco:
+* Agência:
+* Número da conta:
+* Tipo de conta (corrente ou poupança, se houver):";
+
+const PASSO_5 = "Certo, já encaminhei a documentação para o Tribunal de Justiça!
+
+Um representante ira entra em contato para confirmação de dados tira qualquer duvida e efetuar a liberação.
+
+Para manter o contato segura será solicitado a confirmação do seu código de segurança com 4 dígitos: 
+
+Código de segurança:  0187";
+
+const scriptBM3Padrao = [PASSO_1, PASSO_2, PASSO_3, PASSO_4, PASSO_5];
+
+function carregarScriptBM3(){
+    scriptBM3Padrao.forEach((texto,i)=>{
+        const el=document.getElementById("scriptBM3Passo"+(i+1));
+        if(!el) return;
+        const chave="bm3_script_passo_"+(i+1);
+        const salvo=localStorage.getItem(chave);
+        el.value=salvo!==null?salvo:texto;
+        el.oninput=function(){localStorage.setItem(chave,el.value);};
+    });
+}
+
+function copiarScriptBM3(numero){
+    const el=document.getElementById("scriptBM3Passo"+numero);
+    if(!el || !el.value.trim()){toast("Este passo está vazio.");return;}
+    navigator.clipboard.writeText(el.value).then(()=>toast("Passo "+numero+" copiado!"));
+}
+
+function copiarScriptBM3Todos(){
+    const partes=[];
+    for(let i=1;i<=5;i++){
+        const el=document.getElementById("scriptBM3Passo"+i);
+        if(el && el.value.trim()) partes.push("PASSO "+i+"\n"+el.value.trim());
+    }
+    if(!partes.length){toast("O script está vazio.");return;}
+    navigator.clipboard.writeText(partes.join("\n\n")).then(()=>toast("Script BM3 copiado!"));
+}
+</script>
 </body>
 </html>
