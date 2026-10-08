@@ -6475,30 +6475,21 @@ function escapar(texto){
    O MENU SÓ APARECE DEPOIS DO WELCOME.
 ===================================================== */
 
-window.addEventListener("load", function(){
+function bm3IniciarPainel(){
 
-    if(!window.bm3Autenticado){
+    if(!window.bm3Autenticado || window.bm3PainelIniciado){
         return;
     }
 
-    const loading =
-        document.getElementById("loading");
+    window.bm3PainelIniciado = true;
 
-    const welcome =
-        document.getElementById("welcome");
+    const loading = document.getElementById("loading");
+    const welcome = document.getElementById("welcome");
+    const app = document.querySelector(".app");
 
-    const app =
-        document.querySelector(".app");
-
-    /* Garante que o app começa escondido */
     if(app){
         app.classList.remove("ready");
     }
-
-    /*
-       PRIMEIRA ETAPA:
-       mostra o loading por aproximadamente 1,2s
-    */
 
     setTimeout(function(){
 
@@ -6506,47 +6497,23 @@ window.addEventListener("load", function(){
             loading.classList.add("hide");
         }
 
-        /*
-           SEGUNDA ETAPA:
-           espera o loading desaparecer
-           antes de mostrar o welcome
-        */
-
         setTimeout(function(){
 
             if(!welcome){
-
                 mostrarMenu();
-
                 return;
             }
 
             welcome.classList.add("show");
 
-            /*
-               TERCEIRA ETAPA:
-               mantém a tela de boas-vindas
-               antes de liberar o menu
-            */
-
             setTimeout(function(){
 
                 welcome.classList.remove("show");
-
                 welcome.classList.add("hide");
 
-                /*
-                   QUARTA ETAPA:
-                   somente depois da animação
-                   o menu fica disponível
-                */
-
                 setTimeout(function(){
-
                     welcome.style.display = "none";
-
                     mostrarMenu();
-
                 },400);
 
             },900);
@@ -6556,21 +6523,20 @@ window.addEventListener("load", function(){
     },450);
 
     carregarTema();
-
     prepararBanners();
-
     renderContatos();
-
     atualizarResumo();
-
     renderFavoritos();
-
     renderGrupos();
-
     renderCelulares();
-
     renderChips();
+}
 
+/* Se o login já estiver pronto quando a página terminar de carregar. */
+window.addEventListener("load", function(){
+    if(window.bm3Autenticado){
+        bm3IniciarPainel();
+    }
 });
 
 </script>
@@ -6649,6 +6615,7 @@ const BM3_SUPABASE_URL = "https://hgasdxqtqbezrrikceln.supabase.co";
 const BM3_SUPABASE_KEY = "sb_publishable_bci09ic75IgUfvxYxNOdVw_9LfWcsEU";
 const bm3Supabase = window.supabase.createClient(BM3_SUPABASE_URL, BM3_SUPABASE_KEY);
 window.bm3Autenticado = false;
+window.bm3PainelIniciado = false;
 window.bm3Hydrating = false;
 let bm3Usuario = null;
 let bm3Perfil = null;
@@ -6775,7 +6742,7 @@ async function bm3Entrou(session){
         carregarTema();
         prepararBanners();
         renderContatos(); atualizarResumo(); renderFavoritos(); renderGrupos(); renderCelulares(); renderChips();
-        mostrarMenu();
+        bm3IniciarPainel();
     }catch(e){
         console.error(e);
         bm3Mensagem("Não foi possível carregar seus dados: "+(e.message||"erro"));
