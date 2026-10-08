@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#008c45">
 
+<script>
+(function(){
+    try{
+        const tema = localStorage.getItem("bm3_tema");
+        if(tema !== "claro") document.documentElement.classList.add("pre-dark");
+    }catch(e){
+        document.documentElement.classList.add("pre-dark");
+    }
+})();
+</script>
+
 <title>🍀 BOT DO BM3 🍀</title>
 
 <style>
@@ -28,6 +39,12 @@
 
 html{
     scroll-behavior:smooth;
+}
+
+.pre-dark body{
+    background:
+        radial-gradient(circle at top,#171717 0%,#090909 55%,#000000 100%);
+    color:#fff;
 }
 
 body{
@@ -744,6 +761,93 @@ body.dark .empty{
    STATUS
 ========================= */
 
+.status-select{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:8px;
+}
+
+.status-option{
+    position:relative;
+    border:2px solid transparent;
+    border-radius:14px;
+    padding:13px 8px;
+    font-weight:900;
+    font-size:13px;
+    cursor:pointer;
+    opacity:.72;
+    transform:scale(.98);
+    transition:all .18s ease;
+    box-shadow:0 2px 7px rgba(0,0,0,.08);
+}
+
+.status-option:hover{
+    opacity:1;
+    transform:translateY(-1px);
+}
+
+.status-option.active{
+    opacity:1;
+    transform:scale(1);
+    box-shadow:0 0 0 3px rgba(0,0,0,.10), 0 5px 14px rgba(0,0,0,.14);
+}
+
+.status-option.active::after{
+    content:"✓ SELECIONADO";
+    position:absolute;
+    right:7px;
+    top:-9px;
+    padding:3px 6px;
+    border-radius:8px;
+    background:#111;
+    color:#fff;
+    font-size:8px;
+    letter-spacing:.3px;
+}
+
+.status-option.status-on{
+    background:rgba(0,140,69,.12);
+    color:#087a40;
+    border-color:rgba(0,140,69,.28);
+}
+
+.status-option.status-on.active{
+    border-color:#008c45;
+    background:rgba(0,140,69,.22);
+}
+
+.status-option.status-analysis{
+    background:rgba(255,180,0,.13);
+    color:#9a6500;
+    border-color:rgba(255,180,0,.30);
+}
+
+.status-option.status-analysis.active{
+    border-color:#d99400;
+    background:rgba(255,180,0,.24);
+}
+
+.status-option.status-off{
+    background:rgba(205,33,42,.12);
+    color:#b51f29;
+    border-color:rgba(205,33,42,.28);
+}
+
+.status-option.status-off.active{
+    border-color:#cd212a;
+    background:rgba(205,33,42,.22);
+}
+
+body.dark .status-option.active::after{
+    background:#fff;
+    color:#111;
+}
+
+@media(max-width:520px){
+    .status-select{grid-template-columns:1fr;}
+}
+
 .status{
     display:inline-flex;
     padding:5px 9px;
@@ -966,6 +1070,205 @@ body.dark .advisor-card:hover p{
     color:#eee;
 }
 
+
+/* =========================
+   BANNERS DAS TELAS
+========================= */
+
+.universal-banner{
+    position:relative;
+    overflow:hidden;
+    margin:4px 0 20px;
+    padding:21px 22px;
+    min-height:108px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-radius:24px;
+    background:
+        linear-gradient(135deg,#080808 0%,#171717 55%,#087a40 100%);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 16px 38px rgba(0,0,0,.22);
+}
+
+.universal-banner::before{
+    content:"";
+    position:absolute;
+    width:190px;
+    height:190px;
+    right:-65px;
+    top:-90px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+}
+
+.universal-banner::after{
+    content:"✦";
+    position:absolute;
+    right:22px;
+    bottom:7px;
+    font-size:58px;
+    line-height:1;
+    color:rgba(255,255,255,.10);
+}
+
+.universal-banner .banner-title{
+    position:relative;
+    z-index:1;
+    margin:0 65px 6px 0;
+    font-size:24px;
+    line-height:1.1;
+    font-weight:950;
+    letter-spacing:-.4px;
+}
+
+.universal-banner .banner-subtitle{
+    position:relative;
+    z-index:1;
+    margin:0 55px 0 0;
+    color:rgba(255,255,255,.70);
+    font-size:12px;
+    line-height:1.45;
+}
+
+.universal-banner .banner-line{
+    position:absolute;
+    left:22px;
+    bottom:0;
+    width:64px;
+    height:3px;
+    border-radius:99px 99px 0 0;
+    background:linear-gradient(90deg,#00a651,#fff,#cd212a);
+}
+
+body:not(.dark) .universal-banner{
+    box-shadow:0 14px 34px rgba(0,0,0,.15);
+}
+
+body.dark .universal-banner{
+    border-color:rgba(255,255,255,.10);
+}
+
+@media(max-width:480px){
+    .universal-banner{
+        padding:19px 18px;
+        min-height:100px;
+        border-radius:21px;
+    }
+    .universal-banner .banner-title{
+        font-size:21px;
+        margin-right:45px;
+    }
+}
+
+/* =========================
+   CELULARES PREMIUM
+========================= */
+
+.cellular-hero{
+    position:relative;
+    overflow:hidden;
+    padding:22px;
+    margin:16px 0;
+    border-radius:24px;
+    background:linear-gradient(135deg,#101010,#1d1d1d 58%,#087a40);
+    color:#fff;
+    box-shadow:0 16px 38px rgba(0,0,0,.18);
+}
+.cellular-hero::before{
+    content:"";
+    position:absolute;
+    width:150px;height:150px;
+    right:-45px;top:-55px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+}
+.cellular-hero::after{
+    content:"📱";
+    position:absolute;
+    right:20px;bottom:12px;
+    font-size:58px;
+    opacity:.13;
+}
+.cellular-hero h3{margin:0 0 6px;font-size:20px;position:relative;z-index:1}
+.cellular-hero p{margin:0;color:rgba(255,255,255,.72);font-size:12px;position:relative;z-index:1}
+.cellular-toolbar{display:flex;gap:10px;align-items:center;margin-bottom:14px}
+.cellular-count{
+    margin-left:auto;
+    padding:9px 12px;
+    border-radius:12px;
+    background:var(--cinza);
+    color:var(--texto);
+    font-size:11px;font-weight:900;
+}
+.cellular-list{display:grid;gap:12px}
+.cellular-card{
+    position:relative;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:54px 1fr auto;
+    gap:13px;
+    align-items:center;
+    padding:15px;
+    border-radius:20px;
+    background:var(--cinza);
+    border:1px solid rgba(0,0,0,.06);
+    box-shadow:0 7px 20px rgba(0,0,0,.07);
+    transition:.2s ease;
+}
+.cellular-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.11)}
+body.dark .cellular-card{border-color:#292929;background:#121212}
+.cellular-avatar{
+    width:54px;height:54px;border-radius:17px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:27px;color:#fff;
+    background:linear-gradient(145deg,#111,#087a40);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+}
+.cellular-main{min-width:0}
+.cellular-name{font-size:15px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cellular-number{margin-top:4px;font-size:12px;color:#777;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.dark .cellular-number{color:#aaa}
+.cellular-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cellular-badge{padding:5px 8px;border-radius:999px;font-size:9px;font-weight:900;background:rgba(0,0,0,.06);color:var(--texto)}
+.cellular-badge.green{background:rgba(0,140,69,.13);color:#087a40}
+.cellular-badge.red{background:rgba(205,33,42,.13);color:#b51f29}
+.cellular-actions{display:flex;gap:7px}
+.cellular-action{width:38px;height:38px;border:0;border-radius:12px;cursor:pointer;font-size:15px;background:#fff;transition:.18s}
+.cellular-action:hover{transform:translateY(-2px)}
+body.dark .cellular-action{background:#222;color:#fff}
+.cellular-empty{
+    padding:34px 18px;text-align:center;border-radius:20px;
+    border:1px dashed #cfcfcf;background:var(--cinza);color:#777;
+}
+.cellular-empty-icon{font-size:42px;margin-bottom:8px}
+.cellular-empty strong{display:block;color:var(--texto);font-size:15px;margin-bottom:4px}
+.cellular-empty span{font-size:12px}
+body.dark .cellular-empty{border-color:#333;color:#aaa}
+
+.cellular-form-card{padding:20px;border-radius:24px}
+.cellular-form-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.cellular-form-icon{width:48px;height:48px;border-radius:15px;background:linear-gradient(145deg,#111,#087a40);display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff}
+.cellular-form-head strong{display:block;font-size:16px}.cellular-form-head span{display:block;color:#777;font-size:11px;margin-top:3px}
+body.dark .cellular-form-head span{color:#aaa}
+.cellular-field{margin-bottom:16px}
+.cellular-field label{display:block;font-size:10px;font-weight:950;letter-spacing:.6px;margin-bottom:7px;color:#666}
+body.dark .cellular-field label{color:#aaa}
+.cellular-field input{box-sizing:border-box;width:100%;border:1px solid var(--cinza2);border-radius:14px;padding:14px;background:var(--cinza);color:var(--texto);outline:none;font-size:14px;transition:.18s}
+.cellular-field input:focus{border-color:#087a40;box-shadow:0 0 0 3px rgba(0,140,69,.10)}
+.cellular-field .auto-region{margin-top:7px}
+.cellular-section-label{font-size:10px;font-weight:950;letter-spacing:.6px;color:#666;margin:4px 0 8px}
+body.dark .cellular-section-label{color:#aaa}
+.cellular-save{width:100%;margin-top:4px}
+
+@media(max-width:560px){
+    .cellular-card{grid-template-columns:46px 1fr;}
+    .cellular-avatar{width:46px;height:46px;font-size:23px}
+    .cellular-actions{grid-column:2;}
+    .cellular-toolbar{align-items:stretch;flex-direction:column}.cellular-count{margin-left:0;text-align:center}
+}
+
 /* =========================
    CHIP / CELULAR
 ========================= */
@@ -1070,6 +1373,87 @@ body.dark .theme-desc{
 }
 
 /* =========================
+   CHIPS NOVO CADASTRO
+========================= */
+
+.chips-stats{
+    grid-template-columns:repeat(3,1fr);
+}
+
+.stat-on .stat-number{
+    color:var(--verde);
+}
+
+.stat-off .stat-number{
+    color:var(--vermelho);
+}
+
+.stat-total .stat-number{
+    color:var(--texto);
+}
+
+.operator-choice,
+.recharge-choice{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.operator-btn,
+.recharge-btn{
+    border:2px solid var(--cinza2);
+    border-radius:14px;
+    padding:13px 10px;
+    background:var(--cinza);
+    color:var(--texto);
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.operator-btn:hover,
+.recharge-btn:hover{
+    transform:translateY(-2px);
+}
+
+.operator-btn.active{
+    border-color:var(--verde);
+    background:rgba(0,140,69,.12);
+    color:var(--verde);
+}
+
+.recharge-btn.active{
+    border-color:var(--verde);
+    background:rgba(0,140,69,.12);
+    color:var(--verde);
+}
+
+.recharge-btn.inactive.active{
+    border-color:var(--vermelho);
+    background:rgba(205,33,42,.12);
+    color:var(--vermelho);
+}
+
+.auto-region{
+    margin-top:7px;
+    padding:9px 11px;
+    border-radius:11px;
+    background:var(--cinza);
+    color:#777;
+    font-size:12px;
+}
+
+body.dark .auto-region{
+    color:#aaa;
+}
+
+@media(max-width:480px){
+    .chips-stats{
+        grid-template-columns:1fr;
+    }
+}
+
+/* =========================
    RESPONSIVO
 ========================= */
 
@@ -1097,6 +1481,11 @@ body.dark .theme-desc{
     }
 }
 </style>
+<link rel="preload" as="image" href="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png" fetchpriority="high">
+<style>
+.loading-logo,.logo-mini{background:linear-gradient(135deg,#008c45,#ffffff,#cd212a);object-fit:contain;}
+.loading-logo.logo-fallback,.logo-mini.logo-fallback{padding:8px;}
+</style>
 </head>
 
 <body>
@@ -1113,6 +1502,9 @@ body.dark .theme-desc{
             class="loading-logo"
             src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
             alt="BOT DO BM3"
+            fetchpriority="high"
+            decoding="async"
+            onerror="this.classList.add('logo-fallback');this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='40' fill='%23090909'/%3E%3Ccircle cx='100' cy='100' r='72' fill='none' stroke='%23008c45' stroke-width='10'/%3E%3Ctext x='100' y='120' text-anchor='middle' font-family='Arial' font-size='72' font-weight='900' fill='white'%3EBM3%3C/text%3E%3C/svg%3E';this.onerror=null;"
         >
 
         <div class="loading-title">
@@ -1175,6 +1567,9 @@ body.dark .theme-desc{
             class="logo-mini"
             src="ChatGPT%20Image%204%20de%20out.%20de%202026%2C%2004_43_09.png"
             alt="BM3"
+            fetchpriority="high"
+            decoding="async"
+            onerror="this.classList.add('logo-fallback');this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='40' fill='%23090909'/%3E%3Ccircle cx='100' cy='100' r='72' fill='none' stroke='%23008c45' stroke-width='10'/%3E%3Ctext x='100' y='120' text-anchor='middle' font-family='Arial' font-size='72' font-weight='900' fill='white'%3EBM3%3C/text%3E%3C/svg%3E';this.onerror=null;"
         >
 
         <div>
@@ -1423,6 +1818,52 @@ body.dark .theme-desc{
      CALCULADORA
 ========================= -->
 
+
+<style>
+/* =====================================================
+   CALCULADORA BM3 — VISUAL PREMIUM
+===================================================== */
+.calculator-card{
+    margin-top:18px;
+    padding:18px;
+    border:1px solid rgba(128,128,128,.20);
+    border-radius:24px;
+    background:rgba(255,255,255,.035);
+    box-shadow:0 18px 45px rgba(0,0,0,.14);
+}
+body:not(.dark) .calculator-card{
+    background:rgba(255,255,255,.88);
+    border-color:rgba(0,0,0,.08);
+}
+.calculator-help{
+    border:1px solid rgba(0,140,69,.22);
+    border-radius:20px;
+    padding:16px;
+    background:linear-gradient(135deg,rgba(0,140,69,.12),rgba(0,166,81,.035));
+    margin-bottom:18px;
+}
+.calculator-help-title{font-weight:900;color:var(--verde2);font-size:13px;margin-bottom:12px;letter-spacing:.4px}
+.calculator-help-row{display:flex;gap:11px;align-items:flex-start;margin-top:11px;color:var(--texto);font-size:12px;line-height:1.55}
+.calculator-help-icon{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:11px;background:rgba(0,140,69,.12);font-size:18px}
+.calculator-help b{color:var(--verde2)}
+.calculator-example{margin-top:15px;padding:14px;border-radius:17px;background:rgba(128,128,128,.07);border:1px solid rgba(128,128,128,.14);font-size:12px;line-height:1.65;color:var(--texto)}
+.calculator-example-title{font-weight:900;color:var(--verde2);margin-bottom:7px}
+.calculator-note{margin-top:13px;padding:11px 13px;border-left:3px solid var(--verde);background:rgba(0,140,69,.07);border-radius:10px;font-size:11px;line-height:1.5;color:var(--texto)}
+.calc-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:8px}
+.calc-option{border:1px solid rgba(128,128,128,.22);background:rgba(128,128,128,.055);color:var(--texto);border-radius:17px;padding:14px 8px;min-height:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;font-family:inherit;cursor:pointer;transition:.18s ease}
+.calc-option span{font-size:23px}.calc-option b{font-size:11px;text-align:center;line-height:1.25}.calc-option:active{transform:scale(.97)}
+.calc-option.selected{background:linear-gradient(135deg,rgba(0,140,69,.22),rgba(0,166,81,.07));border-color:var(--verde2);box-shadow:0 0 0 2px rgba(0,140,69,.11),0 8px 22px rgba(0,140,69,.10);transform:translateY(-1px)}
+.calc-fields-title{margin:20px 0 10px;color:var(--verde2);font-size:13px;font-weight:950}
+.calc-description{background:rgba(128,128,128,.055);border:1px solid rgba(128,128,128,.16);border-radius:16px;padding:13px;margin-bottom:15px;font-size:12px;color:var(--texto);line-height:1.55}
+.calc-description b{color:var(--verde2)}
+.calculator-card .field{margin-bottom:14px}.calculator-card .field label{display:block;margin-bottom:7px;font-size:11px;font-weight:900;letter-spacing:.25px}
+.calculator-card .field input,.calculator-card .field select{width:100%;padding:13px 14px;border-radius:13px;border:1px solid rgba(128,128,128,.22);background:rgba(128,128,128,.06);color:var(--texto);outline:none;font-size:14px}
+.calculator-card .field input:focus,.calculator-card .field select:focus{border-color:var(--verde2);box-shadow:0 0 0 3px rgba(0,166,81,.10)}
+.calc-generating{display:none;text-align:center;padding:25px 10px;color:var(--verde2);font-weight:950}.calc-generating.show{display:block}
+.calc-result{margin-top:15px}.calc-bot{background:rgba(128,128,128,.055);border:1px solid rgba(128,128,128,.18);border-radius:20px;padding:18px;line-height:1.75;animation:entrada .45s ease both}.calc-bot-header{font-weight:950;color:var(--verde2);margin-bottom:12px;font-size:15px}.calc-divider{height:1px;background:rgba(128,128,128,.18);margin:13px 0}.calc-summary{font-size:17px;font-weight:950;color:var(--verde2);margin-top:7px}
+@media(max-width:380px){.calc-option{min-height:76px;padding:11px 5px}.calc-option b{font-size:10px}.calculator-card{padding:14px}}
+</style>
+
 <section id="calculadora" class="screen">
 
     <button class="back-btn" onclick="voltar()">
@@ -1434,46 +1875,356 @@ body.dark .theme-desc{
     </div>
 
     <div class="screen-subtitle">
-        Escolha o tipo de cálculo.
+        Escolha o tipo de cálculo e preencha os valores.
     </div>
 
-    <div class="action-grid">
 
-        <button class="action-btn" onclick="calcular('porcentagem')">
-            % Porcentagem
+    <div class="calculator-card">
+
+
+        <!-- COMO FUNCIONA -->
+
+        <div class="calculator-help">
+
+            <div class="calculator-help-title">
+                📖 COMO FUNCIONA
+            </div>
+
+
+            <div class="calculator-help-row">
+
+                <div class="calculator-help-icon">
+                    💰
+                </div>
+
+                <div>
+
+                    Você pode escrever valores de várias formas:
+
+                    <br>
+
+                    <b>20k</b> = R$ 20.000
+
+                    <br>
+
+                    <b>20.000</b> = R$ 20.000
+
+                    <br>
+
+                    <b>17,699</b> = R$ 17.699
+
+                    <br>
+
+                    <b>17,5</b> = R$ 17,50
+
+                    <br>
+
+                    <b>20,50</b> = R$ 20,50
+
+                </div>
+
+            </div>
+
+
+            <div class="calculator-help-row">
+
+                <div class="calculator-help-icon">
+                    📉
+                </div>
+
+                <div>
+
+                    Porcentagens podem ser digitadas
+                    normalmente.
+
+                    <br>
+
+                    Exemplo:
+
+                    <b>25</b> = 25%
+
+                </div>
+
+            </div>
+
+
+            <div class="calculator-help-row">
+
+                <div class="calculator-help-icon">
+                    👥
+                </div>
+
+                <div>
+
+                    Na divisão, informe entre quantas
+                    pessoas o valor será dividido.
+
+                </div>
+
+            </div>
+
+
+            <div class="calculator-example">
+
+                <div class="calculator-example-title">
+                    🍀 EXEMPLO
+                </div>
+
+                <div>
+
+                    R$ 20.000 com desconto de 25%
+                    dividido entre 3 pessoas:
+
+                </div>
+
+                <br>
+
+                <b>R$ 20.000</b>
+                → valor informado
+
+                <br>
+
+                <b>25%</b>
+                → desconto
+
+                <br>
+
+                <b>R$ 15.000</b>
+                → valor restante
+
+                <br>
+
+                <b>3 pessoas</b>
+                → divisão
+
+                <br>
+
+                <b>R$ 5.000</b>
+                → para cada pessoa
+
+            </div>
+
+
+            <div class="calculator-note">
+
+                💡 Escolha primeiro o tipo de cálculo.
+                Os campos necessários aparecerão
+                automaticamente.
+
+            </div>
+
+        </div>
+
+
+        <!-- TIPO DE CÁLCULO -->
+
+        <div class="field">
+
+            <label>
+                🧮 TIPO DE CÁLCULO
+            </label>
+
+
+            <div class="calc-options">
+
+
+                <button
+                    type="button"
+                    class="calc-option selected"
+                    data-calc="porcentagemDivisao"
+                    onclick="selecionarCalculo('porcentagemDivisao')"
+                >
+
+                    <span>💰</span>
+
+                    <b>
+                        Porcentagem + divisão
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="calc-option"
+                    data-calc="adicionarPorcentagem"
+                    onclick="selecionarCalculo('adicionarPorcentagem')"
+                >
+
+                    <span>📈</span>
+
+                    <b>
+                        Adicionar %
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="calc-option"
+                    data-calc="descontarPorcentagem"
+                    onclick="selecionarCalculo('descontarPorcentagem')"
+                >
+
+                    <span>📉</span>
+
+                    <b>
+                        Descontar %
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="calc-option"
+                    data-calc="dividir"
+                    onclick="selecionarCalculo('dividir')"
+                >
+
+                    <span>👥</span>
+
+                    <b>
+                        Dividir valor
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="calc-option"
+                    data-calc="multiplicar"
+                    onclick="selecionarCalculo('multiplicar')"
+                >
+
+                    <span>✖️</span>
+
+                    <b>
+                        Multiplicar
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="calc-option"
+                    data-calc="somar"
+                    onclick="selecionarCalculo('somar')"
+                >
+
+                    <span>➕</span>
+
+                    <b>
+                        Somar
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="calc-option"
+                    data-calc="subtrair"
+                    onclick="selecionarCalculo('subtrair')"
+                >
+
+                    <span>➖</span>
+
+                    <b>
+                        Subtrair
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="calc-option"
+                    data-calc="porcentagem"
+                    onclick="selecionarCalculo('porcentagem')"
+                >
+
+                    <span>📊</span>
+
+                    <b>
+                        Descobrir %
+                    </b>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="calc-option"
+                    data-calc="regra3"
+                    onclick="selecionarCalculo('regra3')"
+                >
+
+                    <span>🔢</span>
+
+                    <b>
+                        Regra de três
+                    </b>
+
+                </button>
+
+
+            </div>
+
+
+            <input
+                type="hidden"
+                id="calcTipo"
+                value="porcentagemDivisao"
+            >
+
+        </div>
+
+
+        <!-- CAMPOS -->
+
+        <div id="calcCampos"></div>
+
+
+        <!-- CALCULAR -->
+
+        <button
+            class="primary"
+            type="button"
+            onclick="calcularBM3()"
+        >
+
+            🧮 CALCULAR
+
         </button>
 
-        <button class="action-btn" onclick="calcular('adicionar')">
-            ➕ Adicionar %
-        </button>
 
-        <button class="action-btn" onclick="calcular('descontar')">
-            ➖ Descontar %
-        </button>
+        <!-- GERANDO -->
 
-        <button class="action-btn" onclick="calcular('dividir')">
-            ➗ Dividir
-        </button>
+        <div
+            id="calcGerando"
+            class="calc-generating"
+        >
 
-        <button class="action-btn" onclick="calcular('multiplicar')">
-            ✖️ Multiplicar
-        </button>
+            <div class="mini-loader"></div>
 
-        <button class="action-btn" onclick="calcular('somar')">
-            ➕ Somar
-        </button>
+            🤖 Gerando...
 
-        <button class="action-btn" onclick="calcular('subtrair')">
-            ➖ Subtrair
-        </button>
+        </div>
 
-        <button class="action-btn" onclick="calcular('regra')">
-            📐 Regra de 3
-        </button>
+
+        <!-- RESULTADO -->
+
+        <div
+            id="calcResultado"
+            class="calc-result"
+        ></div>
+
 
     </div>
-
-    <div id="calcArea" style="margin-top:18px;"></div>
 
 </section>
 
@@ -1483,36 +2234,23 @@ body.dark .theme-desc{
 
 <section id="contatos" class="screen">
 
-    <button class="back-btn" onclick="voltar()">
-        ← Voltar
-    </button>
+    <button class="back-btn" onclick="voltar()">← Voltar</button>
 
-    <div class="screen-title">
-        👥 Contatos
-    </div>
+    <div class="screen-title">👥 Contatos</div>
+    <div class="screen-subtitle">Organize seus números sem precisar informar grupo.</div>
 
-    <div class="screen-subtitle">
-        Organize seus números por DDD.
-    </div>
-
-    <button
-        class="btn btn-primary"
-        onclick="abrirTela('novoContato')"
-        style="margin-bottom:15px;"
-    >
-        ＋ Novo contato
+    <button class="btn btn-primary" onclick="abrirNovoContato()" style="margin-bottom:15px;">
+        ➕ NOVO CONTATO
     </button>
 
     <div class="search-box">
-
         <input
             class="input"
-            id="buscaContato"
+            id="buscarContato"
             type="search"
-            placeholder="🔎 Buscar contato ou número..."
+            placeholder="🔎 Buscar nome ou número..."
             oninput="renderContatos()"
         >
-
     </div>
 
     <div id="listaContatos"></div>
@@ -1525,109 +2263,64 @@ body.dark .theme-desc{
 
 <section id="novoContato" class="screen">
 
-    <button class="back-btn" onclick="voltar()">
-        ← Voltar
-    </button>
+    <button class="back-btn" onclick="voltar()">← Voltar</button>
 
-    <div class="screen-title">
-        ➕ Novo contato
-    </div>
+    <div class="screen-title" id="tituloContato">👤 Novo contato</div>
+    <div class="screen-subtitle">Preencha somente o necessário.</div>
 
-    <div class="screen-subtitle">
-        Cadastre um número.
-    </div>
+    <input type="hidden" id="contatoIndex" value="-1">
 
     <div class="card">
 
         <div class="form-group">
-
-            <label>
-                Nome
-            </label>
-
-            <input
-                class="input"
-                id="contatoNome"
-                placeholder="Nome do contato"
-            >
-
+            <label>Nome</label>
+            <input class="input" id="contatoNome" type="text" placeholder="Nome do contato">
         </div>
 
         <div class="form-group">
-
-            <label>
-                DDD
-            </label>
-
+            <label>DDD</label>
             <input
                 class="input"
                 id="contatoDDD"
-                maxlength="2"
+                type="tel"
                 inputmode="numeric"
+                maxlength="2"
                 placeholder="13"
+                oninput="somenteNumeros(this);detectarRegiaoContato()"
             >
-
+            <div id="regiaoContato" class="auto-region">📍 Digite o DDD para identificar a região</div>
         </div>
 
         <div class="form-group">
-
-            <label>
-                Número
-            </label>
-
+            <label>Telefone</label>
             <input
                 class="input"
                 id="contatoNumero"
+                type="tel"
                 inputmode="numeric"
-                placeholder="99999-9999"
+                placeholder="Somente números"
+                oninput="somenteNumeros(this)"
             >
-
         </div>
 
         <div class="form-group">
+            <label>Status</label>
 
-            <label>
-                Status
-            </label>
+            <div class="status-select">
+                <button type="button" id="statusON" class="status-option status-on" onclick="selecionarStatus('on')">🟢 ON</button>
+                <button type="button" id="statusANALISE" class="status-option status-analysis" onclick="selecionarStatus('analysis')">🟡 ANÁLISE</button>
+                <button type="button" id="statusOFF" class="status-option status-off" onclick="selecionarStatus('off')">🔴 OFF</button>
+            </div>
 
-            <select class="select" id="contatoStatus">
-
-                <option value="on">
-                    ✅ ZAP ON
-                </option>
-
-                <option value="analysis">
-                    ⚠️ EM ANÁLISE
-                </option>
-
-                <option value="off">
-                    ❌ ZAP CAIU
-                </option>
-
-            </select>
-
+            <input type="hidden" id="contatoStatus" value="on">
         </div>
 
         <div class="form-group">
-
-            <label>
-                Observação
-            </label>
-
-            <textarea
-                class="textarea"
-                id="contatoObs"
-                placeholder="Observações..."
-            ></textarea>
-
+            <label>Observação</label>
+            <textarea class="textarea" id="contatoObs" placeholder="Opcional"></textarea>
         </div>
 
-        <button
-            class="btn btn-primary"
-            onclick="salvarContato()"
-        >
-            Salvar contato
-        </button>
+        <button class="btn btn-primary" onclick="salvarContato()">💾 SALVAR CONTATO</button>
 
     </div>
 
@@ -1725,58 +2418,80 @@ body.dark .theme-desc{
 
 <section id="celulares" class="screen">
 
-    <button class="back-btn" onclick="voltar()">
-        ← Voltar
-    </button>
+    <button class="back" onclick="voltar()">← Voltar</button>
 
-    <div class="screen-title">
-        📱 Celulares
+    <div class="page-title">📱 Celulares</div>
+    <div class="page-sub">Organize aparelhos, números, operadora e recarga em um só lugar.</div>
+
+    <div class="cellular-hero">
+        <h3>Central de aparelhos</h3>
+        <p>Tenha uma visão rápida de cada celular cadastrado e dos números vinculados.</p>
     </div>
 
-    <div class="screen-subtitle">
-        Organize seus aparelhos.
+    <div class="cellular-toolbar">
+        <button class="primary" onclick="abrirNovoCelular()">➕ ADICIONAR CELULAR</button>
+        <div id="contadorCelulares" class="cellular-count">0 aparelhos</div>
     </div>
 
-    <div class="card">
+    <div id="listaCelulares" class="cellular-list"></div>
 
-        <div class="form-group">
+</section>
 
-            <label>
-                Nome do aparelho
-            </label>
+<!-- NOVO CELULAR -->
 
-            <input
-                class="input"
-                id="celularNome"
-                placeholder="Ex.: iPhone 14 Pro"
-            >
+<section id="novoCelular" class="screen">
 
+    <button class="back" onclick="abrirTela('celulares')">← Voltar</button>
+
+    <div class="page-title">📱 Celular</div>
+    <div class="page-sub">Cadastre o aparelho, os números e as informações da linha.</div>
+
+    <input type="hidden" id="celularIndex" value="-1">
+
+    <div class="card cellular-form-card">
+        <div class="cellular-form-head">
+            <div class="cellular-form-icon">📱</div>
+            <div><strong>Dados do aparelho</strong><span>Preencha as informações abaixo para identificar esta linha.</span></div>
         </div>
 
-        <div class="form-group">
-
-            <label>
-                Número / identificação
-            </label>
-
-            <input
-                class="input"
-                id="celularNumero"
-                placeholder="Número ou identificação"
-            >
-
+        <div class="cellular-field">
+            <label>NOME DO CELULAR</label>
+            <input id="celularNome" type="text" placeholder="Ex.: iPhone 14 Pro">
         </div>
 
-        <button
-            class="btn btn-primary"
-            onclick="salvarCelular()"
-        >
-            Adicionar celular
-        </button>
+        <div class="cellular-field">
+            <label>📞 NÚMERO PRINCIPAL</label>
+            <input id="celularNumero" type="tel" inputmode="numeric" placeholder="Somente números" oninput="somenteNumeros(this)">
+        </div>
 
+        <div class="cellular-field">
+            <label>💬 NÚMERO DO WHATSAPP</label>
+            <input id="celularWhatsapp" type="tel" inputmode="numeric" placeholder="Somente números" oninput="somenteNumeros(this)">
+        </div>
+
+        <div class="cellular-field">
+            <label>DDD / REGIÃO</label>
+            <input id="celularDDD" type="tel" inputmode="numeric" maxlength="2" placeholder="Ex.: 13" oninput="somenteNumeros(this);detectarRegiaoCelular()">
+            <div id="regiaoCelular" class="auto-region">📍 Digite o DDD para identificar a região</div>
+        </div>
+
+        <div class="cellular-section-label">OPERADORA</div>
+        <div class="operator-choice">
+            <button id="celOpPagueMenos" class="operator-btn" onclick="selecionarOperadoraCelular('PAGUE MENOS')">🟢 PAGUE MENOS</button>
+            <button id="celOpVivo" class="operator-btn" onclick="selecionarOperadoraCelular('VIVO')">🟣 VIVO</button>
+        </div>
+        <input type="hidden" id="celularOperadora" value="PAGUE MENOS">
+
+        <div style="height:16px"></div>
+        <div class="cellular-section-label">STATUS DA RECARGA</div>
+        <div class="recharge-choice">
+            <button id="celRecSim" class="recharge-btn" onclick="selecionarRecargaCelular(true)">🟢 COM RECARGA</button>
+            <button id="celRecNao" class="recharge-btn inactive" onclick="selecionarRecargaCelular(false)">🔴 SEM RECARGA</button>
+        </div>
+        <input type="hidden" id="celularRecarga" value="true">
+
+        <button class="primary cellular-save" onclick="salvarCelular()">💾 SALVAR CELULAR</button>
     </div>
-
-    <div id="listaCelulares"></div>
 
 </section>
 
@@ -1786,97 +2501,183 @@ body.dark .theme-desc{
 
 <section id="chips" class="screen">
 
-    <button class="back-btn" onclick="voltar()">
+    <button class="back-btn" onclick="voltar()">← Voltar</button>
+
+    <div class="screen-title">💳 Chips</div>
+    <div class="screen-subtitle">Controle de chips e recargas.</div>
+
+    <div class="stats-grid chips-stats">
+
+        <div class="stat stat-on">
+            <div class="stat-number" id="chipsComRecarga">0</div>
+            <div class="stat-label">🟢 COM RECARGA</div>
+        </div>
+
+        <div class="stat stat-off">
+            <div class="stat-number" id="chipsSemRecarga">0</div>
+            <div class="stat-label">🔴 SEM RECARGA</div>
+        </div>
+
+        <div class="stat stat-total">
+            <div class="stat-number" id="chipsTotal">0</div>
+            <div class="stat-label">📱 CHIPS CADASTRADOS</div>
+        </div>
+
+    </div>
+
+    <div style="height:14px"></div>
+
+    <button
+        type="button"
+        class="btn btn-primary"
+        onclick="abrirNovoChip()"
+    >
+        ➕ ADICIONAR CHIP
+    </button>
+
+    <div id="listaChips" style="margin-top:14px;"></div>
+
+</section>
+
+
+<!-- =========================
+     NOVO CHIP
+========================= -->
+
+<section id="novoChip" class="screen">
+
+    <button
+        type="button"
+        class="back-btn"
+        onclick="voltar()"
+    >
         ← Voltar
     </button>
 
-    <div class="screen-title">
-        📶 4G / Chips
+    <div class="screen-title">➕ Adicionar chip</div>
+    <div class="screen-subtitle">
+        Cadastre o chip e controle sua recarga.
     </div>
 
-    <div class="screen-subtitle">
-        Organize suas linhas e operadoras.
-    </div>
+    <input type="hidden" id="chipIndex" value="-1">
 
     <div class="card">
 
         <div class="form-group">
 
-            <label>
-                Operadora
-            </label>
+            <label>OPERADORA</label>
 
-            <select class="select" id="chipOperadora">
+            <div class="operator-choice">
 
-                <option value="Claro">
-                    Claro
-                </option>
+                <button
+                    type="button"
+                    id="opPagueMenos"
+                    class="operator-btn"
+                    onclick="selecionarOperadora('PAGUE MENOS')"
+                >
+                    🟢 PAGUE MENOS
+                </button>
 
-                <option value="TIM">
-                    TIM
-                </option>
+                <button
+                    type="button"
+                    id="opVivo"
+                    class="operator-btn"
+                    onclick="selecionarOperadora('VIVO')"
+                >
+                    🟣 VIVO
+                </button>
 
-                <option value="Vivo">
-                    Vivo
-                </option>
-
-                <option value="Oi">
-                    Oi
-                </option>
-
-                <option value="Outra">
-                    Outra
-                </option>
-
-            </select>
-
-        </div>
-
-        <div class="form-group">
-
-            <label>
-                Número
-            </label>
+            </div>
 
             <input
-                class="input"
-                id="chipNumero"
-                inputmode="numeric"
-                placeholder="(13) 99999-9999"
+                type="hidden"
+                id="chipOperadora"
+                value="PAGUE MENOS"
             >
 
         </div>
 
         <div class="form-group">
 
-            <label>
-                Recarga
-            </label>
+            <label for="chipDDD">DDD</label>
 
-            <select class="select" id="chipRecarga">
+            <input
+                class="input"
+                id="chipDDD"
+                type="tel"
+                inputmode="numeric"
+                maxlength="2"
+                placeholder="13"
+                autocomplete="off"
+                oninput="somenteNumeros(this); detectarRegiaoChip()"
+            >
 
-                <option value="Em dia">
-                    ✅ Em dia
-                </option>
+            <div id="regiaoChip" class="auto-region">
+                📍 Digite o DDD para identificar a região
+            </div>
 
-                <option value="Pendente">
-                    ⚠️ Pendente
-                </option>
+        </div>
 
-            </select>
+        <div class="form-group">
+
+            <label for="chipNumero">TELEFONE</label>
+
+            <input
+                class="input"
+                id="chipNumero"
+                type="tel"
+                inputmode="numeric"
+                maxlength="9"
+                placeholder="99999-9999"
+                autocomplete="off"
+                oninput="somenteNumeros(this)"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>RECARGA</label>
+
+            <div class="recharge-choice">
+
+                <button
+                    type="button"
+                    id="recargaSim"
+                    class="recharge-btn"
+                    onclick="selecionarRecarga(true)"
+                >
+                    🟢 COM RECARGA
+                </button>
+
+                <button
+                    type="button"
+                    id="recargaNao"
+                    class="recharge-btn"
+                    onclick="selecionarRecarga(false)"
+                >
+                    🔴 SEM RECARGA
+                </button>
+
+            </div>
+
+            <input
+                type="hidden"
+                id="chipRecarga"
+                value="true"
+            >
 
         </div>
 
         <button
+            type="button"
             class="btn btn-primary"
             onclick="salvarChip()"
         >
-            Adicionar chip
+            💾 SALVAR CHIP
         </button>
 
     </div>
-
-    <div id="listaChips"></div>
 
 </section>
 
@@ -2525,13 +3326,17 @@ function mostrarMenu(){
 function carregarTema(){
 
     const tema =
-        localStorage.getItem("bm3_tema") || "claro";
+        localStorage.getItem("bm3_tema") || "escuro";
 
     definirTema(tema, false);
 }
 
 
 function definirTema(tema, salvar = true){
+
+    /* Remove o modo de pré-carregamento assim que o tema real é aplicado.
+       Isso evita que o fundo continue escuro quando o usuário escolhe claro. */
+    document.documentElement.classList.remove("pre-dark");
 
     if(tema === "escuro"){
         document.body.classList.add("dark");
@@ -2588,6 +3393,49 @@ function alternarTema(){
 
 
 /* =====================================================
+   BANNERS DAS TELAS
+===================================================== */
+
+function prepararBanners(){
+
+    document.querySelectorAll(".screen").forEach(function(tela){
+
+        if(tela.querySelector(".universal-banner")) return;
+
+        const titulo =
+            tela.querySelector(".screen-title, .page-title");
+
+        const subtitulo =
+            tela.querySelector(".screen-subtitle, .page-sub");
+
+        if(!titulo) return;
+
+        const banner = document.createElement("div");
+        banner.className = "universal-banner";
+
+        const tituloBanner = document.createElement("div");
+        tituloBanner.className = "banner-title";
+        tituloBanner.innerHTML = titulo.innerHTML;
+
+        const subtituloBanner = document.createElement("div");
+        subtituloBanner.className = "banner-subtitle";
+        subtituloBanner.innerHTML = subtitulo ? subtitulo.innerHTML : "";
+
+        const linha = document.createElement("div");
+        linha.className = "banner-line";
+
+        banner.appendChild(tituloBanner);
+        if(subtitulo) banner.appendChild(subtituloBanner);
+        banner.appendChild(linha);
+
+        titulo.style.display = "none";
+        if(subtitulo) subtitulo.style.display = "none";
+
+        titulo.parentNode.insertBefore(banner,titulo);
+    });
+}
+
+/* =====================================================
    TOAST
 ===================================================== */
 
@@ -2615,330 +3463,292 @@ function toast(mensagem){
    CONTATOS
 ===================================================== */
 
-function salvarContato(){
+function somenteNumeros(el){
+    if(!el) return;
+    el.value = String(el.value || "").replace(/\D/g, "");
+}
 
-    const nome =
-        document.getElementById("contatoNome").value.trim();
+function abrirNovoContato(){
 
-    const ddd =
-        document.getElementById("contatoDDD").value.trim();
+    const index = document.getElementById("contatoIndex");
+    const titulo = document.getElementById("tituloContato");
 
-    const numero =
-        document.getElementById("contatoNumero").value.trim();
+    if(index) index.value = "-1";
+    if(titulo) titulo.textContent = "👤 Novo contato";
 
-    const status =
-        document.getElementById("contatoStatus").value;
+    const nome = document.getElementById("contatoNome");
+    const ddd = document.getElementById("contatoDDD");
+    const numero = document.getElementById("contatoNumero");
+    const obs = document.getElementById("contatoObs");
 
-    const obs =
-        document.getElementById("contatoObs").value.trim();
+    if(nome) nome.value = "";
+    if(ddd) ddd.value = "";
+    if(numero) numero.value = "";
+    if(obs) obs.value = "";
 
-    if(!nome || !numero){
+    selecionarStatus("on");
+    detectarRegiaoContato();
+    abrirTela("novoContato");
+}
 
-        toast("Preencha nome e número.");
+function selecionarStatus(status){
 
-        return;
-    }
+    const valor = status === "ON" ? "on" :
+                  status === "ANÁLISE" ? "analysis" :
+                  status === "OFF" ? "off" : status;
 
-    const contato = {
+    const campo = document.getElementById("contatoStatus");
+    if(campo) campo.value = valor;
 
-        id:Date.now(),
+    ["statusON","statusANALISE","statusOFF"].forEach(function(id){
+        const botao = document.getElementById(id);
+        if(botao) botao.classList.remove("active");
+    });
 
-        nome:nome,
-
-        ddd:ddd,
-
-        numero:numero,
-
-        status:status,
-
-        obs:obs,
-
-        data:new Date().toLocaleString("pt-BR")
-
+    const mapa = {
+        on:"statusON",
+        analysis:"statusANALISE",
+        off:"statusOFF"
     };
 
-    contatos.push(contato);
-
-    localStorage.setItem(
-        "bm3_contatos",
-        JSON.stringify(contatos)
-    );
-
-    document.getElementById("contatoNome").value = "";
-    document.getElementById("contatoDDD").value = "";
-    document.getElementById("contatoNumero").value = "";
-    document.getElementById("contatoObs").value = "";
-
-    toast("Contato salvo!");
-
-    renderContatos();
-
-    voltar();
+    const ativo = document.getElementById(mapa[valor] || "statusON");
+    if(ativo) ativo.classList.add("active");
 }
 
+function detectarRegiaoContato(){
 
-function renderContatos(){
+    const ddd =
+        (document.getElementById("contatoDDD")?.value || "")
+        .replace(/\D/g, "");
 
-    const lista =
-        document.getElementById("listaContatos");
+    const el = document.getElementById("regiaoContato");
+    if(!el) return;
 
-    if(!lista) return;
+    const regioes = {
+        "11":"São Paulo - SP","12":"São José dos Campos / Vale do Paraíba - SP","13":"Baixada Santista / Vale do Ribeira - SP","14":"Bauru / região - SP","15":"Sorocaba / região - SP","16":"Ribeirão Preto / região - SP","17":"São José do Rio Preto / região - SP","18":"Presidente Prudente / região - SP","19":"Campinas / região - SP",
+        "21":"Rio de Janeiro / região - RJ","22":"Norte Fluminense - RJ","24":"Sul Fluminense - RJ",
+        "27":"Espírito Santo - ES","28":"Espírito Santo - ES",
+        "31":"Minas Gerais - MG","32":"Minas Gerais - MG","33":"Minas Gerais - MG","34":"Minas Gerais - MG","35":"Minas Gerais - MG","37":"Minas Gerais - MG","38":"Minas Gerais - MG",
+        "41":"Paraná - PR","42":"Paraná - PR","43":"Paraná - PR","44":"Paraná - PR","45":"Paraná - PR","46":"Paraná - PR",
+        "47":"Santa Catarina - SC","48":"Santa Catarina - SC","49":"Santa Catarina - SC",
+        "51":"Rio Grande do Sul - RS","53":"Rio Grande do Sul - RS","54":"Rio Grande do Sul - RS","55":"Rio Grande do Sul - RS",
+        "61":"Distrito Federal - DF","62":"Goiás - GO","63":"Tocantins - TO","64":"Goiás - GO","65":"Mato Grosso - MT","66":"Mato Grosso - MT","67":"Mato Grosso do Sul - MS","68":"Acre - AC","69":"Rondônia - RO",
+        "71":"Bahia - BA","73":"Bahia - BA","74":"Bahia - BA","75":"Bahia - BA","77":"Bahia - BA",
+        "79":"Sergipe - SE","81":"Pernambuco - PE","82":"Alagoas - AL","83":"Paraíba - PB","84":"Rio Grande do Norte - RN","85":"Ceará - CE","86":"Piauí - PI","87":"Pernambuco - PE","88":"Ceará - CE","89":"Piauí - PI",
+        "91":"Pará - PA","92":"Amazonas - AM","93":"Pará - PA","94":"Pará - PA","95":"Roraima - RR","96":"Amapá - AP","97":"Amazonas - AM","98":"Maranhão - MA","99":"Maranhão - MA"
+    };
 
-    const busca =
-        (document.getElementById("buscaContato")?.value || "")
-        .toLowerCase()
-        .trim();
-
-    const filtrados =
-        contatos.filter(function(c){
-
-            return (
-                c.nome.toLowerCase().includes(busca) ||
-                c.numero.toLowerCase().includes(busca) ||
-                String(c.ddd).includes(busca)
-            );
-
-        });
-
-    if(!filtrados.length){
-
-        lista.innerHTML = `
-            <div class="empty">
-                Nenhum contato encontrado.
-            </div>
-        `;
-
+    if(ddd.length !== 2){
+        el.textContent = "📍 Digite o DDD para identificar a região";
         return;
     }
 
-    lista.innerHTML =
-        filtrados.map(function(c){
-
-            let statusTexto = "⚠️ EM ANÁLISE";
-            let classe = "status-analysis";
-
-            if(c.status === "on"){
-                statusTexto = "✅ ZAP ON";
-                classe = "status-on";
-            }
-
-            if(c.status === "off"){
-                statusTexto = "❌ ZAP CAIU";
-                classe = "status-off";
-            }
-
-            const numeroCompleto =
-                (c.ddd ? "55" + c.ddd : "") +
-                c.numero.replace(/\D/g,"");
-
-            const favorito =
-                favoritos.includes(c.id);
-
-            return `
-
-                <div class="contact-item">
-
-                    <div class="contact-info">
-
-                        <div class="contact-name">
-                            ${escapar(c.nome)}
-                        </div>
-
-                        <div class="contact-number">
-                            ${c.ddd ? "(" + escapar(c.ddd) + ") " : ""}
-                            ${escapar(c.numero)}
-                        </div>
-
-                        <span class="status ${classe}">
-                            ${statusTexto}
-                        </span>
-
-                    </div>
-
-                    <div class="contact-actions">
-
-                        <button
-                            class="small-btn"
-                            onclick="abrirContatoWhatsApp('${numeroCompleto}')"
-                            title="WhatsApp"
-                        >
-                            💬
-                        </button>
-
-                        <button
-                            class="small-btn"
-                            onclick="alternarFavorito(${c.id})"
-                            title="Favorito"
-                        >
-                            ${favorito ? "⭐" : "☆"}
-                        </button>
-
-                        <button
-                            class="small-btn"
-                            onclick="excluirContato(${c.id})"
-                            title="Excluir"
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
-
-                </div>
-            `;
-
-        }).join("");
+    el.textContent = regioes[ddd]
+        ? "📍 " + regioes[ddd]
+        : "📍 DDD não identificado";
 }
 
+function salvarContato(){
 
-function excluirContato(id){
+    const nome = document.getElementById("contatoNome")?.value.trim() || "";
+    const ddd = document.getElementById("contatoDDD")?.value.trim() || "";
+    const numero = document.getElementById("contatoNumero")?.value.trim() || "";
+    const status = document.getElementById("contatoStatus")?.value || "on";
+    const obs = document.getElementById("contatoObs")?.value.trim() || "";
+    const index = Number(document.getElementById("contatoIndex")?.value ?? -1);
 
-    if(!confirm("Excluir este contato?")){
+    if(!nome || !numero){
+        toast("Preencha nome e número.");
         return;
     }
 
-    contatos =
-        contatos.filter(function(c){
-            return c.id !== id;
-        });
+    if(ddd && ddd.length !== 2){
+        toast("Digite um DDD válido.");
+        return;
+    }
 
-    favoritos =
-        favoritos.filter(function(f){
-            return f !== id;
-        });
+    const existente = index >= 0 && index < contatos.length ? contatos[index] : null;
 
-    localStorage.setItem(
-        "bm3_contatos",
-        JSON.stringify(contatos)
-    );
+    const contato = {
+        id: existente?.id || Date.now(),
+        nome:nome,
+        ddd:ddd,
+        numero:numero,
+        status:status,
+        obs:obs,
+        data:existente?.data || new Date().toLocaleString("pt-BR")
+    };
 
-    localStorage.setItem(
-        "bm3_favoritos",
-        JSON.stringify(favoritos)
-    );
+    if(existente){
+        contatos[index] = contato;
+    }else{
+        contatos.push(contato);
+    }
+
+    localStorage.setItem("bm3_contatos", JSON.stringify(contatos));
+
+    toast(existente ? "Contato atualizado!" : "Contato salvo!");
 
     renderContatos();
     renderFavoritos();
     atualizarResumo();
-
-    toast("Contato excluído.");
+    voltar();
 }
 
+function renderContatos(){
+
+    const lista = document.getElementById("listaContatos");
+    if(!lista) return;
+
+    const busca =
+        (document.getElementById("buscarContato")?.value || "")
+        .toLowerCase()
+        .trim();
+
+    const filtrados = contatos.filter(function(c){
+        return (
+            String(c.nome || "").toLowerCase().includes(busca) ||
+            String(c.numero || "").toLowerCase().includes(busca) ||
+            String(c.ddd || "").includes(busca)
+        );
+    });
+
+    if(!filtrados.length){
+        lista.innerHTML = `<div class="empty">Nenhum contato encontrado.</div>`;
+        return;
+    }
+
+    lista.innerHTML = filtrados.map(function(c){
+
+        let statusTexto = "🟡 ANÁLISE";
+        let classe = "status-analysis";
+
+        if(c.status === "on" || c.status === "ON"){
+            statusTexto = "🟢 ZAP ON";
+            classe = "status-on";
+        }
+
+        if(c.status === "off" || c.status === "OFF"){
+            statusTexto = "🔴 ZAP OFF";
+            classe = "status-off";
+        }
+
+        const numeroCompleto =
+            (c.ddd ? "55" + String(c.ddd).replace(/\D/g, "") : "") +
+            String(c.numero || "").replace(/\D/g, "");
+
+        const favorito = favoritos.includes(c.id);
+
+        return `
+            <div class="contact-item">
+                <div class="contact-info">
+                    <div class="contact-name">${escapar(c.nome || "")}</div>
+                    <div class="contact-number">
+                        ${c.ddd ? "(" + escapar(c.ddd) + ") " : ""}${escapar(c.numero || "")}
+                    </div>
+                    <span class="status ${classe}">${statusTexto}</span>
+                    ${c.obs ? `<div class="contact-number">📝 ${escapar(c.obs)}</div>` : ""}
+                </div>
+
+                <div class="contact-actions">
+                    <button class="small-btn" onclick="abrirContatoWhatsApp('${numeroCompleto}')" title="WhatsApp">💬</button>
+                    <button class="small-btn" onclick="editarContato(${c.id})" title="Editar">✏️</button>
+                    <button class="small-btn" onclick="alternarFavorito(${c.id})" title="Favorito">${favorito ? "⭐" : "☆"}</button>
+                    <button class="small-btn" onclick="excluirContato(${c.id})" title="Excluir">🗑️</button>
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+function editarContato(id){
+
+    const index = contatos.findIndex(function(c){ return c.id === id; });
+    if(index < 0) return;
+
+    const c = contatos[index];
+
+    document.getElementById("contatoIndex").value = String(index);
+    document.getElementById("tituloContato").textContent = "✏️ Editar contato";
+    document.getElementById("contatoNome").value = c.nome || "";
+    document.getElementById("contatoDDD").value = c.ddd || "";
+    document.getElementById("contatoNumero").value = c.numero || "";
+    document.getElementById("contatoObs").value = c.obs || "";
+
+    selecionarStatus(c.status || "on");
+    detectarRegiaoContato();
+    abrirTela("novoContato");
+}
+
+function excluirContato(id){
+
+    if(!confirm("Excluir este contato?")) return;
+
+    contatos = contatos.filter(function(c){ return c.id !== id; });
+    favoritos = favoritos.filter(function(f){ return f !== id; });
+
+    localStorage.setItem("bm3_contatos", JSON.stringify(contatos));
+    localStorage.setItem("bm3_favoritos", JSON.stringify(favoritos));
+
+    renderContatos();
+    renderFavoritos();
+    atualizarResumo();
+    toast("Contato excluído.");
+}
 
 function alternarFavorito(id){
 
     if(favoritos.includes(id)){
-
-        favoritos =
-            favoritos.filter(function(f){
-                return f !== id;
-            });
-
+        favoritos = favoritos.filter(function(f){ return f !== id; });
         toast("Removido dos favoritos.");
-
     }else{
-
         favoritos.push(id);
-
         toast("Adicionado aos favoritos.");
     }
 
-    localStorage.setItem(
-        "bm3_favoritos",
-        JSON.stringify(favoritos)
-    );
-
+    localStorage.setItem("bm3_favoritos", JSON.stringify(favoritos));
     renderContatos();
     renderFavoritos();
 }
 
-
 function renderFavoritos(){
 
-    const lista =
-        document.getElementById("listaFavoritos");
-
+    const lista = document.getElementById("listaFavoritos");
     if(!lista) return;
 
-    const dados =
-        contatos.filter(function(c){
-            return favoritos.includes(c.id);
-        });
+    const dados = contatos.filter(function(c){
+        return favoritos.includes(c.id);
+    });
 
     if(!dados.length){
-
-        lista.innerHTML = `
-            <div class="empty">
-                Você ainda não possui favoritos.
-            </div>
-        `;
-
+        lista.innerHTML = `<div class="empty">Você ainda não possui favoritos.</div>`;
         return;
     }
 
-    lista.innerHTML =
-        dados.map(function(c){
-
-            return `
-
-                <div class="favorite-item">
-
-                    <div class="contact-name">
-                        ⭐ ${escapar(c.nome)}
-                    </div>
-
-                    <div class="contact-number">
-                        ${c.ddd ? "(" + escapar(c.ddd) + ") " : ""}
-                        ${escapar(c.numero)}
-                    </div>
-
-                    <button
-                        class="btn btn-primary"
-                        style="margin-top:10px;"
-                        onclick="abrirContatoWhatsApp('${(c.ddd ? "55"+c.ddd : "") + c.numero.replace(/\D/g,"")}')"
-                    >
-                        💬 Abrir WhatsApp
-                    </button>
-
-                </div>
-
-            `;
-
-        }).join("");
+    lista.innerHTML = dados.map(function(c){
+        const numero = (c.ddd ? "55" + c.ddd : "") + String(c.numero || "").replace(/\D/g, "");
+        return `
+            <div class="favorite-item">
+                <div class="contact-name">⭐ ${escapar(c.nome || "")}</div>
+                <div class="contact-number">${c.ddd ? "(" + escapar(c.ddd) + ") " : ""}${escapar(c.numero || "")}</div>
+                <button class="btn btn-primary" style="margin-top:10px;" onclick="abrirContatoWhatsApp('${numero}')">💬 Abrir WhatsApp</button>
+            </div>
+        `;
+    }).join("");
 }
-
 
 function atualizarResumo(){
 
-    const total =
-        document.getElementById("totalContatos");
-
-    const on =
-        document.getElementById("totalON");
-
-    const analise =
-        document.getElementById("totalAnalise");
-
-    const off =
-        document.getElementById("totalOFF");
+    const total = document.getElementById("totalContatos");
+    const on = document.getElementById("totalON");
+    const analise = document.getElementById("totalAnalise");
+    const off = document.getElementById("totalOFF");
 
     if(total) total.textContent = contatos.length;
-
-    if(on){
-        on.textContent =
-            contatos.filter(c => c.status === "on").length;
-    }
-
-    if(analise){
-        analise.textContent =
-            contatos.filter(c => c.status === "analysis").length;
-    }
-
-    if(off){
-        off.textContent =
-            contatos.filter(c => c.status === "off").length;
-    }
+    if(on) on.textContent = contatos.filter(c => c.status === "on").length;
+    if(analise) analise.textContent = contatos.filter(c => c.status === "analysis").length;
+    if(off) off.textContent = contatos.filter(c => c.status === "off").length;
 }
-
 
 /* =====================================================
    WHATSAPP
@@ -3208,148 +4018,384 @@ function excluirGrupo(id){
    CELULARES
 ===================================================== */
 
-function salvarCelular(){
-
-    const nome =
-        document.getElementById("celularNome").value.trim();
-
-    const numero =
-        document.getElementById("celularNumero").value.trim();
-
-    if(!nome){
-
-        toast("Digite o nome do aparelho.");
-
-        return;
-    }
-
-    celulares.push({
-        id:Date.now(),
-        nome:nome,
-        numero:numero
-    });
-
-    localStorage.setItem(
-        "bm3_celulares",
-        JSON.stringify(celulares)
-    );
-
+function abrirNovoCelular(){
+    document.getElementById("celularIndex").value = "-1";
     document.getElementById("celularNome").value = "";
     document.getElementById("celularNumero").value = "";
-
-    renderCelulares();
-
-    toast("Celular adicionado.");
+    document.getElementById("celularWhatsapp").value = "";
+    document.getElementById("celularDDD").value = "";
+    document.getElementById("regiaoCelular").textContent = "📍 Digite o DDD para identificar a região";
+    selecionarOperadoraCelular("PAGUE MENOS");
+    selecionarRecargaCelular(true);
+    abrirTela("novoCelular");
 }
 
+function selecionarOperadoraCelular(valor){
+    const input=document.getElementById("celularOperadora");
+    if(!input) return;
+    input.value=valor;
+    document.getElementById("celOpPagueMenos")?.classList.toggle("active",valor==="PAGUE MENOS");
+    document.getElementById("celOpVivo")?.classList.toggle("active",valor==="VIVO");
+}
+
+function selecionarRecargaCelular(valor){
+    const input=document.getElementById("celularRecarga");
+    if(!input) return;
+    input.value=valor ? "true" : "false";
+    document.getElementById("celRecSim")?.classList.toggle("active",valor===true);
+    document.getElementById("celRecNao")?.classList.toggle("active",valor===false);
+}
+
+function detectarRegiaoCelular(){
+    const ddd=(document.getElementById("celularDDD")?.value||"").replace(/\D/g,"");
+    const regioes={
+        "11":"São Paulo - SP","12":"São José dos Campos - SP","13":"Santos - SP","14":"Bauru - SP","15":"Sorocaba - SP","16":"Ribeirão Preto - SP","17":"São José do Rio Preto - SP","18":"Presidente Prudente - SP","19":"Campinas - SP",
+        "21":"Rio de Janeiro - RJ","22":"Campos dos Goytacazes - RJ","24":"Volta Redonda - RJ",
+        "27":"Vitória - ES","28":"Cachoeiro de Itapemirim - ES",
+        "31":"Belo Horizonte - MG","32":"Juiz de Fora - MG","33":"Governador Valadares - MG","34":"Uberlândia - MG","35":"Poços de Caldas - MG","37":"Divinópolis - MG","38":"Montes Claros - MG",
+        "41":"Curitiba - PR","42":"Ponta Grossa - PR","43":"Londrina - PR","44":"Maringá - PR","45":"Foz do Iguaçu - PR","46":"Francisco Beltrão - PR",
+        "47":"Joinville - SC","48":"Florianópolis - SC","49":"Chapecó - SC",
+        "51":"Porto Alegre - RS","53":"Pelotas - RS","54":"Caxias do Sul - RS","55":"Santa Maria - RS",
+        "61":"Brasília - DF","62":"Goiânia - GO","63":"Palmas - TO","64":"Rio Verde - GO","65":"Cuiabá - MT","66":"Rondonópolis - MT","67":"Campo Grande - MS","68":"Rio Branco - AC","69":"Porto Velho - RO",
+        "71":"Salvador - BA","73":"Ilhéus - BA","74":"Juazeiro - BA","75":"Feira de Santana - BA","77":"Barreiras - BA",
+        "79":"Aracaju - SE","81":"Recife - PE","82":"Maceió - AL","83":"João Pessoa - PB","84":"Natal - RN","85":"Fortaleza - CE","86":"Teresina - PI","87":"Petrolina - PE","88":"Juazeiro do Norte - CE","89":"Picos - PI",
+        "91":"Belém - PA","92":"Manaus - AM","93":"Santarém - PA","94":"Marabá - PA","95":"Boa Vista - RR","96":"Macapá - AP","97":"Coari - AM","98":"São Luís - MA","99":"Imperatriz - MA"
+    };
+    const el=document.getElementById("regiaoCelular");
+    if(!el) return;
+    el.textContent=ddd.length===2 ? (regioes[ddd] ? "📍 "+regioes[ddd] : "📍 Região não identificada") : "📍 Digite o DDD para identificar a região";
+}
+
+function salvarCelular(){
+    const nome=document.getElementById("celularNome").value.trim();
+    const numero=document.getElementById("celularNumero").value.trim();
+    const whatsapp=document.getElementById("celularWhatsapp").value.trim();
+    const ddd=document.getElementById("celularDDD").value.trim();
+    const operadora=document.getElementById("celularOperadora").value;
+    const recarga=document.getElementById("celularRecarga").value === "true";
+    const index=Number(document.getElementById("celularIndex").value);
+    if(!nome){toast("Digite o nome do aparelho.");return;}
+    if(!numero && !whatsapp){toast("Informe pelo menos um número.");return;}
+    const dados={id:index>=0 && celulares[index]?.id ? celulares[index].id : Date.now(),nome,numero,whatsapp,ddd,operadora,recarga};
+    if(index>=0 && index<celulares.length) celulares[index]=dados; else celulares.push(dados);
+    localStorage.setItem("bm3_celulares",JSON.stringify(celulares));
+    renderCelulares();
+    abrirTela("celulares");
+    toast(index>=0 ? "Celular atualizado." : "Celular adicionado.");
+}
 
 function renderCelulares(){
-
-    const lista =
-        document.getElementById("listaCelulares");
-
+    const lista=document.getElementById("listaCelulares");
+    const contador=document.getElementById("contadorCelulares");
     if(!lista) return;
-
+    if(contador){ contador.textContent = celulares.length + (celulares.length===1 ? " aparelho" : " aparelhos"); }
     if(!celulares.length){
-
-        lista.innerHTML = `
-            <div class="empty">
-                Nenhum celular cadastrado.
-            </div>
-        `;
-
+        lista.innerHTML=`<div class="cellular-empty"><div class="cellular-empty-icon">📱</div><strong>Nenhum aparelho cadastrado</strong><span>Adicione seu primeiro celular para começar a organizar as linhas.</span></div>`;
         return;
     }
-
-    lista.innerHTML =
-        celulares.map(function(c){
-
-            return `
-
-                <div class="item-row">
-
-                    <div class="item-row-info">
-
-                        <div class="item-row-title">
-                            📱 ${escapar(c.nome)}
-                        </div>
-
-                        <div class="item-row-sub">
-                            ${escapar(c.numero || "Sem identificação")}
-                        </div>
-
-                    </div>
-
-                    <button
-                        class="small-btn"
-                        onclick="excluirCelular(${c.id})"
-                    >
-                        🗑️
-                    </button>
-
+    lista.innerHTML=celulares.map(function(c,i){
+        const rec=c.recarga===true || c.recarga==="true";
+        const op=c.operadora||"PAGUE MENOS";
+        const numero=c.numero||"Sem número";
+        const whatsapp=c.whatsapp||"";
+        const ddd=c.ddd||"--";
+        return `<div class="cellular-card">
+            <div class="cellular-avatar">📱</div>
+            <div class="cellular-main">
+                <div class="cellular-name">${escapar(c.nome||"Celular sem nome")}</div>
+                <div class="cellular-number">📞 ${escapar(numero)}${whatsapp?"  •  💬 "+escapar(whatsapp):""}</div>
+                <div class="cellular-badges">
+                    <span class="cellular-badge">📍 DDD ${escapar(ddd)}</span>
+                    <span class="cellular-badge">📡 ${escapar(op)}</span>
+                    <span class="cellular-badge ${rec?"green":"red"}">${rec?"🟢 COM RECARGA":"🔴 SEM RECARGA"}</span>
                 </div>
-
-            `;
-
-        }).join("");
+            </div>
+            <div class="cellular-actions">
+                <button class="cellular-action" title="Editar" onclick="editarCelular(${i})">✏️</button>
+                <button class="cellular-action" title="Excluir" onclick="excluirCelular(${c.id})">🗑️</button>
+            </div>
+        </div>`;
+    }).join("");
 }
 
+function editarCelular(index){
+    const c=celulares[index]; if(!c) return;
+    document.getElementById("celularIndex").value=index;
+    document.getElementById("celularNome").value=c.nome||"";
+    document.getElementById("celularNumero").value=c.numero||"";
+    document.getElementById("celularWhatsapp").value=c.whatsapp||"";
+    document.getElementById("celularDDD").value=c.ddd||"";
+    detectarRegiaoCelular();
+    selecionarOperadoraCelular(c.operadora||"PAGUE MENOS");
+    selecionarRecargaCelular(c.recarga!==false && c.recarga!=="false");
+    abrirTela("novoCelular");
+}
 
 function excluirCelular(id){
-
-    celulares =
-        celulares.filter(function(c){
-            return c.id !== id;
-        });
-
-    localStorage.setItem(
-        "bm3_celulares",
-        JSON.stringify(celulares)
-    );
-
+    celulares=celulares.filter(function(c){return c.id!==id;});
+    localStorage.setItem("bm3_celulares",JSON.stringify(celulares));
     renderCelulares();
+    toast("Celular removido.");
 }
-
 
 /* =====================================================
    CHIPS
 ===================================================== */
+
+function somenteNumeros(input){
+
+    if(!input) return;
+
+    input.value =
+        String(input.value || "").replace(/\\D/g,"");
+}
+
+
+function abrirNovoChip(){
+
+    const index =
+        document.getElementById("chipIndex");
+
+    if(index){
+        index.value = "-1";
+    }
+
+    document.getElementById("chipDDD").value = "";
+    document.getElementById("chipNumero").value = "";
+
+    selecionarOperadora("PAGUE MENOS");
+    selecionarRecarga(true);
+    detectarRegiaoChip();
+
+    abrirTela("novoChip");
+}
+
+
+function selecionarOperadora(operadora){
+
+    const campo =
+        document.getElementById("chipOperadora");
+
+    if(!campo) return;
+
+    campo.value = operadora;
+
+    const pagueMenos =
+        document.getElementById("opPagueMenos");
+
+    const vivo =
+        document.getElementById("opVivo");
+
+    if(pagueMenos){
+        pagueMenos.classList.toggle(
+            "active",
+            operadora === "PAGUE MENOS"
+        );
+    }
+
+    if(vivo){
+        vivo.classList.toggle(
+            "active",
+            operadora === "VIVO"
+        );
+    }
+}
+
+
+function selecionarRecarga(valor){
+
+    const campo =
+        document.getElementById("chipRecarga");
+
+    if(!campo) return;
+
+    campo.value = valor ? "true" : "false";
+
+    const sim =
+        document.getElementById("recargaSim");
+
+    const nao =
+        document.getElementById("recargaNao");
+
+    if(sim){
+        sim.classList.toggle("active", valor === true);
+    }
+
+    if(nao){
+        nao.classList.toggle("active", valor === false);
+        nao.classList.toggle("inactive", valor === false);
+    }
+}
+
+
+function detectarRegiaoChip(){
+
+    const ddd =
+        document.getElementById("chipDDD");
+
+    const regiao =
+        document.getElementById("regiaoChip");
+
+    if(!ddd || !regiao) return;
+
+    const codigo =
+        String(ddd.value || "").replace(/\\D/g,"");
+
+    const regioes = {
+        "11":"São Paulo - SP",
+        "12":"São José dos Campos - SP",
+        "13":"Santos / Baixada Santista - SP",
+        "14":"Bauru / Centro-Oeste - SP",
+        "15":"Sorocaba - SP",
+        "16":"Ribeirão Preto - SP",
+        "17":"São José do Rio Preto - SP",
+        "18":"Presidente Prudente - SP",
+        "19":"Campinas - SP",
+        "21":"Rio de Janeiro - RJ",
+        "22":"Norte Fluminense - RJ",
+        "24":"Sul Fluminense - RJ",
+        "27":"Espírito Santo - ES",
+        "28":"Espírito Santo - ES",
+        "31":"Minas Gerais - MG",
+        "32":"Minas Gerais - MG",
+        "33":"Minas Gerais - MG",
+        "34":"Minas Gerais - MG",
+        "35":"Minas Gerais - MG",
+        "37":"Minas Gerais - MG",
+        "38":"Minas Gerais - MG",
+        "41":"Paraná - PR",
+        "42":"Paraná - PR",
+        "43":"Paraná - PR",
+        "44":"Paraná - PR",
+        "45":"Paraná - PR",
+        "46":"Paraná - PR",
+        "47":"Santa Catarina - SC",
+        "48":"Santa Catarina - SC",
+        "49":"Santa Catarina - SC",
+        "51":"Rio Grande do Sul - RS",
+        "53":"Rio Grande do Sul - RS",
+        "54":"Rio Grande do Sul - RS",
+        "55":"Rio Grande do Sul - RS",
+        "61":"Brasília / DF",
+        "62":"Goiás - GO",
+        "63":"Tocantins - TO",
+        "64":"Goiás - GO",
+        "65":"Mato Grosso - MT",
+        "66":"Mato Grosso - MT",
+        "67":"Mato Grosso do Sul - MS",
+        "68":"Acre - AC",
+        "69":"Rondônia - RO",
+        "71":"Bahia - BA",
+        "73":"Bahia - BA",
+        "74":"Bahia - BA",
+        "75":"Bahia - BA",
+        "77":"Bahia - BA",
+        "79":"Sergipe - SE",
+        "81":"Pernambuco - PE",
+        "82":"Alagoas - AL",
+        "83":"Paraíba - PB",
+        "84":"Rio Grande do Norte - RN",
+        "85":"Ceará - CE",
+        "86":"Piauí - PI",
+        "87":"Pernambuco - PE",
+        "88":"Ceará - CE",
+        "89":"Piauí - PI",
+        "91":"Pará - PA",
+        "92":"Amazonas - AM",
+        "93":"Pará - PA",
+        "94":"Pará - PA",
+        "95":"Roraima - RR",
+        "96":"Amapá - AP",
+        "97":"Amazonas - AM",
+        "98":"Maranhão - MA",
+        "99":"Maranhão - MA"
+    };
+
+    if(codigo.length < 2){
+        regiao.textContent =
+            "📍 Digite o DDD para identificar a região";
+        return;
+    }
+
+    regiao.textContent =
+        regioes[codigo]
+            ? "📍 " + regioes[codigo]
+            : "📍 DDD não identificado";
+}
+
+
+function normalizarRecarga(valor){
+
+    if(valor === true || valor === "true" || valor === "Em dia"){
+        return true;
+    }
+
+    return false;
+}
+
 
 function salvarChip(){
 
     const operadora =
         document.getElementById("chipOperadora").value;
 
+    const ddd =
+        document.getElementById("chipDDD").value.trim();
+
     const numero =
         document.getElementById("chipNumero").value.trim();
 
     const recarga =
-        document.getElementById("chipRecarga").value;
+        document.getElementById("chipRecarga").value === "true";
 
-    if(!numero){
+    const index =
+        Number(document.getElementById("chipIndex").value);
 
-        toast("Digite o número.");
+    if(ddd.length !== 2){
+
+        toast("Digite um DDD válido.");
 
         return;
     }
 
-    chips.push({
+    if(numero.length < 8){
+
+        toast("Digite o telefone completo.");
+
+        return;
+    }
+
+    const chip = {
         id:Date.now(),
         operadora:operadora,
+        ddd:ddd,
         numero:numero,
         recarga:recarga
-    });
+    };
+
+    if(index >= 0 && index < chips.length){
+
+        chip.id = chips[index].id;
+        chips[index] = chip;
+
+    }else{
+
+        chips.push(chip);
+
+    }
 
     localStorage.setItem(
         "bm3_chips",
         JSON.stringify(chips)
     );
 
-    document.getElementById("chipNumero").value = "";
+    document.getElementById("chipIndex").value = "-1";
 
     renderChips();
 
-    toast("Chip adicionado.");
+    abrirTela("chips");
+
+    toast(index >= 0 ? "Chip atualizado." : "Chip adicionado.");
 }
 
 
@@ -3359,6 +4405,32 @@ function renderChips(){
         document.getElementById("listaChips");
 
     if(!lista) return;
+
+    let comRecarga = 0;
+
+    chips.forEach(function(c){
+
+        if(normalizarRecarga(c.recarga)){
+            comRecarga++;
+        }
+
+    });
+
+    const semRecarga =
+        chips.length - comRecarga;
+
+    const total =
+        document.getElementById("chipsTotal");
+
+    const com =
+        document.getElementById("chipsComRecarga");
+
+    const sem =
+        document.getElementById("chipsSemRecarga");
+
+    if(total) total.textContent = chips.length;
+    if(com) com.textContent = comRecarga;
+    if(sem) sem.textContent = semRecarga;
 
     if(!chips.length){
 
@@ -3372,7 +4444,15 @@ function renderChips(){
     }
 
     lista.innerHTML =
-        chips.map(function(c){
+        chips.map(function(c,index){
+
+            const ativo =
+                normalizarRecarga(c.recarga);
+
+            const telefone =
+                c.ddd
+                    ? "(" + escapar(c.ddd) + ") " + escapar(c.numero)
+                    : escapar(c.numero || "");
 
             return `
 
@@ -3381,28 +4461,72 @@ function renderChips(){
                     <div class="item-row-info">
 
                         <div class="item-row-title">
-                            📶 ${escapar(c.operadora)}
+                            📶 ${escapar(c.operadora || "Operadora")}
                         </div>
 
                         <div class="item-row-sub">
-                            ${escapar(c.numero)}
-                            • ${escapar(c.recarga)}
+                            ${telefone}
+                        </div>
+
+                        <div class="status ${ativo ? "status-on" : "status-off"}">
+                            ${ativo ? "🟢 COM RECARGA" : "🔴 SEM RECARGA"}
                         </div>
 
                     </div>
 
-                    <button
-                        class="small-btn"
-                        onclick="excluirChip(${c.id})"
-                    >
-                        🗑️
-                    </button>
+                    <div class="contact-actions">
+
+                        <button
+                            type="button"
+                            class="small-btn"
+                            onclick="editarChip(${index})"
+                            title="Editar"
+                        >
+                            ✏️
+                        </button>
+
+                        <button
+                            type="button"
+                            class="small-btn"
+                            onclick="excluirChip(${c.id})"
+                            title="Excluir"
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
 
                 </div>
 
             `;
 
         }).join("");
+}
+
+
+function editarChip(index){
+
+    const c = chips[index];
+
+    if(!c) return;
+
+    document.getElementById("chipIndex").value = index;
+    document.getElementById("chipDDD").value = c.ddd || "";
+    document.getElementById("chipNumero").value = c.numero || "";
+
+    selecionarOperadora(
+        c.operadora === "VIVO"
+            ? "VIVO"
+            : "PAGUE MENOS"
+    );
+
+    selecionarRecarga(
+        normalizarRecarga(c.recarga)
+    );
+
+    detectarRegiaoChip();
+
+    abrirTela("novoChip");
 }
 
 
@@ -3419,228 +4543,1646 @@ function excluirChip(id){
     );
 
     renderChips();
+
+    toast("Chip excluído.");
 }
 
 
 /* =====================================================
-   CALCULADORA
+   CALCULADORA BM3
 ===================================================== */
+/* =========================================================
+   🧮 CALCULADORA BM3
+   ========================================================= */
 
-function calcular(tipo){
+let calculoAtual="porcentagemDivisao";
 
-    const area =
-        document.getElementById("calcArea");
+let calcTimer=null;
 
-    let titulo = "";
-    let campos = "";
 
-    if(tipo === "porcentagem"){
+/* =========================================================
+   CONVERTER VALORES
+   ========================================================= */
 
-        titulo = "Descobrir porcentagem";
+function converterValor(valor){
 
-        campos = `
-            <div class="form-group">
-                <label>Valor</label>
-                <input class="input" id="calcA" type="number">
-            </div>
+    let v=String(valor||"")
+        .trim()
+        .toLowerCase()
+        .replace(/\s/g,"")
+        .replace(/r\$/g,"");
 
-            <div class="form-group">
-                <label>Porcentagem</label>
-                <input class="input" id="calcB" type="number">
-            </div>
-        `;
+    if(!v)return null;
+
+
+    /* 20k / 20,5k */
+
+    if(v.endsWith("k")){
+
+        v=v.slice(0,-1);
+
+        v=v.replace(",", ".");
+
+        const numero=parseFloat(v);
+
+        return Number.isFinite(numero)
+            ?numero*1000
+            :null;
+
     }
 
-    else if(tipo === "adicionar"){
 
-        titulo = "Adicionar porcentagem";
+    /* 17.699,50 */
 
-        campos = `
-            <div class="form-group">
-                <label>Valor</label>
-                <input class="input" id="calcA" type="number">
-            </div>
+    if(
+        v.includes(".") &&
+        v.includes(",")
+    ){
 
-            <div class="form-group">
-                <label>Porcentagem</label>
-                <input class="input" id="calcB" type="number">
-            </div>
-        `;
+        v=v
+            .replace(/\./g,"")
+            .replace(",", ".");
+
     }
 
-    else if(tipo === "descontar"){
 
-        titulo = "Descontar porcentagem";
+    /* 17,699 / 17,5 */
 
-        campos = `
-            <div class="form-group">
-                <label>Valor</label>
-                <input class="input" id="calcA" type="number">
-            </div>
+    else if(v.includes(",")){
 
-            <div class="form-group">
-                <label>Porcentagem</label>
-                <input class="input" id="calcB" type="number">
-            </div>
-        `;
+        const partes=v.split(",");
+
+
+        if(
+            partes.length===2 &&
+            partes[1].length===3
+        ){
+
+            v=
+                partes[0]+
+                partes[1];
+
+        }
+
+        else{
+
+            v=v.replace(",", ".");
+
+        }
+
     }
 
-    else if(tipo === "regra"){
 
-        titulo = "Regra de três";
+    /* 20.000 */
 
-        campos = `
-            <div class="form-group">
-                <label>A</label>
-                <input class="input" id="calcA" type="number">
-            </div>
+    else if(v.includes(".")){
 
-            <div class="form-group">
-                <label>B</label>
-                <input class="input" id="calcB" type="number">
-            </div>
+        const partes=v.split(".");
 
-            <div class="form-group">
-                <label>C</label>
-                <input class="input" id="calcC" type="number">
-            </div>
-        `;
+
+        if(
+            partes.length===2 &&
+            partes[1].length===3
+        ){
+
+            v=
+                partes[0]+
+                partes[1];
+
+        }
+
     }
+
+
+    const numero=parseFloat(v);
+
+
+    return Number.isFinite(numero)
+        ?numero
+        :null;
+
+}
+
+
+/* =========================================================
+   MOEDA
+   ========================================================= */
+
+function moedaBM3(valor){
+
+    return new Intl.NumberFormat(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    ).format(valor);
+
+}
+
+
+/* =========================================================
+   SELECIONAR CÁLCULO
+   ========================================================= */
+
+function selecionarCalculo(tipo){
+
+    calculoAtual=tipo;
+
+
+    const tipoInput=
+        document.getElementById("calcTipo");
+
+
+    if(tipoInput){
+
+        tipoInput.value=tipo;
+
+    }
+
+
+    document
+        .querySelectorAll(".calc-option")
+        .forEach(botao=>{
+
+            botao.classList.toggle(
+                "selected",
+                botao.dataset.calc===tipo
+            );
+
+        });
+
+
+    renderCamposCalculadora(tipo);
+
+
+    const resultado=
+        document.getElementById(
+            "calcResultado"
+        );
+
+
+    if(resultado){
+
+        resultado.innerHTML="";
+
+    }
+
+}
+
+
+/* =========================================================
+   CAMPOS DE PESSOAS
+   ========================================================= */
+
+function opcoesPessoasBM3(){
+
+    let html="";
+
+
+    for(let i=1;i<=20;i++){
+
+        html+=`
+
+            <option value="${i}">
+                ${i}
+                ${i===1?"pessoa":"pessoas"}
+            </option>
+
+        `;
+
+    }
+
+
+    return html;
+
+}
+
+
+/* =========================================================
+   RENDER CAMPOS
+   ========================================================= */
+
+function renderCamposCalculadora(tipo){
+
+    const container=
+        document.getElementById(
+            "calcCampos"
+        );
+
+
+    if(!container)return;
+
+
+    let html="";
+
+
+    /* -----------------------------------------------------
+       PORCENTAGEM + DIVISÃO
+       ----------------------------------------------------- */
+
+    if(tipo==="porcentagemDivisao"){
+
+        html=`
+
+            <div class="calc-fields-title">
+                💰 INFORME OS DADOS
+            </div>
+
+
+            <div class="calc-description">
+
+                Informe o valor, a porcentagem
+                que será descontada e entre
+                quantas pessoas o valor restante
+                será dividido.
+
+                <br><br>
+
+                Exemplo:
+
+                <b>20k</b> +
+                <b>25%</b> +
+                <b>3 pessoas</b>.
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 VALOR
+                </label>
+
+                <input
+                    id="calcValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k ou 20.000"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    📉 PORCENTAGEM
+                </label>
+
+                <input
+                    id="calcPorcentagem"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="Ex.: 25"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    👥 DIVIDIR ENTRE
+                </label>
+
+                <select id="calcPessoas">
+
+                    ${opcoesPessoasBM3()}
+
+                </select>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       ADICIONAR %
+       ----------------------------------------------------- */
+
+    else if(tipo==="adicionarPorcentagem"){
+
+        html=`
+
+            <div class="calc-fields-title">
+                📈 ADICIONAR PORCENTAGEM
+            </div>
+
+
+            <div class="calc-description">
+
+                Adiciona uma porcentagem ao
+                valor informado.
+
+                <br><br>
+
+                Exemplo:
+
+                R$ 20.000 + 25% =
+
+                <b>R$ 25.000</b>.
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 VALOR
+                </label>
+
+                <input
+                    id="calcValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    📈 PORCENTAGEM A ADICIONAR
+                </label>
+
+                <input
+                    id="calcPorcentagem"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 25"
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       DESCONTAR %
+       ----------------------------------------------------- */
+
+    else if(tipo==="descontarPorcentagem"){
+
+        html=`
+
+            <div class="calc-fields-title">
+                📉 DESCONTAR PORCENTAGEM
+            </div>
+
+
+            <div class="calc-description">
+
+                Retira uma porcentagem do
+                valor informado.
+
+                <br><br>
+
+                Exemplo:
+
+                R$ 20.000 - 25% =
+
+                <b>R$ 15.000</b>.
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 VALOR
+                </label>
+
+                <input
+                    id="calcValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    📉 PORCENTAGEM A DESCONTAR
+                </label>
+
+                <input
+                    id="calcPorcentagem"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="Ex.: 25"
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       DIVIDIR
+       ----------------------------------------------------- */
+
+    else if(tipo==="dividir"){
+
+        html=`
+
+            <div class="calc-fields-title">
+                👥 DIVIDIR VALOR
+            </div>
+
+
+            <div class="calc-description">
+
+                Divide um valor igualmente
+                entre várias pessoas.
+
+                <br><br>
+
+                Exemplo:
+
+                R$ 20.000 ÷ 3 =
+
+                <b>R$ 6.666,67 pra cada</b>.
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 VALOR
+                </label>
+
+                <input
+                    id="calcValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    👥 QUANTIDADE DE PESSOAS
+                </label>
+
+                <select id="calcPessoas">
+
+                    ${opcoesPessoasBM3()}
+
+                </select>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       MULTIPLICAR
+       ----------------------------------------------------- */
+
+    else if(tipo==="multiplicar"){
+
+        html=`
+
+            <div class="calc-fields-title">
+                ✖️ MULTIPLICAR VALOR
+            </div>
+
+
+            <div class="calc-description">
+
+                Multiplica um valor pelo número
+                informado.
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 VALOR
+                </label>
+
+                <input
+                    id="calcValor"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    ✖️ MULTIPLICADOR
+                </label>
+
+                <input
+                    id="calcMultiplicador"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 3"
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       SOMAR
+       ----------------------------------------------------- */
+
+    else if(tipo==="somar"){
+
+        html=`
+
+            <div class="calc-fields-title">
+                ➕ SOMAR VALORES
+            </div>
+
+
+            <div class="calc-description">
+
+                Soma dois valores.
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 PRIMEIRO VALOR
+                </label>
+
+                <input
+                    id="calcValor1"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 SEGUNDO VALOR
+                </label>
+
+                <input
+                    id="calcValor2"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 5.000"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       SUBTRAIR
+       ----------------------------------------------------- */
+
+    else if(tipo==="subtrair"){
+
+        html=`
+
+            <div class="calc-fields-title">
+                ➖ SUBTRAIR VALORES
+            </div>
+
+
+            <div class="calc-description">
+
+                Subtrai o segundo valor
+                do primeiro.
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 PRIMEIRO VALOR
+                </label>
+
+                <input
+                    id="calcValor1"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 VALOR A SUBTRAIR
+                </label>
+
+                <input
+                    id="calcValor2"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 5.000"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       DESCOBRIR %
+       ----------------------------------------------------- */
+
+    else if(tipo==="porcentagem"){
+
+        html=`
+
+            <div class="calc-fields-title">
+                📊 DESCOBRIR PORCENTAGEM
+            </div>
+
+
+            <div class="calc-description">
+
+                Descubra quantos por cento um
+                valor representa de outro.
+
+                <br><br>
+
+                Exemplo:
+
+                R$ 5.000 de R$ 20.000 =
+
+                <b>25%</b>.
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 VALOR PARCIAL
+                </label>
+
+                <input
+                    id="calcParcial"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 5k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    💰 VALOR TOTAL
+                </label>
+
+                <input
+                    id="calcTotal"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20k"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* -----------------------------------------------------
+       REGRA DE 3
+       ----------------------------------------------------- */
+
+    else if(tipo==="regra3"){
+
+        html=`
+
+            <div class="calc-fields-title">
+                🔢 REGRA DE TRÊS
+            </div>
+
+
+            <div class="calc-description">
+
+                Preencha:
+
+                <br><br>
+
+                <b>A</b> corresponde a <b>B</b>.
+
+                <br>
+
+                <b>C</b> corresponde a <b>X</b>.
+
+                <br><br>
+
+                O BOT calcula automaticamente
+                o valor de <b>X</b>.
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    🔢 VALOR A
+                </label>
+
+                <input
+                    id="calcRegraA"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 100"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    🔢 VALOR B
+                </label>
+
+                <input
+                    id="calcRegraB"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 20"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    🔢 VALOR C
+                </label>
+
+                <input
+                    id="calcRegraC"
+                    type="text"
+                    inputmode="decimal"
+                    placeholder="Ex.: 50"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+    container.innerHTML=html;
+
+}
+
+
+/* =========================================================
+   CALCULAR
+   ========================================================= */
+
+function calcularBM3(){
+
+    const tipo=
+        document.getElementById(
+            "calcTipo"
+        )?.value ||
+        calculoAtual;
+
+
+    const gerando=
+        document.getElementById(
+            "calcGerando"
+        );
+
+
+    const resultado=
+        document.getElementById(
+            "calcResultado"
+        );
+
+
+    if(!gerando || !resultado)return;
+
+
+    resultado.innerHTML="";
+
+
+    if(calcTimer){
+
+        clearTimeout(calcTimer);
+
+    }
+
+
+    let valorInformado;
+    let valorFinal;
+    let resumo;
+    let detalhes=[];
+
+
+    /* =====================================================
+       PORCENTAGEM + DIVISÃO
+       ===================================================== */
+
+    if(tipo==="porcentagemDivisao"){
+
+        const valorTexto=
+            document.getElementById(
+                "calcValor"
+            )?.value.trim();
+
+
+        const porcentagem=
+            Number(
+                document.getElementById(
+                    "calcPorcentagem"
+                )?.value
+            );
+
+
+        const pessoas=
+            Number(
+                document.getElementById(
+                    "calcPessoas"
+                )?.value
+            );
+
+
+        valorInformado=
+            converterValor(
+                valorTexto
+            );
+
+
+        if(
+            valorInformado===null ||
+            valorInformado<=0
+        ){
+
+            toast(
+                "Digite um valor válido. Ex.: 20k"
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isFinite(porcentagem) ||
+            porcentagem<0 ||
+            porcentagem>100
+        ){
+
+            toast(
+                "Digite uma porcentagem entre 0 e 100."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isFinite(pessoas) ||
+            pessoas<1
+        ){
+
+            toast(
+                "Escolha a quantidade de pessoas."
+            );
+
+            return;
+
+        }
+
+
+        const desconto=
+            valorInformado*
+            (porcentagem/100);
+
+
+        const restante=
+            valorInformado-
+            desconto;
+
+
+        const cada=
+            restante/pessoas;
+
+
+        detalhes=[
+
+            `💰 Valor informado: <b>${moedaBM3(valorInformado)}</b>`,
+
+            `📉 Porcentagem: <b>${porcentagem}%</b>`,
+
+            `💸 Desconto: <b>${moedaBM3(desconto)}</b>`,
+
+            `💵 Valor restante: <b>${moedaBM3(restante)}</b>`,
+
+            `👥 Pessoas: <b>${pessoas}</b>`,
+
+            `<div class="calc-divider"></div>`,
+
+            `🧮 ${moedaBM3(restante)} ÷ ${pessoas}`
+
+        ];
+
+
+        resumo=
+            `RESUMO : 🍀 ${moedaBM3(cada)} pra cada`;
+
+    }
+
+
+    /* =====================================================
+       ADICIONAR %
+       ===================================================== */
+
+    else if(tipo==="adicionarPorcentagem"){
+
+        valorInformado=
+            converterValor(
+                document.getElementById(
+                    "calcValor"
+                )?.value
+            );
+
+
+        const porcentagem=
+            Number(
+                document.getElementById(
+                    "calcPorcentagem"
+                )?.value
+            );
+
+
+        if(
+            valorInformado===null ||
+            valorInformado<=0
+        ){
+
+            toast(
+                "Digite um valor válido."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isFinite(porcentagem) ||
+            porcentagem<0
+        ){
+
+            toast(
+                "Digite uma porcentagem válida."
+            );
+
+            return;
+
+        }
+
+
+        const acrescimo=
+            valorInformado*
+            (porcentagem/100);
+
+
+        valorFinal=
+            valorInformado+
+            acrescimo;
+
+
+        detalhes=[
+
+            `💰 Valor informado: <b>${moedaBM3(valorInformado)}</b>`,
+
+            `📈 Porcentagem: <b>${porcentagem}%</b>`,
+
+            `💵 Acréscimo: <b>${moedaBM3(acrescimo)}</b>`,
+
+            `<div class="calc-divider"></div>`,
+
+            `🧮 ${moedaBM3(valorInformado)} + ${moedaBM3(acrescimo)}`
+
+        ];
+
+
+        resumo=
+            `RESUMO : 🍀 ${moedaBM3(valorFinal)}`;
+
+    }
+
+
+    /* =====================================================
+       DESCONTAR %
+       ===================================================== */
+
+    else if(tipo==="descontarPorcentagem"){
+
+        valorInformado=
+            converterValor(
+                document.getElementById(
+                    "calcValor"
+                )?.value
+            );
+
+
+        const porcentagem=
+            Number(
+                document.getElementById(
+                    "calcPorcentagem"
+                )?.value
+            );
+
+
+        if(
+            valorInformado===null ||
+            valorInformado<=0
+        ){
+
+            toast(
+                "Digite um valor válido."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isFinite(porcentagem) ||
+            porcentagem<0 ||
+            porcentagem>100
+        ){
+
+            toast(
+                "Digite uma porcentagem entre 0 e 100."
+            );
+
+            return;
+
+        }
+
+
+        const desconto=
+            valorInformado*
+            (porcentagem/100);
+
+
+        valorFinal=
+            valorInformado-
+            desconto;
+
+
+        detalhes=[
+
+            `💰 Valor informado: <b>${moedaBM3(valorInformado)}</b>`,
+
+            `📉 Porcentagem: <b>${porcentagem}%</b>`,
+
+            `💸 Desconto: <b>${moedaBM3(desconto)}</b>`,
+
+            `<div class="calc-divider"></div>`,
+
+            `💵 Valor restante: <b>${moedaBM3(valorFinal)}</b>`
+
+        ];
+
+
+        resumo=
+            `RESUMO : 🍀 ${moedaBM3(valorFinal)}`;
+
+    }
+
+
+    /* =====================================================
+       DIVIDIR
+       ===================================================== */
+
+    else if(tipo==="dividir"){
+
+        valorInformado=
+            converterValor(
+                document.getElementById(
+                    "calcValor"
+                )?.value
+            );
+
+
+        const pessoas=
+            Number(
+                document.getElementById(
+                    "calcPessoas"
+                )?.value
+            );
+
+
+        if(
+            valorInformado===null ||
+            valorInformado<=0
+        ){
+
+            toast(
+                "Digite um valor válido."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isFinite(pessoas) ||
+            pessoas<1
+        ){
+
+            toast(
+                "Escolha a quantidade de pessoas."
+            );
+
+            return;
+
+        }
+
+
+        valorFinal=
+            valorInformado/
+            pessoas;
+
+
+        detalhes=[
+
+            `💰 Valor: <b>${moedaBM3(valorInformado)}</b>`,
+
+            `👥 Pessoas: <b>${pessoas}</b>`,
+
+            `<div class="calc-divider"></div>`,
+
+            `🧮 ${moedaBM3(valorInformado)} ÷ ${pessoas}`
+
+        ];
+
+
+        resumo=
+            `RESUMO : 🍀 ${moedaBM3(valorFinal)} pra cada`;
+
+    }
+
+
+    /* =====================================================
+       MULTIPLICAR
+       ===================================================== */
+
+    else if(tipo==="multiplicar"){
+
+        valorInformado=
+            converterValor(
+                document.getElementById(
+                    "calcValor"
+                )?.value
+            );
+
+
+        const multiplicador=
+            Number(
+                document.getElementById(
+                    "calcMultiplicador"
+                )?.value
+            );
+
+
+        if(
+            valorInformado===null ||
+            valorInformado<=0
+        ){
+
+            toast(
+                "Digite um valor válido."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isFinite(multiplicador)
+        ){
+
+            toast(
+                "Digite um multiplicador válido."
+            );
+
+            return;
+
+        }
+
+
+        valorFinal=
+            valorInformado*
+            multiplicador;
+
+
+        detalhes=[
+
+            `💰 Valor: <b>${moedaBM3(valorInformado)}</b>`,
+
+            `✖️ Multiplicador: <b>${multiplicador}</b>`,
+
+            `<div class="calc-divider"></div>`,
+
+            `🧮 ${moedaBM3(valorInformado)} × ${multiplicador}`
+
+        ];
+
+
+        resumo=
+            `RESUMO : 🍀 ${moedaBM3(valorFinal)}`;
+
+    }
+
+
+    /* =====================================================
+       SOMAR
+       ===================================================== */
+
+    else if(tipo==="somar"){
+
+        const valor1=
+            converterValor(
+                document.getElementById(
+                    "calcValor1"
+                )?.value
+            );
+
+
+        const valor2=
+            converterValor(
+                document.getElementById(
+                    "calcValor2"
+                )?.value
+            );
+
+
+        if(
+            valor1===null ||
+            valor2===null
+        ){
+
+            toast(
+                "Informe os dois valores."
+            );
+
+            return;
+
+        }
+
+
+        valorFinal=
+            valor1+
+            valor2;
+
+
+        detalhes=[
+
+            `💰 Primeiro valor: <b>${moedaBM3(valor1)}</b>`,
+
+            `💰 Segundo valor: <b>${moedaBM3(valor2)}</b>`,
+
+            `<div class="calc-divider"></div>`,
+
+            `🧮 ${moedaBM3(valor1)} + ${moedaBM3(valor2)}`
+
+        ];
+
+
+        resumo=
+            `RESUMO : 🍀 ${moedaBM3(valorFinal)}`;
+
+    }
+
+
+    /* =====================================================
+       SUBTRAIR
+       ===================================================== */
+
+    else if(tipo==="subtrair"){
+
+        const valor1=
+            converterValor(
+                document.getElementById(
+                    "calcValor1"
+                )?.value
+            );
+
+
+        const valor2=
+            converterValor(
+                document.getElementById(
+                    "calcValor2"
+                )?.value
+            );
+
+
+        if(
+            valor1===null ||
+            valor2===null
+        ){
+
+            toast(
+                "Informe os dois valores."
+            );
+
+            return;
+
+        }
+
+
+        valorFinal=
+            valor1-
+            valor2;
+
+
+        detalhes=[
+
+            `💰 Primeiro valor: <b>${moedaBM3(valor1)}</b>`,
+
+            `💰 Valor subtraído: <b>${moedaBM3(valor2)}</b>`,
+
+            `<div class="calc-divider"></div>`,
+
+            `🧮 ${moedaBM3(valor1)} − ${moedaBM3(valor2)}`
+
+        ];
+
+
+        resumo=
+            `RESUMO : 🍀 ${moedaBM3(valorFinal)}`;
+
+    }
+
+
+    /* =====================================================
+       DESCOBRIR %
+       ===================================================== */
+
+    else if(tipo==="porcentagem"){
+
+        const parcial=
+            converterValor(
+                document.getElementById(
+                    "calcParcial"
+                )?.value
+            );
+
+
+        const total=
+            converterValor(
+                document.getElementById(
+                    "calcTotal"
+                )?.value
+            );
+
+
+        if(
+            parcial===null ||
+            total===null ||
+            total===0
+        ){
+
+            toast(
+                "Informe valores válidos."
+            );
+
+            return;
+
+        }
+
+
+        valorFinal=
+            (parcial/total)*100;
+
+
+        const porcentagemFormatada=
+            valorFinal
+                .toFixed(2)
+                .replace(".",",");
+
+
+        detalhes=[
+
+            `💰 Valor parcial: <b>${moedaBM3(parcial)}</b>`,
+
+            `💰 Valor total: <b>${moedaBM3(total)}</b>`,
+
+            `<div class="calc-divider"></div>`,
+
+            `🧮 ${moedaBM3(parcial)} representa ${porcentagemFormatada}% de ${moedaBM3(total)}`
+
+        ];
+
+
+        resumo=
+            `RESUMO : 🍀 ${porcentagemFormatada}%`;
+
+    }
+
+
+    /* =====================================================
+       REGRA DE 3
+       ===================================================== */
+
+    else if(tipo==="regra3"){
+
+        const a=
+            converterValor(
+                document.getElementById(
+                    "calcRegraA"
+                )?.value
+            );
+
+
+        const b=
+            converterValor(
+                document.getElementById(
+                    "calcRegraB"
+                )?.value
+            );
+
+
+        const c=
+            converterValor(
+                document.getElementById(
+                    "calcRegraC"
+                )?.value
+            );
+
+
+        if(
+            a===null ||
+            b===null ||
+            c===null ||
+            a===0
+        ){
+
+            toast(
+                "Preencha os três valores corretamente."
+            );
+
+            return;
+
+        }
+
+
+        valorFinal=
+            (b*c)/a;
+
+
+        detalhes=[
+
+            `🔢 A = <b>${a}</b>`,
+
+            `🔢 B = <b>${b}</b>`,
+
+            `🔢 C = <b>${c}</b>`,
+
+            `<div class="calc-divider"></div>`,
+
+            `🧮 (${b} × ${c}) ÷ ${a}`
+
+        ];
+
+
+        resumo=
+            `RESUMO : 🍀 ${moedaBM3(valorFinal)}`;
+
+    }
+
 
     else{
 
-        titulo =
-            tipo === "dividir" ? "Dividir" :
-            tipo === "multiplicar" ? "Multiplicar" :
-            tipo === "somar" ? "Somar" :
-            "Subtrair";
-
-        campos = `
-            <div class="form-group">
-                <label>Primeiro valor</label>
-                <input class="input" id="calcA" type="number">
-            </div>
-
-            <div class="form-group">
-                <label>Segundo valor</label>
-                <input class="input" id="calcB" type="number">
-            </div>
-        `;
-    }
-
-    area.innerHTML = `
-
-        <div class="card">
-
-            <div class="card-title">
-                ${titulo}
-            </div>
-
-            ${campos}
-
-            <button
-                class="btn btn-primary"
-                onclick="executarCalculo('${tipo}')"
-            >
-                Calcular
-            </button>
-
-            <div
-                id="calcResultado"
-                class="calc-result"
-                style="display:none;"
-            ></div>
-
-        </div>
-
-    `;
-}
-
-
-function executarCalculo(tipo){
-
-    const a =
-        parseFloat(
-            document.getElementById("calcA")?.value
+        toast(
+            "Escolha um tipo de cálculo."
         );
-
-    const b =
-        parseFloat(
-            document.getElementById("calcB")?.value
-        );
-
-    const c =
-        parseFloat(
-            document.getElementById("calcC")?.value
-        );
-
-    if(Number.isNaN(a) || Number.isNaN(b)){
-
-        toast("Preencha os valores.");
 
         return;
+
     }
 
-    let resultado = 0;
 
-    if(tipo === "porcentagem"){
-        resultado = a * b / 100;
-    }
+    /* =====================================================
+       ANIMAÇÃO GERANDO
+       ===================================================== */
 
-    else if(tipo === "adicionar"){
-        resultado = a + (a * b / 100);
-    }
+    gerando.classList.add("show");
 
-    else if(tipo === "descontar"){
-        resultado = a - (a * b / 100);
-    }
 
-    else if(tipo === "dividir"){
+    calcTimer=setTimeout(()=>{
 
-        if(b === 0){
-            toast("Não é possível dividir por zero.");
-            return;
-        }
+        gerando.classList.remove("show");
 
-        resultado = a / b;
-    }
 
-    else if(tipo === "multiplicar"){
-        resultado = a * b;
-    }
+        resultado.innerHTML=`
 
-    else if(tipo === "somar"){
-        resultado = a + b;
-    }
+            <div class="calc-bot">
 
-    else if(tipo === "subtrair"){
-        resultado = a - b;
-    }
+                <div class="calc-bot-header">
+                    🤖 BOT DO BM3
+                </div>
 
-    else if(tipo === "regra"){
 
-        if(c === undefined || Number.isNaN(c)){
-            toast("Preencha o terceiro valor.");
-            return;
-        }
+                ${detalhes.join("")}
 
-        if(b === 0){
-            toast("B não pode ser zero.");
-            return;
-        }
 
-        resultado = (b * c) / a;
-    }
+                <div class="calc-summary">
 
-    const box =
-        document.getElementById("calcResultado");
+                    ${resumo}
 
-    box.style.display = "block";
+                </div>
 
-    box.textContent =
-        "Resultado: " +
-        Number(resultado.toFixed(4)).toLocaleString("pt-BR");
+            </div>
+
+        `;
+
+
+    },1000);
+
 }
+
+
+/* =========================================================
+   INICIAR CALCULADORA
+   ========================================================= */
+
+renderCamposCalculadora(
+    "porcentagemDivisao"
+);
 
 
 /* =====================================================
@@ -3872,15 +6414,17 @@ window.addEventListener("load", function(){
 
                     mostrarMenu();
 
-                },700);
+                },400);
 
-            },1400);
+            },900);
 
-        },650);
+        },300);
 
-    },1200);
+    },450);
 
     carregarTema();
+
+    prepararBanners();
 
     renderContatos();
 
