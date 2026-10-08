@@ -1681,6 +1681,25 @@ body.dark .script-step-text{
 body.dark .script-step-card{background:linear-gradient(145deg,#171717,#101010);border-color:#292929;box-shadow:0 12px 30px rgba(0,0,0,.28);}
 body.dark .script-step-title{color:#5ee79a;}
 </style>
+
+<style>
+.bm3-view-text{
+    display:block;
+    width:100%;
+    min-height:105px;
+    padding:14px;
+    border:1px solid var(--cinza2);
+    border-radius:14px;
+    background:var(--cinza);
+    color:var(--texto);
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+    line-height:1.55;
+    font-size:14px;
+    box-sizing:border-box;
+    user-select:text;
+}
+</style>
 </head>
 
 <body>
@@ -2871,7 +2890,7 @@ body:not(.dark) .calculator-card{
             </h4>
 
             <p>
-                Organize, edite e copie seu roteiro em 5 passos.
+                Visualize e copie seu roteiro em 5 passos.
             </p>
         </div>
 
@@ -6559,14 +6578,9 @@ window.addEventListener("load", function(){
 
 
 <script>
-/* =========================================================
-   SCRIPT BM3 — EDITE OS 5 PASSOS AQUI
-   Troque somente o texto entre as aspas de cada PASSO.
-   ========================================================= */
+/* SCRIPT BM3 */
 const PASSO_1 = "Olá (nome), bom dia! Tudo bem?";
-
 const PASSO_2 = "Trago ótimas noticias sobre o seu processo!🙌";
-
 const PASSO_3 = "O juiz concedeu como procedente ao nosso favor, a decisão judicial foi totalmente favorável a causa.
 
 (MANDA O PFF)
@@ -6574,7 +6588,6 @@ const PASSO_3 = "O juiz concedeu como procedente ao nosso favor, a decisão judi
 EM SEGUIDA O VALOR DA CAUSA QUE FICA NO FINAL
 
 O valor acima encontra-se em aberto, disponível para liberação.";
-
 const PASSO_4 = "Nosso próximo passo será realizar o cadastro de uma instituição financeira em sua titularidade.
 
 Pode me encaminhar os seguintes dados para a transferência.
@@ -6584,7 +6597,6 @@ Pode me encaminhar os seguintes dados para a transferência.
 * Agência:
 * Número da conta:
 * Tipo de conta (corrente ou poupança, se houver):";
-
 const PASSO_5 = "Certo, já encaminhei a documentação para o Tribunal de Justiça!
 
 Um representante ira entra em contato para confirmação de dados tira qualquer duvida e efetuar a liberação.
@@ -6592,43 +6604,60 @@ Um representante ira entra em contato para confirmação de dados tira qualquer 
 Para manter o contato segura será solicitado a confirmação do seu código de segurança com 4 dígitos: 
 
 Código de segurança:  0187";
-
 const scriptBM3Padrao = [PASSO_1, PASSO_2, PASSO_3, PASSO_4, PASSO_5];
 
 function carregarScriptBM3(){
     scriptBM3Padrao.forEach((texto,i)=>{
         const el=document.getElementById("scriptBM3Passo"+(i+1));
         if(!el) return;
-        const chave="bm3_script_passo_"+(i+1);
-
         if(i < 2){
+            const chave="bm3_script_passo_"+(i+1);
             const salvo=localStorage.getItem(chave);
             el.textContent=salvo!==null?salvo:texto;
         }else{
-            localStorage.removeItem(chave);
-            if("value" in el) el.value="";
-            else el.textContent="";
+            localStorage.removeItem("bm3_script_passo_"+(i+1));
+            el.textContent="";
         }
     });
+}
+
+function copiarTextoBM3(texto, mensagem){
+    if(!texto.trim()){ toast("Este passo está vazio."); return; }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texto).then(()=>toast(mensagem)).catch(()=>copiarTextoBM3Fallback(texto,mensagem));
+    }else{
+        copiarTextoBM3Fallback(texto,mensagem);
+    }
+}
+
+function copiarTextoBM3Fallback(texto,mensagem){
+    const ta=document.createElement("textarea");
+    ta.value=texto;
+    ta.style.position="fixed";
+    ta.style.left="-9999px";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try{ document.execCommand("copy"); toast(mensagem); }
+    catch(e){ toast("Não foi possível copiar."); }
+    document.body.removeChild(ta);
 }
 
 function copiarScriptBM3(numero){
     const el=document.getElementById("scriptBM3Passo"+numero);
     if(!el) return;
-    const valor=("value" in el ? el.value : el.textContent).trim();
-    if(!valor){toast("Este passo está vazio.");return;}
-    navigator.clipboard.writeText(valor).then(()=>toast("Passo "+numero+" copiado!"));
+    copiarTextoBM3(el.textContent || "", "Passo "+numero+" copiado!");
 }
 
 function copiarScriptBM3Todos(){
     const partes=[];
     for(let i=1;i<=5;i++){
         const el=document.getElementById("scriptBM3Passo"+i);
-        const valor=el ? (("value" in el ? el.value : el.textContent).trim()) : "";
+        const valor=el ? (el.textContent || "").trim() : "";
         if(valor) partes.push("PASSO "+i+"\n"+valor);
     }
-    if(!partes.length){toast("O script está vazio.");return;}
-    navigator.clipboard.writeText(partes.join("\n\n")).then(()=>toast("Script BM3 copiado!"));
+    if(!partes.length){ toast("O script está vazio."); return; }
+    copiarTextoBM3(partes.join("\n\n"), "Script BM3 copiado!");
 }
 </script>
 </body>
