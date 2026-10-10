@@ -1688,9 +1688,50 @@ body.dark .script-step-title{color:#5ee79a;}
 .auth-userbar button{border:0;border-radius:8px;padding:7px 9px;background:#cd212a;color:#fff;font-weight:800;cursor:pointer;}
 body.dark .auth-userbar{display:none;}
 </style>
+
+<style>
+/* ABERTURA CINEMATOGRÁFICA BM3 — paleta original verde/vermelho/preto */
+#bm3Intro{position:fixed;inset:0;z-index:30000;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at center,#171717 0%,#070707 58%,#000 100%);color:#fff;opacity:1;visibility:visible;transition:opacity .8s ease,visibility .8s ease;}
+#bm3Intro.finished{opacity:0;visibility:hidden;pointer-events:none}
+#bm3Intro .bm3-intro-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,166,81,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(205,33,42,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(transparent,#000 35%,#000 75%,transparent);transform:perspective(450px) rotateX(58deg) scale(1.8) translateY(20%);animation:bm3GridMove 5s linear infinite;}
+#bm3Intro .bm3-intro-glow{position:absolute;width:min(70vw,520px);aspect-ratio:1;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 12%,rgba(0,166,81,.8) 18%,transparent 31% 48%,rgba(205,33,42,.8) 58%,transparent 72% 100%);filter:blur(22px);opacity:.42;animation:bm3Orbit 8s linear infinite;}
+#bm3Intro .bm3-intro-content{position:relative;z-index:2;width:min(92%,520px);text-align:center;animation:bm3Reveal 1.1s cubic-bezier(.2,.8,.2,1) both;}
+#bm3Intro .bm3-emblem{width:clamp(112px,25vw,170px);height:clamp(112px,25vw,170px);object-fit:contain;border-radius:30%;filter:drop-shadow(0 0 15px rgba(0,166,81,.55)) drop-shadow(0 0 26px rgba(205,33,42,.3));animation:bm3LogoPulse 2.4s ease-in-out infinite;}
+#bm3Intro .bm3-intro-title{margin-top:18px;font-size:clamp(26px,6vw,43px);font-weight:950;letter-spacing:2px;text-shadow:0 0 25px rgba(255,255,255,.13)}
+#bm3Intro .bm3-intro-sub{margin-top:7px;color:#aaa;font-size:14px;letter-spacing:.5px}
+#bm3Intro .bm3-intro-status{margin-top:34px;color:#ddd;font-size:10px;font-weight:800;letter-spacing:4px}
+#bm3Intro .bm3-progress{height:5px;width:min(78%,360px);margin:14px auto 0;border:1px solid #333;border-radius:99px;overflow:hidden;background:#101010}
+#bm3Intro .bm3-progress span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#008c45,#00a651,#fff 55%,#cd212a);box-shadow:0 0 15px rgba(0,166,81,.6);animation:bm3Progress 4.1s ease forwards}
+#bm3Intro .bm3-particle{position:absolute;width:3px;height:3px;border-radius:50%;background:#00d866;box-shadow:0 0 12px currentColor;animation:bm3Particle 4.5s ease-in-out infinite;opacity:.75}
+#bm3Intro .bm3-particle.red{background:#ff3440;color:#ff3440}
+@keyframes bm3Reveal{from{opacity:0;transform:translateY(24px) scale(.94);filter:blur(8px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes bm3LogoPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes bm3Orbit{to{transform:rotate(360deg)}}
+@keyframes bm3GridMove{to{background-position:0 44px,44px 0}}
+@keyframes bm3Progress{0%{width:0}25%{width:28%}65%{width:72%}100%{width:100%}}
+@keyframes bm3Particle{0%,100%{transform:translate3d(0,18px,0) scale(.7);opacity:.1}50%{transform:translate3d(18px,-22px,0) scale(1.4);opacity:.9}}
+@media(prefers-reduced-motion:reduce){#bm3Intro *,#bm3Intro *::before{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+
 </head>
 
 <body>
+<div id="bm3Intro" aria-label="Inicializando Bot do BM3">
+  <div class="bm3-intro-grid"></div><div class="bm3-intro-glow"></div>
+  <span class="bm3-particle" style="left:13%;top:27%;animation-delay:-.5s"></span>
+  <span class="bm3-particle red" style="left:82%;top:24%;animation-delay:-1.8s"></span>
+  <span class="bm3-particle" style="left:22%;top:72%;animation-delay:-2.2s"></span>
+  <span class="bm3-particle red" style="left:76%;top:68%;animation-delay:-.9s"></span>
+  <span class="bm3-particle" style="left:50%;top:13%;animation-delay:-3s"></span>
+  <div class="bm3-intro-content">
+    <img class="bm3-emblem" src="https://painel-bm3.vercel.app/logo.png" alt="Logo BM3" onerror="this.style.display='none'">
+    <div class="bm3-intro-title">BOT DO BM3</div>
+    <div class="bm3-intro-sub">Organizador premium</div>
+    <div class="bm3-intro-status">INICIALIZANDO SISTEMA...</div>
+    <div class="bm3-progress"><span></span></div>
+  </div>
+</div>
+
 <div id="authGate">
   <div class="auth-box">
     <img class="auth-logo" src="https://painel-bm3.vercel.app/logo.png" alt="BM3" onerror="this.style.display='none'">
@@ -2925,31 +2966,31 @@ body:not(.dark) .calculator-card{
     <div class="script-bm3-card-wrap">
         <div class="script-step-card">
             <div class="script-step-title">PASSO 1</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo1" readonly></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo1"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(1)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 2</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo2" readonly></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo2"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(2)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 3</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo3" readonly></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo3"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(3)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 4</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo4" readonly></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo4"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(4)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 5</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo5" readonly></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo5"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(5)">📋 Copiar passo</button>
         </div>
 
@@ -6544,39 +6585,15 @@ window.addEventListener("load", function(){
 
 <script>
 /* =========================================================
-   SCRIPT BM3 — EDITE OS 5 PASSOS AQUI
-   Troque somente o texto entre as aspas de cada PASSO.
-   ========================================================= */
-const PASSO_1 = "Olá (nome), bom dia! Tudo bem?";
-
-const PASSO_2 = "Trago ótimas noticias sobre o seu processo!🙌";
-
-const PASSO_3 = `O juiz concedeu como procedente ao nosso favor, a decisão judicial foi totalmente favorável a causa.
-
-(MANDA O PFF)
-
-EM SEGUIDA O VALOR DA CAUSA QUE FICA NO FINAL
-
-O valor acima encontra-se em aberto, disponível para liberação`;
-
-const PASSO_4 = `Nosso próximo passo será realizar o cadastro de uma instituição financeira em sua titularidade.
-
-Pode me encaminhar os seguintes dados para a transferência.
-
-* Nome completo:
-* Nome do banco:
-* Agência:
-* Número da conta:
-* Tipo de conta (corrente ou poupança, se houver):`;
-
-const PASSO_5 = `Certo, já encaminhei a documentação para o Tribunal de Justiça!
-
-Um representante ira entra em contato para confirmação de dados tira qualquer duvida e efetuar a liberação.
-
-Para manter o contato segura será solicitado a confirmação do seu código de segurança com 4 dígitos:
-
-Código de segurança: 0187`;
-
+   SCRIPT BM3 — 5 PASSOS EDITÁVEIS E COPIÁVEIS
+   Modelos genéricos de atendimento: personalize com informações
+   verdadeiras. Nunca peça senha, PIN ou código de segurança.
+========================================================= */
+const PASSO_1 = "Olá, (nome)! Tudo bem? Aqui é (seu nome), da equipe de atendimento.";
+const PASSO_2 = "Estou entrando em contato para atualizar você sobre sua solicitação. Posso confirmar se este é um bom momento para conversarmos?";
+const PASSO_3 = "Consultei o status da sua solicitação e gostaria de compartilhar as informações confirmadas: (descreva aqui a atualização real). Se tiver dúvidas, posso ajudar.";
+const PASSO_4 = "Para dar continuidade, utilize apenas o canal oficial e envie somente os documentos estritamente necessários. Não compartilhe senhas, PINs ou códigos de autenticação.";
+const PASSO_5 = "Obrigado pelo contato! O próximo passo é (descreva a próxima etapa confirmada). Se precisar, entre em contato pelos canais oficiais de atendimento.";
 const scriptBM3Padrao = [PASSO_1, PASSO_2, PASSO_3, PASSO_4, PASSO_5];
 
 function carregarScriptBM3(){
@@ -6584,16 +6601,39 @@ function carregarScriptBM3(){
         const el=document.getElementById("scriptBM3Passo"+(i+1));
         if(!el) return;
         const chave="bm3_script_passo_"+(i+1);
-        const salvo=localStorage.getItem(chave);
-        el.value=salvo!==null?salvo:texto;
-        el.oninput=function(){localStorage.setItem(chave,el.value);};
+        let salvo=null;
+        try{salvo=localStorage.getItem(chave);}catch(e){console.warn("BM3: armazenamento local indisponível",e);}
+        el.value=(salvo!==null && salvo.trim()!="")?salvo:texto;
+        el.oninput=function(){
+            try{localStorage.setItem(chave,el.value);}catch(e){console.warn("BM3: não foi possível salvar o passo",e);}
+        };
     });
+}
+
+async function bm3CopiarTexto(texto,mensagem){
+    try{
+        if(navigator.clipboard && window.isSecureContext){
+            await navigator.clipboard.writeText(texto);
+        }else{
+            const campo=document.createElement("textarea");
+            campo.value=texto;campo.setAttribute("readonly","");
+            campo.style.position="fixed";campo.style.opacity="0";campo.style.pointerEvents="none";
+            document.body.appendChild(campo);campo.select();
+            const ok=document.execCommand("copy");campo.remove();
+            if(!ok) throw new Error("A cópia foi bloqueada pelo navegador.");
+        }
+        toast(mensagem);
+    }catch(e){
+        console.error("BM3 copiar:",e);
+        toast("Não foi possível copiar. Selecione o texto e copie manualmente.");
+    }
 }
 
 function copiarScriptBM3(numero){
     const el=document.getElementById("scriptBM3Passo"+numero);
     if(!el || !el.value.trim()){toast("Este passo está vazio.");return;}
-    navigator.clipboard.writeText(el.value).then(()=>toast("Passo "+numero+" copiado!"));
+    try{localStorage.setItem("bm3_script_passo_"+numero,el.value);}catch(e){}
+    bm3CopiarTexto(el.value,"Passo "+numero+" copiado!");
 }
 
 function copiarScriptBM3Todos(){
@@ -6603,7 +6643,7 @@ function copiarScriptBM3Todos(){
         if(el && el.value.trim()) partes.push("PASSO "+i+"\n"+el.value.trim());
     }
     if(!partes.length){toast("O script está vazio.");return;}
-    navigator.clipboard.writeText(partes.join("\n\n")).then(()=>toast("Script BM3 copiado!"));
+    bm3CopiarTexto(partes.join("\n\n"),"Script BM3 copiado!");
 }
 </script>
 
@@ -6775,5 +6815,20 @@ bm3Supabase.auth.onAuthStateChange(async (event,session)=>{
     if(!session && window.bm3Autenticado) await bm3Sair(true);
 });
 </script>
+
+<script>
+/* Abertura cinematográfica curta; o login permanece por baixo da animação. */
+(function(){
+  const intro=document.getElementById('bm3Intro');
+  if(!intro) return;
+  const reduzir=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const duracao=reduzir?250:4600;
+  window.setTimeout(()=>{
+    intro.classList.add('finished');
+    window.setTimeout(()=>intro.remove(),900);
+  },duracao);
+})();
+</script>
+
 </body>
 </html> 
