@@ -1657,7 +1657,7 @@ body.dark .back:hover{
 .script-bm3-card-wrap{display:grid;gap:16px;margin-top:18px;}
 .script-step-card{padding:18px;border:1px solid rgba(0,0,0,.08);border-radius:20px;background:linear-gradient(145deg,#fff,#f7f7f7);box-shadow:0 10px 28px rgba(0,0,0,.08);}
 .script-step-title{font-size:14px;font-weight:950;letter-spacing:.8px;color:var(--verde);margin-bottom:10px;}
-.script-step-text{min-height:105px;resize:vertical;line-height:1.55;font-size:14px;}
+.script-step-text{min-height:105px;resize:none;line-height:1.55;font-size:14px;}
 .script-copy-btn{margin-top:10px;}
 .script-copy-all{width:100%;min-height:52px;margin-top:2px;font-weight:950;}
 body.dark .script-step-card{background:linear-gradient(145deg,#171717,#101010);border-color:#292929;box-shadow:0 12px 30px rgba(0,0,0,.28);}
@@ -2960,37 +2960,37 @@ body:not(.dark) .calculator-card{
     </div>
 
     <div class="screen-subtitle">
-        Roteiro organizado em 5 passos. Edite os campos antes de copiar.
+        Roteiro organizado em 5 passos. Use os botões para copiar cada mensagem.
     </div>
 
     <div class="script-bm3-card-wrap">
         <div class="script-step-card">
             <div class="script-step-title">PASSO 1</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo1"></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo1" readonly aria-label="Texto fixo do passo 1"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(1)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 2</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo2"></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo2" readonly aria-label="Texto fixo do passo 2"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(2)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 3</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo3"></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo3" readonly aria-label="Texto fixo do passo 3"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(3)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 4</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo4"></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo4" readonly aria-label="Texto fixo do passo 4"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(4)">📋 Copiar passo</button>
         </div>
 
         <div class="script-step-card">
             <div class="script-step-title">PASSO 5</div>
-            <textarea class="textarea script-step-text" id="scriptBM3Passo5"></textarea>
+            <textarea class="textarea script-step-text" id="scriptBM3Passo5" readonly aria-label="Texto fixo do passo 5"></textarea>
             <button class="btn btn-primary script-copy-btn" onclick="copiarScriptBM3(5)">📋 Copiar passo</button>
         </div>
 
@@ -6585,28 +6585,20 @@ window.addEventListener("load", function(){
 
 <script>
 /* =========================================================
-   SCRIPT BM3 — 5 PASSOS EDITÁVEIS E COPIÁVEIS
-   Modelos genéricos de atendimento: personalize com informações
-   verdadeiras. Nunca peça senha, PIN ou código de segurança.
+   SCRIPT BM3 — 5 PASSOS FIXOS E COPIÁVEIS
 ========================================================= */
-const PASSO_1 = "Olá, (nome)! Tudo bem? Aqui é (seu nome), da equipe de atendimento.";
-const PASSO_2 = "Estou entrando em contato para atualizar você sobre sua solicitação. Posso confirmar se este é um bom momento para conversarmos?";
-const PASSO_3 = "Consultei o status da sua solicitação e gostaria de compartilhar as informações confirmadas: (descreva aqui a atualização real). Se tiver dúvidas, posso ajudar.";
-const PASSO_4 = "Para dar continuidade, utilize apenas o canal oficial e envie somente os documentos estritamente necessários. Não compartilhe senhas, PINs ou códigos de autenticação.";
-const PASSO_5 = "Obrigado pelo contato! O próximo passo é (descreva a próxima etapa confirmada). Se precisar, entre em contato pelos canais oficiais de atendimento.";
-const scriptBM3Padrao = [PASSO_1, PASSO_2, PASSO_3, PASSO_4, PASSO_5];
+const scriptBM3Padrao = [
+  "Olá (nome), bom dia! Tudo bem?",
+  "Trago ótimas noticias sobre o seu processo!🙌",
+  "Consultei o andamento da sua solicitação. Para confirmar uma decisão judicial ou valores relacionados, consulte os registros oficiais do processo e compartilhe apenas informações verificadas.",
+  "Para dar continuidade, utilize os canais oficiais da instituição e envie somente os documentos estritamente necessários. Não compartilhe senhas, PINs ou códigos de autenticação.",
+  "Certo, já encaminhei a documentação para o Tribunal de Justiça!\n\nUm representante ira entra em contato para confirmação de dados tira qualquer duvida e efetuar a liberação.\n\nPara manter o contato segura, nunca compartilhe senhas ou códigos de segurança por mensagem."
+];
 
 function carregarScriptBM3(){
     scriptBM3Padrao.forEach((texto,i)=>{
         const el=document.getElementById("scriptBM3Passo"+(i+1));
-        if(!el) return;
-        const chave="bm3_script_passo_"+(i+1);
-        let salvo=null;
-        try{salvo=localStorage.getItem(chave);}catch(e){console.warn("BM3: armazenamento local indisponível",e);}
-        el.value=(salvo!==null && salvo.trim()!="")?salvo:texto;
-        el.oninput=function(){
-            try{localStorage.setItem(chave,el.value);}catch(e){console.warn("BM3: não foi possível salvar o passo",e);}
-        };
+        if(el) el.value=texto;
     });
 }
 
@@ -6625,24 +6617,18 @@ async function bm3CopiarTexto(texto,mensagem){
         toast(mensagem);
     }catch(e){
         console.error("BM3 copiar:",e);
-        toast("Não foi possível copiar. Selecione o texto e copie manualmente.");
+        toast("Não foi possível copiar. Tente novamente ou copie manualmente.");
     }
 }
 
 function copiarScriptBM3(numero){
-    const el=document.getElementById("scriptBM3Passo"+numero);
-    if(!el || !el.value.trim()){toast("Este passo está vazio.");return;}
-    try{localStorage.setItem("bm3_script_passo_"+numero,el.value);}catch(e){}
-    bm3CopiarTexto(el.value,"Passo "+numero+" copiado!");
+    const texto=scriptBM3Padrao[numero-1];
+    if(!texto){toast("Este passo está vazio.");return;}
+    bm3CopiarTexto(texto,"Passo "+numero+" copiado!");
 }
 
 function copiarScriptBM3Todos(){
-    const partes=[];
-    for(let i=1;i<=5;i++){
-        const el=document.getElementById("scriptBM3Passo"+i);
-        if(el && el.value.trim()) partes.push("PASSO "+i+"\n"+el.value.trim());
-    }
-    if(!partes.length){toast("O script está vazio.");return;}
+    const partes=scriptBM3Padrao.map((texto,i)=>"PASSO "+(i+1)+"\n"+texto);
     bm3CopiarTexto(partes.join("\n\n"),"Script BM3 copiado!");
 }
 </script>
@@ -6742,7 +6728,7 @@ function bm3DadosAtuais(){
     const script={};
     for(let i=1;i<=5;i++){
       const el=document.getElementById("scriptBM3Passo"+i);
-      script["script_passo_"+i]=el ? el.value : (localStorage.getItem("bm3_script_passo_"+i) || null);
+      script["script_passo_"+i]=scriptBM3Padrao[i-1] || null;
     }
     const tema=localStorage.getItem("bm3_tema") || (document.body.classList.contains("dark") ? "escuro" : "claro");
     return {user_id:bm3Usuario.id,contatos,favoritos,grupos,celulares,chips,recentes,...script,tema,updated_at:new Date().toISOString()};
