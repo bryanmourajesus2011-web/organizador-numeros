@@ -3807,43 +3807,67 @@ function renderContatos(){
         return;
     }
 
-    lista.innerHTML = filtrados.map(function(c){
+    // Agrupa os contatos pelo DDD para manter cada região em uma seção separada.
+    const grupos = {};
+    filtrados.forEach(function(c){
+        const ddd = String(c.ddd || "").replace(/\D/g, "") || "Sem DDD";
+        if(!grupos[ddd]) grupos[ddd] = [];
+        grupos[ddd].push(c);
+    });
 
-        let statusTexto = "🟡 ANÁLISE";
-        let classe = "status-analysis";
+    const ordemDDD = Object.keys(grupos).sort(function(a, b){
+        if(a === "Sem DDD") return 1;
+        if(b === "Sem DDD") return -1;
+        return Number(a) - Number(b);
+    });
 
-        if(c.status === "on" || c.status === "ON"){
-            statusTexto = "🟢 ZAP ON";
-            classe = "status-on";
-        }
+    lista.innerHTML = ordemDDD.map(function(ddd){
+        const contatosDoDDD = grupos[ddd].map(function(c){
+            let statusTexto = "🟡 ANÁLISE";
+            let classe = "status-analysis";
 
-        if(c.status === "off" || c.status === "OFF"){
-            statusTexto = "🔴 ZAP OFF";
-            classe = "status-off";
-        }
+            if(c.status === "on" || c.status === "ON"){
+                statusTexto = "🟢 ZAP ON";
+                classe = "status-on";
+            }
 
-        const numeroCompleto = bm3MontarNumeroWhatsApp(c.ddd, c.numero);
+            if(c.status === "off" || c.status === "OFF"){
+                statusTexto = "🔴 ZAP OFF";
+                classe = "status-off";
+            }
 
-        const favorito = favoritos.includes(c.id);
+            const numeroCompleto = bm3MontarNumeroWhatsApp(c.ddd, c.numero);
+            const favorito = favoritos.includes(c.id);
 
-        return `
-            <div class="contact-item">
-                <div class="contact-info">
-                    <div class="contact-name">${escapar(c.nome || "")}</div>
-                    <div class="contact-number">
-                        ${c.ddd ? "(" + escapar(c.ddd) + ") " : ""}${escapar(c.numero || "")}
+            return `
+                <div class="contact-item">
+                    <div class="contact-info">
+                        <div class="contact-name">${escapar(c.nome || "")}</div>
+                        <div class="contact-number">
+                            ${c.ddd ? "(" + escapar(c.ddd) + ") " : ""}${escapar(c.numero || "")}
+                        </div>
+                        <span class="status ${classe}">${statusTexto}</span>
+                        ${c.obs ? `<div class="contact-number">📝 ${escapar(c.obs)}</div>` : ""}
                     </div>
-                    <span class="status ${classe}">${statusTexto}</span>
-                    ${c.obs ? `<div class="contact-number">📝 ${escapar(c.obs)}</div>` : ""}
-                </div>
 
-                <div class="contact-actions">
-                    <button class="small-btn" onclick="abrirContatoWhatsApp('${numeroCompleto}')" title="WhatsApp">💬</button>
-                    <button class="small-btn" onclick="editarContato(${c.id})" title="Editar">✏️</button>
-                    <button class="small-btn" onclick="alternarFavorito(${c.id})" title="Favorito">${favorito ? "⭐" : "☆"}</button>
-                    <button class="small-btn" onclick="excluirContato(${c.id})" title="Excluir">🗑️</button>
+                    <div class="contact-actions">
+                        <button class="small-btn" onclick="abrirContatoWhatsApp('${numeroCompleto}')" title="WhatsApp">💬</button>
+                        <button class="small-btn" onclick="editarContato(${c.id})" title="Editar">✏️</button>
+                        <button class="small-btn" onclick="alternarFavorito(${c.id})" title="Favorito">${favorito ? "⭐" : "☆"}</button>
+                        <button class="small-btn" onclick="excluirContato(${c.id})" title="Excluir">🗑️</button>
+                    </div>
                 </div>
-            </div>
+            `;
+        }).join("");
+
+        const tituloDDD = ddd === "Sem DDD" ? "CONTATOS SEM DDD" : "DDD " + escapar(ddd);
+        return `
+            <section class="bm3-grupo-ddd" style="margin:18px 0 24px;">
+                <div style="padding:11px 14px;margin-bottom:10px;border-left:4px solid #f5c400;border-radius:8px;background:rgba(245,196,0,.10);color:#f5c400;font-weight:900;letter-spacing:1px;">
+                    📍 ${tituloDDD} <span style="float:right;opacity:.8;">${grupos[ddd].length} contato(s)</span>
+                </div>
+                ${contatosDoDDD}
+            </section>
         `;
     }).join("");
 }
