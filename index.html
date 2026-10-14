@@ -6703,6 +6703,8 @@ window.bm3Hydrating = false;
 let bm3Usuario = null;
 let bm3Perfil = null;
 let bm3SyncTimer = null;
+let bm3SyncQueue = Promise.resolve();
+let bm3SyncPending = false;
 let bm3AuthMode = "login";
 
 function bm3MostrarAuth(mode){
@@ -6793,18 +6795,47 @@ function bm3DadosAtuais(){
 
 async function bm3Sincronizar(){
     if(!bm3Usuario || window.bm3Hydrating) return;
+    const usuarioId=bm3Usuario.id;
     const payload=bm3DadosAtuais();
-    const {error}=await bm3Supabase.from("bm3_data").upsert(payload,{onConflict:"user_id"});
-    if(error) {
-        console.error("BM3 sync:",error);
-        throw error;
+    bm3SyncPending=true;
+    /* Serializa as gravações para evitar que uma gravação antiga termine depois de uma nova. */
+    bm3SyncQueue=bm3SyncQueue.catch(()=>{}).then(async()=>{
+        if(!bm3Usuario || bm3Usuario.id!==usuarioId) return;
+        const {error}=await bm3Supabase.from("bm3_data").upsert(payload,{onConflict:"user_id"});
+        if(error) throw error;
+        bm3SyncPending=false;
+        console.info("BM3: contatos e dados sincronizados com a nuvem.");
+    });
+    try{
+        await bm3SyncQueue;
+    }catch(e){
+        bm3SyncPending=true;
+        console.error("BM3 sync:",e);
+        toast("Não foi possível sincronizar com a nuvem. Verifique a conexão e tente novamente.");
+        throw e;
     }
 }
 
 function bm3ScheduleSync(){
     clearTimeout(bm3SyncTimer);
-    bm3SyncTimer=setTimeout(()=>bm3Sincronizar(),500);
+    bm3SyncPending=true;
+    /* Espera brevemente por alterações em sequência, mas grava logo em seguida. */
+    bm3SyncTimer=setTimeout(()=>{
+        bm3Sincronizar().catch(()=>{});
+    },200);
 }
+
+/* Ao voltar para a aba, tenta enviar qualquer alteração pendente. */
+document.addEventListener("visibilitychange",()=>{
+    if(document.visibilityState==="visible" && bm3SyncPending && bm3Usuario){
+        clearTimeout(bm3SyncTimer);
+        bm3Sincronizar().catch(()=>{});
+    }
+});
+window.addEventListener("pagehide",()=>{
+    /* Inicia a sincronização pendente ao sair; navegadores podem encerrar a página antes de concluir. */
+    if(bm3SyncPending && bm3Usuario) bm3Sincronizar().catch(()=>{});
+});
 
 /* Qualquer alteração feita pelo BM3 aos dados locais também vai para a nuvem. */
 (function(){
