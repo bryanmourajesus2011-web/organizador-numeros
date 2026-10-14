@@ -3737,7 +3737,7 @@ function detectarRegiaoContato(){
         : "📍 DDD não identificado";
 }
 
-function salvarContato(){
+async function salvarContato(){
 
     const nome = document.getElementById("contatoNome")?.value.trim() || "";
     const ddd = document.getElementById("contatoDDD")?.value.trim() || "";
@@ -3774,14 +3774,27 @@ function salvarContato(){
         contatos.push(contato);
     }
 
+    // Salva primeiro no navegador e, estando logado, confirma a gravação na nuvem.
     localStorage.setItem("bm3_contatos", JSON.stringify(contatos));
-
-    toast(existente ? "Contato atualizado!" : "Contato salvo!");
 
     renderContatos();
     renderFavoritos();
     atualizarResumo();
-    voltar();
+
+    if (window.bm3Autenticado && typeof bm3Sincronizar === "function") {
+        clearTimeout(bm3SyncTimer);
+        try {
+            await bm3Sincronizar();
+            toast(existente ? "Contato atualizado e salvo na sua conta!" : "Contato salvo na sua conta!");
+            voltar();
+        } catch (erro) {
+            console.error("Falha ao salvar contato na nuvem:", erro);
+            toast("Contato ficou salvo apenas neste navegador. Verifique a conexão e tente salvar novamente.");
+        }
+    } else {
+        toast("Contato salvo neste navegador, mas entre na sua conta para sincronizar entre links.");
+        voltar();
+    }
 }
 
 function renderContatos(){
@@ -6782,7 +6795,10 @@ async function bm3Sincronizar(){
     if(!bm3Usuario || window.bm3Hydrating) return;
     const payload=bm3DadosAtuais();
     const {error}=await bm3Supabase.from("bm3_data").upsert(payload,{onConflict:"user_id"});
-    if(error) console.error("BM3 sync:",error);
+    if(error) {
+        console.error("BM3 sync:",error);
+        throw error;
+    }
 }
 
 function bm3ScheduleSync(){
