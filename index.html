@@ -3822,9 +3822,7 @@ function renderContatos(){
             classe = "status-off";
         }
 
-        const numeroCompleto =
-            (c.ddd ? "55" + String(c.ddd).replace(/\D/g, "") : "") +
-            String(c.numero || "").replace(/\D/g, "");
+        const numeroCompleto = bm3MontarNumeroWhatsApp(c.ddd, c.numero);
 
         const favorito = favoritos.includes(c.id);
 
@@ -3915,7 +3913,7 @@ function renderFavoritos(){
     }
 
     lista.innerHTML = dados.map(function(c){
-        const numero = (c.ddd ? "55" + c.ddd : "") + String(c.numero || "").replace(/\D/g, "");
+        const numero = bm3MontarNumeroWhatsApp(c.ddd, c.numero);
         return `
             <div class="favorite-item">
                 <div class="contact-name">⭐ ${escapar(c.nome || "")}</div>
@@ -3943,32 +3941,38 @@ function atualizarResumo(){
    WHATSAPP
 ===================================================== */
 
-function abrirContatoWhatsApp(numero){
+/* Monta o número brasileiro no formato internacional aceito pelo WhatsApp. */
+function bm3MontarNumeroWhatsApp(ddd, numero){
+    let d = String(ddd || "").replace(/\D/g, "");
+    let n = String(numero || "").replace(/\D/g, "");
 
-    if(!numero){
-        toast("Número inválido.");
+    // Se o campo número já contém DDD e/ou código do país, evita duplicá-los.
+    if(n.startsWith("00")) n = n.slice(2);
+    if(n.startsWith("55") && n.length >= 12) return n;
+    if(d && n.startsWith(d) && n.length >= 10) return "55" + n;
+    if(d) return "55" + d + n;
+    if(n.length === 10 || n.length === 11) return "55" + n;
+    return n;
+}
+
+function abrirContatoWhatsApp(numero){
+    const telefone = String(numero || "").replace(/\D/g, "");
+
+    if(!telefone || telefone.length < 10){
+        toast("Número inválido. Confira o DDD e o telefone do contato.");
         return;
     }
 
-    recentes =
-        recentes.filter(function(n){
-            return n !== numero;
-        });
+    const numeroFinal = telefone.startsWith("55") ? telefone : "55" + telefone;
 
-    recentes.unshift(numero);
+    recentes = recentes.filter(function(n){ return n !== numeroFinal; });
+    recentes.unshift(numeroFinal);
+    recentes = recentes.slice(0,20);
 
-    recentes =
-        recentes.slice(0,20);
+    localStorage.setItem("bm3_recentes", JSON.stringify(recentes));
 
-    localStorage.setItem(
-        "bm3_recentes",
-        JSON.stringify(recentes)
-    );
-
-    window.open(
-        "https://wa.me/" + numero,
-        "_blank"
-    );
+    // Abre a conversa em uma nova aba sem alterar a tela do painel.
+    window.open("https://wa.me/" + encodeURIComponent(numeroFinal), "_blank", "noopener");
 }
 
 
