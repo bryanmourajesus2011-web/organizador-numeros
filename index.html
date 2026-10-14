@@ -2581,8 +2581,268 @@ body:not(.dark) .calculator-card{
 
 </section>
 
+```html
+<!-- ==================================================
+     BM3 — CENTRAL DE CELULARES
+     HTML + CSS + JAVASCRIPT
+================================================== -->
+
+<style>
+#celulares,
+#novoCelular {
+    --bm3-yellow: #F5C400;
+    --bm3-black: #101010;
+    --bm3-white: #FFFFFF;
+    --bm3-border: #393939;
+    color: var(--bm3-white);
+}
+
+#celulares .cellular-hero,
+#novoCelular .cellular-form-card {
+    background: #151515;
+    border: 1px solid var(--bm3-border);
+    border-radius: 14px;
+    padding: 18px;
+    margin: 18px 0;
+}
+
+#celulares .cellular-hero h3 {
+    color: var(--bm3-yellow);
+    margin-top: 0;
+}
+
+#celulares .cellular-hero p,
+#novoCelular .cellular-form-head span {
+    color: #BBBBBB;
+    font-size: 13px;
+}
+
+#celulares .cellular-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+#celulares .cellular-count {
+    color: var(--bm3-yellow);
+    font-weight: 700;
+}
+
+#celulares .cellular-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+#celulares .bm3-device {
+    background: #151515;
+    border: 1px solid #414141;
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 0;
+}
+
+#celulares .bm3-device h3 {
+    color: var(--bm3-yellow);
+    overflow-wrap: anywhere;
+}
+
+#celulares .bm3-device p {
+    color: #DDDDDD;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+#celulares .bm3-device strong {
+    color: var(--bm3-yellow);
+}
+
+#celulares .bm3-device-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+#celulares .bm3-device-actions button {
+    flex: 1;
+    min-width: 90px;
+}
+
+#celulares .bm3-empty {
+    color: #AAAAAA;
+    padding: 20px;
+    border: 1px dashed #444;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#novoCelular .cellular-form-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+#novoCelular .cellular-form-head strong {
+    display: block;
+    color: var(--bm3-yellow);
+    margin-bottom: 5px;
+}
+
+#novoCelular .cellular-form-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 48px;
+    background: var(--bm3-yellow);
+    color: var(--bm3-black);
+    border-radius: 10px;
+    font-size: 24px;
+}
+
+#novoCelular .cellular-field {
+    margin-bottom: 17px;
+}
+
+#novoCelular .cellular-field label,
+#novoCelular .cellular-section-label {
+    display: block;
+    color: var(--bm3-yellow);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    margin-bottom: 8px;
+}
+
+#novoCelular .cellular-field input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #101010;
+    color: #FFF;
+    font-size: 14px;
+}
+
+#novoCelular .cellular-field input:focus {
+    outline: none;
+    border-color: var(--bm3-yellow);
+}
+
+#novoCelular .whatsapp-account {
+    background: #191919;
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 14px;
+    margin: 14px 0;
+}
+
+#novoCelular .whatsapp-account-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--bm3-yellow);
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+#novoCelular .whatsapp-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: var(--bm3-yellow);
+    color: #101010;
+    border-radius: 8px;
+}
+
+#novoCelular .auto-region {
+    color: var(--bm3-yellow);
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+#novoCelular .operator-choice,
+#novoCelular .recharge-choice {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+#celulares .primary,
+#novoCelular .primary,
+#novoCelular .operator-btn,
+#novoCelular .recharge-btn,
+#celulares .bm3-device-actions button {
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-weight: 800;
+    cursor: pointer;
+    border: 1px solid #555;
+    background: #202020;
+    color: #FFF;
+}
+
+#celulares .primary,
+#novoCelular .primary {
+    background: var(--bm3-yellow);
+    border-color: var(--bm3-yellow);
+    color: #101010;
+}
+
+#novoCelular .operator-btn,
+#novoCelular .recharge-btn {
+    flex: 1;
+    min-width: 120px;
+}
+
+#novoCelular .operator-btn.active,
+#novoCelular .recharge-btn.active {
+    background: var(--bm3-yellow);
+    color: #101010;
+    border-color: var(--bm3-yellow);
+}
+
+#novoCelular .cellular-save {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+#celulares .bm3-device-actions .delete {
+    border-color: #777;
+    color: #FFF;
+}
+
+#celulares button:hover,
+#novoCelular button:hover {
+    filter: brightness(1.1);
+}
+
+@media (max-width: 500px) {
+    #celulares .cellular-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #celulares .cellular-list {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+
 <!-- =========================
-     CELULARES
+     TELA: LISTA DE CELULARES
 ========================= -->
 
 <section id="celulares" class="screen">
@@ -2590,81 +2850,655 @@ body:not(.dark) .calculator-card{
     <button class="back" onclick="voltar()">← Voltar</button>
 
     <div class="page-title">📱 Celulares</div>
-    <div class="page-sub">Organize aparelhos, números, operadora e recarga em um só lugar.</div>
+
+    <div class="page-sub">
+        Gerencie seus aparelhos e os números de WhatsApp.
+    </div>
 
     <div class="cellular-hero">
-        <h3>Central de aparelhos</h3>
-        <p>Tenha uma visão rápida de cada celular cadastrado e dos números vinculados.</p>
+        <h3>BM3 — Central de aparelhos</h3>
+        <p>
+            Cadastre celulares, organize o WhatsApp Normal
+            e o WhatsApp Business e edite seus dados.
+        </p>
     </div>
 
     <div class="cellular-toolbar">
-        <button class="primary" onclick="abrirNovoCelular()">➕ ADICIONAR CELULAR</button>
-        <div id="contadorCelulares" class="cellular-count">0 aparelhos</div>
+        <button class="primary" onclick="abrirNovoCelular()">
+            ➕ ADICIONAR CELULAR
+        </button>
+
+        <div id="contadorCelulares" class="cellular-count">
+            0 aparelhos
+        </div>
     </div>
 
     <div id="listaCelulares" class="cellular-list"></div>
 
 </section>
 
-<!-- NOVO CELULAR -->
+
+<!-- =========================
+     TELA: CADASTRAR / EDITAR
+========================= -->
 
 <section id="novoCelular" class="screen">
 
-    <button class="back" onclick="abrirTela('celulares')">← Voltar</button>
+    <button class="back" onclick="abrirTela('celulares')">
+        ← Voltar
+    </button>
 
-    <div class="page-title">📱 Celular</div>
-    <div class="page-sub">Cadastre o aparelho, os números e as informações da linha.</div>
+    <div class="page-title">📱 Cadastro de celular</div>
+
+    <div class="page-sub">
+        Preencha os dados do aparelho e suas contas.
+    </div>
 
     <input type="hidden" id="celularIndex" value="-1">
 
     <div class="card cellular-form-card">
+
         <div class="cellular-form-head">
             <div class="cellular-form-icon">📱</div>
-            <div><strong>Dados do aparelho</strong><span>Preencha as informações abaixo para identificar esta linha.</span></div>
+            <div>
+                <strong>Dados do aparelho</strong>
+                <span>Identifique o celular e os números cadastrados.</span>
+            </div>
         </div>
 
         <div class="cellular-field">
-            <label>NOME DO CELULAR</label>
-            <input id="celularNome" type="text" placeholder="Ex.: iPhone 14 Pro">
+            <label for="celularNome">NOME DO APARELHO</label>
+            <input
+                id="celularNome"
+                type="text"
+                placeholder="Ex.: iPhone principal"
+                maxlength="80"
+            >
         </div>
 
         <div class="cellular-field">
-            <label>📞 NÚMERO PRINCIPAL</label>
-            <input id="celularNumero" type="tel" inputmode="numeric" placeholder="Somente números" oninput="somenteNumeros(this)">
+            <label for="celularNumero">📞 NÚMERO PRINCIPAL</label>
+            <input
+                id="celularNumero"
+                type="tel"
+                inputmode="numeric"
+                placeholder="DDD + número"
+                maxlength="15"
+                oninput="somenteNumeros(this)"
+            >
+        </div>
+
+        <div class="cellular-section-label">
+            CONTAS DO WHATSAPP
+        </div>
+
+        <div class="whatsapp-account">
+            <div class="whatsapp-account-title">
+                <span class="whatsapp-symbol">01</span>
+                WHATSAPP NORMAL
+            </div>
+
+            <div class="cellular-field">
+                <label for="celularWhatsappNormal">
+                    NÚMERO DO WHATSAPP NORMAL
+                </label>
+                <input
+                    id="celularWhatsappNormal"
+                    type="tel"
+                    inputmode="numeric"
+                    placeholder="Ex.: 5513999999999"
+                    maxlength="15"
+                    oninput="somenteNumeros(this)"
+                >
+            </div>
+        </div>
+
+        <div class="whatsapp-account">
+            <div class="whatsapp-account-title">
+                <span class="whatsapp-symbol">02</span>
+                WHATSAPP BUSINESS
+            </div>
+
+            <div class="cellular-field">
+                <label for="celularWhatsappBusiness">
+                    NÚMERO DO WHATSAPP BUSINESS
+                </label>
+                <input
+                    id="celularWhatsappBusiness"
+                    type="tel"
+                    inputmode="numeric"
+                    placeholder="Ex.: 5513988888888"
+                    maxlength="15"
+                    oninput="somenteNumeros(this)"
+                >
+            </div>
         </div>
 
         <div class="cellular-field">
-            <label>💬 NÚMERO DO WHATSAPP</label>
-            <input id="celularWhatsapp" type="tel" inputmode="numeric" placeholder="Somente números" oninput="somenteNumeros(this)">
-        </div>
-
-        <div class="cellular-field">
-            <label>DDD / REGIÃO</label>
-            <input id="celularDDD" type="tel" inputmode="numeric" maxlength="2" placeholder="Ex.: 13" oninput="somenteNumeros(this);detectarRegiaoCelular()">
-            <div id="regiaoCelular" class="auto-region">📍 Digite o DDD para identificar a região</div>
+            <label for="celularDDD">DDD / REGIÃO</label>
+            <input
+                id="celularDDD"
+                type="tel"
+                inputmode="numeric"
+                maxlength="2"
+                placeholder="Ex.: 13"
+                oninput="somenteNumeros(this);detectarRegiaoCelular()"
+            >
+            <div id="regiaoCelular" class="auto-region">
+                📍 Digite o DDD para identificar a região
+            </div>
         </div>
 
         <div class="cellular-section-label">OPERADORA</div>
+
         <div class="operator-choice">
-            <button id="celOpPagueMenos" class="operator-btn" onclick="selecionarOperadoraCelular('PAGUE MENOS')">🟢 PAGUE MENOS</button>
-            <button id="celOpVivo" class="operator-btn" onclick="selecionarOperadoraCelular('VIVO')">🟣 VIVO</button>
+            <button
+                type="button"
+                id="celOpPagueMenos"
+                class="operator-btn active"
+                onclick="selecionarOperadoraCelular('PAGUE MENOS')"
+            >
+                PAGUE MENOS
+            </button>
+
+            <button
+                type="button"
+                id="celOpVivo"
+                class="operator-btn"
+                onclick="selecionarOperadoraCelular('VIVO')"
+            >
+                VIVO
+            </button>
         </div>
+
         <input type="hidden" id="celularOperadora" value="PAGUE MENOS">
 
-        <div style="height:16px"></div>
+        <div style="height:12px"></div>
+
         <div class="cellular-section-label">STATUS DA RECARGA</div>
+
         <div class="recharge-choice">
-            <button id="celRecSim" class="recharge-btn" onclick="selecionarRecargaCelular(true)">🟢 COM RECARGA</button>
-            <button id="celRecNao" class="recharge-btn inactive" onclick="selecionarRecargaCelular(false)">🔴 SEM RECARGA</button>
+            <button
+                type="button"
+                id="celRecSim"
+                class="recharge-btn active"
+                onclick="selecionarRecargaCelular(true)"
+            >
+                COM RECARGA
+            </button>
+
+            <button
+                type="button"
+                id="celRecNao"
+                class="recharge-btn"
+                onclick="selecionarRecargaCelular(false)"
+            >
+                SEM RECARGA
+            </button>
         </div>
+
         <input type="hidden" id="celularRecarga" value="true">
 
-        <button class="primary cellular-save" onclick="salvarCelular()">💾 SALVAR CELULAR</button>
-    </div>
+        <button
+            type="button"
+            class="primary cellular-save"
+            onclick="salvarCelular()"
+        >
+            💾 SALVAR CELULAR
+        </button>
 
+    </div>
 </section>
 
+
 <!-- =========================
+     JAVASCRIPT BM3
+========================= -->
+
+<script>
+(function () {
+    "use strict";
+
+    const STORAGE_KEY = "BM3_CELULARES_V2";
+
+    let celularesBM3 = [];
+    let storageDisponivel = true;
+
+    function carregarDados() {
+        try {
+            const dados = localStorage.getItem(STORAGE_KEY);
+
+            if (dados) {
+                const lista = JSON.parse(dados);
+
+                if (Array.isArray(lista)) {
+                    celularesBM3 = lista;
+                }
+            }
+        } catch (erro) {
+            storageDisponivel = false;
+            console.error("Não foi possível ler os celulares:", erro);
+        }
+    }
+
+    function persistirDados() {
+        try {
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(celularesBM3)
+            );
+
+            storageDisponivel = true;
+            return true;
+        } catch (erro) {
+            storageDisponivel = false;
+
+            alert(
+                "Não foi possível salvar os dados no navegador. " +
+                "Verifique o armazenamento disponível."
+            );
+
+            console.error("Erro ao salvar celulares:", erro);
+            return false;
+        }
+    }
+
+    function valor(id) {
+        const campo = document.getElementById(id);
+        return campo ? campo.value.trim() : "";
+    }
+
+    function definirValor(id, conteudo) {
+        const campo = document.getElementById(id);
+
+        if (campo) {
+            campo.value = conteudo == null ? "" : String(conteudo);
+        }
+    }
+
+    function escapar(texto) {
+        return String(texto == null ? "" : texto).replace(
+            /[&<>"']/g,
+            function (caractere) {
+                return {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                }[caractere];
+            }
+        );
+    }
+
+    function somenteDigitos(texto) {
+        return String(texto || "").replace(/\D/g, "");
+    }
+
+    window.somenteNumeros = function (campo) {
+        campo.value = somenteDigitos(campo.value);
+    };
+
+    window.abrirNovoCelular = function () {
+        limparFormulario();
+        abrirTela("novoCelular");
+    };
+
+    function limparFormulario() {
+        definirValor("celularIndex", "-1");
+        definirValor("celularNome", "");
+        definirValor("celularNumero", "");
+        definirValor("celularWhatsappNormal", "");
+        definirValor("celularWhatsappBusiness", "");
+        definirValor("celularDDD", "");
+        definirValor("celularOperadora", "PAGUE MENOS");
+        definirValor("celularRecarga", "true");
+
+        atualizarBotoes();
+        window.detectarRegiaoCelular();
+    }
+
+    window.selecionarOperadoraCelular = function (operadora) {
+        definirValor("celularOperadora", operadora);
+        atualizarBotoes();
+    };
+
+    window.selecionarRecargaCelular = function (temRecarga) {
+        definirValor("celularRecarga", String(temRecarga));
+        atualizarBotoes();
+    };
+
+    function atualizarBotoes() {
+        const operadora = valor("celularOperadora");
+        const recarga = valor("celularRecarga");
+
+        const pagueMenos = document.getElementById("celOpPagueMenos");
+        const vivo = document.getElementById("celOpVivo");
+        const sim = document.getElementById("celRecSim");
+        const nao = document.getElementById("celRecNao");
+
+        if (pagueMenos) {
+            pagueMenos.classList.toggle(
+                "active",
+                operadora === "PAGUE MENOS"
+            );
+        }
+
+        if (vivo) {
+            vivo.classList.toggle("active", operadora === "VIVO");
+        }
+
+        if (sim) {
+            sim.classList.toggle("active", recarga === "true");
+        }
+
+        if (nao) {
+            nao.classList.toggle("active", recarga === "false");
+        }
+    }
+
+    const regioesDDD = {
+        "11": "São Paulo - SP",
+        "12": "Vale do Paraíba - SP",
+        "13": "Baixada Santista - SP",
+        "14": "Bauru / região - SP",
+        "15": "Sorocaba / região - SP",
+        "16": "Ribeirão Preto / região - SP",
+        "17": "São José do Rio Preto / região - SP",
+        "18": "Oeste Paulista - SP",
+        "19": "Campinas / região - SP",
+        "21": "Rio de Janeiro / região - RJ",
+        "22": "Norte Fluminense - RJ",
+        "24": "Sul Fluminense - RJ",
+        "27": "Espírito Santo - ES",
+        "28": "Sul do Espírito Santo - ES",
+        "31": "Belo Horizonte / região - MG",
+        "32": "Zona da Mata - MG",
+        "33": "Leste de Minas Gerais",
+        "34": "Triângulo Mineiro",
+        "35": "Sul de Minas Gerais",
+        "37": "Centro-Oeste de Minas Gerais",
+        "38": "Norte de Minas Gerais",
+        "41": "Curitiba / região - PR",
+        "42": "Centro-Sul do Paraná",
+        "43": "Norte do Paraná",
+        "44": "Noroeste do Paraná",
+        "45": "Oeste do Paraná",
+        "46": "Sudoeste do Paraná",
+        "47": "Norte de Santa Catarina",
+        "48": "Florianópolis / região - SC",
+        "49": "Oeste de Santa Catarina",
+        "51": "Porto Alegre / região - RS",
+        "53": "Sul do Rio Grande do Sul",
+        "54": "Serra Gaúcha / região",
+        "55": "Centro-Oeste do Rio Grande do Sul",
+        "61": "Brasília / região",
+        "62": "Goiânia / região - GO",
+        "63": "Tocantins",
+        "64": "Sul de Goiás",
+        "65": "Cuiabá / região - MT",
+        "66": "Norte de Mato Grosso",
+        "67": "Mato Grosso do Sul",
+        "68": "Acre",
+        "69": "Rondônia",
+        "71": "Salvador / região - BA",
+        "73": "Sul da Bahia",
+        "74": "Norte da Bahia",
+        "75": "Interior da Bahia",
+        "77": "Oeste da Bahia",
+        "79": "Sergipe",
+        "81": "Recife / região - PE",
+        "82": "Alagoas",
+        "83": "Paraíba",
+        "84": "Rio Grande do Norte",
+        "85": "Fortaleza / região - CE",
+        "86": "Teresina / região - PI",
+        "87": "Interior de Pernambuco",
+        "88": "Interior do Ceará",
+        "89": "Interior do Piauí",
+        "91": "Belém / região - PA",
+        "92": "Manaus / região - AM",
+        "93": "Oeste do Pará",
+        "94": "Sudeste do Pará",
+        "95": "Roraima",
+        "96": "Amapá",
+        "97": "Interior do Amazonas",
+        "98": "São Luís / região - MA",
+        "99": "Interior do Maranhão"
+    };
+
+    window.detectarRegiaoCelular = function () {
+        const ddd = valor("celularDDD");
+        const regiao = document.getElementById("regiaoCelular");
+
+        if (!regiao) return;
+
+        if (!ddd) {
+            regiao.textContent =
+                "📍 Digite o DDD para identificar a região";
+        } else if (regioesDDD[ddd]) {
+            regiao.textContent = "📍 " + regioesDDD[ddd];
+        } else {
+            regiao.textContent =
+                "📍 DDD não identificado. Confira o número.";
+        }
+    };
+
+    window.salvarCelular = function () {
+        const indice = Number(valor("celularIndex"));
+
+        const aparelho = {
+            nome: valor("celularNome"),
+            numero: somenteDigitos(valor("celularNumero")),
+            whatsappNormal: somenteDigitos(
+                valor("celularWhatsappNormal")
+            ),
+            whatsappBusiness: somenteDigitos(
+                valor("celularWhatsappBusiness")
+            ),
+            ddd: somenteDigitos(valor("celularDDD")),
+            operadora: valor("celularOperadora"),
+            recarga: valor("celularRecarga") === "true",
+            atualizadoEm: new Date().toISOString()
+        };
+
+        if (!aparelho.nome) {
+            alert("Digite o nome do aparelho.");
+            document.getElementById("celularNome").focus();
+            return;
+        }
+
+        if (
+            !aparelho.numero &&
+            !aparelho.whatsappNormal &&
+            !aparelho.whatsappBusiness
+        ) {
+            alert("Informe pelo menos um número de telefone ou WhatsApp.");
+            return;
+        }
+
+        if (
+            aparelho.whatsappNormal &&
+            aparelho.whatsappNormal === aparelho.whatsappBusiness
+        ) {
+            alert(
+                "Os números do WhatsApp Normal e Business são iguais. " +
+                "Confira se estão corretos."
+            );
+            return;
+        }
+
+        if (
+            valor("celularDDD") &&
+            aparelho.ddd.length !== 2
+        ) {
+            alert("O DDD precisa ter dois dígitos.");
+            return;
+        }
+
+        if (
+            Number.isInteger(indice) &&
+            indice >= 0 &&
+            indice < celularesBM3.length
+        ) {
+            celularesBM3[indice] = aparelho;
+        } else {
+            celularesBM3.push(aparelho);
+        }
+
+        if (!persistirDados()) {
+            return;
+        }
+
+        renderizarCelulares();
+        abrirTela("celulares");
+
+        alert("Celular salvo com sucesso!");
+    };
+
+    window.editarCelularBM3 = function (indice) {
+        const aparelho = celularesBM3[indice];
+
+        if (!aparelho) return;
+
+        definirValor("celularIndex", indice);
+        definirValor("celularNome", aparelho.nome);
+        definirValor("celularNumero", aparelho.numero);
+        definirValor(
+            "celularWhatsappNormal",
+            aparelho.whatsappNormal || aparelho.whatsapp || ""
+        );
+        definirValor(
+            "celularWhatsappBusiness",
+            aparelho.whatsappBusiness || ""
+        );
+        definirValor("celularDDD", aparelho.ddd);
+        definirValor("celularOperadora", aparelho.operadora || "PAGUE MENOS");
+        definirValor("celularRecarga", String(aparelho.recarga !== false));
+
+        atualizarBotoes();
+        window.detectarRegiaoCelular();
+        abrirTela("novoCelular");
+    };
+
+    window.excluirCelularBM3 = function (indice) {
+        const aparelho = celularesBM3[indice];
+
+        if (!aparelho) return;
+
+        const confirmado = confirm(
+            'Deseja excluir o aparelho "' + aparelho.nome + '"?'
+        );
+
+        if (!confirmado) return;
+
+        const backup = celularesBM3.slice();
+
+        celularesBM3.splice(indice, 1);
+
+        if (!persistirDados()) {
+            celularesBM3 = backup;
+            return;
+        }
+
+        renderizarCelulares();
+    };
+
+    function renderizarCelulares() {
+        const lista = document.getElementById("listaCelulares");
+        const contador = document.getElementById("contadorCelulares");
+
+        if (!lista || !contador) return;
+
+        contador.textContent =
+            celularesBM3.length +
+            (celularesBM3.length === 1 ? " aparelho" : " aparelhos");
+
+        if (celularesBM3.length === 0) {
+            lista.innerHTML =
+                '<div class="bm3-empty">' +
+                'Nenhum celular cadastrado.<br>' +
+                'Clique em ADICIONAR CELULAR para começar.' +
+                '</div>';
+            return;
+        }
+
+        lista.innerHTML = celularesBM3.map(function (aparelho, indice) {
+            const normal =
+                aparelho.whatsappNormal || aparelho.whatsapp || "";
+
+            const business = aparelho.whatsappBusiness || "";
+
+            return `
+                <article class="bm3-device">
+                    <h3>📱 ${escapar(aparelho.nome)}</h3>
+
+                    <p>
+                        <strong>Número principal:</strong><br>
+                        ${escapar(aparelho.numero || "Não informado")}
+                    </p>
+
+                    <p>
+                        <strong>WhatsApp Normal:</strong><br>
+                        ${escapar(normal || "Não informado")}
+                    </p>
+
+                    <p>
+                        <strong>WhatsApp Business:</strong><br>
+                        ${escapar(business || "Não informado")}
+                    </p>
+
+                    <p>
+                        <strong>DDD:</strong>
+                        ${escapar(aparelho.ddd || "Não informado")}
+                    </p>
+
+                    <p>
+                        <strong>Operadora:</strong>
+                        ${escapar(aparelho.operadora || "Não informada")}
+                    </p>
+
+                    <p>
+                        <strong>Recarga:</strong>
+                        ${aparelho.recarga ? "Com recarga" : "Sem recarga"}
+                    </p>
+
+                    <div class="bm3-device-actions">
+                        <button
+                            type="button"
+                            onclick="editarCelularBM3(${indice})"
+                        >
+                            ✏️ EDITAR
+                        </button>
+
+                        <button
+                            type="button"
+                            class="delete"
+                            onclick="excluirCelularBM3(${indice})"
+                        >
+                            🗑️ EXCLUIR
+                        </button>
+                    </div>
+                </article>
+            `;
+        }).join("");
+    }
+
+    carregarDados();
+
+    window.renderizarCelularesBM3 = renderizarCelulares;
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            renderizarCelulares
+        );
+    } else {
+        renderizarCelulares();
+    }
+})();
+</script>
+<!-- =========================a
      CHIPS
 ========================= -->
 
