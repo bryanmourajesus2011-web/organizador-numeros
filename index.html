@@ -1792,6 +1792,47 @@ button:hover,.btn:hover,.button:hover{filter:brightness(1.08)}
 .bm3-device-modern .bm3-device-actions button:first-child{color:#ffdf48}
 @media(max-width:520px){.bm3-device-modern{align-items:flex-start;flex-direction:column}.bm3-device-modern .bm3-device-actions{align-self:flex-end}.bm3-zap-number{font-size:16px}}
 </style>
+
+<style id="bm3-correcao-layout-celulares">
+/* Correção definitiva dos cartões de celulares: impede textos espremidos e botões desalinhados. */
+#listaCelulares { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; align-items:stretch; }
+#listaCelulares > .bm3-device-modern {
+  display:flex !important; flex-direction:column !important; align-items:stretch !important;
+  justify-content:flex-start !important; gap:14px !important; min-width:0 !important;
+  width:100% !important; height:100%; margin:0 !important; padding:16px !important;
+  border:1px solid #303030 !important; border-radius:20px !important;
+  background:linear-gradient(145deg,#171717,#101010) !important;
+  box-shadow:0 8px 24px rgba(0,0,0,.2) !important; color:#fff !important;
+}
+#listaCelulares .bm3-device-main { display:grid !important; grid-template-columns:46px minmax(0,1fr) !important; align-items:start !important; gap:12px !important; width:100% !important; min-width:0 !important; }
+#listaCelulares .bm3-device-icon { width:46px !important; height:46px !important; min-width:46px !important; flex:none !important; font-size:23px !important; border-radius:14px !important; }
+#listaCelulares .bm3-device-info { display:block !important; width:100% !important; min-width:0 !important; flex:none !important; }
+#listaCelulares .bm3-device-info h3 { font-size:18px !important; line-height:1.25 !important; margin:2px 0 10px !important; color:#f5c400 !important; overflow-wrap:anywhere !important; word-break:normal !important; }
+#listaCelulares .bm3-zap-number { display:block !important; width:100% !important; font-size:14px !important; line-height:1.45 !important; font-weight:700 !important; margin:4px 0 10px !important; overflow-wrap:anywhere !important; word-break:normal !important; }
+#listaCelulares .bm3-zap-row { display:flex !important; align-items:center !important; flex-wrap:wrap !important; gap:7px !important; margin:8px 0 !important; line-height:1.4 !important; }
+#listaCelulares .bm3-zap-row strong { flex:0 0 42px !important; min-width:42px !important; color:#f5c400 !important; }
+#listaCelulares .bm3-zap-secondary { min-width:0 !important; overflow-wrap:anywhere !important; word-break:normal !important; }
+#listaCelulares .zap-status-label { max-width:100% !important; white-space:normal !important; line-height:1.35 !important; }
+#listaCelulares .bm3-device-actions { display:flex !important; flex-direction:row !important; align-items:center !important; justify-content:flex-end !important; gap:8px !important; width:100% !important; margin-top:auto !important; padding-top:2px !important; }
+#listaCelulares .bm3-device-actions button { min-height:40px !important; border:1px solid #f5c400 !important; border-radius:11px !important; background:#222 !important; color:#fff !important; padding:9px 12px !important; font-size:12px !important; font-weight:800 !important; white-space:nowrap !important; }
+#listaCelulares .bm3-device-actions button:first-child { color:#ffdf48 !important; }
+#listaCelulares .bm3-device-actions button:last-child { min-width:42px !important; padding:9px 11px !important; border-color:#444 !important; }
+@media(max-width:560px) {
+  #listaCelulares { grid-template-columns:minmax(0,1fr) !important; gap:12px !important; }
+  #listaCelulares > .bm3-device-modern { padding:16px !important; }
+  #listaCelulares .bm3-device-info h3 { font-size:17px !important; }
+  #listaCelulares .bm3-zap-number { font-size:14px !important; }
+}
+@media(min-width:561px) and (max-width:760px) {
+  #listaCelulares { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:10px !important; }
+  #listaCelulares > .bm3-device-modern { padding:12px !important; }
+  #listaCelulares .bm3-device-main { grid-template-columns:38px minmax(0,1fr) !important; gap:9px !important; }
+  #listaCelulares .bm3-device-icon { width:38px !important; height:38px !important; min-width:38px !important; font-size:20px !important; }
+  #listaCelulares .bm3-device-info h3 { font-size:15px !important; }
+  #listaCelulares .bm3-device-actions button { padding:8px 9px !important; }
+}
+</style>
+
 </head>
 
 <body>
