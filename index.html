@@ -5053,18 +5053,21 @@ function renderContatos(){
         return Number(a) - Number(b);
     });
 
+    // Numera visualmente cada WhatsApp exibido: ZAP 1, ZAP 2, ZAP 3...
+    let numeroZap = 0;
     lista.innerHTML = ordemDDD.map(function(ddd){
         const contatosDoDDD = grupos[ddd].map(function(c){
-            let statusTexto = "🟡 ANÁLISE";
+            numeroZap++;
+            let statusTexto = "🟡 ZAP " + numeroZap + " — EM ANÁLISE";
             let classe = "status-analysis";
 
             if(c.status === "on" || c.status === "ON"){
-                statusTexto = "🟢 ZAP ON";
+                statusTexto = "🟢 ZAP " + numeroZap + " — ON";
                 classe = "status-on";
             }
 
             if(c.status === "off" || c.status === "OFF"){
-                statusTexto = "🔴 ZAP OFF";
+                statusTexto = "🔴 ZAP " + numeroZap + " — OFF";
                 classe = "status-off";
             }
 
