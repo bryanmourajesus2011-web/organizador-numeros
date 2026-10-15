@@ -585,6 +585,22 @@ body.dark .menu-card p{
     color:#aaa;
 }
 
+
+/* Cartão WhatsApp: número e status são o foco principal da lista. */
+.bm3-device-modern{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px;border-radius:22px;border:1px solid #292929;background:linear-gradient(145deg,#151515,#0b0b0b);box-shadow:0 10px 26px rgba(0,0,0,.18);margin-bottom:12px;color:#fff}
+.bm3-device-main{display:flex;align-items:flex-start;gap:13px;min-width:0;flex:1}
+.bm3-device-icon{width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(145deg,#282828,#d6a900);font-size:24px}
+.bm3-device-info{min-width:0;flex:1}
+.bm3-device-info h3{font-size:16px;font-weight:900;margin:0 0 7px;color:#fff}
+.bm3-zap-number{font-size:clamp(16px,3.8vw,21px);font-weight:900;letter-spacing:.3px;color:#fff;overflow-wrap:anywhere;margin-bottom:10px}
+.bm3-zap-row{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:7px;font-size:12px}
+.bm3-zap-row strong{min-width:48px;color:#f5c400;font-size:11px;letter-spacing:.5px}
+.bm3-zap-secondary{font-weight:800;color:#eee;overflow-wrap:anywhere}
+.zap-status-label{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.2px}
+.zap-status-on{background:rgba(28,190,95,.16);color:#50e08a}.zap-status-analysis{background:rgba(255,184,0,.16);color:#ffd166}.zap-status-off{background:rgba(240,65,75,.16);color:#ff747c}.zap-status-empty{background:#292929;color:#aaa}
+.bm3-device-actions{display:flex;gap:7px;flex-shrink:0}.bm3-device-actions button{border:0;border-radius:12px;padding:10px;background:#242424;color:#fff;font-weight:800;cursor:pointer}
+@media(max-width:520px){.bm3-device-modern{align-items:flex-start;padding:13px;gap:8px}.bm3-device-main{gap:9px}.bm3-device-icon{width:40px;height:40px;flex-basis:40px;font-size:21px}.bm3-device-actions{flex-direction:column}.bm3-device-actions button{padding:8px}}
+
 /* =========================
    CARDS
 ========================= */
@@ -3398,10 +3414,6 @@ body:not(.dark) .calculator-card{
                             <div class="bm3-zap-number">📲 ${escapar(zap1 || "Número do WhatsApp não informado")}</div>
                             <div class="bm3-zap-row"><strong>ZAP 1</strong>${statusTexto(c.statusNormal || "on", zap1)}</div>
                             ${zap2 ? `<div class="bm3-zap-row"><strong>ZAP 2</strong><span class="bm3-zap-secondary">${escapar(zap2)}</span>${statusTexto(c.statusBusiness || "on", zap2)}</div>` : ""}
-                            <div class="bm3-device-meta">
-                                ${c.ddd ? `<span>📍 DDD ${escapar(c.ddd)}</span>` : ""}
-                                ${c.recarga ? '<span>● COM RECARGA</span>' : '<span>● SEM RECARGA</span>'}
-                            </div>
                         </div>
                     </div>
                     <div class="bm3-device-actions">
@@ -5553,36 +5565,29 @@ function salvarCelular(){
 }
 
 function renderCelulares(){
+    // Usa sempre o renderizador BM3 moderno, que exibe os números e status dos WhatsApps.
+    if (typeof window.bm3RenderizarCelulares === "function") {
+        window.bm3RenderizarCelulares();
+        return;
+    }
     const lista=document.getElementById("listaCelulares");
     const contador=document.getElementById("contadorCelulares");
     if(!lista) return;
-    if(contador){ contador.textContent = celulares.length + (celulares.length===1 ? " aparelho" : " aparelhos"); }
+    if(contador) contador.textContent = celulares.length + (celulares.length===1 ? " aparelho" : " aparelhos");
     if(!celulares.length){
-        lista.innerHTML=`<div class="cellular-empty"><div class="cellular-empty-icon">📱</div><strong>Nenhum aparelho cadastrado</strong><span>Adicione seu primeiro celular para começar a organizar as linhas.</span></div>`;
+        lista.innerHTML='<div class="cellular-empty"><div class="cellular-empty-icon">📱</div><strong>Nenhum aparelho cadastrado</strong><span>Adicione seu primeiro celular para começar.</span></div>';
         return;
     }
     lista.innerHTML=celulares.map(function(c,i){
-        const rec=c.recarga===true || c.recarga==="true";
-        const op=c.operadora||"PAGUE MENOS";
-        const numero=c.numero||"Sem número";
-        const whatsapp=c.whatsapp||"";
-        const ddd=c.ddd||"--";
-        return `<div class="cellular-card">
-            <div class="cellular-avatar">📱</div>
-            <div class="cellular-main">
-                <div class="cellular-name">${escapar(c.nome||"Celular sem nome")}</div>
-                <div class="cellular-number">📞 ${escapar(numero)}${whatsapp?"  •  💬 "+escapar(whatsapp):""}</div>
-                <div class="cellular-badges">
-                    <span class="cellular-badge">📍 DDD ${escapar(ddd)}</span>
-                    <span class="cellular-badge">📡 ${escapar(op)}</span>
-                    <span class="cellular-badge ${rec?"green":"red"}">${rec?"🟢 COM RECARGA":"🔴 SEM RECARGA"}</span>
-                </div>
-            </div>
-            <div class="cellular-actions">
-                <button class="cellular-action" title="Editar" onclick="editarCelular(${i})">✏️</button>
-                <button class="cellular-action" title="Excluir" onclick="excluirCelular(${c.id})">🗑️</button>
-            </div>
-        </div>`;
+        const zap1=c.whatsappNormal||c.whatsapp||"";
+        const zap2=c.whatsappBusiness||"";
+        const status=function(v,has){
+            if(!has) return '<span class="zap-status-label zap-status-empty">NÃO CADASTRADO</span>';
+            if(v==="analysis") return '<span class="zap-status-label zap-status-analysis">🟡 EM ANÁLISE</span>';
+            if(v==="off") return '<span class="zap-status-label zap-status-off">🔴 OFF</span>';
+            return '<span class="zap-status-label zap-status-on">🟢 ON</span>';
+        };
+        return `<article class="bm3-device bm3-device-modern"><div class="bm3-device-main"><div class="bm3-device-icon">📱</div><div class="bm3-device-info"><h3>${escapar(c.nome||"Celular sem nome")}</h3><div class="bm3-zap-number">📲 ${escapar(zap1||"Número do WhatsApp não informado")}</div><div class="bm3-zap-row"><strong>ZAP 1</strong>${status(c.statusNormal||"on",!!zap1)}</div>${zap2?`<div class="bm3-zap-row"><strong>ZAP 2</strong><span class="bm3-zap-secondary">${escapar(zap2)}</span>${status(c.statusBusiness||"on",true)}</div>`:""}</div></div><div class="bm3-device-actions"><button type="button" onclick="bm3EditarCelular(${i})" aria-label="Editar celular">✏️ Editar</button><button type="button" onclick="bm3ExcluirCelular(${i})" aria-label="Excluir celular">🗑️</button></div></article>`;
     }).join("");
 }
 
