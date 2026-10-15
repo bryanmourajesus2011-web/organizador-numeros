@@ -2823,6 +2823,21 @@ body:not(.dark) .calculator-card{
 </style>
 
 
+<style>
+.zap-status-select {
+    display:block; width:100%; box-sizing:border-box; margin-top:8px;
+    padding:12px; border-radius:10px; border:1px solid #555;
+    background:#171717; color:#fff; font-weight:700; font-size:14px;
+}
+.zap-status-label {
+    display:inline-block; margin:5px 5px 5px 0; padding:5px 9px;
+    border-radius:8px; font-size:12px; font-weight:800;
+}
+.zap-status-on { background:#123d25; color:#70efa0; }
+.zap-status-analysis { background:#493a0a; color:#ffe078; }
+.zap-status-off { background:#4a1717; color:#ff9292; }
+</style>
+
 <!-- =========================
      LISTA DE CELULARES
 ========================= -->
@@ -2916,6 +2931,12 @@ body:not(.dark) .calculator-card{
                        inputmode="numeric"
                        placeholder="Ex.: 5513999999999"
                        oninput="bm3SomenteNumeros(this)">
+                <label for="celularStatusNormal">STATUS DO ZAP 1</label>
+                <select id="celularStatusNormal" class="zap-status-select">
+                    <option value="on">🟢 ZAP 1 — ON</option>
+                    <option value="analysis">🟡 ZAP 1 — EM ANÁLISE</option>
+                    <option value="off">🔴 ZAP 1 — OFF</option>
+                </select>
             </div>
         </div>
 
@@ -2933,6 +2954,12 @@ body:not(.dark) .calculator-card{
                        inputmode="numeric"
                        placeholder="Ex.: 5513988888888"
                        oninput="bm3SomenteNumeros(this)">
+                <label for="celularStatusBusiness">STATUS DO ZAP 2</label>
+                <select id="celularStatusBusiness" class="zap-status-select">
+                    <option value="on">🟢 ZAP 2 — ON</option>
+                    <option value="analysis">🟡 ZAP 2 — EM ANÁLISE</option>
+                    <option value="off">🔴 ZAP 2 — OFF</option>
+                </select>
             </div>
         </div>
 
@@ -3225,6 +3252,8 @@ body:not(.dark) .calculator-card{
             numero: digitos(ler("celularNumero")),
             whatsappNormal: digitos(ler("celularWhatsappNormal")),
             whatsappBusiness: digitos(ler("celularWhatsappBusiness")),
+            statusNormal: ler("celularStatusNormal") || "on",
+            statusBusiness: ler("celularStatusBusiness") || "on",
             ddd: digitos(ler("celularDDD")),
             operadora: ler("celularOperadora"),
             recarga: ler("celularRecarga") === "true"
@@ -3283,6 +3312,8 @@ body:not(.dark) .calculator-card{
         preencher("celularNumero", c.numero);
         preencher("celularWhatsappNormal", c.whatsappNormal || c.whatsapp || "");
         preencher("celularWhatsappBusiness", c.whatsappBusiness || "");
+        preencher("celularStatusNormal", c.statusNormal || "on");
+        preencher("celularStatusBusiness", c.statusBusiness || "on");
         preencher("celularDDD", c.ddd);
         preencher("celularOperadora", c.operadora || "PAGUE MENOS");
         preencher("celularRecarga", String(c.recarga !== false));
@@ -3334,11 +3365,13 @@ body:not(.dark) .calculator-card{
                     <p><strong>Número principal:</strong><br>
                     ${escapar(c.numero || "Não informado")}</p>
 
-                    <p><strong>WhatsApp Normal:</strong><br>
-                    ${escapar(c.whatsappNormal || c.whatsapp || "Não informado")}</p>
+                    <p><strong>WhatsApp Normal (ZAP 1):</strong><br>
+                    ${escapar(c.whatsappNormal || c.whatsapp || "Não informado")}<br>
+                    <span class="zap-status-label zap-status-${escapar(c.statusNormal || "on")}">${(c.statusNormal || "on") === "analysis" ? "🟡 ZAP 1 — EM ANÁLISE" : (c.statusNormal || "on") === "off" ? "🔴 ZAP 1 — OFF" : "🟢 ZAP 1 — ON"}</span></p>
 
-                    <p><strong>WhatsApp Business:</strong><br>
-                    ${escapar(c.whatsappBusiness || "Não informado")}</p>
+                    <p><strong>WhatsApp Business (ZAP 2):</strong><br>
+                    ${escapar(c.whatsappBusiness || "Não informado")}<br>
+                    <span class="zap-status-label zap-status-${escapar(c.statusBusiness || "on")}">${(c.statusBusiness || "on") === "analysis" ? "🟡 ZAP 2 — EM ANÁLISE" : (c.statusBusiness || "on") === "off" ? "🔴 ZAP 2 — OFF" : "🟢 ZAP 2 — ON"}</span></p>
 
                     <p><strong>DDD:</strong>
                     ${escapar(c.ddd || "Não informado")}</p>
