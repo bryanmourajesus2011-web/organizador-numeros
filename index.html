@@ -3006,7 +3006,8 @@ body:not(.dark) .calculator-card{
 (function () {
     "use strict";
 
-    const CHAVE = "BM3_CELULARES_V2";
+    const CHAVE = "bm3_celulares";
+    const CHAVE_LEGADA = "BM3_CELULARES_V2";
     let celulares = [];
 
     function ler(id) {
@@ -3037,10 +3038,20 @@ body:not(.dark) .calculator-card{
 
     function carregar() {
         try {
-            const dados = localStorage.getItem(CHAVE);
-            celulares = dados ? JSON.parse(dados) : [];
-
-            if (!Array.isArray(celulares)) celulares = [];
+            // A chave bm3_celulares é a mesma usada pelo restante do BM3 e pela nuvem.
+            let dados = localStorage.getItem(CHAVE);
+            if (!dados) {
+                dados = localStorage.getItem(CHAVE_LEGADA);
+                if (dados) localStorage.setItem(CHAVE, dados);
+            }
+            const lista = dados ? JSON.parse(dados) : [];
+            celulares = Array.isArray(lista) ? lista.map(function (c) {
+                return {
+                    ...c,
+                    whatsappNormal: c.whatsappNormal || c.whatsapp || "",
+                    whatsappBusiness: c.whatsappBusiness || ""
+                };
+            }) : [];
         } catch (erro) {
             celulares = [];
             console.error("Erro ao carregar celulares:", erro);
@@ -3049,11 +3060,19 @@ body:not(.dark) .calculator-card{
 
     function salvarDados() {
         try {
-            localStorage.setItem(CHAVE, JSON.stringify(celulares));
+            const json = JSON.stringify(celulares);
+            localStorage.setItem(CHAVE, json);
+            // Mantém compatibilidade com versões antigas que liam esta chave.
+            localStorage.setItem(CHAVE_LEGADA, json);
+            // Atualiza também o array principal do BM3, sincronizado com Supabase.
+            if (typeof window.bm3AtualizarCelularesCompartilhados === "function") {
+                window.bm3AtualizarCelularesCompartilhados(celulares);
+            }
+            if (typeof window.bm3ScheduleSync === "function") window.bm3ScheduleSync();
             return true;
         } catch (erro) {
-            alert("Não foi possível salvar no navegador.");
-            console.error(erro);
+            alert("Não foi possível salvar no navegador. Verifique o armazenamento disponível.");
+            console.error("Erro ao salvar celulares:", erro);
             return false;
         }
     }
@@ -3069,32 +3088,32 @@ body:not(.dark) .calculator-card{
             return;
         }
 
-        // Tenta usar a navegação original do BM3, sem depender dela para mostrar a tela.
+        // Usa a navegação principal para manter classes .active e histórico consistentes.
         if (typeof window.abrirTela === "function") {
-            try { window.abrirTela(id); } catch (erro) {
-                console.warn("A navegação original do BM3 falhou; usando navegação local.", erro);
+            try {
+                window.abrirTela(id);
+                destino.style.display = "";
+                return;
+            } catch (erro) {
+                console.warn("A navegação principal falhou; usando navegação local.", erro);
             }
         }
 
         document.querySelectorAll(".screen").forEach(function (tela) {
+            tela.classList.toggle("active", tela.id === id);
             tela.style.display = tela.id === id ? "block" : "none";
         });
-        destino.style.display = "block";
     }
 
 
-    window.bm3AbrirTelaCelulares = function () { bm3Navegar("celulares"); };
+    window.bm3AbrirTelaCelulares = function () { carregar(); renderizar(); bm3Navegar("celulares"); };
     window.bm3VoltarCelulares = function () {
-        if (typeof window.voltar === "function") {
-            try {
-                window.voltar();
-                return;
-            } catch (erro) {
-                console.warn("A função voltar do menu falhou.", erro);
-            }
+        const atual = document.querySelector(".screen.active");
+        if (atual && atual.id === "novoCelular") {
+            bm3Navegar("celulares");
+            return;
         }
-
-        // Fallback: volta para a tela principal conhecida pelo menu, se existir.
+        // Da lista de celulares, voltar deve retornar ao menu principal, sem cair no formulário.
         const possiveisTelas = ["menu", "inicio", "home", "principal"];
         for (const id of possiveisTelas) {
             if (document.getElementById(id)) {
@@ -3102,11 +3121,15 @@ body:not(.dark) .calculator-card{
                 return;
             }
         }
-
-        alert("Para corrigir o botão Voltar ao menu, preciso do HTML principal do BM3 para identificar o ID da tela inicial.");
+        if (typeof window.voltar === "function") {
+            try { window.voltar(); return; }
+            catch (erro) { console.warn("A função voltar do menu falhou.", erro); }
+        }
+        alert("Não encontrei a tela inicial do BM3 para voltar ao menu.");
     };
 
     window.bm3AbrirNovoCelular = function () {
+        carregar();
         limparFormulario();
         bm3Navegar("novoCelular");
     };
@@ -3195,6 +3218,8 @@ body:not(.dark) .calculator-card{
     };
 
     window.bm3SalvarCelular = function () {
+        // Recarrega a fonte compartilhada antes de editar para não sobrescrever dados recentes.
+        carregar();
         const indice = Number(ler("celularIndex"));
 
         const aparelho = {
@@ -4571,6 +4596,9 @@ let contatos = [];
 let favoritos = [];
 let grupos = [];
 let celulares = [];
+window.bm3AtualizarCelularesCompartilhados = function(lista){
+    celulares = Array.isArray(lista) ? lista.slice() : [];
+};
 let chips = [];
 let recentes = [];
 
@@ -7961,6 +7989,7 @@ function bm3SetCache(data){
       });
     }finally{window.bm3Hydrating=false;}
     contatos=map.bm3_contatos; favoritos=map.bm3_favoritos; grupos=map.bm3_grupos; celulares=map.bm3_celulares; chips=map.bm3_chips; recentes=map.bm3_recentes;
+    if(typeof window.bm3RenderizarCelulares === "function") window.bm3RenderizarCelulares();
 }
 
 async function bm3CarregarDados(){
@@ -8015,6 +8044,7 @@ function bm3ScheduleSync(){
         bm3Sincronizar().catch(()=>{});
     },200);
 }
+window.bm3ScheduleSync = bm3ScheduleSync;
 
 /* Ao voltar para a aba, tenta enviar qualquer alteração pendente. */
 document.addEventListener("visibilitychange",()=>{
