@@ -3387,20 +3387,23 @@ body:not(.dark) .calculator-card{
 (function () {
     "use strict";
 
-    const STORAGE_KEY = "BM3_CELULARES_V2";
+    const STORAGE_KEY = "bm3_celulares";
+    const LEGACY_STORAGE_KEY = "BM3_CELULARES_V2";
 
     let celularesBM3 = [];
     let storageDisponivel = true;
 
     function carregarDados() {
         try {
-            const dados = localStorage.getItem(STORAGE_KEY);
+            const dados = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
 
             if (dados) {
                 const lista = JSON.parse(dados);
 
                 if (Array.isArray(lista)) {
                     celularesBM3 = lista;
+                    // Migra os registros antigos para a chave usada pelo sistema.
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
                 }
             }
         } catch (erro) {
@@ -3411,10 +3414,12 @@ body:not(.dark) .calculator-card{
 
     function persistirDados() {
         try {
-            localStorage.setItem(
-                STORAGE_KEY,
-                JSON.stringify(celularesBM3)
-            );
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(celularesBM3));
+            localStorage.setItem(LEGACY_STORAGE_KEY, JSON.stringify(celularesBM3));
+            if (typeof window.bm3AtualizarCelularesCompartilhados === "function") {
+                window.bm3AtualizarCelularesCompartilhados(celularesBM3);
+            }
+            if (typeof window.bm3ScheduleSync === "function") window.bm3ScheduleSync();
 
             storageDisponivel = true;
             return true;
@@ -8125,6 +8130,60 @@ bm3Supabase.auth.onAuthStateChange(async (event,session)=>{
     intro.classList.add('finished');
     window.setTimeout(()=>intro.remove(),900);
   },duracao);
+})();
+</script>
+
+
+<script>
+/* Correção final: todos os botões EDITAR usam a mesma fonte de dados. */
+(function () {
+  function editarCelularBM3Unificado(indice) {
+    let lista = [];
+    try {
+      const bruto = localStorage.getItem("bm3_celulares") || localStorage.getItem("BM3_CELULARES_V2");
+      const dados = bruto ? JSON.parse(bruto) : [];
+      if (Array.isArray(dados)) lista = dados;
+    } catch (e) { console.error("Falha ao carregar celular para edição:", e); }
+
+    const aparelho = lista[Number(indice)];
+    if (!aparelho) {
+      alert("Não foi possível abrir este celular para edição. Atualize a lista e tente novamente.");
+      return;
+    }
+
+    const campos = {
+      celularIndex: Number(indice),
+      celularNome: aparelho.nome || "",
+      celularNumero: aparelho.numero || "",
+      celularWhatsappNormal: aparelho.whatsappNormal || aparelho.whatsapp || "",
+      celularWhatsappBusiness: aparelho.whatsappBusiness || "",
+      celularWhatsapp: aparelho.whatsapp || aparelho.whatsappNormal || "",
+      celularDDD: aparelho.ddd || "",
+      celularOperadora: aparelho.operadora || "PAGUE MENOS",
+      celularRecarga: String(aparelho.recarga !== false && aparelho.recarga !== "false")
+    };
+    Object.keys(campos).forEach(function (id) {
+      const campo = document.getElementById(id);
+      if (campo) campo.value = String(campos[id]);
+    });
+
+    if (typeof window.bm3DetectarRegiaoCelular === "function") window.bm3DetectarRegiaoCelular();
+    else if (typeof window.detectarRegiaoCelular === "function") window.detectarRegiaoCelular();
+    if (typeof window.selecionarOperadoraCelular === "function") window.selecionarOperadoraCelular(campos.celularOperadora);
+    if (typeof window.selecionarRecargaCelular === "function") window.selecionarRecargaCelular(campos.celularRecarga === "true");
+
+    if (typeof window.bm3Navegar === "function") window.bm3Navegar("novoCelular");
+    else if (typeof window.abrirTela === "function") window.abrirTela("novoCelular");
+    else {
+      document.querySelectorAll(".screen").forEach(function (tela) {
+        tela.classList.toggle("active", tela.id === "novoCelular");
+        tela.style.display = tela.id === "novoCelular" ? "block" : "none";
+      });
+    }
+  }
+  window.bm3EditarCelular = editarCelularBM3Unificado;
+  window.editarCelularBM3 = editarCelularBM3Unificado;
+  window.editarCelular = editarCelularBM3Unificado;
 })();
 </script>
 
