@@ -1753,6 +1753,29 @@ button:hover,.btn:hover,.button:hover{filter:brightness(1.08)}
 .menu-card p{font-size:12px;line-height:1.45;color:#aaa!important}
 @media(max-width:480px){.menu-grid{gap:11px}.menu-card{min-height:137px;padding:16px 13px;border-radius:17px}.menu-icon{width:42px;height:42px}}
 </style>
+
+<style>
+.bm3-device-modern{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 16px!important;border:1px solid #303030!important;border-radius:20px!important;background:linear-gradient(135deg,#171717,#101010)!important;box-shadow:0 8px 24px rgba(0,0,0,.18);margin:12px 0}
+.bm3-device-main{display:flex;align-items:flex-start;gap:13px;min-width:0;flex:1}
+.bm3-device-icon{width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#ffe65a,#b88b00);font-size:27px}
+.bm3-device-info{min-width:0;flex:1}
+.bm3-device-modern h3{margin:0 0 8px;font-size:19px;font-weight:800;color:#fff}
+.bm3-zap-number{font-size:18px;font-weight:800;color:#fff;overflow-wrap:anywhere;margin:3px 0 10px}
+.bm3-zap-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:6px 0;font-size:12px;color:#ddd}
+.bm3-zap-row strong{color:#f5cf35;min-width:42px}
+.zap-status-label{display:inline-flex;align-items:center;gap:4px;padding:5px 9px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.2px}
+.zap-status-on{background:#123b25;color:#65e99b}
+.zap-status-analysis{background:#453714;color:#ffdc72}
+.zap-status-off{background:#481c20;color:#ff8189}
+.zap-status-empty{background:#292929;color:#aaa}
+.bm3-zap-secondary{overflow-wrap:anywhere;color:#eee}
+.bm3-device-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.bm3-device-meta span{font-size:10px;font-weight:800;color:#bdbdbd;background:#242424;padding:5px 8px;border-radius:8px}
+.bm3-device-modern .bm3-device-actions{display:flex;gap:8px;flex-shrink:0}
+.bm3-device-modern .bm3-device-actions button{border:1px solid #343434;border-radius:12px;background:#252525;color:#fff;padding:10px 12px;font-weight:700;cursor:pointer}
+.bm3-device-modern .bm3-device-actions button:first-child{color:#ffdf48}
+@media(max-width:520px){.bm3-device-modern{align-items:flex-start;flex-direction:column}.bm3-device-modern .bm3-device-actions{align-self:flex-end}.bm3-zap-number{font-size:16px}}
+</style>
 </head>
 
 <body>
@@ -3358,40 +3381,32 @@ body:not(.dark) .calculator-card{
         }
 
         lista.innerHTML = celulares.map(function (c, i) {
+            const zap1 = c.whatsappNormal || c.whatsapp || "";
+            const zap2 = c.whatsappBusiness || "";
+            const statusTexto = function (status, zap) {
+                if (!zap) return '<span class="zap-status-label zap-status-empty">⚪ NÃO CADASTRADO</span>';
+                if (status === "analysis") return '<span class="zap-status-label zap-status-analysis">🟡 EM ANÁLISE</span>';
+                if (status === "off") return '<span class="zap-status-label zap-status-off">🔴 OFF</span>';
+                return '<span class="zap-status-label zap-status-on">🟢 ON</span>';
+            };
             return `
-                <article class="bm3-device">
-                    <h3>📱 ${escapar(c.nome)}</h3>
-
-                    <p><strong>Número principal:</strong><br>
-                    ${escapar(c.numero || "Não informado")}</p>
-
-                    <p><strong>WhatsApp Normal (ZAP 1):</strong><br>
-                    ${escapar(c.whatsappNormal || c.whatsapp || "Não informado")}<br>
-                    <span class="zap-status-label zap-status-${escapar(c.statusNormal || "on")}">${(c.statusNormal || "on") === "analysis" ? "🟡 ZAP 1 — EM ANÁLISE" : (c.statusNormal || "on") === "off" ? "🔴 ZAP 1 — OFF" : "🟢 ZAP 1 — ON"}</span></p>
-
-                    <p><strong>WhatsApp Business (ZAP 2):</strong><br>
-                    ${escapar(c.whatsappBusiness || "Não informado")}<br>
-                    <span class="zap-status-label zap-status-${escapar(c.statusBusiness || "on")}">${(c.statusBusiness || "on") === "analysis" ? "🟡 ZAP 2 — EM ANÁLISE" : (c.statusBusiness || "on") === "off" ? "🔴 ZAP 2 — OFF" : "🟢 ZAP 2 — ON"}</span></p>
-
-                    <p><strong>DDD:</strong>
-                    ${escapar(c.ddd || "Não informado")}</p>
-
-                    <p><strong>Operadora:</strong>
-                    ${escapar(c.operadora || "Não informada")}</p>
-
-                    <p><strong>Recarga:</strong>
-                    ${c.recarga ? "Com recarga" : "Sem recarga"}</p>
-
+                <article class="bm3-device bm3-device-modern">
+                    <div class="bm3-device-main">
+                        <div class="bm3-device-icon">📱</div>
+                        <div class="bm3-device-info">
+                            <h3>${escapar(c.nome || "Celular sem nome")}</h3>
+                            <div class="bm3-zap-number">📲 ${escapar(zap1 || "Número do WhatsApp não informado")}</div>
+                            <div class="bm3-zap-row"><strong>ZAP 1</strong>${statusTexto(c.statusNormal || "on", zap1)}</div>
+                            ${zap2 ? `<div class="bm3-zap-row"><strong>ZAP 2</strong><span class="bm3-zap-secondary">${escapar(zap2)}</span>${statusTexto(c.statusBusiness || "on", zap2)}</div>` : ""}
+                            <div class="bm3-device-meta">
+                                ${c.ddd ? `<span>📍 DDD ${escapar(c.ddd)}</span>` : ""}
+                                ${c.recarga ? '<span>● COM RECARGA</span>' : '<span>● SEM RECARGA</span>'}
+                            </div>
+                        </div>
+                    </div>
                     <div class="bm3-device-actions">
-                        <button type="button"
-                            onclick="bm3EditarCelular(${i})">
-                            ✏️ EDITAR
-                        </button>
-
-                        <button type="button"
-                            onclick="bm3ExcluirCelular(${i})">
-                            🗑️ EXCLUIR
-                        </button>
+                        <button type="button" onclick="bm3EditarCelular(${i})" aria-label="Editar celular">✏️ Editar</button>
+                        <button type="button" onclick="bm3ExcluirCelular(${i})" aria-label="Excluir celular">🗑️</button>
                     </div>
                 </article>
             `;
