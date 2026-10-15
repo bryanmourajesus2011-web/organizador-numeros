@@ -3803,60 +3803,28 @@ body:not(.dark) .calculator-card{
         }
 
         lista.innerHTML = celularesBM3.map(function (aparelho, indice) {
-            const normal =
-                aparelho.whatsappNormal || aparelho.whatsapp || "";
-
-            const business = aparelho.whatsappBusiness || "";
-
+            const zap1 = aparelho.whatsappNormal || aparelho.whatsapp || "";
+            const zap2 = aparelho.whatsappBusiness || "";
+            function statusZap(status, numero) {
+                if (!numero) return '<span class="zap-status-label zap-status-empty">⚪ NÃO CADASTRADO</span>';
+                if (status === "analysis" || status === "analise" || status === "em análise") return '<span class="zap-status-label zap-status-analysis">🟡 EM ANÁLISE</span>';
+                if (status === "off" || status === "OFF") return '<span class="zap-status-label zap-status-off">🔴 OFF</span>';
+                return '<span class="zap-status-label zap-status-on">🟢 ON</span>';
+            }
             return `
-                <article class="bm3-device">
-                    <h3>📱 ${escapar(aparelho.nome)}</h3>
-
-                    <p>
-                        <strong>Número principal:</strong><br>
-                        ${escapar(aparelho.numero || "Não informado")}
-                    </p>
-
-                    <p>
-                        <strong>WhatsApp Normal:</strong><br>
-                        ${escapar(normal || "Não informado")}
-                    </p>
-
-                    <p>
-                        <strong>WhatsApp Business:</strong><br>
-                        ${escapar(business || "Não informado")}
-                    </p>
-
-                    <p>
-                        <strong>DDD:</strong>
-                        ${escapar(aparelho.ddd || "Não informado")}
-                    </p>
-
-                    <p>
-                        <strong>Operadora:</strong>
-                        ${escapar(aparelho.operadora || "Não informada")}
-                    </p>
-
-                    <p>
-                        <strong>Recarga:</strong>
-                        ${aparelho.recarga ? "Com recarga" : "Sem recarga"}
-                    </p>
-
+                <article class="bm3-device bm3-device-modern">
+                    <div class="bm3-device-main">
+                        <div class="bm3-device-icon">📱</div>
+                        <div class="bm3-device-info">
+                            <h3>${escapar(aparelho.nome || "Celular sem nome")}</h3>
+                            <div class="bm3-zap-number">📲 ${escapar(zap1 || "WhatsApp não informado")}</div>
+                            <div class="bm3-zap-row"><strong>ZAP 1</strong>${statusZap(aparelho.statusNormal || "on", zap1)}</div>
+                            ${zap2 ? `<div class="bm3-zap-row"><strong>ZAP 2</strong><span class="bm3-zap-secondary">${escapar(zap2)}</span>${statusZap(aparelho.statusBusiness || "on", zap2)}</div>` : ""}
+                        </div>
+                    </div>
                     <div class="bm3-device-actions">
-                        <button
-                            type="button"
-                            onclick="editarCelularBM3(${indice})"
-                        >
-                            ✏️ EDITAR
-                        </button>
-
-                        <button
-                            type="button"
-                            class="delete"
-                            onclick="excluirCelularBM3(${indice})"
-                        >
-                            🗑️ EXCLUIR
-                        </button>
+                        <button type="button" onclick="editarCelularBM3(${indice})" aria-label="Editar celular">✏️ EDITAR</button>
+                        <button type="button" class="delete" onclick="excluirCelularBM3(${indice})" aria-label="Excluir celular">🗑️</button>
                     </div>
                 </article>
             `;
