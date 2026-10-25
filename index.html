@@ -7927,9 +7927,13 @@ function carregarScriptBM3(){
     scriptBM3Padrao.forEach((texto,i)=>{
         const numero=i+1, el=document.getElementById("scriptBM3Passo"+numero);
         if(!el)return;
+        // Nunca substituir o que a pessoa está editando ou o campo em foco.
+        if(el.readOnly === false || document.activeElement === el) return;
         let salvo=null;
         try{salvo=localStorage.getItem("bm3_script_passo_"+numero);}catch(e){}
-        el.value=salvo || texto;
+        // Só preencher ao abrir; não trocar um texto já carregado por padrão antigo.
+        if(el.value.trim()) return;
+        el.value=(salvo !== null && salvo !== "") ? salvo : texto;
     });
 }
 function editarScriptBM3(numero){
@@ -7943,8 +7947,8 @@ function editarScriptBM3(numero){
 async function salvarScriptBM3(numero){
     const el=document.getElementById("scriptBM3Passo"+numero);
     if(!el)return;
-    el.readOnly=true;
     try{localStorage.setItem("bm3_script_passo_"+numero,el.value);}catch(e){}
+    el.readOnly=true;
     document.getElementById("scriptBM3Editar"+numero).hidden=false;
     document.getElementById("scriptBM3Salvar"+numero).hidden=true;
     if(typeof bm3Sincronizar === "function" && window.bm3Usuario){
@@ -8054,11 +8058,18 @@ function bm3SetCache(data){
     window.bm3Hydrating=true;
     try{
       Object.entries(map).forEach(([k,v])=>localStorage.setItem(k,typeof v === "string" ? v : JSON.stringify(v)));
-      [1,2,3,4,5].forEach(i=>{
-        const v=data["script_passo_"+i];
-        if(v !== null && v !== undefined) localStorage.setItem("bm3_script_passo_"+i,v);
-        else localStorage.removeItem("bm3_script_passo_"+i);
+      // Não deixar a sincronização da nuvem substituir scripts enquanto algum passo está sendo editado.
+      const scriptEmEdicao=[1,2,3,4,5].some(i=>{
+        const el=document.getElementById("scriptBM3Passo"+i);
+        return el && (el.readOnly === false || document.activeElement === el);
       });
+      if(!scriptEmEdicao){
+        [1,2,3,4,5].forEach(i=>{
+          const v=data["script_passo_"+i];
+          if(v !== null && v !== undefined) localStorage.setItem("bm3_script_passo_"+i,v);
+          else localStorage.removeItem("bm3_script_passo_"+i);
+        });
+      }
     }finally{window.bm3Hydrating=false;}
     contatos=map.bm3_contatos; favoritos=map.bm3_favoritos; grupos=map.bm3_grupos; celulares=map.bm3_celulares; chips=map.bm3_chips; recentes=map.bm3_recentes;
     if(typeof window.bm3RenderizarCelulares === "function") window.bm3RenderizarCelulares();
