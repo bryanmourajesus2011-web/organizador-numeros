@@ -8031,7 +8031,12 @@ async function bm3EnviarAuth(event){
             }
         }
     }catch(e){
-        bm3Mensagem(e.message || "Não foi possível concluir.");
+        const mensagem=String(e && e.message || "");
+        if(bm3AuthMode === "login" && /invalid login credentials/i.test(mensagem)){
+            bm3Mensagem("E-mail ou senha incorretos. Confira o e-mail usado no cadastro ou use a recuperação de senha do Supabase.");
+        }else{
+            bm3Mensagem(mensagem || "Não foi possível concluir. Tente novamente.");
+        }
     }finally{
         btn.disabled=false;
     }
@@ -8138,20 +8143,39 @@ window.addEventListener("pagehide",()=>{
 async function bm3Entrou(session){
     bm3Usuario=session.user;
     window.bm3Autenticado=true;
-    document.getElementById("authGate").classList.add("hidden");
-    document.getElementById("authUserEmail").textContent=bm3Usuario.email || "";
+
+    const authGate=document.getElementById("authGate");
+    const emailEl=document.getElementById("authUserEmail");
+    if(authGate) authGate.classList.add("hidden");
+    if(emailEl) emailEl.textContent=bm3Usuario.email || "";
+
     try{
-        const {data:perfil,error:perfilError}=await bm3Supabase.from("profiles").select("id,email,role").eq("id",bm3Usuario.id).single();
-        if(perfilError) throw perfilError;
-        bm3Perfil=perfil;
+        /*
+         * O perfil é usado apenas para identificar permissões administrativas.
+         * Não deve impedir o login de um usuário autenticado se ainda não existir
+         * uma linha correspondente na tabela profiles.
+         */
+        const {data:perfil,error:perfilError}=await bm3Supabase
+            .from("profiles")
+            .select("id,email,role")
+            .eq("id",bm3Usuario.id)
+            .maybeSingle();
+
+        if(perfilError){
+            console.warn("BM3: não foi possível consultar o perfil; continuando como usuário comum.",perfilError);
+            bm3Perfil={id:bm3Usuario.id,email:bm3Usuario.email || "",role:"user"};
+        }else{
+            bm3Perfil=perfil || {id:bm3Usuario.id,email:bm3Usuario.email || "",role:"user"};
+        }
+
         await bm3CarregarDados();
         carregarTema();
         prepararBanners();
         renderContatos(); atualizarResumo(); renderFavoritos(); renderGrupos(); renderCelulares(); renderChips();
         bm3IniciarPainel();
     }catch(e){
-        console.error(e);
-        bm3Mensagem("Não foi possível carregar seus dados: "+(e.message||"erro"));
+        console.error("BM3: falha após autenticação:",e);
+        bm3Mensagem("Login realizado, mas não foi possível carregar os dados do painel: "+(e.message||"erro desconhecido"));
         await bm3Sair(true);
     }
 }
