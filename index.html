@@ -3452,9 +3452,8 @@ body:not(.dark) .calculator-card{
                         <div class="bm3-device-icon">📱</div>
                         <div class="bm3-device-info">
                             <h3>${escapar(c.nome || "Celular sem nome")}</h3>
-                            <div class="bm3-zap-number">📲 ${escapar(zap1 || "Número do WhatsApp não informado")}</div>
-                            <div class="bm3-zap-row"><strong>ZAP 1</strong>${statusTexto(c.statusNormal || "on", zap1)}</div>
-                            ${zap2 ? `<div class="bm3-zap-row"><strong>ZAP 2</strong><span class="bm3-zap-secondary">${escapar(zap2)}</span>${statusTexto(c.statusBusiness || "on", zap2)}</div>` : ""}
+                            <div class="bm3-zap-row"><strong>WHATSAPP NORMAL (ZAP 1)</strong><span class="bm3-zap-secondary">${escapar(zap1 || "Número não cadastrado")}</span>${statusTexto(c.statusNormal || "on", zap1)}</div>
+                            <div class="bm3-zap-row"><strong>WHATSAPP BUSINESS (ZAP 2)</strong><span class="bm3-zap-secondary">${escapar(zap2 || "Número não cadastrado")}</span>${statusTexto(c.statusBusiness || "on", zap2)}</div>
                         </div>
                     </div>
                     <div class="bm3-device-actions">
@@ -5628,7 +5627,7 @@ function renderCelulares(){
             if(v==="off") return '<span class="zap-status-label zap-status-off">🔴 OFF</span>';
             return '<span class="zap-status-label zap-status-on">🟢 ON</span>';
         };
-        return `<article class="bm3-device bm3-device-modern"><div class="bm3-device-main"><div class="bm3-device-icon">📱</div><div class="bm3-device-info"><h3>${escapar(c.nome||"Celular sem nome")}</h3><div class="bm3-zap-number">📲 ${escapar(zap1||"Número do WhatsApp não informado")}</div><div class="bm3-zap-row"><strong>ZAP 1</strong>${status(c.statusNormal||"on",!!zap1)}</div>${zap2?`<div class="bm3-zap-row"><strong>ZAP 2</strong><span class="bm3-zap-secondary">${escapar(zap2)}</span>${status(c.statusBusiness||"on",true)}</div>`:""}</div></div><div class="bm3-device-actions"><button type="button" onclick="bm3EditarCelular(${i})" aria-label="Editar celular">✏️ Editar</button><button type="button" onclick="bm3ExcluirCelular(${i})" aria-label="Excluir celular">🗑️</button></div></article>`;
+        return `<article class="bm3-device bm3-device-modern"><div class="bm3-device-main"><div class="bm3-device-icon">📱</div><div class="bm3-device-info"><h3>${escapar(c.nome||"Celular sem nome")}</h3><div class="bm3-zap-row"><strong>WHATSAPP NORMAL (ZAP 1)</strong><span class="bm3-zap-secondary">${escapar(zap1||"Número não cadastrado")}</span>${status(c.statusNormal||"on",!!zap1)}</div><div class="bm3-zap-row"><strong>WHATSAPP BUSINESS (ZAP 2)</strong><span class="bm3-zap-secondary">${escapar(zap2||"Número não cadastrado")}</span>${status(c.statusBusiness||"on",!!zap2)}</div></div></div><div class="bm3-device-actions"><button type="button" onclick="bm3EditarCelular(${i})" aria-label="Editar celular">✏️ Editar</button><button type="button" onclick="bm3ExcluirCelular(${i})" aria-label="Excluir celular">🗑️</button></div></article>`;
     }).join("");
 }
 
